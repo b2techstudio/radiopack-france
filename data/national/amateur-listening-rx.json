@@ -1,20 +1,41 @@
 {
   "dataset": "France — APRS et ISS (réception seule)",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "updated": "2026-08-04",
   "scope": "national",
   "default_export_policy": "rx_only",
   "notes": [
-    "Les services ISS peuvent être coupés ou reconfigurés temporairement.",
-    "L'export public bloque l'émission sur toutes les mémoires."
+    "Dans chaque mémoire ISS, frequency_mhz désigne toujours la fréquence reçue par l'utilisateur : la liaison descendante.",
+    "Les fréquences de liaison montante sont conservées uniquement comme métadonnées documentaires et ne sont jamais exportées comme mémoires d'émission.",
+    "La voix équipage et le répéteur utilisent des fréquences séparées pour la montée et la descente.",
+    "Les systèmes packet VHF et UHF utilisent la même fréquence dans les deux sens lorsqu'ils sont configurés dans ces modes.",
+    "La SSTV est une diffusion descendante programmée ; sa fréquence dépend de la campagne annoncée par ARISS.",
+    "Les services ISS peuvent être coupés ou reconfigurés temporairement, notamment pendant les sorties extravéhiculaires, les amarrages et certaines opérations de maintenance.",
+    "L'export public bloque l'émission sur toutes les mémoires avec Duplex=off."
   ],
   "sources": [
     {
+      "id": "ARISS-FREQUENCIES",
       "title": "ARISS — Frequencies in Use",
       "url": "https://www.ariss.org/contact-the-iss.html",
       "accessed": "2026-08-04"
     },
     {
+      "id": "ARISS-STATUS-2026-07-23",
+      "title": "ARISS — Current Status of ISS Stations",
+      "url": "https://www.ariss.org/current-status-of-iss-stations.html",
+      "source_status_date": "2026-07-23",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "ARISS-SSTV-2026-05",
+      "title": "ARISS — SSTV event on 437.550 MHz",
+      "url": "https://www.ariss.org/press-releases/may-08th-2026",
+      "source_date": "2026-05-08",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "IARU-R1-VHF",
       "title": "IARU Région 1 — informations VHF et plans de bande",
       "url": "https://www.iaru-r1.org/wiki/VHF",
       "accessed": "2026-08-04"
@@ -27,6 +48,12 @@
       "mode": "NFM",
       "step_khz": 12.5,
       "tx_policy": "rx_only",
+      "service": "terrestrial_aprs",
+      "link": {
+        "type": "terrestrial_simplex_listening",
+        "downlink_frequency_mhz": 144.8
+      },
+      "source_ids": ["IARU-R1-VHF"],
       "comment": "APRS terrestre Europe — réception seule dans l'export public"
     },
     {
@@ -35,7 +62,16 @@
       "mode": "FM",
       "step_khz": 5,
       "tx_policy": "rx_only",
-      "comment": "ISS voix descendante mondiale — réception seule"
+      "service": "crew_voice",
+      "link": {
+        "type": "split",
+        "uplink_frequency_mhz": 145.2,
+        "uplink_region": "ITU Region 1 — Europe, Russie et Afrique",
+        "downlink_frequency_mhz": 145.8
+      },
+      "operational_status": "scheduled_or_crew_activated",
+      "source_ids": ["ARISS-FREQUENCIES", "ARISS-STATUS-2026-07-23"],
+      "comment": "ISS voix — descente mondiale 145.800; montée Région 1 sur 145.200 non exportée — RX seule"
     },
     {
       "name": "ISS-PKT-V",
@@ -43,7 +79,15 @@
       "mode": "FM",
       "step_khz": 5,
       "tx_policy": "rx_only",
-      "comment": "ISS packet/APRS VHF — réception seule"
+      "service": "packet_aprs_vhf",
+      "link": {
+        "type": "same_frequency_bidirectional",
+        "uplink_frequency_mhz": 145.825,
+        "downlink_frequency_mhz": 145.825
+      },
+      "operational_status": "configuration_dependent",
+      "source_ids": ["ARISS-FREQUENCIES", "ARISS-STATUS-2026-07-23"],
+      "comment": "ISS packet/APRS VHF — 145.825 en montée et descente lorsque ce mode est actif — RX seule"
     },
     {
       "name": "ISS-REP",
@@ -51,7 +95,16 @@
       "mode": "FM",
       "step_khz": 5,
       "tx_policy": "rx_only",
-      "comment": "ISS répéteur VHF/UHF — fréquence descendante, réception seule"
+      "service": "crossband_voice_repeater",
+      "link": {
+        "type": "crossband_split",
+        "uplink_frequency_mhz": 145.99,
+        "uplink_ctcss_hz": 67.0,
+        "downlink_frequency_mhz": 437.8
+      },
+      "operational_status": "active_as_of_2026-07-23",
+      "source_ids": ["ARISS-FREQUENCIES", "ARISS-STATUS-2026-07-23"],
+      "comment": "ISS répéteur — montée 145.990 CTCSS 67 Hz; descente 437.800 — seule la descente est exportée"
     },
     {
       "name": "ISS-PKT-U",
@@ -59,7 +112,15 @@
       "mode": "FM",
       "step_khz": 5,
       "tx_policy": "rx_only",
-      "comment": "ISS packet UHF — réception seule"
+      "service": "packet_aprs_uhf",
+      "link": {
+        "type": "same_frequency_bidirectional",
+        "uplink_frequency_mhz": 437.825,
+        "downlink_frequency_mhz": 437.825
+      },
+      "operational_status": "active_as_of_2026-07-23",
+      "source_ids": ["ARISS-FREQUENCIES", "ARISS-STATUS-2026-07-23"],
+      "comment": "ISS packet/APRS UHF — 437.825 en montée et descente lorsque ce mode est actif — RX seule"
     },
     {
       "name": "ISS-SSTV",
@@ -67,7 +128,15 @@
       "mode": "FM",
       "step_khz": 5,
       "tx_policy": "rx_only",
-      "comment": "ISS SSTV UHF lorsque le service est actif — réception seule"
+      "service": "sstv_broadcast",
+      "link": {
+        "type": "downlink_only_broadcast",
+        "downlink_frequency_mhz": 437.55
+      },
+      "operational_status": "scheduled_events_only",
+      "frequency_schedule_note": "Certaines campagnes ARISS utilisent 145.800 MHz ; vérifier l'annonce officielle de chaque événement.",
+      "source_ids": ["ARISS-FREQUENCIES", "ARISS-SSTV-2026-05"],
+      "comment": "ISS SSTV — descente UHF 437.550 lors des campagnes annoncées — RX seule"
     }
   ]
 }

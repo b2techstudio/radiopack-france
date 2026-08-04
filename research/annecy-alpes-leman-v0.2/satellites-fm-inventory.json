@@ -1,0 +1,132 @@
+{
+  "dataset": "Annecy–Alpes–Léman v0.2 - satellites FM analogiques utiles",
+  "version": "0.2.0-research.1",
+  "updated": "2026-08-04",
+  "production_ready": false,
+  "internal_candidate_allowed": true,
+  "default_export_policy": "rx_only",
+  "rules": [
+    "frequency_mhz désigne toujours la liaison descendante mémorisée pour l'écoute.",
+    "Les liaisons montantes sont documentées dans link mais ne sont jamais exportées comme mémoires séparées.",
+    "Le statut opérationnel doit être recontrôlé sur AMSAT avant toute publication publique.",
+    "Les satellites à calendrier incertain, en test, à orbite inadaptée ou signalés en fin de vie sont exclus du candidat interne."
+  ],
+  "sources": [
+    {
+      "id": "AMSAT-LIVE-FM-2026-07-10",
+      "title": "AMSAT - Live FM Satellites",
+      "url": "https://www.amsat.org/live-fm-satellites/",
+      "source_updated": "2026-07-10",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "AMSAT-SO50",
+      "title": "AMSAT - SO-50 satellite information",
+      "url": "https://www.amsat.org/two-way-satellites/so-50-satellite-information/",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "AMSAT-AO91",
+      "title": "AMSAT - AO-91 Fox-1B",
+      "url": "https://www.amsat.org/two-way-satellites/ao-91/",
+      "source_updated": "2025-04-27",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "AMSAT-STATUS",
+      "title": "AMSAT - Live OSCAR Satellite Status",
+      "url": "https://www.amsat.org/status/",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "SAT-SO50",
+      "frequency_mhz": 436.795,
+      "mode": "FM",
+      "step_khz": 5.0,
+      "tx_policy": "rx_only",
+      "satellite": "SO-50",
+      "service": "fm_voice_repeater",
+      "verification": "verified_current",
+      "link": {
+        "type": "crossband_split",
+        "uplink_frequency_mhz": 145.85,
+        "uplink_ctcss_hz": 67.0,
+        "activation_ctcss_hz": 74.4,
+        "downlink_frequency_mhz": 436.795
+      },
+      "source_ids": [
+        "AMSAT-LIVE-FM-2026-07-10",
+        "AMSAT-SO50",
+        "AMSAT-STATUS"
+      ],
+      "comment": "SO-50 — montée 145.850 CTCSS 67; descente 436.795 — RX seule"
+    },
+    {
+      "name": "SAT-AO91",
+      "frequency_mhz": 145.96,
+      "mode": "FM",
+      "step_khz": 5.0,
+      "tx_policy": "rx_only",
+      "satellite": "AO-91",
+      "service": "fm_voice_repeater",
+      "verification": "verified_current_limited",
+      "link": {
+        "type": "crossband_split",
+        "uplink_frequency_mhz": 435.25,
+        "downlink_frequency_mhz": 145.96
+      },
+      "operating_limit": "sunlight_only_due_to_battery",
+      "source_ids": [
+        "AMSAT-LIVE-FM-2026-07-10",
+        "AMSAT-AO91",
+        "AMSAT-STATUS"
+      ],
+      "comment": "AO-91 — montée 435.250; descente 145.960; soleil uniquement — RX seule"
+    },
+    {
+      "name": "SAT-AO123",
+      "frequency_mhz": 435.4,
+      "mode": "FM",
+      "step_khz": 5.0,
+      "tx_policy": "rx_only",
+      "satellite": "AO-123",
+      "service": "fm_voice_repeater",
+      "verification": "current_amsat_list",
+      "link": {
+        "type": "crossband_split",
+        "uplink_frequency_mhz": 145.85,
+        "uplink_ctcss_hz": 67.0,
+        "downlink_frequency_mhz": 435.4
+      },
+      "source_ids": [
+        "AMSAT-LIVE-FM-2026-07-10",
+        "AMSAT-STATUS"
+      ],
+      "comment": "AO-123 — montée 145.850 CTCSS 67; descente 435.400 — RX seule"
+    }
+  ],
+  "deferred": [
+    {
+      "satellite": "PO-101",
+      "reason": "AMSAT le signale en déclin et activé selon calendrier."
+    },
+    {
+      "satellite": "CAS-3H",
+      "reason": "Transpondeur FM sans calendrier fixe."
+    },
+    {
+      "satellite": "IO-86",
+      "reason": "Orbite limitée à environ ±30 degrés, non adaptée à Annecy."
+    },
+    {
+      "satellite": "RS95S",
+      "reason": "Toujours en phase de test."
+    },
+    {
+      "satellite": "TEVEL2",
+      "reason": "État variable entre plusieurs satellites partageant la même descente."
+    }
+  ]
+}

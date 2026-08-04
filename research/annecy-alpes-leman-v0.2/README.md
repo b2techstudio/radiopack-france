@@ -70,11 +70,32 @@ Le fichier `navigation-lakes-findings.json` aboutit actuellement à zéro mémoi
 - les pages officielles des lacs d'Annecy et du Bourget sont référencées, sans fréquence publique générale identifiée dans les pages consultées ;
 - Aiguebelette reste en attente d'une source officielle spécifique à la radio de navigation.
 
+### Satellites FM et candidat interne
+
+Le fichier `satellites-fm-inventory.json` ajoute trois descendantes analogiques documentées par AMSAT :
+
+- SO-50 : 436.795 MHz, avec montée 145.850 MHz et CTCSS 67 Hz ;
+- AO-91 : 145.960 MHz, avec montée 435.250 MHz, utilisable seulement lorsque le satellite est éclairé ;
+- AO-123 : 435.400 MHz, avec montée 145.850 MHz et CTCSS 67 Hz.
+
+Comme pour l'ISS, seule la liaison descendante devient une mémoire d'écoute. Les montantes restent des métadonnées.
+
+Le script `tools/build_annecy_internal_candidate.py` assemble un candidat interne de 48 mémoires :
+
+- 16 PMR446 ;
+- 6 APRS/ISS ;
+- 3 satellites FM ;
+- 2 canaux d'appel ;
+- 19 fréquences radioamateur françaises ;
+- 2 relais suisses `verified_current`.
+
+Le résultat est généré localement sous `research/annecy-alpes-leman-v0.2/generated/`, avec `public_export_allowed: false`. Ce dossier est ignoré par Git. L'aviation, les lacs et toutes les lignes en attente ou en conflit restent exclus.
+
 ## Blocs restant à inventorier
 
 1. aviation France après AIRAC 08/26 ;
 2. aviation Suisse après AIRAC du 6 août 2026 ;
-3. satellites et balises analogiques utiles ;
+3. balises analogiques réellement utiles ;
 4. usages locaux publics et vérifiables ;
 5. recoupements radioamateurs suisses encore ouverts.
 
@@ -112,6 +133,7 @@ Depuis la racine du dépôt :
 ```powershell
 python tests\test_annecy_research.py
 python tests\test_annecy_aviation_lakes.py
+python tests\test_annecy_internal_candidate.py
 ```
 
 Résultats attendus :
@@ -119,6 +141,7 @@ Résultats attendus :
 ```text
 Tests Annecy–Alpes–Léman research: OK
 Tests Annecy–Alpes–Léman aviation/lakes research: OK
+Tests Annecy–Alpes–Léman internal candidate: OK
 ```
 
 La CI exécute ces tests à chaque push et publie le statut combiné `radiopack-ci/complete`.

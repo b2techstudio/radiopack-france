@@ -1,0 +1,163 @@
+{
+  "dataset": "Annecy–Alpes–Léman v0.2 - candidats radioamateur analogiques Suisse",
+  "version": "0.2.0-research.1",
+  "updated": "2026-08-04",
+  "scope": ["Genève", "Vaud", "Valais"],
+  "production_ready": false,
+  "default_export_policy": "rx_only",
+  "rules": [
+    "Aucune ligne suisse de ce fichier n'est encore intégrée au générateur public.",
+    "Le statut verified_current exige une source du club exploitant ou une preuve d'usage récente.",
+    "Le statut pending_recheck impose un nouveau recoupement avant passage en production.",
+    "Les modes numériques sont exclus du futur pack public.",
+    "Toute future exportation publique utilisera Duplex=off."
+  ],
+  "sources": [
+    {
+      "id": "HB9G-CLUB-2026",
+      "title": "USKA Genève HB9G - informations du club et relais",
+      "url": "https://www.hb9g.ch/info",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "HB9G-RELAIS-2022",
+      "title": "USKA Genève HB9G - relais et balises",
+      "url": "https://www.hb9g.ch/info/217-relais-et-balises-hb9g",
+      "source_updated": "2022-08-23",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "HB9MM-CLUB",
+      "title": "Radio Amateurs Vaudois HB9MM",
+      "url": "https://hb9mm.com/",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "HB9V-QSO-2026",
+      "title": "HB9V - QSO radioamateur suisse",
+      "url": "https://hb9v.ch/qso-radioamateur-suisse/",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "USKA-HBRADIO-2014",
+      "title": "USKA HB Radio - fréquences de sections Genève, Vaud et Valais",
+      "url": "https://uska.ch/wp-content/uploads/hbradio/HBradio_14-03.pdf",
+      "source_updated": "2014",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "CH-HB9G-V",
+      "frequency_mhz": 145.725,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Vaud / Genève",
+      "site": "Pointe de Poêle Chaud - La Glutte",
+      "callsigns": ["HB9G"],
+      "kind": "Relais FM VHF franco-suisse",
+      "verification": "verified_current",
+      "source_ids": ["HB9G-CLUB-2026", "HB9G-RELAIS-2022"],
+      "comment": "HB9G La Glutte - relais VHF franco-suisse 145.725 MHz - réception seule"
+    },
+    {
+      "name": "CH-HB9G-U",
+      "frequency_mhz": 439.1,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Genève",
+      "site": "Petit-Lancy",
+      "callsigns": ["HB9G"],
+      "kind": "Relais FM UHF",
+      "verification": "verified_current",
+      "source_ids": ["HB9G-CLUB-2026", "HB9G-RELAIS-2022"],
+      "comment": "HB9G Petit-Lancy - relais UHF utilisé pour le QSO de section - réception seule"
+    },
+    {
+      "name": "CH-HB9MMV",
+      "frequency_mhz": 145.6,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Vaud",
+      "site": "Les Pléiades",
+      "callsigns": ["HB9MM"],
+      "kind": "Relais FM VHF",
+      "verification": "pending_recheck",
+      "source_ids": ["HB9MM-CLUB", "USKA-HBRADIO-2014"],
+      "comment": "HB9MM Les Pléiades 145.600 MHz - candidat à recouper avant production"
+    },
+    {
+      "name": "CH-HB9MMU",
+      "frequency_mhz": 438.85,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Vaud",
+      "site": "La Praz / réseau vaudois",
+      "callsigns": ["HB9MM"],
+      "kind": "Relais FM UHF",
+      "verification": "current_use_needs_owner_crosscheck",
+      "source_ids": ["HB9V-QSO-2026", "USKA-HBRADIO-2014"],
+      "comment": "HB9MM 438.850 MHz - usage récent documenté, validation exploitant encore requise"
+    },
+    {
+      "name": "CH-HB9Y-L1",
+      "frequency_mhz": 145.625,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Valais",
+      "site": "Haut-Valais",
+      "callsigns": ["HB9Y"],
+      "kind": "Relais FM VHF",
+      "verification": "pending_recheck",
+      "source_ids": ["USKA-HBRADIO-2014"],
+      "comment": "HB9Y Haut-Valais 145.625 MHz - candidat historique à recouper"
+    },
+    {
+      "name": "CH-HB9Y-L2",
+      "frequency_mhz": 145.75,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Valais",
+      "site": "Bas-Valais",
+      "callsigns": ["HB9Y"],
+      "kind": "Relais FM VHF",
+      "verification": "pending_recheck",
+      "source_ids": ["USKA-HBRADIO-2014"],
+      "comment": "HB9Y Bas-Valais 145.750 MHz - candidat historique à recouper"
+    },
+    {
+      "name": "CH-HB9Y-U1",
+      "frequency_mhz": 438.65,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Valais",
+      "site": "Bas-Valais",
+      "callsigns": ["HB9Y"],
+      "kind": "Relais FM UHF",
+      "verification": "pending_recheck",
+      "source_ids": ["USKA-HBRADIO-2014"],
+      "comment": "HB9Y Bas-Valais 438.650 MHz - candidat historique à recouper"
+    },
+    {
+      "name": "CH-HB9Y-U2",
+      "frequency_mhz": 438.675,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "canton": "Valais",
+      "site": "Haut-Valais",
+      "callsigns": ["HB9Y"],
+      "kind": "Relais FM UHF",
+      "verification": "pending_recheck",
+      "source_ids": ["USKA-HBRADIO-2014"],
+      "comment": "HB9Y Haut-Valais 438.675 MHz - candidat historique à recouper"
+    }
+  ]
+}

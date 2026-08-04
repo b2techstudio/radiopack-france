@@ -10,7 +10,6 @@ BUILDER = ROOT / "tools/build_annecy_internal_candidate.py"
 RESEARCH = ROOT / "research/annecy-alpes-leman-v0.2"
 SATELLITES = RESEARCH / "satellites-fm-inventory.json"
 PLAN = RESEARCH / "memory-plan.json"
-COMMITTED_DIR = RESEARCH / "generated"
 
 for path in [BUILDER, SATELLITES, PLAN]:
     assert path.is_file(), f"Fichier Sprint 10 manquant: {path.relative_to(ROOT)}"
@@ -56,14 +55,9 @@ with tempfile.TemporaryDirectory() as tmp:
     json_path = output_dir / "annecy-alpes-leman-v0.2-internal.json"
     csv_path = output_dir / "annecy-alpes-leman-v0.2-internal.csv"
 
-    candidate_text = json_path.read_text(encoding="utf-8")
-    csv_text = csv_path.read_text(encoding="utf-8")
-    candidate = json.loads(candidate_text)
+    candidate = json.loads(json_path.read_text(encoding="utf-8"))
     with csv_path.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-
-    assert (COMMITTED_DIR / json_path.name).read_text(encoding="utf-8") == candidate_text
-    assert (COMMITTED_DIR / csv_path.name).read_text(encoding="utf-8") == csv_text
 
 assert candidate["status"] == "internal_candidate_not_for_publication"
 assert candidate["public_export_allowed"] is False

@@ -1,4 +1,5 @@
 import csv
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -30,6 +31,56 @@ for relative, expected_count in expected.items():
     assert all(row["Duplex"] == "off" for row in rows)
     assert len({row["Name"] for row in rows}) == len(rows)
     assert all(len(row["Name"]) <= 10 for row in rows)
+
+iss_dataset = json.loads(
+    (ROOT / "data/national/amateur-listening-rx.json").read_text(encoding="utf-8")
+)
+iss_channels = {
+    channel["name"]: channel
+    for channel in iss_dataset["channels"]
+    if channel["name"].startswith("ISS-")
+}
+
+for name, channel in iss_channels.items():
+    assert channel["tx_policy"] == "rx_only", name
+    assert float(channel["frequency_mhz"]) == float(channel["link"]["downlink_frequency_mhz"]), name
+
+voice = iss_channels["ISS-VOICE"]
+assert voice["link"]["type"] == "split"
+assert float(voice["link"]["uplink_frequency_mhz"]) == 145.2
+assert float(voice["link"]["downlink_frequency_mhz"]) == 145.8
+assert "Region 1" in voice["link"]["uplink_region"]
+
+repeater = iss_channels["ISS-REP"]
+assert repeater["link"]["type"] == "crossband_split"
+assert float(repeater["link"]["uplink_frequency_mhz"]) == 145.99
+assert float(repeater["link"]["uplink_ctcss_hz"]) == 67.0
+assert float(repeater["link"]["downlink_frequency_mhz"]) == 437.8
+
+for packet_name, frequency in [("ISS-PKT-V", 145.825), ("ISS-PKT-U", 437.825)]:
+    packet = iss_channels[packet_name]
+    assert packet["link"]["type"] == "same_frequency_bidirectional"
+    assert float(packet["link"]["uplink_frequency_mhz"]) == frequency
+    assert float(packet["link"]["downlink_frequency_mhz"]) == frequency
+
+sstv = iss_channels["ISS-SSTV"]
+assert sstv["link"]["type"] == "downlink_only_broadcast"
+assert "uplink_frequency_mhz" not in sstv["link"]
+assert float(sstv["link"]["downlink_frequency_mhz"]) == 437.55
+
+listening = loaded["website/public/downloads/national/radiopack-france-amateur-listening-rx.csv"]
+listening_by_name = {row["Name"]: row for row in listening}
+exported_frequencies = {float(row["Frequency"]) for row in listening}
+
+assert listening_by_name["ISS-VOICE"]["Frequency"] == "145.800000"
+assert listening_by_name["ISS-REP"]["Frequency"] == "437.800000"
+assert listening_by_name["ISS-PKT-V"]["Frequency"] == "145.825000"
+assert listening_by_name["ISS-PKT-U"]["Frequency"] == "437.825000"
+assert listening_by_name["ISS-SSTV"]["Frequency"] == "437.550000"
+assert 145.2 not in exported_frequencies
+assert 145.99 not in exported_frequencies
+assert "montée Région 1 sur 145.200" in listening_by_name["ISS-VOICE"]["Comment"]
+assert "montée 145.990 CTCSS 67 Hz" in listening_by_name["ISS-REP"]["Comment"]
 
 normandie = loaded["website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"]
 normandie_by_name = {row["Name"]: row for row in normandie}
@@ -85,4 +136,4 @@ radioamateur_names = {
 }
 assert len(radioamateur_names) == 17
 
-print("Tests RadioPack Sprint 5: OK")
+print("Tests RadioPack ISS links and Sprint 5: OK")

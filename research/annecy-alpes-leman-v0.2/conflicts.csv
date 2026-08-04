@@ -1,2 +1,3 @@
 item,area,source_a,source_b,conflict,status,production_action,last_checked
-F1ZJV,Haute-Savoie,"REF74 source locale","REF base nationale","Statut analogique ou numérique non concordant selon l'entrée consultée",open,"Exclure de tout JSON/CSV public jusqu'à recoupement récent",2026-08-04
+F1ZJV,Haute-Savoie,"REF74 source locale","REF base nationale","REF74 décrit un fonctionnement analogique sur 145.7875 MHz tandis que le REF national classe l'installation active en DMR et C4FM",open,"Exclure de tout JSON/CSV public jusqu'à confirmation récente de l'exploitant",2026-08-04
+F1ZYT,Haute-Savoie,"REF74 source locale","REF base nationale","REF74 décrit un relais analogique sur 145.7875 MHz mais la ligne nationale ne fournit pas de paramètres techniques ni d'état exploitable",open,"Exclure de tout JSON/CSV public jusqu'à recoupement technique complet",2026-08-04

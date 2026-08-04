@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.7.0 - 2026-08-04
+
+- Ajout d'un pré-inventaire aviation France de 11 fréquences uniques pour Annecy–Alpes–Léman v0.2.
+- Organisation des fréquences d'Annecy, Annemasse, Chambéry, Grenoble-Le Versoud, Grenoble-Alpes-Isère et Genève Information.
+- Marquage obligatoire de toutes les lignes aviation pour revalidation à partir de l'AIRAC 08/26 du 6 août 2026.
+- Maintien d'Albertville, Megève et Sallanches en attente d'extraction officielle.
+- Ajout des conclusions officielles sur la navigation des lacs d'Annecy, du Bourget et du Léman.
+- Exclusion du plan maritime de 57 canaux, de l'AIS suisse et des réseaux professionnels concédés autour de 173 MHz.
+- Conservation du canal 16 suisse comme cas conditionnel de recherche, sans intégration au pack public.
+- Ajout du test `tests/test_annecy_aviation_lakes.py` et de son exécution dans GitHub Actions.
+- Aucun changement du générateur public, des CSV, du PDF ou du statut « En préparation » de la v0.2.
+
 ## 0.6.0 - 2026-08-04
 
 - Ajout de l'inventaire de recherche radioamateur France pour Annecy–Alpes–Léman v0.2.

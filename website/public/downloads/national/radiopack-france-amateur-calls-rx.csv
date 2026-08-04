@@ -1,0 +1,3 @@
+Location,Name,Frequency,Duplex,Offset,Tone,rToneFreq,cToneFreq,DtcsCode,DtcsPolarity,RxDtcsCode,CrossMode,Mode,TStep,Skip,Power,Comment,URCALL,RPT1CALL,RPT2CALL,DVCODE
+0,CALL-VHF,145.500000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,Appel FM 2 m - plan de bande REF/IARU Region 1 - reception seule,,,,
+1,CALL-UHF,433.500000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,Appel FM mobile 70 cm - plan de bande REF/IARU Region 1 - reception seule,,,,

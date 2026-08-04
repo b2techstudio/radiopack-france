@@ -1,51 +1,68 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Pack Normandie v0.2 — RadioPack France" description="CSV CHIRP Normandie de 122 mémoires pour Quansheng UV-K5, entièrement configuré en réception seule.">
+<BaseLayout title="Pack Normandie v0.3.1 - RadioPack France" description="CSV CHIRP Normandie de 139 memoires pour Quansheng UV-K5, configure en reception seule et documente en PDF.">
   <section class="section"><div class="container page-grid">
     <div class="copy">
-      <span class="eyebrow">Pack régional bêta · v0.2.0</span>
+      <span class="eyebrow">Pack regional beta - v0.3.1</span>
       <h1>Normandie</h1>
-      <p class="lead">Le pack passe à 122 mémoires vérifiées : PMR446, plan VHF marine international, APRS et écoute ISS, plus une sélection de fréquences aéronautiques publiques normandes issue du SIA.</p>
+      <p class="lead">La version 0.3.1 ajoute les canaux d'appel FM 2 m / 70 cm et quinze sorties de relais ou voies de transpondeurs analogiques verifiees dans la Manche, la Mayenne, le Calvados et la Seine-Maritime.</p>
       <div class="button-row">
-        <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.2.csv" download>Télécharger le CSV v0.2</a>
-        <a class="button button-secondary" href="/documentation">Procédure CHIRP</a>
+        <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.3.1.csv" download>Telecharger le CSV v0.3.1</a>
+        <a class="button button-orange" href="/downloads/normandie/radiopack-france-normandie-v0.3.1-guide.pdf" download>Telecharger le guide PDF</a>
+        <a class="button button-secondary" href="/documentation">Procedure CHIRP</a>
       </div>
+
       <div class="card legal">
-        <strong>Réception seule sur les 122 mémoires</strong>
-        <p>Toutes les lignes sont exportées avec <code>Duplex=off</code>. La VHF marine, le PMR446, l’aviation et les services radioamateurs/satellites ne sont donc pas émis par ce codeplug public.</p>
+        <strong>Reception seule sur les 139 memoires</strong>
+        <p>Toutes les lignes sont exportees avec <code>Duplex=off</code>. Les frequences radioamateurs sont fournies pour l'ecoute; aucun droit d'emission n'est accorde par le fichier.</p>
       </div>
+
+      <div class="memory-map card">
+        <h2>Organisation des memoires</h2>
+        <div class="ranges">
+          <span><b>0-15</b> PMR446</span>
+          <span><b>20-109</b> Marine</span>
+          <span><b>120-125</b> APRS / ISS</span>
+          <span><b>130-139</b> Aviation</span>
+          <span><b>150-151</b> Appels amateur</span>
+          <span><b>160-174</b> Relais analogiques</span>
+        </div>
+      </div>
+
       <div class="grid-2 category-grid">
-        <article class="card"><span class="badge badge-green">16</span><h3>PMR446</h3><p>16 canaux analogiques en NFM, réception seule.</p></article>
-        <article class="card"><span class="badge">90</span><h3>VHF marine</h3><p>Simplex, côtés navire/côte des duplex, canal 16, DSC et AIS.</p></article>
-        <article class="card"><span class="badge badge-orange">6</span><h3>APRS & ISS</h3><p>APRS terrestre et principales fréquences descendantes ARISS.</p></article>
-        <article class="card"><span class="badge badge-green">10</span><h3>Aviation Normandie</h3><p>Caen, Deauville, Cherbourg, Le Havre, Rouen et urgence aéronautique.</p></article>
+        <article class="card"><span class="badge badge-green">16</span><h3>PMR446</h3><p>16 canaux analogiques en NFM, reception seule.</p></article>
+        <article class="card"><span class="badge">90</span><h3>VHF marine</h3><p>Simplex, cotes navire/cote des duplex, canal 16, DSC et AIS.</p></article>
+        <article class="card"><span class="badge badge-orange">23</span><h3>Radioamateur</h3><p>2 canaux d'appel, APRS/ISS et 15 relais ou transpondeurs analogiques.</p></article>
+        <article class="card"><span class="badge badge-green">10</span><h3>Aviation Normandie</h3><p>Caen, Deauville, Cherbourg, Le Havre, Rouen et urgence aeronautique.</p></article>
       </div>
     </div>
+
     <aside class="card status-card">
-      <span class="badge badge-green">Bêta disponible · v0.2.0</span>
-      <h3>122 mémoires sur 200</h3>
+      <span class="badge badge-green">Beta disponible - v0.3.1</span>
+      <h3>139 memoires sur 200</h3>
       <div class="meter"><span></span></div>
       <ul>
-        <li>16 PMR446 RX</li>
-        <li>90 VHF marine RX</li>
-        <li>6 APRS / ISS RX</li>
-        <li>10 aviation AM RX</li>
+        <li>122 memoires conservees de v0.2</li>
+        <li>2 canaux d'appel radioamateur</li>
+        <li>15 sorties de relais analogiques</li>
+        <li>61 positions encore disponibles</li>
       </ul>
       <hr />
-      <h4>Sources et fraîcheur</h4>
+      <h4>Relais verifies</h4>
       <ul class="future">
-        <li>VHF marine : UIT Appendice 18</li>
-        <li>Aviation : eAIP France du 11 juin 2026</li>
-        <li>ISS : fréquences ARISS publiées</li>
-        <li>Vérification : 4 août 2026</li>
+        <li>Manche : Mont Robin et Cherbourg</li>
+        <li>Mayenne : Mont des Avaloirs / Pre-en-Pail</li>
+        <li>Calvados : Jurques</li>
+        <li>Seine-Maritime : Le Havre, Dieppe, Rouen, Fecamp et Etretat</li>
+        <li>Sources : ARA50, REF, SHTSF et F8KII</li>
       </ul>
       <hr />
-      <h4>Version suivante</h4>
+      <h4>Documentation</h4>
       <ul class="future">
-        <li>Relais radioamateurs locaux vérifiés</li>
-        <li>Tri par sous-régions normandes</li>
-        <li>Documentation PDF du pack</li>
+        <li>Guide PDF complet</li>
+        <li>Table des 139 memoires</li>
+        <li>Sources et date de verification</li>
       </ul>
     </aside>
   </div></section>
@@ -57,9 +74,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}
   .status-card hr{border:0;border-top:1px solid var(--line);margin:22px 0 0}
   .meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}
-  .meter span{display:block;width:61%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}
+  .meter span{display:block;width:69.5%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}
   .legal{padding:20px;background:linear-gradient(120deg,rgba(110,61,232,.1),rgba(255,255,255,.76))}
   .legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}
+  .memory-map{padding:24px;background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(230,241,252,.82))}
+  .memory-map h2{margin-bottom:16px}.ranges{display:flex;flex-wrap:wrap;gap:10px}
+  .ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.8);color:var(--muted);font-size:.82rem}
+  .ranges b{color:#5f31cf;margin-right:4px}
   .category-grid article{padding:22px}.category-grid h3{margin:14px 0 7px}.category-grid p{color:var(--muted)}
   @media(max-width:800px){.page-grid{grid-template-columns:1fr}}
 </style>

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.7.1 - 2026-08-04
+
+- Correction de la modélisation des fréquences ISS en distinguant explicitement liaison montante et liaison descendante.
+- Voix équipage en Région 1 : montée 145,200 MHz et descente mondiale 145,800 MHz.
+- Répéteur vocal croisé : montée 145,990 MHz avec CTCSS 67 Hz et descente 437,800 MHz.
+- Packet/APRS VHF sur 145,825 MHz dans les deux sens et UHF sur 437,825 MHz dans les deux sens lorsque ces modes sont actifs.
+- Confirmation de 437,550 MHz comme fréquence descendante SSTV utilisée lors de campagnes ARISS 2026 ; certaines autres campagnes peuvent utiliser 145,800 MHz.
+- Conservation exclusive des fréquences descendantes dans les mémoires RX publiques ; les montantes restent des métadonnées documentaires.
+- Ajout de tests empêchant l'export de 145,200 MHz et 145,990 MHz comme mémoires de réception séparées.
+- Régénération du CSV national APRS/ISS sans changement du nombre de mémoires.
+
 ## 0.7.0 - 2026-08-04
 
 - Ajout d'un pré-inventaire aviation France de 11 fréquences uniques pour Annecy–Alpes–Léman v0.2.

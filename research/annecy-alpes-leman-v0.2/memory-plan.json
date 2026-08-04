@@ -1,30 +1,80 @@
 {
   "pack": "Annecy–Alpes–Léman",
   "target_version": "0.2.0",
-  "status": "draft_not_for_generation",
+  "status": "internal_candidate_ready_not_for_publication",
   "updated": "2026-08-04",
-  "target_useful_memories": {
-    "preferred_min": 160,
-    "preferred_max": 180,
-    "absolute_soft_max": 185,
-    "rule": "Le total n'est jamais atteint par remplissage artificiel."
+  "public_export_allowed": false,
+  "internal_candidate": {
+    "expected_memory_count": 48,
+    "rule": "Le candidat interne ne contient que les lignes explicitement autorisées par l'assembleur."
   },
-  "draft_blocks": [
-    {"start": 0, "end": 15, "label": "PMR446 national RX"},
-    {"start": 16, "end": 19, "label": "Réserve"},
-    {"start": 20, "end": 29, "label": "APRS / ISS / satellites analogiques"},
-    {"start": 30, "end": 39, "label": "Appels et balises communes"},
-    {"start": 40, "end": 89, "label": "Radioamateur analogique France"},
-    {"start": 90, "end": 124, "label": "Radioamateur analogique Suisse"},
-    {"start": 125, "end": 154, "label": "Aviation France"},
-    {"start": 155, "end": 174, "label": "Aviation Suisse"},
-    {"start": 175, "end": 184, "label": "Lacs et navigation publique vérifiée"},
-    {"start": 185, "end": 199, "label": "Libre"}
+  "blocks": [
+    {
+      "start": 0,
+      "end": 15,
+      "label": "PMR446 national RX",
+      "candidate_count": 16
+    },
+    {
+      "start": 16,
+      "end": 19,
+      "label": "Réserve",
+      "candidate_count": 0
+    },
+    {
+      "start": 20,
+      "end": 29,
+      "label": "APRS / ISS / satellites analogiques",
+      "candidate_count": 9
+    },
+    {
+      "start": 30,
+      "end": 39,
+      "label": "Appels et balises communes",
+      "candidate_count": 2
+    },
+    {
+      "start": 40,
+      "end": 89,
+      "label": "Radioamateur analogique France",
+      "candidate_count": 19
+    },
+    {
+      "start": 90,
+      "end": 124,
+      "label": "Radioamateur analogique Suisse",
+      "candidate_count": 2
+    },
+    {
+      "start": 125,
+      "end": 154,
+      "label": "Aviation France",
+      "candidate_count": 0
+    },
+    {
+      "start": 155,
+      "end": 174,
+      "label": "Aviation Suisse",
+      "candidate_count": 0
+    },
+    {
+      "start": 175,
+      "end": 184,
+      "label": "Lacs et navigation publique vérifiée",
+      "candidate_count": 0
+    },
+    {
+      "start": 185,
+      "end": 199,
+      "label": "Libre",
+      "candidate_count": 0
+    }
   ],
   "notes": [
     "Ce plan est une capacité de travail et non une promesse de remplissage.",
-    "Les limites pourront être déplacées après l'inventaire complet.",
+    "Les blocs aviation restent vides avant revalidation AIRAC 08/26.",
+    "Le bloc lacustre reste vide en l'absence de fréquence publique générale validée.",
     "Les blocs France et Suisse restent distincts.",
-    "Tous les futurs exports publics devront utiliser Duplex=off."
+    "Tous les exports, y compris internes, utilisent Duplex=off."
   ]
 }

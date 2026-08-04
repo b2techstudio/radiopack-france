@@ -1,0 +1,106 @@
+{
+  "dataset": "Annecy–Alpes–Léman v0.2 - navigation lacustre, conclusions de recherche",
+  "version": "0.2.0-research.2",
+  "updated": "2026-08-04",
+  "production_ready": false,
+  "default_export_policy": "rx_only",
+  "rules": [
+    "Aucune fréquence lacustre n'est ajoutée au pack tant qu'un usage public officiel, spécifique au lac et utile à l'écoute n'est pas documenté.",
+    "Le plan VHF maritime de 57 canaux n'est jamais recopié automatiquement sur les lacs.",
+    "Les fréquences professionnelles concédées ou privées sont exclues.",
+    "Les fréquences AIS sont exclues des lacs suisses.",
+    "Toute future mémoire publique restera en réception seule avec Duplex=off."
+  ],
+  "sources": [
+    {
+      "id": "BAKOM-LAKES-WEB",
+      "title": "OFCOM/BAKOM - installations radio sur les lacs intérieurs",
+      "url": "https://www.bakom.admin.ch/de/funkanlagen-auf-binnenseen",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "BAKOM-LAKES-PDF",
+      "title": "OFCOM/BAKOM - radio et radar sur les eaux suisses",
+      "url": "https://www.bakom.admin.ch/dam/de/sd-web/vtOWDP7MeCS9/funk_auf_schweizergewaessern.pdf",
+      "source_date": "2021-02-12",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "PREF74-ANNECY-RPP",
+      "title": "Préfecture de Haute-Savoie - naviguer sur le lac d'Annecy",
+      "url": "https://www.haute-savoie.gouv.fr/index.php/Actions-de-l-Etat/Vos-loisirs/Lacs-et-cours-d-eau/Lac-d-Annecy/Naviguer-sur-le-lac-d-Annecy",
+      "page_updated": "2026-07-15",
+      "accessed": "2026-08-04"
+    },
+    {
+      "id": "PREF73-BOURGET-RPP",
+      "title": "Préfecture de Savoie - navigation sur le lac du Bourget",
+      "url": "https://www.savoie.gouv.fr/Actions-de-l-Etat/Paysages-environnement-risques-naturels-et-technologiques/Environnement/Eau-foret-biodiversite/Navigation/La-navigation-sur-le-lac-du-Bourget",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [],
+  "conditional_candidates": [
+    {
+      "name": "CH-LAC16",
+      "frequency_mhz": 156.8,
+      "mode": "NFM",
+      "step_khz": 25.0,
+      "tx_policy": "rx_only",
+      "area": "Lacs suisses, dont le Léman",
+      "status": "licensed_radar_context_not_public_pack",
+      "source_ids": ["BAKOM-LAKES-PDF"],
+      "reason": "Le canal 16 est lié à une concession de radiocommunication mobile terrestre et au contexte spécifique de navigation au radar; il n'est pas retenu dans le pack public général."
+    }
+  ],
+  "excluded": [
+    {
+      "item": "Plan VHF maritime 57 canaux",
+      "status": "excluded",
+      "reason": "Les appareils maritimes de 57 canaux ne sont pas autorisés sur le territoire suisse, hors exception du Rhin."
+    },
+    {
+      "item": "AIS 1",
+      "frequency_mhz": 161.975,
+      "status": "excluded",
+      "reason": "L'OFCOM réserve cette fréquence au mobile terrestre en Suisse et interdit l'AIS sur les lacs suisses."
+    },
+    {
+      "item": "AIS 2",
+      "frequency_mhz": 162.025,
+      "status": "excluded",
+      "reason": "L'OFCOM réserve cette fréquence au mobile terrestre en Suisse et interdit l'AIS sur les lacs suisses."
+    },
+    {
+      "item": "Réseaux VHF vers 173 MHz",
+      "status": "excluded",
+      "reason": "Fréquences concédées de radiocommunication mobile terrestre, professionnelles ou événementielles, non destinées au pack public."
+    }
+  ],
+  "lake_reviews": [
+    {
+      "lake": "Léman",
+      "countries": ["FR", "CH"],
+      "status": "no_public_general_channel_validated",
+      "result": "Aucun bloc maritime général, aucun AIS et aucun canal professionnel concédé ne sont retenus."
+    },
+    {
+      "lake": "Annecy",
+      "countries": ["FR"],
+      "status": "official_navigation_rules_reviewed_no_radio_channel_identified",
+      "result": "Le RPP officiel est référencé; aucune fréquence publique générale n'a été identifiée dans la page officielle consultée."
+    },
+    {
+      "lake": "Bourget",
+      "countries": ["FR"],
+      "status": "official_navigation_rules_reviewed_no_radio_channel_identified",
+      "result": "Le RPPN 2026 est référencé; aucune fréquence publique générale n'a été identifiée dans la page officielle consultée."
+    },
+    {
+      "lake": "Aiguebelette",
+      "countries": ["FR"],
+      "status": "official_navigation_radio_source_pending",
+      "result": "Aucune mémoire n'est créée avant identification d'une source officielle spécifique."
+    }
+  ]
+}

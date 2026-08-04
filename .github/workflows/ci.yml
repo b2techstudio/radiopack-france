@@ -36,6 +36,9 @@ jobs:
       - name: Test production files
         run: python tests/test_site_files.py
 
+      - name: Test Annecy Alps Leman research inventories
+        run: python tests/test_annecy_research.py
+
   website:
     name: Astro production build
     runs-on: ubuntu-latest

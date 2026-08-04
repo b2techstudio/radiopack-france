@@ -1,22 +1,48 @@
 {
   "pack": "Normandie",
   "slug": "normandie",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "updated": "2026-08-04",
   "status": "beta",
   "max_memories": 200,
   "datasets": [
-    "data/national/pmr446.json",
-    "data/national/marine-vhf-rx.json",
-    "data/national/amateur-listening-rx.json",
-    "data/regions/normandie/aviation-rx.json"
+    {
+      "path": "data/national/pmr446.json",
+      "start_location": 0,
+      "label": "PMR446"
+    },
+    {
+      "path": "data/national/marine-vhf-rx.json",
+      "start_location": 20,
+      "label": "VHF marine"
+    },
+    {
+      "path": "data/national/amateur-listening-rx.json",
+      "start_location": 120,
+      "label": "APRS et ISS"
+    },
+    {
+      "path": "data/regions/normandie/aviation-rx.json",
+      "start_location": 130,
+      "label": "Aviation Normandie"
+    },
+    {
+      "path": "data/national/amateur-calls-rx.json",
+      "start_location": 150,
+      "label": "Canaux d'appel"
+    },
+    {
+      "path": "data/regions/normandie/repeaters-analog-rx.json",
+      "start_location": 160,
+      "label": "Relais analogiques"
+    }
   ],
   "local_channels": [],
   "notes": [
-    "122 mémoires, toutes configurées en réception seule.",
-    "Le pack contient PMR446, VHF marine, APRS/ISS et aviation normande.",
-    "Les canaux maritimes duplex possèdent une mémoire côté navire et une mémoire côté station côtière.",
-    "Les fréquences aéronautiques sont un instantané eAIP : vérifier les mises à jour AIRAC/NOTAM.",
-    "Les relais radioamateurs locaux seront ajoutés dans une version ultérieure après vérification détaillée."
+    "139 mémoires configurées en réception seule.",
+    "Les plages de mémoires sont volontairement séparées par catégorie.",
+    "Les canaux radioamateurs d'appel et quinze sorties de relais ou voies de transpondeurs analogiques vérifiées sont inclus.",
+    "La mémoire 174 contient F6ZCE au Mont des Avaloirs.",
+    "Les positions 175 à 199 restent libres pour de futures extensions."
   ]
 }

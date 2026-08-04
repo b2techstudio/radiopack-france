@@ -1,0 +1,224 @@
+{
+  "dataset": "Normandie - relais et transpondeurs analogiques verifies (reception seule)",
+  "version": "0.3.1",
+  "updated": "2026-08-04",
+  "scope": "normandie",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Seules les frequences de sortie/voie ecoute sont incluses.",
+    "Aucune tonalite d'acces n'est appliquee au recepteur afin de ne pas masquer le trafic.",
+    "Les entrees sont bloquees en emission dans le CSV public.",
+    "La selection privilegie les sources du REF et les sites des associations gestionnaires.",
+    "Aucun relais analogique de l'Orne n'a ete ajoute faute d'entree analogique FM active suffisamment recente dans les sources retenues.",
+    "Le relais F6ZCE de Pré-en-Pail / Mont des Avaloirs est ajouté sur sa fréquence de sortie 145,700 MHz."
+  ],
+  "sources": [
+    {
+      "title": "ARA50 - informations radioamateurs de la Manche",
+      "url": "https://ref50.jimdofree.com/",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "REF - liste des relais et balises, mise a jour mai 2026",
+      "url": "https://web.r-e-f.org/les-relais-et-balises/",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "SHTSF Le Havre - relais",
+      "url": "https://shtsf.fr/relais/",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "F8KII Dieppe - relais F1ZUE et F6ZDK",
+      "url": "https://www.f8kii.fr/",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "REF - F6ZCE Pré-en-Pail / Mont des Avaloirs",
+      "url": "https://www.r-e-f.org/index.php?option=com_content&view=",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "50-F5ZHY",
+      "frequency_mhz": 145.6875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "50",
+      "site": "Mont Robin",
+      "callsign": "F5ZHY",
+      "kind": "Relais FM VHF",
+      "comment": "F5ZHY Mont Robin (Manche) - sortie relais FM VHF - RX seule - ARA50 2026"
+    },
+    {
+      "name": "50-F1ZOV",
+      "frequency_mhz": 430.375,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "50",
+      "site": "Cherbourg",
+      "callsign": "F1ZOV",
+      "kind": "Relais FM UHF",
+      "comment": "F1ZOV Cherbourg (Manche) - sortie relais FM UHF - RX seule - ARA50 2026"
+    },
+    {
+      "name": "50-F1ZBL",
+      "frequency_mhz": 145.25,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "50",
+      "site": "Cherbourg",
+      "callsign": "F1ZBL",
+      "kind": "Transpondeur",
+      "comment": "F1ZBL Cherbourg - acces transparent vers F5ZHY - RX seule - ARA50 2026"
+    },
+    {
+      "name": "14-F5ZBF",
+      "frequency_mhz": 145.325,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "14",
+      "site": "Jurques",
+      "callsign": "F5ZBF",
+      "kind": "Relais FM VHF",
+      "comment": "F5ZBF Jurques (Calvados) - actif, sortie FM VHF - RX seule - REF 2026"
+    },
+    {
+      "name": "14-F5ZWC",
+      "frequency_mhz": 430.025,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "14",
+      "site": "Jurques",
+      "callsign": "F5ZWC",
+      "kind": "Relais FM UHF",
+      "comment": "F5ZWC Jurques (Calvados) - actif, sortie FM UHF - RX seule - REF 2026"
+    },
+    {
+      "name": "76-F5ZEV",
+      "frequency_mhz": 145.725,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Le Havre",
+      "callsign": "F5ZEV",
+      "kind": "Relais FM VHF",
+      "comment": "F5ZEV Le Havre - relais FM VHF en prototype - RX seule - SHTSF 2026"
+    },
+    {
+      "name": "76-F1ZRW",
+      "frequency_mhz": 430.075,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Le Havre",
+      "callsign": "F1ZRW",
+      "kind": "Relais mixte",
+      "comment": "F1ZRW Le Havre - sortie analogique d'un relais mixte - RX seule - SHTSF 2026"
+    },
+    {
+      "name": "76-F1ZIBV",
+      "frequency_mhz": 145.2375,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Le Havre",
+      "callsign": "F1ZIB",
+      "kind": "Transpondeur VHF/UHF",
+      "comment": "F1ZIB Le Havre - voie VHF du transpondeur - RX seule - SHTSF/REF 2026"
+    },
+    {
+      "name": "76-F1ZIBU",
+      "frequency_mhz": 432.8,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Le Havre",
+      "callsign": "F1ZIB",
+      "kind": "Transpondeur VHF/UHF",
+      "comment": "F1ZIB Le Havre - voie UHF du transpondeur - RX seule - SHTSF/REF 2026"
+    },
+    {
+      "name": "76-F1ZUE",
+      "frequency_mhz": 145.7875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Dieppe",
+      "callsign": "F1ZUE",
+      "kind": "Relais FM VHF",
+      "comment": "F1ZUE Dieppe - relais VHF actif, Echolink - RX seule - F8KII 2026"
+    },
+    {
+      "name": "76-F6ZDK",
+      "frequency_mhz": 145.6,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Rouen/Bihorel",
+      "callsign": "F6ZDK",
+      "kind": "Relais FM VHF",
+      "comment": "F6ZDK Rouen-Bihorel - sortie relais VHF - RX seule - F8KII 2026"
+    },
+    {
+      "name": "76-F1ZFRV",
+      "frequency_mhz": 145.5875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Fecamp",
+      "callsign": "F1ZFR",
+      "kind": "Transpondeur VHF/UHF",
+      "comment": "F1ZFR Fecamp - voie VHF transpondeur analogique actif - RX seule - REF 2026"
+    },
+    {
+      "name": "76-F1ZFRU",
+      "frequency_mhz": 432.5875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Fecamp",
+      "callsign": "F1ZFR",
+      "kind": "Transpondeur VHF/UHF",
+      "comment": "F1ZFR Fecamp - voie UHF transpondeur analogique actif - RX seule - REF 2026"
+    },
+    {
+      "name": "76-F5ZWT",
+      "frequency_mhz": 430.225,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "76",
+      "site": "Etretat",
+      "callsign": "F5ZWT",
+      "kind": "Relais FM UHF",
+      "comment": "F5ZWT Etretat - relais FM UHF actif - RX seule - REF 2026"
+    },
+    {
+      "name": "53-F6ZCE",
+      "frequency_mhz": 145.7,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "department": "53",
+      "site": "Pré-en-Pail / Mont des Avaloirs",
+      "callsign": "F6ZCE",
+      "kind": "Relais FM VHF",
+      "comment": "F6ZCE Pré-en-Pail / Mont des Avaloirs (Mayenne) - sortie relais FM VHF - RX seule - REF 2026"
+    }
+  ]
+}

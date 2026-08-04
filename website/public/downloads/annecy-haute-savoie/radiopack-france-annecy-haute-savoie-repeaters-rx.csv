@@ -1,0 +1,10 @@
+Location,Name,Frequency,Duplex,Offset,Tone,rToneFreq,cToneFreq,DtcsCode,DtcsPolarity,RxDtcsCode,CrossMode,Mode,TStep,Skip,Power,Comment,URCALL,RPT1CALL,RPT2CALL,DVCODE
+0,74-F5ZLV,145.412500,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,F5ZLV Viuz-la-Chiesaz - sortie VHF transpondeur analogique - RX seule - REF 2026,,,,
+1,ALP43265,432.650000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,432.650 MHz partagee: F5ZDT Leyssard et F5ZLV Viuz-la-Chiesaz - RX seule,,,,
+2,01-F1ZOH,430.225000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,F1ZOH Crozet (Ain) - sortie relais FM UHF - RX seule - REF 2026,,,,
+3,01-F1ZPY,430.150000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,F1ZPY Apremont (Ain) - sortie relais FM UHF - RX seule - REF 2026,,,,
+4,01-F6ZJD,145.637500,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,F6ZJD Nurieux (Ain) - sortie relais FM VHF - RX seule - REF 2026,,,,
+5,73-F1ZHE,145.262500,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,F1ZHE Montvalezan (Savoie) - sortie VHF transpondeur analogique - RX seule,,,,
+6,73-F1ZHG,145.287500,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,F1ZHG Albertville (Savoie) - sortie VHF transpondeur analogique - RX seule,,,,
+7,ALP43251,432.512500,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,"432.5125 MHz partagee: F1ZHE, F1ZHG et F5ZGT - reception seule",,,,
+8,73-F5ZGT,145.450000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,F5ZGT Saint-Martin-de-Belleville - sortie VHF transpondeur - RX seule,,,,

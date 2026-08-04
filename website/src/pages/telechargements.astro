@@ -1,49 +1,66 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Telechargements - RadioPack France" description="Telecharge les CSV CHIRP RadioPack France et le guide PDF du pack Normandie.">
+<BaseLayout title="Telechargements - RadioPack France" description="Telecharge les CSV CHIRP et les guides PDF des packs Normandie et Annecy / Haute-Savoie.">
   <section class="section">
     <div class="container">
       <span class="eyebrow">Fichiers generes, sources et documentes</span>
       <h1 class="title">Telechargements</h1>
-      <p class="lead">Sprint 4 : le pack Normandie v0.3 contient 139 memoires organisees par blocs, ainsi qu'un guide PDF complet.</p>
+      <p class="lead">Sprint 5 : deux packs regionaux sont disponibles. La Normandie contient 139 memoires et Annecy / Haute-Savoie en contient 36.</p>
 
       <div class="notice card">
         <div class="notice-icon">!</div>
-        <div><strong>Emission bloquee par defaut</strong><p>Dans tous les CSV publics, <code>Duplex=off</code> bloque l'emission. Les canaux radioamateurs et les sorties de relais sont fournis pour la reception.</p></div>
+        <div><strong>Emission bloquee par defaut</strong><p>Dans tous les CSV publics, <code>Duplex=off</code> bloque l'emission. Les frequences sont fournies comme listes d'ecoute documentees.</p></div>
       </div>
 
       <div class="grid-2 downloads">
         <article class="download-card normandie">
           <div class="topline"><span class="badge badge-green">Beta - v0.3.1</span><span>139 / 200 memoires</span></div>
-          <h2>Normandie - pack v0.3</h2>
-          <p>PMR446, VHF marine, APRS/ISS, aviation, canaux d'appel et relais analogiques verifies.</p>
-          <ul><li>Blocs de memoires separes</li><li>15 relais ou transpondeurs analogiques</li><li>Reception seule</li></ul>
+          <h2>Normandie</h2>
+          <p>PMR446, VHF marine, APRS/ISS, aviation, appels et relais analogiques verifies.</p>
+          <ul><li>15 sorties ou voies analogiques</li><li>Organisation par blocs</li><li>Guide PDF complet</li></ul>
           <div class="button-row">
-            <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.3.1.csv" download>CSV Normandie v0.3</a>
+            <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.3.1.csv" download>CSV Normandie v0.3.1</a>
             <a class="button button-orange" href="/downloads/normandie/radiopack-france-normandie-v0.3.1-guide.pdf" download>Guide PDF</a>
           </div>
         </article>
 
+        <article class="download-card annecy">
+          <div class="topline"><span class="badge badge-green">Beta - v0.1.0</span><span>36 / 200 memoires</span></div>
+          <h2>Annecy & Haute-Savoie</h2>
+          <p>PMR446, APRS/ISS, aviation d'Annecy et Annemasse, appels et sorties analogiques alpines.</p>
+          <ul><li>9 sorties analogiques uniques</li><li>Haute-Savoie, Ain et Savoie</li><li>Guide PDF complet</li></ul>
+          <div class="button-row">
+            <a class="button button-primary" href="/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1.csv" download>CSV Annecy v0.1</a>
+            <a class="button button-orange" href="/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1-guide.pdf" download>Guide PDF</a>
+          </div>
+        </article>
+
         <article class="download-card repeaters">
-          <div class="topline"><span class="badge">Normandie - v0.3.1</span><span>14 memoires</span></div>
-          <h2>Relais analogiques RX</h2>
+          <div class="topline"><span class="badge">Normandie - v0.3.1</span><span>15 memoires</span></div>
+          <h2>Relais Normandie RX</h2>
           <p>Sorties ou voies d'ecoute verifiees dans la Manche, la Mayenne, le Calvados et la Seine-Maritime.</p>
-          <ul><li>ARA50, REF, SHTSF et F8KII</li><li>NFM et noms courts UV-K5</li><li>Emission bloquee</li></ul>
           <a class="button button-secondary" href="/downloads/normandie/radiopack-france-normandie-repeaters-rx.csv" download>CSV relais Normandie</a>
         </article>
 
+        <article class="download-card annecy-repeaters">
+          <div class="topline"><span class="badge">Alpes - v0.1.0</span><span>9 memoires</span></div>
+          <h2>Relais Annecy / Alpes RX</h2>
+          <p>Sorties analogiques verifiees en Haute-Savoie, dans l'Ain et en Savoie, sans doublons de frequence.</p>
+          <a class="button button-secondary" href="/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-repeaters-rx.csv" download>CSV relais Alpes</a>
+        </article>
+
         <article class="download-card calls">
-          <div class="topline"><span class="badge badge-orange">National - v0.3.1</span><span>2 memoires</span></div>
+          <div class="topline"><span class="badge badge-orange">National - v0.3.0</span><span>2 memoires</span></div>
           <h2>Canaux d'appel radioamateur</h2>
-          <p>145,500 MHz en 2 m et 433,500 MHz en 70 cm, d'apres les plans de bande du REF.</p>
+          <p>145,500 MHz en 2 m et 433,500 MHz en 70 cm, reception seule.</p>
           <a class="button button-orange" href="/downloads/national/radiopack-france-amateur-calls-rx.csv" download>CSV canaux d'appel</a>
         </article>
 
         <article class="download-card marine">
           <div class="topline"><span class="badge">National - v0.2.0</span><span>90 memoires</span></div>
           <h2>France - VHF marine RX</h2>
-          <p>Plan international conventionnel : simplex, voies navire/cote, DSC et AIS.</p>
+          <p>Plan international : simplex, voies navire/cote, DSC et AIS.</p>
           <a class="button button-secondary" href="/downloads/national/radiopack-france-marine-vhf-rx.csv" download>CSV marine</a>
         </article>
 
@@ -63,8 +80,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <div class="grid-3 info-grid">
-        <article class="card"><span class="badge">138</span><h3>Memoires organisees</h3><p>Les categories commencent sur des positions fixes et laissent des intervalles d'extension.</p></article>
-        <article class="card"><span class="badge badge-orange">PDF</span><h3>Guide complet</h3><p>Carte des memoires, liste des relais, tableau des frequences et sources.</p></article>
+        <article class="card"><span class="badge">2</span><h3>Packs regionaux</h3><p>Normandie et Annecy / Haute-Savoie sont maintenant disponibles.</p></article>
+        <article class="card"><span class="badge badge-orange">PDF</span><h3>Guides complets</h3><p>Organisation des memoires, tableaux de frequences, sources et procedure CHIRP.</p></article>
         <article class="card"><span class="badge badge-green">Tests</span><h3>Controles automatiques</h3><p>Positions, doublons, noms courts, frequences cles et blocage TX sont verifies.</p></article>
       </div>
     </div>
@@ -78,9 +95,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .downloads{margin-top:30px}.download-card{display:grid;gap:18px;padding:28px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.78);box-shadow:var(--shadow)}
   .download-card.national{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(222,248,241,.7))}
   .download-card.normandie{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(245,231,255,.72))}
+  .download-card.annecy{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(221,249,252,.78))}
   .download-card.marine{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(222,242,255,.78))}
   .download-card.space{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,239,216,.76))}
   .download-card.repeaters{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(231,241,255,.78))}
+  .download-card.annecy-repeaters{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(224,250,246,.78))}
   .download-card.calls{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,237,222,.76))}
   .topline{display:flex;justify-content:space-between;gap:15px;align-items:center;color:var(--muted);font-size:.82rem;font-weight:800}
   .download-card h2{font-size:clamp(1.8rem,4vw,2.5rem)}.download-card p,.download-card li{color:var(--muted)}

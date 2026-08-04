@@ -1,0 +1,42 @@
+{
+  "dataset": "France - canaux d'appel radioamateur (reception seule)",
+  "version": "0.3.0",
+  "updated": "2026-08-04",
+  "scope": "national",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "L'export public bloque l'emission avec Duplex=off.",
+    "145,500 MHz est le canal d'appel FM de la bande 2 m.",
+    "433,500 MHz est le canal d'appel FM mobile de la bande 70 cm."
+  ],
+  "sources": [
+    {
+      "title": "REF Commission THF - plan de bande 144-146 MHz",
+      "url": "https://thf.r-e-f.org/plans_des_bandes/144.htm",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "REF Commission THF - plan de bande 430-440 MHz",
+      "url": "https://thf.r-e-f.org/plans_des_bandes/432.htm",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "CALL-VHF",
+      "frequency_mhz": 145.5,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "comment": "Appel FM 2 m - plan de bande REF/IARU Region 1 - reception seule"
+    },
+    {
+      "name": "CALL-UHF",
+      "frequency_mhz": 433.5,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "comment": "Appel FM mobile 70 cm - plan de bande REF/IARU Region 1 - reception seule"
+    }
+  ]
+}

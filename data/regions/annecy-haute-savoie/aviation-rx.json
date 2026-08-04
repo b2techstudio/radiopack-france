@@ -1,0 +1,55 @@
+{
+  "dataset": "Annecy et Haute-Savoie - aviation publique (reception seule)",
+  "version": "0.1.0",
+  "updated": "2026-08-04",
+  "scope": "annecy-haute-savoie",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Instantane fonde sur l'eAIP France AIRAC 07/26, en vigueur du 9 juillet au 5 aout 2026.",
+    "Les frequences aeronautiques peuvent evoluer par cycle AIRAC ou NOTAM.",
+    "Toutes les memoires sont en AM et en reception seule."
+  ],
+  "sources": [
+    {
+      "title": "SIA eAIP AIRAC 07/26 - Annecy-Meythet LFLP",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_09_JUL_2026/FRANCE/AIRAC-2026-07-09/html/eAIP/FR-AD-2.LFLP-fr-FR.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "SIA eAIP AIRAC 07/26 - Annemasse, information A-A",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_09_JUL_2026/FRANCE/AIRAC-2026-07-09/html/eAIP/FR-ENR-5.5-fr-FR.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "SIA eAIP - cycle AIRAC 07/26",
+      "url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/eaip.html",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "AIR-EMERG",
+      "frequency_mhz": 121.5,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Aviation - frequence internationale d'urgence - reception seule"
+    },
+    {
+      "name": "ANNCY-TWR",
+      "frequency_mhz": 118.2,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Annecy-Meythet TWR / AFIS / A-A - SIA eAIP AIRAC 07/26 - RX seule"
+    },
+    {
+      "name": "ANNMS-AA",
+      "frequency_mhz": 125.875,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Annemasse A-A - SIA eAIP AIRAC 07/26 - reception seule"
+    }
+  ]
+}

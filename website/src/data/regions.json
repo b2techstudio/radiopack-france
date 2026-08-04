@@ -3,14 +3,15 @@
     "slug": "normandie",
     "name": "Normandie",
     "shortName": "Normandie",
-    "status": "Aperçu disponible",
+    "status": "Bêta disponible",
     "accent": "purple",
-    "description": "Premier aperçu téléchargeable: 16 canaux PMR446 en réception seule, avant ajout des données locales vérifiées.",
-    "memoryCount": 16,
+    "description": "Pack de 139 mémoires RX : PMR446, marine, aviation, APRS/ISS, appels et relais analogiques vérifiés.",
+    "memoryCount": 139,
     "categories": [
       "PMR446 RX",
-      "CSV CHIRP",
-      "Sources documentées"
+      "VHF marine RX",
+      "Radioamateur RX",
+      "Aviation RX"
     ],
     "available": true
   },
@@ -18,16 +19,16 @@
     "slug": "annecy-haute-savoie",
     "name": "Annecy & Haute-Savoie",
     "shortName": "Annecy",
-    "status": "Prévu ensuite",
+    "status": "Bêta disponible",
     "accent": "cyan",
-    "description": "Pack Alpes du Nord pour Annecy, la Haute-Savoie et les zones proches.",
-    "memoryCount": 200,
+    "description": "Pack Alpes du Nord de 36 mémoires RX pour Annecy, la Haute-Savoie et les zones analogiques proches.",
+    "memoryCount": 36,
     "categories": [
-      "PMR446",
-      "Radioamateur",
-      "Aviation",
+      "PMR446 RX",
+      "Radioamateur RX",
+      "Aviation RX",
       "APRS & ISS"
     ],
-    "available": false
+    "available": true
   }
 ]

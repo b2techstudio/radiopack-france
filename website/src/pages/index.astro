@@ -11,22 +11,22 @@ import regions from "../data/regions.json";
       <div class="hero-copy">
         <span class="eyebrow">Projet open source B2Tech Studio</span>
         <h1><span class="gradient-text">RadioPack</span><br />France</h1>
-        <p class="lead">Des codeplugs CHIRP régionaux, propres et documentés pour les radios Quansheng UV-K5 — sans listes obscures ni réglages incohérents.</p>
+        <p class="lead">Des codeplugs CHIRP regionaux, propres et documentes pour les radios Quansheng UV-K5 - sans listes obscures ni reglages incoherents.</p>
         <div class="button-row">
-          <a class="button button-primary" href="/regions">Choisir une région <span>→</span></a>
+          <a class="button button-primary" href="/regions">Choisir une region <span>→</span></a>
           <a class="button button-secondary" href="/documentation">Comprendre le projet</a>
         </div>
         <div class="hero-stats">
-          <div><strong>200</strong><span>mémoires optimisées</span></div>
-          <div><strong>1</strong><span>aperçu disponible</span></div>
+          <div><strong>200</strong><span>memoires disponibles par pack</span></div>
+          <div><strong>2</strong><span>packs regionaux disponibles</span></div>
           <div><strong>CSV</strong><span>compatible CHIRP</span></div>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="brand-panel"><img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" /><div><span>B2Tech Studio</span><strong>Code. Crée. Innove.</strong></div></div>
+        <div class="brand-panel"><img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" /><div><span>B2Tech Studio</span><strong>Code. Cree. Innove.</strong></div></div>
         <div class="radio-card">
           <div class="antenna"></div><div class="radio-top"></div>
-          <div class="screen"><small>F4HWN · VFO</small><strong>145.500</strong><span>433.500</span><div class="signal">▂▄▆█</div></div>
+          <div class="screen"><small>F4HWN - VFO</small><strong>145.500</strong><span>433.500</span><div class="signal">▂▄▆█</div></div>
           <div class="radio-brand">QUANSHENG</div>
           <div class="keys">{Array.from({ length: 12 }).map((_, i) => <span>{i < 9 ? i + 1 : i === 9 ? "*" : i === 10 ? "0" : "#"}</span>)}</div>
         </div>
@@ -37,11 +37,11 @@ import regions from "../data/regions.json";
 
   <section class="section">
     <div class="container">
-      <div class="section-heading"><div><span class="eyebrow">Une base claire</span><h2>Ce que RadioPack apporte</h2></div><p class="lead">Une seule source de données pour générer les fichiers régionaux, la documentation et les futures pages du site.</p></div>
+      <div class="section-heading"><div><span class="eyebrow">Une base claire</span><h2>Ce que RadioPack apporte</h2></div><p class="lead">Une seule source de donnees pour generer les fichiers regionaux, la documentation et les pages du site.</p></div>
       <div class="grid-3">
-        <FeatureCard icon="✓" title="Prêt à importer" description="Des CSV structurés pour CHIRP, avec noms courts et paramètres cohérents." tone="purple" />
-        <FeatureCard icon="⌁" title="Ancré dans les régions" description="Relais, aviation publique, marine et canaux utiles organisés localement." tone="blue" />
-        <FeatureCard icon="↻" title="Maintenable" description="Des données centralisées, versionnées sur GitHub et faciles à mettre à jour." tone="orange" />
+        <FeatureCard icon="✓" title="Pret a importer" description="Des CSV structures pour CHIRP, avec noms courts et parametres coherents." tone="purple" />
+        <FeatureCard icon="⌁" title="Ancre dans les regions" description="Relais, aviation publique, marine et canaux utiles organises localement." tone="blue" />
+        <FeatureCard icon="↻" title="Maintenable" description="Des donnees centralisees, versionnees sur GitHub et faciles a mettre a jour." tone="orange" />
       </div>
     </div>
   </section>
@@ -50,9 +50,9 @@ import regions from "../data/regions.json";
     <div class="container region-grid">
       <FranceMap />
       <div class="region-list">
-        <span class="eyebrow">Déploiement progressif</span>
+        <span class="eyebrow">Deploiement progressif</span>
         <h2>Choisis ta zone</h2>
-        <p class="lead">On commence volontairement par deux packs solides : la Normandie, puis Annecy et la Haute-Savoie.</p>
+        <p class="lead">Deux packs sont maintenant en ligne : la Normandie et Annecy / Haute-Savoie.</p>
         {regions.map((region) => <RegionCard {...region} />)}
       </div>
     </div>
@@ -60,8 +60,11 @@ import regions from "../data/regions.json";
 
   <section class="section">
     <div class="container cta">
-      <div><span class="eyebrow">Première version</span><h2>La Normandie ouvre la voie.</h2><p>Le premier aperçu Normandie est disponible en CSV avec 16 canaux PMR446 en réception seule. Les données locales seront ajoutées après vérification.</p></div>
-      <a class="button button-orange" href="/regions/normandie">Télécharger le pack Normandie →</a>
+      <div><span class="eyebrow">Deux regions disponibles</span><h2>La Normandie et les Alpes sont en ligne.</h2><p>Le pack Normandie contient 139 memoires. Le nouveau pack Annecy / Haute-Savoie en propose 36, toutes configurees en reception seule.</p></div>
+      <div class="cta-actions">
+        <a class="button button-orange" href="/regions/normandie">Normandie →</a>
+        <a class="button button-primary" href="/regions/annecy-haute-savoie">Annecy →</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -100,8 +103,9 @@ import regions from "../data/regions.json";
   .region-list { display: grid; gap: 18px; }
   .region-list > .lead { margin-bottom: 8px; }
   .cta { display: flex; align-items: center; justify-content: space-between; gap: 35px; padding: 36px; border-radius: 28px; background: linear-gradient(125deg, rgba(110,61,232,.12), rgba(22,135,233,.10), rgba(240,154,32,.15)); border: 1px solid rgba(71,78,129,.15); box-shadow: var(--shadow); }
-  .cta > div { display: grid; gap: 12px; max-width: 720px; }
+  .cta > div:first-child { display: grid; gap: 12px; max-width: 720px; }
   .cta p { color: var(--muted); }
+  .cta-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
   @media (max-width: 980px) { .hero-grid, .region-grid { grid-template-columns: 1fr; } .hero-visual { min-height: 590px; } }
-  @media (max-width: 650px) { .hero-grid { min-height: auto; } .hero-visual { min-height: 510px; } .radio-card { width: 225px; min-height: 420px; transform: scale(.9); } .cta { align-items: stretch; flex-direction: column; } }
+  @media (max-width: 650px) { .hero-grid { min-height: auto; } .hero-visual { min-height: 510px; } .radio-card { width: 225px; min-height: 420px; transform: scale(.9); } .cta { align-items: stretch; flex-direction: column; } .cta-actions { justify-content: flex-start; } }
 </style>

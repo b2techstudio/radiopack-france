@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.8.0 - 2026-08-04
+
+- Ajout de SO-50, AO-91 et AO-123 dans un inventaire satellite FM de recherche.
+- Conservation exclusive des liaisons descendantes comme mémoires RX ; les montantes restent des métadonnées.
+- Exclusion prudente de PO-101, CAS-3H, IO-86, RS95S et TEVEL2 du candidat interne.
+- Finalisation d'un plan mémoire provisoire de 48 mémoires validées.
+- Ajout d'un assembleur interne qui refuse l'aviation non revalidée, les lacs et les lignes suisses non confirmées.
+- Génération locale d'un JSON et d'un CSV internes marqués `public_export_allowed: false` dans un dossier ignoré par Git.
+- Ajout du test `tests/test_annecy_internal_candidate.py` et de son exécution dans GitHub Actions.
+- Aucun changement du générateur public, des téléchargements Annecy ou du statut « En préparation ».
+
 ## 0.7.1 - 2026-08-04
 
 - Correction de la modélisation des fréquences ISS en distinguant explicitement liaison montante et liaison descendante.

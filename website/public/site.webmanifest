@@ -1,0 +1,19 @@
+{
+  "name": "RadioPack France",
+  "short_name": "RadioPack",
+  "description": "Codeplugs CHIRP régionaux et documentés pour Quansheng UV-K5.",
+  "lang": "fr-FR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eef3f8",
+  "theme_color": "#eef3f8",
+  "icons": [
+    {
+      "src": "/brand/b2tech-logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

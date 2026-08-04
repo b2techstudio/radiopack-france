@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Page introuvable"
+  description="La page demandée n'existe pas ou a été déplacée."
+  noindex={true}
+>
+  <section class="section">
+    <div class="container error-shell">
+      <div class="code">404</div>
+      <span class="eyebrow">Fréquence introuvable</span>
+      <h1>Cette page n'émet plus.</h1>
+      <p class="lead">
+        L'adresse saisie n'existe pas, ou le contenu a été déplacé vers une nouvelle version.
+      </p>
+      <div class="button-row">
+        <a class="button button-primary" href="/">Retour à l'accueil</a>
+        <a class="button button-orange" href="/telechargements">Voir les téléchargements</a>
+        <a class="button button-secondary" href="/regions">Choisir une région</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-shell {
+    display: grid;
+    justify-items: start;
+    gap: 20px;
+    max-width: 820px;
+    padding-block: 70px;
+  }
+
+  .code {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(5rem, 16vw, 10rem);
+    font-weight: 900;
+    line-height: .75;
+    color: transparent;
+    background: linear-gradient(120deg, #6e3de8, #1687e9, #f09a20);
+    background-clip: text;
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 7vw, 5rem);
+  }
+</style>

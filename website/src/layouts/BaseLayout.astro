@@ -6,26 +6,95 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "RadioPack France — Codeplugs CHIRP régionaux",
-  description = "Codeplugs CHIRP organisés et documentés pour les radios Quansheng UV-K5 en France."
+  description = "Codeplugs CHIRP organisés et documentés pour les radios Quansheng UV-K5 en France.",
+  image = "/brand/b2tech-logo.png",
+  noindex = false,
 } = Astro.props;
+
+const siteURL = Astro.site ?? new URL("https://radiopack.b2tech.studio");
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const socialImageURL = new URL(image, siteURL);
+const resolvedTitle = title.includes("RadioPack France")
+  ? title
+  : `${title} — RadioPack France`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "RadioPack France",
+  url: siteURL.href,
+  description,
+  inLanguage: "fr-FR",
+  publisher: {
+    "@type": "Organization",
+    name: "B2Tech Studio",
+    url: "https://github.com/b2techstudio",
+  },
+};
 ---
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
     <meta name="theme-color" content="#eef3f8" />
+    <meta name="color-scheme" content="light" />
+
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>{title}</title>
+    <link rel="apple-touch-icon" href="/brand/b2tech-logo.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="RadioPack France" />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:alt" content="Logo RadioPack France par B2Tech Studio" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+
+    <title>{resolvedTitle}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
     <Header />
-    <main><slot /></main>
+    <main id="contenu"><slot /></main>
     <Footer />
   </body>
 </html>
+
+<style is:global>
+  .skip-link {
+    position: fixed;
+    z-index: 1000;
+    top: 12px;
+    left: 12px;
+    padding: .75rem 1rem;
+    border-radius: 10px;
+    color: white;
+    background: #182230;
+    box-shadow: 0 8px 24px rgba(24, 34, 48, .25);
+    transform: translateY(-160%);
+    transition: transform .18s ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+</style>

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.5.0 - 2026-08-04
+
+- Ajout des URL canoniques et des metadonnees Open Graph / Twitter.
+- Ajout des donnees structurees WebSite en JSON-LD.
+- Ajout du manifeste web et du lien de sitemap.
+- Ajout des routes dynamiques `robots.txt` et `sitemap.xml`.
+- Ajout d'une page 404 personnalisee compatible Cloudflare Pages.
+- Ajout de la page publique "Etat des packs".
+- Mise a jour du bouton principal du menu pour les deux regions disponibles.
+- Ajout d'un menu mobile accessible.
+- Ajout des en-tetes de securite et de cache Cloudflare Pages.
+- Ajout de redirections permanentes pour les anciens fichiers Normandie.
+- Ajout d'une integration continue GitHub Actions pour tester les CSV et compiler Astro.
+- Ajout d'un test automatique des fichiers de production.
+
 ## 0.4.0 - 2026-08-04
 
 - Publication du premier pack Annecy & Haute-Savoie v0.1.0.
@@ -37,4 +52,5 @@
 ## 0.1.0 - 2026-08-04
 
 - Premiere base PMR446 et generateur CSV CHIRP.
+
 

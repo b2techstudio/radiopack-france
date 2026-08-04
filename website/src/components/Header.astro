@@ -5,33 +5,204 @@ const links = [
   ["/regions", "Régions"],
   ["/telechargements", "Téléchargements"],
   ["/documentation", "Documentation"],
-  ["/a-propos", "À propos"]
+  ["/a-propos", "À propos"],
 ];
+
+const isActive = (href: string) =>
+  href === "/" ? currentPath === "/" : currentPath.startsWith(href);
 ---
 <header class="site-header">
   <div class="container nav-shell">
     <a class="brand" href="/" aria-label="RadioPack France — Accueil">
       <img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" />
-      <span><strong>RadioPack</strong><small>France · B2Tech Studio</small></span>
+      <span>
+        <strong>RadioPack</strong>
+        <small>France · B2Tech Studio</small>
+      </span>
     </a>
-    <nav aria-label="Navigation principale">
-      {links.map(([href, label]) => <a class:list={[currentPath === href && "active"]} href={href}>{label}</a>)}
+
+    <nav class="desktop-nav" aria-label="Navigation principale">
+      {
+        links.map(([href, label]) => (
+          <a
+            class:list={[isActive(href) && "active"]}
+            href={href}
+            aria-current={isActive(href) ? "page" : undefined}
+          >
+            {label}
+          </a>
+        ))
+      }
     </nav>
-    <a class="header-cta" href="/regions/normandie">Pack Normandie</a>
+
+    <details class="mobile-menu">
+      <summary aria-label="Ouvrir le menu de navigation">Menu</summary>
+      <nav aria-label="Navigation mobile">
+        {
+          links.map(([href, label]) => (
+            <a
+              class:list={[isActive(href) && "active"]}
+              href={href}
+              aria-current={isActive(href) ? "page" : undefined}
+            >
+              {label}
+            </a>
+          ))
+        }
+        <a href="/versions">État des packs</a>
+      </nav>
+    </details>
+
+    <a class="header-cta" href="/telechargements">Télécharger</a>
   </div>
 </header>
+
 <style>
-  .site-header { position: sticky; z-index: 20; top: 0; padding: 13px 0; background: rgba(241,246,251,.83); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(58,77,104,.12); }
-  .nav-shell { display: flex; align-items: center; gap: 24px; min-height: 62px; }
-  .brand { display: flex; align-items: center; gap: 11px; margin-right: auto; }
-  .brand img { width: 50px; height: 50px; object-fit: contain; border-radius: 13px; box-shadow: 0 8px 22px rgba(70,55,140,.18); }
-  .brand span { display: grid; line-height: 1.05; }
-  .brand strong { font-family: "Space Grotesk", sans-serif; font-size: 1.08rem; }
-  .brand small { margin-top: 5px; color: #68788b; font-size: .71rem; font-weight: 700; }
-  nav { display: flex; align-items: center; gap: 5px; }
-  nav a { padding: .62rem .72rem; border-radius: 10px; color: #58687a; font-size: .86rem; font-weight: 750; }
-  nav a:hover, nav a.active { color: #5f31cf; background: rgba(110,61,232,.09); }
-  .header-cta { padding: .7rem .95rem; border-radius: 11px; color: white; font-size: .84rem; font-weight: 800; background: linear-gradient(120deg, #6834df, #1888e7); box-shadow: 0 10px 24px rgba(75,69,199,.20); }
-  @media (max-width: 940px) { nav { display: none; } }
-  @media (max-width: 560px) { .brand small { display: none; } .header-cta { font-size: 0; } .header-cta::after { content: "Normandie"; font-size: .8rem; } }
+  .site-header {
+    position: sticky;
+    z-index: 20;
+    top: 0;
+    padding: 13px 0;
+    background: rgba(241, 246, 251, .83);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(58, 77, 104, .12);
+  }
+
+  .nav-shell {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 62px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-right: auto;
+  }
+
+  .brand img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 13px;
+    box-shadow: 0 8px 22px rgba(70, 55, 140, .18);
+  }
+
+  .brand span {
+    display: grid;
+    line-height: 1.05;
+  }
+
+  .brand strong {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.08rem;
+  }
+
+  .brand small {
+    margin-top: 5px;
+    color: #68788b;
+    font-size: .71rem;
+    font-weight: 700;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  nav a {
+    padding: .62rem .72rem;
+    border-radius: 10px;
+    color: #58687a;
+    font-size: .86rem;
+    font-weight: 750;
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: #5f31cf;
+    background: rgba(110, 61, 232, .09);
+  }
+
+  .header-cta {
+    padding: .7rem .95rem;
+    border-radius: 11px;
+    color: white;
+    font-size: .84rem;
+    font-weight: 800;
+    background: linear-gradient(120deg, #6834df, #1888e7);
+    box-shadow: 0 10px 24px rgba(75, 69, 199, .20);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: relative;
+  }
+
+  .mobile-menu summary {
+    padding: .66rem .8rem;
+    border: 1px solid rgba(58, 77, 104, .15);
+    border-radius: 11px;
+    color: #46576b;
+    background: rgba(255, 255, 255, .72);
+    cursor: pointer;
+    font-size: .82rem;
+    font-weight: 800;
+    list-style: none;
+  }
+
+  .mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-menu nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    display: grid;
+    min-width: 220px;
+    padding: 10px;
+    border: 1px solid rgba(58, 77, 104, .14);
+    border-radius: 16px;
+    background: rgba(248, 251, 255, .98);
+    box-shadow: 0 18px 45px rgba(30, 45, 68, .18);
+  }
+
+  @media (max-width: 940px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .nav-shell {
+      gap: 9px;
+    }
+
+    .brand small {
+      display: none;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+    }
+
+    .header-cta {
+      padding-inline: .78rem;
+      font-size: 0;
+    }
+
+    .header-cta::after {
+      content: "CSV";
+      font-size: .78rem;
+    }
+  }
 </style>

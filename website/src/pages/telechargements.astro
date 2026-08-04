@@ -1,7 +1,44 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Téléchargements — RadioPack France">
-  <section class="section"><div class="container"><span class="eyebrow">Fichiers vérifiés</span><h1 class="title">Téléchargements</h1><p class="lead">Les téléchargements seront publiés ici dès que les premières données régionales auront été validées.</p><div class="grid-3 downloads"><article class="card"><span class="badge">CSV</span><h3>CHIRP CSV</h3><p>Format portable pour importer et comparer les mémoires dans CHIRP.</p></article><article class="card"><span class="badge badge-orange">PDF</span><h3>Documentation</h3><p>Liste des canaux, explications, sources et date de mise à jour.</p></article><article class="card"><span class="badge badge-green">GitHub</span><h3>Données sources</h3><p>JSON versionnés et historique transparent des modifications.</p></article></div></div></section>
+<BaseLayout title="Téléchargements — RadioPack France" description="Télécharge les premiers CSV CHIRP RadioPack France, générés depuis des données JSON versionnées.">
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Fichiers générés et traçables</span>
+      <h1 class="title">Téléchargements</h1>
+      <p class="lead">Sprint 2 : le premier jeu national et l’aperçu Normandie sont disponibles. Les deux exports sont volontairement configurés en réception seule.</p>
+
+      <div class="notice card">
+        <div class="notice-icon">!</div>
+        <div><strong>Sécurité par défaut</strong><p>Dans les CSV ci-dessous, <code>Duplex=off</code> bloque l’émission. Le PMR446 en émission exige un équipement conforme aux conditions techniques applicables ; le Quansheng UV-K5 n’est pas présenté ici comme tel.</p></div>
+      </div>
+
+      <div class="grid-2 downloads">
+        <article class="download-card national">
+          <div class="topline"><span class="badge badge-green">Disponible · v0.1.0</span><span>16 mémoires</span></div>
+          <h2>France — PMR446 RX</h2>
+          <p>Les 16 canaux analogiques PMR446, en NFM, pas de 12,5 kHz et émission bloquée.</p>
+          <ul><li>446,00625 à 446,19375 MHz</li><li>Format CSV générique CHIRP</li><li>Noms courts adaptés à l’UV-K5</li></ul>
+          <a class="button button-primary" href="/downloads/national/radiopack-france-pmr446-rx.csv" download>Télécharger le CSV</a>
+        </article>
+
+        <article class="download-card normandie">
+          <div class="topline"><span class="badge badge-orange">Aperçu · v0.1.0</span><span>16 / 200 mémoires</span></div>
+          <h2>Normandie — aperçu</h2>
+          <p>Première pierre du pack régional. Il reprend la base PMR446 RX ; les données locales seront ajoutées après validation source par source.</p>
+          <ul><li>Centre initial : Mortain-Bocage</li><li>Aucun canal local non vérifié</li><li>Relais, aviation et marine à venir</li></ul>
+          <a class="button button-orange" href="/downloads/normandie/radiopack-france-normandie-preview.csv" download>Télécharger l’aperçu</a>
+        </article>
+      </div>
+
+      <div class="grid-3 info-grid">
+        <article class="card"><span class="badge">JSON</span><h3>Données sources</h3><p>Les fréquences sont stockées dans des fichiers JSON avec sources et dates de consultation.</p></article>
+        <article class="card"><span class="badge badge-orange">Python</span><h3>Génération reproductible</h3><p>Le script du dépôt recrée les CSV sans dépendance externe et vérifie la limite de 200 mémoires.</p></article>
+        <article class="card"><span class="badge badge-green">GitHub</span><h3>Historique transparent</h3><p>Chaque ajout pourra être relu, corrigé et documenté grâce à l’historique Git.</p></article>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
-<style>.title{font-size:clamp(3rem,7vw,5rem);margin:18px 0}.downloads{margin-top:34px}.downloads article{padding:25px}.downloads h3{margin:18px 0 8px}.downloads p{color:var(--muted)}</style>
+<style>
+  .title{font-size:clamp(3rem,7vw,5rem);margin:18px 0}.notice{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;margin:30px 0;padding:22px;background:linear-gradient(120deg,rgba(240,154,32,.12),rgba(255,255,255,.82))}.notice-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:rgba(240,154,32,.18);color:#ad6200;font-size:1.4rem;font-weight:900}.notice p{margin-top:5px;color:var(--muted)}code{font-weight:800;color:#5f31cf}.downloads{margin-top:30px}.download-card{display:grid;gap:18px;padding:28px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.78);box-shadow:var(--shadow)}.download-card.national{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(222,248,241,.7))}.download-card.normandie{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(245,231,255,.72))}.topline{display:flex;justify-content:space-between;gap:15px;align-items:center;color:var(--muted);font-size:.82rem;font-weight:800}.download-card h2{font-size:clamp(1.8rem,4vw,2.5rem)}.download-card p,.download-card li{color:var(--muted)}.download-card ul{margin:0;padding-left:1.15rem}.download-card .button{justify-self:start}.info-grid{margin-top:30px}.info-grid article{padding:24px}.info-grid h3{margin:16px 0 8px}.info-grid p{color:var(--muted)}@media(max-width:600px){.topline{align-items:flex-start;flex-direction:column}}
+</style>

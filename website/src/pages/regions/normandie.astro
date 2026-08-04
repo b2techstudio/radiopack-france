@@ -1,10 +1,26 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Pack Normandie — RadioPack France" description="Pack CHIRP Normandie pour Quansheng UV-K5, en préparation.">
+<BaseLayout title="Pack Normandie — RadioPack France" description="Premier aperçu CSV CHIRP Normandie pour Quansheng UV-K5 : PMR446 en réception seule.">
   <section class="section"><div class="container page-grid">
-    <div class="copy"><span class="eyebrow">Pack prioritaire</span><h1>Normandie</h1><p class="lead">Le premier pack RadioPack France sera centré sur Mortain-Bocage, puis couvrira les zones voisines de la Manche, du Calvados, de l'Orne, de l'Ille-et-Vilaine et de la Mayenne.</p><div class="button-row"><a class="button button-primary" href="/documentation">Voir la méthode</a><a class="button button-secondary" href="https://github.com/b2techstudio/radiopack-france">Suivre sur GitHub</a></div></div>
-    <aside class="card status-card"><span class="badge badge-orange">En préparation</span><h3>Objectif : 200 mémoires</h3><ul><li>16 canaux PMR446</li><li>Radioamateur 2 m / 70 cm</li><li>Relais locaux vérifiés</li><li>VHF marine utile</li><li>Aviation publique</li><li>APRS et ISS</li></ul></aside>
+    <div class="copy">
+      <span class="eyebrow">Premier pack régional</span>
+      <h1>Normandie</h1>
+      <p class="lead">Le pack démarre autour de Mortain-Bocage. La version 0.1 apporte une base nationale propre et téléchargeable ; les relais radioamateurs, fréquences aéronautiques publiques et canaux maritimes locaux viendront ensuite, uniquement après validation.</p>
+      <div class="button-row"><a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-preview.csv" download>Télécharger l’aperçu CSV</a><a class="button button-secondary" href="/documentation">Procédure CHIRP</a></div>
+      <div class="card legal"><strong>Réception seule dans cet aperçu</strong><p>Les 16 mémoires sont exportées avec <code>Duplex=off</code>. Aucune fréquence locale non vérifiée n’a été ajoutée.</p></div>
+    </div>
+    <aside class="card status-card">
+      <span class="badge badge-green">Aperçu disponible · v0.1.0</span>
+      <h3>16 mémoires sur 200</h3>
+      <div class="meter"><span></span></div>
+      <ul><li>16 canaux PMR446 analogiques</li><li>NFM et pas de 12,5 kHz</li><li>Émission bloquée</li><li>Sources Arcep et ETSI documentées</li></ul>
+      <hr />
+      <h4>Étapes suivantes</h4>
+      <ul class="future"><li>Relais 2 m / 70 cm vérifiés</li><li>APRS et fréquences radioamateur nationales</li><li>VHF marine utile à la Normandie</li><li>Aviation publique issue de sources officielles</li></ul>
+    </aside>
   </div></section>
 </BaseLayout>
-<style>.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px}.status-card h3{margin:18px 0}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}@media(max-width:800px){.page-grid{grid-template-columns:1fr}}</style>
+<style>
+  .page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px}.status-card h3{margin:18px 0 10px}.status-card h4{margin:20px 0 8px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.status-card hr{border:0;border-top:1px solid var(--line);margin:22px 0 0}.meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}.meter span{display:block;width:8%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}.legal{padding:20px;background:linear-gradient(120deg,rgba(110,61,232,.1),rgba(255,255,255,.76))}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}@media(max-width:800px){.page-grid{grid-template-columns:1fr}}
+</style>

@@ -1,0 +1,17 @@
+{
+  "pack": "Normandie",
+  "slug": "normandie",
+  "version": "0.1.0-preview",
+  "updated": "2026-08-04",
+  "status": "preview",
+  "max_memories": 200,
+  "datasets": [
+    "data/national/pmr446.json"
+  ],
+  "local_channels": [],
+  "notes": [
+    "Premier aperçu téléchargeable: les 16 canaux PMR446 en réception seule.",
+    "Les relais radioamateurs, fréquences aéronautiques publiques et canaux maritimes locaux seront ajoutés uniquement après validation source par source.",
+    "Aucune fréquence de police, gendarmerie, pompiers, SAMU, réseau privé ou service non public n'est incluse."
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "dataset": "France — PMR446 analogique (16 canaux)",
+  "version": "0.1.0",
+  "updated": "2026-08-04",
+  "scope": "national",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Le CSV généré bloque l'émission (Duplex=off) sur l'UV-K5.",
+    "La bande PMR446 est en autorisation générale uniquement sous respect des conditions techniques applicables aux équipements PMR446.",
+    "Le plan analogique utilise 16 canaux espacés de 12,5 kHz à partir de 446,00625 MHz."
+  ],
+  "sources": [
+    {
+      "title": "Arcep — Utilisation des fréquences sous le régime d'autorisation générale",
+      "url": "https://www.arcep.fr/la-regulation/grands-dossiers-reseaux-mobiles/les-reseaux-mobiles-professionnels-pmr/utilisation-des-frequences-sous-le-regime-dautorisation-generale.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "ETSI EN 303 405 — Analogue and Digital PMR446 Equipment",
+      "url": "https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=47876",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "PMR01",
+      "frequency_mhz": 446.00625,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 01 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR02",
+      "frequency_mhz": 446.01875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 02 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR03",
+      "frequency_mhz": 446.03125,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 03 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR04",
+      "frequency_mhz": 446.04375,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 04 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR05",
+      "frequency_mhz": 446.05625,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 05 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR06",
+      "frequency_mhz": 446.06875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 06 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR07",
+      "frequency_mhz": 446.08125,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 07 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR08",
+      "frequency_mhz": 446.09375,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 08 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR09",
+      "frequency_mhz": 446.10625,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 09 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR10",
+      "frequency_mhz": 446.11875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 10 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR11",
+      "frequency_mhz": 446.13125,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 11 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR12",
+      "frequency_mhz": 446.14375,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 12 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR13",
+      "frequency_mhz": 446.15625,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 13 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR14",
+      "frequency_mhz": 446.16875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 14 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR15",
+      "frequency_mhz": 446.18125,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 15 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    },
+    {
+      "name": "PMR16",
+      "frequency_mhz": 446.19375,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "equipment_compliance_required",
+      "comment": "PMR446 canal 16 — RX par défaut sur UV-K5; émission seulement avec un équipement PMR446 conforme"
+    }
+  ]
+}

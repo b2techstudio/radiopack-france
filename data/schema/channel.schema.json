@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://radiopack.b2tech.studio/schema/channel.schema.json",
+  "title": "RadioPack France channel dataset",
+  "type": "object",
+  "required": ["dataset", "version", "updated", "sources", "channels"],
+  "properties": {
+    "dataset": {"type": "string"},
+    "version": {"type": "string"},
+    "updated": {"type": "string", "format": "date"},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "accessed": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    "channels": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "required": ["name", "frequency_mhz", "mode", "step_khz", "tx_policy", "comment"],
+        "properties": {
+          "name": {"type": "string", "maxLength": 10},
+          "frequency_mhz": {"type": "number"},
+          "mode": {"enum": ["FM", "NFM", "AM"]},
+          "step_khz": {"type": "number"},
+          "tx_policy": {"enum": ["rx_only", "licensed_only", "equipment_compliance_required"]},
+          "comment": {"type": "string"}
+        }
+      }
+    }
+  }
+}

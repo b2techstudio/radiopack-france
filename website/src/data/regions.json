@@ -3,12 +3,16 @@
     "slug": "normandie",
     "name": "Normandie",
     "shortName": "Normandie",
-    "status": "Prioritaire",
+    "status": "Aperçu disponible",
     "accent": "purple",
-    "description": "Premier pack régional, centré sur Mortain-Bocage et les départements voisins.",
-    "memoryCount": 200,
-    "categories": ["PMR446", "Radioamateur", "Marine", "Aviation", "APRS & ISS"],
-    "available": false
+    "description": "Premier aperçu téléchargeable: 16 canaux PMR446 en réception seule, avant ajout des données locales vérifiées.",
+    "memoryCount": 16,
+    "categories": [
+      "PMR446 RX",
+      "CSV CHIRP",
+      "Sources documentées"
+    ],
+    "available": true
   },
   {
     "slug": "annecy-haute-savoie",
@@ -18,7 +22,12 @@
     "accent": "cyan",
     "description": "Pack Alpes du Nord pour Annecy, la Haute-Savoie et les zones proches.",
     "memoryCount": 200,
-    "categories": ["PMR446", "Radioamateur", "Aviation", "APRS & ISS"],
+    "categories": [
+      "PMR446",
+      "Radioamateur",
+      "Aviation",
+      "APRS & ISS"
+    ],
     "available": false
   }
 ]

@@ -2,6 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout title="Documentation — RadioPack France">
-  <section class="section"><div class="container docs"><span class="eyebrow">Méthode et sécurité</span><h1>Documentation</h1><p class="lead">RadioPack France ne remplace pas la lecture de la réglementation, la licence radioamateur ni les instructions du fabricant.</p><div class="grid-2 doc-grid"><article class="card"><h3>Importer un CSV dans CHIRP</h3><ol><li>Lire d'abord la radio dans CHIRP.</li><li>Sauvegarder l'image d'origine.</li><li>Importer le CSV dans un nouvel onglet.</li><li>Copier les mémoires vers l'image de ta radio.</li><li>Vérifier avant l'envoi.</li></ol></article><article class="card"><h3>Règle essentielle</h3><p>Ne jamais envoyer directement une image CHIRP créée pour un autre modèle de radio. Les fichiers IMG sont liés au modèle et au pilote utilisé.</p></article></div></div></section>
+  <section class="section"><div class="container docs">
+    <span class="eyebrow">Méthode et sécurité</span><h1>Documentation</h1>
+    <p class="lead">RadioPack France ne remplace pas la réglementation, la licence radioamateur, les autorisations applicables ni les instructions du fabricant.</p>
+    <div class="grid-2 doc-grid">
+      <article class="card"><h3>Importer un CSV dans CHIRP</h3><ol><li>Brancher la radio et la lire dans CHIRP.</li><li>Sauvegarder immédiatement l’image d’origine.</li><li>Ouvrir ou importer le CSV RadioPack dans un nouvel onglet.</li><li>Copier les mémoires souhaitées vers l’image lue depuis ta radio.</li><li>Vérifier les modes, pas, tonalités et blocages d’émission.</li><li>Envoyer l’image vérifiée vers la radio.</li></ol></article>
+      <article class="card"><h3>Ne jamais importer une image étrangère</h3><p>Un fichier <code>.img</code> est lié au modèle, à la révision et au pilote CHIRP. L’incident qui a lancé ce projet venait précisément de l’envoi d’une image d’un autre poste. RadioPack privilégie donc les CSV portables.</p></article>
+      <article class="card"><h3>Réception seule</h3><p>Dans le premier pack, la colonne <code>Duplex</code> vaut <code>off</code>. CHIRP programme ainsi les mémoires sans émission. C’est le choix par défaut pour les services nécessitant un équipement conforme, une licence ou une autorisation.</p></article>
+      <article class="card"><h3>Format vérifiable</h3><p>Le CSV suit les colonnes génériques de CHIRP : fréquence, duplex, décalage, tonalités, mode, pas, puissance et commentaire. Le générateur et les données JSON sont publiés dans le dépôt.</p></article>
+    </div>
+    <div class="card source-block"><h2>Sources du Sprint 2</h2><ul><li>Arcep — régime d’autorisation générale et bande PMR446.</li><li>ETSI EN 303 405 — plan analogique PMR446 à 12,5 kHz.</li><li>Dépôt officiel CHIRP — structure du CSV générique.</li></ul><a class="button button-secondary" href="https://github.com/b2techstudio/radiopack-france/blob/main/SOURCES.md">Consulter les URL dans GitHub</a></div>
+  </div></section>
 </BaseLayout>
-<style>.docs h1{font-size:clamp(3rem,7vw,5rem);margin:18px 0}.doc-grid{margin-top:34px}.doc-grid article{padding:28px}.doc-grid h3{margin-bottom:15px}.doc-grid p,.doc-grid li{color:var(--muted)}</style>
+<style>.docs h1{font-size:clamp(3rem,7vw,5rem);margin:18px 0}.doc-grid{margin-top:34px}.doc-grid article{padding:28px}.doc-grid h3{margin-bottom:15px}.doc-grid p,.doc-grid li{color:var(--muted)}code{font-weight:800;color:#5f31cf}.source-block{display:grid;gap:16px;margin-top:30px;padding:28px}.source-block ul{margin:0;padding-left:1.2rem;color:var(--muted)}.source-block .button{justify-self:start}</style>

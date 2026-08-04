@@ -5,6 +5,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 required_files = [
     ".github/workflows/ci.yml",
+    "tests/test_annecy_research.py",
+    "research/annecy-alpes-leman-v0.2/radioamateur-france-inventory.json",
+    "research/annecy-alpes-leman-v0.2/radioamateur-switzerland-candidates.json",
+    "research/annecy-alpes-leman-v0.2/source-register.csv",
+    "research/annecy-alpes-leman-v0.2/conflicts.csv",
     "website/astro.config.mjs",
     "website/src/layouts/BaseLayout.astro",
     "website/src/components/Header.astro",
@@ -83,6 +88,8 @@ for expected in [
     "actions/setup-python@v6",
     "actions/setup-node@v6",
     "python tests/test_generator.py",
+    "python tests/test_site_files.py",
+    "python tests/test_annecy_research.py",
     "npm run build",
     "statuses: write",
     "report-status:",
@@ -132,4 +139,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 7: OK")
+print("Tests RadioPack Sprint 8: OK")

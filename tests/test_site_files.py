@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 required_files = [
+    ".gitignore",
     ".github/workflows/ci.yml",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
@@ -39,6 +40,9 @@ for relative in required_files:
     path = ROOT / relative
     assert path.is_file(), f"Fichier manquant: {relative}"
     assert path.stat().st_size > 20, f"Fichier vide ou incomplet: {relative}"
+
+gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
+assert "research/annecy-alpes-leman-v0.2/generated/" in gitignore
 
 astro_config = (ROOT / "website/astro.config.mjs").read_text(encoding="utf-8")
 assert 'site: "https://radiopack.b2tech.studio"' in astro_config

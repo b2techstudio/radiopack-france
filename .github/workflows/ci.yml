@@ -39,6 +39,9 @@ jobs:
       - name: Test Annecy Alps Leman research inventories
         run: python tests/test_annecy_research.py
 
+      - name: Test Annecy Alps Leman aviation and lakes research
+        run: python tests/test_annecy_aviation_lakes.py
+
   website:
     name: Astro production build
     runs-on: ubuntu-latest

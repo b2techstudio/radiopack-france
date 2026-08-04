@@ -44,16 +44,39 @@ Le fichier `radioamateur-switzerland-candidates.json` sépare les niveaux de con
 
 Aucune candidate suisse non recoupée ne doit passer dans un JSON de production.
 
-## Blocs à inventorier
+### Aviation France — pré-inventaire
 
-1. socle national RX ;
-2. radioamateur analogique France ;
-3. radioamateur analogique Suisse ;
-4. aviation France ;
-5. aviation Suisse ;
-6. lacs et navigation publique ;
-7. satellites et balises analogiques utiles ;
-8. usages locaux publics et vérifiables.
+Le fichier `aviation-france-pre-airac-08.json` contient 11 fréquences uniques du cycle AIRAC 07/26 :
+
+- Annecy-Meythet ;
+- Annemasse ;
+- Chambéry Aix-les-Bains ;
+- Grenoble Le Versoud ;
+- Grenoble Alpes Isère ;
+- Genève Information pour le bassin frontalier.
+
+Toutes les lignes sont en `AM`, en `rx_only` et portent le statut `pre_airac_recheck`.
+
+Le cycle AIRAC 07/26 reste valable jusqu'au 5 août 2026 inclus. Aucune de ces fréquences ne peut passer en production avant contrôle dans l'AIRAC 08/26 effectif à partir du 6 août 2026. Albertville, Megève et Sallanches restent à extraire depuis les publications officielles.
+
+### Lacs et navigation
+
+Le fichier `navigation-lakes-findings.json` aboutit actuellement à zéro mémoire publique :
+
+- aucun plan VHF maritime général n'est copié pour le Léman ;
+- AIS 1 sur 161.975 MHz et AIS 2 sur 162.025 MHz sont exclus des lacs suisses ;
+- le canal 16 sur 156.800 MHz reste un cas conditionnel lié à une concession et à la navigation au radar, pas une mémoire du pack public général ;
+- les réseaux professionnels concédés autour de 173 MHz sont exclus ;
+- les pages officielles des lacs d'Annecy et du Bourget sont référencées, sans fréquence publique générale identifiée dans les pages consultées ;
+- Aiguebelette reste en attente d'une source officielle spécifique à la radio de navigation.
+
+## Blocs restant à inventorier
+
+1. aviation France après AIRAC 08/26 ;
+2. aviation Suisse après AIRAC du 6 août 2026 ;
+3. satellites et balises analogiques utiles ;
+4. usages locaux publics et vérifiables ;
+5. recoupements radioamateurs suisses encore ouverts.
 
 ## Portes de validation
 
@@ -73,7 +96,7 @@ Au 4 août 2026, l'eAIP France AIRAC 07/26 reste en vigueur jusqu'au 5 août inc
 
 ## Navigation sur les lacs suisses
 
-L'OFCOM indique que l'exploitation d'installations radio sur les lacs suisses, y compris le Léman, relève d'une concession de radiocommunication mobile terrestre ; une licence de station de navire n'y est pas valable. Cette règle interdit de recopier automatiquement le plan VHF maritime dans le pack. Toute mémoire lacustre doit être justifiée par une source publique spécifique.
+L'OFCOM indique que l'exploitation d'installations radio sur les lacs suisses, y compris le Léman, relève d'une concession de radiocommunication mobile terrestre ; une licence de station de navire n'y est pas valable. Les équipements maritimes de 57 canaux et l'AIS ne doivent donc pas être transposés dans le pack. Le canal 16 n'est conservé que comme cas de recherche conditionnel.
 
 ## Conflits ouverts
 
@@ -88,12 +111,14 @@ Depuis la racine du dépôt :
 
 ```powershell
 python tests\test_annecy_research.py
+python tests\test_annecy_aviation_lakes.py
 ```
 
-Résultat attendu :
+Résultats attendus :
 
 ```text
 Tests Annecy–Alpes–Léman research: OK
+Tests Annecy–Alpes–Léman aviation/lakes research: OK
 ```
 
-La CI exécute également ce test à chaque push et publie le statut combiné `radiopack-ci/complete`.
+La CI exécute ces tests à chaque push et publie le statut combiné `radiopack-ci/complete`.

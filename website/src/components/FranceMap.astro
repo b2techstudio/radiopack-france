@@ -1,0 +1,39 @@
+<div class="map-shell" aria-label="Carte stylisée de la France">
+  <svg viewBox="0 0 560 520" role="img" aria-labelledby="map-title">
+    <title id="map-title">Carte stylisée de la France métropolitaine</title>
+    <defs>
+      <linearGradient id="franceFill" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8259ee" stop-opacity=".78" />
+        <stop offset=".48" stop-color="#26a6d1" stop-opacity=".72" />
+        <stop offset="1" stop-color="#f2a43d" stop-opacity=".76" />
+      </linearGradient>
+      <filter id="softGlow"><feGaussianBlur stdDeviation="5" result="b" /><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <path class="france" d="M187 37 286 27 350 63 412 66 451 123 503 165 483 227 510 280 464 323 447 384 387 400 346 474 274 462 221 489 178 450 117 430 96 371 54 328 75 269 49 213 98 169 111 105 157 78Z"/>
+    <g class="routes">
+      <path d="M108 172 C205 129 315 173 458 126" />
+      <path d="M78 286 C190 255 313 286 476 227" />
+      <path d="M145 415 C235 330 326 342 439 367" />
+      <path d="M204 65 C230 165 225 320 271 460" />
+      <path d="M366 71 C327 171 352 282 347 464" />
+    </g>
+    <g class="nodes">
+      <circle cx="134" cy="225" r="7"/><circle cx="197" cy="147" r="6"/><circle cx="291" cy="184" r="7"/><circle cx="410" cy="146" r="6"/><circle cx="244" cy="304" r="7"/><circle cx="385" cy="314" r="7"/><circle cx="196" cy="405" r="6"/><circle cx="347" cy="421" r="7"/>
+    </g>
+    <g class="labels"><text x="83" y="218">Normandie</text><text x="343" y="302">Alpes</text></g>
+  </svg>
+  <div class="map-note"><strong>2 premières zones</strong><span>Normandie puis Annecy / Haute-Savoie</span></div>
+</div>
+<style>
+  .map-shell { position: relative; min-height: 540px; display: grid; place-items: center; border-radius: 28px; border: 1px solid rgba(52,73,102,.15); background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(233,241,250,.77)); box-shadow: var(--shadow); overflow: hidden; }
+  .map-shell::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 22% 30%, rgba(110,61,232,.12), transparent 32%), radial-gradient(circle at 80% 68%, rgba(240,154,32,.15), transparent 34%); }
+  svg { width: min(90%, 540px); position: relative; z-index: 1; }
+  .france { fill: url(#franceFill); stroke: rgba(255,255,255,.9); stroke-width: 4; filter: url(#softGlow); }
+  .routes path { fill: none; stroke: rgba(255,255,255,.36); stroke-width: 2; stroke-dasharray: 5 8; }
+  .nodes circle { fill: white; stroke: #6e3de8; stroke-width: 4; filter: url(#softGlow); }
+  .labels { fill: white; font-size: 16px; font-weight: 800; text-shadow: 0 2px 8px rgba(18,25,42,.45); }
+  .map-note { position: absolute; left: 22px; bottom: 22px; z-index: 2; display: grid; padding: 13px 16px; border-radius: 14px; background: rgba(255,255,255,.84); border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
+  .map-note strong { color: #5f31cf; }
+  .map-note span { color: var(--muted); font-size: .78rem; }
+  @media (max-width: 560px) { .map-shell { min-height: 410px; } }
+</style>

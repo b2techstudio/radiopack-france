@@ -1,0 +1,37 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  status: string;
+  description: string;
+  memoryCount: number;
+  categories: string[];
+  accent?: string;
+}
+const { slug, name, status, description, memoryCount, categories, accent = "purple" } = Astro.props;
+---
+<a class:list={["region-card", `accent-${accent}`]} href={`/regions/${slug}`}>
+  <div class="top"><span class="region-mark">RF</span><span class="status">{status}</span></div>
+  <div class="body"><h3>{name}</h3><p>{description}</p></div>
+  <div class="tags">{categories.slice(0, 4).map((category) => <span>{category}</span>)}</div>
+  <div class="bottom"><strong>{memoryCount} mémoires</strong><span>Voir le pack →</span></div>
+</a>
+<style>
+  .region-card { display: grid; gap: 20px; min-height: 315px; padding: 24px; border-radius: 24px; border: 1px solid rgba(86,69,176,.16); background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(246,242,255,.82)); box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; overflow: hidden; position: relative; }
+  .region-card::after { content: ""; position: absolute; right: -70px; bottom: -80px; width: 180px; height: 180px; border-radius: 50%; background: rgba(110,61,232,.12); filter: blur(3px); }
+  .region-card:hover { transform: translateY(-5px); box-shadow: 0 27px 65px rgba(45,55,83,.19); }
+  .top, .bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px; position: relative; z-index: 1; }
+  .region-mark { display: grid; place-items: center; width: 45px; height: 45px; border-radius: 13px; color: white; font-family: "Space Grotesk", sans-serif; font-weight: 800; background: linear-gradient(135deg, var(--purple), var(--blue)); }
+  .status { padding: .35rem .58rem; border-radius: 999px; background: rgba(110,61,232,.10); color: #6131ce; font-size: .73rem; font-weight: 800; }
+  .body { display: grid; gap: 10px; position: relative; z-index: 1; }
+  .body h3 { font-size: 1.55rem; }
+  .body p { color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; position: relative; z-index: 1; }
+  .tags span { padding: .3rem .48rem; border-radius: 8px; background: rgba(255,255,255,.8); border: 1px solid var(--line); color: #566579; font-size: .72rem; font-weight: 750; }
+  .bottom { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); color: #5d30cb; font-size: .84rem; }
+  .accent-cyan { border-color: rgba(0,167,187,.18); background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(237,252,255,.82)); }
+  .accent-cyan::after { background: rgba(0,167,187,.12); }
+  .accent-cyan .region-mark { background: linear-gradient(135deg, #00a7bb, #1687e9); }
+  .accent-cyan .status, .accent-cyan .bottom { color: #007c8a; }
+  .accent-cyan .status { background: rgba(0,167,187,.11); }
+</style>

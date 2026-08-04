@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import RegionCard from "../components/RegionCard.astro";
+import FranceMap from "../components/FranceMap.astro";
+import regions from "../data/regions.json";
+---
+<BaseLayout>
+  <section class="hero section-tight">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Projet open source B2Tech Studio</span>
+        <h1><span class="gradient-text">RadioPack</span><br />France</h1>
+        <p class="lead">Des codeplugs CHIRP régionaux, propres et documentés pour les radios Quansheng UV-K5 — sans listes obscures ni réglages incohérents.</p>
+        <div class="button-row">
+          <a class="button button-primary" href="/regions">Choisir une région <span>→</span></a>
+          <a class="button button-secondary" href="/documentation">Comprendre le projet</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>200</strong><span>mémoires optimisées</span></div>
+          <div><strong>2</strong><span>premiers packs prévus</span></div>
+          <div><strong>CSV</strong><span>compatible CHIRP</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="brand-panel"><img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" /><div><span>B2Tech Studio</span><strong>Code. Crée. Innove.</strong></div></div>
+        <div class="radio-card">
+          <div class="antenna"></div><div class="radio-top"></div>
+          <div class="screen"><small>F4HWN · VFO</small><strong>145.500</strong><span>433.500</span><div class="signal">▂▄▆█</div></div>
+          <div class="radio-brand">QUANSHENG</div>
+          <div class="keys">{Array.from({ length: 12 }).map((_, i) => <span>{i < 9 ? i + 1 : i === 9 ? "*" : i === 10 ? "0" : "#"}</span>)}</div>
+        </div>
+        <div class="orbit orbit-purple"></div><div class="orbit orbit-orange"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow">Une base claire</span><h2>Ce que RadioPack apporte</h2></div><p class="lead">Une seule source de données pour générer les fichiers régionaux, la documentation et les futures pages du site.</p></div>
+      <div class="grid-3">
+        <FeatureCard icon="✓" title="Prêt à importer" description="Des CSV structurés pour CHIRP, avec noms courts et paramètres cohérents." tone="purple" />
+        <FeatureCard icon="⌁" title="Ancré dans les régions" description="Relais, aviation publique, marine et canaux utiles organisés localement." tone="blue" />
+        <FeatureCard icon="↻" title="Maintenable" description="Des données centralisées, versionnées sur GitHub et faciles à mettre à jour." tone="orange" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section region-section" id="regions">
+    <div class="container region-grid">
+      <FranceMap />
+      <div class="region-list">
+        <span class="eyebrow">Déploiement progressif</span>
+        <h2>Choisis ta zone</h2>
+        <p class="lead">On commence volontairement par deux packs solides : la Normandie, puis Annecy et la Haute-Savoie.</p>
+        {regions.map((region) => <RegionCard {...region} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta">
+      <div><span class="eyebrow">Première version</span><h2>La Normandie ouvre la voie.</h2><p>Le premier pack sera construit autour de Mortain-Bocage, puis étendu aux départements voisins avec des sources documentées.</p></div>
+      <a class="button button-orange" href="/regions/normandie">Suivre le pack Normandie →</a>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .hero { padding-top: 58px; }
+  .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; gap: 55px; align-items: center; min-height: 690px; }
+  .hero-copy { display: grid; gap: 25px; }
+  .hero-copy h1 { max-width: 720px; }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 10px; }
+  .hero-stats > div { display: grid; min-width: 145px; padding: 14px 16px; border-radius: 15px; background: rgba(255,255,255,.68); border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
+  .hero-stats strong { font-family: "Space Grotesk", sans-serif; font-size: 1.25rem; color: #5f31cf; }
+  .hero-stats span { color: var(--muted); font-size: .75rem; }
+  .hero-visual { position: relative; min-height: 620px; display: grid; place-items: center; border-radius: 34px; background: linear-gradient(145deg, #e4ecf8 0%, #f9fbff 54%, #fff1db 100%); border: 1px solid rgba(62,82,112,.16); box-shadow: var(--shadow); overflow: hidden; }
+  .hero-visual::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 18%, rgba(110,61,232,.20), transparent 31%), radial-gradient(circle at 87% 83%, rgba(240,154,32,.23), transparent 33%); }
+  .brand-panel { position: absolute; z-index: 4; left: 22px; top: 22px; display: flex; gap: 10px; align-items: center; padding: 10px 13px; border-radius: 14px; background: rgba(255,255,255,.82); border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
+  .brand-panel img { width: 42px; height: 42px; object-fit: contain; }
+  .brand-panel div { display: grid; line-height: 1.1; }
+  .brand-panel span { font-weight: 800; font-size: .83rem; }
+  .brand-panel strong { margin-top: 4px; color: var(--purple); font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; }
+  .radio-card { position: relative; z-index: 3; width: 270px; min-height: 480px; padding: 50px 22px 24px; border-radius: 35px; background: linear-gradient(145deg, #222d3b, #101821); border: 7px solid #2d3948; box-shadow: 0 32px 62px rgba(27,36,54,.28), inset 0 0 0 2px rgba(255,255,255,.08); transform: rotate(2deg); }
+  .antenna { position: absolute; left: 45px; top: -118px; width: 30px; height: 142px; border-radius: 16px 16px 7px 7px; background: linear-gradient(90deg,#131a22,#3b4653,#111820); box-shadow: 0 10px 20px rgba(27,36,54,.18); }
+  .radio-top { position: absolute; right: 29px; top: -20px; width: 55px; height: 34px; border-radius: 13px 13px 6px 6px; background: linear-gradient(90deg,#333d48,#111820); border-top: 7px solid var(--orange); }
+  .screen { display: grid; gap: 3px; min-height: 145px; padding: 16px; border-radius: 13px; background: linear-gradient(145deg,#d6f0e9,#b6d7d1); border: 5px solid #111821; box-shadow: inset 0 0 22px rgba(41,85,74,.22); color: #173830; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .screen small { font-weight: 800; }
+  .screen strong { margin-top: 4px; font-size: 2rem; letter-spacing: .03em; }
+  .screen span { font-size: 1.15rem; }
+  .signal { justify-self: end; font-weight: 900; }
+  .radio-brand { padding: 20px 0 13px; color: #d6dde7; text-align: center; font-family: "Space Grotesk", sans-serif; font-weight: 800; letter-spacing: .04em; }
+  .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .keys span { display: grid; place-items: center; aspect-ratio: 1.35; border-radius: 8px; color: #dbe4ee; background: linear-gradient(145deg,#34404d,#1b2530); border: 1px solid rgba(255,255,255,.08); font-size: .8rem; font-weight: 800; }
+  .orbit { position: absolute; border: 2px solid; border-radius: 50%; opacity: .28; }
+  .orbit-purple { width: 470px; height: 470px; border-color: var(--purple); transform: rotate(22deg); }
+  .orbit-orange { width: 390px; height: 540px; border-color: var(--orange); transform: rotate(-34deg); }
+  .region-section { background: linear-gradient(180deg, rgba(230,237,247,.62), rgba(247,250,253,.32)); border-block: 1px solid rgba(60,80,108,.09); }
+  .region-grid { display: grid; grid-template-columns: 1.06fr .94fr; gap: 30px; align-items: start; }
+  .region-list { display: grid; gap: 18px; }
+  .region-list > .lead { margin-bottom: 8px; }
+  .cta { display: flex; align-items: center; justify-content: space-between; gap: 35px; padding: 36px; border-radius: 28px; background: linear-gradient(125deg, rgba(110,61,232,.12), rgba(22,135,233,.10), rgba(240,154,32,.15)); border: 1px solid rgba(71,78,129,.15); box-shadow: var(--shadow); }
+  .cta > div { display: grid; gap: 12px; max-width: 720px; }
+  .cta p { color: var(--muted); }
+  @media (max-width: 980px) { .hero-grid, .region-grid { grid-template-columns: 1fr; } .hero-visual { min-height: 590px; } }
+  @media (max-width: 650px) { .hero-grid { min-height: auto; } .hero-visual { min-height: 510px; } .radio-card { width: 225px; min-height: 420px; transform: scale(.9); } .cta { align-items: stretch; flex-direction: column; } }
+</style>

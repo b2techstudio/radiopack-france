@@ -1,0 +1,24 @@
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="/brand/b2tech-logo.png" alt="B2Tech Studio" />
+      <div><strong>RadioPack France</strong><span>Un projet B2Tech Studio</span></div>
+    </div>
+    <p>Des codeplugs CHIRP régionaux, lisibles, documentés et basés sur des données publiques vérifiables.</p>
+    <div class="footer-links"><a href="/documentation">Documentation</a><a href="/a-propos">À propos</a><a href="https://github.com/b2techstudio/radiopack-france">GitHub</a></div>
+  </div>
+  <div class="container copyright">© 2026 B2Tech Studio · RadioPack France</div>
+</footer>
+<style>
+  footer { margin-top: 50px; padding: 48px 0 26px; background: #e5ebf3; border-top: 1px solid rgba(58,77,104,.13); color: #536174; }
+  .footer-grid { display: grid; grid-template-columns: 1.1fr 1.2fr .8fr; gap: 35px; align-items: center; }
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
+  .footer-brand img { width: 48px; height: 48px; object-fit: contain; }
+  .footer-brand div { display: grid; }
+  .footer-brand strong { color: #182230; font-family: "Space Grotesk", sans-serif; }
+  .footer-brand span { font-size: .8rem; }
+  .footer-grid p { font-size: .9rem; }
+  .footer-links { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 14px; font-size: .85rem; font-weight: 750; }
+  .copyright { margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(58,77,104,.12); font-size: .78rem; }
+  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr; } .footer-links { justify-content: flex-start; } }
+</style>

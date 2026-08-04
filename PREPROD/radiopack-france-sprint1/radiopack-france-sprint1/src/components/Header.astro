@@ -1,0 +1,37 @@
+---
+const currentPath = Astro.url.pathname;
+const links = [
+  ["/", "Accueil"],
+  ["/regions", "Régions"],
+  ["/telechargements", "Téléchargements"],
+  ["/documentation", "Documentation"],
+  ["/a-propos", "À propos"]
+];
+---
+<header class="site-header">
+  <div class="container nav-shell">
+    <a class="brand" href="/" aria-label="RadioPack France — Accueil">
+      <img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" />
+      <span><strong>RadioPack</strong><small>France · B2Tech Studio</small></span>
+    </a>
+    <nav aria-label="Navigation principale">
+      {links.map(([href, label]) => <a class:list={[currentPath === href && "active"]} href={href}>{label}</a>)}
+    </nav>
+    <a class="header-cta" href="/regions/normandie">Pack Normandie</a>
+  </div>
+</header>
+<style>
+  .site-header { position: sticky; z-index: 20; top: 0; padding: 13px 0; background: rgba(241,246,251,.83); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(58,77,104,.12); }
+  .nav-shell { display: flex; align-items: center; gap: 24px; min-height: 62px; }
+  .brand { display: flex; align-items: center; gap: 11px; margin-right: auto; }
+  .brand img { width: 50px; height: 50px; object-fit: contain; border-radius: 13px; box-shadow: 0 8px 22px rgba(70,55,140,.18); }
+  .brand span { display: grid; line-height: 1.05; }
+  .brand strong { font-family: "Space Grotesk", sans-serif; font-size: 1.08rem; }
+  .brand small { margin-top: 5px; color: #68788b; font-size: .71rem; font-weight: 700; }
+  nav { display: flex; align-items: center; gap: 5px; }
+  nav a { padding: .62rem .72rem; border-radius: 10px; color: #58687a; font-size: .86rem; font-weight: 750; }
+  nav a:hover, nav a.active { color: #5f31cf; background: rgba(110,61,232,.09); }
+  .header-cta { padding: .7rem .95rem; border-radius: 11px; color: white; font-size: .84rem; font-weight: 800; background: linear-gradient(120deg, #6834df, #1888e7); box-shadow: 0 10px 24px rgba(75,69,199,.20); }
+  @media (max-width: 940px) { nav { display: none; } }
+  @media (max-width: 560px) { .brand small { display: none; } .header-cta { font-size: 0; } .header-cta::after { content: "Normandie"; font-size: .8rem; } }
+</style>

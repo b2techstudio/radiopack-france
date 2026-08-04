@@ -86,7 +86,7 @@ Résultat attendu :
 Tests Annecy–Alpes–Léman internal candidate: OK
 ```
 
-La CI exécute également le test avec les autres contrôles du dépôt.
+La CI reconstruit le candidat dans un répertoire temporaire, vérifie son contenu, puis le supprime sans publier d'artefact interne. Elle exécute également ce test avec les autres contrôles du dépôt.
 
 ## Ce que ce sprint ne fait pas
 

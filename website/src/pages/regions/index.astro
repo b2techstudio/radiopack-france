@@ -3,8 +3,36 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import RegionCard from "../../components/RegionCard.astro";
 import regions from "../../data/regions.json";
 ---
-<BaseLayout title="Régions — RadioPack France">
-  <section class="section page-head"><div class="container"><span class="eyebrow">Packs régionaux</span><h1>Les régions</h1><p class="lead">Une couverture progressive et documentée. La qualité des données passe avant la quantité.</p></div></section>
-  <section class="section-tight"><div class="container grid-2">{regions.map((region) => <RegionCard {...region} />)}</div></section>
+
+<BaseLayout
+  title="Régions — RadioPack France"
+  description="Packs régionaux RadioPack France disponibles ou en cours de préparation."
+>
+  <section class="section page-head">
+    <div class="container">
+      <span class="eyebrow">Packs régionaux</span>
+      <h1>Les régions</h1>
+      <p class="lead">
+        Une couverture progressive et documentée. La qualité des données passe avant
+        la quantité : un pack incomplet reste indiqué comme en préparation.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container grid-2">
+      {regions.map((region) => <RegionCard {...region} />)}
+    </div>
+  </section>
 </BaseLayout>
-<style>.page-head h1{font-size:clamp(3rem,7vw,5rem);margin:18px 0}.page-head{padding-bottom:25px}</style>
+
+<style>
+  .page-head h1 {
+    font-size: clamp(3rem, 7vw, 5rem);
+    margin: 18px 0;
+  }
+
+  .page-head {
+    padding-bottom: 25px;
+  }
+</style>

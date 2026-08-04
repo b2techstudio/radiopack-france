@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -8,8 +9,13 @@ required_files = [
     "website/src/layouts/BaseLayout.astro",
     "website/src/components/Header.astro",
     "website/src/components/Footer.astro",
+    "website/src/components/RegionCard.astro",
+    "website/src/data/regions.json",
+    "website/src/pages/index.astro",
     "website/src/pages/404.astro",
+    "website/src/pages/telechargements.astro",
     "website/src/pages/versions.astro",
+    "website/src/pages/regions/annecy-haute-savoie.astro",
     "website/src/pages/robots.txt.ts",
     "website/src/pages/sitemap.xml.ts",
     "website/public/site.webmanifest",
@@ -81,4 +87,45 @@ for expected in [
 ]:
     assert expected in workflow, f"Etape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 6: OK")
+regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
+annecy = next(region for region in regions if region["slug"] == "annecy-haute-savoie")
+assert annecy["name"] == "Annecy–Alpes–Léman"
+assert annecy["status"] == "En préparation"
+assert annecy["available"] is False
+assert annecy["memoryCount"] == 0
+
+region_card = (ROOT / "website/src/components/RegionCard.astro").read_text(encoding="utf-8")
+assert "available?: boolean" in region_card
+assert "Reconstruction v0.2" in region_card
+assert "Suivre la préparation" in region_card
+
+public_pages = [
+    "website/src/pages/index.astro",
+    "website/src/pages/telechargements.astro",
+    "website/src/pages/versions.astro",
+    "website/src/pages/regions/annecy-haute-savoie.astro",
+]
+for relative in public_pages:
+    content = (ROOT / relative).read_text(encoding="utf-8")
+    assert "/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1" not in content, (
+        f"Lien public Annecy v0.1 encore present: {relative}"
+    )
+
+home = (ROOT / "website/src/pages/index.astro").read_text(encoding="utf-8")
+assert "1</strong><span>pack régional disponible" in home
+assert "Annecy–Alpes–Léman" in home
+
+downloads = (ROOT / "website/src/pages/telechargements.astro").read_text(encoding="utf-8")
+assert "Un pack régional complet est actuellement disponible" in downloads
+assert "Future v0.2" in downloads
+
+versions = (ROOT / "website/src/pages/versions.astro").read_text(encoding="utf-8")
+assert 'status: "En préparation"' in versions
+assert "pack.download &&" in versions
+
+annecy_page = (ROOT / "website/src/pages/regions/annecy-haute-savoie.astro").read_text(encoding="utf-8")
+assert "Pas de téléchargement régional Annecy pendant la reconstruction" in annecy_page
+assert "F1ZJV" in annecy_page
+assert "Duplex=off" in annecy_page
+
+print("Tests RadioPack Sprint 7: OK")

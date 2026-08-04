@@ -1,109 +1,134 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Telechargements - RadioPack France" description="Telecharge les CSV CHIRP et les guides PDF des packs Normandie et Annecy / Haute-Savoie.">
+
+<BaseLayout
+  title="Téléchargements — RadioPack France"
+  description="Télécharge les CSV CHIRP et guides PDF actuellement publiés par RadioPack France. Annecy–Alpes–Léman v0.2 est en préparation."
+>
   <section class="section">
     <div class="container">
-      <span class="eyebrow">Fichiers generes, sources et documentes</span>
-      <h1 class="title">Telechargements</h1>
-      <p class="lead">Sprint 5 : deux packs regionaux sont disponibles. La Normandie contient 139 memoires et Annecy / Haute-Savoie en contient 36.</p>
+      <span class="eyebrow">Fichiers générés, sourcés et documentés</span>
+      <h1 class="title">Téléchargements</h1>
+      <p class="lead">
+        Un pack régional complet est actuellement disponible : la Normandie v0.3.1.
+        Annecy–Alpes–Léman est en reconstruction et reviendra en v0.2 après vérification
+        de l'ensemble des blocs français et suisses.
+      </p>
 
       <div class="notice card">
         <div class="notice-icon">!</div>
-        <div><strong>Emission bloquee par defaut</strong><p>Dans tous les CSV publics, <code>Duplex=off</code> bloque l'emission. Les frequences sont fournies comme listes d'ecoute documentees.</p></div>
+        <div>
+          <strong>Émission bloquée par défaut</strong>
+          <p>
+            Dans tous les CSV publics, <code>Duplex=off</code> bloque l'émission. Les
+            fréquences sont fournies comme listes d'écoute documentées.
+          </p>
+        </div>
       </div>
 
       <div class="grid-2 downloads">
         <article class="download-card normandie">
-          <div class="topline"><span class="badge badge-green">Beta - v0.3.1</span><span>139 / 200 memoires</span></div>
+          <div class="topline"><span class="badge badge-green">Bêta — v0.3.1</span><span>139 / 200 mémoires</span></div>
           <h2>Normandie</h2>
-          <p>PMR446, VHF marine, APRS/ISS, aviation, appels et relais analogiques verifies.</p>
-          <ul><li>15 sorties ou voies analogiques</li><li>Organisation par blocs</li><li>Guide PDF complet</li></ul>
+          <p>PMR446, VHF marine, APRS/ISS, aviation, appels et relais analogiques vérifiés.</p>
+          <ul>
+            <li>15 sorties ou voies analogiques</li>
+            <li>Organisation par blocs</li>
+            <li>Guide PDF complet</li>
+          </ul>
           <div class="button-row">
             <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.3.1.csv" download>CSV Normandie v0.3.1</a>
             <a class="button button-orange" href="/downloads/normandie/radiopack-france-normandie-v0.3.1-guide.pdf" download>Guide PDF</a>
           </div>
         </article>
 
-        <article class="download-card annecy">
-          <div class="topline"><span class="badge badge-green">Beta - v0.1.0</span><span>36 / 200 memoires</span></div>
-          <h2>Annecy & Haute-Savoie</h2>
-          <p>PMR446, APRS/ISS, aviation d'Annecy et Annemasse, appels et sorties analogiques alpines.</p>
-          <ul><li>9 sorties analogiques uniques</li><li>Haute-Savoie, Ain et Savoie</li><li>Guide PDF complet</li></ul>
-          <div class="button-row">
-            <a class="button button-primary" href="/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1.csv" download>CSV Annecy v0.1</a>
-            <a class="button button-orange" href="/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1-guide.pdf" download>Guide PDF</a>
-          </div>
+        <article class="download-card annecy preparing">
+          <div class="topline"><span class="badge badge-orange">En préparation</span><span>Future v0.2</span></div>
+          <h2>Annecy–Alpes–Léman</h2>
+          <p>
+            Reconstruction complète pour la Haute-Savoie, la Savoie, l'Ain, l'Isère,
+            Genève, Vaud et le Valais. L'aperçu v0.1 de 36 mémoires n'est plus proposé
+            comme pack régional disponible.
+          </p>
+          <ul>
+            <li>France et Suisse en blocs séparés</li>
+            <li>Relais et transpondeurs analogiques recoupés</li>
+            <li>Aviation et lacs vérifiés sur sources en vigueur</li>
+          </ul>
+          <a class="button button-secondary" href="/regions/annecy-haute-savoie">Voir l'avancement</a>
         </article>
 
         <article class="download-card repeaters">
-          <div class="topline"><span class="badge">Normandie - v0.3.1</span><span>15 memoires</span></div>
+          <div class="topline"><span class="badge">Normandie — v0.3.1</span><span>15 mémoires</span></div>
           <h2>Relais Normandie RX</h2>
-          <p>Sorties ou voies d'ecoute verifiees dans la Manche, la Mayenne, le Calvados et la Seine-Maritime.</p>
+          <p>Sorties ou voies d'écoute vérifiées dans la Manche, la Mayenne, le Calvados et la Seine-Maritime.</p>
           <a class="button button-secondary" href="/downloads/normandie/radiopack-france-normandie-repeaters-rx.csv" download>CSV relais Normandie</a>
         </article>
 
-        <article class="download-card annecy-repeaters">
-          <div class="topline"><span class="badge">Alpes - v0.1.0</span><span>9 memoires</span></div>
-          <h2>Relais Annecy / Alpes RX</h2>
-          <p>Sorties analogiques verifiees en Haute-Savoie, dans l'Ain et en Savoie, sans doublons de frequence.</p>
-          <a class="button button-secondary" href="/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-repeaters-rx.csv" download>CSV relais Alpes</a>
-        </article>
-
         <article class="download-card calls">
-          <div class="topline"><span class="badge badge-orange">National - v0.3.0</span><span>2 memoires</span></div>
+          <div class="topline"><span class="badge badge-orange">National — v0.3.0</span><span>2 mémoires</span></div>
           <h2>Canaux d'appel radioamateur</h2>
-          <p>145,500 MHz en 2 m et 433,500 MHz en 70 cm, reception seule.</p>
+          <p>145,500 MHz en 2 m et 433,500 MHz en 70 cm, réception seule.</p>
           <a class="button button-orange" href="/downloads/national/radiopack-france-amateur-calls-rx.csv" download>CSV canaux d'appel</a>
         </article>
 
         <article class="download-card marine">
-          <div class="topline"><span class="badge">National - v0.2.0</span><span>90 memoires</span></div>
-          <h2>France - VHF marine RX</h2>
-          <p>Plan international : simplex, voies navire/cote, DSC et AIS.</p>
+          <div class="topline"><span class="badge">National — v0.2.0</span><span>90 mémoires</span></div>
+          <h2>France — VHF marine RX</h2>
+          <p>Plan international : simplex, voies navire/côte, DSC et AIS.</p>
           <a class="button button-secondary" href="/downloads/national/radiopack-france-marine-vhf-rx.csv" download>CSV marine</a>
         </article>
 
         <article class="download-card national">
-          <div class="topline"><span class="badge badge-green">National - v0.1.0</span><span>16 memoires</span></div>
-          <h2>France - PMR446 RX</h2>
-          <p>Les 16 canaux analogiques PMR446 en NFM, emission bloquee.</p>
+          <div class="topline"><span class="badge badge-green">National — v0.1.0</span><span>16 mémoires</span></div>
+          <h2>France — PMR446 RX</h2>
+          <p>Les 16 canaux analogiques PMR446 en NFM, émission bloquée.</p>
           <a class="button button-primary" href="/downloads/national/radiopack-france-pmr446-rx.csv" download>CSV PMR446</a>
         </article>
 
         <article class="download-card space">
-          <div class="topline"><span class="badge badge-orange">National - v0.2.0</span><span>6 memoires</span></div>
-          <h2>France - APRS & ISS RX</h2>
-          <p>APRS terrestre et principales frequences descendantes publiees par ARISS.</p>
+          <div class="topline"><span class="badge badge-orange">National — v0.2.0</span><span>6 mémoires</span></div>
+          <h2>France — APRS & ISS RX</h2>
+          <p>APRS terrestre et principales fréquences descendantes publiées par ARISS.</p>
           <a class="button button-orange" href="/downloads/national/radiopack-france-amateur-listening-rx.csv" download>CSV APRS / ISS</a>
         </article>
       </div>
 
       <div class="grid-3 info-grid">
-        <article class="card"><span class="badge">2</span><h3>Packs regionaux</h3><p>Normandie et Annecy / Haute-Savoie sont maintenant disponibles.</p></article>
-        <article class="card"><span class="badge badge-orange">PDF</span><h3>Guides complets</h3><p>Organisation des memoires, tableaux de frequences, sources et procedure CHIRP.</p></article>
-        <article class="card"><span class="badge badge-green">Tests</span><h3>Controles automatiques</h3><p>Positions, doublons, noms courts, frequences cles et blocage TX sont verifies.</p></article>
+        <article class="card"><span class="badge">1</span><h3>Pack régional disponible</h3><p>La Normandie reste téléchargeable pendant la reconstruction du pack alpin et lémanique.</p></article>
+        <article class="card"><span class="badge badge-orange">PDF</span><h3>Guides complets</h3><p>Organisation des mémoires, tableaux de fréquences, sources et procédure CHIRP.</p></article>
+        <article class="card"><span class="badge badge-green">Tests</span><h3>Contrôles automatiques</h3><p>Positions, doublons, noms courts, fréquences clés et blocage TX sont vérifiés.</p></article>
       </div>
     </div>
   </section>
 </BaseLayout>
+
 <style>
-  .title{font-size:clamp(3rem,7vw,5rem);margin:18px 0}
-  .notice{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;margin:30px 0;padding:22px;background:linear-gradient(120deg,rgba(240,154,32,.12),rgba(255,255,255,.82))}
-  .notice-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:rgba(240,154,32,.18);color:#ad6200;font-size:1.4rem;font-weight:900}
-  .notice p{margin-top:5px;color:var(--muted)}code{font-weight:800;color:#5f31cf}
-  .downloads{margin-top:30px}.download-card{display:grid;gap:18px;padding:28px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.78);box-shadow:var(--shadow)}
-  .download-card.national{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(222,248,241,.7))}
-  .download-card.normandie{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(245,231,255,.72))}
-  .download-card.annecy{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(221,249,252,.78))}
-  .download-card.marine{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(222,242,255,.78))}
-  .download-card.space{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,239,216,.76))}
-  .download-card.repeaters{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(231,241,255,.78))}
-  .download-card.annecy-repeaters{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(224,250,246,.78))}
-  .download-card.calls{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,237,222,.76))}
-  .topline{display:flex;justify-content:space-between;gap:15px;align-items:center;color:var(--muted);font-size:.82rem;font-weight:800}
-  .download-card h2{font-size:clamp(1.8rem,4vw,2.5rem)}.download-card p,.download-card li{color:var(--muted)}
-  .download-card ul{margin:0;padding-left:1.15rem}.download-card .button{justify-self:start}
-  .info-grid{margin-top:30px}.info-grid article{padding:24px}.info-grid h3{margin:16px 0 8px}.info-grid p{color:var(--muted)}
-  @media(max-width:600px){.topline{align-items:flex-start;flex-direction:column}}
+  .title { font-size: clamp(3rem, 7vw, 5rem); margin: 18px 0; }
+  .notice { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; margin: 30px 0; padding: 22px; background: linear-gradient(120deg,rgba(240,154,32,.12),rgba(255,255,255,.82)); }
+  .notice-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: rgba(240,154,32,.18); color: #ad6200; font-size: 1.4rem; font-weight: 900; }
+  .notice p { margin-top: 5px; color: var(--muted); }
+  code { font-weight: 800; color: #5f31cf; }
+  .downloads { margin-top: 30px; }
+  .download-card { display: grid; gap: 18px; padding: 28px; border-radius: 24px; border: 1px solid var(--line); background: rgba(255,255,255,.78); box-shadow: var(--shadow); }
+  .download-card.national { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(222,248,241,.7)); }
+  .download-card.normandie { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(245,231,255,.72)); }
+  .download-card.annecy { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(221,249,252,.78)); }
+  .download-card.marine { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(222,242,255,.78)); }
+  .download-card.space { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,239,216,.76)); }
+  .download-card.repeaters { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(231,241,255,.78)); }
+  .download-card.calls { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,237,222,.76)); }
+  .preparing { border-style: dashed; }
+  .topline { display: flex; justify-content: space-between; gap: 15px; align-items: center; color: var(--muted); font-size: .82rem; font-weight: 800; }
+  .download-card h2 { font-size: clamp(1.8rem,4vw,2.5rem); }
+  .download-card p,
+  .download-card li { color: var(--muted); }
+  .download-card ul { margin: 0; padding-left: 1.15rem; }
+  .download-card .button { justify-self: start; }
+  .info-grid { margin-top: 30px; }
+  .info-grid article { padding: 24px; }
+  .info-grid h3 { margin: 16px 0 8px; }
+  .info-grid p { color: var(--muted); }
+  @media (max-width: 600px) { .topline { align-items: flex-start; flex-direction: column; } }
 </style>

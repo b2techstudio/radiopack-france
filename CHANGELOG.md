@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.1 - 2026-08-04
+
+- Reclassification publique d'Annecy & Haute-Savoie v0.1 comme aperçu historique incomplet.
+- Retrait des liens directs vers les CSV et PDF Annecy v0.1 des pages publiques.
+- Renommage de la prochaine zone en Annecy–Alpes–Léman.
+- Passage du statut public à « En préparation » pour la future v0.2.
+- Mise à jour de l'accueil, de la liste des régions, des téléchargements et de la page des versions.
+- Adaptation du composant de carte régionale aux packs non disponibles.
+- Ajout de contrôles empêchant la republication accidentelle des liens Annecy v0.1.
+- Ajout d'une base de recherche structurée pour Annecy–Alpes–Léman v0.2.
+
 ## 0.5.0 - 2026-08-04
 
 - Ajout des URL canoniques et des metadonnees Open Graph / Twitter.
@@ -33,7 +44,6 @@
 - Liste des relais portée à 15 mémoires.
 - Mise à jour du site, des tests et du guide PDF.
 
-
 ## 0.3.0 - 2026-08-04
 
 - Ajout des canaux d'appel FM 145,500 MHz et 433,500 MHz en reception seule.
@@ -52,5 +62,3 @@
 ## 0.1.0 - 2026-08-04
 
 - Premiere base PMR446 et generateur CSV CHIRP.
-
-

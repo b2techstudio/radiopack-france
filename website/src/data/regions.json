@@ -17,18 +17,18 @@
   },
   {
     "slug": "annecy-haute-savoie",
-    "name": "Annecy & Haute-Savoie",
-    "shortName": "Annecy",
-    "status": "Bêta disponible",
+    "name": "Annecy–Alpes–Léman",
+    "shortName": "Annecy–Alpes–Léman",
+    "status": "En préparation",
     "accent": "cyan",
-    "description": "Pack Alpes du Nord de 36 mémoires RX pour Annecy, la Haute-Savoie et les zones analogiques proches.",
-    "memoryCount": 36,
+    "description": "Reconstruction complète du pack alpin et lémanique v0.2. L'aperçu historique v0.1 n'est plus présenté comme un pack régional disponible.",
+    "memoryCount": 0,
     "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "Aviation RX",
-      "APRS & ISS"
+      "France & Suisse",
+      "Radioamateur analogique",
+      "Aviation",
+      "Lacs / navigation vérifiés"
     ],
-    "available": true
+    "available": false
   }
 ]

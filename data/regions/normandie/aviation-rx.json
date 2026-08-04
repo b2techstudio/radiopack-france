@@ -1,0 +1,121 @@
+{
+  "dataset": "Normandie — aviation publique (réception seule)",
+  "version": "0.2.0",
+  "updated": "2026-08-04",
+  "scope": "normandie",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Instantané fondé sur l'eAIP France valable au 11 juin 2026.",
+    "Les fréquences aéronautiques peuvent évoluer par cycle AIRAC ou NOTAM.",
+    "Toutes les mémoires sont en AM et en réception seule."
+  ],
+  "sources": [
+    {
+      "title": "SIA eAIP — Caen-Carpiquet LFRK",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRK-fr-FR.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "SIA eAIP — Deauville LFRG",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRG-fr-FR.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "SIA eAIP — Cherbourg-Manche LFRC",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRC-fr-FR.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "SIA eAIP — Le Havre-Octeville LFOH",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFOH-fr-FR.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "SIA eAIP — Rouen Vallée-de-Seine LFOP",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFOP-fr-FR.html",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "AIR-EMERG",
+      "frequency_mhz": 121.5,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Aviation — fréquence internationale d'urgence, réception seule"
+    },
+    {
+      "name": "CAEN-GND",
+      "frequency_mhz": 121.79,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Caen-Carpiquet sol — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "CAEN-TWR",
+      "frequency_mhz": 134.53,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Caen-Carpiquet tour / A/A — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "CAEN-ATIS",
+      "frequency_mhz": 123.08,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Caen-Carpiquet ATIS — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "DVL-TWR",
+      "frequency_mhz": 118.305,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Deauville tour/sol/A-A — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "DVL-ATIS",
+      "frequency_mhz": 119.18,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Deauville ATIS — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "CHER-AFIS",
+      "frequency_mhz": 119.63,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Cherbourg-Manche AFIS/A-A — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "LEH-AFIS",
+      "frequency_mhz": 135.205,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Le Havre-Octeville AFIS/A-A — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "ROUEN-TWR",
+      "frequency_mhz": 120.2,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Rouen Vallée-de-Seine tour/A-A — SIA eAIP 11 juin 2026"
+    },
+    {
+      "name": "ROUEN-ATIS",
+      "frequency_mhz": 120.73,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "comment": "Rouen Vallée-de-Seine ATIS — SIA eAIP 11 juin 2026"
+    }
+  ]
+}

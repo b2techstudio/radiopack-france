@@ -1,26 +1,65 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Pack Normandie — RadioPack France" description="Premier aperçu CSV CHIRP Normandie pour Quansheng UV-K5 : PMR446 en réception seule.">
+<BaseLayout title="Pack Normandie v0.2 — RadioPack France" description="CSV CHIRP Normandie de 122 mémoires pour Quansheng UV-K5, entièrement configuré en réception seule.">
   <section class="section"><div class="container page-grid">
     <div class="copy">
-      <span class="eyebrow">Premier pack régional</span>
+      <span class="eyebrow">Pack régional bêta · v0.2.0</span>
       <h1>Normandie</h1>
-      <p class="lead">Le pack démarre autour de Mortain-Bocage. La version 0.1 apporte une base nationale propre et téléchargeable ; les relais radioamateurs, fréquences aéronautiques publiques et canaux maritimes locaux viendront ensuite, uniquement après validation.</p>
-      <div class="button-row"><a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-preview.csv" download>Télécharger l’aperçu CSV</a><a class="button button-secondary" href="/documentation">Procédure CHIRP</a></div>
-      <div class="card legal"><strong>Réception seule dans cet aperçu</strong><p>Les 16 mémoires sont exportées avec <code>Duplex=off</code>. Aucune fréquence locale non vérifiée n’a été ajoutée.</p></div>
+      <p class="lead">Le pack passe à 122 mémoires vérifiées : PMR446, plan VHF marine international, APRS et écoute ISS, plus une sélection de fréquences aéronautiques publiques normandes issue du SIA.</p>
+      <div class="button-row">
+        <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.2.csv" download>Télécharger le CSV v0.2</a>
+        <a class="button button-secondary" href="/documentation">Procédure CHIRP</a>
+      </div>
+      <div class="card legal">
+        <strong>Réception seule sur les 122 mémoires</strong>
+        <p>Toutes les lignes sont exportées avec <code>Duplex=off</code>. La VHF marine, le PMR446, l’aviation et les services radioamateurs/satellites ne sont donc pas émis par ce codeplug public.</p>
+      </div>
+      <div class="grid-2 category-grid">
+        <article class="card"><span class="badge badge-green">16</span><h3>PMR446</h3><p>16 canaux analogiques en NFM, réception seule.</p></article>
+        <article class="card"><span class="badge">90</span><h3>VHF marine</h3><p>Simplex, côtés navire/côte des duplex, canal 16, DSC et AIS.</p></article>
+        <article class="card"><span class="badge badge-orange">6</span><h3>APRS & ISS</h3><p>APRS terrestre et principales fréquences descendantes ARISS.</p></article>
+        <article class="card"><span class="badge badge-green">10</span><h3>Aviation Normandie</h3><p>Caen, Deauville, Cherbourg, Le Havre, Rouen et urgence aéronautique.</p></article>
+      </div>
     </div>
     <aside class="card status-card">
-      <span class="badge badge-green">Aperçu disponible · v0.1.0</span>
-      <h3>16 mémoires sur 200</h3>
+      <span class="badge badge-green">Bêta disponible · v0.2.0</span>
+      <h3>122 mémoires sur 200</h3>
       <div class="meter"><span></span></div>
-      <ul><li>16 canaux PMR446 analogiques</li><li>NFM et pas de 12,5 kHz</li><li>Émission bloquée</li><li>Sources Arcep et ETSI documentées</li></ul>
+      <ul>
+        <li>16 PMR446 RX</li>
+        <li>90 VHF marine RX</li>
+        <li>6 APRS / ISS RX</li>
+        <li>10 aviation AM RX</li>
+      </ul>
       <hr />
-      <h4>Étapes suivantes</h4>
-      <ul class="future"><li>Relais 2 m / 70 cm vérifiés</li><li>APRS et fréquences radioamateur nationales</li><li>VHF marine utile à la Normandie</li><li>Aviation publique issue de sources officielles</li></ul>
+      <h4>Sources et fraîcheur</h4>
+      <ul class="future">
+        <li>VHF marine : UIT Appendice 18</li>
+        <li>Aviation : eAIP France du 11 juin 2026</li>
+        <li>ISS : fréquences ARISS publiées</li>
+        <li>Vérification : 4 août 2026</li>
+      </ul>
+      <hr />
+      <h4>Version suivante</h4>
+      <ul class="future">
+        <li>Relais radioamateurs locaux vérifiés</li>
+        <li>Tri par sous-régions normandes</li>
+        <li>Documentation PDF du pack</li>
+      </ul>
     </aside>
   </div></section>
 </BaseLayout>
 <style>
-  .page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px}.status-card h3{margin:18px 0 10px}.status-card h4{margin:20px 0 8px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.status-card hr{border:0;border-top:1px solid var(--line);margin:22px 0 0}.meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}.meter span{display:block;width:8%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}.legal{padding:20px;background:linear-gradient(120deg,rgba(110,61,232,.1),rgba(255,255,255,.76))}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}@media(max-width:800px){.page-grid{grid-template-columns:1fr}}
+  .page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}
+  .copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}
+  .status-card{padding:28px}.status-card h3{margin:18px 0 10px}.status-card h4{margin:20px 0 8px}
+  .status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}
+  .status-card hr{border:0;border-top:1px solid var(--line);margin:22px 0 0}
+  .meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}
+  .meter span{display:block;width:61%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}
+  .legal{padding:20px;background:linear-gradient(120deg,rgba(110,61,232,.1),rgba(255,255,255,.76))}
+  .legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}
+  .category-grid article{padding:22px}.category-grid h3{margin:14px 0 7px}.category-grid p{color:var(--muted)}
+  @media(max-width:800px){.page-grid{grid-template-columns:1fr}}
 </style>

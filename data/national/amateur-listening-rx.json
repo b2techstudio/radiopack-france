@@ -1,0 +1,73 @@
+{
+  "dataset": "France — APRS et ISS (réception seule)",
+  "version": "0.2.0",
+  "updated": "2026-08-04",
+  "scope": "national",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Les services ISS peuvent être coupés ou reconfigurés temporairement.",
+    "L'export public bloque l'émission sur toutes les mémoires."
+  ],
+  "sources": [
+    {
+      "title": "ARISS — Frequencies in Use",
+      "url": "https://www.ariss.org/contact-the-iss.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "IARU Région 1 — informations VHF et plans de bande",
+      "url": "https://www.iaru-r1.org/wiki/VHF",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "APRS-1448",
+      "frequency_mhz": 144.8,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "tx_policy": "rx_only",
+      "comment": "APRS terrestre Europe — réception seule dans l'export public"
+    },
+    {
+      "name": "ISS-VOICE",
+      "frequency_mhz": 145.8,
+      "mode": "FM",
+      "step_khz": 5,
+      "tx_policy": "rx_only",
+      "comment": "ISS voix descendante mondiale — réception seule"
+    },
+    {
+      "name": "ISS-PKT-V",
+      "frequency_mhz": 145.825,
+      "mode": "FM",
+      "step_khz": 5,
+      "tx_policy": "rx_only",
+      "comment": "ISS packet/APRS VHF — réception seule"
+    },
+    {
+      "name": "ISS-REP",
+      "frequency_mhz": 437.8,
+      "mode": "FM",
+      "step_khz": 5,
+      "tx_policy": "rx_only",
+      "comment": "ISS répéteur VHF/UHF — fréquence descendante, réception seule"
+    },
+    {
+      "name": "ISS-PKT-U",
+      "frequency_mhz": 437.825,
+      "mode": "FM",
+      "step_khz": 5,
+      "tx_policy": "rx_only",
+      "comment": "ISS packet UHF — réception seule"
+    },
+    {
+      "name": "ISS-SSTV",
+      "frequency_mhz": 437.55,
+      "mode": "FM",
+      "step_khz": 5,
+      "tx_policy": "rx_only",
+      "comment": "ISS SSTV UHF lorsque le service est actif — réception seule"
+    }
+  ]
+}

@@ -1,17 +1,22 @@
 {
   "pack": "Normandie",
   "slug": "normandie",
-  "version": "0.1.0-preview",
+  "version": "0.2.0",
   "updated": "2026-08-04",
-  "status": "preview",
+  "status": "beta",
   "max_memories": 200,
   "datasets": [
-    "data/national/pmr446.json"
+    "data/national/pmr446.json",
+    "data/national/marine-vhf-rx.json",
+    "data/national/amateur-listening-rx.json",
+    "data/regions/normandie/aviation-rx.json"
   ],
   "local_channels": [],
   "notes": [
-    "Premier aperçu téléchargeable: les 16 canaux PMR446 en réception seule.",
-    "Les relais radioamateurs, fréquences aéronautiques publiques et canaux maritimes locaux seront ajoutés uniquement après validation source par source.",
-    "Aucune fréquence de police, gendarmerie, pompiers, SAMU, réseau privé ou service non public n'est incluse."
+    "122 mémoires, toutes configurées en réception seule.",
+    "Le pack contient PMR446, VHF marine, APRS/ISS et aviation normande.",
+    "Les canaux maritimes duplex possèdent une mémoire côté navire et une mémoire côté station côtière.",
+    "Les fréquences aéronautiques sont un instantané eAIP : vérifier les mises à jour AIRAC/NOTAM.",
+    "Les relais radioamateurs locaux seront ajoutés dans une version ultérieure après vérification détaillée."
   ]
 }

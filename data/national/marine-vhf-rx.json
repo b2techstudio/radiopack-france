@@ -1,0 +1,838 @@
+{
+  "dataset": "France — VHF marine internationale (réception seule)",
+  "version": "0.2.0",
+  "updated": "2026-08-04",
+  "scope": "national",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "L'export public bloque l'émission avec Duplex=off.",
+    "Les canaux duplex sont représentés par deux mémoires : côté navire (-S) et côté station côtière (-C).",
+    "Le canal 16 est identifié comme canal de détresse, sécurité et appel.",
+    "Les canaux 70, AIS1 et AIS2 transportent des données numériques ; ils sont marqués à ignorer pendant un scan vocal.",
+    "L'UV-K5 n'est pas présenté comme une VHF marine conforme ou homologuée."
+  ],
+  "sources": [
+    {
+      "title": "UIT — Appendice 18, tableau des fréquences VHF du service mobile maritime",
+      "url": "https://www.itu.int/wftp3/pub/epub_shared/BR/2015-WRC-Final-Acts/E/WRC-Final-Acts_opf_files/WebSearch/page0217.html",
+      "accessed": "2026-08-04"
+    },
+    {
+      "title": "Ministère chargé de la mer — La radio VHF, un outil pour améliorer sa sécurité",
+      "url": "https://www.mer.gouv.fr/gestes-et-conseils-la-radio-vhf-un-outil-pour-ameliorer-sa-securite",
+      "accessed": "2026-08-04"
+    }
+  ],
+  "channels": [
+    {
+      "name": "M01-S",
+      "frequency_mhz": 156.05,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 01 — côté navire, réception seule"
+    },
+    {
+      "name": "M01-C",
+      "frequency_mhz": 160.65,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 01 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M02-S",
+      "frequency_mhz": 156.1,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 02 — côté navire, réception seule"
+    },
+    {
+      "name": "M02-C",
+      "frequency_mhz": 160.7,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 02 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M03-S",
+      "frequency_mhz": 156.15,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 03 — côté navire, réception seule"
+    },
+    {
+      "name": "M03-C",
+      "frequency_mhz": 160.75,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 03 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M04-S",
+      "frequency_mhz": 156.2,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 04 — côté navire, réception seule"
+    },
+    {
+      "name": "M04-C",
+      "frequency_mhz": 160.8,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 04 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M05-S",
+      "frequency_mhz": 156.25,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 05 — côté navire, réception seule"
+    },
+    {
+      "name": "M05-C",
+      "frequency_mhz": 160.85,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 05 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M06",
+      "frequency_mhz": 156.3,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 06 — simplex, réception seule"
+    },
+    {
+      "name": "M07-S",
+      "frequency_mhz": 156.35,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 07 — côté navire, réception seule"
+    },
+    {
+      "name": "M07-C",
+      "frequency_mhz": 160.95,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 07 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M08",
+      "frequency_mhz": 156.4,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 08 — simplex, réception seule"
+    },
+    {
+      "name": "M09",
+      "frequency_mhz": 156.45,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 09 — simplex, réception seule"
+    },
+    {
+      "name": "M10",
+      "frequency_mhz": 156.5,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 10 — simplex, réception seule"
+    },
+    {
+      "name": "M11",
+      "frequency_mhz": 156.55,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 11 — simplex, réception seule"
+    },
+    {
+      "name": "M12",
+      "frequency_mhz": 156.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 12 — simplex, réception seule"
+    },
+    {
+      "name": "M13",
+      "frequency_mhz": 156.65,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 13 — simplex, réception seule"
+    },
+    {
+      "name": "M14",
+      "frequency_mhz": 156.7,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 14 — simplex, réception seule"
+    },
+    {
+      "name": "M15",
+      "frequency_mhz": 156.75,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 15 — simplex, réception seule"
+    },
+    {
+      "name": "M16",
+      "frequency_mhz": 156.8,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 16 — détresse, sécurité et appel, réception seule"
+    },
+    {
+      "name": "M17",
+      "frequency_mhz": 156.85,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 17 — simplex, réception seule"
+    },
+    {
+      "name": "M18-S",
+      "frequency_mhz": 156.9,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 18 — côté navire, réception seule"
+    },
+    {
+      "name": "M18-C",
+      "frequency_mhz": 161.5,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 18 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M19-S",
+      "frequency_mhz": 156.95,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 19 — côté navire, réception seule"
+    },
+    {
+      "name": "M19-C",
+      "frequency_mhz": 161.55,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 19 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M20-S",
+      "frequency_mhz": 157.0,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 20 — côté navire, réception seule"
+    },
+    {
+      "name": "M20-C",
+      "frequency_mhz": 161.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 20 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M21-S",
+      "frequency_mhz": 157.05,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 21 — côté navire, réception seule"
+    },
+    {
+      "name": "M21-C",
+      "frequency_mhz": 161.65,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 21 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M22-S",
+      "frequency_mhz": 157.1,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 22 — côté navire, réception seule"
+    },
+    {
+      "name": "M22-C",
+      "frequency_mhz": 161.7,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 22 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M23-S",
+      "frequency_mhz": 157.15,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 23 — côté navire, réception seule"
+    },
+    {
+      "name": "M23-C",
+      "frequency_mhz": 161.75,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 23 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M24-S",
+      "frequency_mhz": 157.2,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 24 — côté navire, réception seule"
+    },
+    {
+      "name": "M24-C",
+      "frequency_mhz": 161.8,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 24 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M25-S",
+      "frequency_mhz": 157.25,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 25 — côté navire, réception seule"
+    },
+    {
+      "name": "M25-C",
+      "frequency_mhz": 161.85,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 25 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M26-S",
+      "frequency_mhz": 157.3,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 26 — côté navire, réception seule"
+    },
+    {
+      "name": "M26-C",
+      "frequency_mhz": 161.9,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 26 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M27-S",
+      "frequency_mhz": 157.35,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 27 — côté navire, réception seule"
+    },
+    {
+      "name": "M27-C",
+      "frequency_mhz": 161.95,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 27 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M28-S",
+      "frequency_mhz": 157.4,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 28 — côté navire, réception seule"
+    },
+    {
+      "name": "M28-C",
+      "frequency_mhz": 162.0,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 28 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M60-S",
+      "frequency_mhz": 156.025,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 60 — côté navire, réception seule"
+    },
+    {
+      "name": "M60-C",
+      "frequency_mhz": 160.625,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 60 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M61-S",
+      "frequency_mhz": 156.075,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 61 — côté navire, réception seule"
+    },
+    {
+      "name": "M61-C",
+      "frequency_mhz": 160.675,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 61 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M62-S",
+      "frequency_mhz": 156.125,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 62 — côté navire, réception seule"
+    },
+    {
+      "name": "M62-C",
+      "frequency_mhz": 160.725,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 62 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M63-S",
+      "frequency_mhz": 156.175,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 63 — côté navire, réception seule"
+    },
+    {
+      "name": "M63-C",
+      "frequency_mhz": 160.775,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 63 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M64-S",
+      "frequency_mhz": 156.225,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 64 — côté navire, réception seule"
+    },
+    {
+      "name": "M64-C",
+      "frequency_mhz": 160.825,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 64 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M65-S",
+      "frequency_mhz": 156.275,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 65 — côté navire, réception seule"
+    },
+    {
+      "name": "M65-C",
+      "frequency_mhz": 160.875,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 65 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M66-S",
+      "frequency_mhz": 156.325,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 66 — côté navire, réception seule"
+    },
+    {
+      "name": "M66-C",
+      "frequency_mhz": 160.925,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 66 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M67",
+      "frequency_mhz": 156.375,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 67 — simplex, réception seule"
+    },
+    {
+      "name": "M68",
+      "frequency_mhz": 156.425,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 68 — simplex, réception seule"
+    },
+    {
+      "name": "M69",
+      "frequency_mhz": 156.475,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 69 — simplex, réception seule"
+    },
+    {
+      "name": "M70",
+      "frequency_mhz": 156.525,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "S",
+      "comment": "VHF marine canal 70 — ASN/DSC numérique, réception seule"
+    },
+    {
+      "name": "M71",
+      "frequency_mhz": 156.575,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 71 — simplex, réception seule"
+    },
+    {
+      "name": "M72",
+      "frequency_mhz": 156.625,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 72 — simplex, réception seule"
+    },
+    {
+      "name": "M73",
+      "frequency_mhz": 156.675,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 73 — simplex, réception seule"
+    },
+    {
+      "name": "M74",
+      "frequency_mhz": 156.725,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 74 — simplex, réception seule"
+    },
+    {
+      "name": "M75",
+      "frequency_mhz": 156.775,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 75 — simplex, réception seule"
+    },
+    {
+      "name": "M76",
+      "frequency_mhz": 156.825,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 76 — simplex, réception seule"
+    },
+    {
+      "name": "M77",
+      "frequency_mhz": 156.875,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 77 — simplex, réception seule"
+    },
+    {
+      "name": "M78-S",
+      "frequency_mhz": 156.925,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 78 — côté navire, réception seule"
+    },
+    {
+      "name": "M78-C",
+      "frequency_mhz": 161.525,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 78 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M79-S",
+      "frequency_mhz": 156.975,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 79 — côté navire, réception seule"
+    },
+    {
+      "name": "M79-C",
+      "frequency_mhz": 161.575,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 79 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M80-S",
+      "frequency_mhz": 157.025,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 80 — côté navire, réception seule"
+    },
+    {
+      "name": "M80-C",
+      "frequency_mhz": 161.625,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 80 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M81-S",
+      "frequency_mhz": 157.075,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 81 — côté navire, réception seule"
+    },
+    {
+      "name": "M81-C",
+      "frequency_mhz": 161.675,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 81 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M82-S",
+      "frequency_mhz": 157.125,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 82 — côté navire, réception seule"
+    },
+    {
+      "name": "M82-C",
+      "frequency_mhz": 161.725,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 82 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M83-S",
+      "frequency_mhz": 157.175,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 83 — côté navire, réception seule"
+    },
+    {
+      "name": "M83-C",
+      "frequency_mhz": 161.775,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 83 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M84-S",
+      "frequency_mhz": 157.225,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 84 — côté navire, réception seule"
+    },
+    {
+      "name": "M84-C",
+      "frequency_mhz": 161.825,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 84 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M85-S",
+      "frequency_mhz": 157.275,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 85 — côté navire, réception seule"
+    },
+    {
+      "name": "M85-C",
+      "frequency_mhz": 161.875,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 85 — côté station côtière, réception seule"
+    },
+    {
+      "name": "M86-S",
+      "frequency_mhz": 157.325,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 86 — côté navire, réception seule"
+    },
+    {
+      "name": "M86-C",
+      "frequency_mhz": 161.925,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "",
+      "comment": "VHF marine canal 86 — côté station côtière, réception seule"
+    },
+    {
+      "name": "AIS1",
+      "frequency_mhz": 161.975,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "S",
+      "comment": "AIS 1 / canal 87B — données numériques, réception seule"
+    },
+    {
+      "name": "AIS2",
+      "frequency_mhz": 162.025,
+      "mode": "NFM",
+      "step_khz": 25,
+      "tx_policy": "rx_only",
+      "skip": "S",
+      "comment": "AIS 2 / canal 88B — données numériques, réception seule"
+    }
+  ]
+}

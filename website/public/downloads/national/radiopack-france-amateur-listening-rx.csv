@@ -1,0 +1,7 @@
+Location,Name,Frequency,Duplex,Offset,Tone,rToneFreq,cToneFreq,DtcsCode,DtcsPolarity,RxDtcsCode,CrossMode,Mode,TStep,Skip,Power,Comment,URCALL,RPT1CALL,RPT2CALL,DVCODE
+0,APRS-1448,144.800000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,NFM,12.50,,,APRS terrestre Europe — réception seule dans l'export public,,,,
+1,ISS-VOICE,145.800000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,FM,5.00,,,ISS voix descendante mondiale — réception seule,,,,
+2,ISS-PKT-V,145.825000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,FM,5.00,,,ISS packet/APRS VHF — réception seule,,,,
+3,ISS-REP,437.800000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,FM,5.00,,,"ISS répéteur VHF/UHF — fréquence descendante, réception seule",,,,
+4,ISS-PKT-U,437.825000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,FM,5.00,,,ISS packet UHF — réception seule,,,,
+5,ISS-SSTV,437.550000,off,0.000000,,88.5,88.5,023,NN,023,Tone->Tone,FM,5.00,,,ISS SSTV UHF lorsque le service est actif — réception seule,,,,

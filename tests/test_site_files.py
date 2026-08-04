@@ -84,6 +84,10 @@ for expected in [
     "actions/setup-node@v6",
     "python tests/test_generator.py",
     "npm run build",
+    "statuses: write",
+    "report-status:",
+    "radiopack-ci/complete",
+    "always() && github.event_name == 'push'",
 ]:
     assert expected in workflow, f"Etape CI absente: {expected}"
 

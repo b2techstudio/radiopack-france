@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.0 - 2026-08-04
+
+- Ajout de l'inventaire de recherche radioamateur France pour Annecy–Alpes–Léman v0.2.
+- Recensement de 19 fréquences analogiques uniques dans l'Ain, l'Isère, la Savoie et la Haute-Savoie.
+- Fusion de quatre fréquences partagées afin d'éviter les doublons dans le futur plan mémoire.
+- Ajout d'un inventaire séparé de huit candidats suisses pour Genève, Vaud et Valais.
+- Validation actuelle de HB9G 145,725 MHz et 439,100 MHz ; les autres candidats suisses restent en attente de recoupement.
+- Confirmation des conflits F1ZJV et F1ZYT, maintenus hors production.
+- Ajout du test `tests/test_annecy_research.py` et de son exécution dans GitHub Actions.
+- Aucun changement du générateur public, des CSV ou du statut « En préparation » de la v0.2.
+
 ## 0.5.1 - 2026-08-04
 
 - Reclassification publique d'Annecy & Haute-Savoie v0.1 comme aperçu historique incomplet.
@@ -22,7 +33,7 @@
 - Mise a jour du bouton principal du menu pour les deux regions disponibles.
 - Ajout d'un menu mobile accessible.
 - Ajout des en-tetes de securite et de cache Cloudflare Pages.
-- Ajout de redirections permanentes pour les anciens fichiers Normandie.
+- Ajout de redirections permanentes pour les anciens téléchargements Normandie.
 - Ajout d'une integration continue GitHub Actions pour tester les CSV et compiler Astro.
 - Ajout d'un test automatique des fichiers de production.
 

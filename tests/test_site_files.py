@@ -7,10 +7,14 @@ required_files = [
     ".github/workflows/ci.yml",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
+    "tests/test_annecy_internal_candidate.py",
     "research/annecy-alpes-leman-v0.2/radioamateur-france-inventory.json",
     "research/annecy-alpes-leman-v0.2/radioamateur-switzerland-candidates.json",
     "research/annecy-alpes-leman-v0.2/aviation-france-pre-airac-08.json",
     "research/annecy-alpes-leman-v0.2/navigation-lakes-findings.json",
+    "research/annecy-alpes-leman-v0.2/satellites-fm-inventory.json",
+    "research/annecy-alpes-leman-v0.2/memory-plan.json",
+    "tools/build_annecy_internal_candidate.py",
     "research/annecy-alpes-leman-v0.2/source-register.csv",
     "research/annecy-alpes-leman-v0.2/conflicts.csv",
     "website/astro.config.mjs",
@@ -94,6 +98,7 @@ for expected in [
     "python tests/test_site_files.py",
     "python tests/test_annecy_research.py",
     "python tests/test_annecy_aviation_lakes.py",
+    "python tests/test_annecy_internal_candidate.py",
     "npm run build",
     "statuses: write",
     "report-status:",
@@ -143,4 +148,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 9: OK")
+print("Tests RadioPack Sprint 10: OK")

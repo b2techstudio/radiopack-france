@@ -16,6 +16,7 @@ Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée u
 - Statut du plan : `prepublication_reviewed_not_public`.
 - L'**aperçu web du générateur** est maintenant accessible sur `/generateur`.
 - Les options Aviation et NOTAM y sont interactives et le compteur passe réellement de 65 à 48 mémoires lorsque l'aviation est retirée.
+- Correctif Sprint 20 : la confirmation **« J'ai vérifié les NOTAM applicables »** est désormais une case indépendante et ne peut plus être réinitialisée par le simple rafraîchissement du résumé.
 - Contrôle NOTAM France/Suisse : **facultatif et non bloquant** pour un pack d'écoute RX.
 - Le **téléchargement Annecy v0.2 reste verrouillé** et aucun CSV public v0.2 n'est encore créé.
 - Recontrôle satellites AMSAT : validé le 8 août 2026 pour SO-50, AO-91 et AO-123.
@@ -84,6 +85,7 @@ Il est relié aux mêmes règles fonctionnelles que le backend de prépublicatio
 
 - **Inclure les fréquences aviation** : le compteur passe de 65 à 48 mémoires lorsqu'on décoche l'option ;
 - **Contrôle NOTAM avant génération** : affiche une confirmation facultative « J'ai vérifié les NOTAM applicables » ;
+- la case de confirmation NOTAM reste cochable tant que le contrôle NOTAM principal est actif, et n'est remise à zéro que lorsque l'utilisateur désactive explicitement ce contrôle ;
 - le résumé indique en direct le nombre de mémoires, l'état aviation et l'état NOTAM ;
 - le contrôle NOTAM ne modifie jamais les fréquences ;
 - le bouton de génération CSV Annecy reste désactivé tant que la publication n'a pas été déclenchée explicitement.
@@ -159,7 +161,7 @@ python tests\test_web_generator.py
 Le test web doit terminer par :
 
 ```text
-Tests RadioPack Sprint 20 web generator preview: OK
+Tests RadioPack Sprint 20 web generator preview + NOTAM confirmation interaction: OK
 ```
 
 ## Générer les CSV publics existants

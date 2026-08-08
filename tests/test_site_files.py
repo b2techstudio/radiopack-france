@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 required_files = [
     ".gitignore",
     ".github/workflows/ci.yml",
+    "SPRINT-13-CHAMBERY-VALIDATION.md",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
     "tests/test_annecy_airac08.py",
@@ -160,4 +161,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 12: OK")
+print("Tests RadioPack Sprint 13: OK")

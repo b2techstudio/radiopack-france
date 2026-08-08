@@ -7,6 +7,7 @@ const pages = [
   { path: "/regions", priority: "0.9", changefreq: "weekly" },
   { path: "/regions/normandie", priority: "0.9", changefreq: "weekly" },
   { path: "/regions/annecy-haute-savoie", priority: "0.9", changefreq: "weekly" },
+  { path: "/generateur", priority: "0.9", changefreq: "weekly" },
   { path: "/telechargements", priority: "0.9", changefreq: "weekly" },
   { path: "/documentation", priority: "0.7", changefreq: "monthly" },
   { path: "/versions", priority: "0.7", changefreq: "weekly" },
@@ -23,7 +24,7 @@ const escapeXML = (value: string) =>
 
 export const GET: APIRoute = ({ site }) => {
   const base = site ?? new URL("https://radiopack.b2tech.studio");
-  const lastModified = "2026-08-04";
+  const lastModified = "2026-08-08";
 
   const urls = pages
     .map(({ path, priority, changefreq }) => {

@@ -1,37 +1,40 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildAnnecyCsv } from "../lib/annecyPack";
+
+const fullCsv = buildAnnecyCsv(true);
+const noAviationCsv = buildAnnecyCsv(false);
 ---
 <BaseLayout
   title="Générateur de pack"
-  description="Prépare la configuration d'un pack RadioPack France et visualise les options Annecy–Alpes–Léman v0.2 avant sa publication."
+  description="Génère un CSV CHIRP Annecy–Alpes–Léman v0.2 avec ou sans aviation et un contrôle NOTAM facultatif."
 >
   <section class="section generator-hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Générateur web · prépublication</span>
+        <span class="eyebrow">Générateur web · v0.2 disponible</span>
         <h1>Configure ton <span class="gradient-text">RadioPack</span></h1>
         <p class="lead">
-          Le générateur web est maintenant branché sur les règles de la future version
-          Annecy–Alpes–Léman v0.2. Tu peux préparer les options et vérifier le nombre de
-          mémoires avant publication.
+          Choisis si tu veux conserver l'aviation, indique éventuellement ton contrôle NOTAM,
+          puis télécharge directement un CSV CHIRP RX-only validé pour Annecy–Alpes–Léman v0.2.
         </p>
         <div class="notice card">
-          <strong>Le téléchargement Annecy v0.2 reste verrouillé.</strong>
+          <strong>Génération locale dans ton navigateur</strong>
           <p>
-            Cette interface permet de tester la configuration, mais aucun CSV Annecy v0.2
-            n'est encore exposé publiquement. La publication restera une action séparée et explicite.
+            Les options choisissent entre les deux variantes validées du pack. Le contrôle NOTAM
+            reste informatif : il ne modifie jamais les fréquences AIP/AIRAC du CSV.
           </p>
         </div>
       </div>
 
       <aside class="card status-card" aria-label="État du générateur">
-        <span class="badge badge-green">Backend validé</span>
+        <span class="badge badge-green">v0.2 publiée</span>
         <strong>65 / 48 mémoires</strong>
         <p>65 avec aviation, 48 sans aviation. Toutes les mémoires restent en réception seule.</p>
         <dl>
           <div><dt>Duplex</dt><dd>off</dd></div>
           <div><dt>NOTAM</dt><dd>facultatif</dd></div>
-          <div><dt>Publication</dt><dd>verrouillée</dd></div>
+          <div><dt>Publication</dt><dd>disponible</dd></div>
         </dl>
       </aside>
     </div>
@@ -42,10 +45,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <form class="card generator-form" id="annecy-generator" novalidate>
         <div class="form-heading">
           <div>
-            <span class="badge">Annecy–Alpes–Léman v0.2</span>
+            <span class="badge badge-green">Annecy–Alpes–Léman v0.2</span>
             <h2>Options du pack</h2>
           </div>
-          <span class="status-pill">Prépublication</span>
+          <span class="status-pill published">Disponible</span>
         </div>
 
         <fieldset>
@@ -65,8 +68,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <span>
               <strong>Contrôle NOTAM avant génération</strong>
               <small>
-                Enregistre l'état de vérification dans le manifeste. Cette option ne modifie jamais
-                automatiquement les fréquences du CSV.
+                Enregistre uniquement ton état de vérification dans le résumé affiché.
+                Cette option ne modifie jamais automatiquement les fréquences du CSV.
               </small>
             </span>
             <input id="notam-check" name="notam-check" type="checkbox" />
@@ -88,10 +91,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </fieldset>
 
         <div class="form-actions">
-          <button class="button button-primary locked-button" type="button" disabled>
-            Génération CSV Annecy bientôt disponible
+          <button class="button button-primary" id="download-csv" type="button">
+            Générer et télécharger le CSV
           </button>
-          <a class="button button-secondary" href="/telechargements">Téléchargements actuels</a>
+          <a class="button button-secondary" href="/telechargements">Tous les téléchargements</a>
         </div>
       </form>
 
@@ -131,7 +134,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <article class="card info-card">
         <span class="badge">48 mémoires</span>
         <h3>Sans aviation</h3>
-        <p>Les 17 mémoires aviation sont simplement retirées, sans déplacer les autres positions.</p>
+        <p>Les 17 mémoires aviation sont retirées sans déplacer les autres positions.</p>
       </article>
       <article class="card info-card">
         <span class="badge badge-orange">NOTAM</span>
@@ -141,20 +144,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <script>
-    const aviation = document.querySelector<HTMLInputElement>("#include-aviation");
-    const notam = document.querySelector<HTMLInputElement>("#notam-check");
-    const confirmed = document.querySelector<HTMLInputElement>("#notam-confirmed");
-    const confirmZone = document.querySelector<HTMLElement>("#notam-confirm-zone");
-    const memoryCount = document.querySelector<HTMLElement>("#memory-count");
-    const aviationSummary = document.querySelector<HTMLElement>("#aviation-summary");
-    const notamSummary = document.querySelector<HTMLElement>("#notam-summary");
-    const notamWarning = document.querySelector<HTMLElement>("#notam-warning");
+  <script define:vars={{ fullCsv, noAviationCsv }}>
+    const aviation = document.querySelector("#include-aviation");
+    const notam = document.querySelector("#notam-check");
+    const confirmed = document.querySelector("#notam-confirmed");
+    const confirmZone = document.querySelector("#notam-confirm-zone");
+    const memoryCount = document.querySelector("#memory-count");
+    const aviationSummary = document.querySelector("#aviation-summary");
+    const notamSummary = document.querySelector("#notam-summary");
+    const notamWarning = document.querySelector("#notam-warning");
+    const downloadButton = document.querySelector("#download-csv");
 
     const renderSummary = () => {
-      if (!aviation || !notam || !confirmed || !confirmZone || !memoryCount || !aviationSummary || !notamSummary || !notamWarning) {
-        return;
-      }
+      if (!aviation || !notam || !confirmed || !confirmZone || !memoryCount || !aviationSummary || !notamSummary || !notamWarning) return;
 
       memoryCount.textContent = aviation.checked ? "65" : "48";
       aviationSummary.textContent = aviation.checked ? "Incluse · 17" : "Exclue · 0";
@@ -169,7 +171,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       if (confirmed.checked) {
         notamSummary.textContent = "Confirmé";
-        notamWarning.textContent = "Contrôle NOTAM confirmé par l'utilisateur. Le contenu fréquentiel du CSV reste inchangé.";
+        notamWarning.textContent = "Contrôle NOTAM confirmé. Le contenu fréquentiel du CSV reste inchangé.";
       } else {
         notamSummary.textContent = "Demandé · non confirmé";
         notamWarning.textContent = "Contrôle NOTAM demandé mais non confirmé. Cette vérification reste facultative et non bloquante.";
@@ -178,12 +180,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     aviation?.addEventListener("change", renderSummary);
     notam?.addEventListener("change", () => {
-      if (confirmed && notam && !notam.checked) {
-        confirmed.checked = false;
-      }
+      if (confirmed && notam && !notam.checked) confirmed.checked = false;
       renderSummary();
     });
     confirmed?.addEventListener("change", renderSummary);
+
+    downloadButton?.addEventListener("click", () => {
+      if (!aviation) return;
+      const includeAviation = aviation.checked;
+      const csv = includeAviation ? fullCsv : noAviationCsv;
+      const filename = includeAviation
+        ? "radiopack-france-annecy-alpes-leman-v0.2.csv"
+        : "radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv";
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    });
+
     renderSummary();
   </script>
 </BaseLayout>
@@ -193,31 +212,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr); gap: 28px; align-items: end; }
   .hero-copy { display: grid; gap: 24px; }
   .hero-copy h1 { max-width: 850px; }
-  .notice { display: grid; gap: 6px; max-width: 760px; padding: 18px 20px; border-left: 4px solid var(--orange); }
-  .notice p { color: var(--muted); }
+  .notice { display: grid; gap: 6px; max-width: 760px; padding: 18px 20px; border-left: 4px solid var(--green); }
+  .notice p, .status-card > p { color: var(--muted); }
   .status-card { display: grid; gap: 13px; padding: 24px; }
   .status-card > strong { font-family: "Space Grotesk", sans-serif; font-size: 2rem; }
-  .status-card > p { color: var(--muted); }
   .status-card dl { display: grid; gap: 9px; margin: 4px 0 0; }
   .status-card dl div { display: flex; justify-content: space-between; gap: 20px; padding-top: 9px; border-top: 1px solid var(--line); }
   .status-card dt { color: var(--muted); }
   .status-card dd { margin: 0; font-weight: 800; }
-
   .generator-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); gap: 22px; align-items: start; }
   .generator-form, .summary-card { padding: 28px; }
   .generator-form { display: grid; gap: 24px; }
   .form-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
   .form-heading > div { display: grid; gap: 10px; }
   .form-heading h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
-  .status-pill { padding: .4rem .65rem; border-radius: 999px; background: rgba(240,154,32,.14); color: #8d5205; font-size: .75rem; font-weight: 850; white-space: nowrap; }
-
+  .status-pill { padding: .4rem .65rem; border-radius: 999px; font-size: .75rem; font-weight: 850; white-space: nowrap; }
+  .status-pill.published { background: rgba(16,164,122,.13); color: #087154; }
   fieldset { display: grid; gap: 12px; margin: 0; padding: 0; border: 0; }
   legend { margin-bottom: 8px; font-size: .78rem; font-weight: 850; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
   .option-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(248,250,252,.78); cursor: pointer; }
   .option-row > span { display: grid; gap: 4px; }
   .option-row small { color: var(--muted); font-size: .88rem; }
   .option-row input { width: 22px; height: 22px; accent-color: var(--purple); flex: 0 0 auto; }
-
   .notam-confirm { display: grid; gap: 12px; margin-top: 2px; padding: 18px; border-radius: 16px; background: rgba(22,135,233,.07); border: 1px solid rgba(22,135,233,.14); }
   .notam-confirm[hidden] { display: none; }
   .notam-confirm-check { display: flex; gap: 10px; align-items: center; }
@@ -225,8 +241,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .notam-confirm-check input { width: 19px; height: 19px; accent-color: var(--purple); cursor: pointer; }
   .notam-confirm-check input:disabled { cursor: not-allowed; }
   .form-actions { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
-  .locked-button:disabled { opacity: .58; cursor: not-allowed; transform: none; box-shadow: none; }
-
   .summary-card { position: sticky; top: 110px; display: grid; gap: 20px; }
   .memory-counter { display: flex; align-items: baseline; gap: 10px; }
   .memory-counter strong { font-family: "Space Grotesk", sans-serif; font-size: clamp(4rem, 8vw, 6rem); line-height: .9; letter-spacing: -.06em; }
@@ -237,20 +251,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .summary-list strong { text-align: right; }
   .summary-warning { padding: 14px; border-radius: 13px; background: rgba(240,154,32,.11); color: #6e460d; font-size: .9rem; }
   .summary-note { font-size: .88rem; }
-
   .info-grid { padding-bottom: 34px; }
   .info-card { display: grid; gap: 12px; padding: 22px; }
   .info-card p { color: var(--muted); }
-
-  @media (max-width: 900px) {
-    .hero-grid, .generator-grid { grid-template-columns: 1fr; }
-    .summary-card { position: static; }
-  }
-
-  @media (max-width: 600px) {
-    .generator-form, .summary-card { padding: 20px; }
-    .form-heading { flex-direction: column; }
-    .option-row { align-items: flex-start; }
-    .option-row input { margin-top: 2px; }
-  }
+  @media (max-width: 900px) { .hero-grid, .generator-grid { grid-template-columns: 1fr; } .summary-card { position: static; } }
+  @media (max-width: 600px) { .generator-form, .summary-card { padding: 20px; } .form-heading { flex-direction: column; } .option-row { align-items: flex-start; } .option-row input { margin-top: 2px; } }
 </style>

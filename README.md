@@ -11,7 +11,7 @@ Deux packs régionaux sont maintenant disponibles :
 - **Normandie v0.3.1** — 139 mémoires RX ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, avec variante 48 mémoires sans aviation.
 
-Annecy–Alpes–Léman v0.2 est officiellement publié. Le plan est passé à `published_v0.2` après la revue Sprint 19 des **65/65 mémoires** et l'intégration du générateur web au Sprint 20.
+Annecy–Alpes–Léman v0.2 est officiellement publié. Le plan est passé à `published_v0.2` après la revue Sprint 19 des **65/65 mémoires**, l'intégration du générateur web au Sprint 20 et la publication explicite au Sprint 21.
 
 Le générateur public est disponible sur :
 
@@ -71,10 +71,7 @@ La bibliothèque commune est :
 website/src/lib/annecyPack.ts
 ```
 
-Elle assemble les mêmes données validées que le backend de prépublication et sert à la fois :
-
-- aux routes CSV publiques prérendues par Astro ;
-- au générateur web `/generateur`.
+Elle assemble les mêmes données validées que le backend de vérification et sert à la fois aux routes CSV publiques prérendues par Astro et au générateur web `/generateur`.
 
 Routes publiques :
 
@@ -95,17 +92,18 @@ research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json
 
 fige pour chaque mémoire : emplacement, nom, fréquence, mode, pas et empreinte SHA-256 du commentaire validé.
 
-La CI continue de vérifier :
+La CI vérifie :
 
 - les 65 mémoires de la variante complète ;
 - les 48 mémoires de la variante sans aviation ;
 - `Duplex=off` et `Offset=0.000000` ;
-- l'absence de doublons ;
-- les noms ≤ 10 caractères ;
+- l'absence de doublons et les noms ≤ 10 caractères ;
 - l'identité du CSV avec ou sans confirmation NOTAM ;
-- le générateur web ;
-- les routes CSV publiques ;
-- le build Astro.
+- le générateur web et les routes CSV publiques ;
+- le build Astro ;
+- **les deux CSV réellement produits dans `website/dist` après le build**, comparés ligne par ligne à la carte de revue par `tests/test_built_annecy_public_csv.py`.
+
+Ainsi, une CI verte valide aussi les fichiers qui seront réellement déployés sur le site.
 
 ## Synchroniser le dépôt local
 
@@ -119,6 +117,8 @@ Les archives de sprint sont uniquement des sauvegardes de référence. Elles ne 
 
 ## Tests principaux
 
+Depuis la racine :
+
 ```powershell
 python tests\test_generator.py
 python tests\test_site_files.py
@@ -130,6 +130,15 @@ python tests\test_annecy_release_readiness.py
 python tests\test_annecy_prepublication.py
 python tests\test_annecy_prepublication_review.py
 python tests\test_web_generator.py
+```
+
+Après un build Astro, le contrôle des véritables fichiers publics peut aussi être lancé :
+
+```powershell
+cd website
+npm run build
+cd ..
+python tests\test_built_annecy_public_csv.py
 ```
 
 ## Lancer le site en local
@@ -145,12 +154,6 @@ Puis ouvre notamment :
 ```text
 http://localhost:4321/generateur
 http://localhost:4321/regions/annecy-haute-savoie
-```
-
-Build de production :
-
-```powershell
-npm run build
 ```
 
 ## Maintenance du projet

@@ -12,42 +12,27 @@ import regions from "../data/regions.json";
       <div class="hero-copy">
         <span class="eyebrow">Projet open source B2Tech Studio</span>
         <h1><span class="gradient-text">RadioPack</span><br />France</h1>
-        <p class="lead">
-          Des codeplugs CHIRP régionaux, propres et documentés pour les radios
-          Quansheng UV-K5 — sans listes obscures ni réglages incohérents.
-        </p>
+        <p class="lead">Des codeplugs CHIRP régionaux, propres et documentés pour les radios Quansheng UV-K5 — sans listes obscures ni réglages incohérents.</p>
         <div class="button-row">
           <a class="button button-primary" href="/regions">Choisir une région <span>→</span></a>
-          <a class="button button-secondary" href="/documentation">Comprendre le projet</a>
+          <a class="button button-secondary" href="/generateur">Ouvrir le générateur</a>
         </div>
         <div class="hero-stats">
           <div><strong>200</strong><span>mémoires disponibles par pack</span></div>
-          <div><strong>1</strong><span>pack régional disponible</span></div>
-          <div><strong>1</strong><span>pack en reconstruction</span></div>
+          <div><strong>2</strong><span>packs régionaux disponibles</span></div>
+          <div><strong>65</strong><span>mémoires dans Annecy v0.2</span></div>
         </div>
       </div>
 
       <div class="hero-visual">
-        <div class="brand-panel">
-          <img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" />
-          <div><span>B2Tech Studio</span><strong>Code. Crée. Innove.</strong></div>
-        </div>
+        <div class="brand-panel"><img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" /><div><span>B2Tech Studio</span><strong>Code. Crée. Innove.</strong></div></div>
         <div class="radio-card">
-          <div class="antenna"></div>
-          <div class="radio-top"></div>
-          <div class="screen">
-            <small>F4HWN - VFO</small>
-            <strong>145.500</strong>
-            <span>433.500</span>
-            <div class="signal">▂▄▆█</div>
-          </div>
+          <div class="antenna"></div><div class="radio-top"></div>
+          <div class="screen"><small>F4HWN - VFO</small><strong>145.500</strong><span>433.500</span><div class="signal">▂▄▆█</div></div>
           <div class="radio-brand">QUANSHENG</div>
-          <div class="keys">
-            {Array.from({ length: 12 }).map((_, i) => <span>{i < 9 ? i + 1 : i === 9 ? "*" : i === 10 ? "0" : "#"}</span>)}
-          </div>
+          <div class="keys">{Array.from({ length: 12 }).map((_, i) => <span>{i < 9 ? i + 1 : i === 9 ? "*" : i === 10 ? "0" : "#"}</span>)}</div>
         </div>
-        <div class="orbit orbit-purple"></div>
-        <div class="orbit orbit-orange"></div>
+        <div class="orbit orbit-purple"></div><div class="orbit orbit-orange"></div>
       </div>
     </div>
   </section>
@@ -72,10 +57,7 @@ import regions from "../data/regions.json";
       <div class="region-list">
         <span class="eyebrow">Déploiement progressif</span>
         <h2>Choisis ta zone</h2>
-        <p class="lead">
-          La Normandie est disponible. Annecy–Alpes–Léman est reconstruite en v0.2
-          avant toute nouvelle publication.
-        </p>
+        <p class="lead">La Normandie v0.3.1 et Annecy–Alpes–Léman v0.2 sont maintenant disponibles en réception seule.</p>
         {regions.map((region) => <RegionCard {...region} />)}
       </div>
     </div>
@@ -84,17 +66,13 @@ import regions from "../data/regions.json";
   <section class="section">
     <div class="container cta">
       <div>
-        <span class="eyebrow">Publication maîtrisée</span>
-        <h2>Normandie disponible, Alpes–Léman en préparation.</h2>
-        <p>
-          Le pack Normandie contient 139 mémoires RX-only. L'ancien aperçu Annecy v0.1
-          de 36 mémoires n'est plus présenté comme un pack régional terminé ; il sera
-          remplacé par Annecy–Alpes–Léman v0.2 après recoupement complet des sources.
-        </p>
+        <span class="eyebrow">Deux packs régionaux disponibles</span>
+        <h2>Normandie et Alpes–Léman prêtes à importer.</h2>
+        <p>Normandie contient 139 mémoires RX-only. Annecy–Alpes–Léman v0.2 contient 65 mémoires, avec une variante de 48 mémoires sans aviation disponible depuis le générateur.</p>
       </div>
       <div class="cta-actions">
         <a class="button button-orange" href="/regions/normandie">Voir la Normandie →</a>
-        <a class="button button-primary" href="/regions/annecy-haute-savoie">Suivre Annecy v0.2 →</a>
+        <a class="button button-primary" href="/regions/annecy-haute-savoie">Voir Annecy v0.2 →</a>
       </div>
     </div>
   </section>

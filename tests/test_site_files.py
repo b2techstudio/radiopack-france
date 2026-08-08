@@ -7,6 +7,8 @@ required_files = [
     ".gitignore",
     ".github/workflows/ci.yml",
     "SPRINT-13-CHAMBERY-VALIDATION.md",
+    "SPRINT-15-NOTAM-GENERATOR-OPTIONS.md",
+    "generator/options.json",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
     "tests/test_annecy_airac08.py",
@@ -48,6 +50,12 @@ for relative in required_files:
 
 gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
 assert "research/annecy-alpes-leman-v0.2/generated/" in gitignore
+
+options = json.loads((ROOT / "generator/options.json").read_text(encoding="utf-8"))
+assert options["status"] == "architecture_ready_not_yet_wired_to_public_ui"
+assert options["options"]["include_aviation"]["affects_csv_content"] is True
+assert options["options"]["notam_check"]["affects_csv_content"] is False
+assert options["options"]["notam_check"]["blocks_generation"] is False
 
 astro_config = (ROOT / "website/astro.config.mjs").read_text(encoding="utf-8")
 assert 'site: "https://radiopack.b2tech.studio"' in astro_config
@@ -161,4 +169,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 13: OK")
+print("Tests RadioPack Sprint 15: OK")

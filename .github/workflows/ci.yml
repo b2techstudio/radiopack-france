@@ -49,6 +49,9 @@ jobs:
       - name: Test Annecy Alps Leman internal candidate
         run: python tests/test_annecy_internal_candidate.py
 
+      - name: Test Annecy Alps Leman release readiness
+        run: python tests/test_annecy_release_readiness.py
+
   website:
     name: Astro production build
     runs-on: ubuntu-latest

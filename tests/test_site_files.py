@@ -8,11 +8,13 @@ required_files = [
     ".github/workflows/ci.yml",
     "SPRINT-13-CHAMBERY-VALIDATION.md",
     "SPRINT-15-NOTAM-GENERATOR-OPTIONS.md",
+    "SPRINT-16-PREPUBLICATION-READINESS.md",
     "generator/options.json",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
     "tests/test_annecy_airac08.py",
     "tests/test_annecy_internal_candidate.py",
+    "tests/test_annecy_release_readiness.py",
     "research/annecy-alpes-leman-v0.2/radioamateur-france-inventory.json",
     "research/annecy-alpes-leman-v0.2/radioamateur-switzerland-candidates.json",
     "research/annecy-alpes-leman-v0.2/aviation-france-pre-airac-08.json",
@@ -22,7 +24,9 @@ required_files = [
     "research/annecy-alpes-leman-v0.2/navigation-lakes-findings.json",
     "research/annecy-alpes-leman-v0.2/satellites-fm-inventory.json",
     "research/annecy-alpes-leman-v0.2/memory-plan.json",
+    "research/annecy-alpes-leman-v0.2/prepublication-plan.json",
     "tools/build_annecy_internal_candidate.py",
+    "tools/check_annecy_release_readiness.py",
     "research/annecy-alpes-leman-v0.2/source-register.csv",
     "research/annecy-alpes-leman-v0.2/conflicts.csv",
     "website/astro.config.mjs",
@@ -56,6 +60,17 @@ assert options["status"] == "architecture_ready_not_yet_wired_to_public_ui"
 assert options["options"]["include_aviation"]["affects_csv_content"] is True
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 assert options["options"]["notam_check"]["blocks_generation"] is False
+
+prepublication = json.loads(
+    (ROOT / "research/annecy-alpes-leman-v0.2/prepublication-plan.json").read_text(encoding="utf-8")
+)
+assert prepublication["status"] == "blocked_dynamic_satellite_recheck"
+assert prepublication["candidate_memory_count"] == 65
+assert prepublication["public_file_created"] is False
+assert prepublication["public_export_allowed"] is False
+assert prepublication["blocking_gates"] == ["dynamic_satellites"]
+assert set(prepublication["advisory_checks"]) == {"notam_fr", "notam_ch"}
+assert not (ROOT / prepublication["reserved_public_output"]).exists()
 
 astro_config = (ROOT / "website/astro.config.mjs").read_text(encoding="utf-8")
 assert 'site: "https://radiopack.b2tech.studio"' in astro_config
@@ -117,6 +132,7 @@ for expected in [
     "python tests/test_annecy_aviation_lakes.py",
     "python tests/test_annecy_airac08.py",
     "python tests/test_annecy_internal_candidate.py",
+    "python tests/test_annecy_release_readiness.py",
     "npm run build",
     "statuses: write",
     "report-status:",
@@ -169,4 +185,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 15: OK")
+print("Tests RadioPack Sprint 16: OK")

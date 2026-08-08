@@ -7,28 +7,18 @@
     "accent": "purple",
     "description": "Pack de 139 mémoires RX : PMR446, marine, aviation, APRS/ISS, appels et relais analogiques vérifiés.",
     "memoryCount": 139,
-    "categories": [
-      "PMR446 RX",
-      "VHF marine RX",
-      "Radioamateur RX",
-      "Aviation RX"
-    ],
+    "categories": ["PMR446 RX", "VHF marine RX", "Radioamateur RX", "Aviation RX"],
     "available": true
   },
   {
     "slug": "annecy-haute-savoie",
     "name": "Annecy–Alpes–Léman",
     "shortName": "Annecy–Alpes–Léman",
-    "status": "En préparation",
+    "status": "v0.2 disponible",
     "accent": "cyan",
-    "description": "Reconstruction complète du pack alpin et lémanique v0.2. L'aperçu historique v0.1 n'est plus présenté comme un pack régional disponible.",
-    "memoryCount": 0,
-    "categories": [
-      "France & Suisse",
-      "Radioamateur analogique",
-      "Aviation",
-      "Lacs / navigation vérifiés"
-    ],
-    "available": false
+    "description": "Pack RX de 65 mémoires pour les Alpes du Nord et le bassin lémanique, avec variante 48 mémoires sans aviation.",
+    "memoryCount": 65,
+    "categories": ["France & Suisse", "Radioamateur analogique", "Aviation RX", "APRS / ISS / satellites"],
+    "available": true
   }
 ]

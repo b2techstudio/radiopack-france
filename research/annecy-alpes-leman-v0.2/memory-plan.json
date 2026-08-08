@@ -24,8 +24,9 @@
     "Ce plan est une capacité de travail et non une promesse de remplissage.",
     "Le bloc aviation France intègre onze lignes recoupées sur des sources publiques officielles, dont quatre fréquences Chambéry confirmées dans l'AD 2.18 du SIA.",
     "Le bloc aviation Suisse intègre deux fréquences Lausanne et quatre fréquences ATS/ATIS Sion recoupées publiquement.",
-    "Albertville, Megève et Genève-aéroport restent hors candidat en attente d'une extraction primaire suffisamment précise.",
-    "Sallanches-Mont-Blanc est exclu: l'aérodrome est officiellement fermé à toute circulation aérienne depuis le 1er septembre 2020.",
+    "Albertville LFKA, Megève LFHM et Genève LSGG sont volontairement omis de la v0.2 faute de tableau radio primaire courant extractible de façon fiable; aucune fréquence secondaire n'est utilisée.",
+    "Sallanches-Mont-Blanc LFHZ est exclu: l'aérodrome est officiellement fermé à toute circulation aérienne depuis le 1er septembre 2020.",
+    "Le périmètre aviation de recherche est désormais clos pour la v0.2; le candidat reste à 65 mémoires sans remplissage artificiel.",
     "Le bloc lacustre reste vide en l'absence de fréquence publique générale validée.",
     "Les blocs France et Suisse restent distincts.",
     "Tous les exports, y compris internes, utilisent Duplex=off."

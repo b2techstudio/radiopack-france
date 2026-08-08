@@ -1,0 +1,31 @@
+{
+  "pack": "Annecy–Alpes–Léman",
+  "target_version": "0.2.0",
+  "updated": "2026-08-08",
+  "status": "blocked_dynamic_satellite_recheck",
+  "candidate_memory_count": 65,
+  "public_file_created": false,
+  "public_export_allowed": false,
+  "source_candidate": "research/annecy-alpes-leman-v0.2/generated/annecy-alpes-leman-v0.2-internal.csv",
+  "reserved_public_output": "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
+  "blocking_gates": [
+    "dynamic_satellites"
+  ],
+  "advisory_checks": [
+    "notam_fr",
+    "notam_ch"
+  ],
+  "generator_options": {
+    "include_aviation_default": true,
+    "notam_check_default": "disabled",
+    "notam_check_blocks_generation": false
+  },
+  "rules": [
+    "Aucun fichier Annecy–Alpes–Léman v0.2 n'est créé sous website/public tant qu'une porte bloquante reste ouverte.",
+    "Les contrôles NOTAM France et Suisse sont facultatifs et non bloquants pour un pack d'écoute RX.",
+    "Le contrôle NOTAM ne modifie jamais automatiquement les fréquences AIP/AIRAC du CSV.",
+    "Le recontrôle dynamique des satellites FM reste obligatoire avant la prépublication publique.",
+    "Toutes les mémoires publiques restent en réception seule avec Duplex=off.",
+    "Le pack ne constitue pas une source de préparation ou de conduite d'un vol."
+  ]
+}

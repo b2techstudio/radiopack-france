@@ -55,6 +55,18 @@ BLOCKS = [
         "start": 90,
         "selector": "switzerland_verified",
     },
+    {
+        "label": "Aviation France et bassin genevois",
+        "path": RESEARCH / "aviation-france-airac-08.json",
+        "start": 125,
+        "selector": "aviation_france_verified",
+    },
+    {
+        "label": "Aviation Suisse",
+        "path": RESEARCH / "aviation-switzerland-airac-08.json",
+        "start": 155,
+        "selector": "aviation_switzerland_verified",
+    },
 ]
 
 SATELLITE_ALLOWED = {
@@ -64,6 +76,8 @@ SATELLITE_ALLOWED = {
 }
 FRANCE_ALLOWED = {"verified", "verified_merged"}
 SWITZERLAND_ALLOWED = {"verified_current"}
+AVIATION_FRANCE_ALLOWED = {"verified_airac08_public"}
+AVIATION_SWITZERLAND_ALLOWED = {"verified_current_public"}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -76,27 +90,30 @@ def select_channels(dataset: dict[str, Any], selector: str) -> list[dict[str, An
     if selector == "all":
         return [dict(channel) for channel in channels]
     if selector == "satellites":
-        return [
-            dict(channel)
-            for channel in channels
-            if channel.get("verification") in SATELLITE_ALLOWED
-        ]
-    if selector == "france_verified":
-        return [
-            dict(channel)
-            for channel in channels
-            if channel.get("verification") in FRANCE_ALLOWED
-        ]
-    if selector == "switzerland_verified":
-        return [
-            dict(channel)
-            for channel in channels
-            if channel.get("verification") in SWITZERLAND_ALLOWED
-        ]
-    raise ValueError(f"Sélecteur inconnu: {selector}")
+        allowed = SATELLITE_ALLOWED
+    elif selector == "france_verified":
+        allowed = FRANCE_ALLOWED
+    elif selector == "switzerland_verified":
+        allowed = SWITZERLAND_ALLOWED
+    elif selector == "aviation_france_verified":
+        allowed = AVIATION_FRANCE_ALLOWED
+    elif selector == "aviation_switzerland_verified":
+        allowed = AVIATION_SWITZERLAND_ALLOWED
+    else:
+        raise ValueError(f"Sélecteur inconnu: {selector}")
+
+    return [
+        dict(channel)
+        for channel in channels
+        if channel.get("verification") in allowed
+    ]
 
 
-def normalize_channel(channel: dict[str, Any], source_path: Path, label: str) -> dict[str, Any]:
+def normalize_channel(
+    channel: dict[str, Any],
+    source_path: Path,
+    label: str,
+) -> dict[str, Any]:
     normalized = dict(channel)
     normalized["tx_policy"] = "rx_only"
     normalized["source_dataset"] = source_path.as_posix()
@@ -145,7 +162,11 @@ def build_candidate(root: Path) -> dict[str, Any]:
         channels = select_channels(dataset, block["selector"])
         for index, source_channel in enumerate(channels):
             location = int(block["start"]) + index
-            channel = normalize_channel(source_channel, block["path"], block["label"])
+            channel = normalize_channel(
+                source_channel,
+                block["path"],
+                block["label"],
+            )
             placed.append({"location": location, "channel": channel})
 
     locations = [item["location"] for item in placed]
@@ -171,20 +192,35 @@ def build_candidate(root: Path) -> dict[str, Any]:
     if forbidden_sources.intersection(
         {item["channel"]["source_dataset"] for item in placed}
     ):
-        raise ValueError("Une source aviation ou lacustre a été intégrée avant validation")
+        raise ValueError("Une source gelée ou lacustre a été intégrée")
+
+    forbidden_verifications = {
+        "pre_airac_recheck",
+        "pending_recheck",
+        "pending_airac08_public_table_extraction",
+        "pending_current_public_frequency_extraction",
+        "current_use_needs_owner_crosscheck",
+    }
+    for item in placed:
+        verification = item["channel"].get("verification")
+        if verification in forbidden_verifications:
+            raise ValueError(
+                f"Statut non validé assemblé: {item['channel']['name']} ({verification})"
+            )
 
     return {
         "pack": "Annecy–Alpes–Léman",
         "target_version": "0.2.0",
         "status": "internal_candidate_not_for_publication",
         "public_export_allowed": False,
-        "updated": "2026-08-04",
+        "updated": "2026-08-08",
         "memory_count": len(placed),
         "rules": [
             "Ce candidat est stocké hors du répertoire public du site.",
-            "Aucune ligne aviation pre_airac_recheck n'est intégrée.",
+            "Le pré-inventaire aviation AIRAC 07/26 reste interdit.",
+            "Seules les lignes aviation explicitement vérifiées sont intégrées.",
             "Aucune fréquence lacustre n'est intégrée.",
-            "Seules les lignes suisses verified_current sont intégrées.",
+            "Seules les lignes radioamateur suisses verified_current sont intégrées.",
             "Toutes les mémoires sont en réception seule avec Duplex=off.",
             "Les montantes ISS et satellites restent des métadonnées, jamais des mémoires séparées.",
         ],
@@ -192,7 +228,11 @@ def build_candidate(root: Path) -> dict[str, Any]:
     }
 
 
-def write_candidate(candidate: dict[str, Any], json_path: Path, csv_path: Path) -> None:
+def write_candidate(
+    candidate: dict[str, Any],
+    json_path: Path,
+    csv_path: Path,
+) -> None:
     json_path.parent.mkdir(parents=True, exist_ok=True)
     json_path.write_text(
         json.dumps(candidate, ensure_ascii=False, indent=2) + "\n",
@@ -202,13 +242,22 @@ def write_candidate(candidate: dict[str, Any], json_path: Path, csv_path: Path) 
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=CHIRP_COLUMNS)
         writer.writeheader()
-        for item in sorted(candidate["memories"], key=lambda row: row["location"]):
-            writer.writerow(chirp_row(item["location"], item["channel"]))
+        for item in sorted(
+            candidate["memories"],
+            key=lambda row: row["location"],
+        ):
+            writer.writerow(
+                chirp_row(item["location"], item["channel"])
+            )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=ROOT,
+    )
     parser.add_argument(
         "--output-dir",
         type=Path,

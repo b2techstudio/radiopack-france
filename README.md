@@ -144,6 +144,10 @@ Le site Astro est prévu pour Cloudflare Pages. Les changements sur `main` décl
 
 Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint afin de refléter l'état réel du dépôt, les fonctions disponibles, les commandes utiles et les prochaines portes de publication.
 
+La CI vérifie désormais la présence des informations correspondant au sprint courant dans le README. Lors d'un nouveau sprint, ce contrôle doit être mis à jour en même temps que le README.
+
+Les caches Python (`__pycache__/` et `*.py[cod]`) sont ignorés par Git afin de garder le dépôt local propre après l'exécution des scripts et des tests.
+
 Le détail historique des évolutions reste conservé dans [CHANGELOG.md](CHANGELOG.md).
 
 ## Sécurité et usage

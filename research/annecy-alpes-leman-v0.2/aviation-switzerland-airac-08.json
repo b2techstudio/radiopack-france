@@ -1,0 +1,79 @@
+{
+  "dataset": "Annecy–Alpes–Léman v0.2 - aviation Suisse vérifiée publiquement",
+  "version": "0.2.0-research.1",
+  "updated": "2026-08-08",
+  "production_ready": false,
+  "internal_candidate_allowed": true,
+  "default_export_policy": "rx_only",
+  "cycle": {
+    "aip_airac_amdt_effective": "2026-08-06",
+    "source": "Skyguide/Skybriefing",
+    "verification_scope": "publicly accessible sources only"
+  },
+  "rules": [
+    "Seules les fréquences confirmées sur une source officielle ou sur le site officiel de l'exploitant sont assemblées.",
+    "Genève et Sion restent en attente lorsque le détail fréquentiel du cycle courant n'est pas publiquement recoupable.",
+    "Genève Information 126.350 MHz est déjà mémorisée une seule fois dans le bloc France/bassin genevois afin d'éviter un doublon.",
+    "Toutes les mémoires sont en réception seule avec Duplex=off."
+  ],
+  "sources": [
+    {
+      "id": "SKY-AIRAC-0826",
+      "title": "Skyguide/Skybriefing - AIP AIRAC AMDT 06 AUG 2026",
+      "url": "https://www.skybriefing.com/",
+      "effective": "2026-08-06",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "LSGL-OFFICIAL",
+      "title": "Aéroport de Lausanne - Fréquences pilotes",
+      "url": "https://flight.lausanne-airport.ch/pilotes/frequences.html",
+      "accessed": "2026-08-08"
+    }
+  ],
+  "channels": [
+    {
+      "name": "CH-LSGLAD",
+      "frequency_mhz": 123.205,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "country": "CH",
+      "canton": "Vaud",
+      "area": "Lausanne-La Blécherette",
+      "icao": "LSGL",
+      "services": ["AD"],
+      "verification": "verified_current_public",
+      "source_ids": ["SKY-AIRAC-0826", "LSGL-OFFICIAL"],
+      "comment": "Lausanne LSGL AD 123.205 - source exploitant - RX seule"
+    },
+    {
+      "name": "CH-LSGLAP",
+      "frequency_mhz": 118.83,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "country": "CH",
+      "canton": "Vaud",
+      "area": "Lausanne-La Blécherette",
+      "icao": "LSGL",
+      "services": ["APCH INFO"],
+      "verification": "verified_current_public",
+      "source_ids": ["SKY-AIRAC-0826", "LSGL-OFFICIAL"],
+      "comment": "Lausanne APCH INFO 118.830 - source exploitant - RX seule"
+    }
+  ],
+  "pending": [
+    {
+      "area": "Genève",
+      "icao": "LSGG",
+      "status": "pending_current_public_frequency_extraction",
+      "note": "Genève Information 126.350 est déjà couverte par le bloc transfrontalier."
+    },
+    {
+      "area": "Sion",
+      "icao": "LSGS",
+      "status": "pending_current_public_frequency_extraction"
+    }
+  ]
+}

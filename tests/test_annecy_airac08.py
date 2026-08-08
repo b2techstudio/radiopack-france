@@ -122,10 +122,13 @@ assert gates["dynamic_satellites"]["checked"] == "2026-08-08"
 for required_gate in ["airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"]:
     assert gates[required_gate]["required_for_public_release"] is True
 
-assert generator_options["status"] == "backend_wired_prepublication_not_public_ui"
-assert generator_options["implementation"]["annecy_prepublication_builder"] == "tools/build_annecy_prepublication.py"
-assert generator_options["implementation"]["public_ui_wired"] is False
-assert generator_options["implementation"]["public_download_created"] is False
+assert generator_options["status"] == "public_generator_wired_v0.2_published"
+implementation = generator_options["implementation"]
+assert implementation["annecy_prepublication_builder"] == "tools/build_annecy_prepublication.py"
+assert implementation["public_pack_library"] == "website/src/lib/annecyPack.ts"
+assert implementation["public_ui_wired"] is True
+assert implementation["public_ui_download_locked"] is False
+assert implementation["public_download_created"] is True
 include_aviation = generator_options["options"]["include_aviation"]
 notam = generator_options["options"]["notam_check"]
 assert include_aviation["type"] == "boolean"
@@ -139,5 +142,6 @@ assert notam["blocks_generation"] is False
 assert notam["states"] == ["disabled", "requested_unconfirmed", "user_confirmed"]
 assert notam["future_state_reserved"] == "automatic_verified"
 assert generator_options["ui_contract"]["generation_allowed_when_unconfirmed"] is True
+assert generator_options["ui_contract"]["download_enabled"] is True
 
-print("Tests Annecy–Alpes–Léman AIRAC 08 aviation: OK")
+print("Tests Annecy–Alpes–Léman AIRAC 08 aviation + published generator: OK")

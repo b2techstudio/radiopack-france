@@ -13,6 +13,7 @@ required_files = [
     "SPRINT-17-SATELLITE-RECHECK.md",
     "SPRINT-18-PREPUBLICATION-GENERATOR.md",
     "SPRINT-19-PREPUBLICATION-REVIEW.md",
+    "SPRINT-20-WEB-GENERATOR.md",
     "generator/options.json",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
@@ -21,6 +22,7 @@ required_files = [
     "tests/test_annecy_release_readiness.py",
     "tests/test_annecy_prepublication.py",
     "tests/test_annecy_prepublication_review.py",
+    "tests/test_web_generator.py",
     "research/annecy-alpes-leman-v0.2/radioamateur-france-inventory.json",
     "research/annecy-alpes-leman-v0.2/radioamateur-switzerland-candidates.json",
     "research/annecy-alpes-leman-v0.2/aviation-france-pre-airac-08.json",
@@ -45,6 +47,7 @@ required_files = [
     "website/src/data/regions.json",
     "website/src/pages/index.astro",
     "website/src/pages/404.astro",
+    "website/src/pages/generateur.astro",
     "website/src/pages/telechargements.astro",
     "website/src/pages/versions.astro",
     "website/src/pages/regions/annecy-haute-savoie.astro",
@@ -62,13 +65,15 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 19",
+    "État actuel — Sprint 20",
     "65/65 mémoires",
     "48 mémoires sans aviation",
     "Contrôle NOTAM France/Suisse : **facultatif et non bloquant**",
     "prepublication-reviewed-memory-map.json",
     "prepublication_reviewed_not_public",
-    "prépublication reste hors de `website/public`",
+    "aperçu web du générateur",
+    "`/generateur`",
+    "téléchargement Annecy v0.2 reste verrouillé",
     "## Maintenance du projet",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
@@ -81,9 +86,15 @@ assert "*.py[cod]" in gitignore
 
 options = json.loads((ROOT / "generator/options.json").read_text(encoding="utf-8"))
 assert options["status"] == "backend_wired_prepublication_not_public_ui"
-assert options["implementation"]["annecy_prepublication_builder"] == "tools/build_annecy_prepublication.py"
-assert options["implementation"]["public_ui_wired"] is False
-assert options["implementation"]["public_download_created"] is False
+implementation = options["implementation"]
+assert implementation["annecy_prepublication_builder"] == "tools/build_annecy_prepublication.py"
+assert implementation["public_ui_wired"] is False
+assert implementation["public_ui_preview_wired"] is True
+assert implementation["public_ui_preview_route"] == "/generateur"
+assert implementation["public_ui_download_locked"] is True
+assert implementation["public_download_created"] is False
+assert options["ui_contract"]["preview_mode"] is True
+assert options["ui_contract"]["download_enabled"] is False
 assert options["options"]["include_aviation"]["affects_csv_content"] is True
 assert options["options"]["include_aviation"]["annecy_memory_count_when_enabled"] == 65
 assert options["options"]["include_aviation"]["annecy_memory_count_when_disabled"] == 48
@@ -141,7 +152,8 @@ for expected in [
     assert expected in layout, f"Balise production absente: {expected}"
 
 header = (ROOT / "website/src/components/Header.astro").read_text(encoding="utf-8")
-assert 'href="/telechargements">Télécharger</a>' in header
+assert '["/generateur", "Générateur"]' in header
+assert 'href="/generateur">Générateur</a>' in header
 assert 'class="mobile-menu"' in header
 
 footer = (ROOT / "website/src/components/Footer.astro").read_text(encoding="utf-8")
@@ -156,6 +168,7 @@ sitemap = (ROOT / "website/src/pages/sitemap.xml.ts").read_text(encoding="utf-8"
 for route in [
     "/regions/normandie",
     "/regions/annecy-haute-savoie",
+    "/generateur",
     "/telechargements",
     "/versions",
 ]:
@@ -188,6 +201,7 @@ for expected in [
     "python tests/test_annecy_release_readiness.py",
     "python tests/test_annecy_prepublication.py",
     "python tests/test_annecy_prepublication_review.py",
+    "python tests/test_web_generator.py",
     "npm run build",
     "statuses: write",
     "report-status:",
@@ -210,6 +224,7 @@ assert "Suivre la préparation" in region_card
 
 public_pages = [
     "website/src/pages/index.astro",
+    "website/src/pages/generateur.astro",
     "website/src/pages/telechargements.astro",
     "website/src/pages/versions.astro",
     "website/src/pages/regions/annecy-haute-savoie.astro",
@@ -230,6 +245,13 @@ home = (ROOT / "website/src/pages/index.astro").read_text(encoding="utf-8")
 assert "1</strong><span>pack régional disponible" in home
 assert "Annecy–Alpes–Léman" in home
 
+generator_page = (ROOT / "website/src/pages/generateur.astro").read_text(encoding="utf-8")
+assert "Génération CSV Annecy bientôt disponible" in generator_page
+assert 'type="button" disabled' in generator_page
+assert 'id="include-aviation"' in generator_page
+assert 'id="notam-check"' in generator_page
+assert 'id="notam-confirmed"' in generator_page
+
 downloads = (ROOT / "website/src/pages/telechargements.astro").read_text(encoding="utf-8")
 assert "Un pack régional complet est actuellement disponible" in downloads
 assert "Future v0.2" in downloads
@@ -243,4 +265,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 19 + reviewed prepublication guards: OK")
+print("Tests RadioPack Sprint 20 + web generator preview guards: OK")

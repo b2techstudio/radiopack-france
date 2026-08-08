@@ -1,6 +1,6 @@
 {
   "dataset": "Annecy–Alpes–Léman v0.2 - aviation France revalidée AIRAC 08/26",
-  "version": "0.2.0-research.5",
+  "version": "0.2.0-research.6",
   "updated": "2026-08-08",
   "production_ready": false,
   "internal_candidate_allowed": true,
@@ -14,7 +14,8 @@
   "rules": [
     "Ce fichier ne contient que les fréquences aéronautiques recoupées sur des sources officielles publiques accessibles au 8 août 2026.",
     "Une page AIP dont la date d'effet est antérieure au 6 août reste utilisable lorsqu'elle demeure la dernière page effective publiée pour le service dans le cycle courant.",
-    "Les lignes dont le détail AIRAC 08/26 n'a pas pu être extrait publiquement restent en pending et ne sont pas assemblées.",
+    "Une fréquence trouvée uniquement sur une source secondaire n'est jamais promue dans le candidat.",
+    "Un aérodrome dont la VAC primaire est identifiée mais dont le bloc radio n'est pas extractible de façon fiable peut être explicitement exclu du périmètre v0.2 au lieu de bloquer indéfiniment la publication.",
     "Un aérodrome officiellement fermé à toute circulation aérienne est classé excluded et ne doit plus être recherché comme fréquence active.",
     "Toutes les mémoires sont en réception seule avec Duplex=off."
   ],
@@ -56,6 +57,20 @@
       "accessed": "2026-08-08"
     },
     {
+      "id": "SIA-LFKA-VAC-CATALOG",
+      "title": "SIA Atlas VAC - AD-2.LFKA.pdf Albertville",
+      "url": "https://www.sia.aviation-civile.gouv.fr/catalogsearch/result/index/q/ADM/?format=pdf&page=2&q=ADM",
+      "accessed": "2026-08-08",
+      "note": "VAC primaire identifiée dans le catalogue; bloc radio non extractible de façon fiable dans ce workflow."
+    },
+    {
+      "id": "SIA-LFHM-VAC-CATALOG",
+      "title": "SIA Atlas VAC - AD-2.LFHM.pdf Megève",
+      "url": "https://www.sia.aviation-civile.gouv.fr/catalogsearch/result/index/q/0/?page=32&q=0&reg_category=48",
+      "accessed": "2026-08-08",
+      "note": "VAC primaire identifiée dans le catalogue; bloc radio non extractible de façon fiable dans ce workflow."
+    },
+    {
       "id": "FOCA-GENEVA-INFO",
       "title": "OFAC/FOCA - emploi de la fréquence de montagne",
       "url": "https://www.bazl.admin.ch/fr/foca-sand-2013-003-fr",
@@ -70,154 +85,34 @@
     }
   ],
   "channels": [
-    {
-      "name": "ANNCY-TWR",
-      "frequency_mhz": 118.2,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Annecy-Meythet",
-      "services": ["TWR", "AFIS", "A/A"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLP-CURRENT"],
-      "comment": "Annecy 118.200 - TWR, AFIS ou A/A selon horaires - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "ANNMS-A-A",
-      "frequency_mhz": 125.875,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Annemasse",
-      "services": ["A/A"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-ENR55-CURRENT"],
-      "comment": "Annemasse A/A 125.875 - information usagers - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "CHAM-INFO",
-      "frequency_mhz": 123.7,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Chambéry Aix-les-Bains",
-      "services": ["FIS", "APP", "A/A"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLB-CURRENT"],
-      "comment": "Chambéry 123.700 - FIS, APP ou A/A selon horaires - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "CHAM-APP",
-      "frequency_mhz": 121.205,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Chambéry Aix-les-Bains",
-      "services": ["APP"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLB-CURRENT"],
-      "comment": "Chambéry Approche 121.205 - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "CHAM-TWR",
-      "frequency_mhz": 118.3,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Chambéry Aix-les-Bains",
-      "services": ["TWR"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLB-CURRENT"],
-      "comment": "Chambéry Tour 118.300 - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "CHAM-ATIS",
-      "frequency_mhz": 127.1,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Chambéry Aix-les-Bains",
-      "services": ["ATIS"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLB-CURRENT"],
-      "comment": "Chambéry ATIS 127.100 - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "VERSD-A-A",
-      "frequency_mhz": 121.0,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Grenoble Le Versoud",
-      "services": ["TWR", "A/A"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-ENR55-CURRENT"],
-      "comment": "Le Versoud 121.000 - TWR ou A/A selon horaires - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "GREN-GND",
-      "frequency_mhz": 121.93,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Grenoble Alpes Isère",
-      "services": ["GND"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLS-CURRENT"],
-      "comment": "Grenoble Sol 121.930 - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "GREN-TWR",
-      "frequency_mhz": 119.3,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Grenoble Alpes Isère",
-      "services": ["TWR", "VDF"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLS-CURRENT"],
-      "comment": "Grenoble Tour/Gonio 119.300 - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "GREN-ATIS",
-      "frequency_mhz": 133.855,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Grenoble Alpes Isère",
-      "services": ["ATIS"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-LFLS-CURRENT"],
-      "comment": "Grenoble ATIS 133.855 - AIRAC 08/26 - RX seule"
-    },
-    {
-      "name": "GENEV-INFO",
-      "frequency_mhz": 126.35,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "area": "Alpes du Nord / bassin genevois",
-      "services": ["FIS"],
-      "verification": "verified_airac08_public",
-      "source_ids": ["SIA-XML-0826", "SIA-ENR55-CURRENT", "FOCA-GENEVA-INFO"],
-      "comment": "Genève Information 126.350 - bassin franco-suisse - AIRAC 08/26 - RX seule"
-    }
+    {"name":"ANNCY-TWR","frequency_mhz":118.2,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Annecy-Meythet","services":["TWR","AFIS","A/A"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLP-CURRENT"],"comment":"Annecy 118.200 - TWR, AFIS ou A/A selon horaires - AIRAC 08/26 - RX seule"},
+    {"name":"ANNMS-A-A","frequency_mhz":125.875,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Annemasse","services":["A/A"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-ENR55-CURRENT"],"comment":"Annemasse A/A 125.875 - information usagers - AIRAC 08/26 - RX seule"},
+    {"name":"CHAM-INFO","frequency_mhz":123.7,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Chambéry Aix-les-Bains","services":["FIS","APP","A/A"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLB-CURRENT"],"comment":"Chambéry 123.700 - FIS, APP ou A/A selon horaires - AIRAC 08/26 - RX seule"},
+    {"name":"CHAM-APP","frequency_mhz":121.205,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Chambéry Aix-les-Bains","services":["APP"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLB-CURRENT"],"comment":"Chambéry Approche 121.205 - AIRAC 08/26 - RX seule"},
+    {"name":"CHAM-TWR","frequency_mhz":118.3,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Chambéry Aix-les-Bains","services":["TWR"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLB-CURRENT"],"comment":"Chambéry Tour 118.300 - AIRAC 08/26 - RX seule"},
+    {"name":"CHAM-ATIS","frequency_mhz":127.1,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Chambéry Aix-les-Bains","services":["ATIS"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLB-CURRENT"],"comment":"Chambéry ATIS 127.100 - AIRAC 08/26 - RX seule"},
+    {"name":"VERSD-A-A","frequency_mhz":121.0,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Grenoble Le Versoud","services":["TWR","A/A"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-ENR55-CURRENT"],"comment":"Le Versoud 121.000 - TWR ou A/A selon horaires - AIRAC 08/26 - RX seule"},
+    {"name":"GREN-GND","frequency_mhz":121.93,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Grenoble Alpes Isère","services":["GND"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLS-CURRENT"],"comment":"Grenoble Sol 121.930 - AIRAC 08/26 - RX seule"},
+    {"name":"GREN-TWR","frequency_mhz":119.3,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Grenoble Alpes Isère","services":["TWR","VDF"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLS-CURRENT"],"comment":"Grenoble Tour/Gonio 119.300 - AIRAC 08/26 - RX seule"},
+    {"name":"GREN-ATIS","frequency_mhz":133.855,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Grenoble Alpes Isère","services":["ATIS"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-LFLS-CURRENT"],"comment":"Grenoble ATIS 133.855 - AIRAC 08/26 - RX seule"},
+    {"name":"GENEV-INFO","frequency_mhz":126.35,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Alpes du Nord / bassin genevois","services":["FIS"],"verification":"verified_airac08_public","source_ids":["SIA-XML-0826","SIA-ENR55-CURRENT","FOCA-GENEVA-INFO"],"comment":"Genève Information 126.350 - bassin franco-suisse - AIRAC 08/26 - RX seule"}
   ],
-  "pending": [
+  "pending": [],
+  "excluded": [
     {
       "name": "Albertville",
       "icao": "LFKA",
-      "status": "pending_primary_vac_frequency_extraction",
-      "reason": "La VAC courante est identifiée dans le catalogue SIA mais son bloc radio primaire n'a pas pu être extrait dans ce workflow; aucune fréquence secondaire n'est promue."
+      "status": "excluded_scope_unverified_primary",
+      "source_ids": ["SIA-LFKA-VAC-CATALOG"],
+      "reason": "VAC primaire courante identifiée, mais bloc radio non extractible de façon fiable dans ce workflow; les fréquences secondaires repérées ne sont pas utilisées dans la v0.2."
     },
     {
       "name": "Megève",
       "icao": "LFHM",
-      "status": "pending_primary_vac_frequency_extraction",
-      "reason": "La VAC courante est identifiée dans le catalogue SIA mais son bloc radio primaire n'a pas pu être extrait dans ce workflow; aucune fréquence secondaire n'est promue."
-    }
-  ],
-  "excluded": [
+      "status": "excluded_scope_unverified_primary",
+      "source_ids": ["SIA-LFHM-VAC-CATALOG"],
+      "reason": "VAC primaire courante identifiée, mais bloc radio non extractible de façon fiable dans ce workflow; les fréquences secondaires repérées ne sont pas utilisées dans la v0.2."
+    },
     {
       "name": "Sallanches-Mont-Blanc",
       "icao": "LFHZ",

@@ -1,10 +1,22 @@
 {
   "dataset": "Annecy–Alpes–Léman v0.2 - satellites FM analogiques utiles",
-  "version": "0.2.0-research.1",
-  "updated": "2026-08-04",
+  "version": "0.2.0-research.2",
+  "updated": "2026-08-08",
   "production_ready": false,
   "internal_candidate_allowed": true,
   "default_export_policy": "rx_only",
+  "release_recheck": {
+    "checked": "2026-08-08",
+    "status": "passed_official_amsat_recheck",
+    "basis": [
+      "AMSAT-LIVE-FM-2026-07-10",
+      "AMSAT-SO50",
+      "AMSAT-AO91",
+      "AMSAT-STATUS-API-2026-08-08"
+    ],
+    "result": "SO-50, AO-91 et AO-123 restent cohérents avec les fréquences et limites enregistrées dans le candidat v0.2.",
+    "ao91_limit_confirmed": "sunlight_only_due_to_battery"
+  },
   "rules": [
     "frequency_mhz désigne toujours la liaison descendante mémorisée pour l'écoute.",
     "Les liaisons montantes sont documentées dans link mais ne sont jamais exportées comme mémoires séparées.",
@@ -17,26 +29,33 @@
       "title": "AMSAT - Live FM Satellites",
       "url": "https://www.amsat.org/live-fm-satellites/",
       "source_updated": "2026-07-10",
-      "accessed": "2026-08-04"
+      "accessed": "2026-08-08"
     },
     {
       "id": "AMSAT-SO50",
       "title": "AMSAT - SO-50 satellite information",
       "url": "https://www.amsat.org/two-way-satellites/so-50-satellite-information/",
-      "accessed": "2026-08-04"
+      "accessed": "2026-08-08"
     },
     {
       "id": "AMSAT-AO91",
       "title": "AMSAT - AO-91 Fox-1B",
       "url": "https://www.amsat.org/two-way-satellites/ao-91/",
       "source_updated": "2025-04-27",
-      "accessed": "2026-08-04"
+      "accessed": "2026-08-08"
     },
     {
       "id": "AMSAT-STATUS",
       "title": "AMSAT - Live OSCAR Satellite Status",
       "url": "https://www.amsat.org/status/",
-      "accessed": "2026-08-04"
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "AMSAT-STATUS-API-2026-08-08",
+      "title": "AMSAT - Satellite Status API",
+      "url": "https://www.amsat.org/status/api/",
+      "accessed": "2026-08-08",
+      "note": "API officielle identifiée pour de futurs contrôles automatisables ; le Sprint 17 conserve une validation fondée sur les publications AMSAT officielles."
     }
   ],
   "channels": [

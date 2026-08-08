@@ -14,7 +14,7 @@ AVIATION_SWITZERLAND = RESEARCH / "aviation-switzerland-airac-08.json"
 PLAN = RESEARCH / "memory-plan.json"
 
 for path in [BUILDER, SATELLITES, AVIATION_FRANCE, AVIATION_SWITZERLAND, PLAN]:
-    assert path.is_file(), f"Fichier Sprint 11 manquant: {path.relative_to(ROOT)}"
+    assert path.is_file(), f"Fichier Sprint 12 manquant: {path.relative_to(ROOT)}"
 
 satellites = json.loads(SATELLITES.read_text(encoding="utf-8"))
 assert satellites["production_ready"] is False
@@ -33,7 +33,7 @@ assert sat_by_name["SAT-AO123"]["link"]["downlink_frequency_mhz"] == 435.4
 
 plan = json.loads(PLAN.read_text(encoding="utf-8"))
 assert plan["public_export_allowed"] is False
-assert plan["internal_candidate"]["expected_memory_count"] == 57
+assert plan["internal_candidate"]["expected_memory_count"] == 61
 
 blocks = plan["blocks"]
 for index, block in enumerate(blocks):
@@ -63,8 +63,8 @@ with tempfile.TemporaryDirectory() as tmp:
 
 assert candidate["status"] == "internal_candidate_not_for_publication"
 assert candidate["public_export_allowed"] is False
-assert candidate["memory_count"] == 57
-assert len(rows) == 57
+assert candidate["memory_count"] == 61
+assert len(rows) == 61
 assert all(row["Duplex"] == "off" for row in rows)
 
 by_location = {int(row["Location"]): row for row in rows}
@@ -93,6 +93,10 @@ assert by_location[130]["Name"] == "GREN-ATIS"
 assert by_location[131]["Name"] == "GENEV-INFO"
 assert by_location[155]["Name"] == "CH-LSGLAD"
 assert by_location[156]["Name"] == "CH-LSGLAP"
+assert by_location[157]["Name"] == "CH-SIONGND"
+assert by_location[158]["Name"] == "CH-SIONTWR"
+assert by_location[159]["Name"] == "CH-SIONATI"
+assert by_location[160]["Name"] == "CH-SIONAPP"
 
 assert by_name["SAT-SO50"]["Frequency"] == "436.795000"
 assert by_name["SAT-AO91"]["Frequency"] == "145.960000"
@@ -106,14 +110,24 @@ assert by_name["GREN-ATIS"]["Frequency"] == "133.855000"
 assert by_name["GENEV-INFO"]["Frequency"] == "126.350000"
 assert by_name["CH-LSGLAD"]["Frequency"] == "123.205000"
 assert by_name["CH-LSGLAP"]["Frequency"] == "118.830000"
-assert all(by_name[name]["Mode"] == "AM" for name in [
+assert by_name["CH-SIONGND"]["Frequency"] == "121.705000"
+assert by_name["CH-SIONTWR"]["Frequency"] == "118.275000"
+assert by_name["CH-SIONATI"]["Frequency"] == "130.630000"
+assert by_name["CH-SIONAPP"]["Frequency"] == "126.825000"
+
+aviation_names = [
     "ANNCY-TWR", "ANNMS-A-A", "VERSD-A-A", "GREN-GND", "GREN-TWR",
-    "GREN-ATIS", "GENEV-INFO", "CH-LSGLAD", "CH-LSGLAP",
-])
+    "GREN-ATIS", "GENEV-INFO", "CH-LSGLAD", "CH-LSGLAP", "CH-SIONGND",
+    "CH-SIONTWR", "CH-SIONATI", "CH-SIONAPP",
+]
+assert all(by_name[name]["Mode"] == "AM" for name in aviation_names)
+assert all(by_name[name]["TStep"] == "8.33" for name in aviation_names)
 
 exported_frequencies = {float(row["Frequency"]) for row in rows}
 for uplink_only in [145.2, 145.85, 145.99, 435.25]:
     assert uplink_only not in exported_frequencies, f"Montante exportée par erreur: {uplink_only}"
+for excluded_sion in [131.475, 131.67, 131.955, 110.7, 112.15]:
+    assert excluded_sion not in exported_frequencies, f"Fréquence Sion exclue exportée: {excluded_sion}"
 
 source_datasets = {
     item["channel"]["source_dataset"]
@@ -145,7 +159,7 @@ ch_aviation = [
     for item in candidate["memories"]
     if item["channel"]["source_dataset"].endswith("aviation-switzerland-airac-08.json")
 ]
-assert len(ch_aviation) == 2
+assert len(ch_aviation) == 6
 assert all(channel["verification"] == "verified_current_public" for channel in ch_aviation)
 
 for forbidden_name in ["CHAM-INFO", "CHAM-APP", "CHAM-TWR", "CHAM-ATIS"]:

@@ -6,13 +6,15 @@ RESEARCH = ROOT / "research/annecy-alpes-leman-v0.2"
 
 FRANCE = RESEARCH / "aviation-france-airac-08.json"
 SWITZERLAND = RESEARCH / "aviation-switzerland-airac-08.json"
+OPERATIONS = RESEARCH / "aviation-operational-gates.json"
 PREVIOUS = RESEARCH / "aviation-france-pre-airac-08.json"
 
-for path in [FRANCE, SWITZERLAND, PREVIOUS]:
+for path in [FRANCE, SWITZERLAND, OPERATIONS, PREVIOUS]:
     assert path.is_file(), f"Fichier aviation manquant: {path.relative_to(ROOT)}"
 
 france = json.loads(FRANCE.read_text(encoding="utf-8"))
 switzerland = json.loads(SWITZERLAND.read_text(encoding="utf-8"))
+operations = json.loads(OPERATIONS.read_text(encoding="utf-8"))
 previous = json.loads(PREVIOUS.read_text(encoding="utf-8"))
 
 assert france["production_ready"] is False
@@ -105,5 +107,16 @@ assert all(len(channel["name"]) <= 10 for channel in all_channels)
 assert not excluded_ch.intersection(
     {channel["frequency_mhz"] for channel in ch_channels}
 )
+
+assert operations["public_release_allowed"] is False
+gates = {gate["id"]: gate for gate in operations["gates"]}
+assert gates["airac_fr"]["status"] == "passed_research_validation"
+assert gates["airac_ch"]["status"] == "passed_research_validation"
+assert gates["notam_fr"]["status"] == "pending_release_time_briefing"
+assert gates["notam_ch"]["status"] == "pending_release_time_briefing"
+assert gates["pending_airfields"]["status"] == "pending_research_completion"
+assert gates["pending_airfields"]["items"] == ["LFLB", "LFKA", "LFHM", "LSGG"]
+assert gates["dynamic_satellites"]["status"] == "pending_release_time_recheck"
+assert all(gate["required_for_public_release"] is True for gate in gates.values())
 
 print("Tests Annecy–Alpes–Léman AIRAC 08 aviation: OK")

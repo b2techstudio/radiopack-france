@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check whether Annecy–Alpes–Léman v0.2 may enter public prepublication."""
+"""Check the blocking and advisory release gates for Annecy–Alpes–Léman v0.2."""
 from __future__ import annotations
 
 import argparse
@@ -34,32 +34,20 @@ def evaluate(root: Path) -> dict[str, Any]:
     for gate in operations["gates"]:
         if gate["required_for_public_release"]:
             if not passed(str(gate["status"])):
-                blockers.append({
-                    "id": gate["id"],
-                    "status": gate["status"],
-                    "reason": gate.get("reason", ""),
-                })
+                blockers.append({"id": gate["id"], "status": gate["status"], "reason": gate.get("reason", "")})
         else:
-            advisories.append({
-                "id": gate["id"],
-                "status": gate["status"],
-                "service": gate.get("service"),
-            })
+            advisories.append({"id": gate["id"], "status": gate["status"], "service": gate.get("service")})
 
-    ready = not blockers
     return {
         "pack": "Annecy–Alpes–Léman",
         "target_version": "0.2.0",
-        "ready_for_public_prepublication": ready,
+        "publication_status": plan["status"],
+        "ready_for_public_prepublication": not blockers,
         "candidate_memory_count": int(plan["candidate_memory_count"]),
         "blockers": blockers,
         "advisories": advisories,
-        "notam_blocks_generation": bool(
-            options["options"]["notam_check"]["blocks_generation"]
-        ),
-        "include_aviation_default": bool(
-            options["options"]["include_aviation"]["default"]
-        ),
+        "notam_blocks_generation": bool(options["options"]["notam_check"]["blocks_generation"]),
+        "include_aviation_default": bool(options["options"]["include_aviation"]["default"]),
     }
 
 
@@ -73,7 +61,9 @@ def main() -> None:
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
-        if result["ready_for_public_prepublication"]:
+        if result["publication_status"] == "published_v0.2" and not result["blockers"]:
+            print("PUBLISHED: Annecy–Alpes–Léman v0.2; all blocking release gates remain satisfied")
+        elif result["ready_for_public_prepublication"]:
             print("READY: Annecy–Alpes–Léman v0.2 may enter public prepublication")
         else:
             print("NOT READY: Annecy–Alpes–Léman v0.2")

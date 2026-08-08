@@ -1,6 +1,6 @@
 {
   "dataset": "Annecy–Alpes–Léman v0.2 - aviation Suisse vérifiée publiquement",
-  "version": "0.2.0-research.2",
+  "version": "0.2.0-research.3",
   "updated": "2026-08-08",
   "production_ready": false,
   "internal_candidate_allowed": true,
@@ -12,7 +12,8 @@
   },
   "rules": [
     "Seules les fréquences confirmées sur une source officielle ou sur le site officiel de l'exploitant sont assemblées.",
-    "Genève-aéroport reste en attente lorsque le détail fréquentiel du cycle courant n'est pas publiquement recoupable.",
+    "Une fréquence trouvée uniquement sur une source secondaire n'est jamais promue dans le candidat.",
+    "Genève-aéroport est explicitement exclu du périmètre v0.2 lorsque son tableau fréquentiel primaire courant n'est pas publiquement extractible de façon fiable.",
     "Genève Information 126.350 MHz est déjà mémorisée une seule fois dans le bloc France/bassin genevois afin d'éviter un doublon.",
     "Les fréquences de handling et les aides radio de navigation ne sont pas intégrées au bloc d'écoute ATS/ATIS.",
     "L'espacement VHF 8.33 kHz est documenté par l'OFAC pour l'aviation suisse.",
@@ -43,120 +44,45 @@
       "title": "OFAC - Introduction de communications VHF fondées sur un espacement entre canaux de 8,33 kHz",
       "url": "https://www.bazl.admin.ch/fr/infos-aereotechniques",
       "accessed": "2026-08-08"
+    },
+    {
+      "id": "BAZL-LSGG",
+      "title": "OFAC - Aéroport de Genève LSGG",
+      "url": "https://www.bazl.admin.ch/fr/aeroport-geneve",
+      "accessed": "2026-08-08",
+      "note": "Confirme LSGG et l'exploitant; le tableau radio opérationnel courant reste dans l'écosystème AIP/Skybriefing et n'est pas extrait ici."
     }
   ],
   "channels": [
-    {
-      "name": "CH-LSGLAD",
-      "frequency_mhz": 123.205,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "country": "CH",
-      "canton": "Vaud",
-      "area": "Lausanne-La Blécherette",
-      "icao": "LSGL",
-      "services": ["AD"],
-      "verification": "verified_current_public",
-      "source_ids": ["SKY-AIRAC-0826", "LSGL-OFFICIAL", "BAZL-833"],
-      "comment": "Lausanne LSGL AD 123.205 - source exploitant - RX seule"
-    },
-    {
-      "name": "CH-LSGLAP",
-      "frequency_mhz": 118.83,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "country": "CH",
-      "canton": "Vaud",
-      "area": "Lausanne-La Blécherette",
-      "icao": "LSGL",
-      "services": ["APCH INFO"],
-      "verification": "verified_current_public",
-      "source_ids": ["SKY-AIRAC-0826", "LSGL-OFFICIAL", "BAZL-833"],
-      "comment": "Lausanne APCH INFO 118.830 - source exploitant - RX seule"
-    },
-    {
-      "name": "CH-SIONGND",
-      "frequency_mhz": 121.705,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "country": "CH",
-      "canton": "Valais",
-      "area": "Sion",
-      "icao": "LSGS",
-      "services": ["GND"],
-      "verification": "verified_current_public",
-      "source_ids": ["SKY-AIRAC-0826", "LSGS-OFFICIAL", "BAZL-833"],
-      "comment": "Sion Ground 121.705 - site officiel aéroport - RX seule"
-    },
-    {
-      "name": "CH-SIONTWR",
-      "frequency_mhz": 118.275,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "country": "CH",
-      "canton": "Valais",
-      "area": "Sion",
-      "icao": "LSGS",
-      "services": ["TWR"],
-      "verification": "verified_current_public",
-      "source_ids": ["SKY-AIRAC-0826", "LSGS-OFFICIAL", "BAZL-833"],
-      "comment": "Sion Tower 118.275 - site officiel aéroport - RX seule"
-    },
-    {
-      "name": "CH-SIONATI",
-      "frequency_mhz": 130.63,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "country": "CH",
-      "canton": "Valais",
-      "area": "Sion",
-      "icao": "LSGS",
-      "services": ["ATIS"],
-      "verification": "verified_current_public",
-      "source_ids": ["SKY-AIRAC-0826", "LSGS-OFFICIAL", "BAZL-833"],
-      "comment": "Sion ATIS 130.630 - site officiel aéroport - RX seule"
-    },
-    {
-      "name": "CH-SIONAPP",
-      "frequency_mhz": 126.825,
-      "mode": "AM",
-      "step_khz": 8.33,
-      "tx_policy": "rx_only",
-      "country": "CH",
-      "canton": "Valais",
-      "area": "Sion",
-      "icao": "LSGS",
-      "services": ["APP"],
-      "verification": "verified_current_public",
-      "source_ids": ["SKY-AIRAC-0826", "LSGS-OFFICIAL", "BAZL-833"],
-      "comment": "Sion Approach 126.825 - site officiel aéroport - RX seule"
-    }
+    {"name":"CH-LSGLAD","frequency_mhz":123.205,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","country":"CH","canton":"Vaud","area":"Lausanne-La Blécherette","icao":"LSGL","services":["AD"],"verification":"verified_current_public","source_ids":["SKY-AIRAC-0826","LSGL-OFFICIAL","BAZL-833"],"comment":"Lausanne LSGL AD 123.205 - source exploitant - RX seule"},
+    {"name":"CH-LSGLAP","frequency_mhz":118.83,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","country":"CH","canton":"Vaud","area":"Lausanne-La Blécherette","icao":"LSGL","services":["APCH INFO"],"verification":"verified_current_public","source_ids":["SKY-AIRAC-0826","LSGL-OFFICIAL","BAZL-833"],"comment":"Lausanne APCH INFO 118.830 - source exploitant - RX seule"},
+    {"name":"CH-SIONGND","frequency_mhz":121.705,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","country":"CH","canton":"Valais","area":"Sion","icao":"LSGS","services":["GND"],"verification":"verified_current_public","source_ids":["SKY-AIRAC-0826","LSGS-OFFICIAL","BAZL-833"],"comment":"Sion Ground 121.705 - site officiel aéroport - RX seule"},
+    {"name":"CH-SIONTWR","frequency_mhz":118.275,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","country":"CH","canton":"Valais","area":"Sion","icao":"LSGS","services":["TWR"],"verification":"verified_current_public","source_ids":["SKY-AIRAC-0826","LSGS-OFFICIAL","BAZL-833"],"comment":"Sion Tower 118.275 - site officiel aéroport - RX seule"},
+    {"name":"CH-SIONATI","frequency_mhz":130.63,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","country":"CH","canton":"Valais","area":"Sion","icao":"LSGS","services":["ATIS"],"verification":"verified_current_public","source_ids":["SKY-AIRAC-0826","LSGS-OFFICIAL","BAZL-833"],"comment":"Sion ATIS 130.630 - site officiel aéroport - RX seule"},
+    {"name":"CH-SIONAPP","frequency_mhz":126.825,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","country":"CH","canton":"Valais","area":"Sion","icao":"LSGS","services":["APP"],"verification":"verified_current_public","source_ids":["SKY-AIRAC-0826","LSGS-OFFICIAL","BAZL-833"],"comment":"Sion Approach 126.825 - site officiel aéroport - RX seule"}
   ],
   "excluded": [
     {
       "area": "Sion",
       "icao": "LSGS",
+      "status": "excluded_handling",
       "frequencies_mhz": [131.475, 131.67, 131.955],
       "reason": "Fréquences de handling, hors bloc ATS/ATIS général."
     },
     {
       "area": "Sion",
       "icao": "LSGS",
+      "status": "excluded_navaids",
       "frequencies_mhz": [110.7, 112.15],
       "reason": "ILS et VOR, aides de radionavigation et non canaux voix d'écoute du pack."
-    }
-  ],
-  "pending": [
+    },
     {
       "area": "Genève",
       "icao": "LSGG",
-      "status": "pending_current_public_frequency_extraction",
-      "note": "Genève Information 126.350 est déjà couverte par le bloc transfrontalier."
+      "status": "excluded_scope_unverified_primary",
+      "source_ids": ["SKY-AIRAC-0826", "BAZL-LSGG"],
+      "reason": "Les fréquences aéroportuaires repérées sur des sources secondaires ne sont pas intégrées sans tableau primaire opérationnel courant extractible; Genève Information 126.350 reste couverte séparément."
     }
-  ]
+  ],
+  "pending": []
 }

@@ -14,7 +14,7 @@ AVIATION_SWITZERLAND = RESEARCH / "aviation-switzerland-airac-08.json"
 PLAN = RESEARCH / "memory-plan.json"
 
 for path in [BUILDER, SATELLITES, AVIATION_FRANCE, AVIATION_SWITZERLAND, PLAN]:
-    assert path.is_file(), f"Fichier Sprint 12 manquant: {path.relative_to(ROOT)}"
+    assert path.is_file(), f"Fichier Sprint 13 manquant: {path.relative_to(ROOT)}"
 
 satellites = json.loads(SATELLITES.read_text(encoding="utf-8"))
 assert satellites["production_ready"] is False
@@ -33,7 +33,7 @@ assert sat_by_name["SAT-AO123"]["link"]["downlink_frequency_mhz"] == 435.4
 
 plan = json.loads(PLAN.read_text(encoding="utf-8"))
 assert plan["public_export_allowed"] is False
-assert plan["internal_candidate"]["expected_memory_count"] == 61
+assert plan["internal_candidate"]["expected_memory_count"] == 65
 
 blocks = plan["blocks"]
 for index, block in enumerate(blocks):
@@ -63,8 +63,8 @@ with tempfile.TemporaryDirectory() as tmp:
 
 assert candidate["status"] == "internal_candidate_not_for_publication"
 assert candidate["public_export_allowed"] is False
-assert candidate["memory_count"] == 61
-assert len(rows) == 61
+assert candidate["memory_count"] == 65
+assert len(rows) == 65
 assert all(row["Duplex"] == "off" for row in rows)
 
 by_location = {int(row["Location"]): row for row in rows}
@@ -86,11 +86,15 @@ assert by_location[90]["Name"] == "CH-HB9G-V"
 assert by_location[91]["Name"] == "CH-HB9G-U"
 assert by_location[125]["Name"] == "ANNCY-TWR"
 assert by_location[126]["Name"] == "ANNMS-A-A"
-assert by_location[127]["Name"] == "VERSD-A-A"
-assert by_location[128]["Name"] == "GREN-GND"
-assert by_location[129]["Name"] == "GREN-TWR"
-assert by_location[130]["Name"] == "GREN-ATIS"
-assert by_location[131]["Name"] == "GENEV-INFO"
+assert by_location[127]["Name"] == "CHAM-INFO"
+assert by_location[128]["Name"] == "CHAM-APP"
+assert by_location[129]["Name"] == "CHAM-TWR"
+assert by_location[130]["Name"] == "CHAM-ATIS"
+assert by_location[131]["Name"] == "VERSD-A-A"
+assert by_location[132]["Name"] == "GREN-GND"
+assert by_location[133]["Name"] == "GREN-TWR"
+assert by_location[134]["Name"] == "GREN-ATIS"
+assert by_location[135]["Name"] == "GENEV-INFO"
 assert by_location[155]["Name"] == "CH-LSGLAD"
 assert by_location[156]["Name"] == "CH-LSGLAP"
 assert by_location[157]["Name"] == "CH-SIONGND"
@@ -103,6 +107,10 @@ assert by_name["SAT-AO91"]["Frequency"] == "145.960000"
 assert by_name["SAT-AO123"]["Frequency"] == "435.400000"
 assert by_name["ANNCY-TWR"]["Frequency"] == "118.200000"
 assert by_name["ANNMS-A-A"]["Frequency"] == "125.875000"
+assert by_name["CHAM-INFO"]["Frequency"] == "123.700000"
+assert by_name["CHAM-APP"]["Frequency"] == "121.205000"
+assert by_name["CHAM-TWR"]["Frequency"] == "118.300000"
+assert by_name["CHAM-ATIS"]["Frequency"] == "127.100000"
 assert by_name["VERSD-A-A"]["Frequency"] == "121.000000"
 assert by_name["GREN-GND"]["Frequency"] == "121.930000"
 assert by_name["GREN-TWR"]["Frequency"] == "119.300000"
@@ -116,9 +124,10 @@ assert by_name["CH-SIONATI"]["Frequency"] == "130.630000"
 assert by_name["CH-SIONAPP"]["Frequency"] == "126.825000"
 
 aviation_names = [
-    "ANNCY-TWR", "ANNMS-A-A", "VERSD-A-A", "GREN-GND", "GREN-TWR",
-    "GREN-ATIS", "GENEV-INFO", "CH-LSGLAD", "CH-LSGLAP", "CH-SIONGND",
-    "CH-SIONTWR", "CH-SIONATI", "CH-SIONAPP",
+    "ANNCY-TWR", "ANNMS-A-A", "CHAM-INFO", "CHAM-APP", "CHAM-TWR",
+    "CHAM-ATIS", "VERSD-A-A", "GREN-GND", "GREN-TWR", "GREN-ATIS",
+    "GENEV-INFO", "CH-LSGLAD", "CH-LSGLAP", "CH-SIONGND", "CH-SIONTWR",
+    "CH-SIONATI", "CH-SIONAPP",
 ]
 assert all(by_name[name]["Mode"] == "AM" for name in aviation_names)
 assert all(by_name[name]["TStep"] == "8.33" for name in aviation_names)
@@ -151,7 +160,7 @@ fr_aviation = [
     for item in candidate["memories"]
     if item["channel"]["source_dataset"].endswith("aviation-france-airac-08.json")
 ]
-assert len(fr_aviation) == 7
+assert len(fr_aviation) == 11
 assert all(channel["verification"] == "verified_airac08_public" for channel in fr_aviation)
 
 ch_aviation = [
@@ -161,8 +170,5 @@ ch_aviation = [
 ]
 assert len(ch_aviation) == 6
 assert all(channel["verification"] == "verified_current_public" for channel in ch_aviation)
-
-for forbidden_name in ["CHAM-INFO", "CHAM-APP", "CHAM-TWR", "CHAM-ATIS"]:
-    assert forbidden_name not in by_name
 
 print("Tests Annecy–Alpes–Léman internal candidate: OK")

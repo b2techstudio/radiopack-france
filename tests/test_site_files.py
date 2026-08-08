@@ -10,6 +10,7 @@ required_files = [
     "SPRINT-13-CHAMBERY-VALIDATION.md",
     "SPRINT-15-NOTAM-GENERATOR-OPTIONS.md",
     "SPRINT-16-PREPUBLICATION-READINESS.md",
+    "SPRINT-17-SATELLITE-RECHECK.md",
     "generator/options.json",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
@@ -55,10 +56,11 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 16",
+    "État actuel — Sprint 17",
     "Candidat interne Annecy–Alpes–Léman : **65 mémoires**",
     "Contrôle NOTAM France/Suisse : **facultatif et non bloquant**",
-    "recontrôle dynamique des satellites FM",
+    "passed_official_amsat_recheck",
+    "prêt pour la génération de prépublication",
     "## Maintenance du projet",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
@@ -78,13 +80,23 @@ assert options["options"]["notam_check"]["blocks_generation"] is False
 prepublication = json.loads(
     (ROOT / "research/annecy-alpes-leman-v0.2/prepublication-plan.json").read_text(encoding="utf-8")
 )
-assert prepublication["status"] == "blocked_dynamic_satellite_recheck"
+assert prepublication["status"] == "ready_for_prepublication_generation"
 assert prepublication["candidate_memory_count"] == 65
 assert prepublication["public_file_created"] is False
 assert prepublication["public_export_allowed"] is False
-assert prepublication["blocking_gates"] == ["dynamic_satellites"]
+assert prepublication["blocking_gates"] == []
+assert set(prepublication["passed_blocking_gates"]) == {
+    "airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"
+}
 assert set(prepublication["advisory_checks"]) == {"notam_fr", "notam_ch"}
 assert not (ROOT / prepublication["reserved_public_output"]).exists()
+
+satellites = json.loads(
+    (ROOT / "research/annecy-alpes-leman-v0.2/satellites-fm-inventory.json").read_text(encoding="utf-8")
+)
+assert satellites["release_recheck"]["status"] == "passed_official_amsat_recheck"
+assert satellites["release_recheck"]["checked"] == "2026-08-08"
+assert satellites["release_recheck"]["ao91_limit_confirmed"] == "sunlight_only_due_to_battery"
 
 astro_config = (ROOT / "website/astro.config.mjs").read_text(encoding="utf-8")
 assert 'site: "https://radiopack.b2tech.studio"' in astro_config
@@ -199,4 +211,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 16 + README maintenance: OK")
+print("Tests RadioPack Sprint 17 + README maintenance: OK")

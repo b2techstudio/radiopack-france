@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.11.0 - 2026-08-08
+
+- Validation primaire des quatre fréquences Chambéry Aix-les-Bains dans le tableau officiel SIA AD 2.18 : 123,700 MHz, 121,205 MHz, 118,300 MHz et 127,100 MHz.
+- Promotion de `CHAM-INFO`, `CHAM-APP`, `CHAM-TWR` et `CHAM-ATIS` au statut `verified_airac08_public`.
+- Passage du bloc aviation France / bassin genevois de 7 à 11 mémoires et du candidat interne de 61 à 65 mémoires.
+- Réduction de la porte `pending_airfields` à Albertville LFKA, Megève LFHM et Genève LSGG.
+- Reclassement de LFKA et LFHM en `pending_primary_vac_frequency_extraction` : VAC courantes identifiées au SIA, mais aucune fréquence issue d'une source secondaire n'est promue sans extraction primaire fiable.
+- Maintien de Genève-aéroport hors candidat tant que son tableau radio courant n'est pas recoupable sur une source primaire suffisamment précise.
+- Extension des tests AIRAC et du candidat interne aux quatre mémoires Chambéry et à leurs positions 127 à 130.
+- Aucun changement des téléchargements publics Annecy, du générateur public ou du statut « En préparation ».
+
 ## 0.10.0 - 2026-08-08
 
 - Ajout de quatre fréquences aviation Sion recoupées sur le site officiel de l'aéroport : GND 121,705 MHz, TWR 118,275 MHz, ATIS 130,630 MHz et APP 126,825 MHz.

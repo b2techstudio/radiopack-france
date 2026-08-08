@@ -46,29 +46,38 @@ Aucune candidate suisse non recoupée ne passe dans le candidat interne.
 
 ### Aviation France — AIRAC 08/26
 
-Le cycle AIRAC 08/26 est effectif depuis le 6 août 2026. Le fichier `aviation-france-airac-08.json` contient sept mémoires actuellement recoupées sur les publications officielles publiques :
+Le cycle AIRAC 08/26 est effectif depuis le 6 août 2026. Le fichier `aviation-france-airac-08.json` contient désormais onze mémoires recoupées sur les publications officielles publiques :
 
 - Annecy-Meythet : 118.200 MHz ;
 - Annemasse : 125.875 MHz ;
+- Chambéry Aix-les-Bains : 123.700 MHz, 121.205 MHz, 118.300 MHz et 127.100 MHz ;
 - Grenoble-Le Versoud : 121.000 MHz ;
 - Grenoble-Alpes-Isère : 121.930, 119.300 et 133.855 MHz ;
 - Genève Information : 126.350 MHz pour le bassin transfrontalier.
 
-Toutes ces lignes sont en `AM`, au pas de 8.33 kHz, en `rx_only` et portent le statut `verified_airac08_public`.
+Pour Chambéry, le tableau officiel SIA AD 2.18 confirme :
+
+- 123.700 MHz pour FIS, APP et A/A selon le service actif ;
+- 121.205 MHz pour APP ;
+- 118.300 MHz pour TWR ;
+- 127.100 MHz pour ATIS.
+
+Toutes les lignes aviation France assemblées sont en `AM`, au pas de 8.33 kHz, en `rx_only` et portent le statut `verified_airac08_public`.
 
 Le pré-inventaire `aviation-france-pre-airac-08.json` est conservé pour l'historique mais reste explicitement interdit à l'assembleur.
 
-Restent en attente :
+Restent en attente côté France :
 
-- Chambéry Aix-les-Bains : les quatre fréquences du pré-inventaire ne sont pas réutilisées automatiquement ;
-- Albertville ;
-- Megève.
+- Albertville LFKA ;
+- Megève LFHM.
+
+Le catalogue officiel SIA référence bien leurs VAC courantes. Dans le workflow de recherche actuel, le contenu radio de ces PDF primaires n'a cependant pas pu être extrait de façon fiable. Aucune fréquence issue d'un site secondaire n'est donc promue. Les deux entrées portent le statut `pending_primary_vac_frequency_extraction`.
 
 Sallanches-Mont-Blanc n'est plus une ligne en attente : l'aérodrome est classé `excluded_closed_aerodrome`, car sa fermeture à toute circulation aérienne est effective depuis le 1er septembre 2020. Aucune fréquence active ne doit être recherchée ou réintroduite pour LFHZ.
 
 ### Aviation Suisse
 
-Le fichier `aviation-switzerland-airac-08.json` contient désormais six fréquences recoupées publiquement :
+Le fichier `aviation-switzerland-airac-08.json` contient six fréquences recoupées publiquement :
 
 - Lausanne LSGL AD : 123.205 MHz ;
 - Lausanne APCH INFO : 118.830 MHz ;
@@ -81,7 +90,7 @@ Les quatre fréquences Sion proviennent de la page officielle « Infos pilotes �
 
 L'OFAC documente l'espacement de canaux VHF 8.33 kHz applicable à l'aviation suisse ; les six lignes sont donc modélisées en `AM`, pas `8.33`, et `rx_only`.
 
-Genève-aéroport reste hors candidat tant que ses tableaux fréquentiels courants ne sont pas recoupables publiquement avec un niveau de confiance suffisant. Genève Information 126.350 MHz n'est mémorisée qu'une seule fois, dans le bloc France / bassin genevois, afin d'éviter un doublon.
+Genève-aéroport LSGG reste hors candidat tant que son tableau fréquentiel courant n'est pas recoupable sur une source primaire suffisamment précise dans ce workflow. Genève Information 126.350 MHz n'est mémorisée qu'une seule fois, dans le bloc France / bassin genevois, afin d'éviter un doublon.
 
 ### Lacs et navigation
 
@@ -104,7 +113,7 @@ Le fichier `satellites-fm-inventory.json` conserve trois descendantes analogique
 
 Comme pour l'ISS, seule la liaison descendante devient une mémoire d'écoute. Les montantes restent des métadonnées.
 
-Le script `tools/build_annecy_internal_candidate.py` assemble désormais un candidat interne de 61 mémoires :
+Le script `tools/build_annecy_internal_candidate.py` assemble désormais un candidat interne de 65 mémoires :
 
 - 16 PMR446 ;
 - 6 APRS/ISS ;
@@ -112,15 +121,15 @@ Le script `tools/build_annecy_internal_candidate.py` assemble désormais un cand
 - 2 canaux d'appel ;
 - 19 fréquences radioamateur françaises ;
 - 2 relais radioamateur suisses `verified_current` ;
-- 7 fréquences aviation France / bassin genevois ;
+- 11 fréquences aviation France / bassin genevois, dont 4 Chambéry ;
 - 6 fréquences aviation Suisse : 2 Lausanne et 4 Sion.
 
 Le résultat est généré localement sous `research/annecy-alpes-leman-v0.2/generated/`, avec `public_export_allowed: false`. Ce dossier est ignoré par Git. Les lacs et toutes les lignes en attente, exclues ou en conflit restent hors candidat.
 
 ## Blocs restant à inventorier ou recouper
 
-1. Chambéry, Albertville et Megève ;
-2. Genève-aéroport ;
+1. Albertville LFKA et Megève LFHM depuis leur VAC primaire ;
+2. Genève-aéroport LSGG depuis une source primaire courante exploitable ;
 3. balises analogiques réellement utiles ;
 4. usages locaux publics et vérifiables ;
 5. recoupements radioamateurs suisses encore ouverts.

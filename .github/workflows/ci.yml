@@ -55,6 +55,9 @@ jobs:
       - name: Test Annecy Alps Leman prepublication generator
         run: python tests/test_annecy_prepublication.py
 
+      - name: Test Annecy Alps Leman reviewed prepublication CSV
+        run: python tests/test_annecy_prepublication_review.py
+
   website:
     name: Astro production build
     runs-on: ubuntu-latest

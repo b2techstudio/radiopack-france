@@ -38,7 +38,7 @@ for expected in [
     "published_v0.2",
     "65/65 mémoires",
     "48 mémoires sans aviation",
-    "Contrôle NOTAM est **informatif et non bloquant**",
+    "Le contrôle NOTAM est **informatif et non bloquant**",
     "website/src/lib/annecyPack.ts",
     "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",

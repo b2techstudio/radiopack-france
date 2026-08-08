@@ -77,10 +77,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               Vérifie si besoin les informations temporaires auprès de SOFIA-Briefing pour la France
               et Skybriefing pour la Suisse.
             </p>
-            <label for="notam-confirmed">
-              <input id="notam-confirmed" name="notam-confirmed" type="checkbox" />
-              <span>J'ai vérifié les NOTAM applicables</span>
-            </label>
+            <div class="notam-confirm-check">
+              <input id="notam-confirmed" name="notam-confirmed" type="checkbox" disabled />
+              <label for="notam-confirmed">J'ai vérifié les NOTAM applicables</label>
+            </div>
             <p class="muted">
               La confirmation reste facultative : un pack d'écoute RX peut être généré sans elle.
             </p>
@@ -151,7 +151,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     const notamSummary = document.querySelector<HTMLElement>("#notam-summary");
     const notamWarning = document.querySelector<HTMLElement>("#notam-warning");
 
-    const updateGenerator = () => {
+    const renderSummary = () => {
       if (!aviation || !notam || !confirmed || !confirmZone || !memoryCount || !aviationSummary || !notamSummary || !notamWarning) {
         return;
       }
@@ -159,9 +159,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       memoryCount.textContent = aviation.checked ? "65" : "48";
       aviationSummary.textContent = aviation.checked ? "Incluse · 17" : "Exclue · 0";
       confirmZone.hidden = !notam.checked;
+      confirmed.disabled = !notam.checked;
 
       if (!notam.checked) {
-        confirmed.checked = false;
         notamSummary.textContent = "Non demandé";
         notamWarning.textContent = "Contrôle NOTAM non demandé. Les fréquences restent celles des sources officielles validées.";
         return;
@@ -176,10 +176,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       }
     };
 
-    aviation?.addEventListener("change", updateGenerator);
-    notam?.addEventListener("change", updateGenerator);
-    confirmed?.addEventListener("change", updateGenerator);
-    updateGenerator();
+    aviation?.addEventListener("change", renderSummary);
+    notam?.addEventListener("change", () => {
+      if (confirmed && notam && !notam.checked) {
+        confirmed.checked = false;
+      }
+      renderSummary();
+    });
+    confirmed?.addEventListener("change", renderSummary);
+    renderSummary();
   </script>
 </BaseLayout>
 
@@ -214,8 +219,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .option-row input { width: 22px; height: 22px; accent-color: var(--purple); flex: 0 0 auto; }
 
   .notam-confirm { display: grid; gap: 12px; margin-top: 2px; padding: 18px; border-radius: 16px; background: rgba(22,135,233,.07); border: 1px solid rgba(22,135,233,.14); }
-  .notam-confirm label { display: flex; gap: 10px; align-items: center; font-weight: 800; }
-  .notam-confirm input { width: 19px; height: 19px; accent-color: var(--purple); }
+  .notam-confirm[hidden] { display: none; }
+  .notam-confirm-check { display: flex; gap: 10px; align-items: center; }
+  .notam-confirm-check label { font-weight: 800; cursor: pointer; }
+  .notam-confirm-check input { width: 19px; height: 19px; accent-color: var(--purple); cursor: pointer; }
+  .notam-confirm-check input:disabled { cursor: not-allowed; }
   .form-actions { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
   .locked-button:disabled { opacity: .58; cursor: not-allowed; transform: none; box-shadow: none; }
 

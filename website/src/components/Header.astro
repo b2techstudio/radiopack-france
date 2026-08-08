@@ -3,6 +3,7 @@ const currentPath = Astro.url.pathname;
 const links = [
   ["/", "Accueil"],
   ["/regions", "Régions"],
+  ["/generateur", "Générateur"],
   ["/telechargements", "Téléchargements"],
   ["/documentation", "Documentation"],
   ["/a-propos", "À propos"],
@@ -53,7 +54,7 @@ const isActive = (href: string) =>
       </nav>
     </details>
 
-    <a class="header-cta" href="/telechargements">Télécharger</a>
+    <a class="header-cta" href="/generateur">Générateur</a>
   </div>
 </header>
 

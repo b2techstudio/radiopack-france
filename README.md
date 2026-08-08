@@ -4,20 +4,21 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables, et les exports sont configurés en réception seule.
 
-## État actuel — Sprint 19
+## État actuel — Sprint 20
 
 - Pack public disponible : **Normandie v0.3.1**.
 - **Annecy–Alpes–Léman v0.2** est toujours en préparation.
 - Toutes les portes bloquantes de prépublication sont validées.
 - Le backend de prépublication est opérationnel via `tools/build_annecy_prepublication.py`.
 - La variante complète a été revue ligne par ligne : **65/65 mémoires** validées.
-- Variante personnalisée : **48 mémoires sans aviation**, également contrôlée comme sous-ensemble exact.
+- Variante personnalisée : **48 mémoires sans aviation**, contrôlée comme sous-ensemble exact.
 - La carte de référence est `research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json`.
 - Statut du plan : `prepublication_reviewed_not_public`.
-- Aucun CSV public Annecy–Alpes–Léman v0.2 n'est encore publié.
+- L'**aperçu web du générateur** est maintenant accessible sur `/generateur`.
+- Les options Aviation et NOTAM y sont interactives et le compteur passe réellement de 65 à 48 mémoires lorsque l'aviation est retirée.
 - Contrôle NOTAM France/Suisse : **facultatif et non bloquant** pour un pack d'écoute RX.
+- Le **téléchargement Annecy v0.2 reste verrouillé** et aucun CSV public v0.2 n'est encore créé.
 - Recontrôle satellites AMSAT : validé le 8 août 2026 pour SO-50, AO-91 et AO-123.
-- La prépublication reste hors de `website/public` jusqu'à une action de publication explicite.
 
 ## Principes du projet
 
@@ -57,7 +58,7 @@ Albertville `LFKA`, Megève `LFHM` et Genève `LSGG` sont volontairement exclus 
 
 ## Revue finale Sprint 19
 
-La revue ne se contente pas de vérifier le nombre de lignes. Une carte de référence fige, pour chacune des 65 mémoires :
+La carte `prepublication-reviewed-memory-map.json` fige pour chacune des 65 mémoires :
 
 - `Location` ;
 - `Name` ;
@@ -67,13 +68,29 @@ La revue ne se contente pas de vérifier le nombre de lignes. Une carte de réf�
 - le bloc fonctionnel ;
 - l'empreinte SHA-256 du commentaire validé.
 
-La CI compare désormais chaque génération à cette carte. Elle vérifie aussi `Duplex=off`, `Offset=0.000000`, l'absence de tone d'émission et l'absence de champs TX inutiles.
+La CI compare chaque génération à cette carte. Elle vérifie également `Duplex=off`, `Offset=0.000000`, l'absence de tone d'émission et l'absence de champs TX inutiles.
 
 La variante sans aviation doit correspondre exactement à la carte après retrait des deux blocs aviation. Une génération avec NOTAM confirmé doit produire un CSV octet pour octet identique à la génération avec NOTAM désactivé.
 
-## Générateur de prépublication
+## Générateur web — Sprint 20
 
-Le backend est branché, mais **pas encore l'interface publique du site**.
+L'aperçu web est disponible sur :
+
+```text
+/generateur
+```
+
+Il est relié aux mêmes règles fonctionnelles que le backend de prépublication :
+
+- **Inclure les fréquences aviation** : le compteur passe de 65 à 48 mémoires lorsqu'on décoche l'option ;
+- **Contrôle NOTAM avant génération** : affiche une confirmation facultative « J'ai vérifié les NOTAM applicables » ;
+- le résumé indique en direct le nombre de mémoires, l'état aviation et l'état NOTAM ;
+- le contrôle NOTAM ne modifie jamais les fréquences ;
+- le bouton de génération CSV Annecy reste désactivé tant que la publication n'a pas été déclenchée explicitement.
+
+L'aperçu web visible ne signifie donc pas que la v0.2 est publiée. Le futur CSV reste absent de `website/public`.
+
+## Générateur de prépublication local
 
 Génération complète avec aviation :
 
@@ -117,20 +134,6 @@ website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-
 
 Ce fichier **n'est pas encore créé**.
 
-## Options du futur générateur web
-
-Deux options indépendantes sont implémentées côté backend de prépublication :
-
-- **Inclure les fréquences aviation** : ajoute ou retire les 17 mémoires aviation validées.
-- **Contrôle NOTAM avant génération** : enregistre l'état de vérification dans le manifeste sans altérer le CSV.
-
-États NOTAM pris en charge :
-
-- `disabled`
-- `requested_unconfirmed`
-- `user_confirmed`
-- `automatic_verified` reste réservé pour une future automatisation fiable.
-
 ## Synchroniser le dépôt local
 
 Depuis PowerShell :
@@ -150,12 +153,13 @@ python tools\check_annecy_release_readiness.py
 python tools\build_annecy_prepublication.py
 python tests\test_annecy_prepublication.py
 python tests\test_annecy_prepublication_review.py
+python tests\test_web_generator.py
 ```
 
-Le dernier test doit terminer par :
+Le test web doit terminer par :
 
 ```text
-Tests Annecy–Alpes–Léman Sprint 19 reviewed CSV: 65/65 OK
+Tests RadioPack Sprint 20 web generator preview: OK
 ```
 
 ## Générer les CSV publics existants
@@ -182,9 +186,10 @@ python tests\test_annecy_internal_candidate.py
 python tests\test_annecy_release_readiness.py
 python tests\test_annecy_prepublication.py
 python tests\test_annecy_prepublication_review.py
+python tests\test_web_generator.py
 ```
 
-La CI GitHub exécute automatiquement les tests de données, la revue du CSV de prépublication et le build Astro.
+La CI GitHub exécute automatiquement les tests de données, la revue du CSV, le contrat du générateur web et le build Astro.
 
 ## Lancer le site en local
 
@@ -192,6 +197,12 @@ La CI GitHub exécute automatiquement les tests de données, la revue du CSV de 
 cd website
 npm install
 npm run dev
+```
+
+Ouvre ensuite notamment :
+
+```text
+http://localhost:4321/generateur
 ```
 
 Pour reproduire le build de production :
@@ -206,7 +217,7 @@ Le site Astro est prévu pour Cloudflare Pages. Les changements sur `main` décl
 
 ## Prochaine étape
 
-La revue du CSV étant terminée, la prochaine étape est de **préparer l'intégration du générateur Annecy–Alpes–Léman dans le site**, puis de réaliser séparément l'action explicite de publication de la v0.2. Aucun téléchargement public ne doit apparaître avant cette étape dédiée.
+La prochaine étape sera le sprint de **publication explicite Annecy–Alpes–Léman v0.2** : création contrôlée du CSV public à partir de la carte revue, activation du téléchargement dans le générateur, mise à jour des pages publiques et contrôle final avant diffusion.
 
 ## Maintenance du projet
 

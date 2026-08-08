@@ -2,6 +2,8 @@
 """Generate generic CHIRP CSV files from RadioPack France JSON datasets.
 
 CSV generation has no third-party dependency.
+Annecy–Alpes–Léman v0.2 is published by the Astro generator and is intentionally
+not regenerated from the historical Annecy v0.1 datasets in this script.
 """
 from __future__ import annotations
 
@@ -18,9 +20,11 @@ CHIRP_COLUMNS = [
     "URCALL", "RPT1CALL", "RPT2CALL", "DVCODE",
 ]
 
+
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
+
 
 def validate_channel(channel: dict[str, Any], location: int) -> None:
     required = {"name", "frequency_mhz", "mode", "step_khz", "tx_policy", "comment"}
@@ -35,6 +39,7 @@ def validate_channel(channel: dict[str, Any], location: int) -> None:
         raise ValueError(f"Numero de memoire hors limite UV-K5: {location}")
     if float(channel["step_khz"]) <= 0:
         raise ValueError(f"Memoire {location}: pas invalide")
+
 
 def chirp_row(location: int, channel: dict[str, Any]) -> dict[str, Any]:
     validate_channel(channel, location)
@@ -63,6 +68,7 @@ def chirp_row(location: int, channel: dict[str, Any]) -> dict[str, Any]:
         "DVCODE": "",
     }
 
+
 def validate_placed(placed: list[tuple[int, dict[str, Any]]]) -> None:
     locations = [location for location, _ in placed]
     names = [str(channel["name"]) for _, channel in placed]
@@ -75,6 +81,7 @@ def validate_placed(placed: list[tuple[int, dict[str, Any]]]) -> None:
     if len(placed) > 200:
         raise ValueError(f"Le pack contient {len(placed)} memoires; maximum UV-K5: 200")
 
+
 def write_csv(placed: Iterable[tuple[int, dict[str, Any]]], output: Path) -> int:
     items = sorted(list(placed), key=lambda item: item[0])
     validate_placed(items)
@@ -86,12 +93,15 @@ def write_csv(placed: Iterable[tuple[int, dict[str, Any]]], output: Path) -> int
             writer.writerow(chirp_row(location, channel))
     return len(items)
 
+
 def dataset_items(root: Path, dataset_path: Path, start_location: int = 0):
     dataset = load_json(root / dataset_path)
     return [(start_location + index, channel) for index, channel in enumerate(dataset["channels"])]
 
+
 def generate_dataset(root: Path, dataset_path: Path, output: Path) -> int:
     return write_csv(dataset_items(root, dataset_path), output)
+
 
 def generate_pack(root: Path, pack_path: Path, output: Path) -> int:
     pack = load_json(root / pack_path)
@@ -118,6 +128,7 @@ def generate_pack(root: Path, pack_path: Path, output: Path) -> int:
 
     return write_csv(placed, output)
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generateur CSV CHIRP - RadioPack France")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -133,16 +144,10 @@ def main() -> None:
          root / "website/public/downloads/national/radiopack-france-amateur-listening-rx.csv"),
         ("dataset", Path("data/national/amateur-calls-rx.json"),
          root / "website/public/downloads/national/radiopack-france-amateur-calls-rx.csv"),
-
         ("dataset", Path("data/regions/normandie/repeaters-analog-rx.json"),
          root / "website/public/downloads/normandie/radiopack-france-normandie-repeaters-rx.csv"),
         ("pack", Path("data/regions/normandie/pack.json"),
          root / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"),
-
-        ("dataset", Path("data/regions/annecy-haute-savoie/repeaters-analog-rx.json"),
-         root / "website/public/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-repeaters-rx.csv"),
-        ("pack", Path("data/regions/annecy-haute-savoie/pack.json"),
-         root / "website/public/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1.csv"),
     ]
 
     for kind, source, output in jobs:
@@ -152,6 +157,9 @@ def main() -> None:
             else generate_pack(root, source, output)
         )
         print(f"OK: {output.relative_to(root)} ({count} memoires)")
+
+    print("INFO: Annecy–Alpes–Léman v0.2 est généré par website/src/lib/annecyPack.ts")
+
 
 if __name__ == "__main__":
     main()

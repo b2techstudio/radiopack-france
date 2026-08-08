@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 required_files = [
+    "README.md",
     ".gitignore",
     ".github/workflows/ci.yml",
     "SPRINT-13-CHAMBERY-VALIDATION.md",
@@ -52,8 +53,21 @@ for relative in required_files:
     assert path.is_file(), f"Fichier manquant: {relative}"
     assert path.stat().st_size > 20, f"Fichier vide ou incomplet: {relative}"
 
+readme = (ROOT / "README.md").read_text(encoding="utf-8")
+for expected in [
+    "État actuel — Sprint 16",
+    "Candidat interne Annecy–Alpes–Léman : **65 mémoires**",
+    "Contrôle NOTAM France/Suisse : **facultatif et non bloquant**",
+    "dynamic_satellites",
+    "## Maintenance du projet",
+    "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
+]:
+    assert expected in readme, f"README non actualisé: {expected}"
+
 gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
 assert "research/annecy-alpes-leman-v0.2/generated/" in gitignore
+assert "__pycache__/" in gitignore
+assert "*.py[cod]" in gitignore
 
 options = json.loads((ROOT / "generator/options.json").read_text(encoding="utf-8"))
 assert options["status"] == "architecture_ready_not_yet_wired_to_public_ui"
@@ -185,4 +199,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 16: OK")
+print("Tests RadioPack Sprint 16 + README maintenance: OK")

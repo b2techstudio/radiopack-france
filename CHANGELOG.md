@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.12.0 - 2026-08-08
+
+- Clôture conservatrice du périmètre aviation Annecy–Alpes–Léman v0.2 sans ajout artificiel de fréquences.
+- Reclassement d'Albertville LFKA et Megève LFHM en `excluded_scope_unverified_primary` : VAC primaires identifiées au catalogue SIA, mais blocs radio non extractibles de façon suffisamment fiable dans ce workflow.
+- Reclassement de Genève LSGG en `excluded_scope_unverified_primary` : l'aéroport et le cycle courant sont documentés officiellement, mais le tableau radio opérationnel primaire courant n'est pas suffisamment extractible ici.
+- Aucune fréquence provenant uniquement d'une source secondaire n'est intégrée au candidat.
+- Passage de la porte `pending_airfields` à `passed_scope_closed`, avec liste d'attente vide et omissions documentées LFKA/LFHM/LSGG/LFHZ.
+- Maintien du candidat interne à 65 mémoires, toutes en réception seule avec `Duplex=off`.
+- Maintien de `public_release_allowed: false` : briefing NOTAM France, briefing NOTAM Suisse et recontrôle satellites restent requis au moment de la publication.
+- Rafraîchissement du registre de sources et extension des tests pour empêcher la réintroduction accidentelle des terrains exclus.
+- Aucun changement des téléchargements publics Annecy, du générateur public ou du statut « En préparation ».
+
 ## 0.11.0 - 2026-08-08
 
 - Validation primaire des quatre fréquences Chambéry Aix-les-Bains dans le tableau officiel SIA AD 2.18 : 123,700 MHz, 121,205 MHz, 118,300 MHz et 127,100 MHz.

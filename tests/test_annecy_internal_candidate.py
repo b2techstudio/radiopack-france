@@ -9,10 +9,12 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "tools/build_annecy_internal_candidate.py"
 RESEARCH = ROOT / "research/annecy-alpes-leman-v0.2"
 SATELLITES = RESEARCH / "satellites-fm-inventory.json"
+AVIATION_FRANCE = RESEARCH / "aviation-france-airac-08.json"
+AVIATION_SWITZERLAND = RESEARCH / "aviation-switzerland-airac-08.json"
 PLAN = RESEARCH / "memory-plan.json"
 
-for path in [BUILDER, SATELLITES, PLAN]:
-    assert path.is_file(), f"Fichier Sprint 10 manquant: {path.relative_to(ROOT)}"
+for path in [BUILDER, SATELLITES, AVIATION_FRANCE, AVIATION_SWITZERLAND, PLAN]:
+    assert path.is_file(), f"Fichier Sprint 11 manquant: {path.relative_to(ROOT)}"
 
 satellites = json.loads(SATELLITES.read_text(encoding="utf-8"))
 assert satellites["production_ready"] is False
@@ -31,7 +33,7 @@ assert sat_by_name["SAT-AO123"]["link"]["downlink_frequency_mhz"] == 435.4
 
 plan = json.loads(PLAN.read_text(encoding="utf-8"))
 assert plan["public_export_allowed"] is False
-assert plan["internal_candidate"]["expected_memory_count"] == 48
+assert plan["internal_candidate"]["expected_memory_count"] == 57
 
 blocks = plan["blocks"]
 for index, block in enumerate(blocks):
@@ -61,8 +63,8 @@ with tempfile.TemporaryDirectory() as tmp:
 
 assert candidate["status"] == "internal_candidate_not_for_publication"
 assert candidate["public_export_allowed"] is False
-assert candidate["memory_count"] == 48
-assert len(rows) == 48
+assert candidate["memory_count"] == 57
+assert len(rows) == 57
 assert all(row["Duplex"] == "off" for row in rows)
 
 by_location = {int(row["Location"]): row for row in rows}
@@ -82,10 +84,32 @@ assert by_location[40]["Name"] == "01-F1ZOH"
 assert by_location[58]["Name"] == "74-F5ZLV"
 assert by_location[90]["Name"] == "CH-HB9G-V"
 assert by_location[91]["Name"] == "CH-HB9G-U"
+assert by_location[125]["Name"] == "ANNCY-TWR"
+assert by_location[126]["Name"] == "ANNMS-A-A"
+assert by_location[127]["Name"] == "VERSD-A-A"
+assert by_location[128]["Name"] == "GREN-GND"
+assert by_location[129]["Name"] == "GREN-TWR"
+assert by_location[130]["Name"] == "GREN-ATIS"
+assert by_location[131]["Name"] == "GENEV-INFO"
+assert by_location[155]["Name"] == "CH-LSGLAD"
+assert by_location[156]["Name"] == "CH-LSGLAP"
 
 assert by_name["SAT-SO50"]["Frequency"] == "436.795000"
 assert by_name["SAT-AO91"]["Frequency"] == "145.960000"
 assert by_name["SAT-AO123"]["Frequency"] == "435.400000"
+assert by_name["ANNCY-TWR"]["Frequency"] == "118.200000"
+assert by_name["ANNMS-A-A"]["Frequency"] == "125.875000"
+assert by_name["VERSD-A-A"]["Frequency"] == "121.000000"
+assert by_name["GREN-GND"]["Frequency"] == "121.930000"
+assert by_name["GREN-TWR"]["Frequency"] == "119.300000"
+assert by_name["GREN-ATIS"]["Frequency"] == "133.855000"
+assert by_name["GENEV-INFO"]["Frequency"] == "126.350000"
+assert by_name["CH-LSGLAD"]["Frequency"] == "123.205000"
+assert by_name["CH-LSGLAP"]["Frequency"] == "118.830000"
+assert all(by_name[name]["Mode"] == "AM" for name in [
+    "ANNCY-TWR", "ANNMS-A-A", "VERSD-A-A", "GREN-GND", "GREN-TWR",
+    "GREN-ATIS", "GENEV-INFO", "CH-LSGLAD", "CH-LSGLAP",
+])
 
 exported_frequencies = {float(row["Frequency"]) for row in rows}
 for uplink_only in [145.2, 145.85, 145.99, 435.25]:
@@ -97,13 +121,34 @@ source_datasets = {
 }
 assert "research/annecy-alpes-leman-v0.2/aviation-france-pre-airac-08.json" not in source_datasets
 assert "research/annecy-alpes-leman-v0.2/navigation-lakes-findings.json" not in source_datasets
+assert "research/annecy-alpes-leman-v0.2/aviation-france-airac-08.json" in source_datasets
+assert "research/annecy-alpes-leman-v0.2/aviation-switzerland-airac-08.json" in source_datasets
 
-swiss = [
+swiss_ham = [
     item["channel"]
     for item in candidate["memories"]
     if item["channel"]["source_dataset"].endswith("radioamateur-switzerland-candidates.json")
 ]
-assert len(swiss) == 2
-assert all(channel["verification"] == "verified_current" for channel in swiss)
+assert len(swiss_ham) == 2
+assert all(channel["verification"] == "verified_current" for channel in swiss_ham)
+
+fr_aviation = [
+    item["channel"]
+    for item in candidate["memories"]
+    if item["channel"]["source_dataset"].endswith("aviation-france-airac-08.json")
+]
+assert len(fr_aviation) == 7
+assert all(channel["verification"] == "verified_airac08_public" for channel in fr_aviation)
+
+ch_aviation = [
+    item["channel"]
+    for item in candidate["memories"]
+    if item["channel"]["source_dataset"].endswith("aviation-switzerland-airac-08.json")
+]
+assert len(ch_aviation) == 2
+assert all(channel["verification"] == "verified_current_public" for channel in ch_aviation)
+
+for forbidden_name in ["CHAM-INFO", "CHAM-APP", "CHAM-TWR", "CHAM-ATIS"]:
+    assert forbidden_name not in by_name
 
 print("Tests Annecy–Alpes–Léman internal candidate: OK")

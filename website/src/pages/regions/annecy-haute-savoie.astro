@@ -3,121 +3,84 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Annecy–Alpes–Léman v0.2 en préparation — RadioPack France"
-  description="État de préparation du futur pack RX-only Annecy–Alpes–Léman v0.2. L'aperçu historique v0.1 n'est plus présenté comme un pack régional disponible."
+  title="Annecy–Alpes–Léman v0.2 — RadioPack France"
+  description="Pack RX-only Annecy–Alpes–Léman v0.2 : 65 mémoires France–Suisse, avec variante sans aviation."
 >
   <section class="section">
     <div class="container page-grid">
       <div class="copy">
-        <span class="eyebrow">Reconstruction complète — future v0.2</span>
+        <span class="eyebrow">Disponible — v0.2</span>
         <h1>Annecy–Alpes–<br /><span class="gradient-text">Léman</span></h1>
         <p class="lead">
-          Le pack est repris depuis une base propre pour couvrir les Alpes du Nord et
-          le bassin lémanique avec des données analogiques réellement vérifiées. La
-          version v0.1 de 36 mémoires était un aperçu incomplet : elle n'est plus mise
-          en avant ni proposée dans le catalogue public.
+          Le pack v0.2 est publié avec 65 mémoires RX couvrant le socle national,
+          l'APRS/ISS, les satellites FM retenus, les appels radioamateurs, les relais
+          analogiques France/Suisse et les fréquences aviation validées du périmètre.
         </p>
 
         <div class="button-row">
-          <a class="button button-primary" href="/versions">Voir l'état des packs</a>
+          <a class="button button-primary" href="/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv" download>Télécharger le CSV v0.2</a>
+          <a class="button button-orange" href="/generateur">Personnaliser le pack</a>
           <a class="button button-secondary" href="/documentation">Méthode et sécurité</a>
-          <a class="button button-orange" href="/telechargements">Packs disponibles</a>
         </div>
 
-        <div class="card warning">
-          <strong>Pas de téléchargement régional Annecy pendant la reconstruction</strong>
+        <div class="card release-note">
+          <strong>65 mémoires avec aviation · 48 sans aviation</strong>
           <p>
-            Les anciens fichiers v0.1 peuvent rester dans l'historique du dépôt, mais
-            ils ne sont plus présentés comme un produit régional terminé. La prochaine
-            publication publique sera une version v0.2 cohérente : JSON, CSV, site,
-            tests et guide PDF seront livrés ensemble.
+            Le générateur retire simplement les 17 mémoires aviation lorsque l'option est décochée.
+            Les autres positions restent inchangées et toutes les lignes utilisent <code>Duplex=off</code>.
           </p>
         </div>
 
         <div class="card scope">
-          <h2>Zone de travail</h2>
+          <h2>Contenu publié</h2>
           <div class="scope-grid">
-            <div>
-              <span class="badge">France</span>
-              <p>Haute-Savoie, Savoie, Ain et Isère, avec ajout de zones voisines uniquement lorsqu'une réception réaliste et une source solide le justifient.</p>
-            </div>
-            <div>
-              <span class="badge badge-orange">Suisse</span>
-              <p>Genève, Vaud et Valais dans des blocs clairement séparés des données françaises.</p>
-            </div>
+            <div><span class="badge">National</span><p>PMR446, APRS/ISS, satellites FM et canaux d'appel.</p></div>
+            <div><span class="badge badge-green">France</span><p>19 mémoires radioamateur analogiques recoupées et 11 mémoires aviation validées.</p></div>
+            <div><span class="badge badge-orange">Suisse</span><p>2 mémoires radioamateur HB9G et 6 mémoires aviation Lausanne/Sion.</p></div>
+            <div><span class="badge">Navigation</span><p>Aucune mémoire lacustre ajoutée faute de canal public général suffisamment justifié.</p></div>
           </div>
         </div>
 
         <div class="work-grid grid-2">
-          <article class="card">
-            <span class="badge badge-green">1</span>
-            <h3>Socle national</h3>
-            <p>PMR446 RX, appels radioamateurs, APRS, ISS et satellites analogiques encore actifs au moment du gel des données.</p>
-          </article>
-          <article class="card">
-            <span class="badge">2</span>
-            <h3>Radioamateur France</h3>
-            <p>Relais, transpondeurs et balises analogiques recoupés pour les départements ciblés.</p>
-          </article>
-          <article class="card">
-            <span class="badge badge-orange">3</span>
-            <h3>Radioamateur Suisse</h3>
-            <p>Genève, Vaud et Valais, avec noms et commentaires identifiant clairement le pays et les sites.</p>
-          </article>
-          <article class="card">
-            <span class="badge badge-green">4</span>
-            <h3>Aviation France et Suisse</h3>
-            <p>Aérodromes, tours, AFIS, A/A, ATIS, approches et information utiles selon les publications aéronautiques en vigueur.</p>
-          </article>
-          <article class="card">
-            <span class="badge">5</span>
-            <h3>Lacs et navigation</h3>
-            <p>Léman, Annecy, Bourget et Aiguebelette uniquement lorsqu'un usage public officiel est documenté. Aucun plan maritime copié par défaut.</p>
-          </article>
-          <article class="card">
-            <span class="badge badge-orange">6</span>
-            <h3>Contrôle final</h3>
-            <p>Doublons fusionnés, modes numériques exclus, positions 0–199 validées et toutes les lignes publiques forcées en <code>Duplex=off</code>.</p>
-          </article>
+          <article class="card"><span class="badge badge-green">16</span><h3>PMR446</h3><p>Les 16 canaux analogiques en écoute RX.</p></article>
+          <article class="card"><span class="badge">11</span><h3>APRS / espace / appels</h3><p>APRS/ISS, trois satellites FM et deux canaux d'appel.</p></article>
+          <article class="card"><span class="badge badge-orange">21</span><h3>Radioamateur</h3><p>19 mémoires France et 2 mémoires Suisse vérifiées.</p></article>
+          <article class="card"><span class="badge badge-green">17</span><h3>Aviation</h3><p>11 mémoires France/bassin genevois et 6 mémoires Suisse.</p></article>
         </div>
 
         <div class="card conflict">
-          <h2>Fréquences conflictuelles</h2>
+          <h2>Omissions documentées</h2>
           <p>
-            Toute donnée contradictoire reste hors du CSV tant qu'elle n'est pas
-            recoupée. Le cas F1ZJV / Viuz-en-Sallaz reste explicitement en attente :
-            une source locale le décrit comme analogique alors que la base nationale
-            peut le classer autrement selon l'entrée consultée.
+            Albertville LFKA, Megève LFHM et Genève LSGG restent hors v0.2 faute de tableau primaire
+            suffisamment extractible dans le workflow retenu. Sallanches LFHZ est exclu car fermé.
+            Le cas F1ZJV reste également hors production tant que son statut analogique/numérique n'est pas recoupé sans ambiguïté.
           </p>
         </div>
       </div>
 
       <aside class="card status-card">
-        <span class="badge badge-orange">En préparation</span>
-        <h3>Future version v0.2</h3>
-        <div class="meter"><span></span></div>
-        <p class="status-copy">
-          Objectif indicatif : environ 160 à 180 mémoires utiles, sans remplissage
-          artificiel. Un total inférieur restera acceptable si les sources vérifiées
-          ne justifient pas davantage de lignes.
-        </p>
+        <span class="badge badge-green">Publié</span>
+        <h3>Version v0.2</h3>
+        <div class="memory-count"><strong>65</strong><span>mémoires RX</span></div>
+        <p class="status-copy">Revue finale 65/65 terminée avant publication. Variante 48 mémoires sans aviation disponible via le générateur.</p>
 
         <hr />
-        <h4>État public actuel</h4>
+        <h4>Contrôles</h4>
         <ul>
-          <li>Normandie v0.3.1 : disponible</li>
-          <li>Annecy v0.1 : aperçu historique retiré du catalogue</li>
-          <li>Annecy–Alpes–Léman v0.2 : inventaire en cours</li>
+          <li>AIRAC France : validé</li>
+          <li>AIRAC Suisse : validé</li>
+          <li>Satellites AMSAT : recontrôlés</li>
+          <li>NOTAM : facultatif et informatif</li>
         </ul>
 
         <hr />
-        <h4>Règles non négociables</h4>
+        <h4>Règles permanentes</h4>
         <ul>
           <li>Réception seule avec <code>Duplex=off</code></li>
+          <li>Noms ≤ 10 caractères</li>
           <li>Analogique recevable par l'UV-K5</li>
-          <li>Aucun réseau sensible ou privé</li>
           <li>Aucun doublon pour gonfler le total</li>
-          <li>France et Suisse séparées</li>
+          <li>France et Suisse identifiables</li>
         </ul>
       </aside>
     </div>
@@ -125,130 +88,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <style>
-  .page-grid {
-    display: grid;
-    grid-template-columns: 1.25fr .75fr;
-    gap: 30px;
-    align-items: start;
-  }
-
-  .copy {
-    display: grid;
-    gap: 22px;
-  }
-
-  .copy h1 {
-    font-size: clamp(3.2rem, 7vw, 5.6rem);
-  }
-
-  .warning,
-  .scope,
-  .conflict {
-    padding: 24px;
-  }
-
-  .warning {
-    background: linear-gradient(120deg, rgba(240,154,32,.15), rgba(255,255,255,.84));
-  }
-
-  .warning p,
-  .scope p,
-  .conflict p,
-  .work-grid p,
-  .status-copy {
-    margin-top: 7px;
-    color: var(--muted);
-  }
-
-  .scope {
-    background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(230,247,252,.82));
-  }
-
-  .scope h2,
-  .conflict h2 {
-    margin-bottom: 16px;
-  }
-
-  .scope-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  .scope-grid > div {
-    padding: 18px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: rgba(255,255,255,.68);
-  }
-
-  .work-grid article {
-    padding: 22px;
-  }
-
-  .work-grid h3 {
-    margin: 14px 0 7px;
-  }
-
-  .conflict {
-    background: linear-gradient(120deg, rgba(110,61,232,.10), rgba(255,255,255,.84));
-  }
-
-  .status-card {
-    position: sticky;
-    top: 110px;
-    padding: 28px;
-  }
-
-  .status-card h3 {
-    margin: 18px 0 10px;
-  }
-
-  .status-card h4 {
-    margin: 20px 0 8px;
-  }
-
-  .status-card ul {
-    margin: 0;
-    padding-left: 1.2rem;
-    color: var(--muted);
-  }
-
-  .status-card hr {
-    border: 0;
-    border-top: 1px solid var(--line);
-    margin: 22px 0 0;
-  }
-
-  .meter {
-    height: 10px;
-    border-radius: 999px;
-    background: #dfe7f1;
-    overflow: hidden;
-    margin-bottom: 18px;
-  }
-
-  .meter span {
-    display: block;
-    width: 8%;
-    height: 100%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, #f09a20, #1687e9, #6e3de8);
-  }
-
-  code {
-    font-weight: 800;
-    color: #007c8a;
-  }
-
-  @media (max-width: 800px) {
-    .page-grid,
-    .scope-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .status-card {
-      position: static;
-    }
-  }
+  .page-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 30px; align-items: start; }
+  .copy { display: grid; gap: 22px; }
+  .copy h1 { font-size: clamp(3.2rem, 7vw, 5.6rem); }
+  .release-note, .scope, .conflict { padding: 24px; }
+  .release-note { background: linear-gradient(120deg, rgba(16,164,122,.13), rgba(255,255,255,.84)); }
+  .release-note p, .scope p, .conflict p, .work-grid p, .status-copy { margin-top: 7px; color: var(--muted); }
+  .scope { background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(230,247,252,.82)); }
+  .scope h2, .conflict h2 { margin-bottom: 16px; }
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .scope-grid > div { padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.68); }
+  .work-grid article { padding: 22px; }
+  .work-grid h3 { margin: 14px 0 7px; }
+  .conflict { background: linear-gradient(120deg, rgba(110,61,232,.10), rgba(255,255,255,.84)); }
+  .status-card { position: sticky; top: 110px; padding: 28px; }
+  .status-card h3 { margin: 18px 0 10px; }
+  .status-card h4 { margin: 20px 0 8px; }
+  .status-card ul { margin: 0; padding-left: 1.2rem; color: var(--muted); }
+  .status-card hr { border: 0; border-top: 1px solid var(--line); margin: 22px 0 0; }
+  .memory-count { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .memory-count strong { font-family: "Space Grotesk", sans-serif; font-size: 4rem; line-height: .9; }
+  .memory-count span { color: var(--muted); font-weight: 800; }
+  code { font-weight: 800; color: #007c8a; }
+  @media (max-width: 800px) { .page-grid, .scope-grid { grid-template-columns: 1fr; } .status-card { position: static; } }
 </style>

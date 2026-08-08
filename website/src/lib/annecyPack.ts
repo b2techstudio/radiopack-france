@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { basename, resolve } from "node:path";
 
 export const CHIRP_COLUMNS = [
   "Location", "Name", "Frequency", "Duplex", "Offset", "Tone",
@@ -25,9 +26,14 @@ export type PlacedChannel = {
   channel: Channel;
 };
 
+const repositoryRoot = () => {
+  const cwd = process.cwd();
+  return basename(cwd) === "website" ? resolve(cwd, "..") : cwd;
+};
+
 const load = (relativePath: string): Dataset => {
-  const url = new URL(`../../../${relativePath}`, import.meta.url);
-  return JSON.parse(readFileSync(url, "utf-8")) as Dataset;
+  const path = resolve(repositoryRoot(), relativePath);
+  return JSON.parse(readFileSync(path, "utf-8")) as Dataset;
 };
 
 const SOURCES = [
@@ -127,11 +133,7 @@ const chirpRow = (item: PlacedChannel) => {
 
 export const buildAnnecyCsv = (includeAviation = true) => {
   const rows = getAnnecyPack(includeAviation).map(chirpRow);
-  return [
-    CHIRP_COLUMNS.join(","),
-    ...rows.map((row) => row.map(csvCell).join(",")),
-    "",
-  ].join("\r\n");
+  return [CHIRP_COLUMNS.join(","), ...rows.map((row) => row.map(csvCell).join(",")), ""].join("\r\n");
 };
 
 export const annecyPublicFilename = (includeAviation = true) =>

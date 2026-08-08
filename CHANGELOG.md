@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.13.0 - 2026-08-08
+
+- Reclassement des contrôles NOTAM France et Suisse en vérifications facultatives et non bloquantes pour les packs d'écoute RX.
+- Ajout du contrat `generator/options.json` avec deux options indépendantes : inclusion de l'aviation et état du contrôle NOTAM.
+- Ajout de `tools/check_annecy_release_readiness.py` pour distinguer les portes bloquantes des contrôles informatifs.
+- Recontrôle officiel AMSAT de SO-50, AO-91 et AO-123 ; passage de `dynamic_satellites` à `passed_official_amsat_recheck`.
+- Passage d'Annecy–Alpes–Léman v0.2 à l'état prêt pour la prépublication, tout en maintenant l'absence de téléchargement public.
+- Ajout de `tools/build_annecy_prepublication.py`, backend de génération hors `website/public`.
+- Génération contrôlée de deux variantes : 65 mémoires avec aviation et 48 mémoires sans aviation, sans renumérotation artificielle des autres blocs.
+- Le choix NOTAM est enregistré dans le manifeste de génération mais ne modifie jamais automatiquement les fréquences du CSV.
+- Ajout de `tests/test_annecy_prepublication.py` et exécution automatique dans la CI.
+- Mise à jour systématique du `README.md` avec l'état courant du projet et ajout d'un garde-fou CI correspondant.
+- Ajout de l'exclusion Git globale de `__pycache__/` et `*.py[cod]`.
+- Le CSV public Annecy–Alpes–Léman v0.2 reste volontairement absent jusqu'à la revue finale explicite.
+
 ## 0.12.0 - 2026-08-08
 
 - Clôture conservatrice du périmètre aviation Annecy–Alpes–Léman v0.2 sans ajout artificiel de fréquences.

@@ -1,8 +1,8 @@
 {
   "dataset": "Annecy–Alpes–Léman v0.2 - portes opérationnelles aviation",
-  "version": "0.2.0-research.4",
+  "version": "0.2.0-research.5",
   "updated": "2026-08-08",
-  "public_release_allowed": false,
+  "public_release_allowed": true,
   "purpose": "Séparer les validations réellement bloquantes des contrôles opérationnels facultatifs pour un pack d'écoute RX.",
   "sources": [
     {
@@ -21,6 +21,18 @@
       "id": "SKYBRIEFING",
       "title": "Skyguide/Skybriefing - briefing AIP et NOTAM Suisse",
       "url": "https://www.skybriefing.com/",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "AMSAT-LIVE-FM-2026-07-10",
+      "title": "AMSAT - Live FM Satellites",
+      "url": "https://www.amsat.org/live-fm-satellites/",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "AMSAT-STATUS-API-2026-08-08",
+      "title": "AMSAT - Satellite Status API",
+      "url": "https://www.amsat.org/status/api/",
       "accessed": "2026-08-08"
     }
   ],
@@ -67,11 +79,13 @@
     {
       "id": "dynamic_satellites",
       "required_for_public_release": true,
-      "status": "pending_release_time_recheck",
-      "reason": "Le statut opérationnel des satellites FM peut changer et doit être revérifié juste avant publication."
+      "status": "passed_official_amsat_recheck",
+      "checked": "2026-08-08",
+      "evidence": "satellites-fm-inventory.json",
+      "reason": "SO-50, AO-91 et AO-123 ont été revérifiés sur les publications AMSAT officielles. AO-91 reste limité aux passages éclairés à cause de sa batterie."
     }
   ],
   "generator_options_contract": "generator/options.json",
   "notam_rule": "Les NOTAM sont un contrôle facultatif du générateur. Ils n'altèrent jamais automatiquement les fréquences AIP/AIRAC enregistrées dans le CSV.",
-  "release_rule": "Seules les portes required_for_public_release=true peuvent bloquer la publication. Les contrôles NOTAM sont informatifs et facultatifs pour un pack d'écoute RX."
+  "release_rule": "Seules les portes required_for_public_release=true peuvent bloquer la publication. Toutes les portes bloquantes sont maintenant validées ; les contrôles NOTAM restent informatifs et facultatifs pour un pack d'écoute RX."
 }

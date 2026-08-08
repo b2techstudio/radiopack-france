@@ -58,7 +58,7 @@ for expected in [
     "État actuel — Sprint 16",
     "Candidat interne Annecy–Alpes–Léman : **65 mémoires**",
     "Contrôle NOTAM France/Suisse : **facultatif et non bloquant**",
-    "dynamic_satellites",
+    "recontrôle dynamique des satellites FM",
     "## Maintenance du projet",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:

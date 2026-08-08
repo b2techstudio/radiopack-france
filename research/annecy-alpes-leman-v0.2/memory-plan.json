@@ -2,77 +2,29 @@
   "pack": "Annecy–Alpes–Léman",
   "target_version": "0.2.0",
   "status": "internal_candidate_ready_not_for_publication",
-  "updated": "2026-08-04",
+  "updated": "2026-08-08",
   "public_export_allowed": false,
   "internal_candidate": {
-    "expected_memory_count": 48,
+    "expected_memory_count": 57,
     "rule": "Le candidat interne ne contient que les lignes explicitement autorisées par l'assembleur."
   },
   "blocks": [
-    {
-      "start": 0,
-      "end": 15,
-      "label": "PMR446 national RX",
-      "candidate_count": 16
-    },
-    {
-      "start": 16,
-      "end": 19,
-      "label": "Réserve",
-      "candidate_count": 0
-    },
-    {
-      "start": 20,
-      "end": 29,
-      "label": "APRS / ISS / satellites analogiques",
-      "candidate_count": 9
-    },
-    {
-      "start": 30,
-      "end": 39,
-      "label": "Appels et balises communes",
-      "candidate_count": 2
-    },
-    {
-      "start": 40,
-      "end": 89,
-      "label": "Radioamateur analogique France",
-      "candidate_count": 19
-    },
-    {
-      "start": 90,
-      "end": 124,
-      "label": "Radioamateur analogique Suisse",
-      "candidate_count": 2
-    },
-    {
-      "start": 125,
-      "end": 154,
-      "label": "Aviation France",
-      "candidate_count": 0
-    },
-    {
-      "start": 155,
-      "end": 174,
-      "label": "Aviation Suisse",
-      "candidate_count": 0
-    },
-    {
-      "start": 175,
-      "end": 184,
-      "label": "Lacs et navigation publique vérifiée",
-      "candidate_count": 0
-    },
-    {
-      "start": 185,
-      "end": 199,
-      "label": "Libre",
-      "candidate_count": 0
-    }
+    {"start": 0, "end": 15, "label": "PMR446 national RX", "candidate_count": 16},
+    {"start": 16, "end": 19, "label": "Réserve", "candidate_count": 0},
+    {"start": 20, "end": 29, "label": "APRS / ISS / satellites analogiques", "candidate_count": 9},
+    {"start": 30, "end": 39, "label": "Appels et balises communes", "candidate_count": 2},
+    {"start": 40, "end": 89, "label": "Radioamateur analogique France", "candidate_count": 19},
+    {"start": 90, "end": 124, "label": "Radioamateur analogique Suisse", "candidate_count": 2},
+    {"start": 125, "end": 154, "label": "Aviation France / bassin genevois", "candidate_count": 7},
+    {"start": 155, "end": 174, "label": "Aviation Suisse", "candidate_count": 2},
+    {"start": 175, "end": 184, "label": "Lacs et navigation publique vérifiée", "candidate_count": 0},
+    {"start": 185, "end": 199, "label": "Libre", "candidate_count": 0}
   ],
   "notes": [
     "Ce plan est une capacité de travail et non une promesse de remplissage.",
-    "Les blocs aviation restent vides avant revalidation AIRAC 08/26.",
+    "Le bloc aviation France n'intègre que sept lignes recoupées sur des sources publiques du cycle courant.",
+    "Le bloc aviation Suisse n'intègre que les deux fréquences Lausanne actuellement recoupées publiquement.",
+    "Chambéry, Albertville, Megève, Sallanches, Genève-aéroport et Sion restent hors candidat en attente de recoupement public complet.",
     "Le bloc lacustre reste vide en l'absence de fréquence publique générale validée.",
     "Les blocs France et Suisse restent distincts.",
     "Tous les exports, y compris internes, utilisent Duplex=off."

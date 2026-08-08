@@ -103,7 +103,7 @@ assert len({channel["frequency_mhz"] for channel in all_channels}) == len(all_ch
 assert all(len(channel["name"]) <= 10 for channel in all_channels)
 assert not excluded_ch_frequencies.intersection({channel["frequency_mhz"] for channel in ch_channels})
 
-assert operations["public_release_allowed"] is False
+assert operations["public_release_allowed"] is True
 assert operations["generator_options_contract"] == "generator/options.json"
 gates = {gate["id"]: gate for gate in operations["gates"]}
 assert gates["airac_fr"]["status"] == "passed_research_validation"
@@ -117,7 +117,8 @@ assert gates["notam_ch"]["generator_option_id"] == "notam_check"
 assert gates["pending_airfields"]["status"] == "passed_scope_closed"
 assert gates["pending_airfields"]["items"] == []
 assert gates["pending_airfields"]["excluded_from_v0_2"] == ["LFKA", "LFHM", "LSGG", "LFHZ"]
-assert gates["dynamic_satellites"]["status"] == "pending_release_time_recheck"
+assert gates["dynamic_satellites"]["status"] == "passed_official_amsat_recheck"
+assert gates["dynamic_satellites"]["checked"] == "2026-08-08"
 for required_gate in ["airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"]:
     assert gates[required_gate]["required_for_public_release"] is True
 

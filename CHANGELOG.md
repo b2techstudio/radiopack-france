@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.9.0 - 2026-08-08
+
+- Revalidation partielle du bloc aviation Annecy–Alpes–Léman sur le cycle AIRAC 08/26 effectif depuis le 6 août 2026.
+- Ajout de sept mémoires aviation France / bassin genevois recoupées publiquement : Annecy-Meythet, Annemasse, Grenoble-Le Versoud, Grenoble-Alpes-Isère et Genève Information.
+- Ajout de deux mémoires Lausanne-La Blécherette recoupées sur le site officiel de l'exploitant : 123,205 MHz et 118,830 MHz.
+- Conservation du pré-inventaire AIRAC 07/26 comme historique, avec interdiction explicite de l'utiliser dans l'assembleur.
+- Maintien hors candidat de Chambéry, Albertville, Megève, Sallanches, Genève-aéroport et Sion tant que les données courantes ne sont pas suffisamment recoupées publiquement.
+- Passage du candidat interne de 48 à 57 mémoires, toutes en réception seule avec `Duplex=off`.
+- Ajout du test `tests/test_annecy_airac08.py` et extension des tests du candidat interne aux blocs aviation.
+- Aucun changement des téléchargements publics Annecy, du générateur public ou du statut « En préparation ».
+
 ## 0.8.0 - 2026-08-04
 
 - Ajout de SO-50, AO-91 et AO-123 dans un inventaire satellite FM de recherche.

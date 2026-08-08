@@ -1,0 +1,248 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Générateur de pack"
+  description="Prépare la configuration d'un pack RadioPack France et visualise les options Annecy–Alpes–Léman v0.2 avant sa publication."
+>
+  <section class="section generator-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Générateur web · prépublication</span>
+        <h1>Configure ton <span class="gradient-text">RadioPack</span></h1>
+        <p class="lead">
+          Le générateur web est maintenant branché sur les règles de la future version
+          Annecy–Alpes–Léman v0.2. Tu peux préparer les options et vérifier le nombre de
+          mémoires avant publication.
+        </p>
+        <div class="notice card">
+          <strong>Le téléchargement Annecy v0.2 reste verrouillé.</strong>
+          <p>
+            Cette interface permet de tester la configuration, mais aucun CSV Annecy v0.2
+            n'est encore exposé publiquement. La publication restera une action séparée et explicite.
+          </p>
+        </div>
+      </div>
+
+      <aside class="card status-card" aria-label="État du générateur">
+        <span class="badge badge-green">Backend validé</span>
+        <strong>65 / 48 mémoires</strong>
+        <p>65 avec aviation, 48 sans aviation. Toutes les mémoires restent en réception seule.</p>
+        <dl>
+          <div><dt>Duplex</dt><dd>off</dd></div>
+          <div><dt>NOTAM</dt><dd>facultatif</dd></div>
+          <div><dt>Publication</dt><dd>verrouillée</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container generator-grid">
+      <form class="card generator-form" id="annecy-generator" novalidate>
+        <div class="form-heading">
+          <div>
+            <span class="badge">Annecy–Alpes–Léman v0.2</span>
+            <h2>Options du pack</h2>
+          </div>
+          <span class="status-pill">Prépublication</span>
+        </div>
+
+        <fieldset>
+          <legend>Contenu</legend>
+          <label class="option-row" for="include-aviation">
+            <span>
+              <strong>Inclure les fréquences aviation</strong>
+              <small>Ajoute les 17 mémoires aviation validées France / Suisse.</small>
+            </span>
+            <input id="include-aviation" name="include-aviation" type="checkbox" checked />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Contrôle opérationnel facultatif</legend>
+          <label class="option-row" for="notam-check">
+            <span>
+              <strong>Contrôle NOTAM avant génération</strong>
+              <small>
+                Enregistre l'état de vérification dans le manifeste. Cette option ne modifie jamais
+                automatiquement les fréquences du CSV.
+              </small>
+            </span>
+            <input id="notam-check" name="notam-check" type="checkbox" />
+          </label>
+
+          <div class="notam-confirm" id="notam-confirm-zone" hidden>
+            <p>
+              Vérifie si besoin les informations temporaires auprès de SOFIA-Briefing pour la France
+              et Skybriefing pour la Suisse.
+            </p>
+            <label for="notam-confirmed">
+              <input id="notam-confirmed" name="notam-confirmed" type="checkbox" />
+              <span>J'ai vérifié les NOTAM applicables</span>
+            </label>
+            <p class="muted">
+              La confirmation reste facultative : un pack d'écoute RX peut être généré sans elle.
+            </p>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button class="button button-primary locked-button" type="button" disabled>
+            Génération CSV Annecy bientôt disponible
+          </button>
+          <a class="button button-secondary" href="/telechargements">Téléchargements actuels</a>
+        </div>
+      </form>
+
+      <aside class="card summary-card" aria-live="polite">
+        <span class="eyebrow">Résumé</span>
+        <div class="memory-counter">
+          <strong id="memory-count">65</strong>
+          <span>mémoires</span>
+        </div>
+
+        <div class="summary-list">
+          <div><span>Aviation</span><strong id="aviation-summary">Incluse · 17</strong></div>
+          <div><span>NOTAM</span><strong id="notam-summary">Non demandé</strong></div>
+          <div><span>Mode</span><strong>Réception seule</strong></div>
+          <div><span>Duplex</span><strong>off</strong></div>
+        </div>
+
+        <div class="summary-warning" id="notam-warning">
+          Contrôle NOTAM non demandé. Les fréquences restent celles des sources officielles validées.
+        </div>
+
+        <p class="muted summary-note">
+          Les positions mémoire ne sont pas compactées lorsque l'aviation est retirée : les autres
+          blocs conservent leurs emplacements validés.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container info-grid grid-3">
+      <article class="card info-card">
+        <span class="badge badge-green">65 mémoires</span>
+        <h3>Version complète</h3>
+        <p>PMR446, APRS/ISS, satellites FM, appels, radioamateur France/Suisse et aviation validée.</p>
+      </article>
+      <article class="card info-card">
+        <span class="badge">48 mémoires</span>
+        <h3>Sans aviation</h3>
+        <p>Les 17 mémoires aviation sont simplement retirées, sans déplacer les autres positions.</p>
+      </article>
+      <article class="card info-card">
+        <span class="badge badge-orange">NOTAM</span>
+        <h3>Contrôle optionnel</h3>
+        <p>La vérification NOTAM est informative et ne remplace jamais les données AIP/AIRAC de référence.</p>
+      </article>
+    </div>
+  </section>
+
+  <script>
+    const aviation = document.querySelector<HTMLInputElement>("#include-aviation");
+    const notam = document.querySelector<HTMLInputElement>("#notam-check");
+    const confirmed = document.querySelector<HTMLInputElement>("#notam-confirmed");
+    const confirmZone = document.querySelector<HTMLElement>("#notam-confirm-zone");
+    const memoryCount = document.querySelector<HTMLElement>("#memory-count");
+    const aviationSummary = document.querySelector<HTMLElement>("#aviation-summary");
+    const notamSummary = document.querySelector<HTMLElement>("#notam-summary");
+    const notamWarning = document.querySelector<HTMLElement>("#notam-warning");
+
+    const updateGenerator = () => {
+      if (!aviation || !notam || !confirmed || !confirmZone || !memoryCount || !aviationSummary || !notamSummary || !notamWarning) {
+        return;
+      }
+
+      memoryCount.textContent = aviation.checked ? "65" : "48";
+      aviationSummary.textContent = aviation.checked ? "Incluse · 17" : "Exclue · 0";
+      confirmZone.hidden = !notam.checked;
+
+      if (!notam.checked) {
+        confirmed.checked = false;
+        notamSummary.textContent = "Non demandé";
+        notamWarning.textContent = "Contrôle NOTAM non demandé. Les fréquences restent celles des sources officielles validées.";
+        return;
+      }
+
+      if (confirmed.checked) {
+        notamSummary.textContent = "Confirmé";
+        notamWarning.textContent = "Contrôle NOTAM confirmé par l'utilisateur. Le contenu fréquentiel du CSV reste inchangé.";
+      } else {
+        notamSummary.textContent = "Demandé · non confirmé";
+        notamWarning.textContent = "Contrôle NOTAM demandé mais non confirmé. Cette vérification reste facultative et non bloquante.";
+      }
+    };
+
+    aviation?.addEventListener("change", updateGenerator);
+    notam?.addEventListener("change", updateGenerator);
+    confirmed?.addEventListener("change", updateGenerator);
+    updateGenerator();
+  </script>
+</BaseLayout>
+
+<style>
+  .generator-hero { padding-bottom: 48px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr); gap: 28px; align-items: end; }
+  .hero-copy { display: grid; gap: 24px; }
+  .hero-copy h1 { max-width: 850px; }
+  .notice { display: grid; gap: 6px; max-width: 760px; padding: 18px 20px; border-left: 4px solid var(--orange); }
+  .notice p { color: var(--muted); }
+  .status-card { display: grid; gap: 13px; padding: 24px; }
+  .status-card > strong { font-family: "Space Grotesk", sans-serif; font-size: 2rem; }
+  .status-card > p { color: var(--muted); }
+  .status-card dl { display: grid; gap: 9px; margin: 4px 0 0; }
+  .status-card dl div { display: flex; justify-content: space-between; gap: 20px; padding-top: 9px; border-top: 1px solid var(--line); }
+  .status-card dt { color: var(--muted); }
+  .status-card dd { margin: 0; font-weight: 800; }
+
+  .generator-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); gap: 22px; align-items: start; }
+  .generator-form, .summary-card { padding: 28px; }
+  .generator-form { display: grid; gap: 24px; }
+  .form-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+  .form-heading > div { display: grid; gap: 10px; }
+  .form-heading h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .status-pill { padding: .4rem .65rem; border-radius: 999px; background: rgba(240,154,32,.14); color: #8d5205; font-size: .75rem; font-weight: 850; white-space: nowrap; }
+
+  fieldset { display: grid; gap: 12px; margin: 0; padding: 0; border: 0; }
+  legend { margin-bottom: 8px; font-size: .78rem; font-weight: 850; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  .option-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(248,250,252,.78); cursor: pointer; }
+  .option-row > span { display: grid; gap: 4px; }
+  .option-row small { color: var(--muted); font-size: .88rem; }
+  .option-row input { width: 22px; height: 22px; accent-color: var(--purple); flex: 0 0 auto; }
+
+  .notam-confirm { display: grid; gap: 12px; margin-top: 2px; padding: 18px; border-radius: 16px; background: rgba(22,135,233,.07); border: 1px solid rgba(22,135,233,.14); }
+  .notam-confirm label { display: flex; gap: 10px; align-items: center; font-weight: 800; }
+  .notam-confirm input { width: 19px; height: 19px; accent-color: var(--purple); }
+  .form-actions { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
+  .locked-button:disabled { opacity: .58; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .summary-card { position: sticky; top: 110px; display: grid; gap: 20px; }
+  .memory-counter { display: flex; align-items: baseline; gap: 10px; }
+  .memory-counter strong { font-family: "Space Grotesk", sans-serif; font-size: clamp(4rem, 8vw, 6rem); line-height: .9; letter-spacing: -.06em; }
+  .memory-counter span { color: var(--muted); font-weight: 800; }
+  .summary-list { display: grid; }
+  .summary-list div { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-top: 1px solid var(--line); }
+  .summary-list span { color: var(--muted); }
+  .summary-list strong { text-align: right; }
+  .summary-warning { padding: 14px; border-radius: 13px; background: rgba(240,154,32,.11); color: #6e460d; font-size: .9rem; }
+  .summary-note { font-size: .88rem; }
+
+  .info-grid { padding-bottom: 34px; }
+  .info-card { display: grid; gap: 12px; padding: 22px; }
+  .info-card p { color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .hero-grid, .generator-grid { grid-template-columns: 1fr; }
+    .summary-card { position: static; }
+  }
+
+  @media (max-width: 600px) {
+    .generator-form, .summary-card { padding: 20px; }
+    .form-heading { flex-direction: column; }
+    .option-row { align-items: flex-start; }
+    .option-row input { margin-top: 2px; }
+  }
+</style>

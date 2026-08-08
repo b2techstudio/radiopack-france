@@ -4,19 +4,21 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables, et les exports publics sont configurés en réception seule.
 
-## État actuel — Sprint 16
+## État actuel — Sprint 17
 
 - Pack public disponible : **Normandie v0.3.1**.
-- **Annecy–Alpes–Léman v0.2** est toujours en préparation.
+- **Annecy–Alpes–Léman v0.2** est toujours en préparation, mais il est désormais **prêt pour la génération de prépublication**.
 - Candidat interne Annecy–Alpes–Léman : **65 mémoires**.
 - Aucun CSV public Annecy–Alpes–Léman v0.2 n'est encore publié.
 - AIRAC France : validé pour le périmètre retenu.
 - AIRAC Suisse : validé pour le périmètre retenu.
 - Périmètre aviation v0.2 : clos de manière conservatrice.
 - Contrôle NOTAM France/Suisse : **facultatif et non bloquant** pour un pack d'écoute RX.
-- Dernière porte bloquante avant prépublication : **recontrôle dynamique des satellites FM**.
+- Recontrôle satellites AMSAT : **validé le 8 août 2026** pour SO-50, AO-91 et AO-123.
+- Porte `dynamic_satellites` : `passed_official_amsat_recheck`.
+- Toutes les portes réellement bloquantes de prépublication sont maintenant validées.
 
-Le script `tools/check_annecy_release_readiness.py` centralise maintenant cette décision de prépublication.
+Le script `tools/check_annecy_release_readiness.py` centralise cette décision et doit maintenant répondre `READY`.
 
 ## Principes du projet
 
@@ -45,6 +47,14 @@ Le candidat interne de 65 mémoires comprend actuellement :
 | **Total** | **65** |
 
 Albertville `LFKA`, Megève `LFHM` et Genève `LSGG` sont volontairement exclus de la v0.2 faute de tableau primaire suffisamment extractible dans le workflow actuel. Sallanches `LFHZ` est exclu car l'aérodrome est fermé.
+
+### Satellites retenus
+
+- `SAT-SO50` : descente 436.795 MHz ; montée conservée en métadonnée 145.850 MHz, CTCSS 67 Hz ; activation 74.4 Hz.
+- `SAT-AO91` : descente 145.960 MHz ; fonctionnement limité aux passages éclairés à cause de la batterie.
+- `SAT-AO123` : descente 435.400 MHz ; montée conservée en métadonnée 145.850 MHz, CTCSS 67 Hz.
+
+Le recontrôle du Sprint 17 s'appuie sur les publications officielles AMSAT courantes. L'API officielle de statut AMSAT a également été identifiée pour une éventuelle automatisation future.
 
 ## Futur générateur
 
@@ -106,7 +116,15 @@ Ce dossier est ignoré par Git et n'est pas publié sur le site.
 python tools\check_annecy_release_readiness.py
 ```
 
-Tant que la porte satellite reste ouverte, le script répond volontairement `NOT READY` et retourne le code de sortie `2`.
+Depuis le Sprint 17, le résultat attendu est :
+
+```text
+READY: Annecy–Alpes–Léman v0.2 may enter public prepublication
+ADVISORY: notam_fr (advisory_optional_pre_generation)
+ADVISORY: notam_ch (advisory_optional_pre_generation)
+```
+
+Le statut `READY` autorise la prochaine étape de génération de prépublication ; il ne crée ni ne publie automatiquement le CSV final.
 
 ## Tests principaux
 
@@ -140,11 +158,15 @@ npm run build
 
 Le site Astro est prévu pour Cloudflare Pages. Les changements sur `main` déclenchent la CI et le déploiement configuré du projet.
 
+## Prochaine étape
+
+Le Sprint suivant doit générer et contrôler le **candidat de prépublication Annecy–Alpes–Léman v0.2** à partir des 65 mémoires validées, puis préparer son intégration au générateur et au site. La publication effective du CSV reste une action séparée et explicite.
+
 ## Maintenance du projet
 
 Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint afin de refléter l'état réel du dépôt, les fonctions disponibles, les commandes utiles et les prochaines portes de publication.
 
-La CI vérifie désormais la présence des informations correspondant au sprint courant dans le README. Lors d'un nouveau sprint, ce contrôle doit être mis à jour en même temps que le README.
+La CI vérifie la présence des informations correspondant au sprint courant dans le README. Lors d'un nouveau sprint, ce contrôle doit être mis à jour en même temps que le README.
 
 Les caches Python (`__pycache__/` et `*.py[cod]`) sont ignorés par Git afin de garder le dépôt local propre après l'exécution des scripts et des tests.
 

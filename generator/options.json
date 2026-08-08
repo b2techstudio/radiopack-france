@@ -1,11 +1,13 @@
 {
-  "schema_version": "1.1",
-  "status": "backend_wired_prepublication_not_public_ui",
+  "schema_version": "1.2",
+  "status": "public_ui_preview_wired_download_locked",
   "updated": "2026-08-08",
-  "purpose": "Définir et tester le comportement du générateur RadioPack sans modifier les téléchargements publics actuels.",
+  "purpose": "Définir et tester le comportement du générateur RadioPack avec une interface web de prépublication, sans créer le téléchargement public Annecy v0.2.",
   "implementation": {
     "annecy_prepublication_builder": "tools/build_annecy_prepublication.py",
-    "public_ui_wired": false,
+    "public_ui_wired": true,
+    "public_ui_route": "/generateur",
+    "public_ui_download_locked": true,
     "public_download_created": false,
     "output_scope": "research/annecy-alpes-leman-v0.2/generated/prepublication/"
   },
@@ -36,11 +38,16 @@
     }
   },
   "ui_contract": {
+    "route": "/generateur",
+    "preview_mode": true,
+    "download_enabled": false,
     "notam_checkbox_label": "Contrôle NOTAM avant génération",
     "confirmation_label": "J'ai vérifié les NOTAM applicables",
     "show_confirmation_when": "notam_check == requested_unconfirmed",
     "generation_allowed_when_unconfirmed": true,
     "summary_fields": [
+      "memory_count",
+      "aviation_included",
       "notam_check_requested",
       "notam_check_confirmed",
       "notam_check_confirmed_at"
@@ -60,8 +67,9 @@
     "Le contrôle NOTAM est facultatif et non bloquant pour la génération d'un pack d'écoute RX.",
     "La case NOTAM est indépendante de l'option Inclure les fréquences aviation.",
     "Un NOTAM ne supprime, n'ajoute ni ne remplace automatiquement une fréquence de référence dans le CSV.",
-    "Le générateur doit signaler clairement lorsqu'un pack est produit sans confirmation de contrôle NOTAM.",
-    "La prépublication reste hors de website/public jusqu'à une revue finale explicite.",
+    "L'interface web doit afficher 65 mémoires avec aviation et 48 sans aviation.",
+    "L'interface web peut être publiée en mode prévisualisation sans rendre le CSV Annecy v0.2 téléchargeable.",
+    "Le téléchargement Annecy v0.2 reste verrouillé jusqu'à une action de publication explicite.",
     "Le pack reste destiné à l'écoute et ne constitue pas une source de préparation ou de conduite d'un vol."
   ]
 }

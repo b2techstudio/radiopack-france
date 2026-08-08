@@ -1,8 +1,14 @@
 {
-  "schema_version": "1.0",
-  "status": "architecture_ready_not_yet_wired_to_public_ui",
+  "schema_version": "1.1",
+  "status": "backend_wired_prepublication_not_public_ui",
   "updated": "2026-08-08",
-  "purpose": "Définir le comportement futur du générateur RadioPack sans modifier les exports publics actuels.",
+  "purpose": "Définir et tester le comportement du générateur RadioPack sans modifier les téléchargements publics actuels.",
+  "implementation": {
+    "annecy_prepublication_builder": "tools/build_annecy_prepublication.py",
+    "public_ui_wired": false,
+    "public_download_created": false,
+    "output_scope": "research/annecy-alpes-leman-v0.2/generated/prepublication/"
+  },
   "options": {
     "include_aviation": {
       "type": "boolean",
@@ -10,7 +16,9 @@
       "label": "Inclure les fréquences aviation",
       "affects_csv_content": true,
       "blocks_generation": false,
-      "description": "Ajoute ou retire le bloc aviation validé du pack généré."
+      "annecy_memory_count_when_enabled": 65,
+      "annecy_memory_count_when_disabled": 48,
+      "description": "Ajoute ou retire les blocs aviation validés du pack généré, sans renuméroter les autres mémoires."
     },
     "notam_check": {
       "type": "state",
@@ -24,7 +32,7 @@
         "user_confirmed"
       ],
       "future_state_reserved": "automatic_verified",
-      "description": "Contrôle opérationnel facultatif. Il ne modifie jamais automatiquement les fréquences AIP/AIRAC du CSV."
+      "description": "Contrôle opérationnel facultatif enregistré dans le manifeste de génération. Il ne modifie jamais automatiquement les fréquences AIP/AIRAC du CSV."
     }
   },
   "ui_contract": {
@@ -53,6 +61,7 @@
     "La case NOTAM est indépendante de l'option Inclure les fréquences aviation.",
     "Un NOTAM ne supprime, n'ajoute ni ne remplace automatiquement une fréquence de référence dans le CSV.",
     "Le générateur doit signaler clairement lorsqu'un pack est produit sans confirmation de contrôle NOTAM.",
+    "La prépublication reste hors de website/public jusqu'à une revue finale explicite.",
     "Le pack reste destiné à l'écoute et ne constitue pas une source de préparation ou de conduite d'un vol."
   ]
 }

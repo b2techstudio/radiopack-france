@@ -1,0 +1,73 @@
+{
+  "dataset": "Annecy–Alpes–Léman v0.2 - portes opérationnelles aviation",
+  "version": "0.2.0-research.1",
+  "updated": "2026-08-08",
+  "public_release_allowed": false,
+  "purpose": "Séparer la validation des fréquences de la vérification opérationnelle dynamique requise juste avant publication.",
+  "sources": [
+    {
+      "id": "SIA-NOTAM-FAQ",
+      "title": "SIA - FAQ NOTAM et SOFIA-Briefing",
+      "url": "https://www.sia.aviation-civile.gouv.fr/faqs",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "SIA-EAIP-NOTAM-WARNING",
+      "title": "SIA eAIP - consulter NOTAM et SUP AIP pour les dernières informations",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/home.html",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "SKYBRIEFING",
+      "title": "Skyguide/Skybriefing - briefing AIP et NOTAM Suisse",
+      "url": "https://www.skybriefing.com/",
+      "accessed": "2026-08-08"
+    }
+  ],
+  "gates": [
+    {
+      "id": "airac_fr",
+      "required_for_public_release": true,
+      "status": "passed_research_validation",
+      "checked": "2026-08-08",
+      "evidence": "aviation-france-airac-08.json"
+    },
+    {
+      "id": "airac_ch",
+      "required_for_public_release": true,
+      "status": "passed_research_validation",
+      "checked": "2026-08-08",
+      "evidence": "aviation-switzerland-airac-08.json"
+    },
+    {
+      "id": "notam_fr",
+      "required_for_public_release": true,
+      "status": "pending_release_time_briefing",
+      "service": "SOFIA-Briefing",
+      "freshness_rule": "Contrôle à refaire le jour de la publication.",
+      "reason": "Les NOTAM français ne sont pas hébergés ni indexés sur le site public du SIA."
+    },
+    {
+      "id": "notam_ch",
+      "required_for_public_release": true,
+      "status": "pending_release_time_briefing",
+      "service": "Skybriefing",
+      "freshness_rule": "Contrôle à refaire le jour de la publication.",
+      "reason": "Le briefing opérationnel suisse reste dynamique et doit être contrôlé au moment de la publication."
+    },
+    {
+      "id": "pending_airfields",
+      "required_for_public_release": true,
+      "status": "pending_research_completion",
+      "items": ["LFLB", "LFKA", "LFHM", "LSGG"],
+      "reason": "Les fréquences encore non recoupées ne sont pas ajoutées au candidat mais le périmètre doit être explicitement clos avant publication."
+    },
+    {
+      "id": "dynamic_satellites",
+      "required_for_public_release": true,
+      "status": "pending_release_time_recheck",
+      "reason": "Le statut opérationnel des satellites FM peut changer et doit être revérifié juste avant publication."
+    }
+  ],
+  "release_rule": "public_release_allowed ne peut passer à true que lorsque toutes les portes required_for_public_release ont un statut passed_* daté et suffisamment récent."
+}

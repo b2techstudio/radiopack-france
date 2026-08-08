@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.0 - 2026-08-08
+
+- Ajout de quatre fréquences aviation Sion recoupées sur le site officiel de l'aéroport : GND 121,705 MHz, TWR 118,275 MHz, ATIS 130,630 MHz et APP 126,825 MHz.
+- Maintien hors candidat des fréquences de handling Sion 131,475 / 131,670 / 131,955 MHz et des aides de radionavigation 110,7 / 112,15 MHz.
+- Passage du bloc aviation Suisse de 2 à 6 mémoires et du candidat interne de 57 à 61 mémoires.
+- Reclassement de Sallanches-Mont-Blanc LFHZ en `excluded_closed_aerodrome` : fermeture officielle à toute circulation aérienne effective depuis le 1er septembre 2020.
+- Réduction de la liste aviation encore à recouper à Chambéry LFLB, Albertville LFKA, Megève LFHM et Genève LSGG.
+- Ajout d'un fichier `aviation-operational-gates.json` séparant validation des fréquences et contrôles dynamiques de pré-publication.
+- Maintien des portes NOTAM France (SOFIA-Briefing), NOTAM Suisse (Skybriefing) et statut satellites en attente d'un contrôle daté au moment de la publication.
+- Extension des tests AIRAC et du candidat interne pour interdire la réintroduction de Sallanches, des fréquences Sion exclues et de toute donnée non validée.
+- Aucun changement des téléchargements publics Annecy, du générateur public ou du statut « En préparation ».
+
 ## 0.9.0 - 2026-08-08
 
 - Revalidation partielle du bloc aviation Annecy–Alpes–Léman sur le cycle AIRAC 08/26 effectif depuis le 6 août 2026.

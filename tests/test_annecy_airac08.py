@@ -25,26 +25,15 @@ assert france["cycle"]["effective_until_inclusive"] == "2026-09-02"
 
 fr_channels = france["channels"]
 assert len(fr_channels) == 11
-assert all(
-    channel["verification"] == "verified_airac08_public"
-    for channel in fr_channels
-)
+assert all(channel["verification"] == "verified_airac08_public" for channel in fr_channels)
 assert all(channel["mode"] == "AM" for channel in fr_channels)
 assert all(channel["step_khz"] == 8.33 for channel in fr_channels)
 assert all(channel["tx_policy"] == "rx_only" for channel in fr_channels)
 
 fr_by_name = {channel["name"]: channel for channel in fr_channels}
 assert set(fr_by_name) == {
-    "ANNCY-TWR",
-    "ANNMS-A-A",
-    "CHAM-INFO",
-    "CHAM-APP",
-    "CHAM-TWR",
-    "CHAM-ATIS",
-    "VERSD-A-A",
-    "GREN-GND",
-    "GREN-TWR",
-    "GREN-ATIS",
+    "ANNCY-TWR", "ANNMS-A-A", "CHAM-INFO", "CHAM-APP", "CHAM-TWR",
+    "CHAM-ATIS", "VERSD-A-A", "GREN-GND", "GREN-TWR", "GREN-ATIS",
     "GENEV-INFO",
 }
 assert fr_by_name["ANNCY-TWR"]["frequency_mhz"] == 118.2
@@ -60,21 +49,17 @@ assert fr_by_name["GREN-ATIS"]["frequency_mhz"] == 133.855
 assert fr_by_name["GENEV-INFO"]["frequency_mhz"] == 126.35
 assert set(fr_by_name["CHAM-INFO"]["services"]) == {"FIS", "APP", "A/A"}
 
-pending_fr = {item["icao"] for item in france["pending"]}
-assert pending_fr == {"LFKA", "LFHM"}
-assert all(
-    item["status"] == "pending_primary_vac_frequency_extraction"
-    for item in france["pending"]
-)
-assert {item["icao"] for item in france["excluded"]} == {"LFHZ"}
-sallanches = france["excluded"][0]
-assert sallanches["status"] == "excluded_closed_aerodrome"
-assert sallanches["effective_from"] == "2020-09-01"
-assert "LEGIFRANCE-LFHZ-CLOSED-2020" in sallanches["source_ids"]
-assert all(
-    channel["verification"] == "pre_airac_recheck"
-    for channel in previous["channels"]
-)
+assert france["pending"] == []
+fr_excluded = {item["icao"]: item for item in france["excluded"]}
+assert set(fr_excluded) == {"LFKA", "LFHM", "LFHZ"}
+assert fr_excluded["LFKA"]["status"] == "excluded_scope_unverified_primary"
+assert fr_excluded["LFHM"]["status"] == "excluded_scope_unverified_primary"
+assert fr_excluded["LFHZ"]["status"] == "excluded_closed_aerodrome"
+assert fr_excluded["LFHZ"]["effective_from"] == "2020-09-01"
+assert "SIA-LFKA-VAC-CATALOG" in fr_excluded["LFKA"]["source_ids"]
+assert "SIA-LFHM-VAC-CATALOG" in fr_excluded["LFHM"]["source_ids"]
+assert "LEGIFRANCE-LFHZ-CLOSED-2020" in fr_excluded["LFHZ"]["source_ids"]
+assert all(channel["verification"] == "pre_airac_recheck" for channel in previous["channels"])
 
 assert switzerland["production_ready"] is False
 assert switzerland["internal_candidate_allowed"] is True
@@ -82,22 +67,15 @@ assert switzerland["cycle"]["aip_airac_amdt_effective"] == "2026-08-06"
 
 ch_channels = switzerland["channels"]
 assert len(ch_channels) == 6
-assert all(
-    channel["verification"] == "verified_current_public"
-    for channel in ch_channels
-)
+assert all(channel["verification"] == "verified_current_public" for channel in ch_channels)
 assert all(channel["mode"] == "AM" for channel in ch_channels)
 assert all(channel["step_khz"] == 8.33 for channel in ch_channels)
 assert all(channel["tx_policy"] == "rx_only" for channel in ch_channels)
 
 ch_by_name = {channel["name"]: channel for channel in ch_channels}
 assert set(ch_by_name) == {
-    "CH-LSGLAD",
-    "CH-LSGLAP",
-    "CH-SIONGND",
-    "CH-SIONTWR",
-    "CH-SIONATI",
-    "CH-SIONAPP",
+    "CH-LSGLAD", "CH-LSGLAP", "CH-SIONGND", "CH-SIONTWR",
+    "CH-SIONATI", "CH-SIONAPP",
 }
 assert ch_by_name["CH-LSGLAD"]["frequency_mhz"] == 123.205
 assert ch_by_name["CH-LSGLAP"]["frequency_mhz"] == 118.83
@@ -105,21 +83,23 @@ assert ch_by_name["CH-SIONGND"]["frequency_mhz"] == 121.705
 assert ch_by_name["CH-SIONTWR"]["frequency_mhz"] == 118.275
 assert ch_by_name["CH-SIONATI"]["frequency_mhz"] == 130.63
 assert ch_by_name["CH-SIONAPP"]["frequency_mhz"] == 126.825
-assert {item["icao"] for item in switzerland["pending"]} == {"LSGG"}
+assert switzerland["pending"] == []
 
-excluded_ch = {
+ch_excluded = switzerland["excluded"]
+excluded_ch_frequencies = {
     frequency
-    for item in switzerland["excluded"]
-    for frequency in item["frequencies_mhz"]
+    for item in ch_excluded
+    for frequency in item.get("frequencies_mhz", [])
 }
-assert excluded_ch == {131.475, 131.67, 131.955, 110.7, 112.15}
+assert excluded_ch_frequencies == {131.475, 131.67, 131.955, 110.7, 112.15}
+geneva = next(item for item in ch_excluded if item["icao"] == "LSGG")
+assert geneva["status"] == "excluded_scope_unverified_primary"
+assert "BAZL-LSGG" in geneva["source_ids"]
 
 all_channels = fr_channels + ch_channels
 assert len({channel["frequency_mhz"] for channel in all_channels}) == len(all_channels)
 assert all(len(channel["name"]) <= 10 for channel in all_channels)
-assert not excluded_ch.intersection(
-    {channel["frequency_mhz"] for channel in ch_channels}
-)
+assert not excluded_ch_frequencies.intersection({channel["frequency_mhz"] for channel in ch_channels})
 
 assert operations["public_release_allowed"] is False
 gates = {gate["id"]: gate for gate in operations["gates"]}
@@ -127,8 +107,9 @@ assert gates["airac_fr"]["status"] == "passed_research_validation"
 assert gates["airac_ch"]["status"] == "passed_research_validation"
 assert gates["notam_fr"]["status"] == "pending_release_time_briefing"
 assert gates["notam_ch"]["status"] == "pending_release_time_briefing"
-assert gates["pending_airfields"]["status"] == "pending_research_completion"
-assert gates["pending_airfields"]["items"] == ["LFKA", "LFHM", "LSGG"]
+assert gates["pending_airfields"]["status"] == "passed_scope_closed"
+assert gates["pending_airfields"]["items"] == []
+assert gates["pending_airfields"]["excluded_from_v0_2"] == ["LFKA", "LFHM", "LSGG", "LFHZ"]
 assert gates["dynamic_satellites"]["status"] == "pending_release_time_recheck"
 assert all(gate["required_for_public_release"] is True for gate in gates.values())
 

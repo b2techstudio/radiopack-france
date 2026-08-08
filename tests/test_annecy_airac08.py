@@ -7,14 +7,16 @@ RESEARCH = ROOT / "research/annecy-alpes-leman-v0.2"
 FRANCE = RESEARCH / "aviation-france-airac-08.json"
 SWITZERLAND = RESEARCH / "aviation-switzerland-airac-08.json"
 OPERATIONS = RESEARCH / "aviation-operational-gates.json"
+GENERATOR_OPTIONS = ROOT / "generator/options.json"
 PREVIOUS = RESEARCH / "aviation-france-pre-airac-08.json"
 
-for path in [FRANCE, SWITZERLAND, OPERATIONS, PREVIOUS]:
-    assert path.is_file(), f"Fichier aviation manquant: {path.relative_to(ROOT)}"
+for path in [FRANCE, SWITZERLAND, OPERATIONS, GENERATOR_OPTIONS, PREVIOUS]:
+    assert path.is_file(), f"Fichier aviation/générateur manquant: {path.relative_to(ROOT)}"
 
 france = json.loads(FRANCE.read_text(encoding="utf-8"))
 switzerland = json.loads(SWITZERLAND.read_text(encoding="utf-8"))
 operations = json.loads(OPERATIONS.read_text(encoding="utf-8"))
+generator_options = json.loads(GENERATOR_OPTIONS.read_text(encoding="utf-8"))
 previous = json.loads(PREVIOUS.read_text(encoding="utf-8"))
 
 assert france["production_ready"] is False
@@ -102,15 +104,34 @@ assert all(len(channel["name"]) <= 10 for channel in all_channels)
 assert not excluded_ch_frequencies.intersection({channel["frequency_mhz"] for channel in ch_channels})
 
 assert operations["public_release_allowed"] is False
+assert operations["generator_options_contract"] == "generator/options.json"
 gates = {gate["id"]: gate for gate in operations["gates"]}
 assert gates["airac_fr"]["status"] == "passed_research_validation"
 assert gates["airac_ch"]["status"] == "passed_research_validation"
-assert gates["notam_fr"]["status"] == "pending_release_time_briefing"
-assert gates["notam_ch"]["status"] == "pending_release_time_briefing"
+assert gates["notam_fr"]["status"] == "advisory_optional_pre_generation"
+assert gates["notam_ch"]["status"] == "advisory_optional_pre_generation"
+assert gates["notam_fr"]["required_for_public_release"] is False
+assert gates["notam_ch"]["required_for_public_release"] is False
+assert gates["notam_fr"]["generator_option_id"] == "notam_check"
+assert gates["notam_ch"]["generator_option_id"] == "notam_check"
 assert gates["pending_airfields"]["status"] == "passed_scope_closed"
 assert gates["pending_airfields"]["items"] == []
 assert gates["pending_airfields"]["excluded_from_v0_2"] == ["LFKA", "LFHM", "LSGG", "LFHZ"]
 assert gates["dynamic_satellites"]["status"] == "pending_release_time_recheck"
-assert all(gate["required_for_public_release"] is True for gate in gates.values())
+for required_gate in ["airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"]:
+    assert gates[required_gate]["required_for_public_release"] is True
+
+assert generator_options["status"] == "architecture_ready_not_yet_wired_to_public_ui"
+include_aviation = generator_options["options"]["include_aviation"]
+notam = generator_options["options"]["notam_check"]
+assert include_aviation["type"] == "boolean"
+assert include_aviation["default"] is True
+assert include_aviation["affects_csv_content"] is True
+assert notam["default"] == "disabled"
+assert notam["affects_csv_content"] is False
+assert notam["blocks_generation"] is False
+assert notam["states"] == ["disabled", "requested_unconfirmed", "user_confirmed"]
+assert notam["future_state_reserved"] == "automatic_verified"
+assert generator_options["ui_contract"]["generation_allowed_when_unconfirmed"] is True
 
 print("Tests Annecy–Alpes–Léman AIRAC 08 aviation: OK")

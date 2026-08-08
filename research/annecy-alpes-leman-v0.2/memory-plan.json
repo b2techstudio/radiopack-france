@@ -5,7 +5,7 @@
   "updated": "2026-08-08",
   "public_export_allowed": false,
   "internal_candidate": {
-    "expected_memory_count": 61,
+    "expected_memory_count": 65,
     "rule": "Le candidat interne ne contient que les lignes explicitement autorisées par l'assembleur."
   },
   "blocks": [
@@ -15,16 +15,16 @@
     {"start": 30, "end": 39, "label": "Appels et balises communes", "candidate_count": 2},
     {"start": 40, "end": 89, "label": "Radioamateur analogique France", "candidate_count": 19},
     {"start": 90, "end": 124, "label": "Radioamateur analogique Suisse", "candidate_count": 2},
-    {"start": 125, "end": 154, "label": "Aviation France / bassin genevois", "candidate_count": 7},
+    {"start": 125, "end": 154, "label": "Aviation France / bassin genevois", "candidate_count": 11},
     {"start": 155, "end": 174, "label": "Aviation Suisse", "candidate_count": 6},
     {"start": 175, "end": 184, "label": "Lacs et navigation publique vérifiée", "candidate_count": 0},
     {"start": 185, "end": 199, "label": "Libre", "candidate_count": 0}
   ],
   "notes": [
     "Ce plan est une capacité de travail et non une promesse de remplissage.",
-    "Le bloc aviation France n'intègre que sept lignes recoupées sur des sources publiques du cycle courant.",
+    "Le bloc aviation France intègre onze lignes recoupées sur des sources publiques officielles, dont quatre fréquences Chambéry confirmées dans l'AD 2.18 du SIA.",
     "Le bloc aviation Suisse intègre deux fréquences Lausanne et quatre fréquences ATS/ATIS Sion recoupées publiquement.",
-    "Chambéry, Albertville, Megève et Genève-aéroport restent hors candidat en attente de recoupement public complet.",
+    "Albertville, Megève et Genève-aéroport restent hors candidat en attente d'une extraction primaire suffisamment précise.",
     "Sallanches-Mont-Blanc est exclu: l'aérodrome est officiellement fermé à toute circulation aérienne depuis le 1er septembre 2020.",
     "Le bloc lacustre reste vide en l'absence de fréquence publique générale validée.",
     "Les blocs France et Suisse restent distincts.",

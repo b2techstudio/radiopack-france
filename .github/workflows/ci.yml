@@ -52,13 +52,13 @@ jobs:
       - name: Test Annecy Alps Leman release readiness
         run: python tests/test_annecy_release_readiness.py
 
-      - name: Test Annecy Alps Leman prepublication generator
+      - name: Test Annecy Alps Leman local prepublication builder
         run: python tests/test_annecy_prepublication.py
 
-      - name: Test Annecy Alps Leman reviewed prepublication CSV
+      - name: Test Annecy Alps Leman reviewed CSV map
         run: python tests/test_annecy_prepublication_review.py
 
-      - name: Test web generator preview
+      - name: Test published web generator
         run: python tests/test_web_generator.py
 
   website:
@@ -73,6 +73,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -85,6 +90,9 @@ jobs:
 
       - name: Build Astro website
         run: npm run build
+
+      - name: Test built Annecy public CSV
+        run: python ../tests/test_built_annecy_public_csv.py
 
   report-status:
     name: Publish combined CI status

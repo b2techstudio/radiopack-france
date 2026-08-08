@@ -4,26 +4,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Téléchargements — RadioPack France"
-  description="Télécharge les CSV CHIRP et guides PDF actuellement publiés par RadioPack France. Annecy–Alpes–Léman v0.2 est en préparation."
+  description="Télécharge les CSV CHIRP publics RadioPack France pour la Normandie et Annecy–Alpes–Léman."
 >
   <section class="section">
     <div class="container">
       <span class="eyebrow">Fichiers générés, sourcés et documentés</span>
       <h1 class="title">Téléchargements</h1>
       <p class="lead">
-        Un pack régional complet est actuellement disponible : la Normandie v0.3.1.
-        Annecy–Alpes–Léman est en reconstruction et reviendra en v0.2 après vérification
-        de l'ensemble des blocs français et suisses.
+        Deux packs régionaux sont disponibles : Normandie v0.3.1 et Annecy–Alpes–Léman v0.2.
+        Les exports publics restent configurés en réception seule.
       </p>
 
       <div class="notice card">
         <div class="notice-icon">!</div>
         <div>
           <strong>Émission bloquée par défaut</strong>
-          <p>
-            Dans tous les CSV publics, <code>Duplex=off</code> bloque l'émission. Les
-            fréquences sont fournies comme listes d'écoute documentées.
-          </p>
+          <p>Dans tous les CSV publics, <code>Duplex=off</code> bloque l'émission. Les fréquences sont fournies comme listes d'écoute documentées.</p>
         </div>
       </div>
 
@@ -32,31 +28,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <div class="topline"><span class="badge badge-green">Bêta — v0.3.1</span><span>139 / 200 mémoires</span></div>
           <h2>Normandie</h2>
           <p>PMR446, VHF marine, APRS/ISS, aviation, appels et relais analogiques vérifiés.</p>
-          <ul>
-            <li>15 sorties ou voies analogiques</li>
-            <li>Organisation par blocs</li>
-            <li>Guide PDF complet</li>
-          </ul>
+          <ul><li>15 sorties ou voies analogiques</li><li>Organisation par blocs</li><li>Guide PDF complet</li></ul>
           <div class="button-row">
             <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.3.1.csv" download>CSV Normandie v0.3.1</a>
             <a class="button button-orange" href="/downloads/normandie/radiopack-france-normandie-v0.3.1-guide.pdf" download>Guide PDF</a>
           </div>
         </article>
 
-        <article class="download-card annecy preparing">
-          <div class="topline"><span class="badge badge-orange">En préparation</span><span>Future v0.2</span></div>
+        <article class="download-card annecy">
+          <div class="topline"><span class="badge badge-green">Disponible — v0.2</span><span>65 / 200 mémoires</span></div>
           <h2>Annecy–Alpes–Léman</h2>
-          <p>
-            Reconstruction complète pour la Haute-Savoie, la Savoie, l'Ain, l'Isère,
-            Genève, Vaud et le Valais. L'aperçu v0.1 de 36 mémoires n'est plus proposé
-            comme pack régional disponible.
-          </p>
-          <ul>
-            <li>France et Suisse en blocs séparés</li>
-            <li>Relais et transpondeurs analogiques recoupés</li>
-            <li>Aviation et lacs vérifiés sur sources en vigueur</li>
-          </ul>
-          <a class="button button-secondary" href="/regions/annecy-haute-savoie">Voir l'avancement</a>
+          <p>Pack France–Suisse RX-only : PMR446, APRS/ISS, satellites FM, appels, radioamateur analogique et aviation validée.</p>
+          <ul><li>65 mémoires avec aviation</li><li>48 mémoires dans la variante sans aviation</li><li>Contrôle NOTAM facultatif dans le générateur</li></ul>
+          <div class="button-row">
+            <a class="button button-primary" href="/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv" download>CSV Annecy v0.2</a>
+            <a class="button button-secondary" href="/generateur">Personnaliser le pack</a>
+          </div>
         </article>
 
         <article class="download-card repeaters">
@@ -96,8 +83,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <div class="grid-3 info-grid">
-        <article class="card"><span class="badge">1</span><h3>Pack régional disponible</h3><p>La Normandie reste téléchargeable pendant la reconstruction du pack alpin et lémanique.</p></article>
-        <article class="card"><span class="badge badge-orange">PDF</span><h3>Guides complets</h3><p>Organisation des mémoires, tableaux de fréquences, sources et procédure CHIRP.</p></article>
+        <article class="card"><span class="badge">2</span><h3>Packs régionaux disponibles</h3><p>Normandie et Annecy–Alpes–Léman sont maintenant proposés publiquement.</p></article>
+        <article class="card"><span class="badge badge-orange">CSV</span><h3>Variantes contrôlées</h3><p>Le générateur Annecy propose le pack complet ou la variante sans aviation.</p></article>
         <article class="card"><span class="badge badge-green">Tests</span><h3>Contrôles automatiques</h3><p>Positions, doublons, noms courts, fréquences clés et blocage TX sont vérifiés.</p></article>
       </div>
     </div>
@@ -119,11 +106,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .download-card.space { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,239,216,.76)); }
   .download-card.repeaters { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(231,241,255,.78)); }
   .download-card.calls { background: linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,237,222,.76)); }
-  .preparing { border-style: dashed; }
   .topline { display: flex; justify-content: space-between; gap: 15px; align-items: center; color: var(--muted); font-size: .82rem; font-weight: 800; }
   .download-card h2 { font-size: clamp(1.8rem,4vw,2.5rem); }
-  .download-card p,
-  .download-card li { color: var(--muted); }
+  .download-card p, .download-card li { color: var(--muted); }
   .download-card ul { margin: 0; padding-left: 1.15rem; }
   .download-card .button { justify-self: start; }
   .info-grid { margin-top: 30px; }

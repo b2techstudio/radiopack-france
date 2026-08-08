@@ -4,25 +4,27 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables, et les exports publics sont configurés en réception seule.
 
-## État actuel — Sprint 17
+## État actuel — Sprint 18
 
 - Pack public disponible : **Normandie v0.3.1**.
-- **Annecy–Alpes–Léman v0.2** est toujours en préparation, mais il est désormais **prêt pour la génération de prépublication**.
-- Candidat interne Annecy–Alpes–Léman : **65 mémoires**.
+- **Annecy–Alpes–Léman v0.2** est toujours en préparation.
+- Toutes les portes bloquantes de prépublication sont validées.
+- Le backend de prépublication est maintenant opérationnel via `tools/build_annecy_prepublication.py`.
+- Variante complète : **65 mémoires avec aviation**.
+- Variante personnalisée : **48 mémoires sans aviation**.
 - Aucun CSV public Annecy–Alpes–Léman v0.2 n'est encore publié.
 - AIRAC France : validé pour le périmètre retenu.
 - AIRAC Suisse : validé pour le périmètre retenu.
 - Périmètre aviation v0.2 : clos de manière conservatrice.
 - Contrôle NOTAM France/Suisse : **facultatif et non bloquant** pour un pack d'écoute RX.
-- Recontrôle satellites AMSAT : **validé le 8 août 2026** pour SO-50, AO-91 et AO-123.
-- Porte `dynamic_satellites` : `passed_official_amsat_recheck`.
-- Toutes les portes réellement bloquantes de prépublication sont maintenant validées.
+- Recontrôle satellites AMSAT : validé le 8 août 2026 pour SO-50, AO-91 et AO-123.
+- Une revue finale explicite reste obligatoire avant la création du téléchargement public.
 
-Le script `tools/check_annecy_release_readiness.py` centralise cette décision et doit maintenant répondre `READY`.
+Le script `tools/check_annecy_release_readiness.py` centralise la décision de readiness. Le générateur de prépublication refuse de fonctionner si cette readiness repasse à l'état bloqué.
 
 ## Principes du projet
 
-- Réception seule : les exports publics utilisent `Duplex=off`.
+- Réception seule : les exports utilisent `Duplex=off`.
 - Noms de mémoires limités à 10 caractères pour l'écran de l'UV-K5.
 - Maximum 200 mémoires par pack.
 - Pas de remplissage artificiel pour atteindre un nombre cible.
@@ -32,7 +34,7 @@ Le script `tools/check_annecy_release_readiness.py` centralise cette décision e
 
 ## Annecy–Alpes–Léman v0.2
 
-Le candidat interne de 65 mémoires comprend actuellement :
+Le candidat complet de 65 mémoires comprend :
 
 | Bloc | Mémoires |
 |---|---:|
@@ -46,6 +48,8 @@ Le candidat interne de 65 mémoires comprend actuellement :
 | Aviation Suisse | 6 |
 | **Total** | **65** |
 
+Lorsque l'option aviation est désactivée, les 17 mémoires aviation sont retirées et le candidat contient **48 mémoires**. Les autres positions mémoire restent inchangées : elles ne sont pas compactées artificiellement.
+
 Albertville `LFKA`, Megève `LFHM` et Genève `LSGG` sont volontairement exclus de la v0.2 faute de tableau primaire suffisamment extractible dans le workflow actuel. Sallanches `LFHZ` est exclu car l'aérodrome est fermé.
 
 ### Satellites retenus
@@ -54,21 +58,65 @@ Albertville `LFKA`, Megève `LFHM` et Genève `LSGG` sont volontairement exclus 
 - `SAT-AO91` : descente 145.960 MHz ; fonctionnement limité aux passages éclairés à cause de la batterie.
 - `SAT-AO123` : descente 435.400 MHz ; montée conservée en métadonnée 145.850 MHz, CTCSS 67 Hz.
 
-Le recontrôle du Sprint 17 s'appuie sur les publications officielles AMSAT courantes. L'API officielle de statut AMSAT a également été identifiée pour une éventuelle automatisation future.
+## Générateur de prépublication
 
-## Futur générateur
+Le backend est branché, mais **pas encore l'interface publique du site**.
 
-Le contrat fonctionnel du futur générateur prévoit deux options indépendantes :
+Génération complète avec aviation et sans contrôle NOTAM demandé :
 
-- **Inclure les fréquences aviation** : ajoute ou retire le bloc aviation du CSV généré.
-- **Contrôle NOTAM avant génération** : contrôle facultatif qui n'ajoute, ne retire et ne remplace jamais automatiquement une fréquence AIP/AIRAC.
+```powershell
+python tools\build_annecy_prepublication.py
+```
 
-États NOTAM prévus :
+Génération sans aviation :
+
+```powershell
+python tools\build_annecy_prepublication.py --no-aviation
+```
+
+Génération avec contrôle NOTAM demandé mais non confirmé :
+
+```powershell
+python tools\build_annecy_prepublication.py --notam-check requested_unconfirmed
+```
+
+Génération avec contrôle NOTAM confirmé :
+
+```powershell
+python tools\build_annecy_prepublication.py --notam-check user_confirmed
+```
+
+Le contrôle NOTAM est enregistré dans le manifeste JSON, mais **ne modifie jamais le contenu des fréquences du CSV** et ne bloque pas la génération.
+
+Les sorties de prépublication sont créées sous :
+
+```text
+research/annecy-alpes-leman-v0.2/generated/prepublication/
+```
+
+Ce dossier est ignoré par Git. La prépublication reste hors de `website/public`.
+
+Le futur téléchargement public est réservé à :
+
+```text
+website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv
+```
+
+Ce fichier **n'est pas encore créé**.
+
+## Options du futur générateur web
+
+Deux options indépendantes sont maintenant implémentées côté backend de prépublication :
+
+- **Inclure les fréquences aviation** : ajoute ou retire les 17 mémoires aviation validées.
+- **Contrôle NOTAM avant génération** : enregistre l'état de vérification dans le manifeste sans altérer le CSV.
+
+États NOTAM pris en charge :
 
 - `disabled`
 - `requested_unconfirmed`
 - `user_confirmed`
-- `automatic_verified` réservé pour une éventuelle intégration future fiable.
+- `automatic_verified` reste réservé pour une future automatisation fiable.
 
 ## Synchroniser le dépôt local
 
@@ -90,7 +138,7 @@ Depuis la racine du dépôt :
 python generator\generate_chirp_csv.py
 ```
 
-Tester le générateur :
+Tester le générateur historique :
 
 ```powershell
 python tests\test_generator.py
@@ -102,21 +150,19 @@ python tests\test_generator.py
 python tools\build_annecy_internal_candidate.py
 ```
 
-Les fichiers générés restent sous :
+Les fichiers internes restent sous :
 
 ```text
 research/annecy-alpes-leman-v0.2/generated/
 ```
 
-Ce dossier est ignoré par Git et n'est pas publié sur le site.
-
-## Contrôler la prépublication Annecy
+## Contrôler la readiness Annecy
 
 ```powershell
 python tools\check_annecy_release_readiness.py
 ```
 
-Depuis le Sprint 17, le résultat attendu est :
+Résultat attendu depuis le Sprint 17 :
 
 ```text
 READY: Annecy–Alpes–Léman v0.2 may enter public prepublication
@@ -124,7 +170,7 @@ ADVISORY: notam_fr (advisory_optional_pre_generation)
 ADVISORY: notam_ch (advisory_optional_pre_generation)
 ```
 
-Le statut `READY` autorise la prochaine étape de génération de prépublication ; il ne crée ni ne publie automatiquement le CSV final.
+Le statut `READY` autorise la génération de prépublication ; il ne publie rien automatiquement.
 
 ## Tests principaux
 
@@ -136,9 +182,10 @@ python tests\test_annecy_aviation_lakes.py
 python tests\test_annecy_airac08.py
 python tests\test_annecy_internal_candidate.py
 python tests\test_annecy_release_readiness.py
+python tests\test_annecy_prepublication.py
 ```
 
-La CI GitHub exécute automatiquement les tests de données et le build Astro.
+La CI GitHub exécute automatiquement les tests de données, le générateur de prépublication et le build Astro.
 
 ## Lancer le site en local
 
@@ -160,7 +207,7 @@ Le site Astro est prévu pour Cloudflare Pages. Les changements sur `main` décl
 
 ## Prochaine étape
 
-Le Sprint suivant doit générer et contrôler le **candidat de prépublication Annecy–Alpes–Léman v0.2** à partir des 65 mémoires validées, puis préparer son intégration au générateur et au site. La publication effective du CSV reste une action séparée et explicite.
+La prochaine étape est la **revue finale du CSV de prépublication de 65 mémoires** : positions, noms, modes, pas, commentaires et cohérence CHIRP. Après cette revue, nous pourrons préparer l'intégration du générateur dans le site et seulement ensuite décider explicitement de créer le téléchargement public v0.2.
 
 ## Maintenance du projet
 

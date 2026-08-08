@@ -62,21 +62,26 @@ Restent en attente :
 
 - Chambéry Aix-les-Bains : les quatre fréquences du pré-inventaire ne sont pas réutilisées automatiquement ;
 - Albertville ;
-- Megève ;
-- Sallanches.
+- Megève.
 
-Ces aérodromes ne seront ajoutés qu'après extraction publique suffisamment précise de la source officielle courante.
+Sallanches-Mont-Blanc n'est plus une ligne en attente : l'aérodrome est classé `excluded_closed_aerodrome`, car sa fermeture à toute circulation aérienne est effective depuis le 1er septembre 2020. Aucune fréquence active ne doit être recherchée ou réintroduite pour LFHZ.
 
 ### Aviation Suisse
 
-Le fichier `aviation-switzerland-airac-08.json` ajoute uniquement les deux fréquences publiées par l'exploitant de Lausanne-La Blécherette :
+Le fichier `aviation-switzerland-airac-08.json` contient désormais six fréquences recoupées publiquement :
 
-- LSGL AD : 123.205 MHz ;
-- APCH INFO : 118.830 MHz.
+- Lausanne LSGL AD : 123.205 MHz ;
+- Lausanne APCH INFO : 118.830 MHz ;
+- Sion Ground : 121.705 MHz ;
+- Sion Tower : 118.275 MHz ;
+- Sion ATIS : 130.630 MHz ;
+- Sion Approach : 126.825 MHz.
 
-Skyguide indique que l'AIP AIRAC AMDT courant est celui du 6 août 2026. Genève-aéroport et Sion restent cependant hors candidat tant que leurs tableaux fréquentiels courants ne sont pas recoupables publiquement avec un niveau de confiance suffisant.
+Les quatre fréquences Sion proviennent de la page officielle « Infos pilotes » de l'Aéroport de Sion. Les fréquences de handling 131.475, 131.670 et 131.955 MHz ainsi que les aides de radionavigation ILS 110.7 MHz et VOR SION 112.15 MHz sont explicitement exclues du bloc ATS/ATIS.
 
-Genève Information 126.350 MHz n'est mémorisée qu'une seule fois, dans le bloc France / bassin genevois, afin d'éviter un doublon.
+L'OFAC documente l'espacement de canaux VHF 8.33 kHz applicable à l'aviation suisse ; les six lignes sont donc modélisées en `AM`, pas `8.33`, et `rx_only`.
+
+Genève-aéroport reste hors candidat tant que ses tableaux fréquentiels courants ne sont pas recoupables publiquement avec un niveau de confiance suffisant. Genève Information 126.350 MHz n'est mémorisée qu'une seule fois, dans le bloc France / bassin genevois, afin d'éviter un doublon.
 
 ### Lacs et navigation
 
@@ -99,7 +104,7 @@ Le fichier `satellites-fm-inventory.json` conserve trois descendantes analogique
 
 Comme pour l'ISS, seule la liaison descendante devient une mémoire d'écoute. Les montantes restent des métadonnées.
 
-Le script `tools/build_annecy_internal_candidate.py` assemble désormais un candidat interne de 57 mémoires :
+Le script `tools/build_annecy_internal_candidate.py` assemble désormais un candidat interne de 61 mémoires :
 
 - 16 PMR446 ;
 - 6 APRS/ISS ;
@@ -108,14 +113,14 @@ Le script `tools/build_annecy_internal_candidate.py` assemble désormais un cand
 - 19 fréquences radioamateur françaises ;
 - 2 relais radioamateur suisses `verified_current` ;
 - 7 fréquences aviation France / bassin genevois ;
-- 2 fréquences aviation Lausanne.
+- 6 fréquences aviation Suisse : 2 Lausanne et 4 Sion.
 
-Le résultat est généré localement sous `research/annecy-alpes-leman-v0.2/generated/`, avec `public_export_allowed: false`. Ce dossier est ignoré par Git. Les lacs et toutes les lignes en attente ou en conflit restent exclus.
+Le résultat est généré localement sous `research/annecy-alpes-leman-v0.2/generated/`, avec `public_export_allowed: false`. Ce dossier est ignoré par Git. Les lacs et toutes les lignes en attente, exclues ou en conflit restent hors candidat.
 
 ## Blocs restant à inventorier ou recouper
 
-1. Chambéry, Albertville, Megève et Sallanches ;
-2. Genève-aéroport et Sion ;
+1. Chambéry, Albertville et Megève ;
+2. Genève-aéroport ;
 3. balises analogiques réellement utiles ;
 4. usages locaux publics et vérifiables ;
 5. recoupements radioamateurs suisses encore ouverts.
@@ -136,7 +141,7 @@ Une ligne ne passe dans le futur JSON de production que si :
 
 Le gel global du 4 août est levé uniquement pour les lignes qui ont franchi les portes de validation. Une fréquence du pré-inventaire AIRAC 07/26 n'est jamais promue automatiquement parce que le cycle a changé : elle doit disposer d'un recoupement courant et d'un statut explicitement autorisé par l'assembleur.
 
-Avant une publication publique, les informations aéronautiques doivent encore être contrôlées avec les NOTAM et les publications opérationnelles applicables.
+Le contrôle NOTAM reste une porte séparée de pré-publication. Les pages officielles consultées renvoient vers les services NOTAM/Skybriefing, mais aucun état « aucun NOTAM impactant » n'est enregistré automatiquement dans le dépôt. Tant que ce contrôle opérationnel n'est pas explicitement effectué et daté, le candidat reste non publiable.
 
 ## Navigation sur les lacs suisses
 

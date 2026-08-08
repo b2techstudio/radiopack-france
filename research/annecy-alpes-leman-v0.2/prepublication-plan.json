@@ -2,12 +2,17 @@
   "pack": "Annecy–Alpes–Léman",
   "target_version": "0.2.0",
   "updated": "2026-08-08",
-  "status": "ready_for_prepublication_generation",
+  "status": "prepublication_generator_ready_not_public",
   "candidate_memory_count": 65,
+  "candidate_memory_count_without_aviation": 48,
+  "prepublication_generation_allowed": true,
   "public_file_created": false,
   "public_export_allowed": false,
+  "review_required_before_public_export": true,
   "source_candidate": "research/annecy-alpes-leman-v0.2/generated/annecy-alpes-leman-v0.2-internal.csv",
+  "prepublication_output_dir": "research/annecy-alpes-leman-v0.2/generated/prepublication/",
   "reserved_public_output": "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
+  "builder": "tools/build_annecy_prepublication.py",
   "blocking_gates": [],
   "passed_blocking_gates": ["airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"],
   "advisory_checks": ["notam_fr", "notam_ch"],
@@ -18,10 +23,12 @@
   },
   "rules": [
     "Toutes les portes bloquantes de prépublication sont validées au 2026-08-08.",
-    "Aucun CSV Annecy–Alpes–Léman v0.2 n'est encore exposé par le site ; la génération publique reste une étape séparée et explicite.",
+    "Le générateur de prépublication peut produire un CSV de 65 mémoires avec aviation ou 48 mémoires sans aviation.",
+    "Les fichiers de prépublication restent dans research/annecy-alpes-leman-v0.2/generated/ et sont ignorés par Git.",
+    "Aucun CSV Annecy–Alpes–Léman v0.2 n'est exposé par le site sans une revue finale et une action de publication explicite.",
     "Les contrôles NOTAM France et Suisse sont facultatifs et non bloquants pour un pack d'écoute RX.",
     "Le contrôle NOTAM ne modifie jamais automatiquement les fréquences AIP/AIRAC du CSV.",
-    "Toutes les mémoires publiques restent en réception seule avec Duplex=off.",
+    "Toutes les mémoires restent en réception seule avec Duplex=off.",
     "Le pack ne constitue pas une source de préparation ou de conduite d'un vol."
   ]
 }

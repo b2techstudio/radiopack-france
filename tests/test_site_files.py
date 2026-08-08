@@ -11,12 +11,14 @@ required_files = [
     "SPRINT-15-NOTAM-GENERATOR-OPTIONS.md",
     "SPRINT-16-PREPUBLICATION-READINESS.md",
     "SPRINT-17-SATELLITE-RECHECK.md",
+    "SPRINT-18-PREPUBLICATION-GENERATOR.md",
     "generator/options.json",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
     "tests/test_annecy_airac08.py",
     "tests/test_annecy_internal_candidate.py",
     "tests/test_annecy_release_readiness.py",
+    "tests/test_annecy_prepublication.py",
     "research/annecy-alpes-leman-v0.2/radioamateur-france-inventory.json",
     "research/annecy-alpes-leman-v0.2/radioamateur-switzerland-candidates.json",
     "research/annecy-alpes-leman-v0.2/aviation-france-pre-airac-08.json",
@@ -28,6 +30,7 @@ required_files = [
     "research/annecy-alpes-leman-v0.2/memory-plan.json",
     "research/annecy-alpes-leman-v0.2/prepublication-plan.json",
     "tools/build_annecy_internal_candidate.py",
+    "tools/build_annecy_prepublication.py",
     "tools/check_annecy_release_readiness.py",
     "research/annecy-alpes-leman-v0.2/source-register.csv",
     "research/annecy-alpes-leman-v0.2/conflicts.csv",
@@ -56,11 +59,12 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 17",
-    "Candidat interne Annecy–Alpes–Léman : **65 mémoires**",
+    "État actuel — Sprint 18",
+    "65 mémoires avec aviation",
+    "48 mémoires sans aviation",
     "Contrôle NOTAM France/Suisse : **facultatif et non bloquant**",
-    "passed_official_amsat_recheck",
-    "prêt pour la génération de prépublication",
+    "build_annecy_prepublication.py",
+    "prépublication reste hors de `website/public`",
     "## Maintenance du projet",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
@@ -72,18 +76,26 @@ assert "__pycache__/" in gitignore
 assert "*.py[cod]" in gitignore
 
 options = json.loads((ROOT / "generator/options.json").read_text(encoding="utf-8"))
-assert options["status"] == "architecture_ready_not_yet_wired_to_public_ui"
+assert options["status"] == "backend_wired_prepublication_not_public_ui"
+assert options["implementation"]["annecy_prepublication_builder"] == "tools/build_annecy_prepublication.py"
+assert options["implementation"]["public_ui_wired"] is False
+assert options["implementation"]["public_download_created"] is False
 assert options["options"]["include_aviation"]["affects_csv_content"] is True
+assert options["options"]["include_aviation"]["annecy_memory_count_when_enabled"] == 65
+assert options["options"]["include_aviation"]["annecy_memory_count_when_disabled"] == 48
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 assert options["options"]["notam_check"]["blocks_generation"] is False
 
 prepublication = json.loads(
     (ROOT / "research/annecy-alpes-leman-v0.2/prepublication-plan.json").read_text(encoding="utf-8")
 )
-assert prepublication["status"] == "ready_for_prepublication_generation"
+assert prepublication["status"] == "prepublication_generator_ready_not_public"
 assert prepublication["candidate_memory_count"] == 65
+assert prepublication["candidate_memory_count_without_aviation"] == 48
+assert prepublication["prepublication_generation_allowed"] is True
 assert prepublication["public_file_created"] is False
 assert prepublication["public_export_allowed"] is False
+assert prepublication["review_required_before_public_export"] is True
 assert prepublication["blocking_gates"] == []
 assert set(prepublication["passed_blocking_gates"]) == {
     "airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"
@@ -159,6 +171,7 @@ for expected in [
     "python tests/test_annecy_airac08.py",
     "python tests/test_annecy_internal_candidate.py",
     "python tests/test_annecy_release_readiness.py",
+    "python tests/test_annecy_prepublication.py",
     "npm run build",
     "statuses: write",
     "report-status:",
@@ -193,6 +206,9 @@ for relative in public_pages:
     assert "annecy-alpes-leman-v0.2-internal" not in content, (
         f"Candidat interne exposé publiquement: {relative}"
     )
+    assert "radiopack-france-annecy-alpes-leman-v0.2.csv" not in content, (
+        f"Lien public Annecy v0.2 apparu avant revue finale: {relative}"
+    )
 
 home = (ROOT / "website/src/pages/index.astro").read_text(encoding="utf-8")
 assert "1</strong><span>pack régional disponible" in home
@@ -211,4 +227,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 17 + README maintenance: OK")
+print("Tests RadioPack Sprint 18 + prepublication guards: OK")

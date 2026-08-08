@@ -1,12 +1,13 @@
 {
   "schema_version": "1.2",
-  "status": "public_ui_preview_wired_download_locked",
+  "status": "backend_wired_prepublication_not_public_ui",
   "updated": "2026-08-08",
-  "purpose": "Définir et tester le comportement du générateur RadioPack avec une interface web de prépublication, sans créer le téléchargement public Annecy v0.2.",
+  "purpose": "Définir et tester le comportement du générateur RadioPack avec un aperçu web de prépublication, sans créer le téléchargement public Annecy v0.2.",
   "implementation": {
     "annecy_prepublication_builder": "tools/build_annecy_prepublication.py",
-    "public_ui_wired": true,
-    "public_ui_route": "/generateur",
+    "public_ui_wired": false,
+    "public_ui_preview_wired": true,
+    "public_ui_preview_route": "/generateur",
     "public_ui_download_locked": true,
     "public_download_created": false,
     "output_scope": "research/annecy-alpes-leman-v0.2/generated/prepublication/"
@@ -67,8 +68,8 @@
     "Le contrôle NOTAM est facultatif et non bloquant pour la génération d'un pack d'écoute RX.",
     "La case NOTAM est indépendante de l'option Inclure les fréquences aviation.",
     "Un NOTAM ne supprime, n'ajoute ni ne remplace automatiquement une fréquence de référence dans le CSV.",
-    "L'interface web doit afficher 65 mémoires avec aviation et 48 sans aviation.",
-    "L'interface web peut être publiée en mode prévisualisation sans rendre le CSV Annecy v0.2 téléchargeable.",
+    "L'aperçu web doit afficher 65 mémoires avec aviation et 48 sans aviation.",
+    "L'aperçu web peut être publié sans rendre le CSV Annecy v0.2 téléchargeable.",
     "Le téléchargement Annecy v0.2 reste verrouillé jusqu'à une action de publication explicite.",
     "Le pack reste destiné à l'écoute et ne constitue pas une source de préparation ou de conduite d'un vol."
   ]

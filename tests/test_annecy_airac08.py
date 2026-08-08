@@ -50,7 +50,12 @@ assert fr_by_name["GREN-ATIS"]["frequency_mhz"] == 133.855
 assert fr_by_name["GENEV-INFO"]["frequency_mhz"] == 126.35
 
 pending_fr = {item["icao"] for item in france["pending"]}
-assert pending_fr == {"LFLB", "LFKA", "LFHM", "LFHZ"}
+assert pending_fr == {"LFLB", "LFKA", "LFHM"}
+assert {item["icao"] for item in france["excluded"]} == {"LFHZ"}
+sallanches = france["excluded"][0]
+assert sallanches["status"] == "excluded_closed_aerodrome"
+assert sallanches["effective_from"] == "2020-09-01"
+assert "LEGIFRANCE-LFHZ-CLOSED-2020" in sallanches["source_ids"]
 assert all(
     channel["verification"] == "pre_airac_recheck"
     for channel in previous["channels"]
@@ -61,7 +66,7 @@ assert switzerland["internal_candidate_allowed"] is True
 assert switzerland["cycle"]["aip_airac_amdt_effective"] == "2026-08-06"
 
 ch_channels = switzerland["channels"]
-assert len(ch_channels) == 2
+assert len(ch_channels) == 6
 assert all(
     channel["verification"] == "verified_current_public"
     for channel in ch_channels
@@ -71,13 +76,34 @@ assert all(channel["step_khz"] == 8.33 for channel in ch_channels)
 assert all(channel["tx_policy"] == "rx_only" for channel in ch_channels)
 
 ch_by_name = {channel["name"]: channel for channel in ch_channels}
-assert set(ch_by_name) == {"CH-LSGLAD", "CH-LSGLAP"}
+assert set(ch_by_name) == {
+    "CH-LSGLAD",
+    "CH-LSGLAP",
+    "CH-SIONGND",
+    "CH-SIONTWR",
+    "CH-SIONATI",
+    "CH-SIONAPP",
+}
 assert ch_by_name["CH-LSGLAD"]["frequency_mhz"] == 123.205
 assert ch_by_name["CH-LSGLAP"]["frequency_mhz"] == 118.83
-assert {item["icao"] for item in switzerland["pending"]} == {"LSGG", "LSGS"}
+assert ch_by_name["CH-SIONGND"]["frequency_mhz"] == 121.705
+assert ch_by_name["CH-SIONTWR"]["frequency_mhz"] == 118.275
+assert ch_by_name["CH-SIONATI"]["frequency_mhz"] == 130.63
+assert ch_by_name["CH-SIONAPP"]["frequency_mhz"] == 126.825
+assert {item["icao"] for item in switzerland["pending"]} == {"LSGG"}
+
+excluded_ch = {
+    frequency
+    for item in switzerland["excluded"]
+    for frequency in item["frequencies_mhz"]
+}
+assert excluded_ch == {131.475, 131.67, 131.955, 110.7, 112.15}
 
 all_channels = fr_channels + ch_channels
 assert len({channel["frequency_mhz"] for channel in all_channels}) == len(all_channels)
 assert all(len(channel["name"]) <= 10 for channel in all_channels)
+assert not excluded_ch.intersection(
+    {channel["frequency_mhz"] for channel in ch_channels}
+)
 
 print("Tests Annecy–Alpes–Léman AIRAC 08 aviation: OK")

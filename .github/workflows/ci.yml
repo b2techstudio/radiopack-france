@@ -43,6 +43,9 @@ jobs:
       - name: Test Annecy Alps Leman aviation and lakes research
         run: python tests/test_annecy_aviation_lakes.py
 
+      - name: Test Annecy Alps Leman AIRAC 08 aviation
+        run: python tests/test_annecy_airac08.py
+
       - name: Test Annecy Alps Leman internal candidate
         run: python tests/test_annecy_internal_candidate.py
 

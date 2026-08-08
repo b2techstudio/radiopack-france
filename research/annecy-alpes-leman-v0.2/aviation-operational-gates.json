@@ -1,9 +1,9 @@
 {
   "dataset": "Annecy–Alpes–Léman v0.2 - portes opérationnelles aviation",
-  "version": "0.2.0-research.3",
+  "version": "0.2.0-research.4",
   "updated": "2026-08-08",
   "public_release_allowed": false,
-  "purpose": "Séparer la validation des fréquences de la vérification opérationnelle dynamique requise juste avant publication.",
+  "purpose": "Séparer les validations réellement bloquantes des contrôles opérationnels facultatifs pour un pack d'écoute RX.",
   "sources": [
     {
       "id": "SIA-NOTAM-FAQ",
@@ -41,19 +41,19 @@
     },
     {
       "id": "notam_fr",
-      "required_for_public_release": true,
-      "status": "pending_release_time_briefing",
+      "required_for_public_release": false,
+      "status": "advisory_optional_pre_generation",
       "service": "SOFIA-Briefing",
-      "freshness_rule": "Contrôle à refaire le jour de la publication.",
-      "reason": "Les NOTAM français ne sont pas hébergés ni indexés sur le site public du SIA."
+      "generator_option_id": "notam_check",
+      "reason": "Le pack est un fichier statique d'écoute RX. Le contrôle NOTAM reste recommandé mais ne peut pas constituer une validation permanente des fréquences de référence."
     },
     {
       "id": "notam_ch",
-      "required_for_public_release": true,
-      "status": "pending_release_time_briefing",
+      "required_for_public_release": false,
+      "status": "advisory_optional_pre_generation",
       "service": "Skybriefing",
-      "freshness_rule": "Contrôle à refaire le jour de la publication.",
-      "reason": "Le briefing opérationnel suisse reste dynamique et doit être contrôlé au moment de la publication."
+      "generator_option_id": "notam_check",
+      "reason": "Le pack est un fichier statique d'écoute RX. Le contrôle NOTAM reste recommandé mais ne peut pas constituer une validation permanente des fréquences de référence."
     },
     {
       "id": "pending_airfields",
@@ -71,5 +71,7 @@
       "reason": "Le statut opérationnel des satellites FM peut changer et doit être revérifié juste avant publication."
     }
   ],
-  "release_rule": "public_release_allowed ne peut passer à true que lorsque toutes les portes required_for_public_release ont un statut passed_* daté et suffisamment récent."
+  "generator_options_contract": "generator/options.json",
+  "notam_rule": "Les NOTAM sont un contrôle facultatif du générateur. Ils n'altèrent jamais automatiquement les fréquences AIP/AIRAC enregistrées dans le CSV.",
+  "release_rule": "Seules les portes required_for_public_release=true peuvent bloquer la publication. Les contrôles NOTAM sont informatifs et facultatifs pour un pack d'écoute RX."
 }

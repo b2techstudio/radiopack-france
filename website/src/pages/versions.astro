@@ -17,117 +17,59 @@ const packs = [
   {
     name: "Annecy–Alpes–Léman",
     version: "0.2.0",
-    status: "En préparation",
-    available: false,
-    memories: null,
-    verified: "Inventaire en cours",
+    status: "Disponible",
+    available: true,
+    memories: 65,
+    verified: "8 août 2026",
     href: "/regions/annecy-haute-savoie",
-    download: null,
+    download: "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
     tone: "cyan",
-    details: "Reconstruction complète France–Suisse. L'aperçu historique v0.1 de 36 mémoires n'est plus proposé comme pack régional disponible.",
+    details: "65 mémoires RX France–Suisse avec aviation validée ; variante 48 mémoires sans aviation via le générateur.",
   },
 ];
 
 const modules = [
   ["PMR446 analogique", "16", "v0.1.0"],
   ["VHF marine", "90", "v0.2.0"],
-  ["APRS & ISS", "6", "v0.2.0"],
+  ["APRS & ISS", "6", "v0.2.1"],
   ["Appels radioamateur", "2", "v0.3.0"],
 ];
 ---
 
-<BaseLayout
-  title="État des packs"
-  description="Versions, disponibilité, nombre de mémoires et état de vérification des packs RadioPack France."
->
+<BaseLayout title="État des packs" description="Versions, disponibilité, nombre de mémoires et état de vérification des packs RadioPack France.">
   <section class="section">
     <div class="container">
       <span class="eyebrow">Suivi des publications</span>
       <h1>État des packs</h1>
-      <p class="lead intro">
-        Cette page distingue les packs réellement téléchargeables de ceux qui sont en
-        préparation. Un aperçu incomplet n'est pas compté comme un pack régional disponible.
-      </p>
+      <p class="lead intro">Cette page distingue les packs publiés et leurs variantes. Tous les exports restent en réception seule.</p>
 
       <div class="grid-2 pack-grid">
-        {
-          packs.map((pack) => (
-            <article class:list={["pack-card", "card", pack.tone, { preparing: !pack.available }]}>
-              <div class="topline">
-                <span class:list={["badge", pack.available ? "badge-green" : "badge-orange"]}>{pack.status}</span>
-                <strong>v{pack.version}</strong>
-              </div>
-              <h2>{pack.name}</h2>
-
-              {
-                pack.available ? (
-                  <div class="memory-count">
-                    <strong>{pack.memories}</strong>
-                    <span>mémoires RX sur 200</span>
-                  </div>
-                ) : (
-                  <div class="memory-count pending">
-                    <strong>—</strong>
-                    <span>total fixé après recoupement</span>
-                  </div>
-                )
-              }
-
-              <p>{pack.details}</p>
-              <dl>
-                <div>
-                  <dt>Dernière vérification</dt>
-                  <dd>{pack.verified}</dd>
-                </div>
-                <div>
-                  <dt>Politique publique</dt>
-                  <dd>Duplex=off</dd>
-                </div>
-              </dl>
-              <div class="button-row">
-                <a class="button button-secondary" href={pack.href}>
-                  {pack.available ? "Voir le pack" : "Voir la préparation"}
-                </a>
-                {
-                  pack.download && (
-                    <a class="button button-primary" href={pack.download} download>Télécharger le CSV</a>
-                  )
-                }
-              </div>
-            </article>
-          ))
-        }
+        {packs.map((pack) => (
+          <article class:list={["pack-card", "card", pack.tone]}>
+            <div class="topline"><span class="badge badge-green">{pack.status}</span><strong>v{pack.version}</strong></div>
+            <h2>{pack.name}</h2>
+            <div class="memory-count"><strong>{pack.memories}</strong><span>mémoires RX sur 200</span></div>
+            <p>{pack.details}</p>
+            <dl>
+              <div><dt>Dernière vérification</dt><dd>{pack.verified}</dd></div>
+              <div><dt>Politique publique</dt><dd>Duplex=off</dd></div>
+            </dl>
+            <div class="button-row">
+              <a class="button button-secondary" href={pack.href}>Voir le pack</a>
+              {pack.download && <a class="button button-primary" href={pack.download} download>Télécharger le CSV</a>}
+            </div>
+          </article>
+        ))}
       </div>
 
       <section class="modules card">
-        <div>
-          <span class="eyebrow">Modules nationaux</span>
-          <h2>Fichiers réutilisés dans les packs</h2>
-          <p>
-            Ces blocs sont générés séparément puis placés dans les packs régionaux
-            selon leur organisation de mémoires.
-          </p>
-        </div>
+        <div><span class="eyebrow">Modules nationaux</span><h2>Fichiers réutilisés dans les packs</h2><p>Ces blocs sont générés séparément puis placés dans les packs régionaux selon leur organisation de mémoires.</p></div>
         <div class="module-list">
-          {
-            modules.map(([name, count, version]) => (
-              <div>
-                <strong>{name}</strong>
-                <span>{count} mémoires</span>
-                <small>{version}</small>
-              </div>
-            ))
-          }
+          {modules.map(([name, count, version]) => <div><strong>{name}</strong><span>{count} mémoires</span><small>{version}</small></div>)}
         </div>
       </section>
 
-      <div class="card policy">
-        <strong>Règle permanente du projet public</strong>
-        <p>
-          Les CSV publiés par RadioPack France restent configurés en réception seule.
-          L'ajout d'une fréquence ne constitue jamais une autorisation d'émettre.
-        </p>
-      </div>
+      <div class="card policy"><strong>Règle permanente du projet public</strong><p>Les CSV publiés par RadioPack France restent configurés en réception seule. L'ajout d'une fréquence ne constitue jamais une autorisation d'émettre.</p></div>
     </div>
   </section>
 </BaseLayout>
@@ -139,16 +81,11 @@ const modules = [
   .pack-card { display: grid; gap: 18px; padding: 28px; overflow: hidden; }
   .pack-card.purple { background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(242,231,255,.74)); }
   .pack-card.cyan { background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(221,249,252,.82)); }
-  .pack-card.preparing { border-style: dashed; }
   .topline { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
   .topline > strong { color: #5f31cf; font-family: "Space Grotesk", sans-serif; }
   .memory-count { display: flex; align-items: end; gap: 10px; }
   .memory-count strong { font-family: "Space Grotesk", sans-serif; font-size: 3.2rem; line-height: .9; color: #182230; }
-  .memory-count.pending strong { color: #9b5700; }
-  .memory-count span,
-  .pack-card p,
-  .modules p,
-  .policy p { color: var(--muted); }
+  .memory-count span, .pack-card p, .modules p, .policy p { color: var(--muted); }
   dl { display: grid; gap: 8px; margin: 0; }
   dl > div { display: flex; justify-content: space-between; gap: 20px; padding: 10px 0; border-bottom: 1px solid var(--line); }
   dt { color: var(--muted); }
@@ -157,13 +94,8 @@ const modules = [
   .modules h2 { margin: 10px 0; }
   .module-list { display: grid; gap: 9px; }
   .module-list > div { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.7); }
-  .module-list span,
-  .module-list small { color: var(--muted); }
+  .module-list span, .module-list small { color: var(--muted); }
   .policy { margin-top: 30px; padding: 22px; background: linear-gradient(120deg, rgba(240,154,32,.13), rgba(255,255,255,.82)); }
   .policy p { margin-top: 6px; }
-  @media (max-width: 760px) {
-    .modules { grid-template-columns: 1fr; }
-    .module-list > div { grid-template-columns: 1fr auto; }
-    .module-list small { grid-column: 1 / -1; }
-  }
+  @media (max-width: 760px) { .modules { grid-template-columns: 1fr; } .module-list > div { grid-template-columns: 1fr auto; } .module-list small { grid-column: 1 / -1; } }
 </style>

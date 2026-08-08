@@ -15,6 +15,7 @@ required_files = [
     "research/annecy-alpes-leman-v0.2/aviation-france-pre-airac-08.json",
     "research/annecy-alpes-leman-v0.2/aviation-france-airac-08.json",
     "research/annecy-alpes-leman-v0.2/aviation-switzerland-airac-08.json",
+    "research/annecy-alpes-leman-v0.2/aviation-operational-gates.json",
     "research/annecy-alpes-leman-v0.2/navigation-lakes-findings.json",
     "research/annecy-alpes-leman-v0.2/satellites-fm-inventory.json",
     "research/annecy-alpes-leman-v0.2/memory-plan.json",
@@ -159,4 +160,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 11: OK")
+print("Tests RadioPack Sprint 12: OK")

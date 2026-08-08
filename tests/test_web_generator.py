@@ -34,7 +34,14 @@ for expected in [
 assert 'aviation.checked ? "65" : "48"' in page
 assert 'aviation.checked ? "Incluse · 17" : "Exclue · 0"' in page
 assert 'confirmZone.hidden = !notam.checked' in page
+assert 'confirmed.disabled = !notam.checked' in page
+assert 'const renderSummary = () =>' in page
+assert 'notam?.addEventListener("change", () =>' in page
+assert 'if (confirmed && notam && !notam.checked)' in page
 assert 'confirmed.checked = false' in page
+assert 'confirmed?.addEventListener("change", renderSummary)' in page
+assert '.notam-confirm[hidden] { display: none; }' in page
+assert 'class="notam-confirm-check"' in page
 assert 'notamSummary.textContent = "Confirmé"' in page
 assert 'notamSummary.textContent = "Demandé · non confirmé"' in page
 assert "radiopack-france-annecy-alpes-leman-v0.2.csv" not in page
@@ -65,4 +72,4 @@ assert options["options"]["notam_check"]["affects_csv_content"] is False
 
 assert not PUBLIC_CSV.exists(), "Le générateur web ne doit pas publier le CSV Annecy v0.2"
 
-print("Tests RadioPack Sprint 20 web generator preview: OK")
+print("Tests RadioPack Sprint 20 web generator preview + NOTAM confirmation interaction: OK")

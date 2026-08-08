@@ -1,0 +1,155 @@
+{
+  "dataset": "Annecy–Alpes–Léman v0.2 - aviation France revalidée AIRAC 08/26",
+  "version": "0.2.0-research.3",
+  "updated": "2026-08-08",
+  "production_ready": false,
+  "internal_candidate_allowed": true,
+  "default_export_policy": "rx_only",
+  "cycle": {
+    "validation_cycle": "AIRAC 08/26",
+    "effective_from": "2026-08-06",
+    "effective_until_inclusive": "2026-09-02",
+    "validation_basis": "SIA AIRAC 08/26 current database plus latest effective public AIP pages"
+  },
+  "rules": [
+    "Ce fichier ne contient que les fréquences aéronautiques recoupées sur des sources officielles publiques accessibles au 8 août 2026.",
+    "Une page AIP dont la date d'effet est antérieure au 6 août reste utilisable lorsqu'elle demeure la dernière page effective publiée pour le service dans le cycle courant.",
+    "Les lignes dont le détail AIRAC 08/26 n'a pas pu être extrait publiquement restent en pending et ne sont pas assemblées.",
+    "Toutes les mémoires sont en réception seule avec Duplex=off."
+  ],
+  "sources": [
+    {
+      "id": "SIA-XML-0826",
+      "title": "SIA - Données aéronautiques XML AIRAC 08/26 - CORRIGENDUM",
+      "url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "SIA-LFLP-CURRENT",
+      "title": "SIA eAIP - Annecy-Meythet LFLP, dernière page effective publique",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFLP-fr-FR.html",
+      "page_effective_from": "2026-05-14",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "SIA-ENR55-CURRENT",
+      "title": "SIA eAIP - ENR 5.5, dernière page effective publique",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-ENR-5.5-fr-FR.html",
+      "page_effective_from": "2026-06-11",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "SIA-LFLS-CURRENT",
+      "title": "SIA eAIP - Grenoble Alpes Isère LFLS, dernière page effective publique",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_09_JUL_2026/FRANCE/AIRAC-2026-07-09/html/eAIP/FR-AD-2.LFLS-fr-FR.html",
+      "page_effective_from": "2026-05-14",
+      "accessed": "2026-08-08"
+    },
+    {
+      "id": "FOCA-GENEVA-INFO",
+      "title": "OFAC/FOCA - emploi de la fréquence de montagne",
+      "url": "https://www.bazl.admin.ch/fr/foca-sand-2013-003-fr",
+      "accessed": "2026-08-08"
+    }
+  ],
+  "channels": [
+    {
+      "name": "ANNCY-TWR",
+      "frequency_mhz": 118.2,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "area": "Annecy-Meythet",
+      "services": ["TWR", "AFIS", "A/A"],
+      "verification": "verified_airac08_public",
+      "source_ids": ["SIA-XML-0826", "SIA-LFLP-CURRENT"],
+      "comment": "Annecy 118.200 - TWR, AFIS ou A/A selon horaires - AIRAC 08/26 - RX seule"
+    },
+    {
+      "name": "ANNMS-A-A",
+      "frequency_mhz": 125.875,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "area": "Annemasse",
+      "services": ["A/A"],
+      "verification": "verified_airac08_public",
+      "source_ids": ["SIA-XML-0826", "SIA-ENR55-CURRENT"],
+      "comment": "Annemasse A/A 125.875 - information usagers - AIRAC 08/26 - RX seule"
+    },
+    {
+      "name": "VERSD-A-A",
+      "frequency_mhz": 121.0,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "area": "Grenoble Le Versoud",
+      "services": ["TWR", "A/A"],
+      "verification": "verified_airac08_public",
+      "source_ids": ["SIA-XML-0826", "SIA-ENR55-CURRENT"],
+      "comment": "Le Versoud 121.000 - TWR ou A/A selon horaires - AIRAC 08/26 - RX seule"
+    },
+    {
+      "name": "GREN-GND",
+      "frequency_mhz": 121.93,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "area": "Grenoble Alpes Isère",
+      "services": ["GND"],
+      "verification": "verified_airac08_public",
+      "source_ids": ["SIA-XML-0826", "SIA-LFLS-CURRENT"],
+      "comment": "Grenoble Sol 121.930 - AIRAC 08/26 - RX seule"
+    },
+    {
+      "name": "GREN-TWR",
+      "frequency_mhz": 119.3,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "area": "Grenoble Alpes Isère",
+      "services": ["TWR", "VDF"],
+      "verification": "verified_airac08_public",
+      "source_ids": ["SIA-XML-0826", "SIA-LFLS-CURRENT"],
+      "comment": "Grenoble Tour/Gonio 119.300 - AIRAC 08/26 - RX seule"
+    },
+    {
+      "name": "GREN-ATIS",
+      "frequency_mhz": 133.855,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "area": "Grenoble Alpes Isère",
+      "services": ["ATIS"],
+      "verification": "verified_airac08_public",
+      "source_ids": ["SIA-XML-0826", "SIA-LFLS-CURRENT"],
+      "comment": "Grenoble ATIS 133.855 - AIRAC 08/26 - RX seule"
+    },
+    {
+      "name": "GENEV-INFO",
+      "frequency_mhz": 126.35,
+      "mode": "AM",
+      "step_khz": 8.33,
+      "tx_policy": "rx_only",
+      "area": "Alpes du Nord / bassin genevois",
+      "services": ["FIS"],
+      "verification": "verified_airac08_public",
+      "source_ids": ["SIA-XML-0826", "SIA-ENR55-CURRENT", "FOCA-GENEVA-INFO"],
+      "comment": "Genève Information 126.350 - bassin franco-suisse - AIRAC 08/26 - RX seule"
+    }
+  ],
+  "pending": [
+    {
+      "name": "Chambéry Aix-les-Bains",
+      "icao": "LFLB",
+      "frequencies_from_preinventory": [123.7, 121.205, 118.3, 127.1],
+      "status": "pending_airac08_public_table_extraction",
+      "reason": "Les quatre fréquences du pré-inventaire restent hors assemblage tant que le tableau officiel détaillé du cycle courant n'est pas publiquement extractible."
+    },
+    {"name": "Albertville", "icao": "LFKA", "status": "pending_official_frequency_extraction"},
+    {"name": "Megève", "icao": "LFHM", "status": "pending_official_frequency_extraction"},
+    {"name": "Sallanches", "icao": "LFHZ", "status": "pending_official_frequency_extraction"}
+  ]
+}

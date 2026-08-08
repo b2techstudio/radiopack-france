@@ -1,6 +1,6 @@
 {
   "dataset": "Annecy–Alpes–Léman v0.2 - portes opérationnelles aviation",
-  "version": "0.2.0-research.2",
+  "version": "0.2.0-research.3",
   "updated": "2026-08-08",
   "public_release_allowed": false,
   "purpose": "Séparer la validation des fréquences de la vérification opérationnelle dynamique requise juste avant publication.",
@@ -58,9 +58,11 @@
     {
       "id": "pending_airfields",
       "required_for_public_release": true,
-      "status": "pending_research_completion",
-      "items": ["LFKA", "LFHM", "LSGG"],
-      "reason": "Albertville, Megève et Genève-aéroport restent hors candidat tant que leurs tableaux radio primaires courants ne sont pas suffisamment extractibles et recoupés."
+      "status": "passed_scope_closed",
+      "checked": "2026-08-08",
+      "items": [],
+      "excluded_from_v0_2": ["LFKA", "LFHM", "LSGG", "LFHZ"],
+      "reason": "Le périmètre aviation v0.2 est explicitement clos: LFKA, LFHM et LSGG sont omis faute de tableau primaire extractible fiable; LFHZ est fermé. Aucune fréquence secondaire n'est utilisée pour les remplacer."
     },
     {
       "id": "dynamic_satellites",

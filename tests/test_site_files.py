@@ -8,10 +8,13 @@ required_files = [
     ".github/workflows/ci.yml",
     "tests/test_annecy_research.py",
     "tests/test_annecy_aviation_lakes.py",
+    "tests/test_annecy_airac08.py",
     "tests/test_annecy_internal_candidate.py",
     "research/annecy-alpes-leman-v0.2/radioamateur-france-inventory.json",
     "research/annecy-alpes-leman-v0.2/radioamateur-switzerland-candidates.json",
     "research/annecy-alpes-leman-v0.2/aviation-france-pre-airac-08.json",
+    "research/annecy-alpes-leman-v0.2/aviation-france-airac-08.json",
+    "research/annecy-alpes-leman-v0.2/aviation-switzerland-airac-08.json",
     "research/annecy-alpes-leman-v0.2/navigation-lakes-findings.json",
     "research/annecy-alpes-leman-v0.2/satellites-fm-inventory.json",
     "research/annecy-alpes-leman-v0.2/memory-plan.json",
@@ -102,6 +105,7 @@ for expected in [
     "python tests/test_site_files.py",
     "python tests/test_annecy_research.py",
     "python tests/test_annecy_aviation_lakes.py",
+    "python tests/test_annecy_airac08.py",
     "python tests/test_annecy_internal_candidate.py",
     "npm run build",
     "statuses: write",
@@ -134,6 +138,9 @@ for relative in public_pages:
     assert "/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1" not in content, (
         f"Lien public Annecy v0.1 encore present: {relative}"
     )
+    assert "annecy-alpes-leman-v0.2-internal" not in content, (
+        f"Candidat interne exposé publiquement: {relative}"
+    )
 
 home = (ROOT / "website/src/pages/index.astro").read_text(encoding="utf-8")
 assert "1</strong><span>pack régional disponible" in home
@@ -152,4 +159,4 @@ assert "Pas de téléchargement régional Annecy pendant la reconstruction" in a
 assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
-print("Tests RadioPack Sprint 10: OK")
+print("Tests RadioPack Sprint 11: OK")

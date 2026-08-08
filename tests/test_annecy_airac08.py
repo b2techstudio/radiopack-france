@@ -24,7 +24,7 @@ assert france["cycle"]["effective_from"] == "2026-08-06"
 assert france["cycle"]["effective_until_inclusive"] == "2026-09-02"
 
 fr_channels = france["channels"]
-assert len(fr_channels) == 7
+assert len(fr_channels) == 11
 assert all(
     channel["verification"] == "verified_airac08_public"
     for channel in fr_channels
@@ -37,6 +37,10 @@ fr_by_name = {channel["name"]: channel for channel in fr_channels}
 assert set(fr_by_name) == {
     "ANNCY-TWR",
     "ANNMS-A-A",
+    "CHAM-INFO",
+    "CHAM-APP",
+    "CHAM-TWR",
+    "CHAM-ATIS",
     "VERSD-A-A",
     "GREN-GND",
     "GREN-TWR",
@@ -45,14 +49,23 @@ assert set(fr_by_name) == {
 }
 assert fr_by_name["ANNCY-TWR"]["frequency_mhz"] == 118.2
 assert fr_by_name["ANNMS-A-A"]["frequency_mhz"] == 125.875
+assert fr_by_name["CHAM-INFO"]["frequency_mhz"] == 123.7
+assert fr_by_name["CHAM-APP"]["frequency_mhz"] == 121.205
+assert fr_by_name["CHAM-TWR"]["frequency_mhz"] == 118.3
+assert fr_by_name["CHAM-ATIS"]["frequency_mhz"] == 127.1
 assert fr_by_name["VERSD-A-A"]["frequency_mhz"] == 121.0
 assert fr_by_name["GREN-GND"]["frequency_mhz"] == 121.93
 assert fr_by_name["GREN-TWR"]["frequency_mhz"] == 119.3
 assert fr_by_name["GREN-ATIS"]["frequency_mhz"] == 133.855
 assert fr_by_name["GENEV-INFO"]["frequency_mhz"] == 126.35
+assert set(fr_by_name["CHAM-INFO"]["services"]) == {"FIS", "APP", "A/A"}
 
 pending_fr = {item["icao"] for item in france["pending"]}
-assert pending_fr == {"LFLB", "LFKA", "LFHM"}
+assert pending_fr == {"LFKA", "LFHM"}
+assert all(
+    item["status"] == "pending_primary_vac_frequency_extraction"
+    for item in france["pending"]
+)
 assert {item["icao"] for item in france["excluded"]} == {"LFHZ"}
 sallanches = france["excluded"][0]
 assert sallanches["status"] == "excluded_closed_aerodrome"
@@ -115,7 +128,7 @@ assert gates["airac_ch"]["status"] == "passed_research_validation"
 assert gates["notam_fr"]["status"] == "pending_release_time_briefing"
 assert gates["notam_ch"]["status"] == "pending_release_time_briefing"
 assert gates["pending_airfields"]["status"] == "pending_research_completion"
-assert gates["pending_airfields"]["items"] == ["LFLB", "LFKA", "LFHM", "LSGG"]
+assert gates["pending_airfields"]["items"] == ["LFKA", "LFHM", "LSGG"]
 assert gates["dynamic_satellites"]["status"] == "pending_release_time_recheck"
 assert all(gate["required_for_public_release"] is True for gate in gates.values())
 

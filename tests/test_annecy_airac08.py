@@ -122,12 +122,17 @@ assert gates["dynamic_satellites"]["checked"] == "2026-08-08"
 for required_gate in ["airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"]:
     assert gates[required_gate]["required_for_public_release"] is True
 
-assert generator_options["status"] == "architecture_ready_not_yet_wired_to_public_ui"
+assert generator_options["status"] == "backend_wired_prepublication_not_public_ui"
+assert generator_options["implementation"]["annecy_prepublication_builder"] == "tools/build_annecy_prepublication.py"
+assert generator_options["implementation"]["public_ui_wired"] is False
+assert generator_options["implementation"]["public_download_created"] is False
 include_aviation = generator_options["options"]["include_aviation"]
 notam = generator_options["options"]["notam_check"]
 assert include_aviation["type"] == "boolean"
 assert include_aviation["default"] is True
 assert include_aviation["affects_csv_content"] is True
+assert include_aviation["annecy_memory_count_when_enabled"] == 65
+assert include_aviation["annecy_memory_count_when_disabled"] == 48
 assert notam["default"] == "disabled"
 assert notam["affects_csv_content"] is False
 assert notam["blocks_generation"] is False

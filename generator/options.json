@@ -1,16 +1,19 @@
 {
-  "schema_version": "1.2",
-  "status": "backend_wired_prepublication_not_public_ui",
+  "schema_version": "2.0",
+  "status": "public_generator_wired_v0.2_published",
   "updated": "2026-08-08",
-  "purpose": "Définir et tester le comportement du générateur RadioPack avec un aperçu web de prépublication, sans créer le téléchargement public Annecy v0.2.",
+  "purpose": "Définir le comportement du générateur public RadioPack pour Annecy–Alpes–Léman v0.2.",
   "implementation": {
     "annecy_prepublication_builder": "tools/build_annecy_prepublication.py",
-    "public_ui_wired": false,
+    "public_pack_library": "website/src/lib/annecyPack.ts",
+    "public_ui_wired": true,
     "public_ui_preview_wired": true,
     "public_ui_preview_route": "/generateur",
-    "public_ui_download_locked": true,
-    "public_download_created": false,
-    "output_scope": "research/annecy-alpes-leman-v0.2/generated/prepublication/"
+    "public_ui_download_locked": false,
+    "public_download_created": true,
+    "public_delivery_mode": "Astro prerendered CSV routes plus browser Blob generation",
+    "standard_download": "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
+    "no_aviation_download": "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv"
   },
   "options": {
     "include_aviation": {
@@ -29,48 +32,32 @@
       "label": "Contrôle NOTAM avant génération",
       "affects_csv_content": false,
       "blocks_generation": false,
-      "states": [
-        "disabled",
-        "requested_unconfirmed",
-        "user_confirmed"
-      ],
+      "states": ["disabled", "requested_unconfirmed", "user_confirmed"],
       "future_state_reserved": "automatic_verified",
-      "description": "Contrôle opérationnel facultatif enregistré dans le manifeste de génération. Il ne modifie jamais automatiquement les fréquences AIP/AIRAC du CSV."
+      "description": "Contrôle opérationnel facultatif affiché dans le résumé du générateur. Il ne modifie jamais automatiquement les fréquences AIP/AIRAC du CSV."
     }
   },
   "ui_contract": {
     "route": "/generateur",
-    "preview_mode": true,
-    "download_enabled": false,
+    "preview_mode": false,
+    "download_enabled": true,
     "notam_checkbox_label": "Contrôle NOTAM avant génération",
     "confirmation_label": "J'ai vérifié les NOTAM applicables",
     "show_confirmation_when": "notam_check == requested_unconfirmed",
     "generation_allowed_when_unconfirmed": true,
-    "summary_fields": [
-      "memory_count",
-      "aviation_included",
-      "notam_check_requested",
-      "notam_check_confirmed",
-      "notam_check_confirmed_at"
-    ]
+    "summary_fields": ["memory_count", "aviation_included", "notam_check_requested", "notam_check_confirmed"]
   },
   "services": {
-    "FR": {
-      "name": "SOFIA-Briefing",
-      "purpose": "Consulter les NOTAM applicables en France"
-    },
-    "CH": {
-      "name": "Skybriefing",
-      "purpose": "Consulter les NOTAM applicables en Suisse"
-    }
+    "FR": {"name": "SOFIA-Briefing", "purpose": "Consulter les NOTAM applicables en France"},
+    "CH": {"name": "Skybriefing", "purpose": "Consulter les NOTAM applicables en Suisse"}
   },
   "rules": [
     "Le contrôle NOTAM est facultatif et non bloquant pour la génération d'un pack d'écoute RX.",
     "La case NOTAM est indépendante de l'option Inclure les fréquences aviation.",
     "Un NOTAM ne supprime, n'ajoute ni ne remplace automatiquement une fréquence de référence dans le CSV.",
-    "L'aperçu web doit afficher 65 mémoires avec aviation et 48 sans aviation.",
-    "L'aperçu web peut être publié sans rendre le CSV Annecy v0.2 téléchargeable.",
-    "Le téléchargement Annecy v0.2 reste verrouillé jusqu'à une action de publication explicite.",
+    "Le générateur public produit 65 mémoires avec aviation et 48 sans aviation.",
+    "Les deux variantes utilisent la même bibliothèque que les routes CSV publiques.",
+    "Toutes les mémoires publiques restent en réception seule avec Duplex=off.",
     "Le pack reste destiné à l'écoute et ne constitue pas une source de préparation ou de conduite d'un vol."
   ]
 }

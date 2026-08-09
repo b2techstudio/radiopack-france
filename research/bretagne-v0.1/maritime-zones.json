@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "status": "research_zoning_penmarch_interface_and_corsen_frehel_site_confirmed_channels_pending",
+  "status": "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending",
   "created": "2026-08-09",
   "updated": "2026-08-09",
   "pack": {
@@ -16,7 +16,7 @@
     "weather_broadcast_channels_must_be_researched_by_zone": true,
     "amateur_repeaters_must_be_tagged_by_breton_subzone": true,
     "etel_srr_starts_at_pointe_de_penmarch_primary_sourced": true,
-    "corsen_frehel_remote_site_primary_sourced": true,
+    "corsen_frehel_radio_infrastructure_primary_sourced": true,
     "corsen_detailed_srr_and_vhf_overlap_still_pending": true,
     "no_frequency_promoted_from_this_file": true
   },
@@ -25,17 +25,17 @@
       "id": "bretagne-nord-ouest",
       "label": "Bretagne Nord / Manche Ouest",
       "cross": "CROSS Corsen",
-      "status": "current_primary_context_and_frehel_remote_site_supported_full_site_and_channel_inventory_pending",
+      "status": "current_primary_context_supported_detailed_srr_and_vhf_sites_pending",
       "primary_sources": [
         "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
         "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/restauration-de-la-lanterne-du-phare-du-cap-frehel-a1473.html"
       ],
-      "verified_remote_radio_sites": [
+      "verified_remote_radio_infrastructure_sites": [
         {
           "site": "Cap Fréhel",
           "role": "traffic_surveillance_and_vessel_liaison",
-          "channel": null,
-          "status": "primary_site_and_role_verified_channel_pending"
+          "radio_service_or_channel": null,
+          "status": "primary_site_and_role_verified_radio_service_pending"
         }
       ],
       "evidence_examples": [
@@ -46,9 +46,8 @@
       ],
       "research_required": [
         "cartographie détaillée de la SRR et éventuel recouvrement autour de l'interface Penmarc'h",
-        "compléter l'inventaire primaire des stations VHF/MHF déportées au-delà du Cap Fréhel",
-        "identifier par source primaire les canaux effectivement associés aux sites Corsen, sans déduire le canal 79 du seul rôle du site",
-        "couverture canal 16 et éventuels recouvrements",
+        "stations VHF déportées et couverture canal 16",
+        "identifier par source primaire le service radio et les canaux des infrastructures Corsen, sans déduire un canal du seul rôle du site",
         "canaux de diffusion météo et sécurité maritime",
         "relais radioamateurs pertinents pour le nord et l'ouest de la Bretagne"
       ]
@@ -104,7 +103,7 @@
       ],
       "research_required": [
         "documenter la ligne cartographique détaillée et les éventuels recouvrements radio autour de Penmarc'h",
-        "compléter l'inventaire primaire des stations VHF déportées de CROSS Corsen",
+        "obtenir l'inventaire primaire des stations VHF déportées de CROSS Corsen",
         "ne pas déduire un recouvrement VHF de la seule frontière de responsabilité SAR"
       ]
     }
@@ -116,20 +115,20 @@
     "frequency_promoted": false
   },
   "weather_and_safety": {
-    "status": "etel_brittany_emitters_partially_primary_verified_corsen_site_inventory_started_channels_pending",
+    "status": "etel_brittany_emitters_partially_primary_verified_corsen_pending",
     "known_official_context": [
       "Le canal 16 annonce les diffusions météo du CROSS sur les canaux 79 et 80.",
       "Le CROSS Étel publie Penmarc'h, Groix et Belle-Ile sur le canal 80 pour les bulletins météo côtiers.",
       "Le CROSS Étel publie sa station d'Étel sur le canal 63 en diffusion continue.",
       "Le ministère mentionne les canaux 63 et 64 pour un bulletin côtier permanent dans le Morbihan ; le site émetteur Bretagne du canal 64 reste à réconcilier avec une source primaire locale actuelle.",
-      "La DIRM NAMO confirme des équipements CROSS Corsen de suivi et de liaison avec les navires au phare du Cap Fréhel, sans canal publié dans la source exploitée."
+      "La DIRM NAMO confirme des équipements CROSS Corsen de suivi et de liaison avec les navires au phare du Cap Fréhel, sans préciser le service radio ou le canal dans la source exploitée."
     ],
     "frequency_promoted": false
   },
   "repeaters": {
     "maritime_remote_sites": {
-      "status": "etel_weather_emitters_partial_inventory_corsen_frehel_site_verified_full_inventory_and_channels_required",
-      "rule": "Conserver séparément les émetteurs météo explicitement vérifiés et l'inventaire technique des stations VHF/MHF ; un site peut être primaire-vérifié sans que son canal soit connu, et aucun canal ne doit être déduit d'une source secondaire."
+      "status": "etel_weather_emitters_partial_inventory_corsen_inventory_required",
+      "rule": "Conserver séparément les émetteurs météo explicitement vérifiés et l'inventaire technique des stations VHF/MHF. Les équipements radio du Cap Fréhel sont documentés comme infrastructure Corsen mais ne deviennent pas un site VHF météo ni un canal sans source primaire supplémentaire."
     },
     "amateur_repeaters": {
       "status": "inventory_required",

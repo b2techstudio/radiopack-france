@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.2 - 2026-08-09
+
+- Qualification plus précise du site F1ZUG de Châtillon-en-Vendelais : l'APRS `F1ZUG-4` reste sur 144.800 MHz et une publication ARA35 de juin 2024 confirme séparément la présence d'un transpondeur pour le réseau ADRASEC 35.
+- Ajout d'un garde-fou interdisant de déduire la fréquence du transpondeur ADRASEC 35 de la fréquence APRS ; cette fréquence reste à `null` tant qu'une source actuelle ne la publie pas.
+- Ajout de `F5ZEB` / R71 Rennes Est à l'inventaire de recherche : entrée 431.075 MHz, sortie 438.675 MHz, CTCSS 71.9 Hz, de nouveau opérationnel depuis le 25 septembre 2025 et relié au R3 de Brocéliande ; candidature RX maintenue à `false` en attente de revue de couverture et de redondance.
+- Ajout de `F5ZPV` / RU19 Rennes-Beaulieu comme relais documenté mais temporairement arrêté selon la page ARA35 actuelle : sortie 439.875 MHz, entrée 430.475 MHz, CTCSS 71.9 Hz, FM/C4FM ; aucun retour parmi les candidats actifs sans confirmation de redémarrage.
+- Mise à jour de `research/bretagne-v0.1/emergency-relays.json`, du README et du document Sprint 29 ; renforcement des tests secours/ADRASEC et Mortain/Bretagne.
+- Les recherches ADRASEC 22/29 restent volontairement ouvertes faute de source départementale assez précise pour attribuer un relais sans spéculation.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.1 - 2026-08-09
 
 - Validation primaire DIRM NAMO du début de compétence du CROSS Étel à la Pointe de Penmarc'h, jusqu'à la frontière espagnole ; l'interface Finistère Sud n'est plus laissée entièrement indéterminée.
@@ -259,7 +269,7 @@
 - Ajout de neuf sorties analogiques uniques en Haute-Savoie, dans l'Ain et en Savoie.
 - Regroupement des frequences de transpondeurs partagees afin d'eviter les doublons.
 - Ajout du CSV regional, du CSV des relais et du guide PDF.
-- Mise a jour de l'accueil, des regions, des telechargements, du generateur et des tests.
+- Mise a jour de l'accueil, des regions, des telechargements et du generateur et des tests.
 
 ## 0.3.1 - 2026-08-04
 

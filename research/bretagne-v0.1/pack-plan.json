@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_scaffold_not_public",
   "created": "2026-08-09",
   "pack": {
@@ -7,6 +7,7 @@
     "slug": "bretagne",
     "target_version": "0.1"
   },
+  "paired_rx_policy": "research/paired-rx-policy.json",
   "memory_plan": {
     "status": "draft_no_channels",
     "expected_memory_count": null,
@@ -23,6 +24,9 @@
     "rx_only": true,
     "duplex": "off",
     "offset": "0.000000",
+    "native_duplex_or_split_both_directions_rx": true,
+    "paired_distinct_frequencies_use_separate_rx_memories": true,
+    "same_rf_frequency_deduplicated": true,
     "max_memories": 200,
     "max_name_length": 10,
     "no_artificial_fill": true,

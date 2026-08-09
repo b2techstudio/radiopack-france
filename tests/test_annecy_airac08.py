@@ -122,26 +122,35 @@ assert gates["dynamic_satellites"]["checked"] == "2026-08-08"
 for required_gate in ["airac_fr", "airac_ch", "pending_airfields", "dynamic_satellites"]:
     assert gates[required_gate]["required_for_public_release"] is True
 
-assert generator_options["status"] == "public_generator_wired_v0.2_published"
+assert generator_options["schema_version"] == "3.0"
+assert generator_options["status"] == "multi_region_public_generator"
 implementation = generator_options["implementation"]
-assert implementation["annecy_prepublication_builder"] == "tools/build_annecy_prepublication.py"
-assert implementation["public_pack_library"] == "website/src/lib/annecyPack.ts"
+assert implementation["generic_pack_library"] == "website/src/lib/chirpPack.ts"
+assert implementation["annecy_pack_library"] == "website/src/lib/annecyPack.ts"
+assert implementation["public_pack_registry"] == "website/src/lib/packRegistry.ts"
+assert implementation["published_pack_count"] == 2
+assert implementation["default_pack"] == "annecy-alpes-leman"
 assert implementation["public_ui_wired"] is True
 assert implementation["public_ui_download_locked"] is False
 assert implementation["public_download_created"] is True
+
 include_aviation = generator_options["options"]["include_aviation"]
 notam = generator_options["options"]["notam_check"]
+assert include_aviation["scope"] == ["annecy-alpes-leman"]
 assert include_aviation["type"] == "boolean"
 assert include_aviation["default"] is True
 assert include_aviation["affects_csv_content"] is True
 assert include_aviation["annecy_memory_count_when_enabled"] == 65
 assert include_aviation["annecy_memory_count_when_disabled"] == 48
+assert notam["scope"] == ["annecy-alpes-leman"]
 assert notam["default"] == "disabled"
 assert notam["affects_csv_content"] is False
 assert notam["blocks_generation"] is False
 assert notam["states"] == ["disabled", "requested_unconfirmed", "user_confirmed"]
 assert notam["future_state_reserved"] == "automatic_verified"
-assert generator_options["ui_contract"]["generation_allowed_when_unconfirmed"] is True
+assert generator_options["ui_contract"]["pack_selector"] is True
+assert generator_options["ui_contract"]["generation_allowed_when_notam_unconfirmed"] is True
 assert generator_options["ui_contract"]["download_enabled"] is True
+assert generator_options["ui_contract"]["unsupported_options_hidden"] is True
 
-print("Tests Annecy–Alpes–Léman AIRAC 08 aviation + published generator: OK")
+print("Tests Annecy–Alpes–Léman AIRAC 08 aviation + multi-region generator: OK")

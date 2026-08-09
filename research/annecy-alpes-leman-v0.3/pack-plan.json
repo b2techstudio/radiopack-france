@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_next_version_not_public",
   "created": "2026-08-09",
   "pack": {
@@ -9,6 +9,16 @@
   },
   "based_on_published_version": "0.2",
   "published_base_is_immutable": true,
+  "paired_rx_policy": "research/paired-rx-policy.json",
+  "paired_rx": {
+    "native_duplex_or_split_both_directions_rx": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "satellite_uplink_and_downlink_both_rx": true,
+    "analog_repeater_input_and_output_both_rx": true,
+    "crossband_transponder_both_sides_rx": true,
+    "same_rf_frequency_deduplicated": true
+  },
   "memory_plan": {
     "status": "not_defined",
     "expected_memory_count": null,
@@ -18,7 +28,9 @@
     "ADRASEC 74",
     "transpondeurs ADRASEC 73",
     "couverture pertinente 38 et 01",
-    "déduplication des fréquences identiques entre sites"
+    "migration des satellites split vers deux sens RX avec déduplication des fréquences partagées",
+    "écoute des entrées et sorties des relais analogiques sélectionnés",
+    "déduplication des fréquences identiques entre sites et fonctions"
   ],
   "publication": {
     "public_export_allowed": false,

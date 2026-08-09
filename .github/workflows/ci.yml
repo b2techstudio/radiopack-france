@@ -43,6 +43,9 @@ jobs:
       - name: Test regional pack research starter
         run: python tests/test_regional_pack_starter.py
 
+      - name: Test paired RX policy
+        run: python tests/test_paired_rx_policy.py
+
       - name: Test Bretagne research scaffold
         run: python tests/test_bretagne_research_scaffold.py
 

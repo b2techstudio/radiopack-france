@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.3 - 2026-08-09
+
+- Validation primaire d'une infrastructure radio CROSS Corsen au phare du Cap Fréhel : la DIRM NAMO confirme des équipements de suivi et de liaison avec les navires pour la surveillance du trafic et la coordination des secours.
+- Séparation stricte entre cette infrastructure radio vérifiée et l'inventaire des stations VHF météo : aucun service radio ni canal, notamment le 79, n'est attribué à Cap Fréhel sans source primaire supplémentaire.
+- Extension de l'inventaire analogique Finistère à partir du répertoire REF actuel : `F1ZGS` Plouhinec 431.425/145.2625 MHz, `F5ZDV` Morlaix 438.700/145.2625 MHz et `F5ZZL` Cast 431.375/145.2625 MHz, tous en FM avec CTCSS 71.9 Hz et uniquement candidats de recherche.
+- Ajout de `F1ZAJ` Plouray 144.800 MHz comme métadonnée APRS Morbihan sans dupliquer la mémoire APRS nationale.
+- Le canal 64 reste sans émetteur Bretagne primaire-vérifié, les rôles ADRASEC 22/29/56 restent non attribués faute de source dédiée et F6ZES Sourdeval reste sans fréquence ni mode.
+- Renforcement des tests Bretagne/Mortain et secours/ADRASEC ; aucun fichier public, registre public ou version régionale publiée n'est modifié.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.2 - 2026-08-09
 
 - Qualification plus précise du site F1ZUG de Châtillon-en-Vendelais : l'APRS `F1ZUG-4` reste sur 144.800 MHz et une publication ARA35 de juin 2024 confirme séparément la présence d'un transpondeur pour le réseau ADRASEC 35.

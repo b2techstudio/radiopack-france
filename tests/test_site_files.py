@@ -47,12 +47,14 @@ for expected in [
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
     "48 mémoires sans aviation",
     "générateur public multi-régions",
+    "artefacts versionnés figés",
     "website/src/lib/packRegistry.ts",
     "website/src/lib/chirpPack.ts",
     "website/src/lib/annecyPack.ts",
     "Tests de génération isolés — Sprint 24",
     "--output-root <dossier>",
     "les tests du générateur n'écrivent plus dans les CSV suivis par Git",
+    "Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique",
     "nothing to commit, working tree clean",
     "SPRINT-24-ISOLATED-GENERATOR-TESTS.md",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
@@ -150,17 +152,21 @@ for expected in [
     "output_root = args.output_root.resolve() if args.output_root is not None else root",
     "output = output_root / output_relative",
     "sortie isolée",
+    "Normandie v0.3.1 est un artefact publié figé",
 ]:
     assert expected in generator_source, f"Isolation générateur absente: {expected}"
+assert "radiopack-france-normandie-v0.3.1.csv" not in generator_source
 
 generator_test = (ROOT / "tests/test_generator.py").read_text(encoding="utf-8")
 for expected in [
     "tempfile.TemporaryDirectory",
     '"--output-root"',
+    "FROZEN_NORMANDIE",
     "published_before",
     "generated_rows == published_rows",
+    "assert not (output_root / FROZEN_NORMANDIE).exists()",
     "read_bytes() == original_bytes",
-    "Tests RadioPack isolated generator + ISS links: OK",
+    "Tests RadioPack isolated generator + frozen regional artifacts + ISS links: OK",
 ]:
     assert expected in generator_test, f"Garde-fou test isolé absent: {expected}"
 
@@ -237,4 +243,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 24 isolated generator + multi-region architecture: OK")
+print("Tests RadioPack Sprint 24 isolated generator + frozen published packs: OK")

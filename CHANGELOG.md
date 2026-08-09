@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.14.0 - 2026-08-09
+
+- Revue finale ligne par ligne du candidat Annecy–Alpes–Léman v0.2 : 65/65 mémoires figées par carte de référence, avec variante 48 mémoires sans aviation.
+- Validation automatique des emplacements, noms, fréquences, modes, pas, `Duplex=off`, `Offset=0.000000` et empreintes des commentaires.
+- Ajout puis activation du générateur web `/generateur` avec option aviation et contrôle NOTAM facultatif/non bloquant.
+- Publication explicite d'Annecy–Alpes–Léman v0.2 avec deux routes CSV Astro prérendues : 65 mémoires avec aviation et 48 sans aviation.
+- Ajout d'un contrôle CI de bout en bout qui ouvre les CSV réellement produits dans `website/dist` et les compare à la carte de revue.
+- Correction de l'interaction de la case « J'ai vérifié les NOTAM applicables » afin qu'elle reste indépendante du simple rafraîchissement du résumé.
+- Simplification du générateur : le navigateur sélectionne désormais directement l'une des deux routes CSV validées au lieu de reconstruire un Blob CSV côté client.
+- Ajout de liens directs vers SOFIA-Briefing et Skybriefing dans la section NOTAM du générateur.
+- Extraction d'un moteur générique `website/src/lib/chirpPack.ts` pour réutiliser les règles CHIRP sur les futurs packs régionaux ; `annecyPack.ts` devient un wrapper spécifique au pack.
+- Ajout de `REGIONAL-PACK-WORKFLOW.md` décrivant la méthode de création, revue, test et publication d'une nouvelle région.
+- Retrait du dépôt actif des anciens fichiers Annecy/Haute-Savoie v0.1 : manifeste, données aviation/relais, CSV régional, CSV relais et guide PDF.
+- Ajout de redirections permanentes pour les anciennes URL v0.1 afin d'éviter les liens morts tout en conservant l'historique dans Git.
+- Mise à jour du README au Sprint 22 et extension des garde-fous CI pour empêcher le retour des fichiers v0.1 ou d'une génération divergente.
+
 ## 0.13.0 - 2026-08-08
 
 - Reclassement des contrôles NOTAM France et Suisse en vérifications facultatives et non bloquantes pour les packs d'écoute RX.

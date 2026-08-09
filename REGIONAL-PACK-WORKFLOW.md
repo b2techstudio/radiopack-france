@@ -26,6 +26,8 @@ Les blocs nationaux existants peuvent être réutilisés avec des positions fixe
 
 Les satellites ou autres données dynamiques doivent conserver leur propre porte de revalidation avant publication.
 
+Attention : un bloc national peut évoluer après la publication d'un pack régional. Une version régionale déjà publiée ne doit donc jamais être reconstruite silencieusement avec des données partagées devenues plus récentes.
+
 ## 3. Définir les sources régionales
 
 Chaque source régionale doit préciser :
@@ -123,7 +125,27 @@ Exemple Annecy :
 
 Les contrôles informatifs comme NOTAM ne doivent pas modifier automatiquement les fréquences de référence.
 
-## 9. Vérifier le build final
+## 9. Isoler les tests de génération
+
+Un test ne doit pas régénérer directement un fichier suivi par Git dans `website/public`.
+
+Pour le générateur Python générique, utiliser :
+
+```text
+--output-root <dossier-temporaire>
+```
+
+Le test doit :
+
+1. générer dans un dossier temporaire ;
+2. comparer les sorties temporaires aux fichiers publics attendus ;
+3. vérifier les règles CHIRP ;
+4. vérifier que les fichiers suivis n'ont pas changé ;
+5. supprimer automatiquement les sorties temporaires à la fin.
+
+Cette règle évite les faux changements liés aux fins de ligne et empêche un test de remplacer silencieusement un artefact versionné.
+
+## 10. Vérifier le build final
 
 La CI doit au minimum :
 
@@ -131,12 +153,13 @@ La CI doit au minimum :
 2. tester l'assembleur ;
 3. tester la carte de revue ;
 4. tester le registre des packs publics ;
-5. compiler Astro ;
-6. ouvrir les CSV réellement produits dans `website/dist` ;
-7. comparer les variantes générées à leur carte de revue ;
-8. vérifier `Duplex=off`, les positions et les nombres de mémoires.
+5. tester la génération dans une sortie isolée ;
+6. compiler Astro ;
+7. ouvrir les CSV réellement produits dans `website/dist` ;
+8. comparer les variantes générées à leur carte de revue ;
+9. vérifier `Duplex=off`, les positions et les nombres de mémoires.
 
-## 10. Publier explicitement
+## 11. Publier explicitement
 
 Un pack ne passe public qu'après :
 
@@ -147,11 +170,25 @@ Un pack ne passe public qu'après :
 - mise à jour du `README.md` ;
 - CI verte sur le commit final.
 
-## 11. Nettoyer les anciennes versions
+## 12. Figer une version publiée
+
+Une fois publiée, une version régionale devient un **artefact immuable**.
+
+Cela signifie :
+
+- ne pas la régénérer automatiquement à partir de jeux partagés susceptibles d'évoluer ;
+- ne pas modifier silencieusement ses commentaires ou métadonnées ;
+- ne pas remplacer son CSV sous le même numéro de version ;
+- créer une nouvelle version si des données doivent être actualisées ;
+- refaire la revue et la CI avant cette nouvelle publication.
+
+Normandie v0.3.1 est le premier pack explicitement protégé par cette règle depuis le Sprint 24.
+
+## 13. Nettoyer les anciennes versions
 
 Lorsqu'une ancienne version n'a plus de rôle actif :
 
-- la retirer du générateur et du registre public ;
+- la retirer du générateur et du registre public si elle n'est plus proposée ;
 - retirer ses fichiers de `website/public` lorsqu'ils ne sont plus nécessaires ;
 - ajouter des redirections pour les anciennes URL utiles ;
 - conserver son historique via Git plutôt que maintenir deux jeux de données concurrents dans l'arborescence active.

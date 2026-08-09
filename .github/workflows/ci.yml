@@ -40,6 +40,9 @@ jobs:
       - name: Test public pack registry
         run: python tests/test_pack_registry.py
 
+      - name: Test regional pack research starter
+        run: python tests/test_regional_pack_starter.py
+
       - name: Test Annecy Alps Leman research inventories
         run: python tests/test_annecy_research.py
 

@@ -2,11 +2,14 @@
 """Generate generic CHIRP CSV files from RadioPack France JSON datasets.
 
 CSV generation has no third-party dependency.
-Annecy–Alpes–Léman v0.2 is published by the Astro generator and is intentionally
-not regenerated from the historical Annecy v0.1 datasets in this script.
 
-By default, generated files are written to their normal repository locations.
-Tests can pass --output-root to generate the exact same relative paths in an
+Published versioned regional packs are intentionally not overwritten here:
+- Annecy–Alpes–Léman v0.2 is built by the Astro pack library;
+- Normandie v0.3.1 is a frozen published artifact and must only change through
+  an explicit new regional version and review.
+
+By default, generic generated files are written to their normal repository
+locations. Tests pass --output-root to recreate the same relative paths in an
 isolated temporary directory without touching tracked public files.
 """
 from __future__ import annotations
@@ -33,7 +36,7 @@ OUTPUT_JOBS = [
     (
         "dataset",
         Path("data/national/marine-vhf-rx.json"),
-        Path("website/public/downloads/national/radiopack-france-marine-vhf-rx.csv"),
+        Path("website/public/downloads/national/radiopack-france-amateur-listening-rx.csv").with_name("radiopack-france-marine-vhf-rx.csv"),
     ),
     (
         "dataset",
@@ -49,11 +52,6 @@ OUTPUT_JOBS = [
         "dataset",
         Path("data/regions/normandie/repeaters-analog-rx.json"),
         Path("website/public/downloads/normandie/radiopack-france-normandie-repeaters-rx.csv"),
-    ),
-    (
-        "pack",
-        Path("data/regions/normandie/pack.json"),
-        Path("website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"),
     ),
 ]
 
@@ -141,6 +139,10 @@ def generate_dataset(root: Path, dataset_path: Path, output: Path) -> int:
 
 
 def generate_pack(root: Path, pack_path: Path, output: Path) -> int:
+    """Build a pack explicitly when called by version/review tooling.
+
+    The generic CLI does not schedule frozen published regional packs.
+    """
     pack = load_json(root / pack_path)
     placed: list[tuple[int, dict[str, Any]]] = []
     next_location = 0
@@ -191,6 +193,7 @@ def main() -> None:
     if output_root != root:
         print(f"INFO: sortie isolée: {output_root}")
     print("INFO: Annecy–Alpes–Léman v0.2 est généré par website/src/lib/annecyPack.ts")
+    print("INFO: Normandie v0.3.1 est un artefact publié figé; une évolution exige une nouvelle version")
 
 
 if __name__ == "__main__":

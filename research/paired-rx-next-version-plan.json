@@ -1,0 +1,208 @@
+{
+  "schema_version": "1.0",
+  "status": "research_plan_not_public",
+  "updated": "2026-08-09",
+  "policy": "research/paired-rx-policy.json",
+  "export_contract": {
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "two_rx_memories_when_pair_frequencies_differ": true,
+    "same_rf_frequency_deduplicated": true,
+    "public_pack_mutation_allowed": false
+  },
+  "regions": [
+    {
+      "id": "normandie-v0.4",
+      "based_on": "Normandie v0.3.1",
+      "published_base_pair_status": "marine_duplex_pairs_already_present_as_ship_and_coast_rx_memories",
+      "paired_links": [
+        {
+          "id": "F5ZHY",
+          "kind": "amateur_repeater",
+          "uplink_rx_mhz": 145.0875,
+          "downlink_rx_mhz": 145.6875,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F6ZCE",
+          "kind": "amateur_repeater",
+          "uplink_rx_mhz": 145.1000,
+          "downlink_rx_mhz": 145.7000,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F1ZBX",
+          "kind": "amateur_repeater",
+          "uplink_rx_mhz": 145.0750,
+          "downlink_rx_mhz": 145.6750,
+          "selection_status": "coverage_pending"
+        },
+        {
+          "id": "F1ZOV",
+          "kind": "amateur_repeater",
+          "uplink_rx_mhz": 430.3750,
+          "downlink_rx_mhz": 431.9750,
+          "selection_status": "low_priority_research"
+        }
+      ],
+      "unresolved": [
+        "F6ZES Sourdeval frequency and mode still unresolved",
+        "F1ZBL directionality requires review before converting its published candidate frequencies into a paired RX link"
+      ]
+    },
+    {
+      "id": "annecy-alpes-leman-v0.3",
+      "based_on": "Annecy–Alpes–Léman v0.2",
+      "published_base_pair_status": "published_v0.2_remains_immutable_downlink_only_for_satellites",
+      "paired_links": [
+        {
+          "id": "SAT-SO50",
+          "kind": "satellite_split",
+          "uplink_rx_mhz": 145.8500,
+          "downlink_rx_mhz": 436.7950,
+          "selection_status": "must_recheck_operational_status_before_v0.3_publication",
+          "tx_ctcss_metadata_hz": 67.0
+        },
+        {
+          "id": "SAT-AO91",
+          "kind": "satellite_split",
+          "uplink_rx_mhz": 435.2500,
+          "downlink_rx_mhz": 145.9600,
+          "selection_status": "must_recheck_operational_status_before_v0.3_publication"
+        },
+        {
+          "id": "SAT-AO123",
+          "kind": "satellite_split",
+          "uplink_rx_mhz": 145.8500,
+          "downlink_rx_mhz": 435.4000,
+          "selection_status": "must_recheck_operational_status_before_v0.3_publication",
+          "tx_ctcss_metadata_hz": 67.0
+        },
+        {
+          "id": "F1ZJV_F1ZYT_SHARED",
+          "kind": "amateur_repeater_shared_pair",
+          "uplink_rx_mhz": 145.1875,
+          "downlink_rx_mhz": 145.7875,
+          "sites": ["F1ZJV Pointe des Brasses", "F1ZYT Semnoz"],
+          "selection_status": "deduplicated_shared_pair"
+        },
+        {
+          "id": "F1ZHG",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2875,
+          "side_b_rx_mhz": 432.5125,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F5ZGT",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.4500,
+          "side_b_rx_mhz": 432.5125,
+          "selection_status": "coverage_pending"
+        }
+      ],
+      "deduplication_notes": [
+        "SO-50 and AO-123 share 145.850 MHz uplink, so one RX memory can cover both roles",
+        "F1ZJV and F1ZYT share the same 145.1875/145.7875 MHz pair",
+        "F1ZHG and F5ZGT share 432.5125 MHz on one transponder side"
+      ]
+    },
+    {
+      "id": "bretagne-v0.1",
+      "based_on": null,
+      "paired_links": [
+        {
+          "id": "MARINE-63",
+          "kind": "maritime_duplex",
+          "ship_to_coast_rx_mhz": 156.1750,
+          "coast_to_ship_rx_mhz": 160.7750,
+          "selection_status": "research_verified_frequency_pair"
+        },
+        {
+          "id": "MARINE-64",
+          "kind": "maritime_duplex",
+          "ship_to_coast_rx_mhz": 156.2250,
+          "coast_to_ship_rx_mhz": 160.8250,
+          "selection_status": "frequency_pair_verified_site_reconciliation_pending"
+        },
+        {
+          "id": "MARINE-79",
+          "kind": "maritime_duplex",
+          "ship_to_coast_rx_mhz": 156.9750,
+          "coast_to_ship_rx_mhz": 161.5750,
+          "selection_status": "frequency_pair_verified_current_corsen_emitter_pending"
+        },
+        {
+          "id": "MARINE-80",
+          "kind": "maritime_duplex",
+          "ship_to_coast_rx_mhz": 157.0250,
+          "coast_to_ship_rx_mhz": 161.6250,
+          "selection_status": "frequency_pair_verified_etel_emitters_partially_verified"
+        },
+        {
+          "id": "F1ZBX",
+          "kind": "amateur_repeater",
+          "uplink_rx_mhz": 145.0750,
+          "downlink_rx_mhz": 145.6750,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F5ZEB",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 431.0750,
+          "side_b_rx_mhz": 438.6750,
+          "selection_status": "coverage_and_redundancy_pending"
+        },
+        {
+          "id": "F5ZIS",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2375,
+          "side_b_rx_mhz": 432.6500,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F5ZIT",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2250,
+          "side_b_rx_mhz": 432.6500,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F1ZGS",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2625,
+          "side_b_rx_mhz": 431.4250,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F5ZDV",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2625,
+          "side_b_rx_mhz": 438.7000,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F5ZZL",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2625,
+          "side_b_rx_mhz": 431.3750,
+          "selection_status": "research_candidate"
+        },
+        {
+          "id": "F5ZPE",
+          "kind": "amateur_repeater",
+          "uplink_rx_mhz": 145.1375,
+          "downlink_rx_mhz": 145.7375,
+          "selection_status": "research_candidate"
+        }
+      ],
+      "not_active_or_unresolved": [
+        "F5ZPV RU19 pair is documented but relay remains temporarily stopped",
+        "F5ZZH R7X pair is documented but relay remains temporarily stopped and searching a new site",
+        "F1ZUG ADRASEC35 transponder frequency remains unpublished",
+        "F1ZBZ Lorient directionality remains under review"
+      ]
+    }
+  ]
+}

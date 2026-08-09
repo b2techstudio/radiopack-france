@@ -1,0 +1,88 @@
+export type PublicPackVariant = {
+  id: string;
+  label: string;
+  memoryCount: number;
+  filename: string;
+  downloadUrl: string;
+  aviationIncluded?: boolean;
+};
+
+export type PublicPack = {
+  id: string;
+  regionSlug: string;
+  name: string;
+  version: string;
+  status: string;
+  description: string;
+  defaultVariant: string;
+  aviationToggle?: {
+    includedVariant: string;
+    excludedVariant: string;
+    memoryCount: number;
+  };
+  notamCheck: boolean;
+  variants: PublicPackVariant[];
+};
+
+export const publicPacks: PublicPack[] = [
+  {
+    id: "annecy-alpes-leman",
+    regionSlug: "annecy-haute-savoie",
+    name: "Annecy–Alpes–Léman",
+    version: "v0.2",
+    status: "Disponible",
+    description: "Pack Alpes du Nord / bassin lémanique avec variante optionnelle sans aviation.",
+    defaultVariant: "full",
+    aviationToggle: {
+      includedVariant: "full",
+      excludedVariant: "no-aviation",
+      memoryCount: 17,
+    },
+    notamCheck: true,
+    variants: [
+      {
+        id: "full",
+        label: "Version complète",
+        memoryCount: 65,
+        filename: "radiopack-france-annecy-alpes-leman-v0.2.csv",
+        downloadUrl: "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
+        aviationIncluded: true,
+      },
+      {
+        id: "no-aviation",
+        label: "Sans aviation",
+        memoryCount: 48,
+        filename: "radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv",
+        downloadUrl: "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv",
+        aviationIncluded: false,
+      },
+    ],
+  },
+  {
+    id: "normandie",
+    regionSlug: "normandie",
+    name: "Normandie",
+    version: "v0.3.1",
+    status: "Bêta disponible",
+    description: "Pack régional complet de 139 mémoires RX déjà publié.",
+    defaultVariant: "standard",
+    notamCheck: false,
+    variants: [
+      {
+        id: "standard",
+        label: "Pack complet",
+        memoryCount: 139,
+        filename: "radiopack-france-normandie-v0.3.1.csv",
+        downloadUrl: "/downloads/normandie/radiopack-france-normandie-v0.3.1.csv",
+      },
+    ],
+  },
+];
+
+export const defaultPublicPackId = "annecy-alpes-leman";
+
+export const getPublicPack = (packId: string) =>
+  publicPacks.find((pack) => pack.id === packId);
+
+export const getPublicVariant = (pack: PublicPack, variantId: string) =>
+  pack.variants.find((variant) => variant.id === variantId);

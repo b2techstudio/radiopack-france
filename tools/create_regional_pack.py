@@ -149,7 +149,7 @@ def build_scaffold(name: str, slug: str, version: str, created: str) -> dict[str
     }
 
 
-def create_workspace(repository_root: Path, output_root: Path, name: str, slug: str, version: str) -> Path:
+def create_workspace(output_root: Path, name: str, slug: str, version: str) -> Path:
     validate_inputs(name, slug, version)
     target = output_root / "research" / f"{slug}-v{version}"
     if target.exists():
@@ -160,7 +160,7 @@ def create_workspace(repository_root: Path, output_root: Path, name: str, slug: 
     for filename, payload in build_scaffold(name, slug, version, created).items():
         write_json(target / filename, payload)
 
-    readme = f"""# {name} — espace de recherche v{version}\n\n"
+    readme = f"# {name} — espace de recherche v{version}\n\n"
     readme += "Cet espace a été créé par `tools/create_regional_pack.py`.\n\n"
     readme += "## État initial\n\n"
     readme += "- statut : `research_scaffold_not_public` ;\n"
@@ -187,7 +187,7 @@ def main() -> None:
 
     root = args.root.resolve()
     output_root = args.output_root.resolve() if args.output_root else root
-    target = create_workspace(root, output_root, args.name.strip(), args.slug.strip(), args.version.strip())
+    target = create_workspace(output_root, args.name.strip(), args.slug.strip(), args.version.strip())
     print(f"Starter régional créé: {target}")
     print("NOT PUBLIC: aucune route CSV ni entrée packRegistry.ts n'a été créée")
 

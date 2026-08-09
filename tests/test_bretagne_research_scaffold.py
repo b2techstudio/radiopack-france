@@ -80,7 +80,8 @@ assert memory["reserved_positions"] == []
 assert memory["rules"]["duplex"] == "off"
 assert memory["rules"]["no_artificial_fill"] is True
 
-assert maritime["status"] == "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending"
+assert maritime["schema_version"] == "1.2"
+assert maritime["status"] == "research_zoning_penmarch_interface_and_corsen_frehel_site_confirmed_channels_pending"
 assert maritime["rules"]["single_bretagne_maritime_zone_forbidden"] is True
 assert maritime["rules"]["north_south_operational_split_required"] is True
 assert maritime["rules"]["channel_16_frequency_is_common_but_cross_context_is_zone_specific"] is True
@@ -88,6 +89,7 @@ assert maritime["rules"]["cross_remote_sites_must_be_researched_by_zone"] is Tru
 assert maritime["rules"]["weather_broadcast_channels_must_be_researched_by_zone"] is True
 assert maritime["rules"]["amateur_repeaters_must_be_tagged_by_breton_subzone"] is True
 assert maritime["rules"]["etel_srr_starts_at_pointe_de_penmarch_primary_sourced"] is True
+assert maritime["rules"]["corsen_frehel_remote_site_primary_sourced"] is True
 assert maritime["rules"]["corsen_detailed_srr_and_vhf_overlap_still_pending"] is True
 assert maritime["rules"]["no_frequency_promoted_from_this_file"] is True
 zones = {zone["id"]: zone for zone in maritime["zones"]}
@@ -97,18 +99,22 @@ assert zones["bretagne-sud-atlantique"]["cross"] == "CROSS Etel"
 assert zones["bretagne-sud-atlantique"]["official_extent"].startswith("Pointe de Penmarc'h")
 assert zones["transition-finistere-sud"]["cross"] is None
 assert zones["transition-finistere-sud"]["status"] == "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending"
+north_sites = {item["site"]: item for item in zones["bretagne-nord-ouest"]["verified_remote_radio_sites"]}
+assert set(north_sites) == {"Cap Fréhel"}
+assert north_sites["Cap Fréhel"]["channel"] is None
 weather_sites = {item["site"]: item for item in zones["bretagne-sud-atlantique"]["verified_weather_emitters"]}
 assert set(weather_sites) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
 assert weather_sites["Etel"]["channel"] == 63
 assert maritime["channel_16"]["memory_strategy"] == "do_not_duplicate_same_frequency_only_to_label_cross"
 assert maritime["channel_16"]["frequency_promoted"] is False
 assert maritime["weather_and_safety"]["frequency_promoted"] is False
-assert maritime["repeaters"]["maritime_remote_sites"]["status"] == "etel_weather_emitters_partial_inventory_corsen_inventory_required"
+assert maritime["repeaters"]["maritime_remote_sites"]["status"] == "etel_weather_emitters_partial_inventory_corsen_frehel_site_verified_full_inventory_and_channels_required"
 assert maritime["repeaters"]["amateur_repeaters"]["status"] == "inventory_required"
 assert maritime["publication"]["public_export_allowed"] is False
 assert maritime["publication"]["public_registry_allowed"] is False
 assert maritime["publication"]["public_routes_allowed"] is False
 
+assert emergency["schema_version"] == "1.3"
 assert emergency["status"] == "research_inventory_not_public"
 assert {item["id"] for item in emergency["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
 emergency_candidates = {item["id"]: item for item in emergency["candidates"]}
@@ -119,6 +125,11 @@ assert emergency_candidates["F1ZBX"]["output_mhz"] == 145.6750
 assert emergency_candidates["F1ZBX"]["rx_pack_candidate"] is True
 assert emergency_candidates["F1ZBH"]["frequency_mhz"] == 144.8000
 assert emergency_candidates["F1ZGQ"]["frequency_mhz"] == 144.8000
+assert emergency_candidates["F1ZGS"]["output_mhz"] == 431.4250
+assert emergency_candidates["F5ZDV"]["output_mhz"] == 438.7000
+assert emergency_candidates["F5ZZL"]["output_mhz"] == 431.3750
+assert emergency_candidates["F1ZAJ"]["frequency_mhz"] == 144.8000
+assert emergency_candidates["F1ZAJ"]["rx_pack_candidate"] is False
 assert all(item["frequency_promoted_to_public_pack"] is False for item in emergency["candidates"])
 assert emergency["rules"]["private_ppdr_operational_frequencies_excluded"] is True
 assert emergency["rules"]["aprs_same_frequency_not_duplicated_by_site"] is True
@@ -149,4 +160,4 @@ for expected in [
 ]:
     assert expected in readme, f"Cadrage Bretagne absent: {expected}"
 
-print("Tests RadioPack Bretagne maritime + emergency zoning: Penmarc'h interface + Etel weather emitters verified, Corsen inventory pending, ADRASEC inventory, 0 public side effects OK")
+print("Tests RadioPack Bretagne maritime + emergency zoning: Penmarc'h interface + Etel weather emitters + Cap Frehel Corsen site verified, channel inventory pending, ADRASEC and regional relay inventory, 0 public side effects OK")

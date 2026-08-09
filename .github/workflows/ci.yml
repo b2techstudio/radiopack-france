@@ -46,6 +46,9 @@ jobs:
       - name: Test paired RX policy
         run: python tests/test_paired_rx_policy.py
 
+      - name: Test paired RX deduplicated memory plan
+        run: python tests/test_paired_rx_memory_plan.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

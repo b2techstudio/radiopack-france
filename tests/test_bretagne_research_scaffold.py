@@ -10,6 +10,7 @@ required = [
     RESEARCH / "source-registry.json",
     RESEARCH / "publication-gates.json",
     RESEARCH / "memory-plan.json",
+    RESEARCH / "maritime-zones.json",
 ]
 for path in required:
     assert path.is_file(), f"Fichier Bretagne manquant: {path.relative_to(ROOT)}"
@@ -18,6 +19,7 @@ plan = json.loads((RESEARCH / "pack-plan.json").read_text(encoding="utf-8"))
 sources = json.loads((RESEARCH / "source-registry.json").read_text(encoding="utf-8"))
 gates = json.loads((RESEARCH / "publication-gates.json").read_text(encoding="utf-8"))
 memory = json.loads((RESEARCH / "memory-plan.json").read_text(encoding="utf-8"))
+maritime = json.loads((RESEARCH / "maritime-zones.json").read_text(encoding="utf-8"))
 
 assert plan["status"] == "research_scaffold_not_public"
 assert plan["pack"] == {"name": "Bretagne", "slug": "bretagne", "target_version": "0.1"}
@@ -36,28 +38,37 @@ assert plan["rules"]["max_name_length"] == 10
 assert plan["rules"]["no_artificial_fill"] is True
 assert plan["rules"]["published_versions_are_immutable"] is True
 
-assert sources["status"] == "seed_sources_identified_no_frequency_extraction"
+assert sources["status"] == "seed_sources_identified_maritime_zoning_in_progress_no_frequency_extraction"
 assert sources["pack"]["slug"] == "bretagne"
-assert len(sources["sources"]) == 5
+assert len(sources["sources"]) == 10
 source_ids = {source["id"] for source in sources["sources"]}
-assert source_ids == {
+for expected in {
     "SIA-LFRB-EAIP-2026-06-11",
     "SIA-LFRN-EAIP-2026-06-11",
     "ANFR-OPEN-DATA",
     "ANFR-RADIOAMATEUR-MISSIONS",
     "ANFR-RADIOAMATEUR-ANNUAIRE",
-}
+    "MER-VHF-CANAL16-2026",
+    "PREMAR-ATL-CROSS-SRR",
+    "PREMAR-CORSEN-AUDIERNE-2026",
+    "PREMAR-ETEL-CONCARNEAU-2026",
+    "MER-VHF-METEO-CHANNELS",
+}:
+    assert expected in source_ids
 assert all(source["accessed"] == "2026-08-09" for source in sources["sources"])
 assert all(source["frequency_data_promoted"] is False for source in sources["sources"])
-assert all("not_yet_extracted" in source["status"] for source in sources["sources"])
 assert sources["rules"]["prefer_primary_sources"] is True
 assert sources["rules"]["seed_source_does_not_equal_validated_frequency"] is True
+assert sources["rules"]["maritime_cross_assignment_must_be_zone_specific"] is True
+assert sources["rules"]["exact_current_srr_boundary_required_before_publication"] is True
 
-assert gates["status"] == "blocked_research_not_started"
+assert gates["status"] == "blocked_research_in_progress"
 assert gates["public_release_allowed"] is False
-assert len(gates["gates"]) == 6
+assert len(gates["gates"]) == 7
 assert all(gate["required_for_public_release"] is True for gate in gates["gates"])
 assert all(not gate["status"].startswith("passed_") for gate in gates["gates"])
+maritime_gate = next(gate for gate in gates["gates"] if gate["id"] == "maritime_zoning")
+assert maritime_gate["status"] == "north_south_split_required_exact_boundary_pending"
 
 assert memory["status"] == "draft_no_channels"
 assert memory["expected_memory_count"] is None
@@ -65,6 +76,29 @@ assert memory["blocks"] == []
 assert memory["reserved_positions"] == []
 assert memory["rules"]["duplex"] == "off"
 assert memory["rules"]["no_artificial_fill"] is True
+
+assert maritime["status"] == "research_zoning_defined_boundaries_pending_exact_current_confirmation"
+assert maritime["rules"]["single_bretagne_maritime_zone_forbidden"] is True
+assert maritime["rules"]["north_south_operational_split_required"] is True
+assert maritime["rules"]["channel_16_frequency_is_common_but_cross_context_is_zone_specific"] is True
+assert maritime["rules"]["cross_remote_sites_must_be_researched_by_zone"] is True
+assert maritime["rules"]["weather_broadcast_channels_must_be_researched_by_zone"] is True
+assert maritime["rules"]["amateur_repeaters_must_be_tagged_by_breton_subzone"] is True
+assert maritime["rules"]["no_frequency_promoted_from_this_file"] is True
+zones = {zone["id"]: zone for zone in maritime["zones"]}
+assert set(zones) == {"bretagne-nord-ouest", "bretagne-sud-atlantique", "transition-finistere-sud"}
+assert zones["bretagne-nord-ouest"]["cross"] == "CROSS Corsen"
+assert zones["bretagne-sud-atlantique"]["cross"] == "CROSS Etel"
+assert zones["transition-finistere-sud"]["cross"] is None
+assert "exact_current_srr_boundary" in zones["transition-finistere-sud"]["status"]
+assert maritime["channel_16"]["memory_strategy"] == "do_not_duplicate_same_frequency_only_to_label_cross"
+assert maritime["channel_16"]["frequency_promoted"] is False
+assert maritime["weather_and_safety"]["frequency_promoted"] is False
+assert maritime["repeaters"]["maritime_remote_sites"]["status"] == "inventory_required"
+assert maritime["repeaters"]["amateur_repeaters"]["status"] == "inventory_required"
+assert maritime["publication"]["public_export_allowed"] is False
+assert maritime["publication"]["public_registry_allowed"] is False
+assert maritime["publication"]["public_routes_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
 regions = (ROOT / "website/src/data/regions.json").read_text(encoding="utf-8").lower()
@@ -75,8 +109,16 @@ assert not (ROOT / "website/public/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 
 readme = (RESEARCH / "README.md").read_text(encoding="utf-8")
-assert "aucune fréquence n'est encore retenue" in readme
-assert "aucune entrée n'est ajoutée" in readme
-assert "sources de départ" in readme
+for expected in [
+    "Bretagne Nord / Manche Ouest",
+    "CROSS Corsen",
+    "Bretagne Sud / Atlantique",
+    "CROSS Etel",
+    "zone de transition du Finistère Sud",
+    "stations VHF déportées",
+    "relais radioamateurs",
+    "ne devra donc pas créer deux mémoires identiques",
+]:
+    assert expected in readme, f"Cadrage Bretagne absent: {expected}"
 
-print("Tests RadioPack Sprint 26 Bretagne research scaffold: 0 frequencies, 0 public side effects OK")
+print("Tests RadioPack Bretagne maritime zoning: north/south CROSS split, 0 frequencies, 0 public side effects OK")

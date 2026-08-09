@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.17.0 - 2026-08-09
+
+- Ajout de `tools/create_regional_pack.py` pour initialiser un espace de recherche régional sans créer de contenu public.
+- Génération automatique de `README.md`, `pack-plan.json`, `source-registry.json`, `publication-gates.json` et `memory-plan.json` sous `research/<slug>-v<version>/`.
+- État initial volontairement vide : aucune fréquence, aucun bloc mémoire et aucun nombre cible de mémoires ne sont imposés.
+- Tous les drapeaux de publication commencent à `false` ; aucune page Astro, route CSV ou entrée `packRegistry.ts` n'est créée par le starter.
+- Application immédiate des règles permanentes RX-only, `Duplex=off`, `Offset=0.000000`, noms ≤ 10 caractères, maximum 200 mémoires, pas de remplissage artificiel et immutabilité des versions publiées.
+- Refus d'écraser un espace de recherche existant et validation stricte des slugs et versions.
+- Ajout de `tests/test_regional_pack_starter.py`, exécuté sous racine temporaire afin de vérifier l'absence d'effet de bord sur le registre public et les régions publiées.
+- Ajout de l'étape CI `Test regional pack research starter`.
+- Ajout de `SPRINT-25-REGIONAL-STARTER.md` et mise à jour du README au Sprint 25.
+
 ## 0.16.0 - 2026-08-09
 
 - Ajout de l'option `--output-root` au générateur Python afin de produire les CSV dans une racine de sortie séparée du dépôt source.

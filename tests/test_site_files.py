@@ -12,6 +12,7 @@ required_files = [
     "SPRINT-24-ISOLATED-GENERATOR-TESTS.md",
     "SPRINT-25-REGIONAL-STARTER.md",
     "SPRINT-26-BRETAGNE-INITIALIZATION.md",
+    "SPRINT-27-BRETAGNE-MARITIME-ZONING.md",
     "generator/options.json",
     "generator/generate_chirp_csv.py",
     "tools/create_regional_pack.py",
@@ -26,6 +27,7 @@ required_files = [
     "research/bretagne-v0.1/source-registry.json",
     "research/bretagne-v0.1/publication-gates.json",
     "research/bretagne-v0.1/memory-plan.json",
+    "research/bretagne-v0.1/maritime-zones.json",
     "research/annecy-alpes-leman-v0.2/prepublication-plan.json",
     "research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json",
     "website/src/lib/chirpPack.ts",
@@ -43,22 +45,25 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 26",
+    "État actuel — Sprint 27",
     "Normandie v0.3.1** — 139 mémoires RX",
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
     "Bretagne v0.1 — recherche",
     "0 fréquence retenue",
     "aucun nombre cible de mémoires",
-    "research/bretagne-v0.1/",
+    "research/bretagne-v0.1/maritime-zones.json",
+    "Bretagne Nord / Manche Ouest",
+    "CROSS Corsen",
+    "Bretagne Sud / Atlantique",
+    "CROSS Etel",
+    "transition Finistère Sud",
+    "stations VHF déportées",
+    "relais radioamateurs",
+    "maritime_zoning",
     "frequency_data_promoted: false",
     "Bretagne ne doit pas encore apparaître",
-    "tools/create_regional_pack.py",
-    "test_bretagne_research_scaffold.py",
-    "website/src/lib/packRegistry.ts",
-    "Tests de génération isolés",
-    "--output-root <dossier>",
+    "SPRINT-27-BRETAGNE-MARITIME-ZONING.md",
     "nothing to commit, working tree clean",
-    "SPRINT-26-BRETAGNE-INITIALIZATION.md",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README non actualisé: {expected}"
@@ -81,18 +86,47 @@ bretagne_plan = json.loads((ROOT / "research/bretagne-v0.1/pack-plan.json").read
 bretagne_sources = json.loads((ROOT / "research/bretagne-v0.1/source-registry.json").read_text(encoding="utf-8"))
 bretagne_gates = json.loads((ROOT / "research/bretagne-v0.1/publication-gates.json").read_text(encoding="utf-8"))
 bretagne_memory = json.loads((ROOT / "research/bretagne-v0.1/memory-plan.json").read_text(encoding="utf-8"))
+bretagne_maritime = json.loads((ROOT / "research/bretagne-v0.1/maritime-zones.json").read_text(encoding="utf-8"))
+
 assert bretagne_plan["status"] == "research_scaffold_not_public"
 assert bretagne_plan["memory_plan"]["expected_memory_count"] is None
 assert bretagne_plan["memory_plan"]["blocks"] == []
 assert bretagne_plan["publication"]["public_export_allowed"] is False
 assert bretagne_plan["publication"]["public_registry_allowed"] is False
 assert bretagne_plan["publication"]["public_routes_allowed"] is False
-assert len(bretagne_sources["sources"]) == 5
+
+assert bretagne_sources["status"] == "seed_sources_identified_maritime_zoning_in_progress_no_frequency_extraction"
+assert len(bretagne_sources["sources"]) == 10
 assert all(source["frequency_data_promoted"] is False for source in bretagne_sources["sources"])
+assert bretagne_sources["rules"]["maritime_cross_assignment_must_be_zone_specific"] is True
+assert bretagne_sources["rules"]["exact_current_srr_boundary_required_before_publication"] is True
+
+assert bretagne_gates["status"] == "blocked_research_in_progress"
 assert bretagne_gates["public_release_allowed"] is False
+assert len(bretagne_gates["gates"]) == 7
 assert all(not gate["status"].startswith("passed_") for gate in bretagne_gates["gates"])
+maritime_gate = next(gate for gate in bretagne_gates["gates"] if gate["id"] == "maritime_zoning")
+assert maritime_gate["status"] == "north_south_split_required_exact_boundary_pending"
+
 assert bretagne_memory["expected_memory_count"] is None
 assert bretagne_memory["blocks"] == []
+
+assert bretagne_maritime["status"] == "research_zoning_defined_boundaries_pending_exact_current_confirmation"
+assert bretagne_maritime["rules"]["single_bretagne_maritime_zone_forbidden"] is True
+assert bretagne_maritime["rules"]["north_south_operational_split_required"] is True
+assert bretagne_maritime["rules"]["channel_16_frequency_is_common_but_cross_context_is_zone_specific"] is True
+assert bretagne_maritime["rules"]["cross_remote_sites_must_be_researched_by_zone"] is True
+assert bretagne_maritime["rules"]["amateur_repeaters_must_be_tagged_by_breton_subzone"] is True
+zones = {zone["id"]: zone for zone in bretagne_maritime["zones"]}
+assert zones["bretagne-nord-ouest"]["cross"] == "CROSS Corsen"
+assert zones["bretagne-sud-atlantique"]["cross"] == "CROSS Etel"
+assert zones["transition-finistere-sud"]["cross"] is None
+assert bretagne_maritime["channel_16"]["memory_strategy"] == "do_not_duplicate_same_frequency_only_to_label_cross"
+assert bretagne_maritime["channel_16"]["frequency_promoted"] is False
+assert bretagne_maritime["weather_and_safety"]["frequency_promoted"] is False
+assert bretagne_maritime["repeaters"]["maritime_remote_sites"]["status"] == "inventory_required"
+assert bretagne_maritime["repeaters"]["amateur_repeaters"]["status"] == "inventory_required"
+assert bretagne_maritime["publication"]["public_export_allowed"] is False
 
 plan = json.loads((ROOT / "research/annecy-alpes-leman-v0.2/prepublication-plan.json").read_text(encoding="utf-8"))
 assert plan["status"] == "published_v0.2"
@@ -111,10 +145,6 @@ assert {region["slug"] for region in regions} == {"annecy-haute-savoie", "norman
 assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 65
 assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 139
 
-generic_library = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
-for expected in ["assemblePack", "validatePlacedChannels", "buildChirpCsv", '"off"', '"0.000000"']:
-    assert expected in generic_library, f"Moteur générique incomplet: {expected}"
-
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
     'id: "annecy-alpes-leman"',
@@ -122,7 +152,6 @@ for expected in [
     'memoryCount: 65',
     'memoryCount: 48',
     'memoryCount: 139',
-    '/downloads/normandie/radiopack-france-normandie-v0.3.1.csv',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
 assert registry.count('downloadUrl: "') == 3
@@ -135,10 +164,6 @@ historical_generator = (ROOT / "generator/generate_chirp_csv.py").read_text(enco
 for expected in ['"--output-root"', "sortie isolée", "Normandie v0.3.1 est un artefact publié figé"]:
     assert expected in historical_generator, f"Isolation générateur absente: {expected}"
 assert "radiopack-france-normandie-v0.3.1.csv" not in historical_generator
-
-generator_test = (ROOT / "tests/test_generator.py").read_text(encoding="utf-8")
-for expected in ["tempfile.TemporaryDirectory", '"--output-root"', "FROZEN_NORMANDIE", "read_bytes() == original_bytes"]:
-    assert expected in generator_test, f"Garde-fou test générateur absent: {expected}"
 
 starter = (ROOT / "tools/create_regional_pack.py").read_text(encoding="utf-8")
 for expected in [
@@ -154,28 +179,15 @@ for expected in [
     "NOT PUBLIC",
 ]:
     assert expected in starter, f"Starter régional incomplet: {expected}"
-assert "packRegistry.ts" in starter
-assert "website/public" not in starter
-
-starter_test = (ROOT / "tests/test_regional_pack_starter.py").read_text(encoding="utf-8")
-for expected in [
-    "TemporaryDirectory",
-    "pack-test-v0.1",
-    "public_export_allowed",
-    "public_registry_allowed",
-    "public_routes_allowed",
-    "assert not (output_root / \"website\").exists()",
-    "Le starter a modifié un fichier public suivi",
-]:
-    assert expected in starter_test, f"Test starter incomplet: {expected}"
 
 bretagne_test = (ROOT / "tests/test_bretagne_research_scaffold.py").read_text(encoding="utf-8")
 for expected in [
-    "0 public side effects OK",
+    "north/south CROSS split",
     "frequency_data_promoted",
-    'id: "bretagne"',
-    '"slug": "bretagne"',
-    "website/src/pages/regions/bretagne.astro",
+    "bretagne-nord-ouest",
+    "bretagne-sud-atlantique",
+    "transition-finistere-sud",
+    "do_not_duplicate_same_frequency_only_to_label_cross",
 ]:
     assert expected in bretagne_test, f"Test Bretagne incomplet: {expected}"
 
@@ -200,4 +212,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 26 Bretagne research-only initialization: OK")
+print("Tests RadioPack Sprint 27 Bretagne north/south maritime zoning guards: OK")

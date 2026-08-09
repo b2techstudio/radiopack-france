@@ -55,7 +55,7 @@ assert annecy["rules"]["same_output_frequency_must_not_be_duplicated_for_site_la
 
 bretagne = json.loads((ROOT / "research/bretagne-v0.1/emergency-relays.json").read_text(encoding="utf-8"))
 bretagne_gates = json.loads((ROOT / "research/bretagne-v0.1/publication-gates.json").read_text(encoding="utf-8"))
-assert bretagne["schema_version"] == "1.3"
+assert bretagne["schema_version"] == "1.4"
 assert {item["id"] for item in bretagne["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
 b_candidates = {item["id"]: item for item in bretagne["candidates"]}
 assert b_candidates["F1ZUG-4"]["frequency_mhz"] == 144.8000
@@ -71,6 +71,10 @@ assert b_candidates["F5ZEB"]["rx_pack_candidate"] is False
 assert b_candidates["F5ZPV"]["output_mhz"] == 439.8750
 assert b_candidates["F5ZPV"]["status"] == "temporarily_stopped_current_ara35_page"
 assert b_candidates["F5ZPV"]["rx_pack_candidate"] is False
+assert b_candidates["F5ZZH"]["output_mhz"] == 145.7875
+assert b_candidates["F5ZZH"]["input_mhz"] == 145.1875
+assert b_candidates["F5ZZH"]["status"] == "temporarily_stopped_searching_new_site_current_ara35_page"
+assert b_candidates["F5ZZH"]["rx_pack_candidate"] is False
 for relay_id, output_mhz in {"F1ZGS": 431.4250, "F5ZDV": 438.7000, "F5ZZL": 431.3750}.items():
     assert b_candidates[relay_id]["department"] == 29
     assert b_candidates[relay_id]["output_mhz"] == output_mhz
@@ -103,4 +107,4 @@ assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-fra
 published_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 assert published_normandie.is_file()
 
-print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes relay status + Finistere analog candidates + Plouray APRS metadata + Mortain/Annecy frozen public packs, no public mutation OK")
+print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes F5ZPV/F5ZZH stopped status + Finistere analog candidates + Plouray APRS metadata + Mortain/Annecy frozen public packs, no public mutation OK")

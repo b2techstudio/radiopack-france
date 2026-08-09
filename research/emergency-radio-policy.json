@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "status": "active_research_policy",
+  "created": "2026-08-09",
+  "purpose": "Définir ce qui peut être recherché et éventuellement intégré dans les packs RadioPack France pour les communications de secours, de sécurité civile et les relais côtiers.",
+  "included_research_categories": [
+    {
+      "id": "adrasec_amateur_repeaters",
+      "description": "Relais, transpondeurs et digipeaters du service amateur explicitement utilisés, gérés ou prioritaires pour les ADRASEC/FNRASEC.",
+      "public_frequency_eligible": true,
+      "requirements": [
+        "fréquence de sortie publiquement documentée",
+        "mode compatible avec le récepteur cible",
+        "statut courant recoupé",
+        "zone de couverture ou implantation documentée"
+      ]
+    },
+    {
+      "id": "regional_amateur_repeaters",
+      "description": "Relais radioamateurs analogiques régionaux utiles au maillage local, y compris autour des zones côtières et des frontières de département.",
+      "public_frequency_eligible": true,
+      "requirements": [
+        "source radioamateur identifiable",
+        "mode analogique ou écoute réellement exploitable",
+        "pertinence géographique"
+      ]
+    },
+    {
+      "id": "maritime_public_safety",
+      "description": "Canaux VHF maritime, CROSS et diffusions météo/sécurité explicitement destinés au service maritime public.",
+      "public_frequency_eligible": true,
+      "requirements": [
+        "source officielle maritime",
+        "zonage CROSS et couverture locale documentés",
+        "aucune duplication artificielle d'une même fréquence uniquement pour changer l'étiquette de zone"
+      ]
+    },
+    {
+      "id": "public_emergency_broadcasts",
+      "description": "Fréquences ou diffusions de sécurité explicitement publiées pour réception par le public ou les usagers concernés.",
+      "public_frequency_eligible": true,
+      "requirements": [
+        "publication officielle explicite",
+        "usage en réception compatible avec l'objet RadioPack"
+      ]
+    }
+  ],
+  "research_only_or_excluded_categories": [
+    {
+      "id": "private_ppdr_pmr",
+      "description": "Réseaux professionnels PPDR/PMR de police, gendarmerie, pompiers, SAMU, services routiers, ports, administrations ou associations de secours utilisant des assignations professionnelles.",
+      "public_frequency_eligible": false,
+      "rule": "Ne pas publier ni rechercher des canaux opérationnels internes non explicitement destinés à l'écoute publique. Documenter seulement l'existence et la catégorie du réseau lorsque cela aide au périmètre."
+    },
+    {
+      "id": "private_association_operational_channels",
+      "description": "Canaux internes de Protection Civile, Croix-Rouge, associations agréées de sécurité civile ou autres organismes lorsqu'ils relèvent de réseaux professionnels privés.",
+      "public_frequency_eligible": false,
+      "rule": "Ne pas intégrer sans source officielle indiquant explicitement une diffusion publique ou un usage radioamateur ouvert."
+    },
+    {
+      "id": "digital_only_incompatible",
+      "description": "Relais DMR, D-STAR, C4FM, TETRA ou autres modes que le profil RX analogique cible ne peut pas exploiter utilement.",
+      "public_frequency_eligible": false,
+      "rule": "Conserver éventuellement comme métadonnée de couverture, mais ne pas consommer une mémoire analogique inutile."
+    }
+  ],
+  "per_region_rules": {
+    "normandie": {
+      "priority_focus": "Mortain-Bocage / Sud-Manche",
+      "adjacent_departments_to_check": [35, 53, 61],
+      "reason": "La couverture radio utile autour de Mortain-Bocage dépasse les limites administratives du département de la Manche."
+    },
+    "bretagne": {
+      "required_subzones": ["Bretagne Nord / CROSS Corsen", "Bretagne Sud / CROSS Etel", "transition Finistère Sud"],
+      "reason": "Les infrastructures maritimes et les relais radio utiles diffèrent selon la façade et la couverture locale."
+    },
+    "annecy_alpes_leman": {
+      "adjacent_departments_to_check": [1, 38, 73, 74],
+      "cross_border_context": ["Genève", "Vaud", "Valais"],
+      "reason": "Le relief et les réseaux ADRASEC/transpondeurs créent une couverture interdépartementale et transfrontalière."
+    }
+  },
+  "publication_rules": {
+    "rx_only": true,
+    "duplex": "off",
+    "offset": "0.000000",
+    "no_unverified_frequency": true,
+    "no_private_operational_channel": true,
+    "published_versions_are_immutable": true,
+    "new_research_must_target_next_version": true
+  }
+}

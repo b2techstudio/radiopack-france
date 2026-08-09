@@ -135,7 +135,7 @@ for expected in [
     'export const defaultPublicPackId = "annecy-alpes-leman"',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
-assert registry.count("downloadUrl:") == 3
+assert registry.count('downloadUrl: "') == 3
 assert "annecy-haute-savoie-v0.1" not in registry
 
 standard_route = (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts").read_text(encoding="utf-8")

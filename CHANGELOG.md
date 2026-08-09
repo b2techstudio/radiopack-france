@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.7 - 2026-08-09
+
+- Nouvelle politique globale `research/paired-rx-policy.json` : toute liaison publique nativement duplex/split dont les deux fréquences distinctes sont vérifiées doit permettre l'écoute des deux sens avec deux mémoires RX, tout en conservant `Duplex=off` et `Offset=0.000000` sur chacune.
+- Ajout de `research/paired-rx-next-version-plan.json` pour préparer la double écoute des relais/transpondeurs analogiques, des voies maritimes duplex et des satellites split dans Normandie v0.4, Annecy–Alpes–Léman v0.3 et Bretagne v0.1, avec déduplication des fréquences RF partagées.
+- Bretagne maritime : les canaux 63, 64, 79 et 80 conservent désormais explicitement les deux côtés RX navire→côte et côte→navire ; le canal 16 simplex reste une seule mémoire. `public-maritime-radio.json` passe au schéma 1.7.
+- Annecy–Alpes–Léman v0.3 : préparation de l'écoute des montées et descentes de SO-50, AO-91 et AO-123 après recontrôle opérationnel ; la montée 145.850 MHz commune à SO-50/AO-123 restera dédupliquée. La v0.2 publiée reste immuable.
+- Normandie v0.4 : adoption de la double écoute entrée/sortie pour les futurs relais analogiques sélectionnés ; la v0.3.1 publiée est déjà conforme pour la VHF marine avec ses paires `-S` / `-C` et reste immuable.
+- Validation complémentaire du zonage SAR : la SRR actuelle de CROSS Corsen est enregistrée de la baie du Mont-Saint-Michel à la pointe de Penmarc'h, en raccord avec la compétence CROSS Étel à partir de Penmarc'h ; cette frontière ne permet pas de déduire les recouvrements VHF ni les sites émetteurs.
+- Ajout de `tests/test_paired_rx_policy.py`, intégration à la CI et renforcement des garde-fous globaux/Mortain/Bretagne afin d'empêcher tout retour à une politique « descente seulement » tout en maintenant le TX bloqué.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.6 - 2026-08-09
 
 - Validation primaire d'une **couverture VHF opérationnelle actuelle dans le secteur de la Pointe du Raz** : un communiqué de la Préfecture maritime documente un contact VHF établi par le CROSS Corsen avec un navire au nord de la pointe le 21 septembre 2025, sans identifier le site émetteur ni le canal.

@@ -148,14 +148,28 @@ L'inventaire reste :
 research/bretagne-v0.1/emergency-relays.json
 ```
 
-Il couvre les organisations ADRASEC 22 / 29 / 35 / 56 et ajoute maintenant plusieurs relais analogiques régionaux :
+Il couvre les organisations ADRASEC 22 / 29 / 35 / 56 et plusieurs relais analogiques régionaux :
 
 - `F5ZIS` — Matignon — 145.2375 MHz, transpondeur vers 432.6500 MHz, CTCSS 71.9 Hz ;
 - `F5ZIT` — Perros-Guirec — 145.2250 MHz, transpondeur vers 432.6500 MHz, CTCSS 71.9 Hz ;
 - `F1ZBX` — Brocéliande — 145.675 MHz ;
 - `F1ZBZ` — Lorient — sortie 431.200 MHz avec plusieurs entrées publiées, direction exacte à revoir avant sélection RX ;
 - `F5ZPE` — Bignan — sortie 145.7375 MHz, entrée 145.1375 MHz, CTCSS 71.9 Hz ;
-- `F1ZBH`, `F1ZGQ` et `F1ZUG-4` — infrastructures APRS 144.800 MHz conservées comme métadonnées et non comme mémoires dupliquées.
+- `F1ZBH` et `F1ZGQ` — infrastructures APRS 144.800 MHz conservées comme métadonnées et non comme mémoires dupliquées.
+
+### ADRASEC 35 : F1ZUG mieux qualifié
+
+L'ARA35 documente désormais de façon exploitable deux fonctions distinctes sur le site `F1ZUG` de Châtillon-en-Vendelais :
+
+- `F1ZUG-4` est un digipeater APRS sur **144.800 MHz** ;
+- une publication d'entretien du site datée de juin 2024 indique également un **transpondeur pour le réseau ADRASEC 35**.
+
+La fréquence de ce transpondeur ADRASEC n'est pas publiée dans la source consultée. RadioPack la conserve donc à `null` et interdit explicitement de la déduire de la fréquence APRS 144.800 MHz.
+
+### Rennes : F5ZEB R71 et F5ZPV RU19
+
+- `F5ZEB` / **R71** — Rennes Est — de nouveau opérationnel depuis le 25 septembre 2025 selon l'ARA35 ; entrée **431.075 MHz**, sortie **438.675 MHz**, CTCSS 71.9 Hz, liaison vers le R3 `F1ZBX` de Brocéliande. Il reste `rx_pack_candidate: false` tant que couverture et redondance ne sont pas revues ; aucun rôle ADRASEC ne lui est attribué.
+- `F5ZPV` / **RU19** — Rennes-Beaulieu — sortie **439.875 MHz**, entrée **430.475 MHz**, CTCSS 71.9 Hz, FM/C4FM. La page ARA35 actuelle le donne encore comme temporairement arrêté ; il reste donc hors candidats actifs jusqu'à confirmation d'un redémarrage effectif.
 
 Le fait qu'un relais soit situé en Bretagne ou près d'une ADRASEC ne suffit pas à lui attribuer un rôle ADRASEC : ce rôle doit être explicitement documenté.
 
@@ -266,8 +280,10 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 1. trouver une seconde source actuelle pour F6ZES Sourdeval ;
 2. identifier depuis une source primaire la liste détaillée des stations VHF déportées de CROSS Corsen ;
 3. vérifier les recouvrements VHF autour de Penmarc'h et réconcilier l'émetteur actuel du canal 64 dans le Morbihan ;
-4. poursuivre les inventaires ADRASEC 22/29/35/56 et Sud-Manche ;
-5. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
+4. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
+5. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
+6. revalider le redémarrage éventuel de F5ZPV RU19 et la pertinence de F5ZEB R71 ;
+7. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
 
 ## Maintenance
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.9 - 2026-08-09
+
+- Ajout de `research/paired-rx-deduplicated-memory-plan.json` pour matérialiser les fréquences RX uniques issues des paires duplex/split déjà documentées, sans attribuer de positions mémoire ni publier de nouvelle version.
+- Déduplication régionale explicite : **8 fréquences uniques** dans le sous-plan Normandie v0.4, **10** dans Annecy–Alpes–Léman v0.3 et **21** dans Bretagne v0.1 ; ces nombres sont des comptes de recherche et non des tailles finales de packs.
+- Bretagne : fusion de 432.650 MHz pour F5ZIS/F5ZIT et de 145.2625 MHz pour F1ZGS/F5ZDV/F5ZZL ; F5ZPV et F5ZZH restent exclus de la liste active car arrêtés, F1ZUG et F1ZBZ restent non résolus.
+- Annecy v0.3 : 145.850 MHz est fusionné pour les montées SO-50/AO-123, 432.5125 MHz pour F1ZHG/F5ZGT et la paire F1ZJV/F1ZYT est dédupliquée ; les satellites restent soumis à recontrôle opérationnel avant publication.
+- Normandie v0.4 : les paires F5ZHY, F6ZCE, F1ZBX et F1ZOV sont matérialisées en RX entrée/sortie ou côtés A/B ; F6ZES et F1ZBL restent hors liste active tant que leurs données ne sont pas suffisamment résolues.
+- Ajout de `tests/test_paired_rx_memory_plan.py` et de l'étape CI `Test paired RX deduplicated memory plan`, avec contrôle des comptes, de l'unicité RF, des noms ≤ 10 caractères, du contrat TX-off et de l'absence de mutation publique.
+- Les recherches officielles poursuivies sur CROSS Étel n'ont pas encore fourni de liste nominative des 17 stations ni d'émetteur primaire actuel pour le canal 64 ; le bilan 2025 publié n'est pas utilisé faute de lecture PDF fiable dans ce workflow.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.8 - 2026-08-09
 
 - Ajout de `research/bretagne-v0.1/etel-network.json` à partir d'une source officielle DIRM NAMO 2026 indiquant que le service technique du CROSS Étel maintient **17 stations radio réparties sur le littoral, de la Pointe de Penmarc'h à Biarritz**.

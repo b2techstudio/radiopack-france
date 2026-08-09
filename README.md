@@ -4,14 +4,18 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables et les exports publics sont configurés en réception seule.
 
-## État actuel — Sprint 25
+## État actuel — Sprint 26
 
-Deux packs régionaux sont disponibles :
+Deux packs régionaux sont publiés :
 
 - **Normandie v0.3.1** — 139 mémoires RX ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, avec variante **48 mémoires sans aviation**.
 
-Le Sprint 23 a rendu le générateur public multi-régions. Le Sprint 24 a isolé les tests de génération et figé les versions régionales déjà publiées. Le Sprint 25 ajoute un **starter de recherche sécurisé** pour initialiser un futur pack régional sans créer de page publique, de route CSV ou d'entrée dans le registre du générateur.
+Une troisième région est maintenant ouverte en **recherche uniquement** :
+
+- **Bretagne v0.1 — recherche** — 0 fréquence retenue, aucun nombre cible de mémoires, aucune publication autorisée.
+
+Le Sprint 23 a rendu le générateur public multi-régions. Le Sprint 24 a isolé les tests de génération et figé les versions régionales déjà publiées. Le Sprint 25 a ajouté un starter sécurisé. Le Sprint 26 utilise ce cadre pour initialiser réellement `research/bretagne-v0.1/` sans ajouter Bretagne au site public ni au générateur.
 
 Le générateur public reste disponible sur :
 
@@ -19,23 +23,7 @@ Le générateur public reste disponible sur :
 /generateur
 ```
 
-Il permet de sélectionner **Annecy–Alpes–Léman** ou **Normandie**, puis n'affiche que les options réellement prises en charge par le pack choisi.
-
-Pour Annecy :
-
-- aviation activée : 65 mémoires ;
-- aviation désactivée : 48 mémoires ;
-- contrôle NOTAM facultatif ;
-- liens SOFIA-Briefing et Skybriefing ;
-- téléchargement direct de la variante publique validée.
-
-Pour Normandie :
-
-- variante publique fixe de 139 mémoires ;
-- téléchargement direct du CSV v0.3.1 existant ;
-- la version v0.3.1 est figée et ne doit plus être réécrite par le générateur générique.
-
-Le contrôle NOTAM est **informatif et non bloquant**. Il ne modifie jamais automatiquement les fréquences du CSV.
+Il ne propose toujours que **Annecy–Alpes–Léman** et **Normandie**. Bretagne n'y apparaîtra qu'après recherche, revue et publication explicite.
 
 ## Principes permanents
 
@@ -48,6 +36,57 @@ Le contrôle NOTAM est **informatif et non bloquant**. Il ne modifie jamais auto
 - Pour l'ISS et les satellites, seule la liaison descendante est mémorisée ; la liaison montante reste une métadonnée.
 - Les données aéronautiques sont destinées à l'écoute et ne constituent pas une source de préparation ou de conduite d'un vol.
 - Un pack régional déjà publié n'est jamais réécrit silencieusement : une évolution exige une nouvelle version et une nouvelle revue.
+- Une source identifiée n'est pas automatiquement une fréquence validée.
+
+## Bretagne v0.1 — recherche Sprint 26
+
+Le troisième chantier régional est initialisé ici :
+
+```text
+research/bretagne-v0.1/
+```
+
+L'espace contient :
+
+- `README.md` ;
+- `pack-plan.json` ;
+- `source-registry.json` ;
+- `publication-gates.json` ;
+- `memory-plan.json`.
+
+État actuel :
+
+```text
+status: research_scaffold_not_public
+frequences retenues: 0
+expected_memory_count: null
+public_export_allowed: false
+public_registry_allowed: false
+public_routes_allowed: false
+review_completed: false
+```
+
+Les premiers points d'entrée officiels recensés sont :
+
+- SIA / AIP France — Brest Bretagne `LFRB` ;
+- SIA / AIP France — Rennes Saint-Jacques `LFRN` ;
+- portail Open Data de l'ANFR ;
+- services ANFR liés aux radioamateurs ;
+- annuaire officiel ANFR des radioamateurs autorisés.
+
+Ils sont enregistrés uniquement comme **sources de départ**. Toutes les entrées restent à `frequency_data_promoted: false`.
+
+Bretagne n'existe volontairement pas dans :
+
+```text
+website/src/lib/packRegistry.ts
+website/src/data/regions.json
+website/src/pages/regions/
+website/src/pages/downloads/
+website/public/downloads/
+```
+
+Voir [SPRINT-26-BRETAGNE-INITIALIZATION.md](SPRINT-26-BRETAGNE-INITIALIZATION.md).
 
 ## Annecy–Alpes–Léman v0.2
 
@@ -80,19 +119,15 @@ Téléchargements publics :
 /downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv
 ```
 
-Les deux routes sont prérendues par Astro et contrôlées après build.
-
 ## Normandie v0.3.1
 
-Le pack Normandie public contient 139 mémoires RX et reste disponible ici :
+Le pack Normandie public contient 139 mémoires RX :
 
 ```text
 /downloads/normandie/radiopack-france-normandie-v0.3.1.csv
 ```
 
-Il est enregistré dans le même catalogue public qu'Annecy et peut être sélectionné depuis `/generateur`.
-
-Normandie v0.3.1 est désormais traitée comme un **artefact publié immuable**. Les commentaires ISS du jeu national ont évolué depuis sa publication ; les fréquences et positions de v0.3.1 restent inchangées. Toute actualisation Normandie devra donc créer une nouvelle version avec une nouvelle revue.
+Normandie v0.3.1 est un **artefact publié immuable**. Les commentaires ISS du jeu national ont évolué depuis sa publication ; ses fréquences et positions restent inchangées. Toute actualisation devra créer une nouvelle version avec une nouvelle revue.
 
 ## Architecture de génération
 
@@ -114,59 +149,29 @@ Le registre public multi-régions est :
 website/src/lib/packRegistry.ts
 ```
 
-Il décrit actuellement :
+Il décrit actuellement uniquement :
 
 - Annecy–Alpes–Léman v0.2 complet — 65 mémoires ;
 - Annecy–Alpes–Léman v0.2 sans aviation — 48 mémoires ;
 - Normandie v0.3.1 — 139 mémoires.
 
-La méthode complète d'ajout d'une région est documentée dans [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md).
+Bretagne reste hors de ce registre tant que ses portes de publication ne sont pas fermées.
 
-## Starter de pack régional — Sprint 25
+## Starter de pack régional
 
-Le nouvel outil :
+L'outil :
 
 ```text
 tools/create_regional_pack.py
 ```
 
-initialise uniquement un **espace de recherche non public**.
+initialise un espace de recherche non public.
 
-Exemple :
+La Bretagne a été initialisée sur ce modèle au Sprint 26. Le starter impose dès le départ : RX-only, `Duplex=off`, `Offset=0.000000`, noms de 10 caractères maximum, maximum 200 mémoires, pas de remplissage artificiel, préférence pour les sources primaires, revue obligatoire et immutabilité des versions publiées.
 
-```powershell
-python tools\create_regional_pack.py --name "Bretagne" --slug bretagne --version 0.1
-```
+Il ne crée jamais automatiquement de page, de route CSV, de fichier sous `website/public`, d'entrée dans `packRegistry.ts` ou d'entrée dans `regions.json`.
 
-La commande crée :
-
-```text
-research/bretagne-v0.1/
-```
-
-avec :
-
-- `README.md` ;
-- `pack-plan.json` ;
-- `source-registry.json` ;
-- `publication-gates.json` ;
-- `memory-plan.json`.
-
-L'état initial ne contient **aucune fréquence**, **aucun bloc mémoire** et **aucun nombre cible de mémoires**. Tous les drapeaux de publication sont à `false`.
-
-Le starter impose dès le départ les règles permanentes : RX-only, `Duplex=off`, `Offset=0.000000`, noms de 10 caractères maximum, maximum 200 mémoires, pas de remplissage artificiel, préférence pour les sources primaires, revue obligatoire et immutabilité des versions publiées.
-
-Il ne crée jamais :
-
-- de page régionale ;
-- de route CSV ;
-- de fichier sous `website/public` ;
-- d'entrée dans `website/src/lib/packRegistry.ts` ;
-- d'entrée dans `website/src/data/regions.json`.
-
-Si le dossier cible existe déjà, le starter refuse de l'écraser.
-
-Voir [SPRINT-25-REGIONAL-STARTER.md](SPRINT-25-REGIONAL-STARTER.md) pour le détail.
+Voir [SPRINT-25-REGIONAL-STARTER.md](SPRINT-25-REGIONAL-STARTER.md) et [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md).
 
 ## Tests de génération isolés
 
@@ -184,18 +189,11 @@ accepte :
 
 `tests/test_generator.py` utilise un dossier temporaire et ne réécrit plus les CSV suivis par Git. Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique.
 
-Le starter régional possède le même principe de sécurité : `tests/test_regional_pack_starter.py` l'exécute sous une racine temporaire et vérifie qu'aucun fichier public du dépôt n'est modifié.
-
 ## Contrôle NOTAM
 
 L'option NOTAM reste facultative et limitée aux packs qui la prennent explicitement en charge.
 
-Pour Annecy, le générateur propose :
-
-- **SOFIA-Briefing** pour la France ;
-- **Skybriefing** pour la Suisse.
-
-La confirmation NOTAM n'altère jamais le CSV et n'empêche jamais son téléchargement.
+Pour Annecy, le générateur propose SOFIA-Briefing pour la France et Skybriefing pour la Suisse. La confirmation NOTAM n'altère jamais le CSV et n'empêche jamais son téléchargement.
 
 ## Revue et garde-fous
 
@@ -212,15 +210,16 @@ La CI vérifie notamment :
 - Annecy complet : 65 mémoires ;
 - Annecy sans aviation : 48 mémoires ;
 - Normandie : 139 mémoires ;
-- `Duplex=off` et `Offset=0.000000` ;
-- les noms ≤ 10 caractères ;
-- le registre `packRegistry.ts` ;
-- le sélecteur multi-régions ;
-- les fichiers réellement présents dans `website/dist` après `astro build` ;
-- la génération Python dans un dossier temporaire ;
-- l'absence de réécriture de Normandie v0.3.1 ;
-- le starter régional dans un dossier temporaire ;
-- le refus d'une publication ou d'un écrasement implicite par le starter ;
+- les exports RX-only ;
+- le registre multi-régions public ;
+- les fichiers réellement présents dans `website/dist` ;
+- la génération Python en sortie temporaire ;
+- l'immutabilité de Normandie v0.3.1 ;
+- le starter régional ;
+- le scaffold Bretagne ;
+- zéro fréquence Bretagne promue ;
+- tous les drapeaux de publication Bretagne à `false` ;
+- l'absence de Bretagne dans le site et le générateur public ;
 - le build Astro.
 
 ## Synchroniser le dépôt local
@@ -240,6 +239,7 @@ python tests\test_generator.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
 python tests\test_regional_pack_starter.py
+python tests\test_bretagne_research_scaffold.py
 python tests\test_web_generator.py
 python tests\test_annecy_research.py
 python tests\test_annecy_aviation_lakes.py
@@ -266,11 +266,13 @@ python tests\test_built_annecy_public_csv.py
 python tests\test_built_public_pack_catalog.py
 ```
 
-Le catalogue final doit valider :
+Le catalogue public doit toujours valider :
 
 ```text
 Annecy 65 / 48 + Normandie 139
 ```
+
+Bretagne ne doit pas encore apparaître dans ce résultat.
 
 ## Lancer le site en local
 
@@ -288,24 +290,17 @@ http://localhost:4321/regions/annecy-haute-savoie
 http://localhost:4321/regions/normandie
 ```
 
-## Ajouter une future région
+Il ne doit pas encore exister de page publique Bretagne.
 
-Le chemin recommandé est maintenant :
+## Prochaine étape Bretagne
 
-1. créer le starter avec `tools/create_regional_pack.py` ;
-2. documenter les sources et le périmètre ;
-3. construire les inventaires sans remplir artificiellement le pack ;
-4. définir les blocs et positions ;
-5. créer le wrapper `<pack>Pack.ts` utilisant `chirpPack.ts` ;
-6. fermer les portes de publication ;
-7. geler une carte de revue ;
-8. créer les routes ou fichiers publics validés ;
-9. enregistrer explicitement le pack dans `packRegistry.ts` ;
-10. contrôler les fichiers finaux de `website/dist` ;
-11. publier seulement après revue et CI verte ;
-12. ne jamais réécrire une ancienne version publiée.
+Le prochain sprint Bretagne devra rester dans `research/bretagne-v0.1/` et :
 
-Voir [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md) pour le détail.
+1. définir le périmètre géographique et les catégories à étudier ;
+2. compléter le registre de sources officielles ;
+3. rechercher les inventaires domaine par domaine ;
+4. ne promouvoir aucune fréquence sans validation ;
+5. ne fixer aucun nombre cible artificiel de mémoires.
 
 ## Maintenance du projet
 

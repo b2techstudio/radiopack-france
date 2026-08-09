@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Test CSV generator
+      - name: Test CSV generator in isolated output
         run: python tests/test_generator.py
 
       - name: Test production files

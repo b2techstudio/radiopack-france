@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { buildAnnecyCsv } from "../lib/annecyPack";
 
-const fullCsv = buildAnnecyCsv(true);
-const noAviationCsv = buildAnnecyCsv(false);
+const fullDownload = "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv";
+const noAviationDownload = "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv";
+const fullFilename = "radiopack-france-annecy-alpes-leman-v0.2.csv";
+const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv";
 ---
 <BaseLayout
   title="Générateur de pack"
@@ -16,13 +17,13 @@ const noAviationCsv = buildAnnecyCsv(false);
         <h1>Configure ton <span class="gradient-text">RadioPack</span></h1>
         <p class="lead">
           Choisis si tu veux conserver l'aviation, indique éventuellement ton contrôle NOTAM,
-          puis télécharge directement un CSV CHIRP RX-only validé pour Annecy–Alpes–Léman v0.2.
+          puis télécharge directement le CSV CHIRP RX-only correspondant.
         </p>
         <div class="notice card">
-          <strong>Génération locale dans ton navigateur</strong>
+          <strong>Le générateur sélectionne une variante publique déjà validée</strong>
           <p>
-            Les options choisissent entre les deux variantes validées du pack. Le contrôle NOTAM
-            reste informatif : il ne modifie jamais les fréquences AIP/AIRAC du CSV.
+            Le bouton pointe directement vers le CSV 65 ou 48 mémoires construit par Astro.
+            Le contrôle NOTAM reste informatif et ne modifie jamais les fréquences AIP/AIRAC du fichier.
           </p>
         </div>
       </div>
@@ -34,7 +35,7 @@ const noAviationCsv = buildAnnecyCsv(false);
         <dl>
           <div><dt>Duplex</dt><dd>off</dd></div>
           <div><dt>NOTAM</dt><dd>facultatif</dd></div>
-          <div><dt>Publication</dt><dd>disponible</dd></div>
+          <div><dt>Téléchargement</dt><dd>direct</dd></div>
         </dl>
       </aside>
     </div>
@@ -68,8 +69,8 @@ const noAviationCsv = buildAnnecyCsv(false);
             <span>
               <strong>Contrôle NOTAM avant génération</strong>
               <small>
-                Enregistre uniquement ton état de vérification dans le résumé affiché.
-                Cette option ne modifie jamais automatiquement les fréquences du CSV.
+                Sert uniquement à suivre ta vérification. Cette option ne modifie jamais
+                automatiquement les fréquences du CSV.
               </small>
             </span>
             <input id="notam-check" name="notam-check" type="checkbox" />
@@ -77,23 +78,32 @@ const noAviationCsv = buildAnnecyCsv(false);
 
           <div class="notam-confirm" id="notam-confirm-zone" hidden>
             <p>
-              Vérifie si besoin les informations temporaires auprès de SOFIA-Briefing pour la France
-              et Skybriefing pour la Suisse.
+              Les liens ci-dessous ouvrent les services officiels de consultation. Pour un pack
+              d'écoute, cette vérification reste facultative et ne remplace pas les données de référence.
             </p>
+            <div class="notam-links">
+              <a href="https://sofia-briefing.aviation-civile.gouv.fr/sofia/pages/notamform.html" target="_blank" rel="noreferrer">SOFIA-Briefing · France ↗</a>
+              <a href="https://www.skybriefing.com/fr/services/notam-briefing" target="_blank" rel="noreferrer">Skybriefing · Suisse ↗</a>
+            </div>
             <div class="notam-confirm-check">
               <input id="notam-confirmed" name="notam-confirmed" type="checkbox" disabled />
               <label for="notam-confirmed">J'ai vérifié les NOTAM applicables</label>
             </div>
             <p class="muted">
-              La confirmation reste facultative : un pack d'écoute RX peut être généré sans elle.
+              La confirmation reste facultative : le téléchargement est disponible même sans elle.
             </p>
           </div>
         </fieldset>
 
         <div class="form-actions">
-          <button class="button button-primary" id="download-csv" type="button">
-            Générer et télécharger le CSV
-          </button>
+          <a
+            class="button button-primary"
+            id="download-csv"
+            href={fullDownload}
+            download={fullFilename}
+          >
+            Télécharger le CSV · 65 mémoires
+          </a>
           <a class="button button-secondary" href="/telechargements">Tous les téléchargements</a>
         </div>
       </form>
@@ -110,6 +120,7 @@ const noAviationCsv = buildAnnecyCsv(false);
           <div><span>NOTAM</span><strong id="notam-summary">Non demandé</strong></div>
           <div><span>Mode</span><strong>Réception seule</strong></div>
           <div><span>Duplex</span><strong>off</strong></div>
+          <div class="file-row"><span>Fichier</span><strong id="file-summary">{fullFilename}</strong></div>
         </div>
 
         <div class="summary-warning" id="notam-warning">
@@ -144,7 +155,7 @@ const noAviationCsv = buildAnnecyCsv(false);
     </div>
   </section>
 
-  <script define:vars={{ fullCsv, noAviationCsv }}>
+  <script define:vars={{ fullDownload, noAviationDownload, fullFilename, noAviationFilename }}>
     const aviation = document.querySelector("#include-aviation");
     const notam = document.querySelector("#notam-check");
     const confirmed = document.querySelector("#notam-confirmed");
@@ -153,13 +164,24 @@ const noAviationCsv = buildAnnecyCsv(false);
     const aviationSummary = document.querySelector("#aviation-summary");
     const notamSummary = document.querySelector("#notam-summary");
     const notamWarning = document.querySelector("#notam-warning");
-    const downloadButton = document.querySelector("#download-csv");
+    const fileSummary = document.querySelector("#file-summary");
+    const downloadLink = document.querySelector("#download-csv");
 
     const renderSummary = () => {
-      if (!aviation || !notam || !confirmed || !confirmZone || !memoryCount || !aviationSummary || !notamSummary || !notamWarning) return;
+      if (!aviation || !notam || !confirmed || !confirmZone || !memoryCount || !aviationSummary || !notamSummary || !notamWarning || !fileSummary || !downloadLink) return;
 
-      memoryCount.textContent = aviation.checked ? "65" : "48";
-      aviationSummary.textContent = aviation.checked ? "Incluse · 17" : "Exclue · 0";
+      const includeAviation = aviation.checked;
+      const memoryTotal = includeAviation ? 65 : 48;
+      const downloadUrl = includeAviation ? fullDownload : noAviationDownload;
+      const filename = includeAviation ? fullFilename : noAviationFilename;
+
+      memoryCount.textContent = String(memoryTotal);
+      aviationSummary.textContent = includeAviation ? "Incluse · 17" : "Exclue · 0";
+      fileSummary.textContent = filename;
+      downloadLink.href = downloadUrl;
+      downloadLink.setAttribute("download", filename);
+      downloadLink.textContent = `Télécharger le CSV · ${memoryTotal} mémoires`;
+
       confirmZone.hidden = !notam.checked;
       confirmed.disabled = !notam.checked;
 
@@ -171,7 +193,7 @@ const noAviationCsv = buildAnnecyCsv(false);
 
       if (confirmed.checked) {
         notamSummary.textContent = "Confirmé";
-        notamWarning.textContent = "Contrôle NOTAM confirmé. Le contenu fréquentiel du CSV reste inchangé.";
+        notamWarning.textContent = "Contrôle NOTAM confirmé. Le fichier téléchargé reste la variante publique validée, sans modification automatique des fréquences.";
       } else {
         notamSummary.textContent = "Demandé · non confirmé";
         notamWarning.textContent = "Contrôle NOTAM demandé mais non confirmé. Cette vérification reste facultative et non bloquante.";
@@ -184,25 +206,6 @@ const noAviationCsv = buildAnnecyCsv(false);
       renderSummary();
     });
     confirmed?.addEventListener("change", renderSummary);
-
-    downloadButton?.addEventListener("click", () => {
-      if (!aviation) return;
-      const includeAviation = aviation.checked;
-      const csv = includeAviation ? fullCsv : noAviationCsv;
-      const filename = includeAviation
-        ? "radiopack-france-annecy-alpes-leman-v0.2.csv"
-        : "radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv";
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-    });
-
     renderSummary();
   </script>
 </BaseLayout>
@@ -236,6 +239,8 @@ const noAviationCsv = buildAnnecyCsv(false);
   .option-row input { width: 22px; height: 22px; accent-color: var(--purple); flex: 0 0 auto; }
   .notam-confirm { display: grid; gap: 12px; margin-top: 2px; padding: 18px; border-radius: 16px; background: rgba(22,135,233,.07); border: 1px solid rgba(22,135,233,.14); }
   .notam-confirm[hidden] { display: none; }
+  .notam-links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .notam-links a { padding: .55rem .7rem; border-radius: 10px; background: rgba(255,255,255,.8); border: 1px solid var(--line); font-size: .82rem; font-weight: 800; }
   .notam-confirm-check { display: flex; gap: 10px; align-items: center; }
   .notam-confirm-check label { font-weight: 800; cursor: pointer; }
   .notam-confirm-check input { width: 19px; height: 19px; accent-color: var(--purple); cursor: pointer; }
@@ -249,6 +254,8 @@ const noAviationCsv = buildAnnecyCsv(false);
   .summary-list div { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-top: 1px solid var(--line); }
   .summary-list span { color: var(--muted); }
   .summary-list strong { text-align: right; }
+  .summary-list .file-row { align-items: flex-start; }
+  .file-row strong { max-width: 220px; overflow-wrap: anywhere; font-size: .78rem; }
   .summary-warning { padding: 14px; border-radius: 13px; background: rgba(240,154,32,.11); color: #6e460d; font-size: .9rem; }
   .summary-note { font-size: .88rem; }
   .info-grid { padding-bottom: 34px; }

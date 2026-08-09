@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "blocked_research_in_progress",
   "created": "2026-08-09",
   "updated": "2026-08-09",
@@ -23,16 +23,22 @@
       "description": "Distinguer Bretagne Nord / CROSS Corsen et Bretagne Sud / CROSS Etel, confirmer la limite SRR actuelle et inventorier stations VHF déportées, météo et relais par zone"
     },
     {
+      "id": "emergency_relay_inventory",
+      "status": "adrasec_22_29_35_56_and_regional_relays_pending",
+      "required_for_public_release": true,
+      "description": "Inventorier les infrastructures ADRASEC et relais radioamateurs utiles par sous-zone, sans intégrer les réseaux opérationnels PPDR/PMR privés"
+    },
+    {
       "id": "memory_plan",
       "status": "pending",
       "required_for_public_release": true,
-      "description": "Plan mémoire à définir sans remplissage artificiel et sans dupliquer une fréquence uniquement pour changer son étiquette de zone"
+      "description": "Plan mémoire à définir sans remplissage artificiel et sans dupliquer une fréquence uniquement pour changer son étiquette de zone ou de site"
     },
     {
       "id": "data_validation",
       "status": "pending",
       "required_for_public_release": true,
-      "description": "Fréquences retenues à recouper selon leur domaine et leur sous-zone Bretagne"
+      "description": "Fréquences retenues à recouper selon leur domaine, leur sous-zone Bretagne et leur compatibilité RX"
     },
     {
       "id": "dynamic_rechecks",

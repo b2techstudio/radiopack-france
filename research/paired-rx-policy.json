@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "status": "active_project_policy",
+  "created": "2026-08-09",
+  "purpose": "Garantir que les liaisons publiques nativement duplex ou split avec deux fréquences distinctes puissent être écoutées dans les deux sens, sans rendre l'émission possible depuis les exports RadioPack.",
+  "core_rule": {
+    "native_duplex_or_split_pair_exports_both_rx_frequencies": true,
+    "simultaneous_full_duplex_audio_not_required": true,
+    "implementation": "two_rx_only_memories_when_frequencies_differ",
+    "tx_disabled": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000"
+  },
+  "direction_model": {
+    "maritime_duplex": [
+      "ship_to_coast",
+      "coast_to_ship"
+    ],
+    "amateur_repeater": [
+      "user_to_repeater_input",
+      "repeater_to_user_output"
+    ],
+    "crossband_transponder": [
+      "paired_side_a",
+      "paired_side_b"
+    ],
+    "satellite_split": [
+      "ground_to_satellite_uplink",
+      "satellite_to_ground_downlink"
+    ]
+  },
+  "deduplication": {
+    "same_rf_frequency_kept_once_per_pack": true,
+    "shared_frequency_roles_are_metadata": true,
+    "reason": "Une seule mémoire suffit pour écouter une fréquence RF identique même si plusieurs sites, satellites ou fonctions la partagent."
+  },
+  "tone_policy": {
+    "transmit_ctcss_or_activation_tones_never_enable_transmit": true,
+    "tx_tones_may_be_kept_as_comment_metadata": true,
+    "receive_tone_only_when_explicitly_required_for_listening": true
+  },
+  "scope": {
+    "included": [
+      "public_maritime_duplex_channels",
+      "public_amateur_analog_repeaters",
+      "public_amateur_crossband_transponders",
+      "public_amateur_satellite_split_links"
+    ],
+    "excluded": [
+      "private_ppdr_pmr_operational_links",
+      "private_rescue_or_association_operational_links",
+      "unverified_frequencies",
+      "digital_only_links_incompatible_with_target_rx_profile"
+    ]
+  },
+  "versioning": {
+    "published_versions_are_immutable": true,
+    "apply_to_next_versions_and_new_packs": true,
+    "normandie": "v0.4 inherits the paired maritime RX model already present in published v0.3.1 and extends the rule to newly selected public paired links",
+    "annecy_alpes_leman": "v0.3 must expose verified repeater/transponder inputs and outputs plus verified satellite uplinks and downlinks as RX memories after deduplication",
+    "bretagne": "v0.1 must expose both ship and coast frequencies for verified native duplex maritime channels and both sides of selected public amateur paired links"
+  }
+}

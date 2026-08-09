@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "status": "research_inventory_not_public",
   "updated": "2026-08-09",
   "pack": {
@@ -174,9 +174,7 @@
       "status": "current_ref_directory_active_aprs",
       "rx_pack_candidate": false,
       "frequency_promoted_to_public_pack": false,
-      "sources": [
-        "https://www.r-e-f.org/"
-      ],
+      "sources": ["https://www.r-e-f.org/"],
       "note": "APRS déjà couvert nationalement ; utile pour cartographier les infrastructures locales."
     },
     {
@@ -190,9 +188,61 @@
       "status": "current_ref_directory_active_aprs",
       "rx_pack_candidate": false,
       "frequency_promoted_to_public_pack": false,
-      "sources": [
-        "https://www.r-e-f.org/"
-      ]
+      "sources": ["https://www.r-e-f.org/"]
+    },
+    {
+      "id": "F1ZGS",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Plouhinec",
+      "department": 29,
+      "subzone": "bretagne_ouest_finistere_sud",
+      "locator": "IN78SA24FI",
+      "altitude_m": 101,
+      "output_mhz": 431.4250,
+      "input_mhz": 145.2625,
+      "ctcss_hz": 71.9,
+      "mode": "FM",
+      "status": "current_ref_active_analog_candidate",
+      "rx_pack_candidate": true,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "Transpondeur analogique actif du Finistère Sud. Candidat régional de recherche ; aucun rôle ADRASEC n'est attribué sans source dédiée."
+    },
+    {
+      "id": "F5ZDV",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Morlaix",
+      "department": 29,
+      "subzone": "bretagne_nord_finistere",
+      "locator": "IN88CN06IS",
+      "altitude_m": 85,
+      "output_mhz": 438.7000,
+      "input_mhz": 145.2625,
+      "ctcss_hz": 71.9,
+      "mode": "FM",
+      "status": "current_ref_active_analog_candidate",
+      "rx_pack_candidate": true,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "Transpondeur analogique actif du nord Finistère. À conserver comme candidat régional après revue de couverture et de redondance ; rôle ADRASEC non présumé."
+    },
+    {
+      "id": "F5ZZL",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Cast",
+      "department": 29,
+      "subzone": "bretagne_ouest_finistere_centre",
+      "locator": "IN78WD98WO",
+      "altitude_m": 251,
+      "output_mhz": 431.3750,
+      "input_mhz": 145.2625,
+      "ctcss_hz": 71.9,
+      "mode": "FM",
+      "status": "current_ref_active_analog_candidate",
+      "rx_pack_candidate": true,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "Transpondeur analogique actif du Finistère. Candidat régional de recherche ; aucun rôle ADRASEC n'est attribué sans source dédiée."
     },
     {
       "id": "F1ZBZ",
@@ -224,6 +274,22 @@
       "frequency_promoted_to_public_pack": false,
       "sources": ["https://www.r-e-f.org/"],
       "note": "Relais analogique actif du Morbihan à comparer aux relais côtiers et au maillage ADRASEC 56."
+    },
+    {
+      "id": "F1ZAJ",
+      "kind": "amateur_aprs_digipeater",
+      "site": "Plouray",
+      "department": 56,
+      "subzone": "bretagne_sud_morbihan_interieur",
+      "locator": "IN88HC59UI",
+      "altitude_m": 297,
+      "frequency_mhz": 144.8000,
+      "mode": "APRS",
+      "status": "current_ref_directory_active_aprs_metadata_only",
+      "rx_pack_candidate": false,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "APRS national déjà couvert par une mémoire commune ; conserver le site comme métadonnée de maillage uniquement, sans doublon."
     }
   ],
   "research_required": [
@@ -234,6 +300,8 @@
     "inventorier les relais et transpondeurs explicitement ADRASEC 56",
     "revoir la couverture et la redondance de F5ZEB R71 avec le R3 Brocéliande",
     "revalider le redémarrage de F5ZPV RU19 avant tout retour parmi les candidats actifs",
+    "revoir couverture et éventuels doublons des transpondeurs analogiques F1ZGS, F5ZDV et F5ZZL du Finistère",
+    "conserver F1ZAJ Plouray comme métadonnée APRS sans créer une nouvelle mémoire 144.800",
     "rattacher chaque relais au zonage Bretagne Nord / Bretagne Sud / transition lorsque pertinent",
     "croiser les relais amateurs avec la couverture côtière sans confondre réseaux amateurs et réseaux PPDR privés",
     "revoir les entrées multiples F1ZBZ Lorient pour déterminer les fréquences réellement utiles au profil RX"

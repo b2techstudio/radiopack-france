@@ -33,7 +33,7 @@ for expected in [
 ]:
     assert expected in registry, f"Contrat registre absent: {expected}"
 
-assert registry.count("downloadUrl:") == 3
+assert registry.count('downloadUrl: "') == 3
 assert "annecy-haute-savoie-v0.1" not in registry
 
 page = GENERATOR.read_text(encoding="utf-8")

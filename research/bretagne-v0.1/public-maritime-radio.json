@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "status": "official_channel_frequencies_verified_site_coverage_pending",
+  "updated": "2026-08-09",
+  "purpose": "Documenter uniquement les voies VHF maritimes publiques de sécurité/météo utiles au futur pack Bretagne RX, en distinguant fréquence navire et fréquence station côtière pour les voies duplex.",
+  "official_sources": [
+    {
+      "authority": "ANFR",
+      "title": "Affectation des voies VHF dans le service mobile maritime",
+      "url": "https://www.anfr.fr/fileadmin/2026/VOIES_VHF_MARITIMES_MARS_2016.pdf",
+      "status": "primary_frequency_table"
+    },
+    {
+      "authority": "Ministère chargé de la mer",
+      "title": "Règles de sécurité pour les loisirs nautiques en mer",
+      "url": "https://mer.gouv.fr/regles-de-securite-pour-les-loisirs-nautiques-en-mer",
+      "status": "primary_operational_usage"
+    },
+    {
+      "authority": "Ministère chargé de la mer",
+      "title": "Surveillance et sauvetage en mer",
+      "url": "https://www.mer.gouv.fr/surveillance-et-sauvetage-en-mer",
+      "status": "primary_cross_context"
+    }
+  ],
+  "channels": [
+    {
+      "channel": 16,
+      "mode": "simplex",
+      "ship_tx_mhz": 156.8000,
+      "ship_rx_mhz": 156.8000,
+      "rx_memory_mhz": 156.8000,
+      "official_assignment": "APPEL - DETRESSE - SECURITE",
+      "regional_context": ["CROSS Corsen", "CROSS Etel"],
+      "memory_strategy": "reuse_single_common_channel_and_store_cross_as_zone_metadata",
+      "frequency_promoted_to_public_pack": false
+    },
+    {
+      "channel": 79,
+      "mode": "duplex",
+      "ship_tx_mhz": 156.9750,
+      "coast_tx_ship_rx_mhz": 161.5750,
+      "rx_memory_mhz": 161.5750,
+      "official_assignment": "CROSS et Autorités Portuaires",
+      "operational_context": "bulletins météo annoncés préalablement sur le canal 16",
+      "zone_assignment": "exact_transmitter_and_coverage_inventory_pending",
+      "frequency_promoted_to_public_pack": false
+    },
+    {
+      "channel": 80,
+      "mode": "duplex",
+      "ship_tx_mhz": 157.0250,
+      "coast_tx_ship_rx_mhz": 161.6250,
+      "rx_memory_mhz": 161.6250,
+      "official_assignment": "CROSS et Autorités Portuaires",
+      "operational_context": "bulletins météo annoncés préalablement sur le canal 16",
+      "zone_assignment": "exact_transmitter_and_coverage_inventory_pending",
+      "frequency_promoted_to_public_pack": false
+    },
+    {
+      "channel": 63,
+      "mode": "duplex",
+      "ship_tx_mhz": 156.1750,
+      "coast_tx_ship_rx_mhz": 160.7750,
+      "rx_memory_mhz": 160.7750,
+      "official_assignment": "CROSS et Autorités Portuaires",
+      "operational_context": "bulletin météo côtier permanent notamment dans le Morbihan",
+      "breton_subzone": "bretagne_sud_morbihan_priority",
+      "zone_assignment": "exact_transmitter_and_coverage_inventory_pending",
+      "frequency_promoted_to_public_pack": false
+    },
+    {
+      "channel": 64,
+      "mode": "duplex",
+      "ship_tx_mhz": 156.2250,
+      "coast_tx_ship_rx_mhz": 160.8250,
+      "rx_memory_mhz": 160.8250,
+      "official_assignment": "CROSS et Autorités Portuaires",
+      "operational_context": "bulletin météo côtier permanent notamment dans le Morbihan",
+      "breton_subzone": "bretagne_sud_morbihan_priority",
+      "zone_assignment": "exact_transmitter_and_coverage_inventory_pending",
+      "frequency_promoted_to_public_pack": false
+    }
+  ],
+  "cross_zones": [
+    {
+      "cross": "CROSS Corsen",
+      "subzone": "Bretagne Nord / Manche Ouest",
+      "channel_16_common": true,
+      "remote_vhf_sites": [],
+      "remote_vhf_sites_status": "official_inventory_pending"
+    },
+    {
+      "cross": "CROSS Etel",
+      "subzone": "Bretagne Sud / Atlantique",
+      "channel_16_common": true,
+      "remote_vhf_sites": [],
+      "remote_vhf_sites_status": "official_inventory_pending"
+    }
+  ],
+  "rules": {
+    "rx_only_uses_coast_transmit_frequency_on_duplex_channels": true,
+    "channel_16_not_duplicated_by_cross_label": true,
+    "weather_channels_require_site_and_coverage_validation_before_publication": true,
+    "cross_remote_vhf_sites_must_be_primary_sourced": true,
+    "private_port_or_rescue_networks_not_explicitly_public_are_excluded": true,
+    "public_export_allowed": false
+  }
+}

@@ -95,7 +95,7 @@ for expected in [
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
 
-assert registry.count("downloadUrl:") == 3
+assert registry.count('downloadUrl: "') == 3
 assert "annecy-haute-savoie-v0.1" not in registry
 
 generic = GENERIC_LIBRARY.read_text(encoding="utf-8")

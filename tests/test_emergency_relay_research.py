@@ -91,4 +91,4 @@ assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-fra
 published_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 assert published_normandie.is_file()
 
-print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes relay status + Mortain/Annecy frozen public packs OK")
+print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes relay status + Mortain/Annecy frozen public packs, no public mutation OK")

@@ -5,11 +5,35 @@ Cet espace initialise le troisième pack régional RadioPack France à partir du
 ## État actuel
 
 - statut : `research_scaffold_not_public` ;
-- aucune fréquence n'est encore retenue ;
+- aucune fréquence n'est encore retenue publiquement ;
 - aucun nombre cible de mémoires n'est imposé ;
 - aucun fichier public n'est créé ;
 - aucune entrée n'est ajoutée à `website/src/lib/packRegistry.ts` ;
 - aucune entrée n'est ajoutée à `website/src/data/regions.json`.
+
+## Règle paired RX
+
+Bretagne v0.1 applique la politique globale :
+
+```text
+research/paired-rx-policy.json
+```
+
+Une liaison publique nativement duplex/split dont les deux fréquences sont vérifiées devra conserver **les deux côtés pour l'écoute**. Si les fréquences diffèrent, deux mémoires RX sont prévues ; chacune reste `Duplex=off` et `Offset=0.000000`.
+
+Pour la VHF maritime :
+
+- `-S` = côté navire, navire → côte ;
+- `-C` = côté station côtière, côte → navire.
+
+Exemples déjà modélisés dans `public-maritime-radio.json` :
+
+- canal 63 : 156.175 / 160.775 MHz ;
+- canal 64 : 156.225 / 160.825 MHz ;
+- canal 79 : 156.975 / 161.575 MHz ;
+- canal 80 : 157.025 / 161.625 MHz.
+
+Le canal 16 simplex reste une seule mémoire sur 156.800 MHz. Une même fréquence RF partagée par plusieurs sites ou fonctions ne devra pas être dupliquée inutilement.
 
 ## Règle de zonage Bretagne
 
@@ -21,7 +45,7 @@ La recherche doit distinguer au minimum :
 - **Bretagne Sud / Atlantique** — contexte opérationnel CROSS Etel ;
 - **zone de transition du Finistère Sud** — interface autour de la Pointe de Penmarc'h, avec recouvrements radio encore à documenter avant toute publication.
 
-La DIRM NAMO indique désormais explicitement que le **CROSS Étel est compétent à partir de la Pointe de Penmarc'h (Finistère) jusqu'à la frontière espagnole**. Ce point d'interface est donc considéré comme vérifié pour la recherche. Il reste néanmoins nécessaire de documenter la ligne cartographique détaillée, les éventuels recouvrements radio et les stations VHF de CROSS Corsen avant publication.
+La responsabilité SAR est désormais primaire-vérifiée des deux côtés de Penmarc'h : CROSS Corsen de la **Baie du Mont-Saint-Michel** à la Pointe de Penmarc'h, et CROSS Étel à partir de la Pointe de Penmarc'h jusqu'à la frontière espagnole. Cela ne permet pas de déduire la couverture radio réelle ou les sites émetteurs.
 
 Cette séparation s'applique particulièrement à la VHF maritime, mais également à l'étude des relais radioamateurs et de toute infrastructure dont la couverture dépend réellement du territoire.
 
@@ -53,15 +77,19 @@ Le planning officiel de diffusion météo du CROSS Étel permet maintenant d'ide
 
 Le ministère indique par ailleurs que le canal 16 annonce les bulletins sur 79/80 et mentionne une diffusion permanente sur 63/64 notamment dans le Morbihan. Le planning primaire CROSS Étel exploité n'identifie toutefois pas d'émetteur Bretagne sur le canal 64. RadioPack conserve donc le canal 64 comme donnée réglementaire de recherche, sans lui attribuer de site breton tant que ce point n'est pas réconcilié par une source primaire locale actuelle.
 
-Pour CROSS Corsen, la page DIRM actuelle confirme un réseau VHF/MHF et des diffusions météo depuis des stations littorales, mais la liste détaillée des sites et canaux n'est pas fournie dans la source exploitée. Aucun site Corsen n'est donc inventé.
+### CROSS Corsen
+
+Le réseau actuel est documenté à 10 stations VHF et 2 stations MF. Cap Fréhel et Stiff/Ouessant sont primaire-vérifiés comme infrastructures radio actuelles sans canal publié. Une opération officielle confirme une couverture VHF actuelle au nord de la Pointe du Raz, sans identifier l'émetteur ni le canal.
+
+Le canal 79 reste donc sans émetteur actuel primaire-vérifié. La frontière SAR à Penmarc'h, la couverture VHF du Raz et l'existence d'une infrastructure radio ne doivent jamais être utilisés pour inventer une affectation de canal.
 
 ### Premiers constats officiels
 
 Les sources institutionnelles recensées montrent notamment :
 
-- des opérations récentes à Audierne, l'île de Sein et la pointe de Pen Hir coordonnées par CROSS Corsen ;
+- des opérations récentes à Audierne, l'île de Sein, la pointe de Pen Hir et la Pointe du Raz coordonnées par CROSS Corsen ;
 - des opérations récentes à Concarneau / Trévignon et Belle-Île coordonnées par CROSS Etel ;
-- la compétence officielle de CROSS Étel à partir de la Pointe de Penmarc'h vers le sud ;
+- l'interface de responsabilité SAR des deux CROSS à Penmarc'h ;
 - le ministère indique que le canal 16 met en relation avec le CROSS de la zone ;
 - le planning CROSS Étel identifie Penmarc'h, Groix et Belle-Ile sur le canal 80 et Étel sur le canal 63 en continu.
 
@@ -78,7 +106,7 @@ Le registre comprend notamment :
 - documentation officielle du ministère chargé de la mer sur le canal 16 et la météo VHF ;
 - documentation de la Préfecture maritime de l'Atlantique sur le partage des zones CROSS et des opérations récentes.
 
-Les nouvelles sources DIRM NAMO utilisées pour l'interface Penmarc'h et les émetteurs météo sont tracées directement dans `public-maritime-radio.json` et `maritime-zones.json`.
+Les nouvelles sources DIRM NAMO utilisées pour l'interface Penmarc'h, le réseau Corsen et les émetteurs météo sont tracées directement dans `public-maritime-radio.json` et `maritime-zones.json`.
 
 Ces références sont des **sources de départ ou de validation de recherche**, pas des fréquences déjà publiées pour le pack.
 
@@ -89,7 +117,7 @@ Deux inventaires différents devront être constitués :
 1. **stations VHF maritimes déportées / relais de couverture CROSS**, séparées Bretagne Nord et Bretagne Sud ;
 2. **relais radioamateurs**, eux aussi rattachés à une sous-zone Bretagne Nord, Bretagne Sud ou transition lorsque cela est pertinent.
 
-On ne déduira pas une zone uniquement du département : l'implantation, la couverture réelle et l'usage opérationnel devront être documentés.
+Pour les relais/transpondeurs analogiques finalement sélectionnés, les deux côtés publiquement vérifiés seront conservés en RX conformément à la politique paired RX. On ne déduira pas une zone ou un rôle ADRASEC uniquement du département.
 
 ## Suite
 
@@ -97,9 +125,10 @@ On ne déduira pas une zone uniquement du département : l'implantation, la couv
 2. documenter les éventuels recouvrements radio autour de l'interface Penmarc'h ;
 3. réconcilier l'usage actuel du canal 64 dans le Morbihan avec une source primaire locale ;
 4. poursuivre les relais radioamateurs et ADRASEC Bretagne Nord / Bretagne Sud ;
-5. poursuivre séparément aviation et autres domaines ;
-6. construire ensuite un plan mémoire sans objectif artificiel de remplissage ;
-7. créer une carte de revue avant toute publication ;
-8. publier uniquement après fermeture des portes, revue explicite et CI verte.
+5. construire le futur plan mémoire en conservant les deux côtés des liaisons duplex/split vérifiées ;
+6. poursuivre séparément aviation et autres domaines ;
+7. construire ensuite un plan mémoire sans objectif artificiel de remplissage ;
+8. créer une carte de revue avant toute publication ;
+9. publier uniquement après fermeture des portes, revue explicite et CI verte.
 
 Voir `REGIONAL-PACK-WORKFLOW.md` pour le processus complet.

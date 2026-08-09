@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.4 - 2026-08-09
+
+- Ajout du dimensionnement actuel du réseau CROSS Corsen à partir d'une communication officielle DGAMPA : **10 stations radio VHF et 2 stations MF**, avec liste nominative et canaux encore à inventorier.
+- Ajout comme pistes primaires historiques du décret de 2003 documentant des équipements radio au Stiff / Ouessant, à la Pointe du Raz et sur le site de Corsen ; ces sites restent explicitement `current_validation: false` tant qu'une source actuelle ne les recoupe pas.
+- Documentation historique primaire d'une diffusion régulière Corsen/Ouessant sur le canal 79 après appel sur le canal 16 ; le canal 79 reste une donnée de recherche à revalider pour l'architecture actuelle.
+- Recontrôle 2026 de la page ministérielle mentionnant les canaux 63/64 pour le bulletin côtier permanent dans le Morbihan ; maintien du canal 64 sans émetteur Bretagne attribué car les sources locales actuelles du CROSS Étel exploitées identifient Étel sur 63 et aucun site sur 64.
+- Passage de `research/bretagne-v0.1/public-maritime-radio.json` au schéma 1.3 avec séparation stricte entre réseau actuel, infrastructure Cap Fréhel primaire-vérifiée et architecture historique à revalider.
+- Renforcement de `tests/test_mortain_bretagne_radio_research.py` et `tests/test_site_files.py` pour empêcher toute promotion d'un site ou canal historique comme donnée actuelle sans revalidation.
+- F6ZES Sourdeval reste sans fréquence ni mode et les rôles ADRASEC 22/29/56 restent non attribués faute de sources dédiées suffisamment précises.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.3 - 2026-08-09
 
 - Validation primaire d'une infrastructure radio CROSS Corsen au phare du Cap Fréhel : la DIRM NAMO confirme des équipements de suivi et de liaison avec les navires pour la surveillance du trafic et la coordination des secours.

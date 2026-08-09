@@ -49,6 +49,9 @@ jobs:
       - name: Test emergency and ADRASEC research
         run: python tests/test_emergency_relay_research.py
 
+      - name: Test Mortain and Bretagne public radio research
+        run: python tests/test_mortain_bretagne_radio_research.py
+
       - name: Test Annecy Alps Leman research inventories
         run: python tests/test_annecy_research.py
 

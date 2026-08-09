@@ -34,6 +34,7 @@ Le générateur public `/generateur` continue de proposer uniquement Annecy–Al
 - Une version régionale publiée est immuable ; toute évolution crée une nouvelle version et une nouvelle revue.
 - Un rôle ADRASEC n'est jamais déduit uniquement de l'implantation géographique d'un relais.
 - Une infrastructure radio actuelle vérifiée ne vaut pas automatiquement validation d'un canal ou d'une fréquence précise.
+- Une preuve de couverture VHF dans un secteur ne permet pas d'identifier automatiquement le site émetteur.
 - Les réseaux professionnels privés de sécurité/secours ne sont pas transformés en canaux d'écoute simplement parce qu'ils existent.
 
 ## Politique secours / ADRASEC
@@ -137,20 +138,26 @@ Le planning officiel du CROSS Étel identifie quatre émetteurs météo bretons 
 
 Le ministère mentionne toujours une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan. Cette mention a été recontrôlée en 2026, mais la page et le planning primaires du CROSS Étel exploités identifient explicitement Étel sur le canal 63 et aucun émetteur Bretagne sur 64. RadioPack conserve donc le canal 64 en recherche sans inventer de site.
 
-### CROSS Corsen : Stiff/Ouessant désormais primaire-vérifié comme infrastructure radio actuelle
+### CROSS Corsen : infrastructures actuelles, couverture du Raz et inventaire des canaux encore ouvert
 
 La page actuelle du CROSS Corsen confirme un réseau radio VHF/MF veillé en permanence et des stations littorales utilisées pour les diffusions météorologiques. Une communication officielle récente de la DGAMPA précise sa taille : **10 stations radio VHF et 2 stations MF**. La liste complète et les canaux de ces stations restent à établir.
 
-Deux infrastructures actuelles sont maintenant primaire-vérifiées :
+Deux infrastructures actuelles sont primaire-vérifiées :
 
 - **Cap Fréhel** : équipements CROSS Corsen de suivi et de liaison avec les navires, sans service radio ni canal explicitement publié dans la source exploitée ;
-- **Stiff / Ouessant** : une offre officielle DIRM NAMO de 2026 indique que la tour du Stiff abrite les radars et des équipements de radiocommunications du CROSS Corsen ; un marché public DGAMPA de réhabilitation confirme que la vigie abrite actuellement les équipements radio et informatiques nécessaires aux missions du CROSS.
+- **Stiff / Ouessant** : une offre officielle DIRM NAMO de 2026 indique que la tour du Stiff abrite les radars et des équipements de radiocommunications du CROSS Corsen ; un marché public DGAMPA confirme que la vigie abrite actuellement les équipements radio et informatiques nécessaires aux missions du CROSS.
 
-Cette revalidation actuelle du **Stiff** est une avancée importante par rapport au seul décret historique de 2003. Elle ne permet cependant **pas** d'attribuer automatiquement le canal 79 au site : aucune source primaire actuelle exploitée ne relie explicitement le Stiff à ce canal. `radio_service_or_channel` reste donc `null`.
+Cette revalidation actuelle du **Stiff** ne permet **pas** d'attribuer automatiquement le canal 79 au site : aucune source primaire actuelle exploitée ne relie explicitement le Stiff à ce canal. `radio_service_or_channel` reste donc `null`.
 
-Le décret primaire de **2003** reste utile pour l'historique : il documente alors le Stiff en VHF, la **Pointe du Raz** en VHF/MF, le site de **Corsen** comme installation radio de secours multicanal, ainsi qu'une diffusion régulière d'informations et de météo sur le **canal 79** après appel sur le canal 16. Le Stiff est maintenant revalidé comme infrastructure radio actuelle ; **Pointe du Raz** et **Corsen** restent des pistes historiques non revalidées actuellement.
+Une opération officielle du **21 septembre 2025** apporte maintenant une preuve complémentaire pour la **Pointe du Raz** : le CROSS Corsen a établi un contact VHF avec un navire au nord de la pointe. RadioPack en déduit uniquement que le secteur bénéficie d'une couverture VHF opérationnelle actuelle. Le communiqué ne donne ni le site émetteur ni le canal utilisé ; l'ancienne installation VHF/MF de la Pointe du Raz documentée en 2003 reste donc `current_validation: false`.
 
-Ces fréquences, émetteurs, infrastructures et pistes historiques sont documentés dans la recherche mais **pas encore promus dans Bretagne v0.1**.
+Le centre principal actuel du CROSS Corsen à la **Pointe de Corsen / Plouarzel** est conservé séparément de l'inventaire des stations déportées. Le fait que le CROSS soit implanté à Plouarzel ne suffit pas à revalider l'installation radio locale de secours multicanal documentée en 2003.
+
+Le projet **CROSS Nouvelle génération** prévoit par ailleurs un regroupement fonctionnel Étel/Corsen avec un horizon opérationnel 2027. Cette réorganisation future est une métadonnée de recherche : elle ne modifie ni les fréquences actuelles ni les exigences de validation site par site.
+
+Le décret primaire de **2003** reste utile pour l'historique : il documente alors le Stiff en VHF, la Pointe du Raz en VHF/MF, le site de Corsen comme installation radio de secours multicanal, ainsi qu'une diffusion régulière d'informations et de météo sur le **canal 79** après appel sur le canal 16. Le Stiff est maintenant revalidé comme infrastructure radio actuelle ; la Pointe du Raz dispose désormais d'une preuve de couverture sectorielle actuelle, mais son installation historique et l'installation locale historique de Corsen restent à revalider.
+
+Ces fréquences, émetteurs, infrastructures et preuves de couverture sont documentés dans la recherche mais **pas encore promus dans Bretagne v0.1**.
 
 ## Bretagne — ADRASEC et relais analogiques
 
@@ -172,7 +179,7 @@ Il couvre les organisations ADRASEC 22 / 29 / 35 / 56 et plusieurs relais analog
 - `F5ZPE` — Bignan — sortie 145.7375 MHz, entrée 145.1375 MHz, CTCSS 71.9 Hz ;
 - `F1ZBH`, `F1ZGQ` et `F1ZAJ` — infrastructures APRS 144.800 MHz conservées comme métadonnées et non comme mémoires dupliquées.
 
-Les nouveaux transpondeurs Finistère `F1ZGS`, `F5ZDV` et `F5ZZL` sont des candidats analogiques de recherche, pas encore des mémoires retenues. Leur couverture et leur redondance doivent être étudiées avant toute sélection.
+Les transpondeurs Finistère `F1ZGS`, `F5ZDV` et `F5ZZL` sont des candidats analogiques de recherche, pas encore des mémoires retenues. Leur couverture et leur redondance doivent être étudiées avant toute sélection.
 
 ### ADRASEC 35 : F1ZUG mieux qualifié
 
@@ -183,10 +190,11 @@ L'ARA35 documente deux fonctions distinctes sur le site `F1ZUG` de Châtillon-en
 
 La fréquence de ce transpondeur ADRASEC n'est pas publiée dans la source consultée. RadioPack la conserve donc à `null` et interdit explicitement de la déduire de la fréquence APRS 144.800 MHz.
 
-### Rennes : F5ZEB R71 et F5ZPV RU19
+### Rennes : F5ZEB R71, F5ZPV RU19 et F5ZZH R7X
 
 - `F5ZEB` / **R71** — Rennes Est — de nouveau opérationnel depuis le 25 septembre 2025 selon l'ARA35 ; entrée **431.075 MHz**, sortie **438.675 MHz**, CTCSS 71.9 Hz, liaison vers le R3 `F1ZBX` de Brocéliande. Il reste `rx_pack_candidate: false` tant que couverture et redondance ne sont pas revues ; aucun rôle ADRASEC ne lui est attribué.
-- `F5ZPV` / **RU19** — Rennes-Beaulieu — sortie **439.875 MHz**, entrée **430.475 MHz**, CTCSS 71.9 Hz, FM/C4FM. La page ARA35 actuelle le donne encore comme temporairement arrêté ; il reste donc hors candidats actifs jusqu'à confirmation d'un redémarrage effectif.
+- `F5ZPV` / **RU19** — Rennes-Beaulieu — sortie **439.875 MHz**, entrée **430.475 MHz**, CTCSS 71.9 Hz, FM/C4FM. La page ARA35 actuelle le donne encore comme temporairement arrêté ; il reste hors candidats actifs jusqu'à confirmation d'un redémarrage effectif.
+- `F5ZZH` / **R7X** — Rennes-Beaulieu / Cesson-Sévigné — sortie **145.7875 MHz**, entrée **145.1875 MHz**, FM. La page ARA35 actuelle le donne comme **temporairement arrêté et à la recherche d'un nouveau site** ; la fréquence est conservée comme métadonnée de recherche et `rx_pack_candidate` reste `false`.
 
 Les recherches ADRASEC 22, 29 et 56 restent ouvertes : un relais radioamateur ne reçoit jamais un rôle ADRASEC sur la seule base de sa localisation.
 
@@ -295,15 +303,16 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 ## Prochaines priorités
 
 1. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
-2. identifier par source primaire actuelle le ou les émetteurs du **canal 79** sans le déduire du seul fait que le Stiff possède des équipements radio ;
-3. revalider actuellement les pistes historiques **Pointe du Raz** et **Corsen** ;
-4. réconcilier l'émetteur actuel du canal 64 dans le Morbihan ;
-5. trouver une seconde source actuelle pour F6ZES Sourdeval ;
-6. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
-7. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
-8. revoir couverture et redondance de F1ZGS, F5ZDV, F5ZZL et F5ZEB avant toute sélection mémoire ;
-9. revalider le redémarrage éventuel de F5ZPV RU19 ;
-10. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
+2. identifier par source primaire actuelle le ou les émetteurs du **canal 79**, notamment derrière la couverture VHF actuelle du secteur de la Pointe du Raz, sans déduire leur emplacement ;
+3. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
+4. suivre le projet **CROSS Nouvelle génération** sans projeter l'organisation 2027 sur les fréquences actuelles ;
+5. réconcilier l'émetteur actuel du canal 64 dans le Morbihan ;
+6. trouver une seconde source actuelle pour F6ZES Sourdeval ;
+7. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
+8. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
+9. revoir couverture et redondance de F1ZGS, F5ZDV, F5ZZL et F5ZEB avant toute sélection mémoire ;
+10. revalider les redémarrages éventuels de F5ZPV RU19 et F5ZZH R7X ;
+11. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
 
 ## Maintenance
 

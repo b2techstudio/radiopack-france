@@ -80,7 +80,7 @@ assert memory["reserved_positions"] == []
 assert memory["rules"]["duplex"] == "off"
 assert memory["rules"]["no_artificial_fill"] is True
 
-assert maritime["schema_version"] == "1.4"
+assert maritime["schema_version"] == "1.5"
 assert maritime["status"] == "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending"
 assert maritime["rules"]["single_bretagne_maritime_zone_forbidden"] is True
 assert maritime["rules"]["north_south_operational_split_required"] is True
@@ -89,6 +89,8 @@ assert maritime["rules"]["cross_remote_sites_must_be_researched_by_zone"] is Tru
 assert maritime["rules"]["weather_broadcast_channels_must_be_researched_by_zone"] is True
 assert maritime["rules"]["amateur_repeaters_must_be_tagged_by_breton_subzone"] is True
 assert maritime["rules"]["etel_srr_starts_at_pointe_de_penmarch_primary_sourced"] is True
+assert maritime["rules"]["corsen_srr_ends_at_pointe_de_penmarch_primary_sourced"] is True
+assert maritime["rules"]["srr_boundary_endpoints_do_not_imply_radio_overlap"] is True
 assert maritime["rules"]["corsen_frehel_radio_infrastructure_primary_sourced"] is True
 assert maritime["rules"]["corsen_stiff_radio_infrastructure_primary_sourced"] is True
 assert maritime["rules"]["current_radio_infrastructure_does_not_imply_channel_assignment"] is True
@@ -102,8 +104,11 @@ assert zones["bretagne-nord-ouest"]["cross"] == "CROSS Corsen"
 assert zones["bretagne-sud-atlantique"]["cross"] == "CROSS Etel"
 assert zones["bretagne-sud-atlantique"]["official_extent"].startswith("Pointe de Penmarc'h")
 assert zones["transition-finistere-sud"]["cross"] is None
-assert zones["transition-finistere-sud"]["status"] == "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending"
+assert zones["transition-finistere-sud"]["status"] == "corsen_srr_end_and_etel_srr_start_at_penmarch_primary_confirmed_vhf_overlap_pending"
 north = zones["bretagne-nord-ouest"]
+assert north["official_extent"] == "Baie du Mont-Saint-Michel (Ille-et-Vilaine) à la pointe de Penmarc'h (Finistère)"
+assert north["official_srr_area_approx_km2"] == 50000
+assert north["srr_boundary_status"] == "current_primary_endpoints_verified_detailed_offshore_geometry_and_radio_overlap_pending"
 assert north["current_operational_center"]["site"] == "Pointe de Corsen / Plouarzel"
 assert north["current_operational_center"]["radio_service_or_channel"] is None
 north_summary = north["current_network_summary"]
@@ -182,4 +187,4 @@ for expected in [
 ]:
     assert expected in readme, f"Cadrage Bretagne absent: {expected}"
 
-print("Tests RadioPack Bretagne maritime + emergency zoning: Penmarc'h interface + Etel weather emitters verified, Cap Frehel and Stiff Corsen radio infrastructures current-primary-verified with channels pending, Pointe du Raz sector VHF coverage guarded without transmitter-site inference, CROSS-NG transition kept non-frequency, F5ZZH stopped/non-candidate, ADRASEC and regional relay inventory, 0 public side effects OK")
+print("Tests RadioPack Bretagne maritime + emergency zoning: Penmarc'h SAR interface current-primary-verified from both Corsen and Etel sides while VHF overlap remains pending, Etel weather emitters verified, Cap Frehel and Stiff Corsen radio infrastructures current-primary-verified with channels pending, Pointe du Raz sector VHF coverage guarded without transmitter-site inference, F5ZZH stopped/non-candidate, 0 public side effects OK")

@@ -269,7 +269,7 @@
 - Ajout de neuf sorties analogiques uniques en Haute-Savoie, dans l'Ain et en Savoie.
 - Regroupement des frequences de transpondeurs partagees afin d'eviter les doublons.
 - Ajout du CSV regional, du CSV des relais et du guide PDF.
-- Mise a jour de l'accueil, des regions, des telechargements et du generateur et des tests.
+- Mise a jour de l'accueil, des regions, des telechargements, du generateur et des tests.
 
 ## 0.3.1 - 2026-08-04
 

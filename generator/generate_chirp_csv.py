@@ -36,7 +36,7 @@ OUTPUT_JOBS = [
     (
         "dataset",
         Path("data/national/marine-vhf-rx.json"),
-        Path("website/public/downloads/national/radiopack-france-amateur-listening-rx.csv").with_name("radiopack-france-marine-vhf-rx.csv"),
+        Path("website/public/downloads/national/radiopack-france-marine-vhf-rx.csv"),
     ),
     (
         "dataset",

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "status": "research_next_version_not_public",
+  "created": "2026-08-09",
+  "pack": {
+    "name": "Normandie",
+    "slug": "normandie",
+    "target_version": "0.4"
+  },
+  "based_on_published_version": "0.3.1",
+  "published_base_is_immutable": true,
+  "priority_focus": {
+    "label": "Mortain-Bocage / Sud-Manche",
+    "department": 50,
+    "adjacent_departments_to_check": [35, 53, 61],
+    "rule": "Sélectionner selon couverture radio utile et non selon la seule limite administrative."
+  },
+  "memory_plan": {
+    "status": "not_defined",
+    "expected_memory_count": null,
+    "new_blocks": []
+  },
+  "research_priorities": [
+    "ADRASEC 14-50 et infrastructures radioamateurs associées",
+    "relais analogiques Sud-Manche",
+    "relais proches de Sourdeval et Mortain-Bocage",
+    "relais utiles en 35, 53 et 61",
+    "réseaux de secours publics ou amateur uniquement lorsqu'ils sont publiquement documentés et compatibles RX"
+  ],
+  "publication": {
+    "public_export_allowed": false,
+    "public_registry_allowed": false,
+    "public_routes_allowed": false,
+    "review_required": true,
+    "review_completed": false
+  }
+}

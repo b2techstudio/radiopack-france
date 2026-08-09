@@ -11,14 +11,21 @@ required_files = [
     "SPRINT-23-MULTI-REGION-GENERATOR.md",
     "SPRINT-24-ISOLATED-GENERATOR-TESTS.md",
     "SPRINT-25-REGIONAL-STARTER.md",
+    "SPRINT-26-BRETAGNE-INITIALIZATION.md",
     "generator/options.json",
     "generator/generate_chirp_csv.py",
     "tools/create_regional_pack.py",
     "tests/test_generator.py",
     "tests/test_regional_pack_starter.py",
+    "tests/test_bretagne_research_scaffold.py",
     "tests/test_web_generator.py",
     "tests/test_pack_registry.py",
     "tests/test_built_public_pack_catalog.py",
+    "research/bretagne-v0.1/README.md",
+    "research/bretagne-v0.1/pack-plan.json",
+    "research/bretagne-v0.1/source-registry.json",
+    "research/bretagne-v0.1/publication-gates.json",
+    "research/bretagne-v0.1/memory-plan.json",
     "research/annecy-alpes-leman-v0.2/prepublication-plan.json",
     "research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json",
     "website/src/lib/chirpPack.ts",
@@ -36,23 +43,22 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 25",
+    "État actuel — Sprint 26",
     "Normandie v0.3.1** — 139 mémoires RX",
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
-    "48 mémoires sans aviation",
+    "Bretagne v0.1 — recherche",
+    "0 fréquence retenue",
+    "aucun nombre cible de mémoires",
+    "research/bretagne-v0.1/",
+    "frequency_data_promoted: false",
+    "Bretagne ne doit pas encore apparaître",
+    "tools/create_regional_pack.py",
+    "tests/test_bretagne_research_scaffold.py",
     "website/src/lib/packRegistry.ts",
     "Tests de génération isolés",
     "--output-root <dossier>",
-    "Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique",
-    "Starter de pack régional — Sprint 25",
-    "tools/create_regional_pack.py",
-    "research/bretagne-v0.1/",
-    "aucune fréquence",
-    "aucun nombre cible de mémoires",
-    "Tous les drapeaux de publication sont à `false`",
-    "tests/test_regional_pack_starter.py",
     "nothing to commit, working tree clean",
-    "SPRINT-25-REGIONAL-STARTER.md",
+    "SPRINT-26-BRETAGNE-INITIALIZATION.md",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README non actualisé: {expected}"
@@ -70,6 +76,23 @@ assert options["implementation"]["public_pack_registry"] == "website/src/lib/pac
 assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie"}
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 assert options["options"]["notam_check"]["blocks_generation"] is False
+
+bretagne_plan = json.loads((ROOT / "research/bretagne-v0.1/pack-plan.json").read_text(encoding="utf-8"))
+bretagne_sources = json.loads((ROOT / "research/bretagne-v0.1/source-registry.json").read_text(encoding="utf-8"))
+bretagne_gates = json.loads((ROOT / "research/bretagne-v0.1/publication-gates.json").read_text(encoding="utf-8"))
+bretagne_memory = json.loads((ROOT / "research/bretagne-v0.1/memory-plan.json").read_text(encoding="utf-8"))
+assert bretagne_plan["status"] == "research_scaffold_not_public"
+assert bretagne_plan["memory_plan"]["expected_memory_count"] is None
+assert bretagne_plan["memory_plan"]["blocks"] == []
+assert bretagne_plan["publication"]["public_export_allowed"] is False
+assert bretagne_plan["publication"]["public_registry_allowed"] is False
+assert bretagne_plan["publication"]["public_routes_allowed"] is False
+assert len(bretagne_sources["sources"]) == 5
+assert all(source["frequency_data_promoted"] is False for source in bretagne_sources["sources"])
+assert bretagne_gates["public_release_allowed"] is False
+assert all(not gate["status"].startswith("passed_") for gate in bretagne_gates["gates"])
+assert bretagne_memory["expected_memory_count"] is None
+assert bretagne_memory["blocks"] == []
 
 plan = json.loads((ROOT / "research/annecy-alpes-leman-v0.2/prepublication-plan.json").read_text(encoding="utf-8"))
 assert plan["status"] == "published_v0.2"
@@ -103,6 +126,10 @@ for expected in [
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
 assert registry.count('downloadUrl: "') == 3
+assert 'id: "bretagne"' not in registry
+assert not (ROOT / "website/src/pages/regions/bretagne.astro").exists()
+assert not (ROOT / "website/public/downloads/bretagne").exists()
+assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 
 historical_generator = (ROOT / "generator/generate_chirp_csv.py").read_text(encoding="utf-8")
 for expected in ['"--output-root"', "sortie isolée", "Normandie v0.3.1 est un artefact publié figé"]:
@@ -142,6 +169,16 @@ for expected in [
 ]:
     assert expected in starter_test, f"Test starter incomplet: {expected}"
 
+bretagne_test = (ROOT / "tests/test_bretagne_research_scaffold.py").read_text(encoding="utf-8")
+for expected in [
+    "0 public side effects OK",
+    "frequency_data_promoted",
+    'id: "bretagne"',
+    '"slug": "bretagne"',
+    "website/src/pages/regions/bretagne.astro",
+]:
+    assert expected in bretagne_test, f"Test Bretagne incomplet: {expected}"
+
 workflow_doc = (ROOT / "REGIONAL-PACK-WORKFLOW.md").read_text(encoding="utf-8")
 for expected in ["chirpPack.ts", "packRegistry.ts", "carte de revue", "artefact immuable", "README.md"]:
     assert expected in workflow_doc, f"Workflow régional incomplet: {expected}"
@@ -154,6 +191,8 @@ for expected in [
     "python tests/test_pack_registry.py",
     "Test regional pack research starter",
     "python tests/test_regional_pack_starter.py",
+    "Test Bretagne research scaffold",
+    "python tests/test_bretagne_research_scaffold.py",
     "python tests/test_web_generator.py",
     "python tests/test_built_public_pack_catalog.py",
     "npm run build",
@@ -161,4 +200,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 25 safe regional research starter: OK")
+print("Tests RadioPack Sprint 26 Bretagne research-only initialization: OK")

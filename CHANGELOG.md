@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.18.0 - 2026-08-09
+
+- Choix de la Bretagne comme troisième région de travail de RadioPack France.
+- Initialisation de `research/bretagne-v0.1/` à partir du starter régional sécurisé.
+- Création de `README.md`, `pack-plan.json`, `source-registry.json`, `publication-gates.json` et `memory-plan.json` pour Bretagne.
+- État initial strictement recherche : zéro fréquence retenue, aucun nombre cible de mémoires, aucun bloc mémoire et tous les droits de publication désactivés.
+- Ajout de cinq sources institutionnelles de départ sans promotion de fréquence : SIA Brest-Bretagne LFRB, SIA Rennes-Saint-Jacques LFRN, ANFR Open Data, missions radioamateurs ANFR et annuaire radioamateurs ANFR.
+- Ajout de la règle explicite `seed_source_does_not_equal_validated_frequency` : une source identifiée ne vaut pas validation d'une fréquence.
+- Ajout de `tests/test_bretagne_research_scaffold.py` pour interdire toute apparition prématurée de Bretagne dans `packRegistry.ts`, `regions.json`, les pages ou les téléchargements publics.
+- Ajout de l'étape CI `Test Bretagne research scaffold`.
+- Ajout de `SPRINT-26-BRETAGNE-INITIALIZATION.md` et mise à jour du README au Sprint 26.
+- Annecy–Alpes–Léman v0.2 reste publié à 65/48 mémoires et Normandie v0.3.1 reste figée à 139 mémoires.
+
 ## 0.17.0 - 2026-08-09
 
 - Ajout de `tools/create_regional_pack.py` pour initialiser un espace de recherche régional sans créer de contenu public.

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_next_version_not_public",
   "created": "2026-08-09",
   "pack": {
@@ -9,6 +9,15 @@
   },
   "based_on_published_version": "0.3.1",
   "published_base_is_immutable": true,
+  "paired_rx_policy": "research/paired-rx-policy.json",
+  "paired_rx": {
+    "native_duplex_or_split_both_directions_rx": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "published_v0_3_1_maritime_pair_model_already_compliant": true,
+    "future_analog_repeaters_and_transponders_include_both_verified_sides": true,
+    "same_rf_frequency_deduplicated": true
+  },
   "priority_focus": {
     "label": "Mortain-Bocage / Sud-Manche",
     "department": 50,
@@ -22,7 +31,7 @@
   },
   "research_priorities": [
     "ADRASEC 14-50 et infrastructures radioamateurs associées",
-    "relais analogiques Sud-Manche",
+    "relais analogiques Sud-Manche avec écoute de l'entrée et de la sortie lorsqu'elles sont toutes deux vérifiées",
     "relais proches de Sourdeval et Mortain-Bocage",
     "relais utiles en 35, 53 et 61",
     "réseaux de secours publics ou amateur uniquement lorsqu'ils sont publiquement documentés et compatibles RX"

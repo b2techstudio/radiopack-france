@@ -112,8 +112,18 @@ assert weather_emitters["Etel"]["channel"] == 63
 assert zones_data["publication"]["public_export_allowed"] is False
 
 bretagne = json.loads(bretagne_relays_path.read_text(encoding="utf-8"))
-assert bretagne["schema_version"] == "1.1"
+assert bretagne["schema_version"] == "1.2"
 relays = {item["id"]: item for item in bretagne["candidates"]}
+assert relays["F1ZUG-4"]["frequency_mhz"] == 144.8000
+assert relays["F1ZUG-4"]["adrasec_transponder_frequency_mhz"] is None
+assert relays["F1ZUG-4"]["adrasec_transponder_role_status"] == "public_ara35_2024_role_documented_frequency_unpublished"
+assert relays["F5ZEB"]["site"] == "Rennes (Est)"
+assert relays["F5ZEB"]["output_mhz"] == 438.6750
+assert relays["F5ZEB"]["input_mhz"] == 431.0750
+assert relays["F5ZEB"]["rx_pack_candidate"] is False
+assert relays["F5ZPV"]["output_mhz"] == 439.8750
+assert relays["F5ZPV"]["status"] == "temporarily_stopped_current_ara35_page"
+assert relays["F5ZPV"]["rx_pack_candidate"] is False
 assert relays["F5ZIS"]["site"] == "Matignon"
 assert relays["F5ZIS"]["output_mhz"] == 145.2375
 assert relays["F5ZIS"]["paired_mhz"] == 432.6500
@@ -129,6 +139,8 @@ assert relays["F5ZPE"]["output_mhz"] == 145.7375
 assert relays["F5ZPE"]["input_mhz"] == 145.1375
 assert relays["F5ZPE"]["ctcss_hz"] == 71.9
 assert relays["F5ZPE"]["rx_pack_candidate"] is True
+assert bretagne["rules"]["adrasec_transponder_frequency_must_not_be_inferred_from_aprs_frequency"] is True
+assert bretagne["rules"]["temporarily_stopped_repeaters_not_active_candidates"] is True
 assert bretagne["rules"]["adrasec_role_must_not_be_inferred_from_geography_only"] is True
 assert bretagne["rules"]["public_export_allowed"] is False
 assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne["candidates"])
@@ -141,4 +153,4 @@ assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
 
-print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Corsen/channel64 pending, 0 public mutations OK")
+print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, ADRASEC35 role split, Rennes relays classified, 0 public mutations OK")

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.5",
+  "schema_version": "1.6",
   "status": "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending",
   "updated": "2026-08-09",
   "purpose": "Documenter uniquement les voies VHF maritimes publiques de sécurité/météo utiles au futur pack Bretagne RX, en distinguant fréquence navire et fréquence station côtière pour les voies duplex.",
@@ -38,13 +38,13 @@
       "authority": "DIRM NAMO",
       "title": "CROSS Corsen",
       "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
-      "status": "primary_current_corsen_context_remote_vhf_site_list_pending"
+      "status": "primary_current_corsen_context_srr_area_and_remote_vhf_site_list_pending"
     },
     {
       "authority": "Direction Interrégionale de la Mer Nord Atlantique Manche Ouest / Choisir le service public",
       "title": "Directeur/trice du CROSS Corsen - Coordonnateur/trice de Missions de Sauvetage - réf. 2026-2244363",
       "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/2026-2244363/",
-      "status": "primary_current_stiff_radar_and_radio_communications_site"
+      "status": "primary_current_corsen_srr_endpoints_and_stiff_radio_communications_site"
     },
     {
       "authority": "DGAMPA / Plate-forme des achats de l'État",
@@ -150,6 +150,9 @@
     {
       "cross": "CROSS Corsen",
       "subzone": "Bretagne Nord / Manche Ouest",
+      "official_srr_extent": "Baie du Mont-Saint-Michel (Ille-et-Vilaine) à la pointe de Penmarc'h (Finistère)",
+      "official_srr_area_approx_km2": 50000,
+      "srr_boundary_status": "current_primary_endpoints_verified_detailed_offshore_geometry_and_radio_overlap_pending",
       "channel_16_common": true,
       "current_operational_center": {
         "site": "Pointe de Corsen / Plouarzel",
@@ -222,7 +225,7 @@
       },
       "remote_vhf_sites": [],
       "remote_vhf_sites_status": "official_current_channelled_vhf_site_inventory_pending",
-      "note": "Le réseau actuel est confirmé et dimensionné à 10 stations VHF / 2 MF. Cap Fréhel et le Stiff/Ouessant sont actuellement primaire-vérifiés comme infrastructures radio. Une opération officielle de septembre 2025 confirme une couverture VHF opérationnelle au nord de la Pointe du Raz, sans identifier le site émetteur ni le canal. Le centre principal de Plouarzel est actuel mais n'est pas assimilé à une station radio déportée. Pointe du Raz et l'installation radio locale historique de Corsen restent donc à revalider."
+      "note": "Les extrémités actuelles de la SRR Corsen sont désormais primaire-vérifiées de la baie du Mont-Saint-Michel à la pointe de Penmarc'h. Le réseau radio reste confirmé à 10 stations VHF / 2 MF. Cap Fréhel et le Stiff/Ouessant sont actuellement primaire-vérifiés comme infrastructures radio. Une opération officielle de septembre 2025 confirme une couverture VHF opérationnelle au nord de la Pointe du Raz, sans identifier le site émetteur ni le canal. La géométrie offshore détaillée, les recouvrements radio et l'inventaire des sites canalisés restent à établir."
     },
     {
       "cross": "CROSS Etel",
@@ -274,6 +277,8 @@
     "current_operational_center_does_not_imply_local_radio_station": true,
     "planned_cross_ng_reorganisation_does_not_change_current_frequency_validation": true,
     "etel_srr_starts_at_penmarch_primary_verified": true,
+    "corsen_srr_from_mont_saint_michel_to_penmarch_primary_verified": true,
+    "srr_boundary_endpoints_do_not_imply_radio_overlap": true,
     "channel_64_requires_current_brittany_transmitter_reconciliation": true,
     "corsen_frehel_radio_infrastructure_primary_verified": true,
     "corsen_stiff_radio_infrastructure_primary_verified": true,

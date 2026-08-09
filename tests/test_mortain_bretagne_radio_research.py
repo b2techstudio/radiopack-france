@@ -56,7 +56,7 @@ assert stations["F5ZTQ"]["rx_pack_candidate"] is False
 assert all(item["frequency_promoted_to_public_pack"] is False for item in mortain["stations"])
 
 maritime = json.loads(maritime_path.read_text(encoding="utf-8"))
-assert maritime["schema_version"] == "1.2"
+assert maritime["schema_version"] == "1.3"
 assert maritime["status"] == "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending"
 channels = {item["channel"]: item for item in maritime["channels"]}
 assert set(channels) == {16, 63, 64, 79, 80}
@@ -65,7 +65,8 @@ assert channels[16]["rx_memory_mhz"] == 156.8000
 assert channels[16]["memory_strategy"] == "reuse_single_common_channel_and_store_cross_as_zone_metadata"
 assert channels[79]["coast_tx_ship_rx_mhz"] == 161.5750
 assert channels[79]["rx_memory_mhz"] == 161.5750
-assert channels[79]["zone_assignment"] == "corsen_emitter_inventory_pending_etel_brittany_schedule_has_no_channel_79_site"
+assert channels[79]["historical_corsen_primary_status"] == "channel_79_weather_broadcast_documented_in_2003_requires_current_revalidation"
+assert channels[79]["zone_assignment"] == "corsen_current_emitter_inventory_pending_etel_brittany_schedule_has_no_channel_79_site"
 assert channels[80]["coast_tx_ship_rx_mhz"] == 161.6250
 assert channels[80]["rx_memory_mhz"] == 161.6250
 assert channels[80]["verified_etel_brittany_emitters"] == ["Penmarc'h", "Groix", "Belle-Ile"]
@@ -74,25 +75,35 @@ assert channels[63]["rx_memory_mhz"] == 160.7750
 assert channels[63]["verified_etel_brittany_emitters"] == ["Etel"]
 assert channels[64]["coast_tx_ship_rx_mhz"] == 160.8250
 assert channels[64]["rx_memory_mhz"] == 160.8250
+assert channels[64]["current_ministry_statement_revalidated_2026"] is True
 assert channels[64]["zone_assignment"] == "current_brittany_transmitter_requires_primary_reconciliation"
 assert all(item["frequency_promoted_to_public_pack"] is False for item in maritime["channels"])
 assert maritime["rules"]["rx_only_uses_coast_transmit_frequency_on_duplex_channels"] is True
 assert maritime["rules"]["channel_16_not_duplicated_by_cross_label"] is True
 assert maritime["rules"]["weather_channels_require_site_and_coverage_validation_before_publication"] is True
 assert maritime["rules"]["cross_remote_vhf_sites_must_be_primary_sourced"] is True
+assert maritime["rules"]["historical_primary_radio_sites_must_be_revalidated_before_current_use"] is True
 assert maritime["rules"]["etel_srr_starts_at_penmarch_primary_verified"] is True
 assert maritime["rules"]["channel_64_requires_current_brittany_transmitter_reconciliation"] is True
 assert maritime["rules"]["corsen_frehel_radio_infrastructure_primary_verified"] is True
+assert maritime["rules"]["corsen_current_network_size_known_site_names_pending"] is True
 assert maritime["rules"]["corsen_remote_vhf_sites_still_pending"] is True
 assert maritime["rules"]["public_export_allowed"] is False
 crosses = {item["cross"]: item for item in maritime["cross_zones"]}
 assert set(crosses) == {"CROSS Corsen", "CROSS Etel"}
-assert crosses["CROSS Corsen"]["remote_vhf_sites"] == []
-assert crosses["CROSS Corsen"]["remote_vhf_sites_status"] == "official_inventory_pending"
-corsen_infra = {item["site"]: item for item in crosses["CROSS Corsen"]["verified_remote_radio_infrastructure_sites"]}
+corsen = crosses["CROSS Corsen"]
+assert corsen["current_network_summary"]["vhf_station_count"] == 10
+assert corsen["current_network_summary"]["mf_station_count"] == 2
+assert corsen["remote_vhf_sites"] == []
+assert corsen["remote_vhf_sites_status"] == "official_current_site_inventory_pending"
+corsen_infra = {item["site"]: item for item in corsen["verified_remote_radio_infrastructure_sites"]}
 assert set(corsen_infra) == {"Cap Fréhel"}
 assert corsen_infra["Cap Fréhel"]["role"] == "traffic_surveillance_and_vessel_liaison"
 assert corsen_infra["Cap Fréhel"]["radio_service_or_channel"] is None
+historical_sites = {item["site"]: item for item in corsen["historical_primary_radio_architecture"]}
+assert set(historical_sites) == {"Stiff / Ouessant", "Pointe du Raz", "Corsen"}
+assert all(item["current_validation"] is False for item in historical_sites.values())
+assert corsen["historical_channel_79_context"]["status"] == "primary_2003_weather_and_information_broadcast_requires_current_revalidation"
 assert crosses["CROSS Etel"]["official_srr_extent"].startswith("Pointe de Penmarc'h")
 etel_sites = {item["site"]: item for item in crosses["CROSS Etel"]["remote_vhf_sites"]}
 assert set(etel_sites) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
@@ -173,4 +184,4 @@ assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
 
-print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Cap Fréhel Corsen radio infrastructure primary-verified with VHF channel pending, ADRASEC35 role split, Rennes relays classified, F1ZGS F5ZDV F5ZZL Finistere analog candidates, F1ZAJ APRS metadata only, 0 public mutations OK")
+print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Corsen current network 10 VHF + 2 MF with site list pending, Cap Frehel primary-verified, historical Stiff/Pointe du Raz/Corsen leads kept non-current, channel 64 current ministry statement revalidated but transmitter unresolved, ADRASEC35 role split, Finistere analog candidates, APRS metadata only, 0 public mutations OK")

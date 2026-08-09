@@ -108,13 +108,15 @@ Le zonage reste obligatoire :
 
 - **Bretagne Nord / Manche Ouest** — contexte CROSS Corsen ;
 - **Bretagne Sud / Atlantique** — contexte CROSS Etel ;
-- **transition Finistère Sud** — limite opérationnelle exacte encore à confirmer.
+- **interface Penmarc'h / Finistère Sud** — début de compétence du CROSS Étel vérifié, recouvrements radio détaillés encore à documenter.
+
+La DIRM NAMO indique explicitement que le **CROSS Étel est compétent à partir de la Pointe de Penmarc'h (Finistère) jusqu'à la frontière espagnole**. Ce point d'interface n'est donc plus laissé à une simple déduction opérationnelle. En revanche, l'inventaire détaillé des stations VHF de CROSS Corsen et les éventuels recouvrements radio autour de Penmarc'h restent bloquants pour une publication.
 
 Le canal 16 reste une fréquence commune : il ne sera pas dupliqué uniquement pour écrire « Corsen » et « Etel ».
 
 ## Bretagne — VHF maritime publique Sprint 29
 
-Le nouveau fichier est :
+Le fichier de recherche est :
 
 ```text
 research/bretagne-v0.1/public-maritime-radio.json
@@ -125,12 +127,18 @@ Pour une voie maritime duplex, le pack RX doit mémoriser la **fréquence émise
 | Canal | Type | Fréquence RX étudiée | Contexte |
 |---|---|---:|---|
 | 16 | simplex | 156.800 MHz | appel, détresse, sécurité |
-| 79 | duplex | 161.575 MHz | CROSS / météo annoncée sur 16 |
-| 80 | duplex | 161.625 MHz | CROSS / météo annoncée sur 16 |
-| 63 | duplex | 160.775 MHz | météo côtière, priorité Morbihan |
-| 64 | duplex | 160.825 MHz | météo côtière, priorité Morbihan |
+| 79 | duplex | 161.575 MHz | CROSS / météo annoncée sur 16 ; site Bretagne encore à préciser côté Corsen |
+| 80 | duplex | 161.625 MHz | CROSS Étel : Penmarc'h, Groix et Belle-Ile vérifiés pour les bulletins météo côtiers |
+| 63 | duplex | 160.775 MHz | CROSS Étel : station d'Étel vérifiée en diffusion météo continue |
+| 64 | duplex | 160.825 MHz | affectation réglementaire conservée en recherche ; émetteur Bretagne actuel à réconcilier |
 
-Ces fréquences sont documentées dans la recherche mais **pas encore promues dans Bretagne v0.1**. Les sites émetteurs et leur couverture réelle doivent encore être rattachés précisément à Corsen ou Étel avant publication.
+Le planning officiel du CROSS Étel identifie donc désormais quatre émetteurs météo bretons exploitables comme métadonnées territoriales : **Penmarc'h**, **Groix**, **Belle-Ile** sur le canal 80 et **Étel** sur le canal 63 en continu.
+
+Le ministère mentionne parallèlement une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan. Comme le planning primaire CROSS Étel exploité ne liste aucun émetteur Bretagne sur 64, RadioPack ne lui attribue pas de site par déduction : cette incohérence apparente reste une question de recherche.
+
+Côté **CROSS Corsen**, la source primaire DIRM confirme l'existence du réseau VHF/MHF et de stations littorales de diffusion météo, mais ne fournit pas dans la page exploitée la liste détaillée des sites et canaux. Aucun site Corsen n'est inventé.
+
+Ces fréquences et ces émetteurs sont documentés dans la recherche mais **pas encore promus dans Bretagne v0.1**. Les zones de couverture réelles et l'inventaire Corsen doivent encore être complétés avant toute sélection de mémoires.
 
 ## Bretagne — ADRASEC et relais analogiques
 
@@ -256,8 +264,8 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 ## Prochaines priorités
 
 1. trouver une seconde source actuelle pour F6ZES Sourdeval ;
-2. identifier depuis une source primaire les stations VHF déportées de CROSS Corsen et CROSS Etel ;
-3. rattacher 63/64/79/80 aux émetteurs et zones de couverture réellement pertinents ;
+2. identifier depuis une source primaire la liste détaillée des stations VHF déportées de CROSS Corsen ;
+3. vérifier les recouvrements VHF autour de Penmarc'h et réconcilier l'émetteur actuel du canal 64 dans le Morbihan ;
 4. poursuivre les inventaires ADRASEC 22/29/35/56 et Sud-Manche ;
 5. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
 

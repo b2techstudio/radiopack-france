@@ -55,7 +55,7 @@ assert annecy["rules"]["same_output_frequency_must_not_be_duplicated_for_site_la
 
 bretagne = json.loads((ROOT / "research/bretagne-v0.1/emergency-relays.json").read_text(encoding="utf-8"))
 bretagne_gates = json.loads((ROOT / "research/bretagne-v0.1/publication-gates.json").read_text(encoding="utf-8"))
-assert bretagne["schema_version"] == "1.2"
+assert bretagne["schema_version"] == "1.3"
 assert {item["id"] for item in bretagne["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
 b_candidates = {item["id"]: item for item in bretagne["candidates"]}
 assert b_candidates["F1ZUG-4"]["frequency_mhz"] == 144.8000
@@ -71,10 +71,22 @@ assert b_candidates["F5ZEB"]["rx_pack_candidate"] is False
 assert b_candidates["F5ZPV"]["output_mhz"] == 439.8750
 assert b_candidates["F5ZPV"]["status"] == "temporarily_stopped_current_ara35_page"
 assert b_candidates["F5ZPV"]["rx_pack_candidate"] is False
+for relay_id, output_mhz in {"F1ZGS": 431.4250, "F5ZDV": 438.7000, "F5ZZL": 431.3750}.items():
+    assert b_candidates[relay_id]["department"] == 29
+    assert b_candidates[relay_id]["output_mhz"] == output_mhz
+    assert b_candidates[relay_id]["input_mhz"] == 145.2625
+    assert b_candidates[relay_id]["ctcss_hz"] == 71.9
+    assert b_candidates[relay_id]["mode"] == "FM"
+    assert b_candidates[relay_id]["rx_pack_candidate"] is True
+assert b_candidates["F1ZAJ"]["department"] == 56
+assert b_candidates["F1ZAJ"]["frequency_mhz"] == 144.8000
+assert b_candidates["F1ZAJ"]["rx_pack_candidate"] is False
 assert bretagne["rules"]["private_ppdr_operational_frequencies_excluded"] is True
+assert bretagne["rules"]["aprs_same_frequency_not_duplicated_by_site"] is True
 assert bretagne["rules"]["adrasec_transponder_frequency_must_not_be_inferred_from_aprs_frequency"] is True
 assert bretagne["rules"]["temporarily_stopped_repeaters_not_active_candidates"] is True
 assert bretagne["rules"]["north_south_zoning_required"] is True
+assert bretagne["rules"]["adrasec_role_must_not_be_inferred_from_geography_only"] is True
 assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne["candidates"])
 gates = {gate["id"]: gate for gate in bretagne_gates["gates"]}
 assert gates["emergency_relay_inventory"]["required_for_public_release"] is True
@@ -91,4 +103,4 @@ assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-fra
 published_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 assert published_normandie.is_file()
 
-print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes relay status + Mortain/Annecy frozen public packs, no public mutation OK")
+print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes relay status + Finistere analog candidates + Plouray APRS metadata + Mortain/Annecy frozen public packs, no public mutation OK")

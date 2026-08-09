@@ -11,7 +11,7 @@ Deux packs régionaux sont disponibles :
 - **Normandie v0.3.1** — 139 mémoires RX ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, avec variante **48 mémoires sans aviation**.
 
-Le Sprint 23 a rendu le générateur public multi-régions. Le Sprint 24 corrige le workflow de test local : **les tests du générateur n'écrivent plus dans les CSV suivis par Git**.
+Le Sprint 23 a rendu le générateur public multi-régions. Le Sprint 24 sécurise la génération locale : **les tests du générateur n'écrivent plus dans les CSV suivis par Git** et les packs régionaux déjà publiés sont désormais considérés comme des **artefacts versionnés figés**.
 
 Le générateur public est disponible sur :
 
@@ -33,7 +33,8 @@ Pour Normandie :
 
 - variante publique fixe de 139 mémoires ;
 - pas d'option Annecy affichée ;
-- téléchargement direct du CSV v0.3.1 existant.
+- téléchargement direct du CSV v0.3.1 existant ;
+- la version v0.3.1 est figée et ne doit plus être réécrite par le générateur générique.
 
 Le contrôle NOTAM est **informatif et non bloquant**. Il ne modifie jamais automatiquement les fréquences du CSV.
 
@@ -47,6 +48,7 @@ Le contrôle NOTAM est **informatif et non bloquant**. Il ne modifie jamais auto
 - Les fréquences contestées ou insuffisamment recoupées restent hors production.
 - Pour l'ISS et les satellites, seule la liaison descendante est mémorisée ; la liaison montante reste une métadonnée.
 - Les données aéronautiques sont destinées à l'écoute et ne constituent pas une source de préparation ou de conduite d'un vol.
+- Un pack régional déjà publié n'est jamais réécrit silencieusement : une évolution exige une nouvelle version et une nouvelle revue.
 
 ## Annecy–Alpes–Léman v0.2
 
@@ -91,6 +93,12 @@ Le pack Normandie public contient 139 mémoires RX et reste disponible ici :
 
 Il est enregistré dans le même catalogue public qu'Annecy et peut être sélectionné depuis `/generateur`.
 
+### Version publiée figée
+
+Le Sprint 24 a révélé que les commentaires ISS du jeu national avaient été enrichis après la publication de Normandie v0.3.1. Les fréquences et positions du pack publié n'ont pas changé, mais une reconstruction depuis les jeux partagés actuels ne reproduit plus exactement les commentaires historiques de v0.3.1.
+
+La règle retenue est donc : **Normandie v0.3.1 reste immuable**. Le générateur générique ne la reconstruit plus. Toute actualisation des données Normandie devra passer par une nouvelle version, avec revue explicite avant publication.
+
 ## Architecture de génération
 
 Les règles CHIRP génériques du site sont centralisées dans :
@@ -123,7 +131,7 @@ La méthode d'ajout d'une nouvelle région est documentée dans [REGIONAL-PACK-W
 
 ## Tests de génération isolés — Sprint 24
 
-Le générateur Python historique :
+Le générateur Python générique :
 
 ```text
 generator/generate_chirp_csv.py
@@ -135,19 +143,31 @@ accepte désormais une racine de sortie séparée :
 --output-root <dossier>
 ```
 
-Les données sont toujours lues depuis `--root`, mais les fichiers produits sont écrits sous `--output-root` en conservant leurs chemins relatifs.
+Les données sont toujours lues depuis `--root`, mais les sorties génériques planifiées sont écrites sous `--output-root` en conservant leurs chemins relatifs.
+
+Ces sorties génériques sont actuellement :
+
+- PMR446 national ;
+- VHF marine nationale ;
+- APRS / ISS national ;
+- canaux d'appel nationaux ;
+- relais analogiques Normandie.
+
+Le pack complet **Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique**.
 
 `tests/test_generator.py` utilise automatiquement un dossier temporaire système. Il :
 
-1. mémorise les octets des CSV publics suivis ;
-2. génère une copie temporaire de tous les CSV concernés ;
-3. compare les lignes temporaires aux CSV publiés ;
+1. mémorise les octets des CSV suivis concernés, y compris Normandie v0.3.1 ;
+2. génère les sorties génériques dans un dossier temporaire ;
+3. compare les lignes temporaires aux CSV publiés correspondants ;
 4. contrôle les nombres de mémoires et les règles RX-only ;
-5. vérifie qu'aucun CSV suivi n'a changé d'un octet.
+5. vérifie que Normandie v0.3.1 n'est pas reconstruite ;
+6. contrôle séparément le CSV Normandie publié de 139 mémoires ;
+7. vérifie qu'aucun fichier suivi n'a changé d'un octet.
 
-Cela corrige le problème observé sous Windows où un simple test pouvait faire apparaître le CSV Normandie comme modifié dans `git status` à cause d'une réécriture locale.
+Cela corrige définitivement le problème observé sous Windows où un simple test pouvait faire apparaître le CSV Normandie comme modifié dans `git status`.
 
-Le comportement manuel du générateur n'est pas supprimé : sans `--output-root`, il écrit toujours vers les emplacements publics normaux. La régénération des fichiers publiés reste donc une action explicite, distincte des tests.
+Sans `--output-root`, le générateur générique écrit toujours ses sorties génériques planifiées dans leurs emplacements publics normaux. Il ne réécrit plus les packs régionaux versionnés figés.
 
 Voir [SPRINT-24-ISOLATED-GENERATOR-TESTS.md](SPRINT-24-ISOLATED-GENERATOR-TESTS.md) pour le détail.
 
@@ -190,7 +210,8 @@ La CI vérifie notamment :
 - le sélecteur multi-régions ;
 - le masquage des options non prises en charge ;
 - les fichiers réellement présents dans `website/dist` après `astro build` ;
-- **la génération Python dans un dossier temporaire sans modifier les CSV suivis** ;
+- la génération Python dans un dossier temporaire ;
+- l'absence de réécriture de Normandie v0.3.1 ;
 - le build Astro.
 
 ## Synchroniser le dépôt local
@@ -275,7 +296,8 @@ Le principe est :
 6. enregistrer le pack et ses variantes dans `packRegistry.ts` ;
 7. ajouter uniquement les options réellement supportées ;
 8. contrôler les fichiers finaux de `website/dist` par la CI ;
-9. publier explicitement après revue.
+9. publier explicitement après revue ;
+10. ne jamais réécrire une ancienne version publiée : toute évolution produit une nouvelle version.
 
 Voir [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md) pour le détail.
 

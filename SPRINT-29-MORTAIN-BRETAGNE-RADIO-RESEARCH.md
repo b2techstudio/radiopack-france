@@ -68,10 +68,10 @@ Fréquences officielles étudiées :
 | Canal | Type | Fréquence RX utile au pack | Usage étudié |
 |---|---|---:|---|
 | 16 | simplex | 156.800 MHz | appel, détresse, sécurité |
-| 79 | duplex | 161.575 MHz | CROSS / météo annoncée sur 16 |
+| 79 | duplex | 161.575 MHz | CROSS / météo annoncée sur 16 ; usage Corsen historiquement primaire-vérifié en 2003, à revalider aujourd'hui |
 | 80 | duplex | 161.625 MHz | CROSS / météo annoncée sur 16 |
 | 63 | duplex | 160.775 MHz | météo côtière permanente selon zone |
-| 64 | duplex | 160.825 MHz | affectation CROSS / autorités portuaires, usage Bretagne à réconcilier |
+| 64 | duplex | 160.825 MHz | mention ministérielle actuelle 63/64 Morbihan, émetteur Bretagne 64 à réconcilier |
 
 Aucune de ces fréquences n'est encore promue dans Bretagne v0.1.
 
@@ -89,15 +89,28 @@ La DIRM NAMO permet de préciser le zonage et les émetteurs météo :
 
 Ces quatre sites restent des **métadonnées de recherche primaires vérifiées**, pas des mémoires publiques.
 
-Le ministère chargé de la mer mentionne par ailleurs une diffusion permanente sur les canaux 63 et 64 notamment dans le Morbihan. Le planning local primaire CROSS Étel exploité n'identifie cependant aucun émetteur Bretagne sur le canal 64. Le Sprint 29 conserve donc 160.825 MHz comme donnée réglementaire de recherche sans inventer de site ni promouvoir la fréquence.
+La page actuelle du ministère chargé de la mer mentionne toujours une diffusion permanente sur les canaux 63 et 64 notamment dans le Morbihan. Cette mention a été recontrôlée en 2026. En parallèle, les sources primaires locales du CROSS Étel exploitées identifient explicitement Étel sur le canal 63 et aucun émetteur Bretagne sur le canal 64. Le Sprint 29 conserve donc 160.825 MHz comme donnée de recherche sans inventer de site ni promouvoir la fréquence.
 
-### CROSS Corsen — Cap Fréhel confirmé, canal non attribué
+### CROSS Corsen — réseau actuel dimensionné, liste des sites encore ouverte
 
-La page actuelle du CROSS Corsen confirme toujours un réseau VHF/MHF veillé et des diffusions météo depuis des stations littorales, sans publier la liste détaillée de ces stations et de leurs canaux.
+La page actuelle du CROSS Corsen confirme un réseau VHF/MF veillé en permanence et des diffusions météo depuis des stations littorales. Une communication officielle récente de la DGAMPA apporte désormais une information structurante : le réseau Corsen s'appuie sur **10 stations radio VHF et 2 stations MF**.
 
-Une source primaire DIRM NAMO distincte apporte néanmoins une avancée : le **phare du Cap Fréhel héberge des équipements du CROSS Corsen de suivi et de liaison avec les navires**, utilisés pour la surveillance du trafic maritime et la coordination des secours.
+Cette information fixe la taille du réseau actuel à inventorier, mais la source exploitée n'en fournit pas la liste nominative ni les canaux de chaque station.
 
-Cette preuve est enregistrée comme **infrastructure radio Corsen primaire-vérifiée**. Elle n'est volontairement pas classée comme station VHF météo et aucun canal, notamment le 79, ne lui est attribué sans source primaire supplémentaire. L'inventaire `remote_vhf_sites` de Corsen reste donc ouvert.
+Une source primaire DIRM NAMO distincte confirme par ailleurs que le **phare du Cap Fréhel héberge des équipements du CROSS Corsen de suivi et de liaison avec les navires**, utilisés pour la surveillance du trafic maritime et la coordination des secours.
+
+Cap Fréhel reste donc une **infrastructure radio Corsen actuelle primaire-vérifiée**, mais n'est volontairement pas classé comme station VHF météo et aucun canal ne lui est attribué sans source supplémentaire.
+
+### Corsen — pistes primaires historiques de 2003
+
+Un décret Légifrance de 2003 documente l'architecture Corsen/Ouessant de l'époque avec :
+
+- des équipements radio VHF au **Stiff / Ouessant** ;
+- une installation radio **VHF et MF à la Pointe du Raz** ;
+- une installation radio de secours multicanal sur le site de **Corsen** ;
+- une diffusion régulière d'informations et de météo sur le **canal 79**, après appel sur le canal 16, avec bulletin météo toutes les trois heures à partir de 01:50 UTC dans le dispositif décrit à l'époque.
+
+Ce texte constitue une piste primaire précieuse, mais il ne vaut **pas validation actuelle en 2026**. `Stiff / Ouessant`, `Pointe du Raz`, `Corsen` et l'usage Corsen du canal 79 sont donc stockés comme éléments historiques à revalider avant toute qualification actuelle ou sélection de mémoire.
 
 L'interface Penmarc'h reste également à documenter du point de vue des recouvrements radio réels : la frontière de responsabilité ne suffit pas à déduire une couverture VHF.
 
@@ -129,9 +142,9 @@ adrasec_transponder_frequency_mhz: null
 
 et interdit de la déduire à partir de 144.800 MHz.
 
-### Finistère — nouveaux candidats analogiques REF
+### Finistère — candidats analogiques REF
 
-Le répertoire REF actuel permet d'ajouter trois transpondeurs analogiques actifs au travail Bretagne, tous sans leur attribuer de rôle ADRASEC :
+Le répertoire REF actuel permet de conserver trois transpondeurs analogiques actifs au travail Bretagne, tous sans leur attribuer de rôle ADRASEC :
 
 - `F1ZGS` — Plouhinec — sortie **431.425 MHz**, entrée **145.2625 MHz**, FM, CTCSS 71.9 Hz ;
 - `F5ZDV` — Morlaix — sortie **438.700 MHz**, entrée **145.2625 MHz**, FM, CTCSS 71.9 Hz ;
@@ -171,8 +184,10 @@ vérifie notamment :
 - les fréquences RX exactes des canaux maritimes 16/63/64/79/80 ;
 - le point de départ de compétence Étel à Penmarc'h ;
 - les émetteurs météo primaires Penmarc'h, Groix, Belle-Ile et Étel ;
+- le réseau Corsen actuel dimensionné à **10 stations VHF et 2 stations MF**, avec liste nominative encore en attente ;
 - Cap Fréhel comme infrastructure radio Corsen primaire-vérifiée **sans lui attribuer de service VHF ni de canal** ;
-- le maintien de l'inventaire VHF Corsen et du site Bretagne du canal 64 en recherche ;
+- `Stiff / Ouessant`, `Pointe du Raz`, `Corsen` et le contexte canal 79 de 2003 comme pistes historiques qui doivent rester non actuelles sans revalidation ;
+- la mention ministérielle actuelle du canal 64 tout en maintenant l'émetteur Bretagne non résolu ;
 - la séparation stricte entre l'APRS F1ZUG-4 et la fréquence encore inconnue du transpondeur ADRASEC 35 ;
 - F5ZEB R71 comme donnée régionale actuelle mais non promue ;
 - F5ZPV RU19 comme relais temporairement arrêté, donc non candidat actif ;
@@ -180,18 +195,19 @@ vérifie notamment :
 - F1ZAJ Plouray comme métadonnée APRS sans doublon mémoire ;
 - l'absence de Bretagne, Normandie v0.4 et Annecy v0.3 dans le registre public.
 
-Le test secours/ADRASEC et le test de scaffold Bretagne sont alignés sur ces constats.
+Le garde-fou global `tests/test_site_files.py` est également aligné sur le schéma maritime 1.3 et interdit de transformer les éléments historiques Corsen en sites actuels par simple héritage documentaire.
 
 ## Étape suivante
 
 Priorités :
 
-1. trouver une seconde source actuelle pour la fréquence et le mode de F6ZES Sourdeval ;
-2. compléter par sources primaires la liste détaillée des stations VHF/MHF de CROSS Corsen et leurs canaux ;
+1. identifier par source primaire actuelle les noms des **10 stations VHF et 2 stations MF** du réseau CROSS Corsen ;
+2. revalider aujourd'hui les pistes historiques **Stiff / Ouessant, Pointe du Raz et Corsen**, ainsi que l'usage du canal 79 ;
 3. documenter les recouvrements VHF autour de Penmarc'h ;
 4. réconcilier l'usage actuel du canal 64 dans le Morbihan avec une source primaire locale ;
-5. retrouver la fréquence actuelle du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
-6. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
-7. revoir la couverture et la redondance de F1ZGS, F5ZDV, F5ZZL et F5ZEB avant toute sélection mémoire ;
-8. revalider le retour éventuel de F5ZPV RU19 ;
-9. ne publier aucune nouvelle mémoire avant revue de couverture et nouvelle version explicite.
+5. trouver une seconde source actuelle pour la fréquence et le mode de F6ZES Sourdeval ;
+6. retrouver la fréquence actuelle du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
+7. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
+8. revoir la couverture et la redondance de F1ZGS, F5ZDV, F5ZZL et F5ZEB avant toute sélection mémoire ;
+9. revalider le retour éventuel de F5ZPV RU19 ;
+10. ne publier aucune nouvelle mémoire avant revue de couverture et nouvelle version explicite.

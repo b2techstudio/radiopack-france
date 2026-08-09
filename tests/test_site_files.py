@@ -11,8 +11,10 @@ required_files = [
     "SPRINT-21-PUBLICATION-V0.2.md",
     "SPRINT-22-POST-PUBLICATION.md",
     "SPRINT-23-MULTI-REGION-GENERATOR.md",
+    "SPRINT-24-ISOLATED-GENERATOR-TESTS.md",
     "generator/options.json",
     "generator/generate_chirp_csv.py",
+    "tests/test_generator.py",
     "tests/test_web_generator.py",
     "tests/test_pack_registry.py",
     "tests/test_built_public_pack_catalog.py",
@@ -40,15 +42,19 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 23",
+    "État actuel — Sprint 24",
     "Normandie v0.3.1** — 139 mémoires RX",
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
     "48 mémoires sans aviation",
-    "générateur public est maintenant multi-régions",
+    "générateur public multi-régions",
     "website/src/lib/packRegistry.ts",
     "website/src/lib/chirpPack.ts",
     "website/src/lib/annecyPack.ts",
-    "REGIONAL-PACK-WORKFLOW.md",
+    "Tests de génération isolés — Sprint 24",
+    "--output-root <dossier>",
+    "les tests du générateur n'écrivent plus dans les CSV suivis par Git",
+    "nothing to commit, working tree clean",
+    "SPRINT-24-ISOLATED-GENERATOR-TESTS.md",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README non actualisé: {expected}"
@@ -138,6 +144,26 @@ for expected in [
 assert registry.count('downloadUrl: "') == 3
 assert "annecy-haute-savoie-v0.1" not in registry
 
+generator_source = (ROOT / "generator/generate_chirp_csv.py").read_text(encoding="utf-8")
+for expected in [
+    '"--output-root"',
+    "output_root = args.output_root.resolve() if args.output_root is not None else root",
+    "output = output_root / output_relative",
+    "sortie isolée",
+]:
+    assert expected in generator_source, f"Isolation générateur absente: {expected}"
+
+generator_test = (ROOT / "tests/test_generator.py").read_text(encoding="utf-8")
+for expected in [
+    "tempfile.TemporaryDirectory",
+    '"--output-root"',
+    "published_before",
+    "generated_rows == published_rows",
+    "read_bytes() == original_bytes",
+    "Tests RadioPack isolated generator + ISS links: OK",
+]:
+    assert expected in generator_test, f"Garde-fou test isolé absent: {expected}"
+
 standard_route = (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts").read_text(encoding="utf-8")
 no_air_route = (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts").read_text(encoding="utf-8")
 assert "buildAnnecyCsv(true)" in standard_route
@@ -199,6 +225,7 @@ for expected in ["chirpPack.ts", "<pack>Pack.ts", "packRegistry.ts", "carte de r
 
 workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
 for expected in [
+    "Test CSV generator in isolated output",
     "python tests/test_generator.py",
     "python tests/test_site_files.py",
     "python tests/test_pack_registry.py",
@@ -210,4 +237,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 23 multi-region generator + registry: OK")
+print("Tests RadioPack Sprint 24 isolated generator + multi-region architecture: OK")

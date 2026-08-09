@@ -4,18 +4,18 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables et les exports publics sont configurés en réception seule.
 
-## État actuel — Sprint 26
+## État actuel — Sprint 27
 
 Deux packs régionaux sont publiés :
 
 - **Normandie v0.3.1** — 139 mémoires RX ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, avec variante **48 mémoires sans aviation**.
 
-Une troisième région est maintenant ouverte en **recherche uniquement** :
+Une troisième région reste en **recherche uniquement** :
 
 - **Bretagne v0.1 — recherche** — 0 fréquence retenue, aucun nombre cible de mémoires, aucune publication autorisée.
 
-Le Sprint 23 a rendu le générateur public multi-régions. Le Sprint 24 a isolé les tests de génération et figé les versions régionales déjà publiées. Le Sprint 25 a ajouté un starter sécurisé. Le Sprint 26 utilise ce cadre pour initialiser réellement `research/bretagne-v0.1/` sans ajouter Bretagne au site public ni au générateur.
+Le Sprint 27 impose désormais un **zonage radio Bretagne Nord / Bretagne Sud**. La Bretagne ne sera pas traitée comme un bloc maritime unique : la recherche distingue le contexte **CROSS Corsen** côté Manche Ouest / Bretagne Nord-Ouest, le contexte **CROSS Etel** côté Atlantique / Bretagne Sud, ainsi qu'une zone de transition du Finistère Sud dont la limite opérationnelle exacte doit encore être confirmée sur la cartographie officielle actuelle.
 
 Le générateur public reste disponible sur :
 
@@ -37,22 +37,24 @@ Il ne propose toujours que **Annecy–Alpes–Léman** et **Normandie**. Bretagn
 - Les données aéronautiques sont destinées à l'écoute et ne constituent pas une source de préparation ou de conduite d'un vol.
 - Un pack régional déjà publié n'est jamais réécrit silencieusement : une évolution exige une nouvelle version et une nouvelle revue.
 - Une source identifiée n'est pas automatiquement une fréquence validée.
+- Une même fréquence ne doit pas être dupliquée artificiellement uniquement pour changer son étiquette géographique.
 
-## Bretagne v0.1 — recherche Sprint 26
+## Bretagne v0.1 — recherche Sprint 27
 
-Le troisième chantier régional est initialisé ici :
+Le troisième chantier régional est ici :
 
 ```text
 research/bretagne-v0.1/
 ```
 
-L'espace contient :
+L'espace contient maintenant :
 
 - `README.md` ;
 - `pack-plan.json` ;
 - `source-registry.json` ;
 - `publication-gates.json` ;
-- `memory-plan.json`.
+- `memory-plan.json` ;
+- `maritime-zones.json`.
 
 État actuel :
 
@@ -66,15 +68,69 @@ public_routes_allowed: false
 review_completed: false
 ```
 
-Les premiers points d'entrée officiels recensés sont :
+### Bretagne Nord / Bretagne Sud
+
+Le fichier :
+
+```text
+research/bretagne-v0.1/maritime-zones.json
+```
+
+impose trois sous-zones de recherche :
+
+- **Bretagne Nord / Manche Ouest** — contexte opérationnel `CROSS Corsen` ;
+- **Bretagne Sud / Atlantique** — contexte opérationnel `CROSS Etel` ;
+- **transition Finistère Sud** — frontière opérationnelle actuelle à confirmer précisément avant publication.
+
+Cette séparation s'applique à la VHF maritime, aux stations VHF déportées des CROSS, aux diffusions météo / sécurité et aux relais radioamateurs lorsque leur implantation ou leur couverture justifie un rattachement territorial.
+
+### Canal 16
+
+Le futur pack ne créera pas deux mémoires identiques du canal 16 uniquement pour écrire « Corsen » et « Etel ».
+
+Le canal reste commun, mais la recherche doit conserver en métadonnées :
+
+- le CROSS responsable selon la zone ;
+- les stations VHF déportées / relais de couverture ;
+- les éventuelles zones de recouvrement ;
+- les canaux météo et de sécurité utilisés localement.
+
+Le registre officiel de recherche contient désormais des exemples opérationnels récents montrant notamment Corsen à Audierne / ouest Finistère et Etel à Concarneau / Finistère Sud. Ces exemples servent au cadrage ; la limite SRR actuelle exacte doit encore être extraite de la cartographie officielle avant promotion d'une fréquence maritime.
+
+### Météo et sécurité maritime
+
+Le contexte de recherche enregistre également :
+
+- annonces météo via le canal 16 avant diffusion sur 79/80 ;
+- diffusion météo côtière permanente sur 63/64 notamment dans le Morbihan.
+
+Aucune de ces informations n'est encore promue en mémoire Bretagne.
+
+### Relais et couverture
+
+Deux inventaires séparés devront être construits :
+
+1. stations VHF maritimes déportées / relais de couverture CROSS, avec distinction Bretagne Nord et Bretagne Sud ;
+2. relais radioamateurs, rattachés à Bretagne Nord, Bretagne Sud ou à la zone de transition lorsque cela est pertinent.
+
+Une nouvelle porte de publication `maritime_zoning` bloque toute sortie publique tant que ce travail n'est pas terminé.
+
+### Sources Bretagne
+
+Le registre de sources contient maintenant dix points d'entrée institutionnels ou opérationnels officiels, notamment :
 
 - SIA / AIP France — Brest Bretagne `LFRB` ;
 - SIA / AIP France — Rennes Saint-Jacques `LFRN` ;
 - portail Open Data de l'ANFR ;
 - services ANFR liés aux radioamateurs ;
-- annuaire officiel ANFR des radioamateurs autorisés.
+- documentation officielle du ministère chargé de la mer sur le canal 16 et les diffusions météo ;
+- documentation de la Préfecture maritime de l'Atlantique sur le partage des zones CROSS et des opérations récentes.
 
-Ils sont enregistrés uniquement comme **sources de départ**. Toutes les entrées restent à `frequency_data_promoted: false`.
+Toutes les entrées restent à :
+
+```text
+frequency_data_promoted: false
+```
 
 Bretagne n'existe volontairement pas dans :
 
@@ -86,7 +142,7 @@ website/src/pages/downloads/
 website/public/downloads/
 ```
 
-Voir [SPRINT-26-BRETAGNE-INITIALIZATION.md](SPRINT-26-BRETAGNE-INITIALIZATION.md).
+Voir [SPRINT-26-BRETAGNE-INITIALIZATION.md](SPRINT-26-BRETAGNE-INITIALIZATION.md) et [SPRINT-27-BRETAGNE-MARITIME-ZONING.md](SPRINT-27-BRETAGNE-MARITIME-ZONING.md).
 
 ## Annecy–Alpes–Léman v0.2
 
@@ -104,14 +160,6 @@ Voir [SPRINT-26-BRETAGNE-INITIALIZATION.md](SPRINT-26-BRETAGNE-INITIALIZATION.md
 
 La variante sans aviation retire uniquement les 17 mémoires aviation et conserve **48 mémoires** sans compacter les autres positions.
 
-Albertville `LFKA`, Megève `LFHM` et Genève `LSGG` restent volontairement hors v0.2 faute de tableau primaire suffisamment extractible dans le workflow retenu. Sallanches `LFHZ` est exclu car l'aérodrome est fermé. Le cas F1ZJV reste hors production tant que son statut analogique/numérique n'est pas recoupé sans ambiguïté.
-
-Satellites retenus :
-
-- `SAT-SO50` — descente 436.795 MHz ;
-- `SAT-AO91` — descente 145.960 MHz, passages éclairés uniquement en raison de la batterie ;
-- `SAT-AO123` — descente 435.400 MHz.
-
 Téléchargements publics :
 
 ```text
@@ -127,7 +175,7 @@ Le pack Normandie public contient 139 mémoires RX :
 /downloads/normandie/radiopack-france-normandie-v0.3.1.csv
 ```
 
-Normandie v0.3.1 est un **artefact publié immuable**. Les commentaires ISS du jeu national ont évolué depuis sa publication ; ses fréquences et positions restent inchangées. Toute actualisation devra créer une nouvelle version avec une nouvelle revue.
+Normandie v0.3.1 est un **artefact publié immuable**. Toute actualisation devra créer une nouvelle version avec une nouvelle revue.
 
 ## Architecture de génération
 
@@ -165,23 +213,13 @@ L'outil :
 tools/create_regional_pack.py
 ```
 
-initialise un espace de recherche non public.
-
-La Bretagne a été initialisée sur ce modèle au Sprint 26. Le starter impose dès le départ : RX-only, `Duplex=off`, `Offset=0.000000`, noms de 10 caractères maximum, maximum 200 mémoires, pas de remplissage artificiel, préférence pour les sources primaires, revue obligatoire et immutabilité des versions publiées.
-
-Il ne crée jamais automatiquement de page, de route CSV, de fichier sous `website/public`, d'entrée dans `packRegistry.ts` ou d'entrée dans `regions.json`.
+initialise un espace de recherche non public. Il ne crée jamais automatiquement de page, de route CSV, de fichier sous `website/public`, d'entrée dans `packRegistry.ts` ou d'entrée dans `regions.json`.
 
 Voir [SPRINT-25-REGIONAL-STARTER.md](SPRINT-25-REGIONAL-STARTER.md) et [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md).
 
 ## Tests de génération isolés
 
-Le générateur Python générique :
-
-```text
-generator/generate_chirp_csv.py
-```
-
-accepte :
+Le générateur Python générique accepte :
 
 ```text
 --output-root <dossier>
@@ -189,21 +227,7 @@ accepte :
 
 `tests/test_generator.py` utilise un dossier temporaire et ne réécrit plus les CSV suivis par Git. Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique.
 
-## Contrôle NOTAM
-
-L'option NOTAM reste facultative et limitée aux packs qui la prennent explicitement en charge.
-
-Pour Annecy, le générateur propose SOFIA-Briefing pour la France et Skybriefing pour la Suisse. La confirmation NOTAM n'altère jamais le CSV et n'empêche jamais son téléchargement.
-
 ## Revue et garde-fous
-
-La carte de revue Annecy :
-
-```text
-research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json
-```
-
-fige chaque mémoire validée.
 
 La CI vérifie notamment :
 
@@ -212,13 +236,13 @@ La CI vérifie notamment :
 - Normandie : 139 mémoires ;
 - les exports RX-only ;
 - le registre multi-régions public ;
-- les fichiers réellement présents dans `website/dist` ;
 - la génération Python en sortie temporaire ;
 - l'immutabilité de Normandie v0.3.1 ;
 - le starter régional ;
-- le scaffold Bretagne ;
 - zéro fréquence Bretagne promue ;
-- tous les drapeaux de publication Bretagne à `false` ;
+- Bretagne Nord / CROSS Corsen et Bretagne Sud / CROSS Etel obligatoires dans la recherche ;
+- limite SRR actuelle laissée bloquante tant qu'elle n'est pas confirmée ;
+- inventaire futur obligatoire des stations VHF déportées et relais radioamateurs par sous-zone ;
 - l'absence de Bretagne dans le site et le générateur public ;
 - le build Astro.
 
@@ -274,33 +298,17 @@ Annecy 65 / 48 + Normandie 139
 
 Bretagne ne doit pas encore apparaître dans ce résultat.
 
-## Lancer le site en local
-
-```powershell
-cd website
-npm install
-npm run dev
-```
-
-Puis ouvre notamment :
-
-```text
-http://localhost:4321/generateur
-http://localhost:4321/regions/annecy-haute-savoie
-http://localhost:4321/regions/normandie
-```
-
-Il ne doit pas encore exister de page publique Bretagne.
-
 ## Prochaine étape Bretagne
 
-Le prochain sprint Bretagne devra rester dans `research/bretagne-v0.1/` et :
+Le prochain travail restera dans `research/bretagne-v0.1/` et devra en priorité :
 
-1. définir le périmètre géographique et les catégories à étudier ;
-2. compléter le registre de sources officielles ;
-3. rechercher les inventaires domaine par domaine ;
-4. ne promouvoir aucune fréquence sans validation ;
-5. ne fixer aucun nombre cible artificiel de mémoires.
+1. confirmer précisément la limite SRR actuelle entre CROSS Corsen et CROSS Etel ;
+2. inventorier les stations VHF déportées / relais de couverture des deux CROSS ;
+3. cartographier les diffusions météo / sécurité maritime par sous-zone ;
+4. construire séparément l'inventaire des relais radioamateurs Bretagne Nord et Bretagne Sud ;
+5. poursuivre ensuite les inventaires aviation et autres domaines ;
+6. ne promouvoir aucune fréquence sans validation ;
+7. ne fixer aucun nombre cible artificiel de mémoires.
 
 ## Maintenance du projet
 

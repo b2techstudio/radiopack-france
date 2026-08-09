@@ -110,7 +110,7 @@
 ## 0.17.0 - 2026-08-09
 
 - Ajout de `tools/create_regional_pack.py` pour initialiser un espace de recherche régional sans créer de contenu public.
-- Génération automatique de `README.md`, `pack-plan.json`, `source-registry.json` et `memory-plan.json` sous `research/<slug>-v<version>/`.
+- Génération automatique de `README.md`, `pack-plan.json`, `source-registry.json`, `publication-gates.json` et `memory-plan.json` sous `research/<slug>-v<version>/`.
 - État initial volontairement vide : aucune fréquence, aucun bloc mémoire et aucun nombre cible de mémoires ne sont imposés.
 - Tous les drapeaux de publication commencent à `false` ; aucune page Astro, route CSV ou entrée `packRegistry.ts` n'est créée par le starter.
 - Application immédiate des règles permanentes RX-only, `Duplex=off`, `Offset=0.000000`, noms ≤ 10 caractères, maximum 200 mémoires, pas de remplissage artificiel et immutabilité des versions publiées.

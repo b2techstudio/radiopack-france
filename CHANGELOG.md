@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.21.0 - 2026-08-09
+
+- Ajout de `research/normandie-v0.4/mortain-bocage-coverage.json` pour classer les infrastructures selon leur pertinence réelle autour de Mortain-Bocage / Sud-Manche, avec étude volontaire des départements 50, 35, 53 et 61.
+- Confirmation de l'existence actuelle de F6ZES à Sourdeval, du responsable F1SMB, du locator `IN98MR93XV` et de l'altitude 230 m, tout en laissant fréquence et mode à `null` faute de seconde source actuelle suffisamment précise.
+- Ajout de la règle `sourdeval_must_not_be_guessed` afin d'empêcher toute fréquence inventée ou historique non recoupée dans Normandie v0.4.
+- Classement de F5ZHY Montabot/Percy, F6ZCE Mont des Avaloirs et F1ZBX Brocéliande parmi les candidats analogiques utiles au secteur ; ajout de F5ZHA en étude de couverture.
+- Conservation de F5ZIX Tessy-sur-Vire et F5ZPO Gorron comme métadonnées APRS sans dupliquer 144.800 MHz, exclusion du relais C4FM F1ZKC du profil analogique et exclusion de F5ZTQ arrêté.
+- Ajout de `research/bretagne-v0.1/public-maritime-radio.json` à partir du tableau VHF maritime ANFR : canal 16 RX 156.800 MHz, canal 79 RX côte 161.575 MHz, canal 80 RX côte 161.625 MHz, canal 63 RX côte 160.775 MHz et canal 64 RX côte 160.825 MHz.
+- Ajout de la règle RX-only selon laquelle une voie maritime duplex utilise la fréquence émise par la station côtière et reçue par le navire.
+- Maintien des sites VHF déportés de CROSS Corsen et CROSS Etel à l'état `official_inventory_pending` : aucun site n'est inventé avant source primaire exploitable.
+- Extension de l'inventaire Bretagne avec F5ZIS Matignon, F5ZIT Perros-Guirec, F1ZBZ Lorient et F5ZPE Bignan, sans déduire de rôle ADRASEC de leur seule implantation.
+- Ajout de `tests/test_mortain_bretagne_radio_research.py` et de l'étape CI `Test Mortain and Bretagne public radio research`.
+- Ajout de `SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md`, mise à jour du README au Sprint 29 et renforcement du garde-fou général.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.20.0 - 2026-08-09
 
 - Ajout de `research/emergency-radio-policy.json` pour distinguer les relais radioamateurs/ADRASEC et services publics éligibles des réseaux opérationnels PPDR/PMR privés qui restent hors publication.

@@ -14,6 +14,7 @@ required_files = [
     "SPRINT-26-BRETAGNE-INITIALIZATION.md",
     "SPRINT-27-BRETAGNE-MARITIME-ZONING.md",
     "SPRINT-28-EMERGENCY-ADRASEC-RESEARCH.md",
+    "SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md",
     "generator/options.json",
     "generator/generate_chirp_csv.py",
     "tools/create_regional_pack.py",
@@ -21,6 +22,7 @@ required_files = [
     "tests/test_regional_pack_starter.py",
     "tests/test_bretagne_research_scaffold.py",
     "tests/test_emergency_relay_research.py",
+    "tests/test_mortain_bretagne_radio_research.py",
     "tests/test_web_generator.py",
     "tests/test_pack_registry.py",
     "tests/test_built_public_pack_catalog.py",
@@ -32,9 +34,11 @@ required_files = [
     "research/bretagne-v0.1/memory-plan.json",
     "research/bretagne-v0.1/maritime-zones.json",
     "research/bretagne-v0.1/emergency-relays.json",
+    "research/bretagne-v0.1/public-maritime-radio.json",
     "research/normandie-v0.4/README.md",
     "research/normandie-v0.4/pack-plan.json",
     "research/normandie-v0.4/emergency-relays.json",
+    "research/normandie-v0.4/mortain-bocage-coverage.json",
     "research/annecy-alpes-leman-v0.3/README.md",
     "research/annecy-alpes-leman-v0.3/pack-plan.json",
     "research/annecy-alpes-leman-v0.3/emergency-relays.json",
@@ -55,28 +59,31 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 28",
+    "État actuel — Sprint 29",
     "Normandie v0.3.1** — 139 mémoires RX",
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
     "Bretagne v0.1 — recherche",
-    "Politique secours / ADRASEC — Sprint 28",
-    "research/emergency-radio-policy.json",
-    "Normandie v0.4 — recherche Mortain-Bocage / Sud-Manche",
-    "research/normandie-v0.4/",
-    "35, 53 et 61",
+    "Mortain-Bocage / Sud-Manche",
+    "50, 35, 53 et 61",
+    "research/normandie-v0.4/mortain-bocage-coverage.json",
+    "sourdeval_must_not_be_guessed: true",
     "F5ZHY",
     "F6ZES",
     "F6ZCE",
-    "Annecy–Alpes–Léman v0.3 — recherche secours",
-    "research/annecy-alpes-leman-v0.3/",
-    "F1ZJV",
-    "F1ZYT",
-    "F1ZHG",
-    "ADRASEC 22 / 29 / 35 / 56",
-    "emergency_relay_inventory",
-    "réseaux professionnels privés",
-    "tests\\test_emergency_relay_research.py",
-    "SPRINT-28-EMERGENCY-ADRASEC-RESEARCH.md",
+    "F1ZBX",
+    "Bretagne — VHF maritime publique Sprint 29",
+    "research/bretagne-v0.1/public-maritime-radio.json",
+    "156.800 MHz",
+    "161.575 MHz",
+    "161.625 MHz",
+    "160.775 MHz",
+    "160.825 MHz",
+    "F5ZIS",
+    "F5ZIT",
+    "F1ZBZ",
+    "F5ZPE",
+    "tests\\test_mortain_bretagne_radio_research.py",
+    "SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md",
     "nothing to commit, working tree clean",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
@@ -112,6 +119,7 @@ bretagne_gates = json.loads((ROOT / "research/bretagne-v0.1/publication-gates.js
 bretagne_memory = json.loads((ROOT / "research/bretagne-v0.1/memory-plan.json").read_text(encoding="utf-8"))
 bretagne_maritime = json.loads((ROOT / "research/bretagne-v0.1/maritime-zones.json").read_text(encoding="utf-8"))
 bretagne_emergency = json.loads((ROOT / "research/bretagne-v0.1/emergency-relays.json").read_text(encoding="utf-8"))
+bretagne_public_maritime = json.loads((ROOT / "research/bretagne-v0.1/public-maritime-radio.json").read_text(encoding="utf-8"))
 
 assert bretagne_plan["status"] == "research_scaffold_not_public"
 assert bretagne_plan["memory_plan"]["expected_memory_count"] is None
@@ -145,9 +153,29 @@ assert {item["id"] for item in bretagne_emergency["organisations"]} == {"ADRASEC
 assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne_emergency["candidates"])
 assert bretagne_emergency["rules"]["private_ppdr_operational_frequencies_excluded"] is True
 assert bretagne_emergency["rules"]["north_south_zoning_required"] is True
+assert bretagne_emergency["rules"]["adrasec_role_must_not_be_inferred_from_geography_only"] is True
+brelays = {item["id"]: item for item in bretagne_emergency["candidates"]}
+assert brelays["F5ZIS"]["output_mhz"] == 145.2375
+assert brelays["F5ZIT"]["output_mhz"] == 145.2250
+assert brelays["F1ZBZ"]["output_mhz"] == 431.2000
+assert brelays["F5ZPE"]["output_mhz"] == 145.7375
+
+assert bretagne_public_maritime["status"] == "official_channel_frequencies_verified_site_coverage_pending"
+maritime_channels = {item["channel"]: item for item in bretagne_public_maritime["channels"]}
+assert maritime_channels[16]["rx_memory_mhz"] == 156.8000
+assert maritime_channels[79]["rx_memory_mhz"] == 161.5750
+assert maritime_channels[80]["rx_memory_mhz"] == 161.6250
+assert maritime_channels[63]["rx_memory_mhz"] == 160.7750
+assert maritime_channels[64]["rx_memory_mhz"] == 160.8250
+assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne_public_maritime["channels"])
+assert bretagne_public_maritime["rules"]["rx_only_uses_coast_transmit_frequency_on_duplex_channels"] is True
+assert bretagne_public_maritime["rules"]["channel_16_not_duplicated_by_cross_label"] is True
+assert bretagne_public_maritime["rules"]["public_export_allowed"] is False
+assert all(item["remote_vhf_sites"] == [] for item in bretagne_public_maritime["cross_zones"])
 
 normandie_next = json.loads((ROOT / "research/normandie-v0.4/pack-plan.json").read_text(encoding="utf-8"))
 normandie_emergency = json.loads((ROOT / "research/normandie-v0.4/emergency-relays.json").read_text(encoding="utf-8"))
+mortain_coverage = json.loads((ROOT / "research/normandie-v0.4/mortain-bocage-coverage.json").read_text(encoding="utf-8"))
 assert normandie_next["status"] == "research_next_version_not_public"
 assert normandie_next["based_on_published_version"] == "0.3.1"
 assert normandie_next["published_base_is_immutable"] is True
@@ -160,6 +188,22 @@ assert nrelays["F6ZES"]["output_mhz"] is None
 assert nrelays["F6ZCE"]["department"] == 53
 assert nrelays["F1ZBX"]["department"] == 35
 assert all(item["frequency_promoted_to_public_pack"] is False for item in normandie_emergency["candidates"])
+
+assert mortain_coverage["status"] == "research_coverage_priorities_not_public"
+assert mortain_coverage["focus"]["departments_checked"] == [50, 35, 53, 61]
+assert mortain_coverage["rules"]["sourdeval_must_not_be_guessed"] is True
+assert mortain_coverage["rules"]["public_export_allowed"] is False
+mstations = {item["id"]: item for item in mortain_coverage["stations"]}
+assert mstations["F6ZES"]["output_mhz"] is None
+assert mstations["F6ZES"]["mode"] is None
+assert mstations["F6ZES"]["rx_pack_candidate"] is False
+assert mstations["F5ZHY"]["output_mhz"] == 145.6875
+assert mstations["F6ZCE"]["output_mhz"] == 145.7000
+assert mstations["F1ZBX"]["output_mhz"] == 145.6750
+assert mstations["F5ZIX"]["rx_pack_candidate"] is False
+assert mstations["F5ZPO"]["rx_pack_candidate"] is False
+assert mstations["F1ZKC"]["rx_pack_candidate"] is False
+assert mstations["F5ZTQ"]["rx_pack_candidate"] is False
 
 annecy_next = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/pack-plan.json").read_text(encoding="utf-8"))
 annecy_emergency = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/emergency-relays.json").read_text(encoding="utf-8"))
@@ -179,7 +223,6 @@ assert plan["status"] == "published_v0.2"
 assert plan["candidate_memory_count"] == 65
 assert plan["candidate_memory_count_without_aviation"] == 48
 assert plan["public_export_allowed"] is True
-
 review = json.loads((ROOT / "research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json").read_text(encoding="utf-8"))
 assert review["expected_memory_count"] == 65
 assert review["expected_memory_count_without_aviation"] == 48
@@ -245,6 +288,21 @@ for expected in [
 ]:
     assert expected in emergency_test, f"Test secours/ADRASEC incomplet: {expected}"
 
+sprint29_test = (ROOT / "tests/test_mortain_bretagne_radio_research.py").read_text(encoding="utf-8")
+for expected in [
+    "Sourdeval unresolved safely",
+    "161.5750",
+    "161.6250",
+    "160.7750",
+    "160.8250",
+    "F5ZIS",
+    "F5ZIT",
+    "F1ZBZ",
+    "F5ZPE",
+    "0 public mutations OK",
+]:
+    assert expected in sprint29_test, f"Test Sprint 29 incomplet: {expected}"
+
 workflow_doc = (ROOT / "REGIONAL-PACK-WORKFLOW.md").read_text(encoding="utf-8")
 for expected in ["chirpPack.ts", "packRegistry.ts", "carte de revue", "artefact immuable", "README.md"]:
     assert expected in workflow_doc, f"Workflow régional incomplet: {expected}"
@@ -261,6 +319,8 @@ for expected in [
     "python tests/test_bretagne_research_scaffold.py",
     "Test emergency and ADRASEC research",
     "python tests/test_emergency_relay_research.py",
+    "Test Mortain and Bretagne public radio research",
+    "python tests/test_mortain_bretagne_radio_research.py",
     "python tests/test_web_generator.py",
     "python tests/test_built_public_pack_catalog.py",
     "npm run build",
@@ -268,4 +328,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 28 emergency/ADRASEC research guards: published packs frozen, future research non-public OK")
+print("Tests RadioPack Sprint 29 guards: Mortain coverage + Bretagne maritime RX + public packs frozen OK")

@@ -48,7 +48,32 @@ La bibliothèque générique `website/src/lib/chirpPack.ts` se charge ensuite :
 - de limiter le pack à 200 mémoires ;
 - de produire le CSV CHIRP en réception seule avec `Duplex=off` et `Offset=0.000000`.
 
-## 4. Créer un wrapper spécifique au pack
+## 4. Appliquer la politique paired RX
+
+Avant de construire le plan mémoire, appliquer :
+
+```text
+research/paired-rx-policy.json
+```
+
+Une liaison publique **nativement duplex ou split** doit conserver les deux fréquences pour l'écoute lorsque les deux côtés sont vérifiés :
+
+- VHF maritime : navire → côte et côte → navire ;
+- relais analogique : entrée et sortie ;
+- transpondeur cross-band : les deux côtés publiés ;
+- satellite split : montée et descente.
+
+Si les deux fréquences diffèrent, créer deux mémoires RX distinctes. Chacune reste `Duplex=off` avec `Offset=0.000000` : la seconde fréquence ne doit jamais être placée dans un champ TX split.
+
+Si plusieurs fonctions partagent exactement la même fréquence RF, conserver une seule mémoire et stocker les rôles/sites dans les métadonnées. Les tonalités de montée ou d'activation restent documentaires sauf si elles sont explicitement nécessaires à la réception.
+
+Le plan de migration courant des prochaines versions est conservé dans :
+
+```text
+research/paired-rx-next-version-plan.json
+```
+
+## 5. Créer un wrapper spécifique au pack
 
 Créer un fichier du type :
 
@@ -67,7 +92,7 @@ Ce fichier ne doit contenir que les règles propres au pack :
 
 Annecy–Alpes–Léman utilise `website/src/lib/annecyPack.ts` comme exemple de référence.
 
-## 5. Enregistrer le pack dans le catalogue du générateur
+## 6. Enregistrer le pack dans le catalogue du générateur
 
 Les packs et variantes effectivement téléchargeables sont déclarés dans :
 
@@ -88,7 +113,7 @@ Le générateur `/generateur` lit ce registre. Il ne doit pas contenir une secon
 
 Une option non supportée par un pack doit être masquée dans l'interface plutôt que simulée.
 
-## 6. Geler une carte de revue
+## 7. Geler une carte de revue
 
 Avant publication, générer une carte de référence qui fige au minimum :
 
@@ -100,9 +125,11 @@ Avant publication, générer une carte de référence qui fige au minimum :
 - le commentaire ou son empreinte ;
 - les variantes optionnelles du pack.
 
+Pour une liaison paired RX, la carte doit également permettre de vérifier que les deux fréquences attendues sont présentes, dédupliquées correctement et toutes en TX bloqué.
+
 La CI doit comparer la génération à cette carte afin qu'un changement de données ne modifie pas silencieusement un pack publié.
 
-## 7. Créer les routes de téléchargement
+## 8. Créer les routes de téléchargement
 
 Les fichiers publics générés doivent utiliser des routes Astro prérendues sous :
 
@@ -114,7 +141,7 @@ Un fichier statique déjà publié et maintenu dans `website/public/downloads/` 
 
 Le navigateur doit télécharger directement la ressource publique validée plutôt que reconstruire une copie indépendante du CSV côté client.
 
-## 8. Ajouter les options du générateur
+## 9. Ajouter les options du générateur
 
 Les options qui modifient réellement le contenu doivent sélectionner une variante explicitement testée et déclarée dans `packRegistry.ts`.
 
@@ -125,7 +152,7 @@ Exemple Annecy :
 
 Les contrôles informatifs comme NOTAM ne doivent pas modifier automatiquement les fréquences de référence.
 
-## 9. Isoler les tests de génération
+## 10. Isoler les tests de génération
 
 Un test ne doit pas régénérer directement un fichier suivi par Git dans `website/public`.
 
@@ -140,37 +167,40 @@ Le test doit :
 1. générer dans un dossier temporaire ;
 2. comparer les sorties temporaires aux fichiers publics attendus ;
 3. vérifier les règles CHIRP ;
-4. vérifier que les fichiers suivis n'ont pas changé ;
-5. supprimer automatiquement les sorties temporaires à la fin.
+4. vérifier les paires RX attendues lorsque le service est duplex/split ;
+5. vérifier que les fichiers suivis n'ont pas changé ;
+6. supprimer automatiquement les sorties temporaires à la fin.
 
 Cette règle évite les faux changements liés aux fins de ligne et empêche un test de remplacer silencieusement un artefact versionné.
 
-## 10. Vérifier le build final
+## 11. Vérifier le build final
 
 La CI doit au minimum :
 
 1. tester les données sources ;
-2. tester l'assembleur ;
-3. tester la carte de revue ;
-4. tester le registre des packs publics ;
-5. tester la génération dans une sortie isolée ;
-6. compiler Astro ;
-7. ouvrir les CSV réellement produits dans `website/dist` ;
-8. comparer les variantes générées à leur carte de revue ;
-9. vérifier `Duplex=off`, les positions et les nombres de mémoires.
+2. tester la politique paired RX ;
+3. tester l'assembleur ;
+4. tester la carte de revue ;
+5. tester le registre des packs publics ;
+6. tester la génération dans une sortie isolée ;
+7. compiler Astro ;
+8. ouvrir les CSV réellement produits dans `website/dist` ;
+9. comparer les variantes générées à leur carte de revue ;
+10. vérifier `Duplex=off`, `Offset=0.000000`, les positions et les nombres de mémoires.
 
-## 11. Publier explicitement
+## 12. Publier explicitement
 
 Un pack ne passe public qu'après :
 
 - fermeture de ses portes bloquantes ;
 - revue du CSV ;
+- vérification des paires RX et de la déduplication ;
 - ajout de ses variantes dans `packRegistry.ts` ;
 - mise à jour du site ;
 - mise à jour du `README.md` ;
 - CI verte sur le commit final.
 
-## 12. Figer une version publiée
+## 13. Figer une version publiée
 
 Une fois publiée, une version régionale devient un **artefact immuable**.
 
@@ -179,12 +209,12 @@ Cela signifie :
 - ne pas la régénérer automatiquement à partir de jeux partagés susceptibles d'évoluer ;
 - ne pas modifier silencieusement ses commentaires ou métadonnées ;
 - ne pas remplacer son CSV sous le même numéro de version ;
-- créer une nouvelle version si des données doivent être actualisées ;
+- créer une nouvelle version si des données doivent être actualisées ou si une ancienne version doit adopter la nouvelle politique paired RX ;
 - refaire la revue et la CI avant cette nouvelle publication.
 
-Normandie v0.3.1 est le premier pack explicitement protégé par cette règle depuis le Sprint 24.
+Normandie v0.3.1 est le premier pack explicitement protégé par cette règle depuis le Sprint 24. Sa VHF marine contient déjà les deux côtés des voies duplex ; elle ne doit néanmoins pas être réécrite sous le même numéro de version.
 
-## 13. Nettoyer les anciennes versions
+## 14. Nettoyer les anciennes versions
 
 Lorsqu'une ancienne version n'a plus de rôle actif :
 

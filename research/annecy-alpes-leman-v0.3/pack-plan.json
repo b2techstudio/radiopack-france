@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "status": "research_next_version_not_public",
+  "created": "2026-08-09",
+  "pack": {
+    "name": "Annecy–Alpes–Léman",
+    "slug": "annecy-alpes-leman",
+    "target_version": "0.3"
+  },
+  "based_on_published_version": "0.2",
+  "published_base_is_immutable": true,
+  "memory_plan": {
+    "status": "not_defined",
+    "expected_memory_count": null,
+    "new_blocks": []
+  },
+  "research_priorities": [
+    "ADRASEC 74",
+    "transpondeurs ADRASEC 73",
+    "couverture pertinente 38 et 01",
+    "déduplication des fréquences identiques entre sites"
+  ],
+  "publication": {
+    "public_export_allowed": false,
+    "public_registry_allowed": false,
+    "public_routes_allowed": false,
+    "review_required": true,
+    "review_completed": false
+  }
+}

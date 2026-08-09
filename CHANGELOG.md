@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.6 - 2026-08-09
+
+- Validation primaire d'une **couverture VHF opérationnelle actuelle dans le secteur de la Pointe du Raz** : un communiqué de la Préfecture maritime documente un contact VHF établi par le CROSS Corsen avec un navire au nord de la pointe le 21 septembre 2025, sans identifier le site émetteur ni le canal.
+- Maintien de l'installation VHF/MF historique de la **Pointe du Raz** à `current_validation: false` : une preuve de couverture sectorielle ne vaut pas revalidation du site émetteur historique et ne permet pas d'attribuer le canal 79.
+- Séparation du centre opérationnel actuel de **Pointe de Corsen / Plouarzel** de l'inventaire des stations radio déportées ; l'implantation actuelle du CROSS ne suffit pas à revalider son ancienne installation radio locale multicanal.
+- Ajout du contexte futur **CROSS Nouvelle génération** : regroupement fonctionnel Étel/Corsen prévu à l'horizon 2027, conservé comme métadonnée de transition sans modifier les fréquences ou sites actuels.
+- Ajout de `F5ZZH` / R7X Rennes-Beaulieu à l'inventaire de recherche : sortie 145.7875 MHz, entrée 145.1875 MHz, FM, actuellement indiqué par l'ARA35 comme temporairement arrêté et à la recherche d'un nouveau site ; `rx_pack_candidate: false`.
+- Passage de `public-maritime-radio.json` au schéma 1.5, de `maritime-zones.json` au schéma 1.4 et de `emergency-relays.json` au schéma 1.4 ; renforcement des garde-fous distinguant infrastructure, couverture, site émetteur et canal.
+- Le canal 79 reste sans émetteur actuel primaire-vérifié, le canal 64 reste sans émetteur Bretagne réconcilié, F6ZES Sourdeval reste sans fréquence/mode et les rôles ADRASEC 22/29/56 restent ouverts.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.5 - 2026-08-09
 
 - Revalidation actuelle primaire du **Stiff / Ouessant** comme infrastructure radio du CROSS Corsen : une offre officielle DIRM NAMO 2026 indique que la tour abrite les radars et des équipements de radiocommunications, et un marché public DGAMPA confirme que la vigie héberge aujourd'hui les équipements radio et informatiques nécessaires aux missions du CROSS.

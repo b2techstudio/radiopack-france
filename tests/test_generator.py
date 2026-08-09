@@ -7,19 +7,20 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR = ROOT / "generator/generate_chirp_csv.py"
+FROZEN_NORMANDIE = "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 
-expected = {
+expected_generated = {
     "website/public/downloads/national/radiopack-france-pmr446-rx.csv": 16,
     "website/public/downloads/national/radiopack-france-marine-vhf-rx.csv": 90,
     "website/public/downloads/national/radiopack-france-amateur-listening-rx.csv": 6,
     "website/public/downloads/national/radiopack-france-amateur-calls-rx.csv": 2,
     "website/public/downloads/normandie/radiopack-france-normandie-repeaters-rx.csv": 15,
-    "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv": 139,
 }
 
+tracked_guard_paths = [*expected_generated, FROZEN_NORMANDIE]
 published_before = {
     relative: (ROOT / relative).read_bytes()
-    for relative in expected
+    for relative in tracked_guard_paths
 }
 
 loaded = {}
@@ -37,7 +38,7 @@ with tempfile.TemporaryDirectory(prefix="radiopack-generator-test-") as temporar
         check=True,
     )
 
-    for relative, expected_count in expected.items():
+    for relative, expected_count in expected_generated.items():
         generated_path = output_root / relative
         published_path = ROOT / relative
         assert generated_path.is_file(), f"Sortie isolée manquante: {relative}"
@@ -54,12 +55,16 @@ with tempfile.TemporaryDirectory(prefix="radiopack-generator-test-") as temporar
         assert len({row["Name"] for row in generated_rows}) == len(generated_rows)
         assert all(len(row["Name"]) <= 10 for row in generated_rows)
 
+    assert not (output_root / FROZEN_NORMANDIE).exists(), "Le générateur générique ne doit pas reconstruire Normandie v0.3.1"
+
 for relative, original_bytes in published_before.items():
     assert (ROOT / relative).read_bytes() == original_bytes, f"Le test a modifié un fichier suivi: {relative}"
 
 generator_source = GENERATOR.read_text(encoding="utf-8")
 assert '"--output-root"' in generator_source
 assert "output_root / output_relative" in generator_source
+assert "radiopack-france-normandie-v0.3.1.csv" not in generator_source
+assert "Normandie v0.3.1 est un artefact publié figé" in generator_source
 assert "data/regions/annecy-haute-savoie/pack.json" not in generator_source
 assert "radiopack-france-annecy-haute-savoie-v0.1.csv" not in generator_source
 assert "website/src/lib/annecyPack.ts" in generator_source
@@ -96,12 +101,16 @@ assert listening_by_name["ISS-SSTV"]["Frequency"] == "437.550000"
 assert 145.2 not in exported_frequencies
 assert 145.99 not in exported_frequencies
 
-normandie = loaded["website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"]
+with (ROOT / FROZEN_NORMANDIE).open(encoding="utf-8", newline="") as handle:
+    normandie = list(csv.DictReader(handle))
+
 normandie_by_name = {row["Name"]: row for row in normandie}
 normandie_by_location = {int(row["Location"]): row for row in normandie}
 assert len(normandie) == 139
+assert all(row["Duplex"] == "off" for row in normandie)
+assert all(row["Offset"] == "0.000000" for row in normandie)
 assert max(normandie_by_location) == 174
 assert normandie_by_name["53-F6ZCE"]["Frequency"] == "145.700000"
 assert normandie_by_location[174]["Name"] == "53-F6ZCE"
 
-print("Tests RadioPack isolated generator + ISS links: OK")
+print("Tests RadioPack isolated generator + frozen regional artifacts + ISS links: OK")

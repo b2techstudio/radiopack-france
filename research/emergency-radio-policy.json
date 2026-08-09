@@ -1,15 +1,16 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "active_research_policy",
   "created": "2026-08-09",
   "purpose": "Définir ce qui peut être recherché et éventuellement intégré dans les packs RadioPack France pour les communications de secours, de sécurité civile et les relais côtiers.",
+  "paired_rx_policy": "research/paired-rx-policy.json",
   "included_research_categories": [
     {
       "id": "adrasec_amateur_repeaters",
       "description": "Relais, transpondeurs et digipeaters du service amateur explicitement utilisés, gérés ou prioritaires pour les ADRASEC/FNRASEC.",
       "public_frequency_eligible": true,
       "requirements": [
-        "fréquence de sortie publiquement documentée",
+        "fréquences publiques documentées pour les deux sens lorsqu'une liaison analogique est nativement duplex ou split",
         "mode compatible avec le récepteur cible",
         "statut courant recoupé",
         "zone de couverture ou implantation documentée"
@@ -22,6 +23,7 @@
       "requirements": [
         "source radioamateur identifiable",
         "mode analogique ou écoute réellement exploitable",
+        "entrée et sortie conservées comme fréquences RX distinctes lorsqu'elles sont toutes deux publiquement documentées",
         "pertinence géographique"
       ]
     },
@@ -32,6 +34,7 @@
       "requirements": [
         "source officielle maritime",
         "zonage CROSS et couverture locale documentés",
+        "pour les voies duplex, fréquence navire et fréquence station côtière toutes deux conservées en RX lorsqu'elles sont distinctes",
         "aucune duplication artificielle d'une même fréquence uniquement pour changer l'étiquette de zone"
       ]
     },
@@ -85,6 +88,10 @@
     "rx_only": true,
     "duplex": "off",
     "offset": "0.000000",
+    "native_duplex_or_split_both_directions_rx": true,
+    "paired_distinct_frequencies_use_separate_rx_memories": true,
+    "same_rf_frequency_deduplicated": true,
+    "tx_tones_metadata_only_unless_needed_for_rx": true,
     "no_unverified_frequency": true,
     "no_private_operational_channel": true,
     "published_versions_are_immutable": true,

@@ -74,6 +74,8 @@ for expected in [
     "Bretagne — VHF maritime publique Sprint 29",
     "research/bretagne-v0.1/public-maritime-radio.json",
     "Pointe de Penmarc'h",
+    "Pointe du Raz",
+    "CROSS Nouvelle génération",
     "Penmarc'h",
     "Groix",
     "Belle-Ile",
@@ -83,6 +85,7 @@ for expected in [
     "161.625 MHz",
     "160.775 MHz",
     "160.825 MHz",
+    "F5ZZH",
     "F5ZIS",
     "F5ZIT",
     "F1ZBZ",
@@ -146,34 +149,48 @@ assert bretagne_gate_map["maritime_zoning"]["status"] == "etel_penmarch_interfac
 assert bretagne_gate_map["emergency_relay_inventory"]["status"] == "adrasec_22_29_35_56_and_regional_relays_pending"
 assert bretagne_memory["expected_memory_count"] is None
 assert bretagne_memory["blocks"] == []
-assert bretagne_maritime["schema_version"] == "1.3"
+assert bretagne_maritime["schema_version"] == "1.4"
 assert bretagne_maritime["status"] == "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending"
 assert bretagne_maritime["rules"]["single_bretagne_maritime_zone_forbidden"] is True
 assert bretagne_maritime["rules"]["north_south_operational_split_required"] is True
 assert bretagne_maritime["rules"]["etel_srr_starts_at_pointe_de_penmarch_primary_sourced"] is True
 assert bretagne_maritime["rules"]["corsen_stiff_radio_infrastructure_primary_sourced"] is True
 assert bretagne_maritime["rules"]["current_radio_infrastructure_does_not_imply_channel_assignment"] is True
+assert bretagne_maritime["rules"]["current_sector_vhf_contact_does_not_identify_transmitter_site"] is True
+assert bretagne_maritime["rules"]["planned_cross_ng_reorganisation_does_not_change_current_frequency_validation"] is True
 assert bretagne_maritime["rules"]["corsen_detailed_srr_and_vhf_overlap_still_pending"] is True
 assert bretagne_maritime["channel_16"]["memory_strategy"] == "do_not_duplicate_same_frequency_only_to_label_cross"
 assert bretagne_maritime["channel_16"]["frequency_promoted"] is False
 zones = {zone["id"]: zone for zone in bretagne_maritime["zones"]}
-assert zones["bretagne-nord-ouest"]["cross"] == "CROSS Corsen"
+north = zones["bretagne-nord-ouest"]
+assert north["cross"] == "CROSS Corsen"
+assert north["current_operational_center"]["site"] == "Pointe de Corsen / Plouarzel"
+assert north["current_operational_center"]["radio_service_or_channel"] is None
+assert north["current_operational_coverage_evidence"][0]["sector"].startswith("Pointe du Raz")
+assert north["current_operational_coverage_evidence"][0]["transmitter_site_identified"] is False
+assert north["current_transition_context"]["target_operational_horizon"] == "2027"
 assert zones["bretagne-sud-atlantique"]["cross"] == "CROSS Etel"
 assert zones["bretagne-sud-atlantique"]["official_extent"].startswith("Pointe de Penmarc'h")
 assert zones["transition-finistere-sud"]["cross"] is None
 assert zones["transition-finistere-sud"]["status"] == "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending"
+
+assert bretagne_emergency["schema_version"] == "1.4"
 assert {item["id"] for item in bretagne_emergency["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
 assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne_emergency["candidates"])
 assert bretagne_emergency["rules"]["private_ppdr_operational_frequencies_excluded"] is True
 assert bretagne_emergency["rules"]["north_south_zoning_required"] is True
 assert bretagne_emergency["rules"]["adrasec_role_must_not_be_inferred_from_geography_only"] is True
+assert bretagne_emergency["rules"]["temporarily_stopped_repeaters_not_active_candidates"] is True
 brelays = {item["id"]: item for item in bretagne_emergency["candidates"]}
+assert brelays["F5ZZH"]["output_mhz"] == 145.7875
+assert brelays["F5ZZH"]["input_mhz"] == 145.1875
+assert brelays["F5ZZH"]["rx_pack_candidate"] is False
 assert brelays["F5ZIS"]["output_mhz"] == 145.2375
 assert brelays["F5ZIT"]["output_mhz"] == 145.2250
 assert brelays["F1ZBZ"]["output_mhz"] == 431.2000
 assert brelays["F5ZPE"]["output_mhz"] == 145.7375
 
-assert bretagne_public_maritime["schema_version"] == "1.4"
+assert bretagne_public_maritime["schema_version"] == "1.5"
 assert bretagne_public_maritime["status"] == "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending"
 maritime_channels = {item["channel"]: item for item in bretagne_public_maritime["channels"]}
 assert maritime_channels[16]["rx_memory_mhz"] == 156.8000
@@ -192,13 +209,19 @@ assert bretagne_public_maritime["rules"]["rx_only_uses_coast_transmit_frequency_
 assert bretagne_public_maritime["rules"]["channel_16_not_duplicated_by_cross_label"] is True
 assert bretagne_public_maritime["rules"]["historical_primary_radio_sites_must_be_revalidated_before_current_use"] is True
 assert bretagne_public_maritime["rules"]["current_radio_infrastructure_does_not_imply_current_channel_assignment"] is True
+assert bretagne_public_maritime["rules"]["current_sector_vhf_contact_does_not_identify_transmitter_site"] is True
+assert bretagne_public_maritime["rules"]["current_operational_center_does_not_imply_local_radio_station"] is True
+assert bretagne_public_maritime["rules"]["planned_cross_ng_reorganisation_does_not_change_current_frequency_validation"] is True
 assert bretagne_public_maritime["rules"]["etel_srr_starts_at_penmarch_primary_verified"] is True
 assert bretagne_public_maritime["rules"]["channel_64_requires_current_brittany_transmitter_reconciliation"] is True
 assert bretagne_public_maritime["rules"]["corsen_stiff_radio_infrastructure_primary_verified"] is True
+assert bretagne_public_maritime["rules"]["corsen_pointe_du_raz_sector_vhf_coverage_primary_verified_site_pending"] is True
 assert bretagne_public_maritime["rules"]["corsen_current_network_size_known_site_names_partially_revalidated"] is True
 assert bretagne_public_maritime["rules"]["public_export_allowed"] is False
 crosses = {item["cross"]: item for item in bretagne_public_maritime["cross_zones"]}
 corsen = crosses["CROSS Corsen"]
+assert corsen["current_operational_center"]["site"] == "Pointe de Corsen / Plouarzel"
+assert corsen["current_operational_center"]["radio_service_or_channel"] is None
 assert corsen["current_network_summary"]["vhf_station_count"] == 10
 assert corsen["current_network_summary"]["mf_station_count"] == 2
 assert corsen["remote_vhf_sites"] == []
@@ -207,11 +230,18 @@ corsen_infra = {item["site"]: item for item in corsen["verified_remote_radio_inf
 assert set(corsen_infra) == {"Cap Fréhel", "Stiff / Ouessant"}
 assert corsen_infra["Cap Fréhel"]["radio_service_or_channel"] is None
 assert corsen_infra["Stiff / Ouessant"]["radio_service_or_channel"] is None
+coverage = corsen["current_operational_coverage_evidence"]
+assert coverage[0]["evidence_date"] == "2025-09-21"
+assert coverage[0]["transmitter_site_identified"] is False
+assert coverage[0]["channel_identified"] is False
+assert corsen["current_transition_context"]["target_operational_horizon"] == "2027"
 historical_sites = {item["site"]: item for item in corsen["historical_primary_radio_architecture"]}
 assert set(historical_sites) == {"Stiff / Ouessant", "Pointe du Raz", "Corsen"}
 assert historical_sites["Stiff / Ouessant"]["current_validation"] is True
 assert historical_sites["Pointe du Raz"]["current_validation"] is False
+assert historical_sites["Pointe du Raz"]["current_sector_vhf_coverage_verified"] is True
 assert historical_sites["Corsen"]["current_validation"] is False
+assert historical_sites["Corsen"]["current_main_operational_center_verified"] is True
 etel_sites = {item["site"]: item for item in crosses["CROSS Etel"]["remote_vhf_sites"]}
 assert set(etel_sites) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
 assert etel_sites["Etel"]["channel"] == 63
@@ -327,6 +357,7 @@ for expected in [
     "F1ZYT",
     "ADRASEC-22",
     "ADRASEC-56",
+    "F5ZZH",
     "no public mutation OK",
 ]:
     assert expected in emergency_test, f"Test secours/ADRASEC incomplet: {expected}"
@@ -343,6 +374,8 @@ for expected in [
     "Groix",
     "Belle-Ile",
     "Stiff",
+    "Pointe du Raz",
+    "F5ZZH",
     "F5ZIS",
     "F5ZIT",
     "F1ZBZ",
@@ -376,4 +409,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 29 guards: Mortain coverage + Bretagne Etel weather emitters + Corsen current network with Cap Frehel and Stiff current radio infrastructures guarded without channel inference + public packs frozen OK")
+print("Tests RadioPack Sprint 29 guards: Mortain coverage + Bretagne Etel weather emitters + Corsen current network with Cap Frehel/Stiff infrastructures and Pointe du Raz sector VHF coverage guarded without transmitter inference + CROSS-NG future context + F5ZZH stopped + public packs frozen OK")

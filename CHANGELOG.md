@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.8 - 2026-08-09
+
+- Ajout de `research/bretagne-v0.1/etel-network.json` à partir d'une source officielle DIRM NAMO 2026 indiquant que le service technique du CROSS Étel maintient **17 stations radio réparties sur le littoral, de la Pointe de Penmarc'h à Biarritz**.
+- Séparation explicite entre le dimensionnement du réseau et son inventaire nominatif : le nombre de 17 stations ne permet pas d'en déduire leurs noms, leurs canaux ni leur couverture individuelle.
+- Conservation des émetteurs météo déjà primaire-vérifiés comme inventaire partiel : Penmarc'h, Groix et Belle-Ile sur le canal 80, Étel sur le canal 63 ; Chassiron sur 63 est conservé comme contexte hors Bretagne.
+- Renforcement du dossier **canal 64 Morbihan** : le réseau Étel est plus large que les seuls émetteurs météo nommés, mais aucun site primaire actuel n'est encore identifié pour 64 ; `channel_64_site_must_not_be_guessed` reste obligatoire.
+- Ajout de `tests/test_etel_network_research.py` et de l'étape CI correspondante afin de figer le nombre de 17 stations, l'inventaire météo partiel, l'absence de site 64 et l'absence de promotion publique.
+- La politique paired RX reste inchangée : les deux fréquences du canal 64 sont conservées comme données RX, mais aucune attribution territoriale n'est inventée tant que le site n'est pas validé.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.7 - 2026-08-09
 
 - Nouvelle politique globale `research/paired-rx-policy.json` : toute liaison publique nativement duplex/split dont les deux fréquences distinctes sont vérifiées doit permettre l'écoute des deux sens avec deux mémoires RX, tout en conservant `Duplex=off` et `Offset=0.000000` sur chacune.

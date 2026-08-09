@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.15.0 - 2026-08-09
+
+- Passage du générateur public `/generateur` à une architecture multi-régions avec sélecteur de pack.
+- Ajout du registre `website/src/lib/packRegistry.ts`, source de vérité des packs et variantes téléchargeables.
+- Enregistrement d'Annecy–Alpes–Léman v0.2 avec ses variantes 65 mémoires et 48 mémoires sans aviation.
+- Enregistrement de Normandie v0.3.1 comme variante publique fixe de 139 mémoires, sans modification de ses fréquences.
+- Masquage automatique des options non prises en charge : Aviation et NOTAM restent propres au pack Annecy.
+- Maintien du téléchargement direct des ressources publiques validées, sans génération de Blob CSV côté navigateur.
+- Passage du contrat `generator/options.json` au schéma 3.0 `multi_region_public_generator`.
+- Extension de `REGIONAL-PACK-WORKFLOW.md` avec l'étape obligatoire d'enregistrement dans le catalogue public.
+- Ajout de `tests/test_pack_registry.py` pour valider le registre, les variantes et le CSV Normandie.
+- Ajout de `tests/test_built_public_pack_catalog.py` pour contrôler après `astro build` les fichiers Annecy 65/48 et Normandie 139 réellement déployés.
+- Mise à jour des tests AIRAC et readiness afin de conserver leurs validations métier tout en adoptant le nouveau contrat multi-régions.
+- Mise à jour du README au Sprint 23 et de la CI pour vérifier le sélecteur, le registre et les trois CSV publics.
+
 ## 0.14.0 - 2026-08-09
 
 - Revue finale ligne par ligne du candidat Annecy–Alpes–Léman v0.2 : 65/65 mémoires figées par carte de référence, avec variante 48 mémoires sans aviation.
@@ -75,7 +90,7 @@
 - Maintien hors candidat de Chambéry, Albertville, Megève, Sallanches, Genève-aéroport et Sion tant que les données courantes ne sont pas suffisamment recoupées publiquement.
 - Passage du candidat interne de 48 à 57 mémoires, toutes en réception seule avec `Duplex=off`.
 - Ajout du test `tests/test_annecy_airac08.py` et extension des tests du candidat interne aux blocs aviation.
-- Aucun changement des téléchargements publics Annecy, du générateur public ou du statut « En préparation ».
+- Aucun changement du générateur public, des téléchargements Annecy ou du statut « En préparation ».
 
 ## 0.8.0 - 2026-08-04
 

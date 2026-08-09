@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "status": "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending",
   "updated": "2026-08-09",
   "purpose": "Documenter uniquement les voies VHF maritimes publiques de sécurité/météo utiles au futur pack Bretagne RX, en distinguant fréquence navire et fréquence station côtière pour les voies duplex.",
@@ -41,6 +41,18 @@
       "status": "primary_current_corsen_context_remote_vhf_site_list_pending"
     },
     {
+      "authority": "Direction Interrégionale de la Mer Nord Atlantique Manche Ouest / Choisir le service public",
+      "title": "Directeur/trice du CROSS Corsen - Coordonnateur/trice de Missions de Sauvetage - réf. 2026-2244363",
+      "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/2026-2244363/",
+      "status": "primary_current_stiff_radar_and_radio_communications_site"
+    },
+    {
+      "authority": "DGAMPA / Plate-forme des achats de l'État",
+      "title": "Réhabilitation de la tour radar du Stiff - DGAMPA-SNC1-2024-03-CR_STIFF",
+      "url": "https://www.marches-publics.gouv.fr/index.php?id=2495216&orgAcronyme=d4t&page=Entreprise.EntrepriseDemandeTelechargementDce",
+      "status": "primary_current_stiff_radio_and_it_equipment_site"
+    },
+    {
       "authority": "DIRM NAMO",
       "title": "Restauration de la lanterne du phare du Cap Fréhel",
       "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/restauration-de-la-lanterne-du-phare-du-cap-frehel-a1473.html",
@@ -78,9 +90,9 @@
       "coast_tx_ship_rx_mhz": 161.5750,
       "rx_memory_mhz": 161.5750,
       "official_assignment": "CROSS et Autorités Portuaires",
-      "operational_context": "bulletins météo annoncés préalablement sur le canal 16 ; un décret primaire de 2003 documente une diffusion météo régulière Corsen/Ouessant sur le canal 79, mais l'émetteur et l'architecture actuels doivent être revalidés ; le planning primaire CROSS Étel exploité ne liste pas d'émetteur Bretagne sur 79",
-      "historical_corsen_primary_status": "channel_79_weather_broadcast_documented_in_2003_requires_current_revalidation",
-      "zone_assignment": "corsen_current_emitter_inventory_pending_etel_brittany_schedule_has_no_channel_79_site",
+      "operational_context": "bulletins météo annoncés préalablement sur le canal 16 ; un décret primaire de 2003 documente une diffusion météo régulière Corsen/Ouessant sur le canal 79, mais aucune source primaire actuelle exploitée ne rattache encore explicitement le canal 79 au Stiff ou à un autre émetteur Corsen ; le planning primaire CROSS Étel exploité ne liste pas d'émetteur Bretagne sur 79",
+      "historical_corsen_primary_status": "channel_79_weather_broadcast_documented_in_2003_requires_current_transmitter_revalidation",
+      "zone_assignment": "corsen_current_channel_79_emitter_pending_etel_brittany_schedule_has_no_channel_79_site",
       "frequency_promoted_to_public_pack": false
     },
     {
@@ -130,8 +142,8 @@
       "current_network_summary": {
         "vhf_station_count": 10,
         "mf_station_count": 2,
-        "status": "current_official_dgampa_network_size_site_names_pending",
-        "note": "La DGAMPA décrit un réseau permanent de 10 stations radio VHF et 2 stations MF ; la liste nominative et les canaux de chaque station ne sont pas publiés dans la source exploitée."
+        "status": "current_official_dgampa_network_size_site_names_partially_revalidated",
+        "note": "La DGAMPA décrit un réseau permanent de 10 stations radio VHF et 2 stations MF. Cap Fréhel et le Stiff/Ouessant sont maintenant primaire-vérifiés comme infrastructures radio Corsen, mais la liste complète des stations et leurs canaux restent inconnus."
       },
       "verified_remote_radio_infrastructure_sites": [
         {
@@ -139,13 +151,21 @@
           "role": "traffic_surveillance_and_vessel_liaison",
           "radio_service_or_channel": null,
           "source_status": "primary_site_and_role_verified_radio_service_pending"
+        },
+        {
+          "site": "Stiff / Ouessant",
+          "role": "radar_and_radio_communications_supporting_cross_corsen",
+          "radio_service_or_channel": null,
+          "source_status": "primary_current_site_and_radio_equipment_verified_channel_pending",
+          "current_validation_date": "2026-08-09"
         }
       ],
       "historical_primary_radio_architecture": [
         {
           "site": "Stiff / Ouessant",
           "historical_role": "VHF radio equipment used remotely by Corsen/Ouessant VTS",
-          "current_validation": false
+          "current_validation": true,
+          "current_revalidation_status": "current_radio_communications_infrastructure_primary_verified_channel_pending"
         },
         {
           "site": "Pointe du Raz",
@@ -159,12 +179,12 @@
         }
       ],
       "historical_channel_79_context": {
-        "status": "primary_2003_weather_and_information_broadcast_requires_current_revalidation",
-        "details": "Le texte de 2003 documente des informations Corsen/Ouessant diffusées sur le canal 79 après appel sur 16 et un bulletin météorologique régulier toutes les trois heures à partir de 01:50 UTC."
+        "status": "primary_2003_weather_and_information_broadcast_requires_current_transmitter_revalidation",
+        "details": "Le texte de 2003 documente des informations Corsen/Ouessant diffusées sur le canal 79 après appel sur 16 et un bulletin météorologique régulier toutes les trois heures à partir de 01:50 UTC. La revalidation actuelle du site du Stiff comme infrastructure radio ne suffit pas à lui attribuer le canal 79."
       },
       "remote_vhf_sites": [],
-      "remote_vhf_sites_status": "official_current_site_inventory_pending",
-      "note": "Le réseau actuel est confirmé et dimensionné à 10 stations VHF / 2 MF, mais la liste actuelle des sites reste inconnue. Cap Fréhel est primaire-vérifié comme infrastructure de liaison. Stiff, Pointe du Raz et Corsen sont des pistes primaires historiques de 2003 à revalider avant toute qualification actuelle."
+      "remote_vhf_sites_status": "official_current_channelled_vhf_site_inventory_pending",
+      "note": "Le réseau actuel est confirmé et dimensionné à 10 stations VHF / 2 MF. Cap Fréhel est primaire-vérifié comme infrastructure de liaison et le Stiff/Ouessant est désormais primaire-vérifié comme site actuel hébergeant des équipements de radiocommunications du CROSS. Les services et canaux de ces équipements restent à établir. Pointe du Raz et Corsen restent des pistes primaires historiques de 2003 non revalidées actuellement."
     },
     {
       "cross": "CROSS Etel",
@@ -211,10 +231,12 @@
     "weather_channels_require_site_and_coverage_validation_before_publication": true,
     "cross_remote_vhf_sites_must_be_primary_sourced": true,
     "historical_primary_radio_sites_must_be_revalidated_before_current_use": true,
+    "current_radio_infrastructure_does_not_imply_current_channel_assignment": true,
     "etel_srr_starts_at_penmarch_primary_verified": true,
     "channel_64_requires_current_brittany_transmitter_reconciliation": true,
     "corsen_frehel_radio_infrastructure_primary_verified": true,
-    "corsen_current_network_size_known_site_names_pending": true,
+    "corsen_stiff_radio_infrastructure_primary_verified": true,
+    "corsen_current_network_size_known_site_names_partially_revalidated": true,
     "corsen_remote_vhf_sites_still_pending": true,
     "private_port_or_rescue_networks_not_explicitly_public_are_excluded": true,
     "public_export_allowed": false

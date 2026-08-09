@@ -95,15 +95,45 @@ La page actuelle du **CROSS Corsen** confirme un réseau VHF/MHF veillé et des 
 
 L'ancienne formulation « frontière Finistère Sud entièrement inconnue » est remplacée par une position plus précise : **le point de départ de compétence Étel à Penmarc'h est vérifié**, mais la ligne cartographique détaillée, les éventuels recouvrements VHF et les sites Corsen restent à documenter.
 
-## Bretagne — relais analogiques régionaux
+## Bretagne — relais analogiques régionaux et ADRASEC 35
 
-L'inventaire `research/bretagne-v0.1/emergency-relays.json` contient des candidats analogiques actuels :
+L'inventaire `research/bretagne-v0.1/emergency-relays.json` contient des candidats analogiques actuels et des métadonnées ADRASEC :
 
 - `F5ZIS` Matignon : 145.2375 MHz, transpondeur vers 432.6500 MHz, CTCSS 71.9 Hz ;
 - `F5ZIT` Perros-Guirec : 145.2250 MHz, transpondeur vers 432.6500 MHz, CTCSS 71.9 Hz ;
 - `F1ZBX` Brocéliande : 145.675 MHz ;
 - `F1ZBZ` Lorient : sortie 431.200 MHz avec plusieurs entrées publiées ; direction exacte à revoir avant sélection RX ;
 - `F5ZPE` Bignan : 145.7375 MHz en sortie, 145.1375 MHz en entrée, CTCSS 71.9 Hz.
+
+### F1ZUG — rôle ADRASEC 35 confirmé, fréquence du transpondeur encore inconnue
+
+L'ARA35 documente le site `F1ZUG` de Châtillon-en-Vendelais comme :
+
+- digipeater APRS `F1ZUG-4` sur 144.800 MHz ;
+- site hébergeant également un **transpondeur pour le réseau ADRASEC 35**, information explicitement publiée lors d'une opération d'entretien du site en juin 2024.
+
+Cette seconde fonction ne doit surtout pas être confondue avec l'APRS. La source consultée ne donne pas la fréquence du transpondeur ADRASEC. Le fichier de recherche conserve donc :
+
+```text
+adrasec_transponder_frequency_mhz: null
+```
+
+et une règle interdit de déduire cette fréquence à partir de 144.800 MHz.
+
+### F5ZEB R71 — Rennes Est
+
+L'ARA35 indique le transpondeur `F5ZEB` / R71 de nouveau opérationnel depuis le 25 septembre 2025 :
+
+- entrée 431.075 MHz ;
+- sortie 438.675 MHz ;
+- CTCSS 71.9 Hz ;
+- liaison vers le R3 `F1ZBX` de Brocéliande.
+
+Il est ajouté à l'inventaire de recherche Bretagne comme **candidat régional à étudier**, avec `rx_pack_candidate: false` tant que sa couverture réelle, son utilité par rapport au R3 et les doublons ne sont pas revus. Aucun rôle ADRASEC ne lui est attribué.
+
+### F5ZPV RU19 — statut conservateur
+
+La page actuelle de l'ARA35 indique toujours `F5ZPV` / RU19 de Rennes-Beaulieu comme **temporairement arrêté**, malgré un retour qui était envisagé pour l'été 2026. Ses paramètres connus restent documentés : sortie 439.875 MHz, entrée 430.475 MHz, CTCSS 71.9 Hz, FM/C4FM. Mais en l'absence de confirmation actuelle de redémarrage, il reste `rx_pack_candidate: false`.
 
 Le fait qu'un relais soit situé dans une zone où une ADRASEC est active ne suffit jamais à lui attribuer un rôle ADRASEC. Ce rôle doit être documenté par une source dédiée.
 
@@ -132,12 +162,14 @@ vérifie notamment :
 - le point de départ de compétence Étel à Penmarc'h ;
 - les émetteurs météo primaires Penmarc'h, Groix, Belle-Ile et Étel ;
 - le maintien de CROSS Corsen et du site Bretagne du canal 64 en recherche lorsqu'ils ne sont pas suffisamment documentés ;
-- les relais Bretagne ;
+- la séparation stricte entre l'APRS F1ZUG-4 et la fréquence encore inconnue du transpondeur ADRASEC 35 ;
+- F5ZEB R71 comme donnée régionale actuelle mais non promue ;
+- F5ZPV RU19 comme relais temporairement arrêté, donc non candidat actif ;
 - l'absence de Bretagne, Normandie v0.4 et Annecy v0.3 dans le registre public.
 
-Le test Bretagne et le garde-fou global ont également été alignés sur ce nouvel état.
+Le test secours/ADRASEC a également été renforcé pour ces nouveaux constats.
 
-La CI exécute ce test dans l'étape `Test Mortain and Bretagne public radio research`.
+La CI exécute ces contrôles sans créer de sortie publique Bretagne.
 
 ## Étape suivante
 
@@ -147,5 +179,7 @@ Priorités :
 2. identifier depuis une source primaire la liste détaillée des stations VHF déportées de CROSS Corsen ;
 3. documenter les recouvrements VHF autour de Penmarc'h ;
 4. réconcilier l'usage actuel du canal 64 dans le Morbihan avec une source primaire locale ;
-5. poursuivre les inventaires ADRASEC 22/29/35/56 et Sud-Manche ;
-6. ne publier aucune nouvelle mémoire avant revue de couverture et nouvelle version explicite.
+5. retrouver la fréquence actuelle du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
+6. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
+7. revalider le retour éventuel de F5ZPV RU19 et la pertinence réelle de F5ZEB R71 ;
+8. ne publier aucune nouvelle mémoire avant revue de couverture et nouvelle version explicite.

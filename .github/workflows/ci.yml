@@ -43,6 +43,9 @@ jobs:
       - name: Test regional pack research starter
         run: python tests/test_regional_pack_starter.py
 
+      - name: Test Bretagne research scaffold
+        run: python tests/test_bretagne_research_scaffold.py
+
       - name: Test Annecy Alps Leman research inventories
         run: python tests/test_annecy_research.py
 

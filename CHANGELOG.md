@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.5 - 2026-08-09
+
+- Revalidation actuelle primaire du **Stiff / Ouessant** comme infrastructure radio du CROSS Corsen : une offre officielle DIRM NAMO 2026 indique que la tour abrite les radars et des équipements de radiocommunications, et un marché public DGAMPA confirme que la vigie héberge aujourd'hui les équipements radio et informatiques nécessaires aux missions du CROSS.
+- Passage du Stiff de simple piste historique 2003 à `current_validation: true`, avec maintien de `radio_service_or_channel: null` : la présence actuelle d'équipements radio ne suffit pas à attribuer un canal précis.
+- Maintien du **canal 79** en revalidation : son usage Corsen/Ouessant est documenté par une source primaire de 2003, mais aucune source primaire actuelle exploitée ne rattache encore explicitement le canal 79 au Stiff ou à un autre émetteur Corsen.
+- Maintien de **Pointe du Raz** et du site de **Corsen** comme pistes radio historiques non revalidées actuellement ; aucune donnée actuelle n'est inventée à partir de l'architecture de 2003.
+- Passage de `research/bretagne-v0.1/public-maritime-radio.json` au schéma 1.4 et de `maritime-zones.json` au schéma 1.3, avec ajout de la règle interdisant de déduire un canal de la seule validation d'une infrastructure radio.
+- Renforcement de `tests/test_mortain_bretagne_radio_research.py`, `tests/test_bretagne_research_scaffold.py` et `tests/test_site_files.py` pour figer Cap Fréhel et Stiff comme infrastructures actuelles vérifiées tout en conservant leurs canaux à `null`.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.4 - 2026-08-09
 
 - Ajout du dimensionnement actuel du réseau CROSS Corsen à partir d'une communication officielle DGAMPA : **10 stations radio VHF et 2 stations MF**, avec liste nominative et canaux encore à inventorier.
@@ -100,7 +110,7 @@
 ## 0.17.0 - 2026-08-09
 
 - Ajout de `tools/create_regional_pack.py` pour initialiser un espace de recherche régional sans créer de contenu public.
-- Génération automatique de `README.md`, `pack-plan.json`, `source-registry.json`, `publication-gates.json` et `memory-plan.json` sous `research/<slug>-v<version>/`.
+- Génération automatique de `README.md`, `pack-plan.json`, `source-registry.json` et `memory-plan.json` sous `research/<slug>-v<version>/`.
 - État initial volontairement vide : aucune fréquence, aucun bloc mémoire et aucun nombre cible de mémoires ne sont imposés.
 - Tous les drapeaux de publication commencent à `false` ; aucune page Astro, route CSV ou entrée `packRegistry.ts` n'est créée par le starter.
 - Application immédiate des règles permanentes RX-only, `Duplex=off`, `Offset=0.000000`, noms ≤ 10 caractères, maximum 200 mémoires, pas de remplissage artificiel et immutabilité des versions publiées.

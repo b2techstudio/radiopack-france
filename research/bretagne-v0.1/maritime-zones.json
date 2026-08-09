@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "status": "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending",
   "created": "2026-08-09",
   "updated": "2026-08-09",
@@ -19,6 +19,8 @@
     "corsen_frehel_radio_infrastructure_primary_sourced": true,
     "corsen_stiff_radio_infrastructure_primary_sourced": true,
     "current_radio_infrastructure_does_not_imply_channel_assignment": true,
+    "current_sector_vhf_contact_does_not_identify_transmitter_site": true,
+    "planned_cross_ng_reorganisation_does_not_change_current_frequency_validation": true,
     "corsen_detailed_srr_and_vhf_overlap_still_pending": true,
     "no_frequency_promoted_from_this_file": true
   },
@@ -27,13 +29,20 @@
       "id": "bretagne-nord-ouest",
       "label": "Bretagne Nord / Manche Ouest",
       "cross": "CROSS Corsen",
-      "status": "current_primary_context_supported_two_radio_infrastructures_verified_channelled_vhf_inventory_pending",
+      "status": "current_primary_context_supported_two_radio_infrastructures_and_pointe_du_raz_sector_vhf_coverage_verified_channelled_inventory_pending",
       "primary_sources": [
         "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
         "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/restauration-de-la-lanterne-du-phare-du-cap-frehel-a1473.html",
         "https://choisirleservicepublic.gouv.fr/offre-emploi/2026-2244363/",
-        "https://www.marches-publics.gouv.fr/index.php?id=2495216&orgAcronyme=d4t&page=Entreprise.EntrepriseDemandeTelechargementDce"
+        "https://www.marches-publics.gouv.fr/index.php?id=2495216&orgAcronyme=d4t&page=Entreprise.EntrepriseDemandeTelechargementDce",
+        "https://www.premar-atlantique.gouv.fr/communiques-presse/assistance-a-navire-en-difficulte-intervention-coordonnee-au-large-de-la-pointe-du-raz",
+        "https://choisirleservicepublic.gouv.fr/offre-emploi/2026-2341398/"
       ],
+      "current_operational_center": {
+        "site": "Pointe de Corsen / Plouarzel",
+        "status": "primary_current_main_cross_site_verified_not_counted_as_remote_radio_station",
+        "radio_service_or_channel": null
+      },
       "current_network_summary": {
         "vhf_station_count": 10,
         "mf_station_count": 2,
@@ -54,19 +63,60 @@
           "status": "primary_current_site_and_radio_equipment_verified_channel_pending"
         }
       ],
+      "current_operational_coverage_evidence": [
+        {
+          "sector": "Pointe du Raz / nord de la Pointe du Raz",
+          "evidence_date": "2025-09-21",
+          "evidence": "CROSS Corsen established VHF contact with a vessel north of Pointe du Raz during an official assistance operation",
+          "transmitter_site_identified": false,
+          "channel_identified": false,
+          "status": "primary_current_sector_vhf_coverage_verified_transmitter_site_pending"
+        }
+      ],
+      "current_transition_context": {
+        "project": "CROSS Nouvelle génération",
+        "planned_change": "functional_grouping_etel_corsen",
+        "target_operational_horizon": "2027",
+        "status": "primary_current_reorganisation_project_not_a_current_frequency_or_site_change"
+      },
       "evidence_examples": [
         "Audierne / ouest Finistère",
         "Île de Sein",
         "Pointe de Pen Hir / Camaret-sur-Mer",
         "Cap Fréhel : équipements CROSS Corsen de suivi et de liaison avec les navires confirmés par la DIRM NAMO",
-        "Stiff / Ouessant : une offre officielle DIRM NAMO 2026 et un marché public DGAMPA confirment des équipements de radiocommunications du CROSS dans la tour"
+        "Stiff / Ouessant : une offre officielle DIRM NAMO 2026 et un marché public DGAMPA confirment des équipements de radiocommunications du CROSS dans la tour",
+        "Pointe du Raz : une opération officielle du 21 septembre 2025 confirme un contact VHF établi par CROSS Corsen avec un navire au nord de la pointe, sans identifier le site émetteur"
+      ],
+      "historical_primary_radio_architecture": [
+        {
+          "site": "Stiff / Ouessant",
+          "historical_role": "VHF radio equipment used remotely by Corsen/Ouessant VTS",
+          "current_validation": true,
+          "current_revalidation_status": "current_radio_communications_infrastructure_primary_verified_channel_pending"
+        },
+        {
+          "site": "Pointe du Raz",
+          "historical_role": "VHF and MF radio installation documented for Corsen",
+          "current_validation": false,
+          "current_sector_vhf_coverage_verified": true,
+          "current_transmitter_site_revalidation": false
+        },
+        {
+          "site": "Corsen",
+          "historical_role": "multichannel backup radio installation",
+          "current_validation": false,
+          "current_main_operational_center_verified": true,
+          "current_local_radio_installation_revalidation": false
+        }
       ],
       "research_required": [
         "cartographie détaillée de la SRR et éventuel recouvrement autour de l'interface Penmarc'h",
         "identifier la liste complète des stations VHF déportées et leur couverture canal 16",
         "identifier par source primaire les services radio et canaux de Cap Fréhel et du Stiff sans déduire un canal du seul rôle du site",
-        "revalider actuellement les pistes historiques Pointe du Raz et Corsen",
+        "revalider actuellement l'installation radio historique de la Pointe du Raz malgré la couverture VHF sectorielle actuelle confirmée",
+        "revalider l'installation radio locale historique du centre de Corsen sans assimiler le centre principal à une station déportée",
         "identifier l'émetteur actuel du canal 79 côté Corsen",
+        "suivre le projet CROSS-NG sans projeter sa future organisation sur les fréquences actuelles",
         "canaux de diffusion météo et sécurité maritime",
         "relais radioamateurs pertinents pour le nord et l'ouest de la Bretagne"
       ]
@@ -141,14 +191,15 @@
       "Le CROSS Étel publie sa station d'Étel sur le canal 63 en diffusion continue.",
       "Le ministère mentionne les canaux 63 et 64 pour un bulletin côtier permanent dans le Morbihan ; le site émetteur Bretagne du canal 64 reste à réconcilier avec une source primaire locale actuelle.",
       "La DIRM NAMO confirme des équipements CROSS Corsen de suivi et de liaison avec les navires au phare du Cap Fréhel, sans préciser le service radio ou le canal dans la source exploitée.",
-      "Des sources officielles 2026 confirment que la tour du Stiff à Ouessant abrite des équipements de radiocommunications nécessaires au CROSS Corsen, sans publier le canal utilisé."
+      "Des sources officielles 2026 confirment que la tour du Stiff à Ouessant abrite des équipements de radiocommunications nécessaires au CROSS Corsen, sans publier le canal utilisé.",
+      "Une opération officielle de septembre 2025 confirme un contact VHF de CROSS Corsen avec un navire au nord de la Pointe du Raz, preuve de couverture sectorielle mais pas de l'emplacement de l'émetteur."
     ],
     "frequency_promoted": false
   },
   "repeaters": {
     "maritime_remote_sites": {
-      "status": "etel_weather_emitters_partial_inventory_corsen_two_radio_infrastructures_verified_channelled_inventory_required",
-      "rule": "Conserver séparément les émetteurs météo explicitement vérifiés et l'inventaire technique des stations VHF/MHF. Cap Fréhel et le Stiff sont documentés comme infrastructures radio Corsen actuelles, mais ne deviennent pas automatiquement des émetteurs météo ni des canaux sans source primaire supplémentaire."
+      "status": "etel_weather_emitters_partial_inventory_corsen_two_radio_infrastructures_and_sector_coverage_verified_channelled_inventory_required",
+      "rule": "Conserver séparément les émetteurs météo explicitement vérifiés, les infrastructures radio actuelles vérifiées et les simples preuves de couverture opérationnelle. Cap Fréhel et le Stiff sont documentés comme infrastructures radio Corsen actuelles ; le contact VHF actuel au nord de la Pointe du Raz ne permet pas d'identifier l'émetteur."
     },
     "amateur_repeaters": {
       "status": "inventory_required",

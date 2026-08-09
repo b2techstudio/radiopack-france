@@ -53,7 +53,7 @@ for expected in [
     "frequency_data_promoted: false",
     "Bretagne ne doit pas encore apparaître",
     "tools/create_regional_pack.py",
-    "tests/test_bretagne_research_scaffold.py",
+    "test_bretagne_research_scaffold.py",
     "website/src/lib/packRegistry.ts",
     "Tests de génération isolés",
     "--output-root <dossier>",

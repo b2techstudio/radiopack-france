@@ -1,7 +1,8 @@
 {
-  "schema_version": "1.0",
-  "status": "blocked_research_not_started",
+  "schema_version": "1.1",
+  "status": "blocked_research_in_progress",
   "created": "2026-08-09",
+  "updated": "2026-08-09",
   "pack": {
     "name": "Bretagne",
     "slug": "bretagne",
@@ -16,16 +17,22 @@
       "description": "Sources principales identifiées, extraction et validation encore à réaliser"
     },
     {
+      "id": "maritime_zoning",
+      "status": "north_south_split_required_exact_boundary_pending",
+      "required_for_public_release": true,
+      "description": "Distinguer Bretagne Nord / CROSS Corsen et Bretagne Sud / CROSS Etel, confirmer la limite SRR actuelle et inventorier stations VHF déportées, météo et relais par zone"
+    },
+    {
       "id": "memory_plan",
       "status": "pending",
       "required_for_public_release": true,
-      "description": "Plan mémoire à définir sans remplissage artificiel"
+      "description": "Plan mémoire à définir sans remplissage artificiel et sans dupliquer une fréquence uniquement pour changer son étiquette de zone"
     },
     {
       "id": "data_validation",
       "status": "pending",
       "required_for_public_release": true,
-      "description": "Fréquences retenues à recouper selon leur domaine"
+      "description": "Fréquences retenues à recouper selon leur domaine et leur sous-zone Bretagne"
     },
     {
       "id": "dynamic_rechecks",

@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "status": "current_network_size_verified_site_inventory_pending",
+  "updated": "2026-08-09",
+  "pack": {
+    "name": "Bretagne",
+    "target_version": "0.1"
+  },
+  "cross": "CROSS Etel",
+  "official_srr_extent": "Pointe de Penmarc'h (Finistère) à la frontière espagnole",
+  "current_radio_network": {
+    "station_count": 17,
+    "maintenance_extent": "Pointe de Penmarc'h aux Pyrénées-Atlantiques (Biarritz)",
+    "maintained_by": "service technique du CROSS Etel",
+    "status": "primary_current_2026_network_size_verified_station_names_pending",
+    "note": "Une offre officielle DIRM NAMO publiée en juillet 2026 indique que le service technique du CROSS Etel assure la maintenance des installations du centre et de ses 17 stations radio réparties sur le littoral, de la pointe de Penmarc'h à Biarritz. Cette source donne le nombre de stations et l'étendue générale, pas leur liste nominative ni leurs canaux."
+  },
+  "primary_sources": [
+    {
+      "authority": "Direction Interrégionale de la Mer Nord Atlantique Manche Ouest / Choisir le service public",
+      "title": "Technicien-ne de maintien en conditions opérationnelles CROSS - réf. 2026-2341297",
+      "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/technicien-ne-de-maintien-en-conditions-operationnelles-cross-reference-2026-2341297/",
+      "status": "primary_current_17_radio_stations_penmarch_to_biarritz"
+    },
+    {
+      "authority": "DIRM NAMO",
+      "title": "Le CROSS Étel",
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-etel-a152.html",
+      "status": "primary_current_srr_and_weather_emitters_context"
+    }
+  ],
+  "known_weather_sites": [
+    {
+      "site": "Penmarc'h",
+      "channel": 80,
+      "status": "primary_weather_emitter_verified"
+    },
+    {
+      "site": "Groix",
+      "channel": 80,
+      "status": "primary_weather_emitter_verified"
+    },
+    {
+      "site": "Belle-Ile",
+      "channel": 80,
+      "status": "primary_weather_emitter_verified"
+    },
+    {
+      "site": "Etel",
+      "channel": 63,
+      "status": "primary_continuous_weather_emitter_verified"
+    },
+    {
+      "site": "Chassiron",
+      "channel": 63,
+      "status": "primary_continuous_weather_emitter_verified_outside_brittany"
+    }
+  ],
+  "channel_64_research": {
+    "ministry_current_statement": "Les canaux 63 et 64 diffusent un bulletin météo côtier permanent notamment dans le Morbihan.",
+    "local_primary_site_identified": false,
+    "candidate_station_name": null,
+    "status": "current_network_context_strengthened_transmitter_still_unidentified",
+    "note": "Le dimensionnement à 17 stations confirme l'existence d'un réseau technique plus large que les seuls émetteurs météo nommés. Il ne permet pas d'attribuer le canal 64 à Etel, Groix, Belle-Ile, Penmarc'h ou à un autre site sans source primaire dédiée."
+  },
+  "rules": {
+    "station_count_does_not_imply_station_names": true,
+    "known_weather_sites_are_not_complete_network_inventory": true,
+    "network_extent_does_not_imply_channel_assignment": true,
+    "channel_64_site_must_not_be_guessed": true,
+    "paired_rx_policy_applies_after_channel_validation": true,
+    "frequency_promoted_to_public_pack": false,
+    "public_export_allowed": false
+  }
+}

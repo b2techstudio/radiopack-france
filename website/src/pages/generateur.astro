@@ -1,41 +1,40 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { defaultPublicPackId, publicPacks } from "../lib/packRegistry";
 
-const fullDownload = "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv";
-const noAviationDownload = "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv";
-const fullFilename = "radiopack-france-annecy-alpes-leman-v0.2.csv";
-const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv";
+const defaultPack = publicPacks.find((pack) => pack.id === defaultPublicPackId) ?? publicPacks[0];
+const defaultVariant = defaultPack.variants.find((variant) => variant.id === defaultPack.defaultVariant) ?? defaultPack.variants[0];
 ---
 <BaseLayout
   title="Générateur de pack"
-  description="Génère un CSV CHIRP Annecy–Alpes–Léman v0.2 avec ou sans aviation et un contrôle NOTAM facultatif."
+  description="Choisis un pack régional RadioPack France puis télécharge directement une variante CSV CHIRP RX-only validée."
 >
   <section class="section generator-hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Générateur web · v0.2 disponible</span>
+        <span class="eyebrow">Générateur web · multi-régions</span>
         <h1>Configure ton <span class="gradient-text">RadioPack</span></h1>
         <p class="lead">
-          Choisis si tu veux conserver l'aviation, indique éventuellement ton contrôle NOTAM,
-          puis télécharge directement le CSV CHIRP RX-only correspondant.
+          Choisis une région, ajuste les options disponibles pour ce pack, puis télécharge directement
+          le CSV CHIRP RX-only correspondant à une variante publique déjà validée.
         </p>
         <div class="notice card">
-          <strong>Le générateur sélectionne une variante publique déjà validée</strong>
+          <strong>Une seule interface pour les packs publiés</strong>
           <p>
-            Le bouton pointe directement vers le CSV 65 ou 48 mémoires construit par Astro.
-            Le contrôle NOTAM reste informatif et ne modifie jamais les fréquences AIP/AIRAC du fichier.
+            Le générateur sélectionne uniquement des fichiers publics contrôlés par la CI.
+            Il ne reconstruit pas de CSV indépendant dans ton navigateur.
           </p>
         </div>
       </div>
 
       <aside class="card status-card" aria-label="État du générateur">
-        <span class="badge badge-green">v0.2 publiée</span>
-        <strong>65 / 48 mémoires</strong>
-        <p>65 avec aviation, 48 sans aviation. Toutes les mémoires restent en réception seule.</p>
+        <span class="badge badge-green">2 packs publiés</span>
+        <strong>Normandie + Annecy</strong>
+        <p>Les packs proposés restent configurés en réception seule.</p>
         <dl>
           <div><dt>Duplex</dt><dd>off</dd></div>
-          <div><dt>NOTAM</dt><dd>facultatif</dd></div>
           <div><dt>Téléchargement</dt><dd>direct</dd></div>
+          <div><dt>CSV côté client</dt><dd>aucun</dd></div>
         </dl>
       </aside>
     </div>
@@ -43,33 +42,46 @@ const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviati
 
   <section class="section-tight">
     <div class="container generator-grid">
-      <form class="card generator-form" id="annecy-generator" novalidate>
+      <form class="card generator-form" id="radiopack-generator" novalidate>
         <div class="form-heading">
           <div>
-            <span class="badge badge-green">Annecy–Alpes–Léman v0.2</span>
+            <span class="badge badge-green" id="pack-badge">{defaultPack.name} {defaultPack.version}</span>
             <h2>Options du pack</h2>
           </div>
-          <span class="status-pill published">Disponible</span>
+          <span class="status-pill published" id="pack-status">{defaultPack.status}</span>
         </div>
 
         <fieldset>
+          <legend>Région</legend>
+          <label class="select-label" for="pack-select">Pack régional</label>
+          <select id="pack-select" name="pack-select">
+            {publicPacks.map((pack) => (
+              <option value={pack.id} selected={pack.id === defaultPack.id}>
+                {pack.name} · {pack.version}
+              </option>
+            ))}
+          </select>
+          <p class="muted" id="pack-description">{defaultPack.description}</p>
+        </fieldset>
+
+        <fieldset id="aviation-fieldset">
           <legend>Contenu</legend>
           <label class="option-row" for="include-aviation">
             <span>
               <strong>Inclure les fréquences aviation</strong>
-              <small>Ajoute les 17 mémoires aviation validées France / Suisse.</small>
+              <small>Annecy : sélectionne la variante complète 65 mémoires ou la variante 48 sans aviation.</small>
             </span>
             <input id="include-aviation" name="include-aviation" type="checkbox" checked />
           </label>
         </fieldset>
 
-        <fieldset>
+        <fieldset id="notam-fieldset">
           <legend>Contrôle opérationnel facultatif</legend>
           <label class="option-row" for="notam-check">
             <span>
               <strong>Contrôle NOTAM avant génération</strong>
               <small>
-                Sert uniquement à suivre ta vérification. Cette option ne modifie jamais
+                Disponible pour Annecy. Sert uniquement à suivre ta vérification et ne modifie jamais
                 automatiquement les fréquences du CSV.
               </small>
             </span>
@@ -89,9 +101,7 @@ const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviati
               <input id="notam-confirmed" name="notam-confirmed" type="checkbox" disabled />
               <label for="notam-confirmed">J'ai vérifié les NOTAM applicables</label>
             </div>
-            <p class="muted">
-              La confirmation reste facultative : le téléchargement est disponible même sans elle.
-            </p>
+            <p class="muted">La confirmation reste facultative : le téléchargement est disponible même sans elle.</p>
           </div>
         </fieldset>
 
@@ -99,10 +109,10 @@ const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviati
           <a
             class="button button-primary"
             id="download-csv"
-            href={fullDownload}
-            download={fullFilename}
+            href={defaultVariant.downloadUrl}
+            download={defaultVariant.filename}
           >
-            Télécharger le CSV · 65 mémoires
+            Télécharger le CSV · {defaultVariant.memoryCount} mémoires
           </a>
           <a class="button button-secondary" href="/telechargements">Tous les téléchargements</a>
         </div>
@@ -111,25 +121,25 @@ const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviati
       <aside class="card summary-card" aria-live="polite">
         <span class="eyebrow">Résumé</span>
         <div class="memory-counter">
-          <strong id="memory-count">65</strong>
+          <strong id="memory-count">{defaultVariant.memoryCount}</strong>
           <span>mémoires</span>
         </div>
 
         <div class="summary-list">
+          <div><span>Pack</span><strong id="pack-summary">{defaultPack.name} {defaultPack.version}</strong></div>
           <div><span>Aviation</span><strong id="aviation-summary">Incluse · 17</strong></div>
           <div><span>NOTAM</span><strong id="notam-summary">Non demandé</strong></div>
           <div><span>Mode</span><strong>Réception seule</strong></div>
           <div><span>Duplex</span><strong>off</strong></div>
-          <div class="file-row"><span>Fichier</span><strong id="file-summary">{fullFilename}</strong></div>
+          <div class="file-row"><span>Fichier</span><strong id="file-summary">{defaultVariant.filename}</strong></div>
         </div>
 
         <div class="summary-warning" id="notam-warning">
           Contrôle NOTAM non demandé. Les fréquences restent celles des sources officielles validées.
         </div>
 
-        <p class="muted summary-note">
-          Les positions mémoire ne sont pas compactées lorsque l'aviation est retirée : les autres
-          blocs conservent leurs emplacements validés.
+        <p class="muted summary-note" id="variant-note">
+          Pour Annecy, retirer l'aviation conserve les emplacements mémoire des autres blocs.
         </p>
       </aside>
     </div>
@@ -138,54 +148,108 @@ const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviati
   <section class="section-tight">
     <div class="container info-grid grid-3">
       <article class="card info-card">
-        <span class="badge badge-green">65 mémoires</span>
-        <h3>Version complète</h3>
-        <p>PMR446, APRS/ISS, satellites FM, appels, radioamateur France/Suisse et aviation validée.</p>
+        <span class="badge badge-green">Annecy · 65 / 48</span>
+        <h3>Pack configurable</h3>
+        <p>La variante aviation peut être incluse ou retirée sans modifier les autres blocs validés.</p>
       </article>
       <article class="card info-card">
-        <span class="badge">48 mémoires</span>
-        <h3>Sans aviation</h3>
-        <p>Les 17 mémoires aviation sont retirées sans déplacer les autres positions.</p>
+        <span class="badge badge-green">Normandie · 139</span>
+        <h3>Pack fixe publié</h3>
+        <p>Le générateur propose directement le CSV Normandie v0.3.1 déjà validé.</p>
       </article>
       <article class="card info-card">
-        <span class="badge badge-orange">NOTAM</span>
-        <h3>Contrôle optionnel</h3>
-        <p>La vérification NOTAM est informative et ne remplace jamais les données AIP/AIRAC de référence.</p>
+        <span class="badge badge-orange">Architecture</span>
+        <h3>Prête pour la suite</h3>
+        <p>Les futurs packs peuvent rejoindre le même registre sans recopier toute la page générateur.</p>
       </article>
     </div>
   </section>
 
-  <script define:vars={{ fullDownload, noAviationDownload, fullFilename, noAviationFilename }}>
+  <script define:vars={{ publicPacks, defaultPublicPackId }}>
+    const packSelect = document.querySelector("#pack-select");
+    const packBadge = document.querySelector("#pack-badge");
+    const packStatus = document.querySelector("#pack-status");
+    const packDescription = document.querySelector("#pack-description");
+    const aviationFieldset = document.querySelector("#aviation-fieldset");
     const aviation = document.querySelector("#include-aviation");
+    const notamFieldset = document.querySelector("#notam-fieldset");
     const notam = document.querySelector("#notam-check");
     const confirmed = document.querySelector("#notam-confirmed");
     const confirmZone = document.querySelector("#notam-confirm-zone");
     const memoryCount = document.querySelector("#memory-count");
+    const packSummary = document.querySelector("#pack-summary");
     const aviationSummary = document.querySelector("#aviation-summary");
     const notamSummary = document.querySelector("#notam-summary");
     const notamWarning = document.querySelector("#notam-warning");
     const fileSummary = document.querySelector("#file-summary");
+    const variantNote = document.querySelector("#variant-note");
     const downloadLink = document.querySelector("#download-csv");
 
+    const findPack = () => {
+      const selectedId = packSelect?.value || defaultPublicPackId;
+      return publicPacks.find((pack) => pack.id === selectedId) || publicPacks[0];
+    };
+
+    const findVariant = (pack) => {
+      let variantId = pack.defaultVariant;
+      if (pack.aviationToggle && aviation) {
+        variantId = aviation.checked
+          ? pack.aviationToggle.includedVariant
+          : pack.aviationToggle.excludedVariant;
+      }
+      return pack.variants.find((variant) => variant.id === variantId) || pack.variants[0];
+    };
+
+    const resetUnsupportedControls = (pack) => {
+      const aviationSupported = Boolean(pack.aviationToggle);
+      if (aviationFieldset) aviationFieldset.hidden = !aviationSupported;
+      if (aviation) aviation.disabled = !aviationSupported;
+
+      if (notamFieldset) notamFieldset.hidden = !pack.notamCheck;
+      if (notam) {
+        notam.disabled = !pack.notamCheck;
+        if (!pack.notamCheck) notam.checked = false;
+      }
+      if (confirmed && !pack.notamCheck) confirmed.checked = false;
+    };
+
     const renderSummary = () => {
-      if (!aviation || !notam || !confirmed || !confirmZone || !memoryCount || !aviationSummary || !notamSummary || !notamWarning || !fileSummary || !downloadLink) return;
+      const pack = findPack();
+      if (!pack || !downloadLink || !memoryCount || !fileSummary || !packSummary || !aviationSummary || !notamSummary || !notamWarning || !confirmZone || !confirmed) return;
 
-      const includeAviation = aviation.checked;
-      const memoryTotal = includeAviation ? 65 : 48;
-      const downloadUrl = includeAviation ? fullDownload : noAviationDownload;
-      const filename = includeAviation ? fullFilename : noAviationFilename;
+      resetUnsupportedControls(pack);
+      const variant = findVariant(pack);
+      if (!variant) return;
 
-      memoryCount.textContent = String(memoryTotal);
-      aviationSummary.textContent = includeAviation ? "Incluse · 17" : "Exclue · 0";
-      fileSummary.textContent = filename;
-      downloadLink.href = downloadUrl;
-      downloadLink.setAttribute("download", filename);
-      downloadLink.textContent = `Télécharger le CSV · ${memoryTotal} mémoires`;
+      if (packBadge) packBadge.textContent = `${pack.name} ${pack.version}`;
+      if (packStatus) packStatus.textContent = pack.status;
+      if (packDescription) packDescription.textContent = pack.description;
+      packSummary.textContent = `${pack.name} ${pack.version}`;
+      memoryCount.textContent = String(variant.memoryCount);
+      fileSummary.textContent = variant.filename;
+      downloadLink.href = variant.downloadUrl;
+      downloadLink.setAttribute("download", variant.filename);
+      downloadLink.textContent = `Télécharger le CSV · ${variant.memoryCount} mémoires`;
 
-      confirmZone.hidden = !notam.checked;
-      confirmed.disabled = !notam.checked;
+      if (pack.aviationToggle) {
+        aviationSummary.textContent = variant.aviationIncluded ? `Incluse · ${pack.aviationToggle.memoryCount}` : "Exclue · 0";
+        if (variantNote) variantNote.textContent = "Pour Annecy, retirer l'aviation conserve les emplacements mémoire des autres blocs.";
+      } else {
+        aviationSummary.textContent = "Configuration fixe";
+        if (variantNote) variantNote.textContent = "Ce pack est proposé dans sa variante publique fixe déjà validée.";
+      }
 
-      if (!notam.checked) {
+      const notamActive = Boolean(pack.notamCheck && notam?.checked);
+      confirmZone.hidden = !notamActive;
+      confirmed.disabled = !notamActive;
+
+      if (!pack.notamCheck) {
+        notamSummary.textContent = "Non proposé";
+        notamWarning.textContent = "Ce pack utilise sa configuration publique fixe. Aucun contrôle NOTAM interactif n'est associé à cette variante.";
+        return;
+      }
+
+      if (!notamActive) {
         notamSummary.textContent = "Non demandé";
         notamWarning.textContent = "Contrôle NOTAM non demandé. Les fréquences restent celles des sources officielles validées.";
         return;
@@ -200,6 +264,7 @@ const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviati
       }
     };
 
+    packSelect?.addEventListener("change", renderSummary);
     aviation?.addEventListener("change", renderSummary);
     notam?.addEventListener("change", () => {
       if (confirmed && notam && !notam.checked) confirmed.checked = false;
@@ -232,7 +297,10 @@ const noAviationFilename = "radiopack-france-annecy-alpes-leman-v0.2-sans-aviati
   .status-pill { padding: .4rem .65rem; border-radius: 999px; font-size: .75rem; font-weight: 850; white-space: nowrap; }
   .status-pill.published { background: rgba(16,164,122,.13); color: #087154; }
   fieldset { display: grid; gap: 12px; margin: 0; padding: 0; border: 0; }
+  fieldset[hidden] { display: none; }
   legend { margin-bottom: 8px; font-size: .78rem; font-weight: 850; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  .select-label { font-weight: 800; }
+  select { width: 100%; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 13px; background: #fff; color: inherit; font: inherit; }
   .option-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(248,250,252,.78); cursor: pointer; }
   .option-row > span { display: grid; gap: 4px; }
   .option-row small { color: var(--muted); font-size: .88rem; }

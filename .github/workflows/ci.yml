@@ -92,7 +92,7 @@ jobs:
         run: npm run build
 
       - name: Test built Annecy public CSV
-        run: python ../tests/test_built_annecy_public_csv.py
+        run: cd .. && python tests/test_built_annecy_public_csv.py
 
   report-status:
     name: Publish combined CI status

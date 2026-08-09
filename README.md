@@ -132,13 +132,19 @@ Pour une voie maritime duplex, le pack RX doit mémoriser la **fréquence émise
 | 63 | duplex | 160.775 MHz | CROSS Étel : station d'Étel vérifiée en diffusion météo continue |
 | 64 | duplex | 160.825 MHz | affectation réglementaire conservée en recherche ; émetteur Bretagne actuel à réconcilier |
 
-Le planning officiel du CROSS Étel identifie donc désormais quatre émetteurs météo bretons exploitables comme métadonnées territoriales : **Penmarc'h**, **Groix**, **Belle-Ile** sur le canal 80 et **Étel** sur le canal 63 en continu.
+Le planning officiel du CROSS Étel identifie quatre émetteurs météo bretons exploitables comme métadonnées territoriales : **Penmarc'h**, **Groix**, **Belle-Ile** sur le canal 80 et **Étel** sur le canal 63 en continu.
 
 Le ministère mentionne parallèlement une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan. Comme le planning primaire CROSS Étel exploité ne liste aucun émetteur Bretagne sur 64, RadioPack ne lui attribue pas de site par déduction : cette incohérence apparente reste une question de recherche.
 
-Côté **CROSS Corsen**, la source primaire DIRM confirme l'existence du réseau VHF/MHF et de stations littorales de diffusion météo, mais ne fournit pas dans la page exploitée la liste détaillée des sites et canaux. Aucun site Corsen n'est inventé.
+### CROSS Corsen : première infrastructure distante primaire-vérifiée
 
-Ces fréquences et ces émetteurs sont documentés dans la recherche mais **pas encore promus dans Bretagne v0.1**. Les zones de couverture réelles et l'inventaire Corsen doivent encore être complétés avant toute sélection de mémoires.
+La page actuelle du CROSS Corsen confirme l'existence d'un réseau radio VHF/MHF veillé en permanence et de stations littorales utilisées pour les diffusions météorologiques, mais ne publie pas leur liste détaillée ni leurs canaux.
+
+Une autre source primaire DIRM NAMO confirme désormais que le **phare du Cap Fréhel** héberge des équipements du CROSS Corsen de **suivi et de liaison avec les navires** pour la surveillance du trafic et la coordination des secours.
+
+RadioPack enregistre donc Cap Fréhel comme **infrastructure radio Corsen vérifiée**, mais ne le classe pas automatiquement comme station VHF météo et ne lui attribue aucun canal. Le champ de service/canal reste `null` et l'inventaire VHF Corsen reste ouvert. Aucun canal 79 n'est déduit d'une source secondaire.
+
+Ces fréquences, émetteurs et infrastructures sont documentés dans la recherche mais **pas encore promus dans Bretagne v0.1**.
 
 ## Bretagne — ADRASEC et relais analogiques
 
@@ -153,13 +159,18 @@ Il couvre les organisations ADRASEC 22 / 29 / 35 / 56 et plusieurs relais analog
 - `F5ZIS` — Matignon — 145.2375 MHz, transpondeur vers 432.6500 MHz, CTCSS 71.9 Hz ;
 - `F5ZIT` — Perros-Guirec — 145.2250 MHz, transpondeur vers 432.6500 MHz, CTCSS 71.9 Hz ;
 - `F1ZBX` — Brocéliande — 145.675 MHz ;
+- `F1ZGS` — Plouhinec — sortie **431.425 MHz**, entrée 145.2625 MHz, CTCSS 71.9 Hz ;
+- `F5ZDV` — Morlaix — sortie **438.700 MHz**, entrée 145.2625 MHz, CTCSS 71.9 Hz ;
+- `F5ZZL` — Cast — sortie **431.375 MHz**, entrée 145.2625 MHz, CTCSS 71.9 Hz ;
 - `F1ZBZ` — Lorient — sortie 431.200 MHz avec plusieurs entrées publiées, direction exacte à revoir avant sélection RX ;
 - `F5ZPE` — Bignan — sortie 145.7375 MHz, entrée 145.1375 MHz, CTCSS 71.9 Hz ;
-- `F1ZBH` et `F1ZGQ` — infrastructures APRS 144.800 MHz conservées comme métadonnées et non comme mémoires dupliquées.
+- `F1ZBH`, `F1ZGQ` et `F1ZAJ` — infrastructures APRS 144.800 MHz conservées comme métadonnées et non comme mémoires dupliquées.
+
+Les nouveaux transpondeurs Finistère `F1ZGS`, `F5ZDV` et `F5ZZL` sont des candidats analogiques de recherche, pas encore des mémoires retenues. Leur couverture et leur redondance doivent être étudiées avant toute sélection.
 
 ### ADRASEC 35 : F1ZUG mieux qualifié
 
-L'ARA35 documente désormais de façon exploitable deux fonctions distinctes sur le site `F1ZUG` de Châtillon-en-Vendelais :
+L'ARA35 documente deux fonctions distinctes sur le site `F1ZUG` de Châtillon-en-Vendelais :
 
 - `F1ZUG-4` est un digipeater APRS sur **144.800 MHz** ;
 - une publication d'entretien du site datée de juin 2024 indique également un **transpondeur pour le réseau ADRASEC 35**.
@@ -171,7 +182,7 @@ La fréquence de ce transpondeur ADRASEC n'est pas publiée dans la source consu
 - `F5ZEB` / **R71** — Rennes Est — de nouveau opérationnel depuis le 25 septembre 2025 selon l'ARA35 ; entrée **431.075 MHz**, sortie **438.675 MHz**, CTCSS 71.9 Hz, liaison vers le R3 `F1ZBX` de Brocéliande. Il reste `rx_pack_candidate: false` tant que couverture et redondance ne sont pas revues ; aucun rôle ADRASEC ne lui est attribué.
 - `F5ZPV` / **RU19** — Rennes-Beaulieu — sortie **439.875 MHz**, entrée **430.475 MHz**, CTCSS 71.9 Hz, FM/C4FM. La page ARA35 actuelle le donne encore comme temporairement arrêté ; il reste donc hors candidats actifs jusqu'à confirmation d'un redémarrage effectif.
 
-Le fait qu'un relais soit situé en Bretagne ou près d'une ADRASEC ne suffit pas à lui attribuer un rôle ADRASEC : ce rôle doit être explicitement documenté.
+Les recherches ADRASEC 22, 29 et 56 restent ouvertes : un relais radioamateur ne reçoit jamais un rôle ADRASEC sur la seule base de sa localisation.
 
 ## Packs publics actuels
 
@@ -278,12 +289,13 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 ## Prochaines priorités
 
 1. trouver une seconde source actuelle pour F6ZES Sourdeval ;
-2. identifier depuis une source primaire la liste détaillée des stations VHF déportées de CROSS Corsen ;
+2. compléter par sources primaires l'inventaire VHF/MHF de CROSS Corsen et identifier les canaux associés ;
 3. vérifier les recouvrements VHF autour de Penmarc'h et réconcilier l'émetteur actuel du canal 64 dans le Morbihan ;
 4. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
 5. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
-6. revalider le redémarrage éventuel de F5ZPV RU19 et la pertinence de F5ZEB R71 ;
-7. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
+6. revoir couverture et redondance de F1ZGS, F5ZDV, F5ZZL et F5ZEB avant toute sélection mémoire ;
+7. revalider le redémarrage éventuel de F5ZPV RU19 ;
+8. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
 
 ## Maintenance
 

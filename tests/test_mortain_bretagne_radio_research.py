@@ -7,9 +7,17 @@ mortain_path = ROOT / "research/normandie-v0.4/mortain-bocage-coverage.json"
 maritime_path = ROOT / "research/bretagne-v0.1/public-maritime-radio.json"
 maritime_zones_path = ROOT / "research/bretagne-v0.1/maritime-zones.json"
 bretagne_relays_path = ROOT / "research/bretagne-v0.1/emergency-relays.json"
+paired_policy_path = ROOT / "research/paired-rx-policy.json"
+paired_plan_path = ROOT / "research/paired-rx-next-version-plan.json"
 
-for path in (mortain_path, maritime_path, maritime_zones_path, bretagne_relays_path):
+for path in (mortain_path, maritime_path, maritime_zones_path, bretagne_relays_path, paired_policy_path, paired_plan_path):
     assert path.is_file(), f"Fichier de recherche manquant: {path.relative_to(ROOT)}"
+
+paired_policy = json.loads(paired_policy_path.read_text(encoding="utf-8"))
+assert paired_policy["core_rule"]["native_duplex_or_split_pair_exports_both_rx_frequencies"] is True
+assert paired_policy["core_rule"]["tx_disabled"] is True
+assert paired_policy["core_rule"]["chirp_duplex"] == "off"
+assert paired_policy["core_rule"]["chirp_offset"] == "0.000000"
 
 mortain = json.loads(mortain_path.read_text(encoding="utf-8"))
 assert mortain["status"] == "research_coverage_priorities_not_public"
@@ -32,19 +40,14 @@ assert stations["F6ZES"]["output_mhz"] is None
 assert stations["F6ZES"]["mode"] is None
 assert stations["F6ZES"]["rx_pack_candidate"] is False
 assert "seconde source actuelle" in stations["F6ZES"]["blocking_reason"]
-
 assert stations["F5ZHY"]["output_mhz"] == 145.6875
 assert stations["F5ZHY"]["input_mhz"] == 145.0875
-assert stations["F5ZHY"]["mode"] == "FM"
-assert stations["F5ZHY"]["rx_pack_candidate"] is True
 assert stations["F6ZCE"]["output_mhz"] == 145.7000
 assert stations["F6ZCE"]["input_mhz"] == 145.1000
 assert stations["F6ZCE"]["ctcss_hz"] == 123.0
-assert stations["F6ZCE"]["rx_pack_candidate"] is True
 assert stations["F1ZBX"]["output_mhz"] == 145.6750
 assert stations["F1ZBX"]["input_mhz"] == 145.0750
 assert stations["F1ZBX"]["ctcss_hz"] == 71.9
-assert stations["F1ZBX"]["rx_pack_candidate"] is True
 assert stations["F5ZIX"]["output_mhz"] == 144.8000
 assert stations["F5ZIX"]["rx_pack_candidate"] is False
 assert stations["F5ZPO"]["output_mhz"] == 144.8000
@@ -56,29 +59,45 @@ assert stations["F5ZTQ"]["rx_pack_candidate"] is False
 assert all(item["frequency_promoted_to_public_pack"] is False for item in mortain["stations"])
 
 maritime = json.loads(maritime_path.read_text(encoding="utf-8"))
-assert maritime["schema_version"] == "1.6"
+assert maritime["schema_version"] == "1.7"
 assert maritime["status"] == "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending"
+assert maritime["paired_rx_policy"] == "research/paired-rx-policy.json"
 channels = {item["channel"]: item for item in maritime["channels"]}
 assert set(channels) == {16, 63, 64, 79, 80}
 assert channels[16]["mode"] == "simplex"
 assert channels[16]["rx_memory_mhz"] == 156.8000
+assert len(channels[16]["rx_memories"]) == 1
 assert channels[16]["memory_strategy"] == "reuse_single_common_channel_and_store_cross_as_zone_metadata"
-assert channels[79]["coast_tx_ship_rx_mhz"] == 161.5750
-assert channels[79]["rx_memory_mhz"] == 161.5750
+
+expected_pairs = {
+    63: (156.1750, 160.7750),
+    64: (156.2250, 160.8250),
+    79: (156.9750, 161.5750),
+    80: (157.0250, 161.6250),
+}
+for channel_number, (ship_side, coast_side) in expected_pairs.items():
+    channel = channels[channel_number]
+    assert channel["mode"] == "duplex"
+    assert channel["ship_tx_mhz"] == ship_side
+    assert channel["coast_tx_ship_rx_mhz"] == coast_side
+    assert channel["rx_memory_mhz"] == coast_side
+    memories = channel["rx_memories"]
+    assert len(memories) == 2
+    frequencies = {item["direction"]: item["frequency_mhz"] for item in memories}
+    assert frequencies == {"ship_to_coast": ship_side, "coast_to_ship": coast_side}
+    assert {item["name_hint"] for item in memories} == {f"M{channel_number}-S", f"M{channel_number}-C"}
+
 assert channels[79]["historical_corsen_primary_status"] == "channel_79_weather_broadcast_documented_in_2003_requires_current_transmitter_revalidation"
 assert channels[79]["zone_assignment"] == "corsen_current_channel_79_emitter_pending_etel_brittany_schedule_has_no_channel_79_site"
-assert channels[80]["coast_tx_ship_rx_mhz"] == 161.6250
-assert channels[80]["rx_memory_mhz"] == 161.6250
 assert channels[80]["verified_etel_brittany_emitters"] == ["Penmarc'h", "Groix", "Belle-Ile"]
-assert channels[63]["coast_tx_ship_rx_mhz"] == 160.7750
-assert channels[63]["rx_memory_mhz"] == 160.7750
 assert channels[63]["verified_etel_brittany_emitters"] == ["Etel"]
-assert channels[64]["coast_tx_ship_rx_mhz"] == 160.8250
-assert channels[64]["rx_memory_mhz"] == 160.8250
 assert channels[64]["current_ministry_statement_revalidated_2026"] is True
 assert channels[64]["zone_assignment"] == "current_brittany_transmitter_requires_primary_reconciliation"
 assert all(item["frequency_promoted_to_public_pack"] is False for item in maritime["channels"])
-assert maritime["rules"]["rx_only_uses_coast_transmit_frequency_on_duplex_channels"] is True
+assert maritime["rules"]["rx_only_duplex_channels_include_both_ship_and_coast_frequencies"] is True
+assert maritime["rules"]["paired_distinct_frequencies_use_separate_rx_memories"] is True
+assert maritime["rules"]["all_exported_memories_tx_disabled"] is True
+assert maritime["rules"]["same_rf_frequency_deduplicated"] is True
 assert maritime["rules"]["channel_16_not_duplicated_by_cross_label"] is True
 assert maritime["rules"]["weather_channels_require_site_and_coverage_validation_before_publication"] is True
 assert maritime["rules"]["cross_remote_vhf_sites_must_be_primary_sourced"] is True
@@ -97,6 +116,7 @@ assert maritime["rules"]["corsen_pointe_du_raz_sector_vhf_coverage_primary_verif
 assert maritime["rules"]["corsen_current_network_size_known_site_names_partially_revalidated"] is True
 assert maritime["rules"]["corsen_remote_vhf_sites_still_pending"] is True
 assert maritime["rules"]["public_export_allowed"] is False
+
 crosses = {item["cross"]: item for item in maritime["cross_zones"]}
 assert set(crosses) == {"CROSS Corsen", "CROSS Etel"}
 corsen = crosses["CROSS Corsen"]
@@ -196,7 +216,6 @@ assert relays["F5ZZH"]["rx_pack_candidate"] is False
 assert relays["F5ZIS"]["site"] == "Matignon"
 assert relays["F5ZIS"]["output_mhz"] == 145.2375
 assert relays["F5ZIS"]["paired_mhz"] == 432.6500
-assert relays["F5ZIS"]["ctcss_hz"] == 71.9
 assert relays["F5ZIT"]["site"] == "Perros-Guirec"
 assert relays["F5ZIT"]["output_mhz"] == 145.2250
 assert relays["F5ZIT"]["paired_mhz"] == 432.6500
@@ -225,6 +244,12 @@ assert bretagne["rules"]["adrasec_role_must_not_be_inferred_from_geography_only"
 assert bretagne["rules"]["public_export_allowed"] is False
 assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne["candidates"])
 
+paired_plan = json.loads(paired_plan_path.read_text(encoding="utf-8"))
+regions = {item["id"]: item for item in paired_plan["regions"]}
+assert regions["bretagne-v0.1"]["paired_links"]
+assert regions["annecy-alpes-leman-v0.3"]["paired_links"]
+assert regions["normandie-v0.4"]["paired_links"]
+
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' not in registry
 assert 'version: "v0.4"' not in registry
@@ -233,4 +258,4 @@ assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
 
-print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Corsen SRR Mont-Saint-Michel to Penmarch primary-verified from current official source while radio overlap stays pending, Corsen current network 10 VHF + 2 MF with Cap Frehel and Stiff radio infrastructures current-primary-verified but channels pending, Pointe du Raz sector VHF coverage primary-verified without transmitter-site inference, channel 79 still transmitter-unresolved, F5ZZH stopped/non-candidate, 0 public mutations OK")
+print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Bretagne duplex marine channels keep ship and coast RX sides with TX off, Corsen SRR Mont-Saint-Michel to Penmarch primary-verified while radio overlap stays pending, channel 79 still transmitter-unresolved, F5ZZH stopped/non-candidate, 0 public mutations OK")

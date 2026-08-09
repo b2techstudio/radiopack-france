@@ -20,12 +20,15 @@ required_files = [
     "tools/create_regional_pack.py",
     "tests/test_generator.py",
     "tests/test_regional_pack_starter.py",
+    "tests/test_paired_rx_policy.py",
     "tests/test_bretagne_research_scaffold.py",
     "tests/test_emergency_relay_research.py",
     "tests/test_mortain_bretagne_radio_research.py",
     "tests/test_web_generator.py",
     "tests/test_pack_registry.py",
     "tests/test_built_public_pack_catalog.py",
+    "research/paired-rx-policy.json",
+    "research/paired-rx-next-version-plan.json",
     "research/emergency-radio-policy.json",
     "research/bretagne-v0.1/README.md",
     "research/bretagne-v0.1/pack-plan.json",
@@ -65,6 +68,10 @@ for expected in [
     "Bretagne v0.1 — recherche",
     "Mortain-Bocage / Sud-Manche",
     "50, 35, 53 et 61",
+    "research/paired-rx-policy.json",
+    "deux fréquences RX",
+    "Duplex=off",
+    "Offset=0.000000",
     "research/normandie-v0.4/mortain-bocage-coverage.json",
     "sourdeval_must_not_be_guessed: true",
     "F5ZHY",
@@ -73,6 +80,7 @@ for expected in [
     "F1ZBX",
     "Bretagne — VHF maritime publique Sprint 29",
     "research/bretagne-v0.1/public-maritime-radio.json",
+    "Baie du Mont-Saint-Michel",
     "Pointe de Penmarc'h",
     "Pointe du Raz",
     "CROSS Nouvelle génération",
@@ -90,6 +98,7 @@ for expected in [
     "F5ZIT",
     "F1ZBZ",
     "F5ZPE",
+    "tests\\test_paired_rx_policy.py",
     "tests\\test_mortain_bretagne_radio_research.py",
     "SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md",
     "nothing to commit, working tree clean",
@@ -111,11 +120,30 @@ assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-a
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 assert options["options"]["notam_check"]["blocks_generation"] is False
 
+paired_policy = json.loads((ROOT / "research/paired-rx-policy.json").read_text(encoding="utf-8"))
+paired_plan = json.loads((ROOT / "research/paired-rx-next-version-plan.json").read_text(encoding="utf-8"))
+assert paired_policy["status"] == "active_project_policy"
+assert paired_policy["core_rule"]["native_duplex_or_split_pair_exports_both_rx_frequencies"] is True
+assert paired_policy["core_rule"]["tx_disabled"] is True
+assert paired_policy["core_rule"]["chirp_duplex"] == "off"
+assert paired_policy["core_rule"]["chirp_offset"] == "0.000000"
+assert paired_policy["deduplication"]["same_rf_frequency_kept_once_per_pack"] is True
+assert paired_plan["status"] == "research_plan_not_public"
+assert paired_plan["export_contract"]["tx_disabled"] is True
+assert paired_plan["export_contract"]["two_rx_memories_when_pair_frequencies_differ"] is True
+assert paired_plan["export_contract"]["public_pack_mutation_allowed"] is False
+assert {item["id"] for item in paired_plan["regions"]} == {"normandie-v0.4", "annecy-alpes-leman-v0.3", "bretagne-v0.1"}
+
 policy = json.loads((ROOT / "research/emergency-radio-policy.json").read_text(encoding="utf-8"))
+assert policy["schema_version"] == "1.1"
 assert policy["status"] == "active_research_policy"
+assert policy["paired_rx_policy"] == "research/paired-rx-policy.json"
 assert policy["publication_rules"]["rx_only"] is True
 assert policy["publication_rules"]["duplex"] == "off"
 assert policy["publication_rules"]["offset"] == "0.000000"
+assert policy["publication_rules"]["native_duplex_or_split_both_directions_rx"] is True
+assert policy["publication_rules"]["paired_distinct_frequencies_use_separate_rx_memories"] is True
+assert policy["publication_rules"]["same_rf_frequency_deduplicated"] is True
 assert policy["publication_rules"]["no_private_operational_channel"] is True
 assert policy["publication_rules"]["published_versions_are_immutable"] is True
 assert policy["per_region_rules"]["normandie"]["priority_focus"] == "Mortain-Bocage / Sud-Manche"
@@ -129,7 +157,12 @@ bretagne_maritime = json.loads((ROOT / "research/bretagne-v0.1/maritime-zones.js
 bretagne_emergency = json.loads((ROOT / "research/bretagne-v0.1/emergency-relays.json").read_text(encoding="utf-8"))
 bretagne_public_maritime = json.loads((ROOT / "research/bretagne-v0.1/public-maritime-radio.json").read_text(encoding="utf-8"))
 
+assert bretagne_plan["schema_version"] == "1.1"
 assert bretagne_plan["status"] == "research_scaffold_not_public"
+assert bretagne_plan["paired_rx_policy"] == "research/paired-rx-policy.json"
+assert bretagne_plan["rules"]["native_duplex_or_split_both_directions_rx"] is True
+assert bretagne_plan["rules"]["paired_distinct_frequencies_use_separate_rx_memories"] is True
+assert bretagne_plan["rules"]["same_rf_frequency_deduplicated"] is True
 assert bretagne_plan["memory_plan"]["expected_memory_count"] is None
 assert bretagne_plan["memory_plan"]["blocks"] == []
 assert bretagne_plan["publication"]["public_export_allowed"] is False
@@ -149,11 +182,14 @@ assert bretagne_gate_map["maritime_zoning"]["status"] == "etel_penmarch_interfac
 assert bretagne_gate_map["emergency_relay_inventory"]["status"] == "adrasec_22_29_35_56_and_regional_relays_pending"
 assert bretagne_memory["expected_memory_count"] is None
 assert bretagne_memory["blocks"] == []
-assert bretagne_maritime["schema_version"] == "1.4"
+
+assert bretagne_maritime["schema_version"] == "1.5"
 assert bretagne_maritime["status"] == "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending"
 assert bretagne_maritime["rules"]["single_bretagne_maritime_zone_forbidden"] is True
 assert bretagne_maritime["rules"]["north_south_operational_split_required"] is True
 assert bretagne_maritime["rules"]["etel_srr_starts_at_pointe_de_penmarch_primary_sourced"] is True
+assert bretagne_maritime["rules"]["corsen_srr_ends_at_pointe_de_penmarch_primary_sourced"] is True
+assert bretagne_maritime["rules"]["srr_boundary_endpoints_do_not_imply_radio_overlap"] is True
 assert bretagne_maritime["rules"]["corsen_stiff_radio_infrastructure_primary_sourced"] is True
 assert bretagne_maritime["rules"]["current_radio_infrastructure_does_not_imply_channel_assignment"] is True
 assert bretagne_maritime["rules"]["current_sector_vhf_contact_does_not_identify_transmitter_site"] is True
@@ -164,6 +200,8 @@ assert bretagne_maritime["channel_16"]["frequency_promoted"] is False
 zones = {zone["id"]: zone for zone in bretagne_maritime["zones"]}
 north = zones["bretagne-nord-ouest"]
 assert north["cross"] == "CROSS Corsen"
+assert north["official_extent"] == "Baie du Mont-Saint-Michel (Ille-et-Vilaine) à la pointe de Penmarc'h (Finistère)"
+assert north["official_srr_area_approx_km2"] == 50000
 assert north["current_operational_center"]["site"] == "Pointe de Corsen / Plouarzel"
 assert north["current_operational_center"]["radio_service_or_channel"] is None
 assert north["current_operational_coverage_evidence"][0]["sector"].startswith("Pointe du Raz")
@@ -172,7 +210,7 @@ assert north["current_transition_context"]["target_operational_horizon"] == "202
 assert zones["bretagne-sud-atlantique"]["cross"] == "CROSS Etel"
 assert zones["bretagne-sud-atlantique"]["official_extent"].startswith("Pointe de Penmarc'h")
 assert zones["transition-finistere-sud"]["cross"] is None
-assert zones["transition-finistere-sud"]["status"] == "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending"
+assert zones["transition-finistere-sud"]["status"] == "corsen_srr_end_and_etel_srr_start_at_penmarch_primary_confirmed_vhf_overlap_pending"
 
 assert bretagne_emergency["schema_version"] == "1.4"
 assert {item["id"] for item in bretagne_emergency["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
@@ -190,22 +228,36 @@ assert brelays["F5ZIT"]["output_mhz"] == 145.2250
 assert brelays["F1ZBZ"]["output_mhz"] == 431.2000
 assert brelays["F5ZPE"]["output_mhz"] == 145.7375
 
-assert bretagne_public_maritime["schema_version"] == "1.5"
+assert bretagne_public_maritime["schema_version"] == "1.7"
 assert bretagne_public_maritime["status"] == "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending"
+assert bretagne_public_maritime["paired_rx_policy"] == "research/paired-rx-policy.json"
 maritime_channels = {item["channel"]: item for item in bretagne_public_maritime["channels"]}
 assert maritime_channels[16]["rx_memory_mhz"] == 156.8000
-assert maritime_channels[79]["rx_memory_mhz"] == 161.5750
+assert len(maritime_channels[16]["rx_memories"]) == 1
+expected_pairs = {
+    63: (156.1750, 160.7750),
+    64: (156.2250, 160.8250),
+    79: (156.9750, 161.5750),
+    80: (157.0250, 161.6250),
+}
+for number, (ship_side, coast_side) in expected_pairs.items():
+    channel = maritime_channels[number]
+    assert channel["ship_tx_mhz"] == ship_side
+    assert channel["coast_tx_ship_rx_mhz"] == coast_side
+    assert len(channel["rx_memories"]) == 2
+    by_direction = {item["direction"]: item["frequency_mhz"] for item in channel["rx_memories"]}
+    assert by_direction == {"ship_to_coast": ship_side, "coast_to_ship": coast_side}
 assert maritime_channels[79]["historical_corsen_primary_status"] == "channel_79_weather_broadcast_documented_in_2003_requires_current_transmitter_revalidation"
 assert maritime_channels[79]["zone_assignment"] == "corsen_current_channel_79_emitter_pending_etel_brittany_schedule_has_no_channel_79_site"
-assert maritime_channels[80]["rx_memory_mhz"] == 161.6250
 assert maritime_channels[80]["verified_etel_brittany_emitters"] == ["Penmarc'h", "Groix", "Belle-Ile"]
-assert maritime_channels[63]["rx_memory_mhz"] == 160.7750
 assert maritime_channels[63]["verified_etel_brittany_emitters"] == ["Etel"]
-assert maritime_channels[64]["rx_memory_mhz"] == 160.8250
 assert maritime_channels[64]["current_ministry_statement_revalidated_2026"] is True
 assert maritime_channels[64]["zone_assignment"] == "current_brittany_transmitter_requires_primary_reconciliation"
 assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne_public_maritime["channels"])
-assert bretagne_public_maritime["rules"]["rx_only_uses_coast_transmit_frequency_on_duplex_channels"] is True
+assert bretagne_public_maritime["rules"]["rx_only_duplex_channels_include_both_ship_and_coast_frequencies"] is True
+assert bretagne_public_maritime["rules"]["paired_distinct_frequencies_use_separate_rx_memories"] is True
+assert bretagne_public_maritime["rules"]["all_exported_memories_tx_disabled"] is True
+assert bretagne_public_maritime["rules"]["same_rf_frequency_deduplicated"] is True
 assert bretagne_public_maritime["rules"]["channel_16_not_duplicated_by_cross_label"] is True
 assert bretagne_public_maritime["rules"]["historical_primary_radio_sites_must_be_revalidated_before_current_use"] is True
 assert bretagne_public_maritime["rules"]["current_radio_infrastructure_does_not_imply_current_channel_assignment"] is True
@@ -213,6 +265,8 @@ assert bretagne_public_maritime["rules"]["current_sector_vhf_contact_does_not_id
 assert bretagne_public_maritime["rules"]["current_operational_center_does_not_imply_local_radio_station"] is True
 assert bretagne_public_maritime["rules"]["planned_cross_ng_reorganisation_does_not_change_current_frequency_validation"] is True
 assert bretagne_public_maritime["rules"]["etel_srr_starts_at_penmarch_primary_verified"] is True
+assert bretagne_public_maritime["rules"]["corsen_srr_from_mont_saint_michel_to_penmarch_primary_verified"] is True
+assert bretagne_public_maritime["rules"]["srr_boundary_endpoints_do_not_imply_radio_overlap"] is True
 assert bretagne_public_maritime["rules"]["channel_64_requires_current_brittany_transmitter_reconciliation"] is True
 assert bretagne_public_maritime["rules"]["corsen_stiff_radio_infrastructure_primary_verified"] is True
 assert bretagne_public_maritime["rules"]["corsen_pointe_du_raz_sector_vhf_coverage_primary_verified_site_pending"] is True
@@ -220,6 +274,8 @@ assert bretagne_public_maritime["rules"]["corsen_current_network_size_known_site
 assert bretagne_public_maritime["rules"]["public_export_allowed"] is False
 crosses = {item["cross"]: item for item in bretagne_public_maritime["cross_zones"]}
 corsen = crosses["CROSS Corsen"]
+assert corsen["official_srr_extent"] == "Baie du Mont-Saint-Michel (Ille-et-Vilaine) à la pointe de Penmarc'h (Finistère)"
+assert corsen["official_srr_area_approx_km2"] == 50000
 assert corsen["current_operational_center"]["site"] == "Pointe de Corsen / Plouarzel"
 assert corsen["current_operational_center"]["radio_service_or_channel"] is None
 assert corsen["current_network_summary"]["vhf_station_count"] == 10
@@ -249,9 +305,12 @@ assert etel_sites["Etel"]["channel"] == 63
 normandie_next = json.loads((ROOT / "research/normandie-v0.4/pack-plan.json").read_text(encoding="utf-8"))
 normandie_emergency = json.loads((ROOT / "research/normandie-v0.4/emergency-relays.json").read_text(encoding="utf-8"))
 mortain_coverage = json.loads((ROOT / "research/normandie-v0.4/mortain-bocage-coverage.json").read_text(encoding="utf-8"))
+assert normandie_next["schema_version"] == "1.1"
 assert normandie_next["status"] == "research_next_version_not_public"
 assert normandie_next["based_on_published_version"] == "0.3.1"
 assert normandie_next["published_base_is_immutable"] is True
+assert normandie_next["paired_rx"]["published_v0_3_1_maritime_pair_model_already_compliant"] is True
+assert normandie_next["paired_rx"]["future_analog_repeaters_and_transponders_include_both_verified_sides"] is True
 assert normandie_next["priority_focus"]["label"] == "Mortain-Bocage / Sud-Manche"
 assert normandie_next["priority_focus"]["adjacent_departments_to_check"] == [35, 53, 61]
 assert normandie_next["publication"]["public_export_allowed"] is False
@@ -280,9 +339,12 @@ assert mstations["F5ZTQ"]["rx_pack_candidate"] is False
 
 annecy_next = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/pack-plan.json").read_text(encoding="utf-8"))
 annecy_emergency = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/emergency-relays.json").read_text(encoding="utf-8"))
+assert annecy_next["schema_version"] == "1.1"
 assert annecy_next["status"] == "research_next_version_not_public"
 assert annecy_next["based_on_published_version"] == "0.2"
 assert annecy_next["published_base_is_immutable"] is True
+assert annecy_next["paired_rx"]["satellite_uplink_and_downlink_both_rx"] is True
+assert annecy_next["paired_rx"]["analog_repeater_input_and_output_both_rx"] is True
 assert annecy_next["publication"]["public_export_allowed"] is False
 arelays = {item["id"]: item for item in annecy_emergency["candidates"]}
 assert arelays["F1ZJV"]["output_mhz"] == 145.7875
@@ -328,6 +390,10 @@ assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
 
+chirp_pack = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
+assert '"off"' in chirp_pack
+assert '"0.000000"' in chirp_pack
+
 historical_generator = (ROOT / "generator/generate_chirp_csv.py").read_text(encoding="utf-8")
 for expected in ['"--output-root"', "sortie isolée", "Normandie v0.3.1 est un artefact publié figé"]:
     assert expected in historical_generator, f"Isolation générateur absente: {expected}"
@@ -361,6 +427,17 @@ for expected in [
     "no public mutation OK",
 ]:
     assert expected in emergency_test, f"Test secours/ADRASEC incomplet: {expected}"
+
+paired_test = (ROOT / "tests/test_paired_rx_policy.py").read_text(encoding="utf-8")
+for expected in [
+    "native_duplex_or_split_pair_exports_both_rx_frequencies",
+    "M01-S",
+    "M01-C",
+    "SAT-SO50",
+    "MARINE-79",
+    "TX remains off/zero",
+]:
+    assert expected in paired_test, f"Test paired RX incomplet: {expected}"
 
 sprint29_test = (ROOT / "tests/test_mortain_bretagne_radio_research.py").read_text(encoding="utf-8")
 for expected in [
@@ -396,6 +473,8 @@ for expected in [
     "python tests/test_pack_registry.py",
     "Test regional pack research starter",
     "python tests/test_regional_pack_starter.py",
+    "Test paired RX policy",
+    "python tests/test_paired_rx_policy.py",
     "Test Bretagne research scaffold",
     "python tests/test_bretagne_research_scaffold.py",
     "Test emergency and ADRASEC research",
@@ -409,4 +488,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 29 guards: Mortain coverage + Bretagne Etel weather emitters + Corsen current network with Cap Frehel/Stiff infrastructures and Pointe du Raz sector VHF coverage guarded without transmitter inference + CROSS-NG future context + F5ZZH stopped + public packs frozen OK")
+print("Tests RadioPack Sprint 29 guards: paired RX policy + TX off/zero + Mortain coverage + Bretagne dual-side marine RX + Corsen current SRR and infrastructures + Pointe du Raz coverage guard + public packs frozen OK")

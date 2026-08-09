@@ -65,7 +65,28 @@ Ce fichier ne doit contenir que les règles propres au pack :
 
 Annecy–Alpes–Léman utilise `website/src/lib/annecyPack.ts` comme exemple de référence.
 
-## 5. Geler une carte de revue
+## 5. Enregistrer le pack dans le catalogue du générateur
+
+Les packs et variantes effectivement téléchargeables sont déclarés dans :
+
+```text
+website/src/lib/packRegistry.ts
+```
+
+Pour chaque pack public, renseigner au minimum :
+
+- un identifiant stable ;
+- le nom et la version ;
+- le slug de la page régionale ;
+- la variante par défaut ;
+- les variantes publiques avec leur nombre de mémoires, nom de fichier et URL ;
+- les options prises en charge par ce pack.
+
+Le générateur `/generateur` lit ce registre. Il ne doit pas contenir une seconde liste indépendante des packs publics.
+
+Une option non supportée par un pack doit être masquée dans l'interface plutôt que simulée.
+
+## 6. Geler une carte de revue
 
 Avant publication, générer une carte de référence qui fige au minimum :
 
@@ -79,19 +100,21 @@ Avant publication, générer une carte de référence qui fige au minimum :
 
 La CI doit comparer la génération à cette carte afin qu'un changement de données ne modifie pas silencieusement un pack publié.
 
-## 6. Créer les routes de téléchargement
+## 7. Créer les routes de téléchargement
 
-Les fichiers publics doivent être générés comme routes Astro prérendues sous :
+Les fichiers publics générés doivent utiliser des routes Astro prérendues sous :
 
 ```text
 website/src/pages/downloads/<slug>/...
 ```
 
-Le navigateur doit télécharger directement ces routes validées plutôt que reconstruire une copie indépendante du CSV côté client.
+Un fichier statique déjà publié et maintenu dans `website/public/downloads/` peut également être enregistré dans le catalogue tant qu'il est couvert par les tests de production.
 
-## 7. Ajouter les options du générateur
+Le navigateur doit télécharger directement la ressource publique validée plutôt que reconstruire une copie indépendante du CSV côté client.
 
-Les options qui modifient réellement le contenu doivent sélectionner une variante explicitement testée.
+## 8. Ajouter les options du générateur
+
+Les options qui modifient réellement le contenu doivent sélectionner une variante explicitement testée et déclarée dans `packRegistry.ts`.
 
 Exemple Annecy :
 
@@ -100,33 +123,35 @@ Exemple Annecy :
 
 Les contrôles informatifs comme NOTAM ne doivent pas modifier automatiquement les fréquences de référence.
 
-## 8. Vérifier le build final
+## 9. Vérifier le build final
 
 La CI doit au minimum :
 
 1. tester les données sources ;
 2. tester l'assembleur ;
 3. tester la carte de revue ;
-4. compiler Astro ;
-5. ouvrir les CSV réellement produits dans `website/dist` ;
-6. comparer ces CSV à la carte de revue ;
-7. vérifier `Duplex=off`, les positions et les nombres de mémoires.
+4. tester le registre des packs publics ;
+5. compiler Astro ;
+6. ouvrir les CSV réellement produits dans `website/dist` ;
+7. comparer les variantes générées à leur carte de revue ;
+8. vérifier `Duplex=off`, les positions et les nombres de mémoires.
 
-## 9. Publier explicitement
+## 10. Publier explicitement
 
 Un pack ne passe public qu'après :
 
 - fermeture de ses portes bloquantes ;
 - revue du CSV ;
+- ajout de ses variantes dans `packRegistry.ts` ;
 - mise à jour du site ;
 - mise à jour du `README.md` ;
 - CI verte sur le commit final.
 
-## 10. Nettoyer les anciennes versions
+## 11. Nettoyer les anciennes versions
 
 Lorsqu'une ancienne version n'a plus de rôle actif :
 
-- la retirer du générateur ;
-- retirer ses fichiers de `website/public` ;
+- la retirer du générateur et du registre public ;
+- retirer ses fichiers de `website/public` lorsqu'ils ne sont plus nécessaires ;
 - ajouter des redirections pour les anciennes URL utiles ;
 - conserver son historique via Git plutôt que maintenir deux jeux de données concurrents dans l'arborescence active.

@@ -75,7 +75,7 @@
 - Application immédiate des règles permanentes RX-only, `Duplex=off`, `Offset=0.000000`, noms ≤ 10 caractères, maximum 200 mémoires, pas de remplissage artificiel et immutabilité des versions publiées.
 - Refus d'écraser un espace de recherche existant et validation stricte des slugs et versions.
 - Ajout de `tests/test_regional_pack_starter.py`, exécuté sous racine temporaire afin de vérifier l'absence d'effet de bord sur le registre public et les régions publiées.
-- Ajout de l'étape CI en `Test regional pack research starter` et ajout de garde-fous correspondants.
+- Ajout de l'étape CI `Test regional pack research starter`, de `SPRINT-25-REGIONAL-STARTER.md` et mise à jour du README au Sprint 25.
 
 ## 0.16.0 - 2026-08-09
 

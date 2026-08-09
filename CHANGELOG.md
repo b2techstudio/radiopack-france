@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.19.0 - 2026-08-09
+
+- Découpage obligatoire de la recherche Bretagne en **Bretagne Nord / Manche Ouest**, **Bretagne Sud / Atlantique** et **zone de transition Finistère Sud**.
+- Attribution du contexte opérationnel CROSS Corsen au nord / nord-ouest et CROSS Etel au sud, sans figer encore la frontière SAR exacte.
+- Ajout de `research/bretagne-v0.1/maritime-zones.json` pour documenter le zonage, les stations VHF déportées à inventorier, la météo maritime et les relais radioamateurs par sous-zone.
+- Ajout de la règle empêchant de dupliquer artificiellement le canal 16 uniquement pour changer le nom du CROSS ; le contexte CROSS restera une métadonnée de zone.
+- Ajout d'une porte de publication `maritime_zoning` qui reste bloquante tant que la limite SRR actuelle Corsen / Etel et les couvertures VHF ne sont pas précisément confirmées.
+- Extension du registre Bretagne à dix sources officielles ou opérationnelles, toutes avec `frequency_data_promoted: false`.
+- Ajout du contexte météo officiel : annonces via le canal 16 avant diffusion sur 79/80 et diffusion permanente 63/64 notamment dans le Morbihan, sans promotion de fréquence dans le pack.
+- Renforcement de `tests/test_bretagne_research_scaffold.py` et `tests/test_site_files.py` pour imposer le zonage nord/sud et empêcher toute publication prématurée.
+- Ajout de `SPRINT-27-BRETAGNE-MARITIME-ZONING.md` et mise à jour du README au Sprint 27.
+- Les packs publics restent inchangés : Annecy–Alpes–Léman v0.2 à 65/48 mémoires et Normandie v0.3.1 figée à 139 mémoires.
+
 ## 0.18.0 - 2026-08-09
 
 - Choix de la Bretagne comme troisième région de travail de RadioPack France.

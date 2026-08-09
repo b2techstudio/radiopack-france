@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_inventory_not_public",
   "updated": "2026-08-09",
   "pack": {
@@ -80,14 +80,48 @@
       "subzone": "bretagne_interieure_sud_est",
       "output_mhz": 145.6750,
       "input_mhz": 145.0750,
+      "ctcss_hz": 71.9,
       "mode": "FM",
-      "status": "public_ara35_source_candidate",
+      "status": "current_ref_and_ara35_active_analog_candidate",
       "rx_pack_candidate": true,
       "frequency_promoted_to_public_pack": false,
       "sources": [
+        "https://www.r-e-f.org/",
         "https://ara35.fr/frequences/relais-phonie/r3/"
       ],
-      "note": "Relais régional à étudier pour couverture intérieure ; ne pas l'assimiler automatiquement à un relais ADRASEC."
+      "note": "Relais régional intérieur ; ne pas l'assimiler automatiquement à un relais ADRASEC."
+    },
+    {
+      "id": "F5ZIS",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Matignon",
+      "department": 22,
+      "subzone": "bretagne_nord_cote_emeraude",
+      "output_mhz": 145.2375,
+      "paired_mhz": 432.6500,
+      "ctcss_hz": 71.9,
+      "mode": "FM",
+      "status": "current_ref_active_analog_candidate",
+      "rx_pack_candidate": true,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "Point côtier Bretagne Nord à étudier pour le maillage analogique ; rôle ADRASEC non présumé sans source dédiée."
+    },
+    {
+      "id": "F5ZIT",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Perros-Guirec",
+      "department": 22,
+      "subzone": "bretagne_nord_cote_granit_rose",
+      "output_mhz": 145.2250,
+      "paired_mhz": 432.6500,
+      "ctcss_hz": 71.9,
+      "mode": "FM",
+      "status": "current_ref_active_analog_candidate",
+      "rx_pack_candidate": true,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "Relais/transpondeur côtier Bretagne Nord ; intégrer seulement après revue de couverture et doublons."
     },
     {
       "id": "F1ZBH",
@@ -97,7 +131,7 @@
       "subzone": "bretagne_nord_ouest_transition_finistere",
       "frequency_mhz": 144.8000,
       "mode": "APRS",
-      "status": "current_ref_directory_candidate",
+      "status": "current_ref_directory_active_aprs",
       "rx_pack_candidate": false,
       "frequency_promoted_to_public_pack": false,
       "sources": [
@@ -113,26 +147,59 @@
       "subzone": "bretagne_nord_ouest",
       "frequency_mhz": 144.8000,
       "mode": "APRS",
-      "status": "current_ref_directory_candidate",
+      "status": "current_ref_directory_active_aprs",
       "rx_pack_candidate": false,
       "frequency_promoted_to_public_pack": false,
       "sources": [
         "https://www.r-e-f.org/"
       ]
+    },
+    {
+      "id": "F1ZBZ",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Lorient",
+      "department": 56,
+      "subzone": "bretagne_sud_cote_morbihan",
+      "output_mhz": 431.2000,
+      "paired_vhf_candidates_mhz": [145.0250, 145.1375, 145.6250, 145.7375],
+      "mode": "FM",
+      "status": "current_ref_active_analog_multientry_requires_direction_review",
+      "rx_pack_candidate": false,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "Le répertoire REF publie plusieurs entrées de transpondeur autour de la sortie UHF 431.200 MHz. Avant toute mémoire, déterminer précisément la ou les voies utiles en réception et éviter les doublons."
+    },
+    {
+      "id": "F5ZPE",
+      "kind": "amateur_analog_repeater",
+      "site": "Bignan",
+      "department": 56,
+      "subzone": "bretagne_sud_morbihan_interieur",
+      "output_mhz": 145.7375,
+      "input_mhz": 145.1375,
+      "ctcss_hz": 71.9,
+      "mode": "FM",
+      "status": "current_ref_active_analog_candidate",
+      "rx_pack_candidate": true,
+      "frequency_promoted_to_public_pack": false,
+      "sources": ["https://www.r-e-f.org/"],
+      "note": "Relais analogique actif du Morbihan à comparer aux relais côtiers et au maillage ADRASEC 56."
     }
   ],
   "research_required": [
-    "inventorier les relais et transpondeurs ADRASEC 22",
-    "inventorier les relais et transpondeurs ADRASEC 29",
+    "inventorier les relais et transpondeurs explicitement ADRASEC 22",
+    "inventorier les relais et transpondeurs explicitement ADRASEC 29",
     "compléter les infrastructures ADRASEC 35 au-delà d'APRS",
-    "inventorier les relais et transpondeurs ADRASEC 56",
+    "inventorier les relais et transpondeurs explicitement ADRASEC 56",
     "rattacher chaque relais au zonage Bretagne Nord / Bretagne Sud / transition lorsque pertinent",
-    "croiser les relais amateurs avec la couverture côtière sans confondre réseaux amateurs et réseaux PPDR privés"
+    "croiser les relais amateurs avec la couverture côtière sans confondre réseaux amateurs et réseaux PPDR privés",
+    "revoir les entrées multiples F1ZBZ Lorient pour déterminer les fréquences réellement utiles au profil RX"
   ],
   "rules": {
     "private_ppdr_operational_frequencies_excluded": true,
     "aprs_same_frequency_not_duplicated_by_site": true,
     "north_south_zoning_required": true,
+    "adrasec_role_must_not_be_inferred_from_geography_only": true,
     "frequency_requires_current_validation_before_publication": true,
     "public_export_allowed": false
   }

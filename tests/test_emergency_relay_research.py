@@ -55,13 +55,25 @@ assert annecy["rules"]["same_output_frequency_must_not_be_duplicated_for_site_la
 
 bretagne = json.loads((ROOT / "research/bretagne-v0.1/emergency-relays.json").read_text(encoding="utf-8"))
 bretagne_gates = json.loads((ROOT / "research/bretagne-v0.1/publication-gates.json").read_text(encoding="utf-8"))
+assert bretagne["schema_version"] == "1.2"
 assert {item["id"] for item in bretagne["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
 b_candidates = {item["id"]: item for item in bretagne["candidates"]}
 assert b_candidates["F1ZUG-4"]["frequency_mhz"] == 144.8000
+assert b_candidates["F1ZUG-4"]["adrasec_transponder_frequency_mhz"] is None
+assert b_candidates["F1ZUG-4"]["adrasec_transponder_role_status"] == "public_ara35_2024_role_documented_frequency_unpublished"
 assert b_candidates["F1ZUG-4"]["rx_pack_candidate"] is False
 assert b_candidates["F5ZZC-4"]["frequency_mhz"] is None
 assert b_candidates["F1ZBX"]["output_mhz"] == 145.6750
+assert b_candidates["F5ZEB"]["output_mhz"] == 438.6750
+assert b_candidates["F5ZEB"]["input_mhz"] == 431.0750
+assert b_candidates["F5ZEB"]["ctcss_hz"] == 71.9
+assert b_candidates["F5ZEB"]["rx_pack_candidate"] is False
+assert b_candidates["F5ZPV"]["output_mhz"] == 439.8750
+assert b_candidates["F5ZPV"]["status"] == "temporarily_stopped_current_ara35_page"
+assert b_candidates["F5ZPV"]["rx_pack_candidate"] is False
 assert bretagne["rules"]["private_ppdr_operational_frequencies_excluded"] is True
+assert bretagne["rules"]["adrasec_transponder_frequency_must_not_be_inferred_from_aprs_frequency"] is True
+assert bretagne["rules"]["temporarily_stopped_repeaters_not_active_candidates"] is True
 assert bretagne["rules"]["north_south_zoning_required"] is True
 assert all(item["frequency_promoted_to_public_pack"] is False for item in bretagne["candidates"])
 gates = {gate["id"]: gate for gate in bretagne_gates["gates"]}
@@ -79,4 +91,4 @@ assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-fra
 published_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 assert published_normandie.is_file()
 
-print("Tests RadioPack Sprint 28 emergency/ADRASEC research: Bretagne + Mortain-focused Normandie v0.4 + Annecy v0.3, no public mutation OK")
+print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes relay status + Mortain/Annecy frozen public packs OK")

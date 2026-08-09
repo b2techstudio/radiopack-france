@@ -11,6 +11,7 @@ required = [
     RESEARCH / "publication-gates.json",
     RESEARCH / "memory-plan.json",
     RESEARCH / "maritime-zones.json",
+    RESEARCH / "emergency-relays.json",
 ]
 for path in required:
     assert path.is_file(), f"Fichier Bretagne manquant: {path.relative_to(ROOT)}"
@@ -20,6 +21,7 @@ sources = json.loads((RESEARCH / "source-registry.json").read_text(encoding="utf
 gates = json.loads((RESEARCH / "publication-gates.json").read_text(encoding="utf-8"))
 memory = json.loads((RESEARCH / "memory-plan.json").read_text(encoding="utf-8"))
 maritime = json.loads((RESEARCH / "maritime-zones.json").read_text(encoding="utf-8"))
+emergency = json.loads((RESEARCH / "emergency-relays.json").read_text(encoding="utf-8"))
 
 assert plan["status"] == "research_scaffold_not_public"
 assert plan["pack"] == {"name": "Bretagne", "slug": "bretagne", "target_version": "0.1"}
@@ -64,11 +66,12 @@ assert sources["rules"]["exact_current_srr_boundary_required_before_publication"
 
 assert gates["status"] == "blocked_research_in_progress"
 assert gates["public_release_allowed"] is False
-assert len(gates["gates"]) == 7
+assert len(gates["gates"]) == 8
 assert all(gate["required_for_public_release"] is True for gate in gates["gates"])
 assert all(not gate["status"].startswith("passed_") for gate in gates["gates"])
-maritime_gate = next(gate for gate in gates["gates"] if gate["id"] == "maritime_zoning")
-assert maritime_gate["status"] == "north_south_split_required_exact_boundary_pending"
+gate_map = {gate["id"]: gate for gate in gates["gates"]}
+assert gate_map["maritime_zoning"]["status"] == "north_south_split_required_exact_boundary_pending"
+assert gate_map["emergency_relay_inventory"]["status"] == "adrasec_22_29_35_56_and_regional_relays_pending"
 
 assert memory["status"] == "draft_no_channels"
 assert memory["expected_memory_count"] is None
@@ -100,6 +103,22 @@ assert maritime["publication"]["public_export_allowed"] is False
 assert maritime["publication"]["public_registry_allowed"] is False
 assert maritime["publication"]["public_routes_allowed"] is False
 
+assert emergency["status"] == "research_inventory_not_public"
+assert {item["id"] for item in emergency["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
+emergency_candidates = {item["id"]: item for item in emergency["candidates"]}
+assert emergency_candidates["F1ZUG-4"]["frequency_mhz"] == 144.8000
+assert emergency_candidates["F1ZUG-4"]["rx_pack_candidate"] is False
+assert emergency_candidates["F5ZZC-4"]["frequency_mhz"] is None
+assert emergency_candidates["F1ZBX"]["output_mhz"] == 145.6750
+assert emergency_candidates["F1ZBX"]["rx_pack_candidate"] is True
+assert emergency_candidates["F1ZBH"]["frequency_mhz"] == 144.8000
+assert emergency_candidates["F1ZGQ"]["frequency_mhz"] == 144.8000
+assert all(item["frequency_promoted_to_public_pack"] is False for item in emergency["candidates"])
+assert emergency["rules"]["private_ppdr_operational_frequencies_excluded"] is True
+assert emergency["rules"]["aprs_same_frequency_not_duplicated_by_site"] is True
+assert emergency["rules"]["north_south_zoning_required"] is True
+assert emergency["rules"]["public_export_allowed"] is False
+
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
 regions = (ROOT / "website/src/data/regions.json").read_text(encoding="utf-8").lower()
 assert 'id: "bretagne"' not in registry
@@ -121,4 +140,4 @@ for expected in [
 ]:
     assert expected in readme, f"Cadrage Bretagne absent: {expected}"
 
-print("Tests RadioPack Bretagne maritime zoning: north/south CROSS split, 0 frequencies, 0 public side effects OK")
+print("Tests RadioPack Bretagne maritime + emergency zoning: north/south CROSS split, ADRASEC inventory, 0 promoted frequencies, 0 public side effects OK")

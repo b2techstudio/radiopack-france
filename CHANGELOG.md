@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.16.0 - 2026-08-09
+
+- Ajout de l'option `--output-root` au générateur Python afin de produire les CSV dans une racine de sortie séparée du dépôt source.
+- Modification de `tests/test_generator.py` pour utiliser un répertoire temporaire système au lieu de réécrire `website/public` pendant les tests.
+- Comparaison des sorties temporaires génériques avec les CSV publics suivis et vérification finale que les fichiers suivis n'ont changé d'aucun octet.
+- Identification d'une dérive historique de Normandie v0.3.1 : les fréquences et positions restent identiques, mais les commentaires ISS nationaux ont été enrichis après la publication de cette version.
+- Classement de Normandie v0.3.1 comme artefact versionné figé : le générateur générique ne la reconstruit plus et une évolution devra produire une nouvelle version régionale.
+- Ajout de la règle générale d'immutabilité des packs régionaux publiés dans `REGIONAL-PACK-WORKFLOW.md`.
+- Renommage de l'étape CI en `Test CSV generator in isolated output` et ajout de garde-fous contre la reconstruction accidentelle d'une version régionale figée.
+- Ajout de `SPRINT-24-ISOLATED-GENERATOR-TESTS.md` et mise à jour du README au Sprint 24.
+
 ## 0.15.0 - 2026-08-09
 
 - Passage du générateur public `/generateur` à une architecture multi-régions avec sélecteur de pack.
@@ -85,7 +96,7 @@
 
 - Revalidation partielle du bloc aviation Annecy–Alpes–Léman sur le cycle AIRAC 08/26 effectif depuis le 6 août 2026.
 - Ajout de sept mémoires aviation France / bassin genevois recoupées publiquement : Annecy-Meythet, Annemasse, Grenoble-Le Versoud, Grenoble-Alpes-Isère et Genève Information.
-- Ajout de deux mémoires Lausanne-La Blécherette recoupées sur le site officiel de l'exploitant : 123,205 MHz et 118,830 MHz.
+- Ajout de deux mémoires Lausanne-La Bléchette recoupées sur le site officiel de l'exploitant : 123,205 MHz et 118,830 MHz.
 - Conservation du pré-inventaire AIRAC 07/26 comme historique, avec interdiction explicite de l'utiliser dans l'assembleur.
 - Maintien hors candidat de Chambéry, Albertville, Megève, Sallanches, Genève-aéroport et Sion tant que les données courantes ne sont pas suffisamment recoupées publiquement.
 - Passage du candidat interne de 48 à 57 mémoires, toutes en réception seule avec `Duplex=off`.

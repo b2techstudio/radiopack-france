@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.1 - 2026-08-09
+
+- Validation primaire DIRM NAMO du début de compétence du CROSS Étel à la Pointe de Penmarc'h, jusqu'à la frontière espagnole ; l'interface Finistère Sud n'est plus laissée entièrement indéterminée.
+- Ajout des émetteurs météo Bretagne explicitement publiés par le CROSS Étel : Penmarc'h, Groix et Belle-Ile sur le canal 80, Étel sur le canal 63 en diffusion continue.
+- Maintien de CROSS Corsen en inventaire primaire en attente : la page DIRM confirme le réseau VHF/MHF et les diffusions depuis des stations littorales mais n'énumère pas les sites/canaux dans la source exploitée.
+- Conservation prudente du canal 64 comme donnée réglementaire de recherche : le ministère mentionne 63/64 en diffusion permanente dans le Morbihan, tandis que le planning CROSS Étel exploité n'identifie pas d'émetteur Bretagne sur 64 ; aucun site n'est inventé.
+- Mise à jour de `research/bretagne-v0.1/public-maritime-radio.json`, `maritime-zones.json`, `publication-gates.json` et du README de recherche Bretagne sans publier de mémoire.
+- Renforcement de `tests/test_mortain_bretagne_radio_research.py`, `tests/test_bretagne_research_scaffold.py` et `tests/test_site_files.py` pour figer Penmarc'h/Groix/Belle-Ile/Étel tout en maintenant Corsen et le canal 64 à l'état de recherche.
+- F6ZES Sourdeval reste volontairement sans fréquence ni mode : aucune seconde source actuelle suffisamment précise n'a été trouvée.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.0 - 2026-08-09
 
 - Ajout de `research/normandie-v0.4/mortain-bocage-coverage.json` pour classer les infrastructures selon leur pertinence réelle autour de Mortain-Bocage / Sud-Manche, avec étude volontaire des départements 50, 35, 53 et 61.
@@ -64,8 +75,7 @@
 - Application immédiate des règles permanentes RX-only, `Duplex=off`, `Offset=0.000000`, noms ≤ 10 caractères, maximum 200 mémoires, pas de remplissage artificiel et immutabilité des versions publiées.
 - Refus d'écraser un espace de recherche existant et validation stricte des slugs et versions.
 - Ajout de `tests/test_regional_pack_starter.py`, exécuté sous racine temporaire afin de vérifier l'absence d'effet de bord sur le registre public et les régions publiées.
-- Ajout de l'étape CI `Test regional pack research starter`.
-- Ajout de `SPRINT-25-REGIONAL-STARTER.md` et mise à jour du README au Sprint 25.
+- Ajout de l'étape CI en `Test regional pack research starter` et ajout de garde-fous correspondants.
 
 ## 0.16.0 - 2026-08-09
 

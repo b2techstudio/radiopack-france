@@ -4,16 +4,16 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables et les exports publics sont configurés en réception seule.
 
-## État actuel — Sprint 24
+## État actuel — Sprint 25
 
 Deux packs régionaux sont disponibles :
 
 - **Normandie v0.3.1** — 139 mémoires RX ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, avec variante **48 mémoires sans aviation**.
 
-Le Sprint 23 a rendu le générateur public multi-régions. Le Sprint 24 sécurise la génération locale : **les tests du générateur n'écrivent plus dans les CSV suivis par Git** et les packs régionaux déjà publiés sont désormais considérés comme des **artefacts versionnés figés**.
+Le Sprint 23 a rendu le générateur public multi-régions. Le Sprint 24 a isolé les tests de génération et figé les versions régionales déjà publiées. Le Sprint 25 ajoute un **starter de recherche sécurisé** pour initialiser un futur pack régional sans créer de page publique, de route CSV ou d'entrée dans le registre du générateur.
 
-Le générateur public est disponible sur :
+Le générateur public reste disponible sur :
 
 ```text
 /generateur
@@ -32,7 +32,6 @@ Pour Annecy :
 Pour Normandie :
 
 - variante publique fixe de 139 mémoires ;
-- pas d'option Annecy affichée ;
 - téléchargement direct du CSV v0.3.1 existant ;
 - la version v0.3.1 est figée et ne doit plus être réécrite par le générateur générique.
 
@@ -93,11 +92,7 @@ Le pack Normandie public contient 139 mémoires RX et reste disponible ici :
 
 Il est enregistré dans le même catalogue public qu'Annecy et peut être sélectionné depuis `/generateur`.
 
-### Version publiée figée
-
-Le Sprint 24 a révélé que les commentaires ISS du jeu national avaient été enrichis après la publication de Normandie v0.3.1. Les fréquences et positions du pack publié n'ont pas changé, mais une reconstruction depuis les jeux partagés actuels ne reproduit plus exactement les commentaires historiques de v0.3.1.
-
-La règle retenue est donc : **Normandie v0.3.1 reste immuable**. Le générateur générique ne la reconstruit plus. Toute actualisation des données Normandie devra passer par une nouvelle version, avec revue explicite avant publication.
+Normandie v0.3.1 est désormais traitée comme un **artefact publié immuable**. Les commentaires ISS du jeu national ont évolué depuis sa publication ; les fréquences et positions de v0.3.1 restent inchangées. Toute actualisation Normandie devra donc créer une nouvelle version avec une nouvelle revue.
 
 ## Architecture de génération
 
@@ -125,11 +120,55 @@ Il décrit actuellement :
 - Annecy–Alpes–Léman v0.2 sans aviation — 48 mémoires ;
 - Normandie v0.3.1 — 139 mémoires.
 
-Chaque variante déclare son nombre de mémoires, son nom de fichier, son URL publique et les options réellement supportées.
+La méthode complète d'ajout d'une région est documentée dans [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md).
 
-La méthode d'ajout d'une nouvelle région est documentée dans [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md).
+## Starter de pack régional — Sprint 25
 
-## Tests de génération isolés — Sprint 24
+Le nouvel outil :
+
+```text
+tools/create_regional_pack.py
+```
+
+initialise uniquement un **espace de recherche non public**.
+
+Exemple :
+
+```powershell
+python tools\create_regional_pack.py --name "Bretagne" --slug bretagne --version 0.1
+```
+
+La commande crée :
+
+```text
+research/bretagne-v0.1/
+```
+
+avec :
+
+- `README.md` ;
+- `pack-plan.json` ;
+- `source-registry.json` ;
+- `publication-gates.json` ;
+- `memory-plan.json`.
+
+L'état initial ne contient **aucune fréquence**, **aucun bloc mémoire** et **aucun nombre cible de mémoires**. Tous les drapeaux de publication sont à `false`.
+
+Le starter impose dès le départ les règles permanentes : RX-only, `Duplex=off`, `Offset=0.000000`, noms de 10 caractères maximum, maximum 200 mémoires, pas de remplissage artificiel, préférence pour les sources primaires, revue obligatoire et immutabilité des versions publiées.
+
+Il ne crée jamais :
+
+- de page régionale ;
+- de route CSV ;
+- de fichier sous `website/public` ;
+- d'entrée dans `website/src/lib/packRegistry.ts` ;
+- d'entrée dans `website/src/data/regions.json`.
+
+Si le dossier cible existe déjà, le starter refuse de l'écraser.
+
+Voir [SPRINT-25-REGIONAL-STARTER.md](SPRINT-25-REGIONAL-STARTER.md) pour le détail.
+
+## Tests de génération isolés
 
 Le générateur Python générique :
 
@@ -137,39 +176,15 @@ Le générateur Python générique :
 generator/generate_chirp_csv.py
 ```
 
-accepte désormais une racine de sortie séparée :
+accepte :
 
 ```text
 --output-root <dossier>
 ```
 
-Les données sont toujours lues depuis `--root`, mais les sorties génériques planifiées sont écrites sous `--output-root` en conservant leurs chemins relatifs.
+`tests/test_generator.py` utilise un dossier temporaire et ne réécrit plus les CSV suivis par Git. Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique.
 
-Ces sorties génériques sont actuellement :
-
-- PMR446 national ;
-- VHF marine nationale ;
-- APRS / ISS national ;
-- canaux d'appel nationaux ;
-- relais analogiques Normandie.
-
-Le pack complet **Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique**.
-
-`tests/test_generator.py` utilise automatiquement un dossier temporaire système. Il :
-
-1. mémorise les octets des CSV suivis concernés, y compris Normandie v0.3.1 ;
-2. génère les sorties génériques dans un dossier temporaire ;
-3. compare les lignes temporaires aux CSV publiés correspondants ;
-4. contrôle les nombres de mémoires et les règles RX-only ;
-5. vérifie que Normandie v0.3.1 n'est pas reconstruite ;
-6. contrôle séparément le CSV Normandie publié de 139 mémoires ;
-7. vérifie qu'aucun fichier suivi n'a changé d'un octet.
-
-Cela corrige définitivement le problème observé sous Windows où un simple test pouvait faire apparaître le CSV Normandie comme modifié dans `git status`.
-
-Sans `--output-root`, le générateur générique écrit toujours ses sorties génériques planifiées dans leurs emplacements publics normaux. Il ne réécrit plus les packs régionaux versionnés figés.
-
-Voir [SPRINT-24-ISOLATED-GENERATOR-TESTS.md](SPRINT-24-ISOLATED-GENERATOR-TESTS.md) pour le détail.
+Le starter régional possède le même principe de sécurité : `tests/test_regional_pack_starter.py` l'exécute sous une racine temporaire et vérifie qu'aucun fichier public du dépôt n'est modifié.
 
 ## Contrôle NOTAM
 
@@ -182,12 +197,6 @@ Pour Annecy, le générateur propose :
 
 La confirmation NOTAM n'altère jamais le CSV et n'empêche jamais son téléchargement.
 
-## Ancienne Annecy / Haute-Savoie v0.1
-
-L'ancienne v0.1 n'a plus de rôle actif dans le dépôt. Ses anciens fichiers ont été retirés de l'arborescence courante au Sprint 22.
-
-L'historique reste disponible dans Git et les anciennes URL utiles sont redirigées vers la v0.2 ou vers la page régionale.
-
 ## Revue et garde-fous
 
 La carte de revue Annecy :
@@ -196,7 +205,7 @@ La carte de revue Annecy :
 research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json
 ```
 
-fige pour chaque mémoire : emplacement, nom, fréquence, mode, pas et empreinte SHA-256 du commentaire validé.
+fige chaque mémoire validée.
 
 La CI vérifie notamment :
 
@@ -205,13 +214,13 @@ La CI vérifie notamment :
 - Normandie : 139 mémoires ;
 - `Duplex=off` et `Offset=0.000000` ;
 - les noms ≤ 10 caractères ;
-- l'absence de doublons ;
 - le registre `packRegistry.ts` ;
 - le sélecteur multi-régions ;
-- le masquage des options non prises en charge ;
 - les fichiers réellement présents dans `website/dist` après `astro build` ;
 - la génération Python dans un dossier temporaire ;
 - l'absence de réécriture de Normandie v0.3.1 ;
+- le starter régional dans un dossier temporaire ;
+- le refus d'une publication ou d'un écrasement implicite par le starter ;
 - le build Astro.
 
 ## Synchroniser le dépôt local
@@ -230,6 +239,7 @@ Les archives de sprint sont uniquement des sauvegardes de référence. Elles ne 
 python tests\test_generator.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+python tests\test_regional_pack_starter.py
 python tests\test_web_generator.py
 python tests\test_annecy_research.py
 python tests\test_annecy_aviation_lakes.py
@@ -240,13 +250,7 @@ python tests\test_annecy_prepublication.py
 python tests\test_annecy_prepublication_review.py
 ```
 
-Après `python tests\test_generator.py`, cette commande doit maintenant rester propre :
-
-```powershell
-git status
-```
-
-Résultat attendu :
+Après les tests locaux, `git status` doit rester :
 
 ```text
 nothing to commit, working tree clean
@@ -286,18 +290,20 @@ http://localhost:4321/regions/normandie
 
 ## Ajouter une future région
 
-Le principe est :
+Le chemin recommandé est maintenant :
 
-1. créer les inventaires de recherche ;
-2. définir les blocs et positions ;
-3. créer un wrapper `<pack>Pack.ts` utilisant `chirpPack.ts` ;
-4. geler une carte de revue ;
-5. créer les routes ou fichiers publics validés ;
-6. enregistrer le pack et ses variantes dans `packRegistry.ts` ;
-7. ajouter uniquement les options réellement supportées ;
-8. contrôler les fichiers finaux de `website/dist` par la CI ;
-9. publier explicitement après revue ;
-10. ne jamais réécrire une ancienne version publiée : toute évolution produit une nouvelle version.
+1. créer le starter avec `tools/create_regional_pack.py` ;
+2. documenter les sources et le périmètre ;
+3. construire les inventaires sans remplir artificiellement le pack ;
+4. définir les blocs et positions ;
+5. créer le wrapper `<pack>Pack.ts` utilisant `chirpPack.ts` ;
+6. fermer les portes de publication ;
+7. geler une carte de revue ;
+8. créer les routes ou fichiers publics validés ;
+9. enregistrer explicitement le pack dans `packRegistry.ts` ;
+10. contrôler les fichiers finaux de `website/dist` ;
+11. publier seulement après revue et CI verte ;
+12. ne jamais réécrire une ancienne version publiée.
 
 Voir [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md) pour le détail.
 

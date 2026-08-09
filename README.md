@@ -4,257 +4,174 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables et les exports publics sont configurés en réception seule.
 
-## État actuel — Sprint 27
+## État actuel — Sprint 28
 
-Deux packs régionaux sont publiés :
+Deux packs régionaux restent publiés et immuables :
 
 - **Normandie v0.3.1** — 139 mémoires RX ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, avec variante **48 mémoires sans aviation**.
 
-Une troisième région reste en **recherche uniquement** :
+La Bretagne reste en recherche uniquement :
 
-- **Bretagne v0.1 — recherche** — 0 fréquence retenue, aucun nombre cible de mémoires, aucune publication autorisée.
+- **Bretagne v0.1 — recherche** — 0 fréquence promue, aucun nombre cible artificiel, aucune publication autorisée.
 
-Le Sprint 27 impose désormais un **zonage radio Bretagne Nord / Bretagne Sud**. La Bretagne ne sera pas traitée comme un bloc maritime unique : la recherche distingue le contexte **CROSS Corsen** côté Manche Ouest / Bretagne Nord-Ouest, le contexte **CROSS Etel** côté Atlantique / Bretagne Sud, ainsi qu'une zone de transition du Finistère Sud dont la limite opérationnelle exacte doit encore être confirmée sur la cartographie officielle actuelle.
+Le Sprint 28 étend la recherche aux **relais radioamateurs de secours / ADRASEC**, aux relais régionaux utiles et aux infrastructures côtières publiques. Les versions déjà publiées ne sont pas modifiées : les évolutions passent par **Normandie v0.4** et **Annecy–Alpes–Léman v0.3** en recherche.
 
-Le générateur public reste disponible sur :
-
-```text
-/generateur
-```
-
-Il ne propose toujours que **Annecy–Alpes–Léman** et **Normandie**. Bretagne n'y apparaîtra qu'après recherche, revue et publication explicite.
+Le générateur public `/generateur` continue de proposer uniquement Annecy–Alpes–Léman v0.2 et Normandie v0.3.1.
 
 ## Principes permanents
 
-- Réception seule : `Duplex=off` sur les exports RadioPack.
-- `Offset=0.000000` pour les fichiers RX-only.
+- Réception seule : `Duplex=off`.
+- `Offset=0.000000`.
 - Noms de mémoires limités à 10 caractères.
 - Maximum 200 mémoires par pack.
 - Pas de remplissage artificiel.
-- Les fréquences contestées ou insuffisamment recoupées restent hors production.
-- Pour l'ISS et les satellites, seule la liaison descendante est mémorisée ; la liaison montante reste une métadonnée.
-- Les données aéronautiques sont destinées à l'écoute et ne constituent pas une source de préparation ou de conduite d'un vol.
-- Un pack régional déjà publié n'est jamais réécrit silencieusement : une évolution exige une nouvelle version et une nouvelle revue.
 - Une source identifiée n'est pas automatiquement une fréquence validée.
-- Une même fréquence ne doit pas être dupliquée artificiellement uniquement pour changer son étiquette géographique.
+- Une même fréquence ne doit pas être dupliquée uniquement pour changer son étiquette géographique ou son nom de site.
+- Une version régionale publiée est immuable ; toute évolution crée une nouvelle version et une nouvelle revue.
+- Les réseaux professionnels privés de sécurité/secours ne sont pas transformés en canaux d'écoute simplement parce qu'ils existent.
 
-## Bretagne v0.1 — recherche Sprint 27
+## Politique secours / ADRASEC — Sprint 28
 
-Le troisième chantier régional est ici :
-
-```text
-research/bretagne-v0.1/
-```
-
-L'espace contient maintenant :
-
-- `README.md` ;
-- `pack-plan.json` ;
-- `source-registry.json` ;
-- `publication-gates.json` ;
-- `memory-plan.json` ;
-- `maritime-zones.json`.
-
-État actuel :
+La politique commune est définie dans :
 
 ```text
-status: research_scaffold_not_public
-frequences retenues: 0
-expected_memory_count: null
-public_export_allowed: false
-public_registry_allowed: false
-public_routes_allowed: false
-review_completed: false
+research/emergency-radio-policy.json
 ```
 
-### Bretagne Nord / Bretagne Sud
+Peuvent être étudiés pour une future intégration RX :
 
-Le fichier :
+- relais et transpondeurs radioamateurs ADRASEC/FNRASEC publiquement documentés ;
+- relais radioamateurs analogiques régionaux réellement utiles à la couverture locale ;
+- canaux maritimes et diffusions météo/sécurité explicitement publics ;
+- autres diffusions de sécurité officiellement destinées à la réception des usagers.
+
+Restent hors publication par défaut :
+
+- canaux opérationnels internes PPDR/PMR de police, gendarmerie, SDIS, SAMU ou autres réseaux professionnels ;
+- canaux privés de Protection Civile, Croix-Rouge ou associations de secours lorsqu'ils ne sont pas explicitement destinés à l'écoute publique ou au service amateur ouvert ;
+- relais uniquement numériques incompatibles avec le profil RX analogique cible.
+
+L'ANFR distingue les réseaux radioamateurs des réseaux professionnels PMR/PPDR. RadioPack ne doit donc pas mélanger un relais amateur ADRASEC public avec un canal professionnel opérationnel privé.
+
+## Normandie v0.4 — recherche Mortain-Bocage / Sud-Manche
+
+La v0.3.1 publique reste figée. La prochaine évolution est préparée dans :
 
 ```text
-research/bretagne-v0.1/maritime-zones.json
+research/normandie-v0.4/
 ```
 
-impose trois sous-zones de recherche :
+Le périmètre prioritaire est **Mortain-Bocage / Sud-Manche**. La couverture utile ne s'arrête pas à la frontière du département 50 : la recherche regarde aussi les départements voisins **35, 53 et 61**.
 
-- **Bretagne Nord / Manche Ouest** — contexte opérationnel `CROSS Corsen` ;
-- **Bretagne Sud / Atlantique** — contexte opérationnel `CROSS Etel` ;
-- **transition Finistère Sud** — frontière opérationnelle actuelle à confirmer précisément avant publication.
+Premiers candidats enregistrés :
 
-Cette séparation s'applique à la VHF maritime, aux stations VHF déportées des CROSS, aux diffusions météo / sécurité et aux relais radioamateurs lorsque leur implantation ou leur couverture justifie un rattachement territorial.
+- `F5ZHY` — Montabot / Percy-en-Normandie — **145.6875 MHz FM** ;
+- `F6ZES` — Sourdeval — indicatif et site identifiés, fréquence actuelle encore à confirmer ;
+- `F6ZCE` — Mont des Avaloirs / département 53 — **145.700 MHz FM** ;
+- `F1ZBX` — Brocéliande / Paimpont / département 35 — **145.675 MHz FM**, couverture depuis Mortain à vérifier ;
+- `F1ZBL` — transpondeur Cherbourg, intérêt surtout Nord-Manche ;
+- `F1ZOV` — Equeurdreville, relais analogique Nord-Manche ;
+- `F5ZTE` — Percy-en-Normandie, réseau numérique conservé en métadonnée mais non retenu par défaut pour l'écoute analogique.
 
-### Canal 16
+L'**ADRASEC 14-50** est enregistrée comme organisation actuelle membre de la FNRASEC. Cette appartenance ne suffit jamais à déduire une fréquence : chaque relais doit être validé séparément.
 
-Le futur pack ne créera pas deux mémoires identiques du canal 16 uniquement pour écrire « Corsen » et « Etel ».
+## Annecy–Alpes–Léman v0.3 — recherche secours
 
-Le canal reste commun, mais la recherche doit conserver en métadonnées :
-
-- le CROSS responsable selon la zone ;
-- les stations VHF déportées / relais de couverture ;
-- les éventuelles zones de recouvrement ;
-- les canaux météo et de sécurité utilisés localement.
-
-Le registre officiel de recherche contient désormais des exemples opérationnels récents montrant notamment Corsen à Audierne / ouest Finistère et Etel à Concarneau / Finistère Sud. Ces exemples servent au cadrage ; la limite SRR actuelle exacte doit encore être extraite de la cartographie officielle avant promotion d'une fréquence maritime.
-
-### Météo et sécurité maritime
-
-Le contexte de recherche enregistre également :
-
-- annonces météo via le canal 16 avant diffusion sur 79/80 ;
-- diffusion météo côtière permanente sur 63/64 notamment dans le Morbihan.
-
-Aucune de ces informations n'est encore promue en mémoire Bretagne.
-
-### Relais et couverture
-
-Deux inventaires séparés devront être construits :
-
-1. stations VHF maritimes déportées / relais de couverture CROSS, avec distinction Bretagne Nord et Bretagne Sud ;
-2. relais radioamateurs, rattachés à Bretagne Nord, Bretagne Sud ou à la zone de transition lorsque cela est pertinent.
-
-Une nouvelle porte de publication `maritime_zoning` bloque toute sortie publique tant que ce travail n'est pas terminé.
-
-### Sources Bretagne
-
-Le registre de sources contient maintenant dix points d'entrée institutionnels ou opérationnels officiels, notamment :
-
-- SIA / AIP France — Brest Bretagne `LFRB` ;
-- SIA / AIP France — Rennes Saint-Jacques `LFRN` ;
-- portail Open Data de l'ANFR ;
-- services ANFR liés aux radioamateurs ;
-- documentation officielle du ministère chargé de la mer sur le canal 16 et les diffusions météo ;
-- documentation de la Préfecture maritime de l'Atlantique sur le partage des zones CROSS et des opérations récentes.
-
-Toutes les entrées restent à :
+La v0.2 publique reste figée. La prochaine recherche est dans :
 
 ```text
-frequency_data_promoted: false
+research/annecy-alpes-leman-v0.3/
 ```
 
-Bretagne n'existe volontairement pas dans :
+Premiers candidats :
+
+- `F1ZJV` — Pointe des Brasses — **145.7875 MHz FM**, relais ADRASEC 74 ;
+- `F1ZYT` — Semnoz — même sortie 145.7875 MHz : pas de doublon mémoire uniquement pour distinguer le site ;
+- `F1ZHG` — Fort du Mont — **145.2875 MHz**, transpondeur ADRASEC 73 ;
+- `F5ZGT` — Cime Caron — **145.450 MHz**, pertinence de couverture Annecy à confirmer.
+
+Le rôle des relais ADRASEC 73/38/01 sera étudié uniquement s'ils apportent une couverture réellement pertinente au bassin Annecy–Alpes–Léman.
+
+## Bretagne v0.1 — recherche Nord / Sud + ADRASEC
+
+Le zonage du Sprint 27 reste obligatoire :
+
+- **Bretagne Nord / Manche Ouest** — contexte CROSS Corsen ;
+- **Bretagne Sud / Atlantique** — contexte CROSS Etel ;
+- **transition Finistère Sud** — limite opérationnelle exacte encore à confirmer.
+
+Le canal 16 reste une fréquence commune : il ne sera pas dupliqué uniquement pour écrire « Corsen » et « Etel ». Le CROSS responsable, les stations VHF déportées et les zones de couverture restent des métadonnées territoriales.
+
+Le nouvel inventaire :
 
 ```text
-website/src/lib/packRegistry.ts
-website/src/data/regions.json
-website/src/pages/regions/
-website/src/pages/downloads/
-website/public/downloads/
+research/bretagne-v0.1/emergency-relays.json
 ```
 
-Voir [SPRINT-26-BRETAGNE-INITIALIZATION.md](SPRINT-26-BRETAGNE-INITIALIZATION.md) et [SPRINT-27-BRETAGNE-MARITIME-ZONING.md](SPRINT-27-BRETAGNE-MARITIME-ZONING.md).
+ouvre maintenant la recherche sur **ADRASEC 22 / 29 / 35 / 56** et les relais régionaux associés.
 
-## Annecy–Alpes–Léman v0.2
+Premiers éléments :
 
-| Bloc | Mémoires |
-|---|---:|
-| PMR446 | 16 |
-| APRS / ISS | 6 |
-| Satellites FM | 3 |
-| Canaux d'appel | 2 |
-| Radioamateur France | 19 |
-| Radioamateur Suisse | 2 |
-| Aviation France / bassin genevois | 11 |
-| Aviation Suisse | 6 |
-| **Total** | **65** |
+- `F1ZUG-4` — APRS **144.800 MHz**, site ARA35 avec rôle documenté dans le réseau ADRASEC 35 ;
+- `F5ZZC-4` — digipeater APRS ADRASEC 35, fréquence actuelle à revalider avant toute promotion ;
+- `F1ZBX` — Brocéliande — **145.675 MHz FM** ;
+- `F1ZBH` et `F1ZGQ` — APRS Finistère **144.800 MHz**, conservés comme métadonnées de maillage et non comme doublons du canal APRS national.
 
-La variante sans aviation retire uniquement les 17 mémoires aviation et conserve **48 mémoires** sans compacter les autres positions.
+Une porte de publication `emergency_relay_inventory` bloque Bretagne tant que les infrastructures ADRASEC 22/29/35/56 et les relais régionaux pertinents ne sont pas correctement inventoriés et zonés.
 
-Téléchargements publics :
+## Packs publics actuels
+
+### Annecy–Alpes–Léman v0.2
+
+Téléchargements :
 
 ```text
 /downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv
 /downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv
 ```
 
-## Normandie v0.3.1
+### Normandie v0.3.1
 
-Le pack Normandie public contient 139 mémoires RX :
+Téléchargement :
 
 ```text
 /downloads/normandie/radiopack-france-normandie-v0.3.1.csv
 ```
 
-Normandie v0.3.1 est un **artefact publié immuable**. Toute actualisation devra créer une nouvelle version avec une nouvelle revue.
+Le catalogue public reste donc :
 
-## Architecture de génération
+```text
+Annecy 65 / 48 + Normandie 139
+```
 
-Les règles CHIRP génériques du site sont centralisées dans :
+## Architecture
+
+Moteur CHIRP générique :
 
 ```text
 website/src/lib/chirpPack.ts
 ```
 
-La configuration spécifique d'Annecy–Alpes–Léman est dans :
+Configuration Annecy publique :
 
 ```text
 website/src/lib/annecyPack.ts
 ```
 
-Le registre public multi-régions est :
+Registre des packs effectivement téléchargeables :
 
 ```text
 website/src/lib/packRegistry.ts
 ```
 
-Il décrit actuellement uniquement :
+Bretagne v0.1, Normandie v0.4 et Annecy–Alpes–Léman v0.3 restent volontairement hors de ce registre.
 
-- Annecy–Alpes–Léman v0.2 complet — 65 mémoires ;
-- Annecy–Alpes–Léman v0.2 sans aviation — 48 mémoires ;
-- Normandie v0.3.1 — 139 mémoires.
+Voir aussi :
 
-Bretagne reste hors de ce registre tant que ses portes de publication ne sont pas fermées.
-
-## Starter de pack régional
-
-L'outil :
-
-```text
-tools/create_regional_pack.py
-```
-
-initialise un espace de recherche non public. Il ne crée jamais automatiquement de page, de route CSV, de fichier sous `website/public`, d'entrée dans `packRegistry.ts` ou d'entrée dans `regions.json`.
-
-Voir [SPRINT-25-REGIONAL-STARTER.md](SPRINT-25-REGIONAL-STARTER.md) et [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md).
-
-## Tests de génération isolés
-
-Le générateur Python générique accepte :
-
-```text
---output-root <dossier>
-```
-
-`tests/test_generator.py` utilise un dossier temporaire et ne réécrit plus les CSV suivis par Git. Normandie v0.3.1 n'est volontairement plus une sortie du générateur générique.
-
-## Revue et garde-fous
-
-La CI vérifie notamment :
-
-- Annecy complet : 65 mémoires ;
-- Annecy sans aviation : 48 mémoires ;
-- Normandie : 139 mémoires ;
-- les exports RX-only ;
-- le registre multi-régions public ;
-- la génération Python en sortie temporaire ;
-- l'immutabilité de Normandie v0.3.1 ;
-- le starter régional ;
-- zéro fréquence Bretagne promue ;
-- Bretagne Nord / CROSS Corsen et Bretagne Sud / CROSS Etel obligatoires dans la recherche ;
-- limite SRR actuelle laissée bloquante tant qu'elle n'est pas confirmée ;
-- inventaire futur obligatoire des stations VHF déportées et relais radioamateurs par sous-zone ;
-- l'absence de Bretagne dans le site et le générateur public ;
-- le build Astro.
-
-## Synchroniser le dépôt local
-
-```powershell
-cd "C:\Users\cross\Documents\CODE\PROJETS\RadioPack-France"
-git pull --ff-only
-git status
-```
-
-Les archives de sprint sont uniquement des sauvegardes de référence. Elles ne doivent pas être copiées ou décompressées dans le dépôt quand les mêmes changements sont déjà sur GitHub.
+- [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md)
+- [SPRINT-27-BRETAGNE-MARITIME-ZONING.md](SPRINT-27-BRETAGNE-MARITIME-ZONING.md)
+- [SPRINT-28-EMERGENCY-ADRASEC-RESEARCH.md](SPRINT-28-EMERGENCY-ADRASEC-RESEARCH.md)
 
 ## Tests principaux
 
@@ -264,6 +181,7 @@ python tests\test_site_files.py
 python tests\test_pack_registry.py
 python tests\test_regional_pack_starter.py
 python tests\test_bretagne_research_scaffold.py
+python tests\test_emergency_relay_research.py
 python tests\test_web_generator.py
 python tests\test_annecy_research.py
 python tests\test_annecy_aviation_lakes.py
@@ -274,7 +192,13 @@ python tests\test_annecy_prepublication.py
 python tests\test_annecy_prepublication_review.py
 ```
 
-Après les tests locaux, `git status` doit rester :
+Après les tests locaux :
+
+```powershell
+git status
+```
+
+Résultat attendu :
 
 ```text
 nothing to commit, working tree clean
@@ -290,35 +214,23 @@ python tests\test_built_annecy_public_csv.py
 python tests\test_built_public_pack_catalog.py
 ```
 
-Le catalogue public doit toujours valider :
+## Synchroniser le dépôt local
 
-```text
-Annecy 65 / 48 + Normandie 139
+```powershell
+cd "C:\Users\cross\Documents\CODE\PROJETS\RadioPack-France"
+git pull --ff-only
+git status
 ```
 
-Bretagne ne doit pas encore apparaître dans ce résultat.
+Les archives de sprint sont des sauvegardes de référence uniquement : ne pas les décompresser dans le dépôt local lorsque GitHub contient déjà les changements.
 
-## Prochaine étape Bretagne
+## Maintenance
 
-Le prochain travail restera dans `research/bretagne-v0.1/` et devra en priorité :
-
-1. confirmer précisément la limite SRR actuelle entre CROSS Corsen et CROSS Etel ;
-2. inventorier les stations VHF déportées / relais de couverture des deux CROSS ;
-3. cartographier les diffusions météo / sécurité maritime par sous-zone ;
-4. construire séparément l'inventaire des relais radioamateurs Bretagne Nord et Bretagne Sud ;
-5. poursuivre ensuite les inventaires aviation et autres domaines ;
-6. ne promouvoir aucune fréquence sans validation ;
-7. ne fixer aucun nombre cible artificiel de mémoires.
-
-## Maintenance du projet
-
-Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint afin de refléter l'état réel du dépôt, les fonctions disponibles, les commandes utiles et les prochaines étapes.
-
-La CI doit être ajustée en même temps lorsque le contrat du sprint évolue.
+Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint. La CI doit évoluer avec le contrat du sprint.
 
 Les caches Python (`__pycache__/` et `*.py[cod]`) sont ignorés par Git.
 
-Le détail historique des évolutions reste conservé dans [CHANGELOG.md](CHANGELOG.md).
+Le détail historique reste dans [CHANGELOG.md](CHANGELOG.md).
 
 ## Sécurité et usage
 

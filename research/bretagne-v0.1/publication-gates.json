@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "status": "blocked_research_not_started",
+  "created": "2026-08-09",
+  "pack": {
+    "name": "Bretagne",
+    "slug": "bretagne",
+    "target_version": "0.1"
+  },
+  "public_release_allowed": false,
+  "gates": [
+    {
+      "id": "sources",
+      "status": "seed_sources_identified_not_validated",
+      "required_for_public_release": true,
+      "description": "Sources principales identifiées, extraction et validation encore à réaliser"
+    },
+    {
+      "id": "memory_plan",
+      "status": "pending",
+      "required_for_public_release": true,
+      "description": "Plan mémoire à définir sans remplissage artificiel"
+    },
+    {
+      "id": "data_validation",
+      "status": "pending",
+      "required_for_public_release": true,
+      "description": "Fréquences retenues à recouper selon leur domaine"
+    },
+    {
+      "id": "dynamic_rechecks",
+      "status": "pending_scope_definition",
+      "required_for_public_release": true,
+      "description": "Contrôles dynamiques applicables à définir puis revalider"
+    },
+    {
+      "id": "review_map",
+      "status": "pending",
+      "required_for_public_release": true,
+      "description": "Carte de revue finale à créer et valider"
+    },
+    {
+      "id": "explicit_publication",
+      "status": "blocked_until_all_previous_gates_pass",
+      "required_for_public_release": true,
+      "description": "Ajout au site et au registre public uniquement après revue et CI verte"
+    }
+  ]
+}

@@ -80,7 +80,7 @@ assert memory["reserved_positions"] == []
 assert memory["rules"]["duplex"] == "off"
 assert memory["rules"]["no_artificial_fill"] is True
 
-assert maritime["schema_version"] == "1.3"
+assert maritime["schema_version"] == "1.4"
 assert maritime["status"] == "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending"
 assert maritime["rules"]["single_bretagne_maritime_zone_forbidden"] is True
 assert maritime["rules"]["north_south_operational_split_required"] is True
@@ -92,6 +92,8 @@ assert maritime["rules"]["etel_srr_starts_at_pointe_de_penmarch_primary_sourced"
 assert maritime["rules"]["corsen_frehel_radio_infrastructure_primary_sourced"] is True
 assert maritime["rules"]["corsen_stiff_radio_infrastructure_primary_sourced"] is True
 assert maritime["rules"]["current_radio_infrastructure_does_not_imply_channel_assignment"] is True
+assert maritime["rules"]["current_sector_vhf_contact_does_not_identify_transmitter_site"] is True
+assert maritime["rules"]["planned_cross_ng_reorganisation_does_not_change_current_frequency_validation"] is True
 assert maritime["rules"]["corsen_detailed_srr_and_vhf_overlap_still_pending"] is True
 assert maritime["rules"]["no_frequency_promoted_from_this_file"] is True
 zones = {zone["id"]: zone for zone in maritime["zones"]}
@@ -101,28 +103,36 @@ assert zones["bretagne-sud-atlantique"]["cross"] == "CROSS Etel"
 assert zones["bretagne-sud-atlantique"]["official_extent"].startswith("Pointe de Penmarc'h")
 assert zones["transition-finistere-sud"]["cross"] is None
 assert zones["transition-finistere-sud"]["status"] == "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending"
-north_summary = zones["bretagne-nord-ouest"]["current_network_summary"]
+north = zones["bretagne-nord-ouest"]
+assert north["current_operational_center"]["site"] == "Pointe de Corsen / Plouarzel"
+assert north["current_operational_center"]["radio_service_or_channel"] is None
+north_summary = north["current_network_summary"]
 assert north_summary["vhf_station_count"] == 10
 assert north_summary["mf_station_count"] == 2
 assert set(north_summary["site_names_partially_revalidated"]) == {"Cap Fréhel", "Stiff / Ouessant"}
-north_infra = {item["site"]: item for item in zones["bretagne-nord-ouest"]["verified_remote_radio_infrastructure_sites"]}
+north_infra = {item["site"]: item for item in north["verified_remote_radio_infrastructure_sites"]}
 assert set(north_infra) == {"Cap Fréhel", "Stiff / Ouessant"}
 assert north_infra["Cap Fréhel"]["radio_service_or_channel"] is None
 assert north_infra["Stiff / Ouessant"]["radio_service_or_channel"] is None
-assert north_infra["Stiff / Ouessant"]["status"] == "primary_current_site_and_radio_equipment_verified_channel_pending"
+coverage = north["current_operational_coverage_evidence"]
+assert len(coverage) == 1
+assert coverage[0]["sector"].startswith("Pointe du Raz")
+assert coverage[0]["transmitter_site_identified"] is False
+assert coverage[0]["channel_identified"] is False
+assert north["current_transition_context"]["target_operational_horizon"] == "2027"
 weather_sites = {item["site"]: item for item in zones["bretagne-sud-atlantique"]["verified_weather_emitters"]}
 assert set(weather_sites) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
 assert weather_sites["Etel"]["channel"] == 63
 assert maritime["channel_16"]["memory_strategy"] == "do_not_duplicate_same_frequency_only_to_label_cross"
 assert maritime["channel_16"]["frequency_promoted"] is False
 assert maritime["weather_and_safety"]["frequency_promoted"] is False
-assert maritime["repeaters"]["maritime_remote_sites"]["status"] == "etel_weather_emitters_partial_inventory_corsen_two_radio_infrastructures_verified_channelled_inventory_required"
+assert maritime["repeaters"]["maritime_remote_sites"]["status"] == "etel_weather_emitters_partial_inventory_corsen_two_radio_infrastructures_and_sector_coverage_verified_channelled_inventory_required"
 assert maritime["repeaters"]["amateur_repeaters"]["status"] == "inventory_required"
 assert maritime["publication"]["public_export_allowed"] is False
 assert maritime["publication"]["public_registry_allowed"] is False
 assert maritime["publication"]["public_routes_allowed"] is False
 
-assert emergency["schema_version"] == "1.3"
+assert emergency["schema_version"] == "1.4"
 assert emergency["status"] == "research_inventory_not_public"
 assert {item["id"] for item in emergency["organisations"]} == {"ADRASEC-22", "ADRASEC-29", "ADRASEC-35", "ADRASEC-56"}
 emergency_candidates = {item["id"]: item for item in emergency["candidates"]}
@@ -131,6 +141,9 @@ assert emergency_candidates["F1ZUG-4"]["rx_pack_candidate"] is False
 assert emergency_candidates["F5ZZC-4"]["frequency_mhz"] is None
 assert emergency_candidates["F1ZBX"]["output_mhz"] == 145.6750
 assert emergency_candidates["F1ZBX"]["rx_pack_candidate"] is True
+assert emergency_candidates["F5ZZH"]["output_mhz"] == 145.7875
+assert emergency_candidates["F5ZZH"]["input_mhz"] == 145.1875
+assert emergency_candidates["F5ZZH"]["rx_pack_candidate"] is False
 assert emergency_candidates["F1ZBH"]["frequency_mhz"] == 144.8000
 assert emergency_candidates["F1ZGQ"]["frequency_mhz"] == 144.8000
 assert emergency_candidates["F1ZGS"]["output_mhz"] == 431.4250
@@ -142,6 +155,7 @@ assert all(item["frequency_promoted_to_public_pack"] is False for item in emerge
 assert emergency["rules"]["private_ppdr_operational_frequencies_excluded"] is True
 assert emergency["rules"]["aprs_same_frequency_not_duplicated_by_site"] is True
 assert emergency["rules"]["north_south_zoning_required"] is True
+assert emergency["rules"]["temporarily_stopped_repeaters_not_active_candidates"] is True
 assert emergency["rules"]["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
@@ -168,4 +182,4 @@ for expected in [
 ]:
     assert expected in readme, f"Cadrage Bretagne absent: {expected}"
 
-print("Tests RadioPack Bretagne maritime + emergency zoning: Penmarc'h interface + Etel weather emitters verified, Cap Frehel and Stiff Corsen radio infrastructures current-primary-verified with channels pending, ADRASEC and regional relay inventory, 0 public side effects OK")
+print("Tests RadioPack Bretagne maritime + emergency zoning: Penmarc'h interface + Etel weather emitters verified, Cap Frehel and Stiff Corsen radio infrastructures current-primary-verified with channels pending, Pointe du Raz sector VHF coverage guarded without transmitter-site inference, CROSS-NG transition kept non-frequency, F5ZZH stopped/non-candidate, ADRASEC and regional relay inventory, 0 public side effects OK")

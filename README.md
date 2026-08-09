@@ -59,6 +59,14 @@ Le plan concret pour les prochaines versions est :
 research/paired-rx-next-version-plan.json
 ```
 
+La carte des fréquences uniques après déduplication est désormais séparée dans :
+
+```text
+research/paired-rx-deduplicated-memory-plan.json
+```
+
+Elle matérialise uniquement les paires déjà documentées et encore actives au niveau recherche : **8 fréquences uniques pour Normandie v0.4**, **10 pour Annecy–Alpes–Léman v0.3** et **21 pour Bretagne v0.1**. Ces nombres ne sont **pas** des tailles finales de packs ni des objectifs de remplissage. Les fréquences partagées sont fusionnées par région et les liaisons arrêtées ou non résolues restent hors de cette liste active.
+
 La **Normandie v0.3.1** publiée applique déjà cette logique à la VHF marine avec des paires comme `M01-S` / `M01-C`. Elle reste figée. La **Normandie v0.4**, **Annecy–Alpes–Léman v0.3** et **Bretagne v0.1** appliquent désormais cette règle à toute nouvelle liaison publique duplex/split retenue.
 
 ## Politique secours / ADRASEC
@@ -305,6 +313,7 @@ python tests\test_site_files.py
 python tests\test_pack_registry.py
 python tests\test_regional_pack_starter.py
 python tests\test_paired_rx_policy.py
+python tests\test_paired_rx_memory_plan.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
@@ -353,7 +362,7 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 
 ## Prochaines priorités
 
-1. intégrer la politique paired RX dans les assembleurs des prochaines versions lorsque leurs plans mémoire seront ouverts ;
+1. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
 2. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
 3. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
 4. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;

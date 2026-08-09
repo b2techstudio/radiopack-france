@@ -5,9 +5,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 mortain_path = ROOT / "research/normandie-v0.4/mortain-bocage-coverage.json"
 maritime_path = ROOT / "research/bretagne-v0.1/public-maritime-radio.json"
+maritime_zones_path = ROOT / "research/bretagne-v0.1/maritime-zones.json"
 bretagne_relays_path = ROOT / "research/bretagne-v0.1/emergency-relays.json"
 
-for path in (mortain_path, maritime_path, bretagne_relays_path):
+for path in (mortain_path, maritime_path, maritime_zones_path, bretagne_relays_path):
     assert path.is_file(), f"Fichier de recherche manquant: {path.relative_to(ROOT)}"
 
 mortain = json.loads(mortain_path.read_text(encoding="utf-8"))
@@ -58,7 +59,7 @@ assert stations["F5ZTQ"]["rx_pack_candidate"] is False
 assert all(item["frequency_promoted_to_public_pack"] is False for item in mortain["stations"])
 
 maritime = json.loads(maritime_path.read_text(encoding="utf-8"))
-assert maritime["status"] == "official_channel_frequencies_verified_site_coverage_pending"
+assert maritime["status"] == "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending"
 channels = {item["channel"]: item for item in maritime["channels"]}
 assert set(channels) == {16, 63, 64, 79, 80}
 assert channels[16]["mode"] == "simplex"
@@ -68,22 +69,47 @@ assert channels[79]["coast_tx_ship_rx_mhz"] == 161.5750
 assert channels[79]["rx_memory_mhz"] == 161.5750
 assert channels[80]["coast_tx_ship_rx_mhz"] == 161.6250
 assert channels[80]["rx_memory_mhz"] == 161.6250
+assert channels[80]["verified_etel_brittany_emitters"] == ["Penmarc'h", "Groix", "Belle-Ile"]
 assert channels[63]["coast_tx_ship_rx_mhz"] == 160.7750
 assert channels[63]["rx_memory_mhz"] == 160.7750
+assert channels[63]["verified_etel_brittany_emitters"] == ["Etel"]
 assert channels[64]["coast_tx_ship_rx_mhz"] == 160.8250
 assert channels[64]["rx_memory_mhz"] == 160.8250
+assert channels[64]["zone_assignment"] == "current_brittany_transmitter_requires_primary_reconciliation"
 assert all(item["frequency_promoted_to_public_pack"] is False for item in maritime["channels"])
 assert maritime["rules"]["rx_only_uses_coast_transmit_frequency_on_duplex_channels"] is True
 assert maritime["rules"]["channel_16_not_duplicated_by_cross_label"] is True
 assert maritime["rules"]["weather_channels_require_site_and_coverage_validation_before_publication"] is True
 assert maritime["rules"]["cross_remote_vhf_sites_must_be_primary_sourced"] is True
+assert maritime["rules"]["etel_srr_starts_at_penmarch_primary_verified"] is True
+assert maritime["rules"]["channel_64_requires_current_brittany_transmitter_reconciliation"] is True
+assert maritime["rules"]["corsen_remote_vhf_sites_still_pending"] is True
 assert maritime["rules"]["public_export_allowed"] is False
 crosses = {item["cross"]: item for item in maritime["cross_zones"]}
 assert set(crosses) == {"CROSS Corsen", "CROSS Etel"}
 assert crosses["CROSS Corsen"]["remote_vhf_sites"] == []
-assert crosses["CROSS Etel"]["remote_vhf_sites"] == []
 assert crosses["CROSS Corsen"]["remote_vhf_sites_status"] == "official_inventory_pending"
-assert crosses["CROSS Etel"]["remote_vhf_sites_status"] == "official_inventory_pending"
+assert crosses["CROSS Etel"]["official_srr_extent"].startswith("Pointe de Penmarc'h")
+etel_sites = {item["site"]: item for item in crosses["CROSS Etel"]["remote_vhf_sites"]}
+assert set(etel_sites) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
+assert etel_sites["Penmarc'h"]["channel"] == 80
+assert etel_sites["Groix"]["channel"] == 80
+assert etel_sites["Belle-Ile"]["channel"] == 80
+assert etel_sites["Etel"]["channel"] == 63
+assert etel_sites["Etel"]["broadcast"] == "continuous_coastal_weather"
+assert crosses["CROSS Etel"]["remote_vhf_sites_status"] == "official_weather_emitter_inventory_partially_verified"
+
+zones_data = json.loads(maritime_zones_path.read_text(encoding="utf-8"))
+assert zones_data["status"] == "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending"
+assert zones_data["rules"]["etel_srr_starts_at_pointe_de_penmarch_primary_sourced"] is True
+assert zones_data["rules"]["corsen_detailed_srr_and_vhf_overlap_still_pending"] is True
+zones = {item["id"]: item for item in zones_data["zones"]}
+assert zones["bretagne-sud-atlantique"]["official_extent"].startswith("Pointe de Penmarc'h")
+assert zones["transition-finistere-sud"]["status"] == "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending"
+weather_emitters = {item["site"]: item for item in zones["bretagne-sud-atlantique"]["verified_weather_emitters"]}
+assert set(weather_emitters) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
+assert weather_emitters["Etel"]["channel"] == 63
+assert zones_data["publication"]["public_export_allowed"] is False
 
 bretagne = json.loads(bretagne_relays_path.read_text(encoding="utf-8"))
 assert bretagne["schema_version"] == "1.1"
@@ -115,4 +141,4 @@ assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
 
-print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, maritime RX verified, 0 public mutations OK")
+print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Corsen/channel64 pending, 0 public mutations OK")

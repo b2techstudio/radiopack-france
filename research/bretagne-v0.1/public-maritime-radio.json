@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "status": "official_channel_frequencies_etel_weather_emitters_and_corsen_frehel_site_verified_channels_pending",
+  "status": "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending",
   "updated": "2026-08-09",
   "purpose": "Documenter uniquement les voies VHF maritimes publiques de sécurité/météo utiles au futur pack Bretagne RX, en distinguant fréquence navire et fréquence station côtière pour les voies duplex.",
   "official_sources": [
@@ -38,13 +38,13 @@
       "authority": "DIRM NAMO",
       "title": "CROSS Corsen",
       "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
-      "status": "primary_current_corsen_context"
+      "status": "primary_current_corsen_context_remote_vhf_site_list_pending"
     },
     {
       "authority": "DIRM NAMO",
       "title": "Restauration de la lanterne du phare du Cap Fréhel",
       "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/restauration-de-la-lanterne-du-phare-du-cap-frehel-a1473.html",
-      "status": "primary_corsen_remote_site_and_vessel_liaison_role"
+      "status": "primary_corsen_remote_radio_infrastructure_and_vessel_liaison_role"
     }
   ],
   "channels": [
@@ -67,7 +67,7 @@
       "rx_memory_mhz": 161.5750,
       "official_assignment": "CROSS et Autorités Portuaires",
       "operational_context": "bulletins météo annoncés préalablement sur le canal 16 ; le planning primaire CROSS Étel exploité ne liste pas d'émetteur Bretagne sur 79",
-      "zone_assignment": "corsen_channel_assignment_pending_etel_brittany_schedule_has_no_channel_79_site",
+      "zone_assignment": "corsen_emitter_inventory_pending_etel_brittany_schedule_has_no_channel_79_site",
       "frequency_promoted_to_public_pack": false
     },
     {
@@ -79,7 +79,7 @@
       "official_assignment": "CROSS et Autorités Portuaires",
       "operational_context": "bulletins météo annoncés préalablement sur le canal 16",
       "verified_etel_brittany_emitters": ["Penmarc'h", "Groix", "Belle-Ile"],
-      "zone_assignment": "etel_brittany_emitters_primary_verified_corsen_channel_inventory_pending",
+      "zone_assignment": "etel_brittany_emitters_primary_verified_corsen_inventory_pending",
       "frequency_promoted_to_public_pack": false
     },
     {
@@ -113,17 +113,17 @@
       "cross": "CROSS Corsen",
       "subzone": "Bretagne Nord / Manche Ouest",
       "channel_16_common": true,
-      "remote_vhf_sites": [
+      "verified_remote_radio_infrastructure_sites": [
         {
           "site": "Cap Fréhel",
           "role": "traffic_surveillance_and_vessel_liaison",
-          "channel": null,
-          "rx_memory_mhz": null,
-          "source_status": "primary_site_and_role_verified_channel_pending"
+          "radio_service_or_channel": null,
+          "source_status": "primary_site_and_role_verified_radio_service_pending"
         }
       ],
-      "remote_vhf_sites_status": "official_partial_site_inventory_channel_assignments_pending",
-      "note": "La DIRM NAMO confirme des équipements CROSS Corsen de suivi et de liaison avec les navires au phare du Cap Fréhel. Aucun canal n'est attribué à ce site sans source primaire supplémentaire. L'inventaire complet des stations VHF/MHF Corsen reste à poursuivre."
+      "remote_vhf_sites": [],
+      "remote_vhf_sites_status": "official_inventory_pending",
+      "note": "La DIRM NAMO confirme des équipements CROSS Corsen de suivi et de liaison avec les navires au phare du Cap Fréhel, sans préciser dans la source exploitée le service radio ni le canal. Le site est donc distingué de l'inventaire VHF météo, qui reste à établir par source primaire."
     },
     {
       "cross": "CROSS Etel",
@@ -171,8 +171,8 @@
     "cross_remote_vhf_sites_must_be_primary_sourced": true,
     "etel_srr_starts_at_penmarch_primary_verified": true,
     "channel_64_requires_current_brittany_transmitter_reconciliation": true,
-    "corsen_frehel_site_primary_verified": true,
-    "corsen_channel_assignments_still_pending": true,
+    "corsen_frehel_radio_infrastructure_primary_verified": true,
+    "corsen_remote_vhf_sites_still_pending": true,
     "private_port_or_rescue_networks_not_explicitly_public_are_excluded": true,
     "public_export_allowed": false
   }

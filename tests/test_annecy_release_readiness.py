@@ -13,8 +13,9 @@ OPTIONS = ROOT / "generator/options.json"
 BUILDER = ROOT / "tools/build_annecy_prepublication.py"
 REVIEW_MAP = ROOT / "research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json"
 PUBLIC_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
+PACK_REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 
-for path in [CHECKER, PLAN, OPERATIONS, SATELLITES, OPTIONS, BUILDER, REVIEW_MAP, PUBLIC_ROUTE]:
+for path in [CHECKER, PLAN, OPERATIONS, SATELLITES, OPTIONS, BUILDER, REVIEW_MAP, PUBLIC_ROUTE, PACK_REGISTRY]:
     assert path.is_file(), f"Fichier readiness manquant: {path.relative_to(ROOT)}"
 
 spec = importlib.util.spec_from_file_location("annecy_readiness", CHECKER)
@@ -61,9 +62,21 @@ assert satellites["release_recheck"]["status"] == "passed_official_amsat_recheck
 assert satellites["release_recheck"]["ao91_limit_confirmed"] == "sunlight_only_due_to_battery"
 
 options = json.loads(OPTIONS.read_text(encoding="utf-8"))
-assert options["status"] == "public_generator_wired_v0.2_published"
+assert options["schema_version"] == "3.0"
+assert options["status"] == "multi_region_public_generator"
 assert options["implementation"]["public_ui_wired"] is True
 assert options["implementation"]["public_download_created"] is True
+assert options["implementation"]["public_pack_registry"] == "website/src/lib/packRegistry.ts"
+assert options["implementation"]["default_pack"] == "annecy-alpes-leman"
+assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie"}
+assert options["options"]["include_aviation"]["scope"] == ["annecy-alpes-leman"]
+assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
+
+registry = PACK_REGISTRY.read_text(encoding="utf-8")
+assert 'id: "annecy-alpes-leman"' in registry
+assert 'memoryCount: 65' in registry
+assert 'memoryCount: 48' in registry
+assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv' in registry
 
 completed = subprocess.run(
     [sys.executable, str(CHECKER), "--root", str(ROOT), "--json"],
@@ -75,4 +88,4 @@ cli_result = json.loads(completed.stdout)
 assert cli_result["ready_for_public_prepublication"] is True
 assert cli_result["blockers"] == []
 
-print("Tests Annecy–Alpes–Léman release readiness: PUBLISHED v0.2")
+print("Tests Annecy–Alpes–Léman release readiness: PUBLISHED v0.2 + multi-region generator")

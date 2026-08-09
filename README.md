@@ -177,7 +177,15 @@ Les futurs noms proposés suivent le modèle déjà utilisé par la Normandie : 
 
 Le planning officiel du CROSS Étel identifie quatre émetteurs météo bretons exploitables comme métadonnées territoriales : **Penmarc'h**, **Groix**, **Belle-Ile** sur le canal 80 et **Étel** sur le canal 63 en continu.
 
-Le ministère mentionne toujours une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan. La page et le planning primaires du CROSS Étel exploités identifient explicitement Étel sur le canal 63 et aucun émetteur Bretagne sur 64. RadioPack conserve donc le canal 64 en recherche sans inventer de site, tout en gardant sa paire de fréquences RX comme donnée réglementaire.
+Un inventaire technique séparé est désormais conservé dans :
+
+```text
+research/bretagne-v0.1/etel-network.json
+```
+
+Une offre officielle DIRM NAMO de juillet 2026 indique que le service technique du CROSS Étel assure la maintenance de **17 stations radio littorales de la Pointe de Penmarc'h à Biarritz**. Ce chiffre confirme que les quatre émetteurs météo bretons nommés ne constituent qu'un inventaire partiel du réseau. La page actuelle du CROSS Étel confirme aussi Chassiron et Étel sur le canal 63 en diffusion continue ; Chassiron reste une métadonnée hors Bretagne.
+
+Le nombre de stations ne permet pas d'en déduire les noms ni les canaux. Le ministère mentionne toujours une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan, mais les sources locales exploitées n'identifient explicitement aucun site Bretagne sur le canal 64. RadioPack conserve donc le canal 64 en recherche sans inventer de site, tout en gardant sa paire de fréquences RX comme donnée réglementaire.
 
 ### CROSS Corsen : SRR, infrastructures et couverture du Raz
 
@@ -297,6 +305,7 @@ python tests\test_site_files.py
 python tests\test_pack_registry.py
 python tests\test_regional_pack_starter.py
 python tests\test_paired_rx_policy.py
+python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
 python tests\test_mortain_bretagne_radio_research.py
@@ -345,10 +354,10 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 ## Prochaines priorités
 
 1. intégrer la politique paired RX dans les assembleurs des prochaines versions lorsque leurs plans mémoire seront ouverts ;
-2. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
-3. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
-4. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
-5. réconcilier l'émetteur actuel du canal 64 dans le Morbihan ;
+2. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
+3. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
+4. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
+5. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
 6. trouver une seconde source actuelle pour F6ZES Sourdeval ;
 7. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
 8. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;

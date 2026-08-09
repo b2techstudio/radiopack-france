@@ -4,6 +4,10 @@
 CSV generation has no third-party dependency.
 Annecy–Alpes–Léman v0.2 is published by the Astro generator and is intentionally
 not regenerated from the historical Annecy v0.1 datasets in this script.
+
+By default, generated files are written to their normal repository locations.
+Tests can pass --output-root to generate the exact same relative paths in an
+isolated temporary directory without touching tracked public files.
 """
 from __future__ import annotations
 
@@ -18,6 +22,39 @@ CHIRP_COLUMNS = [
     "rToneFreq", "cToneFreq", "DtcsCode", "DtcsPolarity", "RxDtcsCode",
     "CrossMode", "Mode", "TStep", "Skip", "Power", "Comment",
     "URCALL", "RPT1CALL", "RPT2CALL", "DVCODE",
+]
+
+OUTPUT_JOBS = [
+    (
+        "dataset",
+        Path("data/national/pmr446.json"),
+        Path("website/public/downloads/national/radiopack-france-pmr446-rx.csv"),
+    ),
+    (
+        "dataset",
+        Path("data/national/marine-vhf-rx.json"),
+        Path("website/public/downloads/national/radiopack-france-marine-vhf-rx.csv"),
+    ),
+    (
+        "dataset",
+        Path("data/national/amateur-listening-rx.json"),
+        Path("website/public/downloads/national/radiopack-france-amateur-listening-rx.csv"),
+    ),
+    (
+        "dataset",
+        Path("data/national/amateur-calls-rx.json"),
+        Path("website/public/downloads/national/radiopack-france-amateur-calls-rx.csv"),
+    ),
+    (
+        "dataset",
+        Path("data/regions/normandie/repeaters-analog-rx.json"),
+        Path("website/public/downloads/normandie/radiopack-france-normandie-repeaters-rx.csv"),
+    ),
+    (
+        "pack",
+        Path("data/regions/normandie/pack.json"),
+        Path("website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"),
+    ),
 ]
 
 
@@ -132,32 +169,27 @@ def generate_pack(root: Path, pack_path: Path, output: Path) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generateur CSV CHIRP - RadioPack France")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=None,
+        help="Racine de sortie alternative; conserve les chemins relatifs sans modifier le dépôt source.",
+    )
     args = parser.parse_args()
     root = args.root.resolve()
+    output_root = args.output_root.resolve() if args.output_root is not None else root
 
-    jobs = [
-        ("dataset", Path("data/national/pmr446.json"),
-         root / "website/public/downloads/national/radiopack-france-pmr446-rx.csv"),
-        ("dataset", Path("data/national/marine-vhf-rx.json"),
-         root / "website/public/downloads/national/radiopack-france-marine-vhf-rx.csv"),
-        ("dataset", Path("data/national/amateur-listening-rx.json"),
-         root / "website/public/downloads/national/radiopack-france-amateur-listening-rx.csv"),
-        ("dataset", Path("data/national/amateur-calls-rx.json"),
-         root / "website/public/downloads/national/radiopack-france-amateur-calls-rx.csv"),
-        ("dataset", Path("data/regions/normandie/repeaters-analog-rx.json"),
-         root / "website/public/downloads/normandie/radiopack-france-normandie-repeaters-rx.csv"),
-        ("pack", Path("data/regions/normandie/pack.json"),
-         root / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"),
-    ]
-
-    for kind, source, output in jobs:
+    for kind, source, output_relative in OUTPUT_JOBS:
+        output = output_root / output_relative
         count = (
             generate_dataset(root, source, output)
             if kind == "dataset"
             else generate_pack(root, source, output)
         )
-        print(f"OK: {output.relative_to(root)} ({count} memoires)")
+        print(f"OK: {output_relative} ({count} memoires)")
 
+    if output_root != root:
+        print(f"INFO: sortie isolée: {output_root}")
     print("INFO: Annecy–Alpes–Léman v0.2 est généré par website/src/lib/annecyPack.ts")
 
 

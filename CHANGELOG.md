@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.20.0 - 2026-08-09
+
+- Ajout de `research/emergency-radio-policy.json` pour distinguer les relais radioamateurs/ADRASEC et services publics éligibles des réseaux opérationnels PPDR/PMR privés qui restent hors publication.
+- Ouverture de `research/normandie-v0.4/` sans modifier Normandie v0.3.1, avec priorité Mortain-Bocage / Sud-Manche et contrôle de la couverture utile dans les départements voisins 35, 53 et 61.
+- Ajout des premiers candidats Normandie v0.4 : F5ZHY Montabot/Percy, F6ZES Sourdeval à revalider, F6ZCE Mont des Avaloirs, F1ZBX Brocéliande et plusieurs infrastructures Manche conservées selon leur pertinence réelle.
+- Classement des relais uniquement numériques comme métadonnées lorsqu'ils ne sont pas utiles au profil RX analogique cible.
+- Ouverture de `research/annecy-alpes-leman-v0.3/` sans modifier Annecy–Alpes–Léman v0.2.
+- Réouverture de F1ZJV Pointe des Brasses comme candidat analogique ADRASEC 74, conservation de F1ZYT Semnoz comme métadonnée sur la même fréquence de sortie et ajout des candidats ADRASEC 73 F1ZHG / F5ZGT.
+- Ajout de `research/bretagne-v0.1/emergency-relays.json` avec inventaire initial ADRASEC 22/29/35/56, relais analogiques et digipeaters APRS, tout en conservant le zonage Bretagne Nord / Bretagne Sud.
+- Ajout de la porte Bretagne `emergency_relay_inventory`, bloquante tant que les infrastructures secours radioamateur pertinentes ne sont pas inventoriées et zonées.
+- Ajout de `tests/test_emergency_relay_research.py`, renforcement du test Bretagne et mise à jour du garde-fou général Sprint 28.
+- Ajout de l'étape CI `Test emergency and ADRASEC research`, de `SPRINT-28-EMERGENCY-ADRASEC-RESEARCH.md` et mise à jour du README au Sprint 28.
+- État public inchangé : Normandie v0.3.1 reste à 139 mémoires, Annecy–Alpes–Léman v0.2 à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.19.0 - 2026-08-09
 
 - Découpage obligatoire de la recherche Bretagne en **Bretagne Nord / Manche Ouest**, **Bretagne Sud / Atlantique** et **zone de transition Finistère Sud**.

@@ -46,6 +46,9 @@ jobs:
       - name: Test Bretagne research scaffold
         run: python tests/test_bretagne_research_scaffold.py
 
+      - name: Test emergency and ADRASEC research
+        run: python tests/test_emergency_relay_research.py
+
       - name: Test Annecy Alps Leman research inventories
         run: python tests/test_annecy_research.py
 

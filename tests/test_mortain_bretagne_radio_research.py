@@ -56,7 +56,7 @@ assert stations["F5ZTQ"]["rx_pack_candidate"] is False
 assert all(item["frequency_promoted_to_public_pack"] is False for item in mortain["stations"])
 
 maritime = json.loads(maritime_path.read_text(encoding="utf-8"))
-assert maritime["schema_version"] == "1.3"
+assert maritime["schema_version"] == "1.4"
 assert maritime["status"] == "official_channel_frequencies_and_etel_weather_emitters_verified_corsen_sites_pending"
 channels = {item["channel"]: item for item in maritime["channels"]}
 assert set(channels) == {16, 63, 64, 79, 80}
@@ -65,8 +65,8 @@ assert channels[16]["rx_memory_mhz"] == 156.8000
 assert channels[16]["memory_strategy"] == "reuse_single_common_channel_and_store_cross_as_zone_metadata"
 assert channels[79]["coast_tx_ship_rx_mhz"] == 161.5750
 assert channels[79]["rx_memory_mhz"] == 161.5750
-assert channels[79]["historical_corsen_primary_status"] == "channel_79_weather_broadcast_documented_in_2003_requires_current_revalidation"
-assert channels[79]["zone_assignment"] == "corsen_current_emitter_inventory_pending_etel_brittany_schedule_has_no_channel_79_site"
+assert channels[79]["historical_corsen_primary_status"] == "channel_79_weather_broadcast_documented_in_2003_requires_current_transmitter_revalidation"
+assert channels[79]["zone_assignment"] == "corsen_current_channel_79_emitter_pending_etel_brittany_schedule_has_no_channel_79_site"
 assert channels[80]["coast_tx_ship_rx_mhz"] == 161.6250
 assert channels[80]["rx_memory_mhz"] == 161.6250
 assert channels[80]["verified_etel_brittany_emitters"] == ["Penmarc'h", "Groix", "Belle-Ile"]
@@ -83,10 +83,12 @@ assert maritime["rules"]["channel_16_not_duplicated_by_cross_label"] is True
 assert maritime["rules"]["weather_channels_require_site_and_coverage_validation_before_publication"] is True
 assert maritime["rules"]["cross_remote_vhf_sites_must_be_primary_sourced"] is True
 assert maritime["rules"]["historical_primary_radio_sites_must_be_revalidated_before_current_use"] is True
+assert maritime["rules"]["current_radio_infrastructure_does_not_imply_current_channel_assignment"] is True
 assert maritime["rules"]["etel_srr_starts_at_penmarch_primary_verified"] is True
 assert maritime["rules"]["channel_64_requires_current_brittany_transmitter_reconciliation"] is True
 assert maritime["rules"]["corsen_frehel_radio_infrastructure_primary_verified"] is True
-assert maritime["rules"]["corsen_current_network_size_known_site_names_pending"] is True
+assert maritime["rules"]["corsen_stiff_radio_infrastructure_primary_verified"] is True
+assert maritime["rules"]["corsen_current_network_size_known_site_names_partially_revalidated"] is True
 assert maritime["rules"]["corsen_remote_vhf_sites_still_pending"] is True
 assert maritime["rules"]["public_export_allowed"] is False
 crosses = {item["cross"]: item for item in maritime["cross_zones"]}
@@ -95,15 +97,21 @@ corsen = crosses["CROSS Corsen"]
 assert corsen["current_network_summary"]["vhf_station_count"] == 10
 assert corsen["current_network_summary"]["mf_station_count"] == 2
 assert corsen["remote_vhf_sites"] == []
-assert corsen["remote_vhf_sites_status"] == "official_current_site_inventory_pending"
+assert corsen["remote_vhf_sites_status"] == "official_current_channelled_vhf_site_inventory_pending"
 corsen_infra = {item["site"]: item for item in corsen["verified_remote_radio_infrastructure_sites"]}
-assert set(corsen_infra) == {"Cap Fréhel"}
+assert set(corsen_infra) == {"Cap Fréhel", "Stiff / Ouessant"}
 assert corsen_infra["Cap Fréhel"]["role"] == "traffic_surveillance_and_vessel_liaison"
 assert corsen_infra["Cap Fréhel"]["radio_service_or_channel"] is None
+assert corsen_infra["Stiff / Ouessant"]["role"] == "radar_and_radio_communications_supporting_cross_corsen"
+assert corsen_infra["Stiff / Ouessant"]["radio_service_or_channel"] is None
+assert corsen_infra["Stiff / Ouessant"]["source_status"] == "primary_current_site_and_radio_equipment_verified_channel_pending"
 historical_sites = {item["site"]: item for item in corsen["historical_primary_radio_architecture"]}
 assert set(historical_sites) == {"Stiff / Ouessant", "Pointe du Raz", "Corsen"}
-assert all(item["current_validation"] is False for item in historical_sites.values())
-assert corsen["historical_channel_79_context"]["status"] == "primary_2003_weather_and_information_broadcast_requires_current_revalidation"
+assert historical_sites["Stiff / Ouessant"]["current_validation"] is True
+assert historical_sites["Stiff / Ouessant"]["current_revalidation_status"] == "current_radio_communications_infrastructure_primary_verified_channel_pending"
+assert historical_sites["Pointe du Raz"]["current_validation"] is False
+assert historical_sites["Corsen"]["current_validation"] is False
+assert corsen["historical_channel_79_context"]["status"] == "primary_2003_weather_and_information_broadcast_requires_current_transmitter_revalidation"
 assert crosses["CROSS Etel"]["official_srr_extent"].startswith("Pointe de Penmarc'h")
 etel_sites = {item["site"]: item for item in crosses["CROSS Etel"]["remote_vhf_sites"]}
 assert set(etel_sites) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
@@ -115,17 +123,23 @@ assert etel_sites["Etel"]["broadcast"] == "continuous_coastal_weather"
 assert crosses["CROSS Etel"]["remote_vhf_sites_status"] == "official_weather_emitter_inventory_partially_verified"
 
 zones_data = json.loads(maritime_zones_path.read_text(encoding="utf-8"))
-assert zones_data["schema_version"] == "1.2"
+assert zones_data["schema_version"] == "1.3"
 assert zones_data["status"] == "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending"
 assert zones_data["rules"]["etel_srr_starts_at_pointe_de_penmarch_primary_sourced"] is True
 assert zones_data["rules"]["corsen_frehel_radio_infrastructure_primary_sourced"] is True
+assert zones_data["rules"]["corsen_stiff_radio_infrastructure_primary_sourced"] is True
+assert zones_data["rules"]["current_radio_infrastructure_does_not_imply_channel_assignment"] is True
 assert zones_data["rules"]["corsen_detailed_srr_and_vhf_overlap_still_pending"] is True
 zones = {item["id"]: item for item in zones_data["zones"]}
 assert zones["bretagne-sud-atlantique"]["official_extent"].startswith("Pointe de Penmarc'h")
 assert zones["transition-finistere-sud"]["status"] == "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending"
+north_summary = zones["bretagne-nord-ouest"]["current_network_summary"]
+assert north_summary["vhf_station_count"] == 10
+assert north_summary["mf_station_count"] == 2
 north_infra = {item["site"]: item for item in zones["bretagne-nord-ouest"]["verified_remote_radio_infrastructure_sites"]}
-assert set(north_infra) == {"Cap Fréhel"}
+assert set(north_infra) == {"Cap Fréhel", "Stiff / Ouessant"}
 assert north_infra["Cap Fréhel"]["radio_service_or_channel"] is None
+assert north_infra["Stiff / Ouessant"]["radio_service_or_channel"] is None
 weather_emitters = {item["site"]: item for item in zones["bretagne-sud-atlantique"]["verified_weather_emitters"]}
 assert set(weather_emitters) == {"Penmarc'h", "Groix", "Belle-Ile", "Etel"}
 assert weather_emitters["Etel"]["channel"] == 63
@@ -184,4 +198,4 @@ assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
 
-print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Corsen current network 10 VHF + 2 MF with site list pending, Cap Frehel primary-verified, historical Stiff/Pointe du Raz/Corsen leads kept non-current, channel 64 current ministry statement revalidated but transmitter unresolved, ADRASEC35 role split, Finistere analog candidates, APRS metadata only, 0 public mutations OK")
+print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Corsen current network 10 VHF + 2 MF with Cap Frehel and Stiff radio infrastructures current-primary-verified but channels pending, Pointe du Raz/Corsen historical leads kept non-current, channel 79 not inferred from Stiff, channel 64 transmitter unresolved, ADRASEC35 role split, Finistere analog candidates, APRS metadata only, 0 public mutations OK")

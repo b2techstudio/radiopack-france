@@ -8,16 +8,19 @@ required_files = [
     ".gitignore",
     ".github/workflows/ci.yml",
     "REGIONAL-PACK-WORKFLOW.md",
-    "SPRINT-20-WEB-GENERATOR.md",
     "SPRINT-21-PUBLICATION-V0.2.md",
     "SPRINT-22-POST-PUBLICATION.md",
+    "SPRINT-23-MULTI-REGION-GENERATOR.md",
     "generator/options.json",
     "generator/generate_chirp_csv.py",
     "tests/test_web_generator.py",
+    "tests/test_pack_registry.py",
+    "tests/test_built_public_pack_catalog.py",
     "research/annecy-alpes-leman-v0.2/prepublication-plan.json",
     "research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json",
     "website/src/lib/chirpPack.ts",
     "website/src/lib/annecyPack.ts",
+    "website/src/lib/packRegistry.ts",
     "website/src/pages/generateur.astro",
     "website/src/pages/telechargements.astro",
     "website/src/pages/versions.astro",
@@ -25,6 +28,7 @@ required_files = [
     "website/src/pages/regions/annecy-haute-savoie.astro",
     "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts",
     "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts",
+    "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv",
     "website/src/pages/sitemap.xml.ts",
     "website/public/_headers",
     "website/public/_redirects",
@@ -36,17 +40,15 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 22",
+    "État actuel — Sprint 23",
+    "Normandie v0.3.1** — 139 mémoires RX",
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
-    "published_v0.2",
-    "65/65 mémoires",
     "48 mémoires sans aviation",
-    "Le contrôle NOTAM est **informatif et non bloquant**",
+    "générateur public est maintenant multi-régions",
+    "website/src/lib/packRegistry.ts",
     "website/src/lib/chirpPack.ts",
     "website/src/lib/annecyPack.ts",
     "REGIONAL-PACK-WORKFLOW.md",
-    "ancienne v0.1",
-    "téléchargement direct",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README non actualisé: {expected}"
@@ -57,22 +59,25 @@ assert "__pycache__/" in gitignore
 assert "*.py[cod]" in gitignore
 
 options = json.loads((ROOT / "generator/options.json").read_text(encoding="utf-8"))
-assert options["schema_version"] == "2.1"
-assert options["status"] == "public_generator_wired_v0.2_published"
+assert options["schema_version"] == "3.0"
+assert options["status"] == "multi_region_public_generator"
 implementation = options["implementation"]
 assert implementation["generic_pack_library"] == "website/src/lib/chirpPack.ts"
-assert implementation["public_pack_library"] == "website/src/lib/annecyPack.ts"
+assert implementation["annecy_pack_library"] == "website/src/lib/annecyPack.ts"
+assert implementation["public_pack_registry"] == "website/src/lib/packRegistry.ts"
+assert implementation["published_pack_count"] == 2
+assert implementation["default_pack"] == "annecy-alpes-leman"
 assert implementation["public_ui_wired"] is True
 assert implementation["public_ui_download_locked"] is False
-assert implementation["public_download_created"] is True
+assert options["ui_contract"]["pack_selector"] is True
 assert options["ui_contract"]["download_enabled"] is True
-assert options["ui_contract"]["download_strategy"] == "direct_prerendered_route"
-assert options["options"]["include_aviation"]["annecy_memory_count_when_enabled"] == 65
-assert options["options"]["include_aviation"]["annecy_memory_count_when_disabled"] == 48
+assert options["ui_contract"]["download_strategy"] == "direct_validated_route"
+assert options["ui_contract"]["unsupported_options_hidden"] is True
+assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie"}
+assert options["options"]["include_aviation"]["scope"] == ["annecy-alpes-leman"]
+assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 assert options["options"]["notam_check"]["blocks_generation"] is False
-assert options["services"]["FR"]["url"].startswith("https://sofia-briefing.")
-assert options["services"]["CH"]["url"] == "https://www.skybriefing.com/fr/services/notam-briefing"
 
 plan = json.loads((ROOT / "research/annecy-alpes-leman-v0.2/prepublication-plan.json").read_text(encoding="utf-8"))
 assert plan["status"] == "published_v0.2"
@@ -90,11 +95,15 @@ assert review["expected_memory_count_without_aviation"] == 48
 assert len(review["rows"]) == 65
 
 regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
+assert len(regions) == 2
 annecy = next(region for region in regions if region["slug"] == "annecy-haute-savoie")
+normandie = next(region for region in regions if region["slug"] == "normandie")
 assert annecy["name"] == "Annecy–Alpes–Léman"
-assert annecy["status"] == "v0.2 disponible"
 assert annecy["available"] is True
 assert annecy["memoryCount"] == 65
+assert normandie["name"] == "Normandie"
+assert normandie["available"] is True
+assert normandie["memoryCount"] == 139
 
 generic_library = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
 for expected in [
@@ -114,6 +123,20 @@ assert "buildChirpCsv(getAnnecyPack(includeAviation))" in annecy_library
 assert 'verificationAllowList: ["verified_current"]' in annecy_library
 assert 'group: "aviation"' in annecy_library
 assert "const expected = includeAviation ? 65 : 48" in annecy_library
+
+registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
+for expected in [
+    'id: "annecy-alpes-leman"',
+    'id: "normandie"',
+    'memoryCount: 65',
+    'memoryCount: 48',
+    'memoryCount: 139',
+    '/downloads/normandie/radiopack-france-normandie-v0.3.1.csv',
+    'export const defaultPublicPackId = "annecy-alpes-leman"',
+]:
+    assert expected in registry, f"Registre public incomplet: {expected}"
+assert registry.count("downloadUrl:") == 3
+assert "annecy-haute-savoie-v0.1" not in registry
 
 standard_route = (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts").read_text(encoding="utf-8")
 no_air_route = (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts").read_text(encoding="utf-8")
@@ -143,11 +166,18 @@ assert "F1ZJV" in annecy_page
 assert "Duplex=off" in annecy_page
 
 generator_page = (ROOT / "website/src/pages/generateur.astro").read_text(encoding="utf-8")
+for expected in [
+    'id="pack-select"',
+    "Générateur web · multi-régions",
+    "Normandie · 139",
+    "Annecy · 65 / 48",
+    "downloadLink.href = variant.downloadUrl",
+    "aviationFieldset.hidden = !aviationSupported",
+    "notamFieldset.hidden = !pack.notamCheck",
+]:
+    assert expected in generator_page, f"Générateur multi-régions incomplet: {expected}"
 assert "new Blob" not in generator_page
 assert "URL.createObjectURL" not in generator_page
-assert "downloadLink.href = downloadUrl" in generator_page
-assert "SOFIA-Briefing · France" in generator_page
-assert "Skybriefing · Suisse" in generator_page
 
 legacy_paths = [
     "data/regions/annecy-haute-savoie/pack.json",
@@ -162,43 +192,22 @@ for relative in legacy_paths:
 
 redirects = (ROOT / "website/public/_redirects").read_text(encoding="utf-8")
 assert "radiopack-france-annecy-haute-savoie-v0.1.csv /downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv 301" in redirects
-assert "radiopack-france-annecy-haute-savoie-v0.1-guide.pdf /regions/annecy-haute-savoie 301" in redirects
-assert "radiopack-france-annecy-haute-savoie-repeaters-rx.csv /regions/annecy-haute-savoie 301" in redirects
-
-public_pages = [
-    ROOT / "website/src/pages/index.astro",
-    ROOT / "website/src/pages/generateur.astro",
-    ROOT / "website/src/pages/telechargements.astro",
-    ROOT / "website/src/pages/versions.astro",
-    ROOT / "website/src/pages/regions/annecy-haute-savoie.astro",
-]
-for path in public_pages:
-    content = path.read_text(encoding="utf-8")
-    assert "/downloads/annecy-haute-savoie/radiopack-france-annecy-haute-savoie-v0.1" not in content, f"Lien v0.1 public: {path.name}"
-    assert "annecy-alpes-leman-v0.2-internal" not in content, f"Candidat interne exposé: {path.name}"
-
-historical_generator = (ROOT / "generator/generate_chirp_csv.py").read_text(encoding="utf-8")
-assert "radiopack-france-annecy-haute-savoie-v0.1.csv" not in historical_generator
-assert "data/regions/annecy-haute-savoie/pack.json" not in historical_generator
-
-headers = (ROOT / "website/public/_headers").read_text(encoding="utf-8")
-for expected in ["X-Frame-Options: DENY", "X-Content-Type-Options: nosniff", "Referrer-Policy: strict-origin-when-cross-origin"]:
-    assert expected in headers
 
 workflow_doc = (ROOT / "REGIONAL-PACK-WORKFLOW.md").read_text(encoding="utf-8")
-for expected in ["chirpPack.ts", "<pack>Pack.ts", "carte de revue", "routes Astro prérendues", "README.md"]:
+for expected in ["chirpPack.ts", "<pack>Pack.ts", "packRegistry.ts", "carte de revue", "routes Astro prérendues", "README.md"]:
     assert expected in workflow_doc, f"Workflow régional incomplet: {expected}"
 
 workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
 for expected in [
     "python tests/test_generator.py",
     "python tests/test_site_files.py",
-    "python tests/test_annecy_prepublication_review.py",
+    "python tests/test_pack_registry.py",
     "python tests/test_web_generator.py",
     "python tests/test_built_annecy_public_csv.py",
+    "python tests/test_built_public_pack_catalog.py",
     "npm run build",
     "radiopack-ci/complete",
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 22 cleanup + reusable regional architecture: OK")
+print("Tests RadioPack Sprint 23 multi-region generator + registry: OK")

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "research_inventory_not_public",
   "updated": "2026-08-09",
   "pack": {
@@ -42,20 +42,23 @@
   "candidates": [
     {
       "id": "F1ZUG-4",
-      "kind": "amateur_aprs_digipeater_with_adrasec_network_role",
+      "kind": "amateur_aprs_digipeater_and_adrasec35_transponder_site",
       "site": "Châtillon-en-Vendelais",
       "department": 35,
       "subzone": "bretagne_est_transition_normandie",
       "frequency_mhz": 144.8000,
       "mode": "AX.25 APRS",
-      "status": "public_ara35_source_current_role_documented",
+      "adrasec_transponder_role_status": "public_ara35_2024_role_documented_frequency_unpublished",
+      "adrasec_transponder_frequency_mhz": null,
+      "role_evidence_date": "2024-06-23",
+      "status": "current_aprs_and_adrasec35_transponder_role_documented_frequency_split_required",
       "rx_pack_candidate": false,
       "frequency_promoted_to_public_pack": false,
       "sources": [
         "https://ara35.fr/frequences/digipeater-aprs-f1zug/",
         "https://ara35.fr/category/aprs/"
       ],
-      "note": "La fréquence APRS nationale existe déjà comme bloc commun ; conserver surtout le rôle ADRASEC et le site comme métadonnée de couverture."
+      "note": "L'APRS 144.800 MHz et le rôle de transpondeur ADRASEC 35 sont deux fonctions distinctes. La source ARA35 de juin 2024 confirme le transpondeur ADRASEC 35 sur le site F1ZUG mais n'en publie pas la fréquence ; ne jamais déduire cette fréquence de 144.800 MHz."
     },
     {
       "id": "F5ZZC-4",
@@ -90,6 +93,43 @@
         "https://ara35.fr/frequences/relais-phonie/r3/"
       ],
       "note": "Relais régional intérieur ; ne pas l'assimiler automatiquement à un relais ADRASEC."
+    },
+    {
+      "id": "F5ZEB",
+      "kind": "amateur_analog_transponder",
+      "site": "Rennes (Est)",
+      "department": 35,
+      "subzone": "bretagne_est_interieure",
+      "output_mhz": 438.6750,
+      "input_mhz": 431.0750,
+      "ctcss_hz": 71.9,
+      "mode": "FM",
+      "linked_repeater": "F1ZBX / R3 Brocéliande",
+      "status": "current_ara35_operational_since_2025_09_25",
+      "rx_pack_candidate": false,
+      "frequency_promoted_to_public_pack": false,
+      "sources": [
+        "https://ara35.fr/frequences/relais-phonie/transpondeur-ru71/"
+      ],
+      "note": "Transpondeur R71 actuel reliant le bassin rennais au R3 de Brocéliande. Candidat régional à étudier pour couverture et redondance ; aucun rôle ADRASEC n'est attribué sans source dédiée."
+    },
+    {
+      "id": "F5ZPV",
+      "kind": "amateur_dualmode_repeater",
+      "site": "Rennes Beaulieu / Cesson-Sévigné",
+      "department": 35,
+      "subzone": "bretagne_est_interieure",
+      "output_mhz": 439.8750,
+      "input_mhz": 430.4750,
+      "ctcss_hz": 71.9,
+      "modes": ["FM", "C4FM"],
+      "status": "temporarily_stopped_current_ara35_page",
+      "rx_pack_candidate": false,
+      "frequency_promoted_to_public_pack": false,
+      "sources": [
+        "https://ara35.fr/relais-ru19-uhf-de-beaulieu/"
+      ],
+      "note": "La page ARA35 actuelle indique le RU19 temporairement arrêté et annonçait un retour visé pour l'été 2026. Aucun redémarrage actuel n'est confirmé : rester hors candidat actif jusqu'à nouvelle preuve."
     },
     {
       "id": "F5ZIS",
@@ -189,8 +229,11 @@
   "research_required": [
     "inventorier les relais et transpondeurs explicitement ADRASEC 22",
     "inventorier les relais et transpondeurs explicitement ADRASEC 29",
-    "compléter les infrastructures ADRASEC 35 au-delà d'APRS",
+    "retrouver la fréquence actuelle du transpondeur ADRASEC 35 documenté sur le site F1ZUG sans la déduire de l'APRS 144.800",
+    "revalider l'infrastructure F5ZZC-4 ADRASEC 35",
     "inventorier les relais et transpondeurs explicitement ADRASEC 56",
+    "revoir la couverture et la redondance de F5ZEB R71 avec le R3 Brocéliande",
+    "revalider le redémarrage de F5ZPV RU19 avant tout retour parmi les candidats actifs",
     "rattacher chaque relais au zonage Bretagne Nord / Bretagne Sud / transition lorsque pertinent",
     "croiser les relais amateurs avec la couverture côtière sans confondre réseaux amateurs et réseaux PPDR privés",
     "revoir les entrées multiples F1ZBZ Lorient pour déterminer les fréquences réellement utiles au profil RX"
@@ -198,6 +241,8 @@
   "rules": {
     "private_ppdr_operational_frequencies_excluded": true,
     "aprs_same_frequency_not_duplicated_by_site": true,
+    "adrasec_transponder_frequency_must_not_be_inferred_from_aprs_frequency": true,
+    "temporarily_stopped_repeaters_not_active_candidates": true,
     "north_south_zoning_required": true,
     "adrasec_role_must_not_be_inferred_from_geography_only": true,
     "frequency_requires_current_validation_before_publication": true,

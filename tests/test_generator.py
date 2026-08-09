@@ -2,11 +2,11 @@ import csv
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR = ROOT / "generator/generate_chirp_csv.py"
-subprocess.run([sys.executable, str(GENERATOR), "--root", str(ROOT)], check=True)
 
 expected = {
     "website/public/downloads/national/radiopack-france-pmr446-rx.csv": 16,
@@ -17,18 +17,49 @@ expected = {
     "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv": 139,
 }
 
+published_before = {
+    relative: (ROOT / relative).read_bytes()
+    for relative in expected
+}
+
 loaded = {}
-for relative, expected_count in expected.items():
-    path = ROOT / relative
-    with path.open(encoding="utf-8", newline="") as handle:
-        rows = list(csv.DictReader(handle))
-    loaded[relative] = rows
-    assert len(rows) == expected_count, (relative, len(rows), expected_count)
-    assert all(row["Duplex"] == "off" for row in rows)
-    assert len({row["Name"] for row in rows}) == len(rows)
-    assert all(len(row["Name"]) <= 10 for row in rows)
+with tempfile.TemporaryDirectory(prefix="radiopack-generator-test-") as temporary:
+    output_root = Path(temporary)
+    subprocess.run(
+        [
+            sys.executable,
+            str(GENERATOR),
+            "--root",
+            str(ROOT),
+            "--output-root",
+            str(output_root),
+        ],
+        check=True,
+    )
+
+    for relative, expected_count in expected.items():
+        generated_path = output_root / relative
+        published_path = ROOT / relative
+        assert generated_path.is_file(), f"Sortie isolée manquante: {relative}"
+
+        with generated_path.open(encoding="utf-8", newline="") as handle:
+            generated_rows = list(csv.DictReader(handle))
+        with published_path.open(encoding="utf-8", newline="") as handle:
+            published_rows = list(csv.DictReader(handle))
+
+        assert generated_rows == published_rows, f"La génération diverge du CSV publié: {relative}"
+        loaded[relative] = generated_rows
+        assert len(generated_rows) == expected_count, (relative, len(generated_rows), expected_count)
+        assert all(row["Duplex"] == "off" for row in generated_rows)
+        assert len({row["Name"] for row in generated_rows}) == len(generated_rows)
+        assert all(len(row["Name"]) <= 10 for row in generated_rows)
+
+for relative, original_bytes in published_before.items():
+    assert (ROOT / relative).read_bytes() == original_bytes, f"Le test a modifié un fichier suivi: {relative}"
 
 generator_source = GENERATOR.read_text(encoding="utf-8")
+assert '"--output-root"' in generator_source
+assert "output_root / output_relative" in generator_source
 assert "data/regions/annecy-haute-savoie/pack.json" not in generator_source
 assert "radiopack-france-annecy-haute-savoie-v0.1.csv" not in generator_source
 assert "website/src/lib/annecyPack.ts" in generator_source
@@ -73,4 +104,4 @@ assert max(normandie_by_location) == 174
 assert normandie_by_name["53-F6ZCE"]["Frequency"] == "145.700000"
 assert normandie_by_location[174]["Name"] == "53-F6ZCE"
 
-print("Tests RadioPack generic generator + ISS links: OK")
+print("Tests RadioPack isolated generator + ISS links: OK")

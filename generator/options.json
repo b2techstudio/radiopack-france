@@ -1,17 +1,18 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.1",
   "status": "public_generator_wired_v0.2_published",
-  "updated": "2026-08-08",
-  "purpose": "Définir le comportement du générateur public RadioPack pour Annecy–Alpes–Léman v0.2.",
+  "updated": "2026-08-09",
+  "purpose": "Définir le comportement du générateur public RadioPack pour Annecy–Alpes–Léman v0.2 et préparer une architecture réutilisable pour les prochains packs.",
   "implementation": {
     "annecy_prepublication_builder": "tools/build_annecy_prepublication.py",
+    "generic_pack_library": "website/src/lib/chirpPack.ts",
     "public_pack_library": "website/src/lib/annecyPack.ts",
     "public_ui_wired": true,
     "public_ui_preview_wired": true,
     "public_ui_preview_route": "/generateur",
     "public_ui_download_locked": false,
     "public_download_created": true,
-    "public_delivery_mode": "Astro prerendered CSV routes plus browser Blob generation",
+    "public_delivery_mode": "Astro prerendered CSV routes selected directly by the browser generator",
     "standard_download": "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
     "no_aviation_download": "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv"
   },
@@ -24,7 +25,7 @@
       "blocks_generation": false,
       "annecy_memory_count_when_enabled": 65,
       "annecy_memory_count_when_disabled": 48,
-      "description": "Ajoute ou retire les blocs aviation validés du pack généré, sans renuméroter les autres mémoires."
+      "description": "Sélectionne la variante publique avec ou sans les blocs aviation validés, sans renuméroter les autres mémoires."
     },
     "notam_check": {
       "type": "state",
@@ -41,22 +42,32 @@
     "route": "/generateur",
     "preview_mode": false,
     "download_enabled": true,
+    "download_strategy": "direct_prerendered_route",
     "notam_checkbox_label": "Contrôle NOTAM avant génération",
     "confirmation_label": "J'ai vérifié les NOTAM applicables",
     "show_confirmation_when": "notam_check == requested_unconfirmed",
     "generation_allowed_when_unconfirmed": true,
-    "summary_fields": ["memory_count", "aviation_included", "notam_check_requested", "notam_check_confirmed"]
+    "summary_fields": ["memory_count", "aviation_included", "notam_check_requested", "notam_check_confirmed", "selected_filename"]
   },
   "services": {
-    "FR": {"name": "SOFIA-Briefing", "purpose": "Consulter les NOTAM applicables en France"},
-    "CH": {"name": "Skybriefing", "purpose": "Consulter les NOTAM applicables en Suisse"}
+    "FR": {
+      "name": "SOFIA-Briefing",
+      "purpose": "Consulter les NOTAM applicables en France",
+      "url": "https://sofia-briefing.aviation-civile.gouv.fr/sofia/pages/notamform.html"
+    },
+    "CH": {
+      "name": "Skybriefing",
+      "purpose": "Consulter les NOTAM applicables en Suisse",
+      "url": "https://www.skybriefing.com/fr/services/notam-briefing"
+    }
   },
   "rules": [
     "Le contrôle NOTAM est facultatif et non bloquant pour la génération d'un pack d'écoute RX.",
     "La case NOTAM est indépendante de l'option Inclure les fréquences aviation.",
     "Un NOTAM ne supprime, n'ajoute ni ne remplace automatiquement une fréquence de référence dans le CSV.",
-    "Le générateur public produit 65 mémoires avec aviation et 48 sans aviation.",
-    "Les deux variantes utilisent la même bibliothèque que les routes CSV publiques.",
+    "Le générateur public sélectionne 65 mémoires avec aviation et 48 sans aviation.",
+    "Le navigateur télécharge directement l'une des deux routes CSV prérendues et validées; il ne reconstruit plus un Blob CSV dans la page.",
+    "La bibliothèque générique chirpPack.ts centralise les règles CHIRP réutilisables pour les futurs packs régionaux.",
     "Toutes les mémoires publiques restent en réception seule avec Duplex=off.",
     "Le pack reste destiné à l'écoute et ne constitue pas une source de préparation ou de conduite d'un vol."
   ]

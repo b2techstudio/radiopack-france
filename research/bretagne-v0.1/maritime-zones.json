@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.4",
+  "schema_version": "1.5",
   "status": "research_zoning_penmarch_interface_confirmed_vhf_overlap_pending",
   "created": "2026-08-09",
   "updated": "2026-08-09",
@@ -16,6 +16,8 @@
     "weather_broadcast_channels_must_be_researched_by_zone": true,
     "amateur_repeaters_must_be_tagged_by_breton_subzone": true,
     "etel_srr_starts_at_pointe_de_penmarch_primary_sourced": true,
+    "corsen_srr_ends_at_pointe_de_penmarch_primary_sourced": true,
+    "srr_boundary_endpoints_do_not_imply_radio_overlap": true,
     "corsen_frehel_radio_infrastructure_primary_sourced": true,
     "corsen_stiff_radio_infrastructure_primary_sourced": true,
     "current_radio_infrastructure_does_not_imply_channel_assignment": true,
@@ -29,7 +31,10 @@
       "id": "bretagne-nord-ouest",
       "label": "Bretagne Nord / Manche Ouest",
       "cross": "CROSS Corsen",
-      "status": "current_primary_context_supported_two_radio_infrastructures_and_pointe_du_raz_sector_vhf_coverage_verified_channelled_inventory_pending",
+      "status": "current_primary_srr_endpoints_supported_two_radio_infrastructures_and_pointe_du_raz_sector_vhf_coverage_verified_channelled_inventory_pending",
+      "official_extent": "Baie du Mont-Saint-Michel (Ille-et-Vilaine) à la pointe de Penmarc'h (Finistère)",
+      "official_srr_area_approx_km2": 50000,
+      "srr_boundary_status": "current_primary_endpoints_verified_detailed_offshore_geometry_and_radio_overlap_pending",
       "primary_sources": [
         "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
         "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/restauration-de-la-lanterne-du-phare-du-cap-frehel-a1473.html",
@@ -80,6 +85,7 @@
         "status": "primary_current_reorganisation_project_not_a_current_frequency_or_site_change"
       },
       "evidence_examples": [
+        "La zone recherche et sauvetage actuelle du CROSS Corsen est explicitement donnée de la baie du Mont-Saint-Michel à la pointe de Penmarc'h.",
         "Audierne / ouest Finistère",
         "Île de Sein",
         "Pointe de Pen Hir / Camaret-sur-Mer",
@@ -110,7 +116,7 @@
         }
       ],
       "research_required": [
-        "cartographie détaillée de la SRR et éventuel recouvrement autour de l'interface Penmarc'h",
+        "documenter la géométrie offshore détaillée de la SRR et les éventuels recouvrements radio autour de l'interface Penmarc'h",
         "identifier la liste complète des stations VHF déportées et leur couverture canal 16",
         "identifier par source primaire les services radio et canaux de Cap Fréhel et du Stiff sans déduire un canal du seul rôle du site",
         "revalider actuellement l'installation radio historique de la Pointe du Raz malgré la couverture VHF sectorielle actuelle confirmée",
@@ -164,11 +170,12 @@
       "id": "transition-finistere-sud",
       "label": "Interface Penmarc'h / Finistère Sud",
       "cross": null,
-      "status": "etel_srr_start_at_penmarch_confirmed_vhf_overlap_pending",
+      "status": "corsen_srr_end_and_etel_srr_start_at_penmarch_primary_confirmed_vhf_overlap_pending",
       "evidence_examples": [
+        "Une source officielle 2026 donne la zone recherche et sauvetage du CROSS Corsen de la baie du Mont-Saint-Michel à la pointe de Penmarc'h.",
         "La DIRM NAMO indique que le CROSS Étel est compétent à partir de la Pointe de Penmarc'h vers le sud jusqu'à la frontière espagnole.",
         "Le planning officiel du CROSS Étel liste Penmarc'h sur le canal 80 pour les bulletins météo côtiers.",
-        "Audierne est traité par CROSS Corsen dans des opérations récentes tandis que Concarneau / Trévignon relève de CROSS Étel."
+        "Les deux CROSS se raccordent donc officiellement à Penmarc'h pour la responsabilité SAR, sans que cela démontre un recouvrement radio identique."
       ],
       "research_required": [
         "documenter la ligne cartographique détaillée et les éventuels recouvrements radio autour de Penmarc'h",
@@ -186,6 +193,7 @@
   "weather_and_safety": {
     "status": "etel_brittany_emitters_partially_primary_verified_corsen_channelled_sites_pending",
     "known_official_context": [
+      "La SRR actuelle du CROSS Corsen est donnée de la baie du Mont-Saint-Michel à la pointe de Penmarc'h, tandis que la compétence du CROSS Étel commence à Penmarc'h vers le sud ; cette interface de responsabilité n'identifie pas les recouvrements radio.",
       "Le canal 16 annonce les diffusions météo du CROSS sur les canaux 79 et 80.",
       "Le CROSS Étel publie Penmarc'h, Groix et Belle-Ile sur le canal 80 pour les bulletins météo côtiers.",
       "Le CROSS Étel publie sa station d'Étel sur le canal 63 en diffusion continue.",
@@ -199,7 +207,7 @@
   "repeaters": {
     "maritime_remote_sites": {
       "status": "etel_weather_emitters_partial_inventory_corsen_two_radio_infrastructures_and_sector_coverage_verified_channelled_inventory_required",
-      "rule": "Conserver séparément les émetteurs météo explicitement vérifiés, les infrastructures radio actuelles vérifiées et les simples preuves de couverture opérationnelle. Cap Fréhel et le Stiff sont documentés comme infrastructures radio Corsen actuelles ; le contact VHF actuel au nord de la Pointe du Raz ne permet pas d'identifier l'émetteur."
+      "rule": "Conserver séparément les limites de responsabilité SAR, les émetteurs météo explicitement vérifiés, les infrastructures radio actuelles vérifiées et les simples preuves de couverture opérationnelle. La frontière Penmarc'h commune aux deux SRR ne permet pas de déduire les recouvrements ni les sites VHF."
     },
     "amateur_repeaters": {
       "status": "inventory_required",

@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "status": "research_deduplicated_memory_plan_not_public",
+  "updated": "2026-08-09",
+  "source_plan": "research/paired-rx-next-version-plan.json",
+  "policy": "research/paired-rx-policy.json",
+  "purpose": "Matérialiser les fréquences RX uniques issues des liaisons duplex/split déjà documentées, après déduplication RF, sans attribuer de positions mémoire ni publier de nouvelle version.",
+  "export_contract": {
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "name_max_length": 10,
+    "same_rf_frequency_kept_once_per_region": true,
+    "memory_positions_assigned": false,
+    "public_pack_mutation_allowed": false
+  },
+  "regions": [
+    {
+      "id": "normandie-v0.4",
+      "unique_frequency_count": 8,
+      "memories": [
+        {"name_hint": "ZHY-IN", "frequency_mhz": 145.0875, "roles": ["F5ZHY repeater input"], "selection_status": "research_candidate"},
+        {"name_hint": "ZHY-OUT", "frequency_mhz": 145.6875, "roles": ["F5ZHY repeater output"], "selection_status": "research_candidate"},
+        {"name_hint": "ZCE-IN", "frequency_mhz": 145.1000, "roles": ["F6ZCE repeater input"], "selection_status": "research_candidate"},
+        {"name_hint": "ZCE-OUT", "frequency_mhz": 145.7000, "roles": ["F6ZCE repeater output"], "selection_status": "research_candidate"},
+        {"name_hint": "ZBX-IN", "frequency_mhz": 145.0750, "roles": ["F1ZBX repeater input"], "selection_status": "coverage_pending"},
+        {"name_hint": "ZBX-OUT", "frequency_mhz": 145.6750, "roles": ["F1ZBX repeater output"], "selection_status": "coverage_pending"},
+        {"name_hint": "ZOV-A", "frequency_mhz": 430.3750, "roles": ["F1ZOV paired side A"], "selection_status": "low_priority_research"},
+        {"name_hint": "ZOV-B", "frequency_mhz": 431.9750, "roles": ["F1ZOV paired side B"], "selection_status": "low_priority_research"}
+      ],
+      "excluded_or_unresolved": [
+        "F6ZES Sourdeval: frequency/mode unresolved",
+        "F1ZBL: directionality unresolved"
+      ]
+    },
+    {
+      "id": "annecy-alpes-leman-v0.3",
+      "unique_frequency_count": 10,
+      "memories": [
+        {"name_hint": "SAT-UP850", "frequency_mhz": 145.8500, "roles": ["SO-50 uplink RX", "AO-123 uplink RX"], "selection_status": "satellite_operational_recheck_required"},
+        {"name_hint": "SO50-DN", "frequency_mhz": 436.7950, "roles": ["SO-50 downlink RX"], "selection_status": "satellite_operational_recheck_required"},
+        {"name_hint": "AO91-UP", "frequency_mhz": 435.2500, "roles": ["AO-91 uplink RX"], "selection_status": "satellite_operational_recheck_required"},
+        {"name_hint": "AO91-DN", "frequency_mhz": 145.9600, "roles": ["AO-91 downlink RX"], "selection_status": "satellite_operational_recheck_required"},
+        {"name_hint": "AO123-DN", "frequency_mhz": 435.4000, "roles": ["AO-123 downlink RX"], "selection_status": "satellite_operational_recheck_required"},
+        {"name_hint": "JVYT-IN", "frequency_mhz": 145.1875, "roles": ["F1ZJV input", "F1ZYT input"], "selection_status": "deduplicated_shared_pair"},
+        {"name_hint": "JVYT-OUT", "frequency_mhz": 145.7875, "roles": ["F1ZJV output", "F1ZYT output"], "selection_status": "deduplicated_shared_pair"},
+        {"name_hint": "ZHG-A", "frequency_mhz": 145.2875, "roles": ["F1ZHG transponder side A"], "selection_status": "research_candidate"},
+        {"name_hint": "X432512", "frequency_mhz": 432.5125, "roles": ["F1ZHG transponder side B", "F5ZGT transponder side B"], "selection_status": "deduplicated_shared_frequency"},
+        {"name_hint": "ZGT-A", "frequency_mhz": 145.4500, "roles": ["F5ZGT transponder side A"], "selection_status": "coverage_pending"}
+      ],
+      "excluded_or_unresolved": [
+        "Published v0.2 remains immutable and keeps its historical downlink-only satellite model",
+        "Satellite operational status must be rechecked before v0.3 publication"
+      ]
+    },
+    {
+      "id": "bretagne-v0.1",
+      "unique_frequency_count": 21,
+      "memories": [
+        {"name_hint": "M63-S", "frequency_mhz": 156.1750, "roles": ["marine channel 63 ship-to-coast RX"], "selection_status": "research_verified_frequency_pair"},
+        {"name_hint": "M63-C", "frequency_mhz": 160.7750, "roles": ["marine channel 63 coast-to-ship RX"], "selection_status": "research_verified_frequency_pair"},
+        {"name_hint": "M64-S", "frequency_mhz": 156.2250, "roles": ["marine channel 64 ship-to-coast RX"], "selection_status": "site_reconciliation_pending"},
+        {"name_hint": "M64-C", "frequency_mhz": 160.8250, "roles": ["marine channel 64 coast-to-ship RX"], "selection_status": "site_reconciliation_pending"},
+        {"name_hint": "M79-S", "frequency_mhz": 156.9750, "roles": ["marine channel 79 ship-to-coast RX"], "selection_status": "current_corsen_emitter_pending"},
+        {"name_hint": "M79-C", "frequency_mhz": 161.5750, "roles": ["marine channel 79 coast-to-ship RX"], "selection_status": "current_corsen_emitter_pending"},
+        {"name_hint": "M80-S", "frequency_mhz": 157.0250, "roles": ["marine channel 80 ship-to-coast RX"], "selection_status": "research_verified_frequency_pair"},
+        {"name_hint": "M80-C", "frequency_mhz": 161.6250, "roles": ["marine channel 80 coast-to-ship RX"], "selection_status": "research_verified_frequency_pair"},
+        {"name_hint": "ZBX-IN", "frequency_mhz": 145.0750, "roles": ["F1ZBX repeater input"], "selection_status": "research_candidate"},
+        {"name_hint": "ZBX-OUT", "frequency_mhz": 145.6750, "roles": ["F1ZBX repeater output"], "selection_status": "research_candidate"},
+        {"name_hint": "ZEB-A", "frequency_mhz": 431.0750, "roles": ["F5ZEB transponder side A"], "selection_status": "coverage_and_redundancy_pending"},
+        {"name_hint": "ZEB-B", "frequency_mhz": 438.6750, "roles": ["F5ZEB transponder side B"], "selection_status": "coverage_and_redundancy_pending"},
+        {"name_hint": "ZIS-A", "frequency_mhz": 145.2375, "roles": ["F5ZIS transponder side A"], "selection_status": "research_candidate"},
+        {"name_hint": "X432650", "frequency_mhz": 432.6500, "roles": ["F5ZIS transponder side B", "F5ZIT transponder side B"], "selection_status": "deduplicated_shared_frequency"},
+        {"name_hint": "ZIT-A", "frequency_mhz": 145.2250, "roles": ["F5ZIT transponder side A"], "selection_status": "research_candidate"},
+        {"name_hint": "X145262", "frequency_mhz": 145.2625, "roles": ["F1ZGS transponder side A", "F5ZDV transponder side A", "F5ZZL transponder side A"], "selection_status": "deduplicated_shared_frequency"},
+        {"name_hint": "ZGS-B", "frequency_mhz": 431.4250, "roles": ["F1ZGS transponder side B"], "selection_status": "research_candidate"},
+        {"name_hint": "ZDV-B", "frequency_mhz": 438.7000, "roles": ["F5ZDV transponder side B"], "selection_status": "research_candidate"},
+        {"name_hint": "ZZL-B", "frequency_mhz": 431.3750, "roles": ["F5ZZL transponder side B"], "selection_status": "research_candidate"},
+        {"name_hint": "ZPE-IN", "frequency_mhz": 145.1375, "roles": ["F5ZPE repeater input"], "selection_status": "research_candidate"},
+        {"name_hint": "ZPE-OUT", "frequency_mhz": 145.7375, "roles": ["F5ZPE repeater output"], "selection_status": "research_candidate"}
+      ],
+      "excluded_or_unresolved": [
+        "F5ZPV RU19: stopped, pair not included in active research memory list",
+        "F5ZZH R7X: stopped/searching new site, pair not included in active research memory list",
+        "F1ZUG ADRASEC35 transponder: frequency unpublished",
+        "F1ZBZ Lorient: directionality unresolved"
+      ]
+    }
+  ],
+  "rules": {
+    "counts_are_research_counts_not_pack_targets": true,
+    "memory_names_are_hints_not_final_public_names": true,
+    "stopped_or_unresolved_links_excluded_from_active_memory_list": true,
+    "no_public_export": true
+  }
+}

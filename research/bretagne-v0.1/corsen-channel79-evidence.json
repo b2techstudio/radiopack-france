@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "status": "secondary_current_clues_recorded_primary_current_channel79_site_validation_pending",
+  "updated": "2026-08-10",
+  "cross": "CROSS Corsen",
+  "channel": 79,
+  "paired_rx": {
+    "ship_to_coast_mhz": 156.975,
+    "coast_to_ship_mhz": 161.575,
+    "both_frequencies_already_in_bretagne_research_plan": true,
+    "new_rf_memory_delta": 0
+  },
+  "primary_current_context": [
+    {
+      "authority": "DIRM NAMO",
+      "title": "CROSS Corsen",
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
+      "accessed": "2026-08-10",
+      "supports": "Le CROSS Corsen exploite un réseau radio VHF/MF permanent et diffuse les bulletins météo via ses stations côtières.",
+      "channel_79_transmitter_site_identified": false
+    },
+    {
+      "authority": "Préfecture maritime de l'Atlantique",
+      "title": "Assistance à navire en difficulté - Intervention coordonnée au large de la Pointe du Raz",
+      "url": "https://www.premar-atlantique.gouv.fr/communiques-presse/assistance-a-navire-en-difficulte-intervention-coordonnee-au-large-de-la-pointe-du-raz",
+      "evidence_date": "2025-09-21",
+      "accessed": "2026-08-10",
+      "supports": "Un contact VHF opérationnel du CROSS Corsen dans le secteur nord de la Pointe du Raz.",
+      "channel_79_transmitter_site_identified": false
+    }
+  ],
+  "secondary_current_clues": [
+    {
+      "source": "Club de Voile de la Baie d'Erquy",
+      "title": "Météo pour Erquy : Prévisions - Par V.H.F.",
+      "url": "https://cvberquy.org/erquy/meteo/avoirPrevisions.xml",
+      "accessed": "2026-08-10",
+      "source_class": "local_secondary_current",
+      "reported_channel": 79,
+      "reported_sites": [
+        {
+          "site": "Cap Fréhel",
+          "reported_local_times": ["05:45", "08:03", "12:03*", "16:33", "20:03"]
+        },
+        {
+          "site": "Bodic",
+          "reported_local_times": ["05:33", "07:45", "11:45*", "16:15", "19:45"]
+        }
+      ],
+      "scope_note": "Cette page locale est utile comme indice actuel pour la côte d'Erquy. Elle ne constitue pas l'inventaire primaire complet des stations Corsen et ne suffit pas à attribuer définitivement le canal 79 à ces sites dans RadioPack."
+    }
+  ],
+  "assessment": {
+    "primary_current_channel79_transmitter_site_confirmed": false,
+    "secondary_clue_sites": ["Cap Fréhel", "Bodic"],
+    "priority_for_primary_revalidation": ["Cap Fréhel", "Bodic", "Batz", "Stiff / Ouessant", "Pointe du Raz"],
+    "channel79_frequency_pair_is_already_verified": true,
+    "site_assignment_can_be_promoted": false,
+    "reason": "La piste Cap Fréhel/Bodic devient plus concrète grâce à une source locale actuelle, mais la règle du projet exige une source primaire ou exploitant suffisamment actuelle pour l'attribution du site."
+  },
+  "rules": {
+    "secondary_current_clue_is_not_primary_validation": true,
+    "current_radio_infrastructure_does_not_imply_channel_assignment": true,
+    "current_sector_vhf_contact_does_not_identify_transmitter_site": true,
+    "channel79_site_must_not_be_guessed": true,
+    "no_new_rf_memory_from_site_metadata": true,
+    "frequency_promoted_to_public_pack": false,
+    "public_export_allowed": false
+  }
+}

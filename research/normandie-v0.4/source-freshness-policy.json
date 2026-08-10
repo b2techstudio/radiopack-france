@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "status": "active_internal_source_freshness_policy_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Empêcher une décision Normandie v0.4 de s'appuyer silencieusement sur un état opérationnel ou une revalidation devenue trop ancienne.",
+  "classes": {
+    "local_operator_status": {
+      "maximum_age_days": 14,
+      "reason": "Un état opérationnel local (maintenance / retour en service) peut changer rapidement."
+    },
+    "current_technical_directory": {
+      "maximum_age_days": 30,
+      "reason": "Les paramètres techniques et conflits de répertoires doivent être recontrôlés régulièrement avant promotion."
+    },
+    "unresolved_frequency_search": {
+      "maximum_age_days": 30,
+      "reason": "Une recherche restée infructueuse doit être réessayée avant toute décision ultérieure ; elle ne devient jamais une preuve négative."
+    },
+    "field_reception_evidence": {
+      "maximum_age_days": 90,
+      "reason": "Une preuve de réception locale peut rester utile plus longtemps, mais doit être revalidée avant une publication tardive."
+    }
+  },
+  "station_policy": {
+    "F1ZBX_R3": {
+      "revalidation_class": "local_operator_status",
+      "field_evidence_class": "field_reception_evidence"
+    },
+    "F5ZHA_LAVAL": {
+      "revalidation_class": "current_technical_directory",
+      "field_evidence_class": "field_reception_evidence"
+    },
+    "F1ZOV_EQUEURDREVILLE": {
+      "revalidation_class": "local_operator_status"
+    },
+    "F6ZES_SOURDEVAL": {
+      "revalidation_class": "unresolved_frequency_search"
+    }
+  },
+  "rules": {
+    "stale_source_blocks_release_review_completion": true,
+    "stale_source_does_not_prove_station_inactive": true,
+    "freshness_check_does_not_open_promotion_gate": true,
+    "freshness_check_does_not_mutate_evidence": true,
+    "local_operator_status_keeps_priority": true,
+    "public_export_allowed": false
+  }
+}

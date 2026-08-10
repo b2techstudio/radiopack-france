@@ -124,14 +124,14 @@ sourdeval_must_not_be_guessed: true
 
 - `F5ZHY` — Montabot / Percy-en-Normandie — sortie **145.6875 MHz**, entrée **145.0875 MHz**, FM ;
 - `F6ZCE` — Mont des Avaloirs — sortie **145.700 MHz**, entrée **145.100 MHz**, FM, CTCSS 123 Hz ;
-- `F1ZBX` — Paimpont / Brocéliande — sortie **145.675 MHz**, entrée **145.075 MHz**, FM, CTCSS 71.9 Hz. L'ARA35 documente son lien avec R71 Rennes à **46,51 km** et un **rayon d'usage de 150 km** pour R3 ; cette valeur renforce sa priorité de vérification autour de Mortain mais ne constitue pas une garantie de réception ;
+- `F1ZBX` — Paimpont / Brocéliande — sortie **145.675 MHz**, entrée **145.075 MHz**, FM, CTCSS 71.9 Hz. L'ARA35 documente son lien avec R71 Rennes à **46,51 km** et un **rayon d'usage de 150 km** pour R3. D'après les coordonnées publiées par l'exploitant et la référence géographique de Mortain, la distance directe R3–Mortain est d'environ **119,3 km**, soit environ **30,7 km** à l'intérieur de ce rayon d'usage ; cette inclusion géométrique en fait une priorité de validation terrain, mais ne constitue pas une preuve de réception ;
 - `F5ZHA` — Laval — le REF actuel et `manuel.la-radio.eu` concordent sur **145.4675 / 432.5750 MHz**. RepeaterBook affiche toutefois encore **431.4125 MHz** sur une donnée ancienne : la paire REF est renforcée et reste dans la recherche paired RX, mais elle demeure **bloquée avant publication** tant qu'une source locale actuelle ne ferme pas définitivement le conflit ;
 - `F1ZBL` — Équeurdreville-Hainneville — paire cross-band **145.2500 / 431.2500 MHz** confirmée à la fois par le REF et le Radio Club Nord Cotentin. La liste `manuel.la-radio.eu` concorde également ; la valeur secondaire `431.2250 MHz` vue dans RepeaterBook n'est donc pas retenue ;
 - `F5ZIX` Tessy-sur-Vire et `F5ZPO` Gorron — APRS 144.800 MHz conservés comme métadonnées de maillage, sans dupliquer la mémoire APRS nationale ;
 - `F1ZKC` Orne — C4FM, conservé comme métadonnée uniquement ;
 - `F5ZTQ` Izé — arrêté, exclu des candidats.
 
-Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. La carte paired RX Normandie reste à **12 fréquences RF uniques de recherche** ; ce compte inclut F5ZHA comme paire de recherche, mais son conflit secondaire doit être réconcilié localement avant toute publication. F1ZBX/R3 devient un candidat adjacent prioritaire à valider réellement depuis Mortain grâce au contexte opérateur, tandis que F6ZES reste le principal blocage immédiat. Aucune de ces nouvelles recherches n'est encore promue.
+Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. La carte paired RX Normandie reste à **12 fréquences RF uniques de recherche** ; ce compte inclut F5ZHA comme paire de recherche, mais son conflit secondaire doit être réconcilié localement avant toute publication. F1ZBX/R3 devient une **priorité de validation terrain immédiate** : sa géométrie 119,3 km / 150 km est favorable à une vérification locale, sans que la réception depuis Mortain soit encore considérée comme validée. F6ZES reste le principal blocage immédiat. Aucune de ces nouvelles recherches n'est encore promue.
 
 ## Annecy–Alpes–Léman v0.3 — recherche secours et paired RX
 
@@ -203,7 +203,7 @@ research/bretagne-v0.1/etel-network.json
 
 Une offre officielle DIRM NAMO de juillet 2026 indique que le service technique du CROSS Étel assure la maintenance de **17 stations radio littorales de la Pointe de Penmarc'h à Biarritz**. Ce chiffre confirme que les quatre émetteurs météo bretons nommés ne constituent qu'un inventaire partiel du réseau. La page actuelle du CROSS Étel confirme aussi Chassiron et Étel sur le canal 63 en diffusion continue ; Chassiron reste une métadonnée hors Bretagne.
 
-Le nombre de stations ne permet pas d'en déduire les noms ni les canaux. Le ministère mentionne toujours une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan, mais les sources locales exploitées n'identifient explicitement aucun site Bretagne sur le canal 64. Les recherches ciblées du 10 août 2026 n'ont pas fermé cette attribution. RadioPack conserve donc le canal 64 en recherche sans inventer de site, tout en gardant sa paire de fréquences RX comme donnée réglementaire.
+Le nombre de stations ne permet pas d'en déduire les noms ni les canaux. La page ministérielle actuelle, mise à jour le **19 juin 2026**, reconfirme une diffusion permanente sur les canaux **63 et 64**, notamment dans le Morbihan. En parallèle, la page HTML actuelle du CROSS Étel identifie explicitement **Étel sur le canal 63** en diffusion continue mais ne nomme aucun site breton sur le canal 64. RadioPack distingue donc désormais clairement la validation régionale du canal et l'identification de son émetteur : le **canal 64 reste sans site actuel attribué**, sans aucune déduction à partir des 17 stations du réseau.
 
 ### CROSS Corsen : SRR, infrastructures et couverture du Raz
 
@@ -299,7 +299,7 @@ Le système lié R3 Brocéliande / R71 Rennes est désormais modélisé séparé
 research/bretagne-v0.1/rennes-broceliande-linked-system.json
 ```
 
-L'ARA35 documente une chaîne analogique à **quatre fréquences RX distinctes** : **431.075 MHz** côté entrée utilisateur R71, **145.075 MHz** pour le chemin R71 vers R3 et l'entrée R3, **145.675 MHz** pour la sortie R3 et le retour vers R71, puis **438.675 MHz** en sortie R71. Ces quatre fréquences étaient déjà présentes une fois chacune dans la carte Bretagne : la modélisation du système lié n'ajoute donc **aucune mémoire RF supplémentaire**. Le R71 reste sur un emplacement temporaire ; le rayon d'usage de 150 km annoncé concerne R3 et n'est pas une garantie de réception locale.
+L'ARA35 documente une chaîne analogique à **quatre fréquences RX distinctes** : **431.075 MHz** côté entrée utilisateur R71, **145.075 MHz** pour le chemin R71 vers R3 et l'entrée R3, **145.675 MHz** pour la sortie R3 et le retour vers R71, puis **438.675 MHz** en sortie R71. Ces quatre fréquences étaient déjà présentes une fois chacune dans la carte Bretagne : la modélisation du système lié n'ajoute donc **aucune mémoire RF supplémentaire**. Le R71 reste sur un emplacement temporaire. Pour R3, Mortain se trouve à environ **119,3 km** en ligne droite du site opérateur, à l'intérieur du rayon d'usage annoncé de 150 km ; `actual_reception_from_mortain_verified` reste néanmoins à `false` tant qu'une validation locale ou de propagation ne confirme pas la réception réelle.
 
 Le recontrôle du 10 août 2026 met en évidence une divergence de statut entre le REF et les pages de l'**ARA35**, qui exploite ces équipements. RadioPack retient donc la source locale pour l'état opérationnel courant tout en conservant le désaccord :
 
@@ -420,13 +420,13 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 
 ## Prochaines priorités
 
-1. valider réellement depuis **Mortain-Bocage** la réception utile de `F1ZBX` / R3 Brocéliande ; l'ARA35 annonce un rayon d'usage de 150 km et une liaison R71 à 46,51 km, mais cela reste à confirmer localement ;
+1. valider réellement depuis **Mortain-Bocage** la réception utile de `F1ZBX` / R3 Brocéliande : la distance directe est d'environ **119,3 km** pour un rayon d'usage opérateur annoncé de 150 km, mais cette inclusion géométrique doit encore être confirmée en réception ou par étude de propagation ;
 2. revalider par source associative actuelle l'interconnexion éventuelle du cluster Côtes-d'Armor **432.650 MHz** ; la présence des cinq sites est désormais recoupée indépendamment mais l'interconnexion reste non prouvée ;
 3. trouver une source locale actuelle supplémentaire pour **F5ZHA Laval** afin de fermer définitivement le conflit 432.5750 / 431.4125, même si deux listes actuelles concordent déjà sur 432.5750 ;
 4. suivre les statuts **F5ZEB R71 / F5ZPV RU19 / F5ZZH R7X** sur les pages ARA35 et revalider le site temporaire R71 ; ne réactiver RU19/R7X qu'après annonce explicite de redémarrage ;
 5. vérifier la couverture utile de F1ZMU, F1ZBZ, F5ZHA et F5ZEB sans la déduire des seules puissances, altitudes ou états opérationnels ;
 6. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
-7. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
+7. identifier progressivement les **17 stations radio du CROSS Étel** et surtout le site actuel du canal 64 : la page ministérielle 2026 confirme le canal dans le Morbihan, mais cette validation régionale ne permet toujours pas d'identifier l'émetteur ;
 8. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
 9. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
 10. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;

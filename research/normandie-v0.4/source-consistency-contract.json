@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "status": "source_consistency_contract_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Empêcher une promotion lorsque les sources de vérité du dépôt se contredisent ou lorsqu'un annuaire général écrase à tort l'état courant publié par l'exploitant local.",
+  "stations": {
+    "F1ZBX_R3": {
+      "required_primary_source_kind": "current_local_operator",
+      "required_gate_id": "R3_MORTAIN_RX",
+      "field_evidence_required": true
+    },
+    "F5ZHA_LAVAL": {
+      "required_gate_id": "F5ZHA_SOURCE_AND_COVERAGE",
+      "authoritative_reconciliation_required": true,
+      "field_evidence_does_not_close_source_conflict": true
+    },
+    "F1ZOV_EQUEURDREVILLE": {
+      "required_gate_id": "F1ZOV_OPERATIONAL_STATUS",
+      "local_operator_status_has_priority": true,
+      "general_directory_active_status_must_not_override_local_operator_maintenance": true
+    },
+    "F6ZES_SOURDEVAL": {
+      "required_gate_id": null,
+      "frequency_and_mode_required_before_candidate_creation": true,
+      "unresolved_frequency_must_not_be_guessed": true
+    }
+  },
+  "rules": {
+    "all_promotions_require_consistent_repository_truth": true,
+    "search_failure_is_not_negative_evidence": true,
+    "geometry_is_not_reception_proof": true,
+    "published_v0_3_1_remains_immutable": true,
+    "public_export_allowed": false
+  }
+}

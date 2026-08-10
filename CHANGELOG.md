@@ -284,7 +284,7 @@
 - Reclassement de Sallanches-Mont-Blanc LFHZ en `excluded_closed_aerodrome` : fermeture officielle à toute circulation aérienne effective depuis le 1er septembre 2020.
 - Réduction de la liste aviation encore à recouper à Chambéry LFLB, Albertville LFKA, Megève LFHM et Genève LSGG.
 - Ajout d'un fichier `aviation-operational-gates.json` séparant validation des fréquences et contrôles dynamiques de pré-publication.
-- Maintien des portes NOTAM France (SOFIA-Briefing), briefing NOTAM Suisse et statut satellites en attente d'un contrôle daté au moment de la publication.
+- Maintien des portes NOTAM France (SOFIA-Briefing), NOTAM Suisse (Skybriefing) et statut satellites en attente d'un contrôle daté au moment de la publication.
 - Extension des tests AIRAC et du candidat interne pour interdire la réintroduction de Sallanches, des fréquences Sion exclues et de toute donnée non validée.
 - Aucun changement des téléchargements publics Annecy, du générateur public ou du statut « En préparation ».
 

@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "status": "current_revalidation_snapshot_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Conserver un instantané explicite des recontrôles externes qui déterminent les portes de promotion Normandie v0.4 sans transformer une recherche infructueuse en preuve négative.",
+  "pack": "Normandie",
+  "target_version": "0.4",
+  "public_export_allowed": false,
+  "stations": [
+    {
+      "id": "F1ZBX_R3",
+      "station": "F1ZBX / R3 Brocéliande",
+      "state": "operator_parameters_current_field_evidence_still_required",
+      "frequencies_mhz": [145.075, 145.675],
+      "checked_on": "2026-08-10",
+      "sources": [
+        {
+          "authority": "ARA35",
+          "kind": "current_operator_page",
+          "url": "https://ara35.fr/frequences/relais-phonie/r3/",
+          "supports": [
+            "repeater operational",
+            "145.075 MHz input",
+            "145.675 MHz output",
+            "71.9 Hz temporary CTCSS context",
+            "Paimpont / Brocéliande operator context"
+          ],
+          "does_not_support": [
+            "actual reception from Mortain-Bocage"
+          ]
+        }
+      ],
+      "promotion_effect": "none_until_field_validation",
+      "promotion_to_internal_candidate_allowed": false
+    },
+    {
+      "id": "F5ZHA_LAVAL",
+      "station": "F5ZHA Laval",
+      "state": "frequency_pair_strengthened_but_conflict_and_coverage_open",
+      "frequencies_mhz": [145.4675, 432.575],
+      "checked_on": "2026-08-10",
+      "sources": [
+        {
+          "authority": "REF",
+          "kind": "current_national_directory",
+          "url": "https://www.r-e-f.org/index.php?option=com_content&view=",
+          "supports": [
+            "F5ZHA active",
+            "145.4675 MHz / 432.575 MHz bidirectional transponder pair",
+            "Laval",
+            "responsible F5BUF",
+            "locator IN98OB86BQ"
+          ]
+        },
+        {
+          "authority": "manuel.la-radio.eu",
+          "kind": "current_secondary_repeater_list",
+          "url": "https://www.manuel.la-radio.eu/RM18/RM18H01A.HTM",
+          "supports": [
+            "F5ZHA Laval",
+            "145.4675 MHz / 432.575 MHz pair"
+          ]
+        },
+        {
+          "authority": "RepeaterBook",
+          "kind": "conflicting_secondary_directory",
+          "url": "https://www.repeaterbook.com/row_repeaters/location_search.php?loc=Laval&state_id=FR&type=city",
+          "supports": [
+            "F5ZHA Laval exists"
+          ],
+          "conflicts": [
+            "431.4125 MHz remains listed instead of the 432.575 MHz side shown by REF and the second current list"
+          ]
+        }
+      ],
+      "local_operator_source_found": false,
+      "local_operator_search_failure_is_negative_evidence": false,
+      "useful_mortain_coverage_verified": false,
+      "promotion_effect": "blocked",
+      "promotion_to_internal_candidate_allowed": false
+    },
+    {
+      "id": "F1ZOV_EQUEURDREVILLE",
+      "station": "F1ZOV Equeurdreville-Hainneville",
+      "state": "operator_maintenance",
+      "frequencies_mhz": [430.375, 431.975],
+      "checked_on": "2026-08-10",
+      "sources": [
+        {
+          "authority": "Radio Club Nord Cotentin F6KFW",
+          "kind": "current_local_operator_page",
+          "url": "https://f6kfw.fr/",
+          "supports": [
+            "F1ZOV marked En Maintenance",
+            "430.375 MHz / 431.975 MHz pair"
+          ]
+        },
+        {
+          "authority": "REF",
+          "kind": "current_national_directory",
+          "url": "https://www.r-e-f.org/index.php?option=com_content&view=",
+          "supports": [
+            "430.375 MHz / 431.975 MHz pair",
+            "directory status active"
+          ],
+          "note": "For current operational state the local operator takes priority over the general directory."
+        }
+      ],
+      "promotion_effect": "blocked_until_local_operator_no_longer_marks_maintenance",
+      "promotion_to_internal_candidate_allowed": false
+    },
+    {
+      "id": "F6ZES_SOURDEVAL",
+      "station": "F6ZES Sourdeval",
+      "state": "site_confirmed_frequency_unresolved",
+      "checked_on": "2026-08-10",
+      "sources": [
+        {
+          "authority": "REF",
+          "kind": "current_national_directory",
+          "url": "https://www.r-e-f.org/index.php?option=com_content&view=",
+          "supports": [
+            "F6ZES listed as a relay in Sourdeval",
+            "responsible F1SMB",
+            "locator IN98MR93XV",
+            "altitude 230 m"
+          ],
+          "does_not_support": [
+            "usable frequency",
+            "mode",
+            "operational state"
+          ]
+        }
+      ],
+      "second_current_frequency_source_found": false,
+      "search_failure_is_negative_evidence": false,
+      "must_not_guess_frequency": true,
+      "promotion_effect": "no_candidate_frequency",
+      "promotion_to_internal_candidate_allowed": false
+    }
+  ],
+  "rules": {
+    "local_operator_status_has_priority_for_current_operational_state": true,
+    "source_search_failure_is_not_negative_operational_evidence": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "geometry_is_not_reception_proof": true,
+    "current_directory_entry_is_not_automatically_publication_approval": true,
+    "published_v0_3_1_remains_immutable": true,
+    "tx_disabled": true,
+    "public_export_allowed": false
+  }
+}

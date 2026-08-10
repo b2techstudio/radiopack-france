@@ -4,12 +4,12 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 Le projet privilégie une approche prudente : aucune fréquence n'est ajoutée uniquement pour remplir un pack, les sources doivent être identifiables, les versions publiées sont immuables et les exports restent configurés pour l'écoute.
 
-## État actuel — Sprint 39
+## État actuel — Sprint 44
 
 Packs publics :
 
 - **Normandie v0.3.1** — 139 mémoires RX, publiée et immuable ;
-- **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante **48 mémoires sans aviation**, publiée et immuable.
+- **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 mémoires sans aviation, publiée et immuable.
 
 Packs en recherche :
 
@@ -17,9 +17,7 @@ Packs en recherche :
 - **Annecy–Alpes–Léman v0.3** — recherche uniquement ;
 - **Bretagne v0.1** — recherche uniquement, aucune mémoire publique et aucun nombre cible artificiel.
 
-Le générateur public `/generateur` continue de proposer uniquement les versions réellement publiées.
-
-Le point de reprise humain est `PROJECT_STATUS.md`. L'état machine correspondant est `research/project-resume-state.json`.
+Le générateur public `/generateur` continue de proposer uniquement les versions réellement publiées. Le point de reprise humain est `PROJECT_STATUS.md` et l'état machine correspondant est `research/project-resume-state.json`.
 
 ## Principes permanents
 
@@ -40,13 +38,9 @@ Le point de reprise humain est `PROJECT_STATUS.md`. L'état machine correspondan
 - Une fréquence non résolue n'est jamais devinée.
 - Les réseaux professionnels privés de sécurité/secours restent hors des packs lorsqu'ils ne sont pas explicitement destinés à l'écoute publique ou au service amateur ouvert.
 
-## Politique paired RX — écouter les deux sens
+## Politique paired RX
 
-La règle commune est définie dans `research/paired-rx-policy.json`.
-
-Lorsqu'une liaison publique est nativement duplex ou split et que ses deux fréquences distinctes sont vérifiées, RadioPack prévoit les deux côtés en réception, donc deux fréquences RX lorsque la paire utilise deux fréquences RF différentes : VHF maritime duplex, entrée/sortie d'un relais, deux côtés d'un transpondeur cross-band, montée/descente satellite après revalidation.
-
-Chaque mémoire reste `Duplex=off` et `Offset=0.000000`. Les tonalités CTCSS restent documentaires et ne réactivent jamais le TX.
+La règle commune est définie dans `research/paired-rx-policy.json`. Lorsqu'une liaison publique est nativement duplex ou split et que ses deux fréquences distinctes sont vérifiées, RadioPack prévoit les deux côtés en réception. Chaque mémoire reste `Duplex=off` et `Offset=0.000000`.
 
 Plans communs :
 
@@ -59,15 +53,13 @@ Les comptes paired RX de recherche actuels restent 12 fréquences uniques pour N
 
 ## Politique secours / ADRASEC
 
-La politique commune est `research/emergency-radio-policy.json`.
-
-Peuvent être étudiés pour une future intégration RX : relais/transpondeurs radioamateurs ADRASEC/FNRASEC documentés, relais analogiques régionaux réellement utiles, canaux maritimes publics et diffusions de sécurité explicitement destinées aux usagers. Les réseaux opérationnels internes PPDR/PMR privés restent exclus.
+La politique commune est `research/emergency-radio-policy.json`. Les relais/transpondeurs radioamateurs documentés, canaux maritimes publics et diffusions de sécurité explicitement destinées aux usagers peuvent être étudiés. Les réseaux opérationnels internes PPDR/PMR privés restent exclus.
 
 # Normandie v0.4 — travail actif
 
-Priorité géographique explicite : **Mortain-Bocage / Sud-Manche**, avec contrôle volontaire des départements **50, 35, 53 et 61**. Les stations actuellement suivies autour de ce périmètre comprennent notamment **F5ZHY**, **F6ZES**, **F6ZCE**, **F1ZBX**, **F5ZHA** et **F1ZOV**.
+Priorité géographique : **Mortain-Bocage / Sud-Manche**, avec contrôle volontaire des départements 50, 35, 53 et 61. Les stations suivies comprennent notamment **F5ZHY**, **F6ZES**, **F6ZCE**, **F1ZBX**, **F5ZHA** et **F1ZOV**.
 
-Fichiers principaux :
+Fichiers de vérité :
 
 ```text
 research/normandie-v0.4/pack-plan.json
@@ -77,6 +69,7 @@ research/normandie-v0.4/candidate-memory-delta.json
 research/normandie-v0.4/internal-candidate-map.json
 research/normandie-v0.4/promotion-gates.json
 research/normandie-v0.4/blocked-station-revalidation.json
+research/normandie-v0.4/external-evidence-matrix.json
 research/normandie-v0.4/r3-mortain-field-validation.json
 research/normandie-v0.4/r3-validation-pack.json
 research/normandie-v0.4/f5zha-mortain-validation.json
@@ -96,7 +89,7 @@ Ces positions sont internes et provisoires. Elles ne définissent pas la numéro
 python tools\build_normandie_v04_internal_candidate.py
 ```
 
-## Portes connues
+## Portes connues et plafond de travail
 
 Cinq fréquences restent exclues :
 
@@ -104,11 +97,13 @@ Cinq fréquences restent exclues :
 - F5ZHA Laval — 145.4675 / 432.575 MHz — conflit de source et pertinence/couverture locale à fermer ;
 - F1ZOV Équeurdreville-Hainneville — 431.975 MHz — retour en service à confirmer chez l'exploitant local.
 
+Le candidat est à 142 mémoires. Les trois portes connues représentent au maximum +5 mémoires, soit un plafond interne connu de **147 mémoires**. Ce nombre n'est pas une taille publique finale et F6ZES reste hors calcul tant qu'aucune fréquence exploitable n'est résolue.
+
 ```powershell
 python tools\check_normandie_v04_promotion_gates.py
+python tools\build_normandie_v04_readiness_report.py
+python tools\build_normandie_v04_promotion_scenarios.py
 ```
-
-Le candidat est à 142 mémoires. Les trois portes connues représentent au maximum +5 mémoires, soit un plafond interne connu de **147 mémoires**. Ce nombre n'est pas une taille publique finale et F6ZES reste hors calcul tant qu'aucune fréquence exploitable n'est résolue.
 
 ## R3 / F1ZBX
 
@@ -119,19 +114,18 @@ python tools\build_normandie_v04_r3_validation_pack.py
 python tools\record_normandie_v04_r3_observation.py --help
 ```
 
-Le mini-pack contient `R3-OUT`, `R3-IN` et `CTRL-ZHY`. La porte demande au moins deux sessions RX indépendantes suffisamment identifiées et intelligibles sur 145.675 MHz.
+La porte demande au moins deux sessions RX indépendantes suffisamment identifiées et intelligibles sur 145.675 MHz.
 
 ## F5ZHA Laval
 
-Le REF courant publie 145.4675 / 432.575 MHz. Une ancienne valeur secondaire 431.4125 MHz reste un conflit historique diagnostique uniquement.
-
-Le centre du locator `IN98OB86BQ` est à environ 65,6 km de la référence Mortain. Cette géométrie justifie un test local mais ne prouve aucune réception.
+Le REF courant publie 145.4675 / 432.575 MHz. Une ancienne valeur secondaire 431.4125 MHz reste un conflit historique diagnostique uniquement. Le centre du locator `IN98OB86BQ` est à environ 65,6 km de la référence Mortain : cette géométrie justifie un test local mais ne prouve aucune réception.
 
 ```powershell
 python tools\build_normandie_v04_f5zha_validation_pack.py
+python tools\record_normandie_v04_f5zha_observation.py --help
 ```
 
-Le mini-pack contient `ZHA-VHF`, `ZHA-UHF` et `ZHA-OLD`. `ZHA-OLD` ne remplace jamais la paire REF actuelle. Le conflit reste ouvert jusqu'à réconciliation suffisamment autoritative.
+Le protocole `research/normandie-v0.4/f5zha-mortain-validation.json` conserve `ZHA-VHF`, `ZHA-UHF` et `ZHA-OLD`. Les observations terrain peuvent documenter la pertinence locale mais **ne peuvent jamais fermer le conflit de source**. La promotion exige à la fois une couverture locale utile documentée et une réconciliation autoritative de la source.
 
 ## F1ZOV
 
@@ -147,14 +141,16 @@ sourdeval_must_not_be_guessed: true
 
 F6ZES reste sans fréquence candidate et sans delta mémoire chiffré.
 
-## Readiness et scénarios
+## Pipeline de preuves — Sprints 40 à 44
+
+La matrice `research/normandie-v0.4/external-evidence-matrix.json` sépare maintenant les paramètres techniques, l'état opérateur, la preuve de réception et les conflits de sources.
 
 ```powershell
-python tools\build_normandie_v04_readiness_report.py
-python tools\build_normandie_v04_promotion_scenarios.py
+python tools\build_normandie_v04_evidence_report.py
+python tools\build_normandie_v04_internal_promotion_plan.py
 ```
 
-Le readiness report conserve `public_release_ready=false`. La matrice calcule les 8 combinaisons des trois portes connues, entre 142 et 147 mémoires, sans autoriser automatiquement promotion ou publication.
+`build_normandie_v04_evidence_report.py` consolide R3, F5ZHA, F1ZOV et F6ZES sans modifier les portes. `build_normandie_v04_internal_promotion_plan.py` ne propose des ajouts que pour les portes réellement franchies et **ne modifie jamais automatiquement le candidat interne**. À l'état Sprint 44, aucune porte n'est franchie : le plan attendu contient 0 ajout et reste à 142 mémoires.
 
 ## Contrôles Normandie v0.4
 
@@ -171,6 +167,7 @@ python tests\test_normandie_v04_internal_candidate.py
 python tests\test_normandie_v04_promotion_gates.py
 python tests\test_normandie_v04_field_tools.py
 python tests\test_normandie_v04_readiness.py
+python tests\test_normandie_v04_evidence_pipeline.py
 ```
 
 # Annecy–Alpes–Léman v0.3 — recherche
@@ -179,22 +176,9 @@ La v0.2 publique reste figée. La recherche suivante est dans `research/annecy-a
 
 # Bretagne v0.1 — recherche
 
-La Bretagne reste volontairement non publique.
+La Bretagne reste volontairement non publique. Le dossier principal VHF maritime reste `research/bretagne-v0.1/public-maritime-radio.json` avec les autres inventaires sous `research/bretagne-v0.1/`.
 
-Principaux dossiers :
-
-```text
-research/bretagne-v0.1/public-maritime-radio.json
-research/bretagne-v0.1/etel-network.json
-research/bretagne-v0.1/emergency-relays.json
-research/bretagne-v0.1/ref-analog-expansion.json
-research/bretagne-v0.1/analog-coverage-redundancy-review.json
-research/bretagne-v0.1/rennes-broceliande-linked-system.json
-```
-
-Le zonage conserve Bretagne Nord / Manche Ouest — CROSS Corsen, Bretagne Sud / Atlantique — CROSS Etel, et interface Penmarc'h / Finistère Sud. Les canaux maritimes duplex conservent les deux côtés RX. Les détails de la Baie du Mont-Saint-Michel, Pointe de Penmarc'h, Pointe du Raz, CROSS Nouvelle génération, Penmarc'h, Groix, Belle-Ile, Étel et des canaux 156.800 MHz / 161.575 MHz / 161.625 MHz / 160.775 MHz / 160.825 MHz sont conservés dans les fichiers de recherche dédiés plutôt que dupliqués ici.
-
-Les relais et transpondeurs de recherche F5ZZH, F5ZIS, F5ZIT, F1ZBZ et F5ZPE restent documentés dans les inventaires Bretagne.
+Le zonage conserve Bretagne Nord / Manche Ouest — CROSS Corsen, Bretagne Sud / Atlantique — CROSS Etel, et interface Penmarc'h / Finistère Sud. Les détails Baie du Mont-Saint-Michel, Pointe de Penmarc'h, Pointe du Raz, CROSS Nouvelle génération, Penmarc'h, Groix, Belle-Ile, Étel et les fréquences 156.800 MHz / 161.575 MHz / 161.625 MHz / 160.775 MHz / 160.825 MHz restent documentés dans les fichiers de recherche dédiés. Les relais F5ZZH, F5ZIS, F5ZIT, F1ZBZ et F5ZPE restent également documentés.
 
 # Packs publics actuels
 
@@ -204,11 +188,9 @@ Les relais et transpondeurs de recherche F5ZZH, F5ZIS, F5ZIT, F1ZBZ et F5ZPE res
 /downloads/normandie/radiopack-france-normandie-v0.3.1.csv
 ```
 
-Catalogue public : `Annecy 65 / 48 + Normandie 139`.
+Catalogue public : `Annecy 65 / 48 + Normandie 139`. Bretagne v0.1, Normandie v0.4 et Annecy–Alpes–Léman v0.3 restent hors de `website/src/lib/packRegistry.ts`.
 
-Bretagne v0.1, Normandie v0.4 et Annecy–Alpes–Léman v0.3 restent hors de `website/src/lib/packRegistry.ts`.
-
-# Architecture
+# Architecture et historique
 
 ```text
 website/src/lib/chirpPack.ts
@@ -219,11 +201,10 @@ website/src/lib/packRegistry.ts
 Documents :
 
 - [REGIONAL-PACK-WORKFLOW.md](REGIONAL-PACK-WORKFLOW.md)
-- [SPRINT-27-BRETAGNE-MARITIME-ZONING.md](SPRINT-27-BRETAGNE-MARITIME-ZONING.md)
-- [SPRINT-28-EMERGENCY-ADRASEC-RESEARCH.md](SPRINT-28-EMERGENCY-ADRASEC-RESEARCH.md)
 - [SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md](SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md)
 - [research/sprint-30-34-summary.md](research/sprint-30-34-summary.md)
 - [research/sprint-35-39-summary.md](research/sprint-35-39-summary.md)
+- [research/sprint-40-44-summary.md](research/sprint-40-44-summary.md)
 
 # Tests principaux
 
@@ -239,20 +220,10 @@ python tests\test_normandie_v04_internal_candidate.py
 python tests\test_normandie_v04_promotion_gates.py
 python tests\test_normandie_v04_field_tools.py
 python tests\test_normandie_v04_readiness.py
-python tests\test_etel_network_research.py
-python tests\test_bretagne_ref_analog_expansion.py
-python tests\test_analog_coverage_redundancy_review.py
+python tests\test_normandie_v04_evidence_pipeline.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
 python tests\test_mortain_bretagne_radio_research.py
-python tests\test_web_generator.py
-python tests\test_annecy_research.py
-python tests\test_annecy_aviation_lakes.py
-python tests\test_annecy_airac08.py
-python tests\test_annecy_internal_candidate.py
-python tests\test_annecy_release_readiness.py
-python tests\test_annecy_prepublication.py
-python tests\test_annecy_prepublication_review.py
 ```
 
 Après les tests :
@@ -279,6 +250,7 @@ python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
 python tests\test_normandie_v04_readiness.py
+python tests\test_normandie_v04_evidence_pipeline.py
 
 git status
 ```
@@ -286,21 +258,19 @@ git status
 # Prochaines priorités
 
 1. exécuter le protocole R3 depuis Mortain-Bocage ;
-2. utiliser le mini-pack F5ZHA pour mesurer sa pertinence locale ;
+2. utiliser le mini-pack F5ZHA et l'enregistreur pour mesurer sa pertinence locale ;
 3. fermer le conflit F5ZHA par une source suffisamment autoritative ;
 4. surveiller le retour en service de F1ZOV ;
 5. trouver une seconde source actuelle donnant fréquence et mode pour F6ZES ;
-6. poursuivre Bretagne / CROSS / ADRASEC et Annecy v0.3 sans modifier les packs publics ;
-7. ne définir une taille publique Normandie v0.4 qu'après revue explicite ;
+6. ne définir une taille publique Normandie v0.4 qu'après revue explicite ;
+7. poursuivre Bretagne / CROSS / ADRASEC et Annecy v0.3 sans modifier les packs publics ;
 8. ne publier aucune nouvelle mémoire tant que le readiness reste négatif.
 
 # Maintenance
 
 Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint. La CI doit évoluer avec le contrat du sprint.
 
-Les caches Python (`__pycache__/` et `*.py[cod]`) et les dossiers `generated/` prévus sont ignorés par Git.
-
-Le détail historique reste dans [CHANGELOG.md](CHANGELOG.md) et dans les résumés de sprint du dossier `research/`.
+Les caches Python (`__pycache__/` et `*.py[cod]`) et les dossiers `generated/` prévus sont ignorés par Git. Le détail historique reste dans [CHANGELOG.md](CHANGELOG.md) et dans les résumés de sprint du dossier `research/`.
 
 # Sécurité et usage
 

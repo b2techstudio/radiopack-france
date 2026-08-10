@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_deduplicated_memory_plan_not_public",
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "source_plan": "research/paired-rx-next-version-plan.json",
   "policy": "research/paired-rx-policy.json",
   "purpose": "Matérialiser les fréquences RX uniques issues des liaisons duplex/split déjà documentées, après déduplication RF, sans attribuer de positions mémoire ni publier de nouvelle version.",
@@ -55,7 +55,7 @@
     },
     {
       "id": "bretagne-v0.1",
-      "unique_frequency_count": 21,
+      "unique_frequency_count": 29,
       "memories": [
         {"name_hint": "M63-S", "frequency_mhz": 156.1750, "roles": ["marine channel 63 ship-to-coast RX"], "selection_status": "research_verified_frequency_pair"},
         {"name_hint": "M63-C", "frequency_mhz": 160.7750, "roles": ["marine channel 63 coast-to-ship RX"], "selection_status": "research_verified_frequency_pair"},
@@ -70,20 +70,27 @@
         {"name_hint": "ZEB-A", "frequency_mhz": 431.0750, "roles": ["F5ZEB transponder side A"], "selection_status": "coverage_and_redundancy_pending"},
         {"name_hint": "ZEB-B", "frequency_mhz": 438.6750, "roles": ["F5ZEB transponder side B"], "selection_status": "coverage_and_redundancy_pending"},
         {"name_hint": "ZIS-A", "frequency_mhz": 145.2375, "roles": ["F5ZIS transponder side A"], "selection_status": "research_candidate"},
-        {"name_hint": "X432650", "frequency_mhz": 432.6500, "roles": ["F5ZIS transponder side B", "F5ZIT transponder side B"], "selection_status": "deduplicated_shared_frequency"},
+        {"name_hint": "X432650", "frequency_mhz": 432.6500, "roles": ["F5ZIS transponder side B", "F5ZIT transponder side B", "F5ZIU transponder side B", "F5ZIV transponder side B", "F5ZJR transponder side B"], "selection_status": "deduplicated_shared_frequency"},
         {"name_hint": "ZIT-A", "frequency_mhz": 145.2250, "roles": ["F5ZIT transponder side A"], "selection_status": "research_candidate"},
+        {"name_hint": "ZIU-A", "frequency_mhz": 145.4625, "roles": ["F5ZIU transponder side A"], "selection_status": "current_ref_active_next_coverage_review"},
+        {"name_hint": "ZIV-A", "frequency_mhz": 145.4875, "roles": ["F5ZIV transponder side A"], "selection_status": "current_ref_active_next_coverage_review"},
+        {"name_hint": "ZJR-A", "frequency_mhz": 145.2875, "roles": ["F5ZJR transponder side A"], "selection_status": "current_ref_active_next_coverage_review"},
         {"name_hint": "X145262", "frequency_mhz": 145.2625, "roles": ["F1ZGS transponder side A", "F5ZDV transponder side A", "F5ZZL transponder side A"], "selection_status": "deduplicated_shared_frequency"},
         {"name_hint": "ZGS-B", "frequency_mhz": 431.4250, "roles": ["F1ZGS transponder side B"], "selection_status": "research_candidate"},
         {"name_hint": "ZDV-B", "frequency_mhz": 438.7000, "roles": ["F5ZDV transponder side B"], "selection_status": "research_candidate"},
         {"name_hint": "ZZL-B", "frequency_mhz": 431.3750, "roles": ["F5ZZL transponder side B"], "selection_status": "research_candidate"},
-        {"name_hint": "ZPE-IN", "frequency_mhz": 145.1375, "roles": ["F5ZPE repeater input"], "selection_status": "research_candidate"},
-        {"name_hint": "ZPE-OUT", "frequency_mhz": 145.7375, "roles": ["F5ZPE repeater output"], "selection_status": "research_candidate"}
+        {"name_hint": "ZPE-IN", "frequency_mhz": 145.1375, "roles": ["F5ZPE repeater input", "F1ZBZ repeater emission path"], "selection_status": "deduplicated_shared_frequency"},
+        {"name_hint": "ZPE-OUT", "frequency_mhz": 145.7375, "roles": ["F5ZPE repeater output", "F1ZBZ repeater reception path"], "selection_status": "deduplicated_shared_frequency"},
+        {"name_hint": "ZMU-OUT", "frequency_mhz": 430.3250, "roles": ["F1ZMU repeater output"], "selection_status": "current_ref_active_next_coverage_review"},
+        {"name_hint": "ZMU-IN", "frequency_mhz": 439.7250, "roles": ["F1ZMU repeater input"], "selection_status": "current_ref_active_next_coverage_review"},
+        {"name_hint": "ZBZ-U", "frequency_mhz": 431.2000, "roles": ["F1ZBZ shared UHF side across documented paths"], "selection_status": "current_ref_active_multi_path_research_candidate"},
+        {"name_hint": "ZBZ-VA", "frequency_mhz": 145.6250, "roles": ["F1ZBZ repeater reception path"], "selection_status": "current_ref_active_multi_path_research_candidate"},
+        {"name_hint": "ZBZ-VB", "frequency_mhz": 145.0250, "roles": ["F1ZBZ repeater emission path"], "selection_status": "current_ref_active_multi_path_research_candidate"}
       ],
       "excluded_or_unresolved": [
         "F5ZPV RU19: stopped, pair not included in active research memory list",
         "F5ZZH R7X: stopped/searching new site, pair not included in active research memory list",
-        "F1ZUG ADRASEC35 transponder: frequency unpublished",
-        "F1ZBZ Lorient: directionality unresolved"
+        "F1ZUG ADRASEC35 transponder: frequency unpublished"
       ]
     }
   ],

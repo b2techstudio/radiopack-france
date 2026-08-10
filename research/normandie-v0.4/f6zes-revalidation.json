@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "status": "current_ref_revalidated_frequency_mode_unresolved",
+  "updated": "2026-08-10",
+  "station": {
+    "callsign": "F6ZES",
+    "site": "Sourdeval",
+    "responsible": "F1SMB",
+    "locator": "IN98MR93XV",
+    "altitude_m": 230
+  },
+  "current_primary_or_associative_evidence": [
+    {
+      "authority": "REF",
+      "title": "Réseau des Emetteurs Français",
+      "url": "https://www.r-e-f.org/index.php?limitstart=3",
+      "accessed": "2026-08-10",
+      "observed": {
+        "callsign": "F6ZES",
+        "site": "SOURDEVAL",
+        "responsible": "F1SMB",
+        "locator": "IN98MR93XV",
+        "altitude_m": 230,
+        "operational_state": null,
+        "band": null,
+        "tx_mhz": null,
+        "rx_mhz": null,
+        "mode": null
+      },
+      "interpretation": "Le REF courant confirme l'existence et les métadonnées de site mais ne fournit toujours aucune fréquence, bande, mode ni état exploitable pour F6ZES."
+    }
+  ],
+  "local_source_search": {
+    "authority": "ARA50",
+    "accessed": "2026-08-10",
+    "public_result_found_for_f6zes": false,
+    "interpretation": "Aucune page publique ARA50 identifiant F6ZES n'a été retrouvée pendant cette passe. Une recherche infructueuse n'est ni une preuve d'arrêt ni une preuve d'absence."
+  },
+  "decision": {
+    "frequency_resolved": false,
+    "mode_resolved": false,
+    "operational_state_resolved": false,
+    "paired_rx_candidate_frequencies_mhz": [],
+    "candidate_memory_delta": 0,
+    "promote_to_internal_candidate": false,
+    "reason": "Aucune source actuelle suffisamment précise ne permet d'identifier une fréquence et un mode sans conjecture."
+  },
+  "rules": {
+    "sourdeval_must_not_be_guessed": true,
+    "blank_directory_fields_are_not_negative_operational_evidence": true,
+    "search_failure_is_not_negative_evidence": true,
+    "site_metadata_does_not_imply_frequency": true,
+    "frequency_promoted_to_internal_candidate": false,
+    "frequency_promoted_to_public_pack": false,
+    "public_export_allowed": false
+  }
+}

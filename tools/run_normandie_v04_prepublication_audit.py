@@ -35,13 +35,14 @@ def build(root: Path, as_of: date | None = None) -> dict[str, Any]:
         "published_base_exact_prefix": bool(diff["published_base_is_exact_prefix_of_internal_candidate"]),
         "internal_candidate_exact_preview_prefix": bool(diff["internal_candidate_is_exact_prefix_of_guarded_preview"]),
         "candidate_not_mutated": diff["candidate_mutated"] is False,
+        "public_registry_stays_private_during_prepublication": checklist["public_registry_has_v04"] is False,
         "public_export_stays_disabled": diff["public_export_allowed"] is False and checklist["public_export_allowed"] is False and blockers["public_export_allowed"] is False,
     }
     integrity_errors = [key for key, value in integrity_checks.items() if not value]
-    release_ready = checklist["release_review_complete"] and blockers["blocking_count"] == 0
+    prepublication_ready = checklist["release_review_complete"] and blockers["blocking_count"] == 0 and not integrity_errors
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "status": "prepublication_audit_not_public",
         "as_of": freshness["as_of"],
         "integrity_ok": not integrity_errors,
@@ -56,11 +57,16 @@ def build(root: Path, as_of: date | None = None) -> dict[str, Any]:
         "review_item_count": checklist["item_count"],
         "review_blocking_open_count": checklist["blocking_open_count"],
         "release_blocking_count": blockers["blocking_count"],
-        "release_ready": release_ready,
+        "prepublication_ready": prepublication_ready,
+        "release_ready": prepublication_ready,
+        "public_registry_has_v04": checklist["public_registry_has_v04"],
+        "public_activation_pending": prepublication_ready and not checklist["public_registry_has_v04"],
         "public_export_allowed": False,
         "rules": {
-            "integrity_ok_does_not_mean_release_ready": True,
-            "release_ready_requires_zero_review_and_release_blockers": True,
+            "integrity_ok_does_not_mean_prepublication_ready": True,
+            "prepublication_ready_requires_zero_review_and_release_blockers": True,
+            "public_registry_must_remain_private_during_prepublication": True,
+            "public_activation_is_separate_after_prepublication_ready": True,
             "audit_never_mutates_candidate": True,
             "audit_never_publishes": True,
             "published_v0_3_1_remains_immutable": True,
@@ -79,10 +85,11 @@ def markdown(data: dict[str, Any]) -> str:
         f"- Ajouts futurs éligibles : **{data['currently_eligible_future_addition_count']}**",
         f"- Checklist revue : **{data['review_completed_count']}/{data['review_item_count']}**",
         f"- Blocages revue : **{data['review_blocking_open_count']}**",
-        f"- Blocages publication : **{data['release_blocking_count']}**",
-        f"- Release ready : **{'oui' if data['release_ready'] else 'non'}**",
+        f"- Blocages prépublication : **{data['release_blocking_count']}**",
+        f"- Prépublication prête : **{'oui' if data['prepublication_ready'] else 'non'}**",
+        f"- Activation publique en attente : **{'oui' if data['public_activation_pending'] else 'non'}**",
         "",
-        "Un audit d'intégrité OK signifie seulement que le pipeline est cohérent ; il ne vaut jamais autorisation de publication.",
+        "Un audit d'intégrité OK signifie seulement que le pipeline est cohérent. L'activation du registre public reste une étape séparée après prépublication prête.",
         "",
     ])
 
@@ -101,7 +108,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
-    parser.add_argument("--require-release-ready", action="store_true")
+    parser.add_argument("--require-release-ready", action="store_true", help="Compatibility alias: require prepublication ready.")
+    parser.add_argument("--require-prepublication-ready", action="store_true")
     args = parser.parse_args()
     root = args.root.resolve()
     out = args.output_dir if args.output_dir.is_absolute() else root / args.output_dir
@@ -111,13 +119,13 @@ def main() -> None:
         f"integrity={'OK' if data['integrity_ok'] else 'ERROR'} "
         f"review={data['review_completed_count']}/{data['review_item_count']} "
         f"blockers={data['release_blocking_count']} "
-        f"release_ready={str(data['release_ready']).lower()}"
+        f"prepublication_ready={str(data['prepublication_ready']).lower()}"
     )
     print(jp)
     print(mp)
     if not data["integrity_ok"]:
         raise SystemExit(1)
-    if args.require_release_ready and not data["release_ready"]:
+    if (args.require_release_ready or args.require_prepublication_ready) and not data["prepublication_ready"]:
         raise SystemExit(2)
 
 

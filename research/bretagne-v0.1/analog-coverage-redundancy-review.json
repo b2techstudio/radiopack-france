@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.0",
+  "status": "research_geometry_and_redundancy_review_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Qualifier la valeur mémoire et la diversité géographique des relais/transpondeurs analogiques Bretagne déjà vérifiés, sans transformer les locators, altitudes, puissances ou gains en preuve de couverture radio réelle.",
+  "sources": [
+    {
+      "authority": "Réseau des Émetteurs Français (REF)",
+      "url": "https://www.r-e-f.org/",
+      "status": "current_primary_directory_for_active_status_frequencies_locators_and_technical_metadata"
+    },
+    {
+      "authority": "RepeaterBook",
+      "url": "https://www.repeaterbook.com/simplex_nodes/details.php?ID=8158&state_id=FR",
+      "status": "secondary_historical_topology_lead_reviewed_2016_not_current_primary_validation",
+      "note": "La fiche historique F5ZIT indique un lien avec F5ZIV, F5ZIU, F5ZIS et F5ZJR. Cette mention est conservée uniquement comme piste historique secondaire ; elle ne prouve pas l'interconnexion actuelle."
+    }
+  ],
+  "method": {
+    "geometry": "Distances géodésiques approximatives calculées entre les centres des locators Maidenhead 10 caractères publiés par le REF.",
+    "distance_is_coverage": false,
+    "altitude_power_gain_are_coverage": false,
+    "priority_basis": "efficacité mémoire RF, diversité géographique, statut actif actuel et degré de redondance fréquentielle uniquement"
+  },
+  "cluster_432_650": {
+    "shared_frequency_mhz": 432.6500,
+    "current_ref_active_site_count": 5,
+    "current_common_responsible": "F6HRP",
+    "current_common_ctcss_hz": 71.9,
+    "current_primary_shared_frequency_verified": true,
+    "current_primary_linkage_verified": false,
+    "historical_secondary_linkage_documented": true,
+    "locator_span_max_km": 90.6,
+    "max_span_sites": ["F5ZIS Matignon", "F5ZIT Perros-Guirec"],
+    "selection_priority": "high_memory_efficiency_research_candidate",
+    "selection_reason": "Une seule mémoire RX 432.650 MHz représente cinq transpondeurs actifs répartis sur plusieurs ancrages côtiers et intérieurs ; conserver une seule fréquence RF avec cinq rôles.",
+    "sites": [
+      {
+        "id": "F5ZIS",
+        "site": "Matignon",
+        "locator": "IN88UO65UV",
+        "altitude_m": 55,
+        "vhf_side_mhz": 145.2375,
+        "geographic_role": "east_coastal_anchor_review",
+        "coverage_claim": null
+      },
+      {
+        "id": "F5ZIT",
+        "site": "Perros-Guirec",
+        "locator": "IN88GT32AJ",
+        "altitude_m": 82,
+        "vhf_side_mhz": 145.2250,
+        "geographic_role": "west_coastal_anchor_review",
+        "coverage_claim": null
+      },
+      {
+        "id": "F5ZIU",
+        "site": "La Harmoye",
+        "locator": "IN88LI87TK",
+        "altitude_m": 318,
+        "vhf_side_mhz": 145.4625,
+        "geographic_role": "elevated_inland_west_review",
+        "coverage_claim": null
+      },
+      {
+        "id": "F5ZIV",
+        "site": "Saint-Brieuc",
+        "locator": "IN88OM43CW",
+        "altitude_m": 119,
+        "vhf_side_mhz": 145.4875,
+        "geographic_role": "central_coastal_anchor_review",
+        "coverage_claim": null
+      },
+      {
+        "id": "F5ZJR",
+        "site": "Plessala",
+        "locator": "IN88QH97WI",
+        "altitude_m_by_ref_row": {"vhf_side": 335, "uhf_side": 339},
+        "vhf_side_mhz": 145.2875,
+        "geographic_role": "elevated_inland_east_review",
+        "coverage_claim": null
+      }
+    ],
+    "selected_geometry_checks_km": [
+      {"from": "F5ZIS", "to": "F5ZIT", "distance_km": 90.6},
+      {"from": "F5ZIS", "to": "F5ZIV", "distance_km": 39.8},
+      {"from": "F5ZIT", "to": "F5ZIV", "distance_km": 58.9},
+      {"from": "F5ZIU", "to": "F5ZIV", "distance_km": 23.0},
+      {"from": "F5ZJR", "to": "F5ZIV", "distance_km": 26.8}
+    ],
+    "vhf_side_rule": "Les cinq côtés VHF restent cinq fréquences RX distinctes : ils ne sont pas redondants en RF même si le côté UHF 432.650 MHz est commun."
+  },
+  "morbihan_review": {
+    "F1ZMU": {
+      "site": "Saint-Nolff",
+      "locator": "IN87QR21GN",
+      "pair_mhz": [439.7250, 430.3250],
+      "power_w": 50,
+      "selection_priority": "high_distinct_pair_research_candidate",
+      "distance_to_f5zpe_km": 19.0,
+      "redundancy_status": "geographic_neighbor_but_different_rf_pair",
+      "coverage_claim": null,
+      "note": "La proximité géométrique avec F5ZPE ne constitue pas un doublon : F1ZMU apporte une paire UHF distincte."
+    },
+    "F1ZBZ": {
+      "site": "Lorient",
+      "locator": "IN87HR59VP",
+      "unique_rx_frequencies_mhz": [431.2000, 145.6250, 145.0250, 145.7375, 145.1375],
+      "new_unique_rf_after_f5zpe_deduplication": [431.2000, 145.6250, 145.0250],
+      "shared_with_f5zpe_mhz": [145.7375, 145.1375],
+      "selection_priority": "medium_local_multi_path_research_candidate",
+      "distance_to_f5zpe_km": 45.1,
+      "distance_to_f1zmu_km": 54.0,
+      "coverage_claim": null,
+      "note": "F1ZBZ reste utile comme cas multi-chemins local : trois fréquences RF sont nouvelles après déduplication et deux sont partagées avec F5ZPE. Altitude et puissance ne sont pas utilisées pour affirmer une portée."
+    }
+  },
+  "recommendations": {
+    "retain_432_650_shared_memory_in_research_plan": true,
+    "retain_all_five_unique_vhf_sides_in_research_plan": true,
+    "retain_f1zmu_pair_in_research_plan": true,
+    "retain_f1zbz_multi_path_frequencies_in_research_plan": true,
+    "field_or_propagation_validation_required_before_public_selection": true,
+    "current_linkage_of_432_650_cluster_requires_current_primary_or_association_source": true
+  },
+  "rules": {
+    "locator_distance_is_not_radio_coverage": true,
+    "technical_metadata_is_not_radio_coverage": true,
+    "historical_secondary_linkage_is_not_current_primary_linkage": true,
+    "shared_rf_frequency_is_deduplicated": true,
+    "priority_is_not_public_selection": true,
+    "tx_disabled_in_future_export": true,
+    "public_export_allowed": false
+  }
+}

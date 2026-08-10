@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.49 - 2026-08-10
+
+- Consolidation des **Sprints 55 à 60** dans `research/sprint-55-60-summary.md` : snapshot de revue, manifeste SHA-256, détection de dérive, dry-run de publication, handoff de revue et reprise de recherche externe prioritaire.
+- Ajout de `tools/build_normandie_v04_review_snapshot.py`, `tools/build_normandie_v04_review_manifest.py`, `tools/check_normandie_v04_review_drift.py` et `tools/run_normandie_v04_publication_dry_run.py` ; ces outils restent strictement non publics et non destructifs.
+- Ajout de `tests/test_normandie_v04_review_handoff.py` et intégration CI : état courant **3/9 points de revue complétés**, **6 blocages ouverts**, candidat/preview **142/142**, `release_ready=false`.
+- Ajout de `research/normandie-v0.4/f6zes-revalidation.json` : le REF courant confirme F6ZES Sourdeval, F1SMB, `IN98MR93XV` et 230 m, mais fréquence, bande, mode et état restent non résolus ; delta candidat **0** et aucune conjecture autorisée.
+- Ajout de `research/bretagne-v0.1/corsen-channel79-evidence.json` : une source locale actuelle associe le canal 79 à **Cap Fréhel** et **Bodic**, conservés comme indices secondaires à revalider par source primaire ; aucun site n'est promu et le delta RF reste **0**.
+- Ajout de `tests/test_sprint60_revalidation.py` et de l'étape GitHub Actions correspondante pour figer l'absence de fréquence F6ZES inventée et l'absence de promotion Ch79 depuis une source secondaire.
+- Mise à jour de `README.md`, `PROJECT_STATUS.md` et `research/project-resume-state.json` au **Sprint 60 / 0.21.49**.
+- État public inchangé : Normandie v0.3.1 reste figée à **139 mémoires**, Annecy–Alpes–Léman v0.2 à **65/48 mémoires**, Bretagne reste non publique et Normandie v0.4 reste un candidat interne non public à **142 mémoires**.
+
 ## 0.21.43 - 2026-08-10
 
 - Consolidation des **Sprints 50 à 54** : politique de fraîcheur des sources, checklist de revue, diff structurel candidat et audit prépublication non public.

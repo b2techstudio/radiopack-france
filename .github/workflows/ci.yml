@@ -52,6 +52,9 @@ jobs:
       - name: Test Normandie v0.4 candidate delta
         run: python tests/test_normandie_v04_candidate_delta.py
 
+      - name: Test Normandie v0.4 internal candidate
+        run: python tests/test_normandie_v04_internal_candidate.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 
@@ -146,7 +149,7 @@ jobs:
           WEBSITE_RESULT: ${{ needs.website.result }}
           REPOSITORY: ${{ github.repository }}
           COMMIT_SHA: ${{ github.sha }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.run_id }}
         shell: bash
         run: |
           if [[ "$DATA_RESULT" == "success" && "$WEBSITE_RESULT" == "success" ]]; then

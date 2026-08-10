@@ -4,6 +4,8 @@ Codeplugs CHIRP régionaux, documentés et générés à partir de données publ
 
 ## État actuel — Sprint 60 / 0.21.49
 
+Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
+
 Packs publics immuables :
 
 - **Normandie v0.3.1** — 139 mémoires RX ;

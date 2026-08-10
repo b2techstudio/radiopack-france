@@ -49,6 +49,9 @@ jobs:
       - name: Test paired RX deduplicated memory plan
         run: python tests/test_paired_rx_memory_plan.py
 
+      - name: Test Normandie v0.4 candidate delta
+        run: python tests/test_normandie_v04_candidate_delta.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

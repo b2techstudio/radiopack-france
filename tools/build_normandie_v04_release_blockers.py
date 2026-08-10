@@ -25,7 +25,7 @@ def build(root: Path) -> dict[str, Any]:
     dossier = load_module("decision_dossier_blockers", root / "tools/build_normandie_v04_decision_dossier.py").build(root)
     blockers = []
     for station, item in dossier["station_decisions"].items():
-        if item["decision"] in {"blocked", "unresolved"}:
+        if item["decision"] != "eligible_for_internal_plan":
             blockers.append({"id": station, "kind": item["decision"], "reason": item["reason"]})
     blockers.extend([
         {"id": "FINAL_REVIEW", "kind": "review", "reason": "explicit final review has not been completed"},
@@ -40,6 +40,7 @@ def build(root: Path) -> dict[str, Any]:
         "release_allowed": False,
         "public_export_allowed": False,
         "rules": {
+            "non_eligible_station_decision_remains_release_blocker": True,
             "zero_station_blockers_still_requires_final_review": True,
             "final_memory_plan_must_be_explicit": True,
             "public_registry_change_must_be_separate_and_reviewed": True,

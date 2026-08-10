@@ -18,6 +18,11 @@
       "authority": "Réseau des Émetteurs Français (REF)",
       "url": "https://www.r-e-f.org/",
       "status": "current_directory_frequency_corroboration_with_r71_status_conflict"
+    },
+    {
+      "authority": "Loterre / ISTEX - référentiel géographique fondé sur GeoNames",
+      "url": "https://loterre.istex.fr/D63/fr/page/-LZQ0XFCB-7?clang=fr",
+      "status": "secondary_geographic_reference_for_mortain_coordinates_only"
     }
   ],
   "system": {
@@ -64,7 +69,17 @@
     "r71_current_site": "temporary",
     "r71_operator_coverage_context": "very_good_clearance_over_rennes_basin",
     "mortain_relevance": {
-      "r3_priority": "high_operator_documented_long_range_candidate_for_local_validation",
+      "mortain_reference": "Mortain commune déléguée / Mortain-Bocage",
+      "mortain_reference_latitude": 48.64782,
+      "mortain_reference_longitude": -0.94055,
+      "r3_operator_latitude": 48.01166,
+      "r3_operator_longitude": -2.2393,
+      "straight_line_distance_km": 119.3,
+      "inside_operator_usage_radius_geometrically": true,
+      "operator_usage_radius_margin_km": 30.7,
+      "actual_reception_from_mortain_verified": false,
+      "geometry_status": "inside_operator_usage_radius_by_straight_line_geometry_not_a_reception_proof",
+      "r3_priority": "high_operator_documented_long_range_candidate_immediate_local_validation",
       "r71_priority": "bretagne_east_local_candidate_not_assumed_useful_from_mortain",
       "local_reception_or_propagation_validation_required": true
     }
@@ -79,6 +94,7 @@
   "rules": {
     "linked_system_does_not_require_duplicate_rf_memories": true,
     "operator_usage_radius_is_not_guaranteed_coverage": true,
+    "geometric_inclusion_in_operator_radius_is_not_reception_proof": true,
     "operator_linkage_is_not_adrasec_role": true,
     "r71_temporary_site_requires_revalidation_before_publication": true,
     "published_packs_immutable": true,

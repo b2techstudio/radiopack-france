@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "status": "research_candidate_delta_defined_not_public",
   "updated": "2026-08-10",
-  "purpose": "Définir uniquement le delta paired RX potentiel de Normandie v0.4 par rapport à la v0.3.1 publiée, sans attribuer de positions mémoire ni créer de CSV public.",
+  "purpose": "Définir le delta paired RX potentiel de Normandie v0.4 par rapport à la v0.3.1 publiée ; seules les trois fréquences déjà mûres sont maintenant matérialisées dans un candidat interne non public, tandis que le plan public final reste non défini.",
   "base": {
     "version": "0.3.1",
     "memory_count": 139,
@@ -13,7 +13,8 @@
     "paired_memory_plan": "research/paired-rx-deduplicated-memory-plan.json",
     "pair_refresh": "research/normandie-v0.4/paired-rx-refresh.json",
     "coverage_review": "research/normandie-v0.4/mortain-bocage-coverage.json",
-    "r3_field_validation": "research/normandie-v0.4/r3-mortain-field-validation.json"
+    "r3_field_validation": "research/normandie-v0.4/r3-mortain-field-validation.json",
+    "internal_candidate_map": "research/normandie-v0.4/internal-candidate-map.json"
   },
   "paired_rx_research_frequency_count": 12,
   "already_present_in_published_base": [
@@ -111,6 +112,9 @@
     "local_mortain_validation_required": 2,
     "source_conflict_and_coverage_validation_required": 2,
     "operator_maintenance_revalidation_required": 1,
+    "internal_candidate_memory_count": 142,
+    "internal_candidate_new_memory_count": 3,
+    "internal_candidate_positions_assigned_provisionally": true,
     "final_v0_4_memory_count": null,
     "memory_positions_assigned": false
   },
@@ -120,6 +124,7 @@
     "ready_research_candidate_does_not_mean_publication_approved": true,
     "temporary_maintenance_blocks_new_side_promotion_until_revalidated": true,
     "local_geometry_is_not_reception_proof": true,
+    "internal_candidate_positions_are_not_final_public_positions": true,
     "all_future_exported_memories_tx_disabled": true,
     "chirp_duplex": "off",
     "chirp_offset": "0.000000",

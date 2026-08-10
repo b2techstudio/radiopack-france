@@ -16,6 +16,12 @@
     "geometric_margin_inside_operator_radius_km": 30.7,
     "geometry_is_reception_proof": false
   },
+  "validation_tools": {
+    "standalone_rx_pack": "research/normandie-v0.4/r3-validation-pack.json",
+    "standalone_rx_pack_builder": "tools/build_normandie_v04_r3_validation_pack.py",
+    "promotion_gates": "research/normandie-v0.4/promotion-gates.json",
+    "promotion_gate_checker": "tools/check_normandie_v04_promotion_gates.py"
+  },
   "rx_only_contract": {
     "transmission_forbidden": true,
     "chirp_duplex": "off",

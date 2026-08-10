@@ -18,7 +18,7 @@ Une même fréquence RF partagée entre plusieurs rôles ou sites restera dédup
 
 ## Delta mémoire v0.4
 
-Le premier plan mémoire concret est maintenant défini dans :
+Le plan de recherche est défini dans :
 
 ```text
 research/normandie-v0.4/candidate-memory-delta.json
@@ -31,15 +31,44 @@ Il compare les **12 fréquences paired RX de recherche** avec les 139 mémoires 
 - `145.2500` — F1ZBL côté A ;
 - `430.3750` — F1ZOV côté A.
 
-Le delta paired RX maximal actuellement étudié est donc de **8 nouvelles fréquences**, sans positions mémoire attribuées :
+Le delta paired RX maximal actuellement étudié est donc de **8 nouvelles fréquences**.
+
+### Candidat interne actuel — 142 mémoires
+
+Les trois fréquences déjà suffisamment mûres sont maintenant matérialisées dans un candidat interne reproductible :
+
+```text
+research/normandie-v0.4/internal-candidate-map.json
+tools/build_normandie_v04_internal_candidate.py
+```
+
+Le candidat conserve les **139 lignes de v0.3.1 comme préfixe exact** et ajoute seulement :
+
+- `Location 175` — `50-ZHY-IN` — **145.0875 MHz** — entrée RX F5ZHY ;
+- `Location 176` — `53-ZCE-IN` — **145.1000 MHz** — entrée RX F6ZCE ;
+- `Location 177` — `50-ZBL-U` — **431.2500 MHz** — côté UHF RX F1ZBL.
+
+Ces positions sont **internes et provisoires**. Elles ne définissent pas encore la numérotation publique finale de v0.4. Le candidat totalise **142 mémoires**, reste hors de `website/public` et son dossier généré est ignoré par Git.
+
+Commande locale :
+
+```powershell
+python tools\build_normandie_v04_internal_candidate.py
+```
+
+Le test dédié reconstruit le candidat dans un dossier temporaire et vérifie notamment que la v0.3.1 publique n'est modifiée d'aucun octet :
+
+```powershell
+python tests\test_normandie_v04_internal_candidate.py
+```
 
 ### Prêtes au niveau recherche
 
 - `145.0875` — F5ZHY entrée, paire actuelle explicitement publiée par l'ARA50 ;
-- `145.1000` — F6ZCE entrée, déduite du décalage -600 kHz explicitement publié par l'ARAS72 avec sortie 145.700 MHz ;
-- `431.2500` — F1ZBL côté B, paire bidirectionnelle 145.250 / 431.250 MHz confirmée par le Radio Club Nord Cotentin.
+- `145.1000` — F6ZCE entrée, issue du décalage -600 kHz explicitement publié par l'ARAS72 avec sortie 145.700 MHz ;
+- `431.2500` — F1ZBL côté B, paire bidirectionnelle 145.250 / 431.250 MHz confirmée par le Radio Club Nord Cotentin et recoupée par l'ARA50.
 
-`ready_research_candidate` ne signifie pas publication autorisée : ces fréquences entrent seulement dans le candidat interne de travail.
+Leur présence dans le candidat interne ne signifie pas publication autorisée.
 
 ### À valider depuis Mortain
 
@@ -61,7 +90,7 @@ La sortie `145.675 MHz` est la fréquence principale de validation de couverture
 - `145.4675` / `432.5750` — F5ZHA Laval : le REF et une seconde liste actuelle concordent, mais l'ancien conflit RepeaterBook reste à fermer par une source locale actuelle et la couverture Mortain reste à vérifier ;
 - `431.9750` — F1ZOV : la paire 430.375 / 431.975 MHz est recoupée par le Radio Club Nord Cotentin et l'ARA50, mais le club exploitant affiche actuellement **F1ZOV en maintenance**. Le nouveau côté reste donc bloqué jusqu'à revalidation du retour en service.
 
-Le nombre final de mémoires v0.4 reste `null` et aucune position n'est assignée. Le delta ne constitue ni un objectif de remplissage ni une autorisation de publication.
+Le nombre final de mémoires publiques v0.4 reste `null`. Les positions 175–177 appartiennent uniquement au candidat interne et ne constituent ni un objectif de remplissage ni une autorisation de publication.
 
 ## Priorité géographique
 
@@ -86,7 +115,7 @@ Les réseaux opérationnels privés PPDR/PMR de police, gendarmerie, SDIS, SAMU 
 
 ## Candidats et blocages actuels
 
-- `F5ZHY` — Montabot / Percy-en-Normandie — entrée **145.0875 MHz**, sortie **145.6875 MHz** ;
+- `F5ZHY` — Mont Robin / Percy-en-Normandie — entrée **145.0875 MHz**, sortie **145.6875 MHz** ;
 - `F6ZES` — Sourdeval — priorité locale, site/responsable/locator confirmés mais fréquence et mode toujours non résolus ;
 - `F6ZCE` — Mont des Avaloirs — entrée **145.100 MHz**, sortie **145.700 MHz**, département 53 ;
 - `F1ZBX` — Brocéliande / Paimpont — entrée **145.075 MHz**, sortie **145.675 MHz**, validation locale Mortain requise ;
@@ -101,4 +130,4 @@ Le plan courant des paires reste centralisé dans :
 research/paired-rx-next-version-plan.json
 ```
 
-Aucune nouvelle version publique n'est créée dans ce dossier. Les mémoires du delta ne pourront devenir publiques qu'après validation, allocation finale, revue explicite et création d'une nouvelle version Normandie.
+Aucune nouvelle version publique n'est créée dans ce dossier. Le candidat interne ne pourra devenir une prépublication qu'après validation des portes restantes, revue de sa sélection et définition explicite du plan public final.

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "research_plan_not_public",
   "updated": "2026-08-10",
   "policy": "research/paired-rx-policy.json",
@@ -39,6 +39,20 @@
           "selection_status": "coverage_pending"
         },
         {
+          "id": "F5ZHA",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.4675,
+          "side_b_rx_mhz": 432.5750,
+          "selection_status": "coverage_pending"
+        },
+        {
+          "id": "F1ZBL",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2500,
+          "side_b_rx_mhz": 431.2500,
+          "selection_status": "pair_resolved_low_priority_for_mortain"
+        },
+        {
           "id": "F1ZOV",
           "kind": "amateur_repeater",
           "uplink_rx_mhz": 430.3750,
@@ -47,8 +61,7 @@
         }
       ],
       "unresolved": [
-        "F6ZES Sourdeval frequency and mode still unresolved",
-        "F1ZBL directionality requires review before converting its published candidate frequencies into a paired RX link"
+        "F6ZES Sourdeval frequency and mode still unresolved"
       ]
     },
     {

@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "status": "promotion_gates_defined_not_public",
+  "updated": "2026-08-10",
+  "pack": "Normandie",
+  "target_version": "0.4",
+  "current_internal_candidate_memory_count": 142,
+  "current_internal_candidate_new_memory_count": 3,
+  "blocked_frequency_count": 5,
+  "gates": [
+    {
+      "id": "R3_MORTAIN_RX",
+      "station": "F1ZBX / R3 Broceliande",
+      "frequencies_mhz": [145.075, 145.675],
+      "current_state": "field_evidence_required",
+      "blocking_reason": "No reliable current public evidence found proving actual R3 reception from Mortain-Bocage.",
+      "current_source": "https://ara35.fr/frequences/relais-phonie/r3/",
+      "current_source_supports": [
+        "145.075 MHz input",
+        "145.675 MHz output",
+        "current operator technical parameters",
+        "150 km operator usage radius context"
+      ],
+      "current_source_does_not_support": [
+        "actual reception from Mortain-Bocage"
+      ],
+      "promotion_requirements": {
+        "field_protocol": "research/normandie-v0.4/r3-mortain-field-validation.json",
+        "validation_pack": "research/normandie-v0.4/r3-validation-pack.json",
+        "minimum_independent_sessions": 2,
+        "primary_probe_mhz": 145.675,
+        "repeatable_identified_reception_required": true
+      },
+      "promotion_to_internal_candidate_allowed": false
+    },
+    {
+      "id": "F5ZHA_SOURCE_AND_COVERAGE",
+      "station": "F5ZHA Laval",
+      "frequencies_mhz": [145.4675, 432.575],
+      "current_state": "source_conflict_and_coverage_validation_required",
+      "blocking_reason": "Current REF and a second current list agree on 145.4675/432.575 MHz, while RepeaterBook still publishes 431.4125 MHz; no current local operator source was found to close the discrepancy, and useful Mortain coverage is unverified.",
+      "sources": {
+        "current_ref": "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "current_secondary_agreeing": "https://www.manuel.la-radio.eu/RM18/RM18H01A.HTM",
+        "conflicting_repeaterbook": "https://www.repeaterbook.com/row_repeaters/location_search.php?loc=Laval&state_id=FR&type=city"
+      },
+      "promotion_requirements": {
+        "current_local_operator_or_equivalent_authoritative_source_required": true,
+        "source_conflict_must_be_closed": true,
+        "useful_coverage_or_local_relevance_must_be_validated": true
+      },
+      "promotion_to_internal_candidate_allowed": false
+    },
+    {
+      "id": "F1ZOV_OPERATIONAL_STATUS",
+      "station": "F1ZOV Equeurdreville-Hainneville",
+      "frequencies_mhz": [431.975],
+      "current_state": "operator_maintenance_revalidation_required",
+      "blocking_reason": "The local operating club currently marks F1ZOV En Maintenance even though REF and ARA50 still list the frequency pair.",
+      "sources": {
+        "local_operator": "https://f6kfw.fr/",
+        "current_ref": "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "ara50": "https://ref50.jimdofree.com/"
+      },
+      "promotion_requirements": {
+        "local_operator_must_no_longer_mark_maintenance": true,
+        "frequency_pair_must_remain_430_375_431_975": true
+      },
+      "promotion_to_internal_candidate_allowed": false
+    }
+  ],
+  "rules": {
+    "failed_gate_must_not_be_added_to_internal_candidate": true,
+    "source_search_failure_must_not_be_treated_as_negative_operational_evidence": true,
+    "geometry_or_operator_radius_is_not_reception_proof": true,
+    "local_operator_status_has_priority_for_current_operational_state": true,
+    "published_v0_3_1_remains_immutable": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "public_export_allowed": false
+  }
+}

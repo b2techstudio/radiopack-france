@@ -46,14 +46,19 @@ def evaluate(root: Path) -> dict[str, Any]:
     if m["F5ZHA_LAVAL"]["current_frequencies_mhz"] != r["F5ZHA_LAVAL"]["frequencies_mhz"]:
         errors.append("F5ZHA pair differs between evidence and revalidation")
 
-    if r["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance" and g["F1ZOV_OPERATIONAL_STATUS"]["promotion_to_internal_candidate_allowed"] is True:
+    f1zov_revalidation_maintenance = r["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
+    f1zov_matrix_maintenance = m["F1ZOV_EQUEURDREVILLE"].get("operator_status") == "maintenance"
+    if f1zov_revalidation_maintenance != f1zov_matrix_maintenance:
+        errors.append("F1ZOV operator state differs between evidence and revalidation")
+    if f1zov_revalidation_maintenance and g["F1ZOV_OPERATIONAL_STATUS"]["promotion_to_internal_candidate_allowed"] is True:
         errors.append("F1ZOV gate opened while local operator still reports maintenance")
-    if m["F1ZOV_EQUEURDREVILLE"]["operator_status"] != "maintenance":
-        errors.append("F1ZOV evidence matrix no longer reflects local operator maintenance")
 
-    if m["F6ZES_SOURDEVAL"]["current_frequencies_mhz"] and r["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True:
-        errors.append("F6ZES frequencies appeared without resolving the guarded source state")
-    if not m["F6ZES_SOURDEVAL"]["current_frequencies_mhz"] and r["F6ZES_SOURDEVAL"]["promotion_to_internal_candidate_allowed"] is True:
+    f6_freqs = m["F6ZES_SOURDEVAL"]["current_frequencies_mhz"]
+    f6_still_unresolved = r["F6ZES_SOURDEVAL"]["state"] == "site_confirmed_frequency_unresolved"
+    f6_second_source = bool(r["F6ZES_SOURDEVAL"].get("second_current_frequency_source_found"))
+    if f6_freqs and (f6_still_unresolved or not f6_second_source):
+        errors.append("F6ZES frequencies appeared before the guarded source state was resolved")
+    if not f6_freqs and r["F6ZES_SOURDEVAL"]["promotion_to_internal_candidate_allowed"] is True:
         errors.append("F6ZES promoted without a verified frequency")
 
     return {

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "status": "research_plan_not_public",
   "updated": "2026-08-10",
   "policy": "research/paired-rx-policy.json",
@@ -33,10 +33,14 @@
         },
         {
           "id": "F1ZBX",
-          "kind": "amateur_repeater",
+          "kind": "amateur_repeater_linked_to_r71",
           "uplink_rx_mhz": 145.0750,
           "downlink_rx_mhz": 145.6750,
-          "selection_status": "coverage_pending"
+          "selection_status": "operator_supported_long_range_candidate_local_mortain_validation_required",
+          "operator_usage_radius_km": 150,
+          "operator_usage_radius_is_guaranteed_reception": false,
+          "linked_system": "F5ZEB R71 Rennes",
+          "linked_system_file": "research/bretagne-v0.1/rennes-broceliande-linked-system.json"
         },
         {
           "id": "F5ZHA",
@@ -155,17 +159,21 @@
         },
         {
           "id": "F1ZBX",
-          "kind": "amateur_repeater",
+          "kind": "amateur_repeater_linked_to_r71",
           "uplink_rx_mhz": 145.0750,
           "downlink_rx_mhz": 145.6750,
-          "selection_status": "research_candidate"
+          "selection_status": "current_operator_linked_system_verified",
+          "linked_system": "F5ZEB R71 Rennes",
+          "linked_system_file": "research/bretagne-v0.1/rennes-broceliande-linked-system.json"
         },
         {
           "id": "F5ZEB",
-          "kind": "crossband_transponder",
+          "kind": "crossband_transponder_linked_to_r3",
           "side_a_rx_mhz": 431.0750,
           "side_b_rx_mhz": 438.6750,
-          "selection_status": "coverage_and_redundancy_pending"
+          "selection_status": "current_operator_operational_linked_system_temporary_site_review_required",
+          "linked_system": "F1ZBX R3 Brocéliande",
+          "linked_system_file": "research/bretagne-v0.1/rennes-broceliande-linked-system.json"
         },
         {
           "id": "F5ZIS",
@@ -251,6 +259,7 @@
         }
       ],
       "deduplication_notes": [
+        "R3 Brocéliande / R71 Rennes is one operator-verified linked system using four RX frequencies already present once each: 145.075, 145.675, 431.075 and 438.675 MHz",
         "432.650 MHz is shared by F5ZIS, F5ZIT, F5ZIU, F5ZIV and F5ZJR",
         "145.2625 MHz is shared by F1ZGS, F5ZDV and F5ZZL",
         "F1ZBZ shares 145.1375 and 145.7375 MHz with the F5ZPE pair, so these RF frequencies remain single memories",

@@ -40,8 +40,8 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 49
-assert resume["state_version"] == "0.21.38"
+assert resume["current_sprint"] == 54
+assert resume["state_version"] == "0.21.43"
 assert resume["public_packs"]["normandie"]["memory_count"] == 139
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["blocked_frequency_count"] == 5
@@ -49,21 +49,32 @@ assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known
 assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
 assert resume["active_work"]["current_candidate_preview_memory_count"] == 142
 assert resume["active_work"]["current_release_blocker_count"] == 7
+assert resume["active_work"]["current_review_checklist_completed_count"] == 2
+assert resume["active_work"]["current_review_checklist_item_count"] == 9
+assert resume["active_work"]["current_review_blocking_open_count"] == 7
 assert resume["active_work"]["source_truth_consistent"] is True
+assert resume["active_work"]["source_revalidations_fresh_as_of_2026_08_10"] is True
+assert resume["active_work"]["prepublication_integrity_ok"] is True
+assert resume["active_work"]["prepublication_release_ready"] is False
 assert resume["active_work"]["public_export_allowed"] is False
 assert resume["active_work"]["public_release_ready"] is False
 assert resume["resume_rules"]["published_versions_are_immutable"] is True
 assert resume["resume_rules"]["geometry_is_not_reception_proof"] is True
 assert resume["resume_rules"]["field_observations_do_not_close_source_conflicts"] is True
 assert resume["resume_rules"]["local_operator_status_overrides_general_directory_for_current_state"] is True
+assert resume["resume_rules"]["stale_source_blocks_release_review_completion"] is True
+assert resume["resume_rules"]["prepublication_integrity_ok_does_not_mean_release_ready"] is True
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **49**" in status_text
-assert "État logique : **0.21.38**" in status_text
+assert "Sprint courant : **54**" in status_text
+assert "État logique : **0.21.43**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
-assert "7 blocages actifs" in status_text
+assert "7 blocages ouverts" in status_text
+assert "2/9 points complétés" in status_text
+assert "integrity_ok" in status_text
+assert "release_ready=false" in status_text
 
 recorder = load_module("r3_recorder", RECORDER)
 reporter = load_module("gate_reporter", REPORTER)
@@ -136,5 +147,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained at sprint 49, OK"
+    "non-public, recovery state is self-contained at sprint 54, OK"
 )

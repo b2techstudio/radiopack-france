@@ -23,6 +23,7 @@ assert delta["base"]["version"] == "0.3.1"
 assert delta["base"]["memory_count"] == 139
 assert delta["base"]["immutable"] is True
 assert delta["paired_rx_research_frequency_count"] == 12
+assert delta["sources"]["internal_candidate_map"] == "research/normandie-v0.4/internal-candidate-map.json"
 
 with BASE_CSV.open(encoding="utf-8", newline="") as handle:
     rows = list(csv.DictReader(handle))
@@ -75,12 +76,16 @@ assert summary["ready_research_candidates"] == 3
 assert summary["local_mortain_validation_required"] == 2
 assert summary["source_conflict_and_coverage_validation_required"] == 2
 assert summary["operator_maintenance_revalidation_required"] == 1
+assert summary["internal_candidate_memory_count"] == 142
+assert summary["internal_candidate_new_memory_count"] == 3
+assert summary["internal_candidate_positions_assigned_provisionally"] is True
 assert summary["final_v0_4_memory_count"] is None
 assert summary["memory_positions_assigned"] is False
 
 rules = delta["rules"]
 assert rules["frequency_present_in_base_must_not_be_added_again"] is True
 assert rules["temporary_maintenance_blocks_new_side_promotion_until_revalidated"] is True
+assert rules["internal_candidate_positions_are_not_final_public_positions"] is True
 assert rules["all_future_exported_memories_tx_disabled"] is True
 assert rules["chirp_duplex"] == "off"
 assert rules["chirp_offset"] == "0.000000"
@@ -105,15 +110,21 @@ assert field["observations"] == []
 
 memory_plan = pack_plan["memory_plan"]
 assert pack_plan["schema_version"] == "1.1"
-assert memory_plan["status"] == "paired_rx_delta_candidate_defined_not_public"
+assert memory_plan["status"] == "internal_candidate_defined_not_public"
 assert memory_plan["candidate_delta_file"] == "research/normandie-v0.4/candidate-memory-delta.json"
+assert memory_plan["internal_candidate_map_file"] == "research/normandie-v0.4/internal-candidate-map.json"
+assert memory_plan["internal_candidate_builder"] == "tools/build_normandie_v04_internal_candidate.py"
 assert memory_plan["r3_field_validation_file"] == "research/normandie-v0.4/r3-mortain-field-validation.json"
+assert memory_plan["internal_candidate_memory_count"] == 142
+assert memory_plan["internal_candidate_new_memory_count"] == 3
+assert memory_plan["internal_candidate_positions_assigned_provisionally"] is True
 assert memory_plan["paired_rx_research_frequency_count"] == 12
 assert memory_plan["paired_rx_frequencies_already_in_v0_3_1"] == 4
 assert memory_plan["maximum_new_paired_rx_frequencies_under_current_research"] == 8
 assert memory_plan["ready_research_candidates"] == 3
 assert memory_plan["expected_memory_count"] is None
 assert memory_plan["memory_positions_assigned"] is False
+assert memory_plan["new_blocks"][0]["locations"] == [175, 176, 177]
 assert pack_plan["publication"]["public_export_allowed"] is False
 
 assert refresh["schema_version"] == "1.3"
@@ -129,4 +140,4 @@ assert refresh["rules"]["maintenance_blocks_new_side_promotion_until_revalidated
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'version: "v0.4"' not in registry
 
-print("Tests Normandie v0.4 candidate delta: 4 paired frequencies already in frozen v0.3.1 + 8 possible new sides classified as 3 ready research / 2 Mortain field validation / 2 source conflict / 1 operator maintenance; no public mutation OK")
+print("Tests Normandie v0.4 candidate delta: frozen v0.3.1 + 8 possible paired sides classified, 3 promoted only into a 142-memory internal candidate with provisional locations 175-177; no public mutation OK")

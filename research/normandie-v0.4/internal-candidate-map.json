@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "status": "internal_candidate_map_not_public",
+  "updated": "2026-08-10",
+  "pack": "Normandie",
+  "target_version": "0.4",
+  "base": {
+    "version": "0.3.1",
+    "memory_count": 139,
+    "csv": "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv",
+    "immutable": true
+  },
+  "candidate": {
+    "memory_count": 142,
+    "new_memory_count": 3,
+    "positions_are_internal_provisional": true,
+    "public_export_allowed": false
+  },
+  "additions": [
+    {
+      "location": 175,
+      "name": "50-ZHY-IN",
+      "frequency_mhz": 145.0875,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "F5ZHY repeater input RX",
+      "source_authority": "ARA50",
+      "source_status": "current_association_explicit_pair_revalidated_2026_08_10",
+      "comment": "F5ZHY Mont Robin (Manche) - entree relais FM VHF - RX seule - ARA50 2026"
+    },
+    {
+      "location": 176,
+      "name": "53-ZCE-IN",
+      "frequency_mhz": 145.1000,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "F6ZCE repeater input RX",
+      "source_authority": "ARAS72",
+      "source_status": "current_association_output_and_minus_600khz_shift_revalidated_2026_08_10",
+      "comment": "F6ZCE Mont des Avaloirs (Mayenne) - entree relais FM VHF - RX seule - ARAS72 2026"
+    },
+    {
+      "location": 177,
+      "name": "50-ZBL-U",
+      "frequency_mhz": 431.2500,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "F1ZBL transponder UHF side RX",
+      "source_authority": "Radio Club Nord Cotentin F6KFW + ARA50",
+      "source_status": "current_local_club_bidirectional_pair_revalidated_2026_08_10",
+      "comment": "F1ZBL Cherbourg - voie UHF transpondeur cross-band - RX seule - F6KFW/ARA50 2026"
+    }
+  ],
+  "excluded_from_internal_candidate": [
+    {
+      "frequencies_mhz": [145.0750, 145.6750],
+      "reason": "F1ZBX R3 actual reception from Mortain not yet verified"
+    },
+    {
+      "frequencies_mhz": [145.4675, 432.5750],
+      "reason": "F5ZHA source conflict and coverage validation still open"
+    },
+    {
+      "frequencies_mhz": [431.9750],
+      "reason": "F1ZOV local operator currently marks repeater in maintenance"
+    }
+  ],
+  "rules": {
+    "published_base_must_be_exact_prefix_of_generated_candidate": true,
+    "no_published_base_row_may_be_rewritten": true,
+    "only_ready_research_candidates_may_be_added": true,
+    "names_max_10_characters": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "tone_activation_metadata_must_not_enable_tx_or_rx_filtering": true,
+    "final_public_memory_plan_is_not_defined_by_this_map": true,
+    "public_export_allowed": false
+  }
+}

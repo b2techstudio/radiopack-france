@@ -15,6 +15,7 @@ FOCUSED_TESTS = [
     "tests/test_normandie_v04_promotion_gates.py",
     "tests/test_normandie_v04_field_tools.py",
     "tests/test_normandie_v04_readiness.py",
+    "tests/test_normandie_v04_evidence_pipeline.py",
 ]
 
 EXTENDED_TESTS = [

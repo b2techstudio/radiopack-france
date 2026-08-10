@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "status": "current_ref_active_analog_expansion_research_not_public",
+  "updated": "2026-08-10",
+  "source": {
+    "authority": "Réseau des Émetteurs Français (REF)",
+    "url": "https://www.r-e-f.org/",
+    "status": "current_official_radioamateur_directory_rechecked_2026_08_10"
+  },
+  "purpose": "Étendre l'inventaire Bretagne des relais/transpondeurs analogiques actuels et résoudre les chemins explicitement publiés pour F1ZBZ Lorient, sans attribuer de rôle ADRASEC ni publier de mémoire.",
+  "new_active_candidates": [
+    {
+      "id": "F5ZIU",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "La Harmoye",
+      "department": 22,
+      "locator": "IN88LI87TK",
+      "altitude_m": 318,
+      "side_a_rx_mhz": 145.4625,
+      "side_b_rx_mhz": 432.6500,
+      "ctcss_hz": 71.9,
+      "power_w": 10,
+      "antenna_gain_dbi": 6,
+      "status": "current_ref_active",
+      "review_priority": "next_coverage_review",
+      "coverage_claim": null,
+      "frequency_promoted_to_public_pack": false
+    },
+    {
+      "id": "F5ZIV",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Saint-Brieuc",
+      "department": 22,
+      "locator": "IN88OM43CW",
+      "altitude_m": 119,
+      "side_a_rx_mhz": 145.4875,
+      "side_b_rx_mhz": 432.6500,
+      "ctcss_hz": 71.9,
+      "power_w": 10,
+      "antenna_gain_dbi": 8,
+      "status": "current_ref_active",
+      "review_priority": "next_coverage_review",
+      "coverage_claim": null,
+      "frequency_promoted_to_public_pack": false
+    },
+    {
+      "id": "F5ZJR",
+      "kind": "amateur_analog_crossband_transponder",
+      "site": "Plessala",
+      "department": 22,
+      "locator": "IN88QH97WI",
+      "altitude_m_by_ref_row": {
+        "vhf_side": 335,
+        "uhf_side": 339
+      },
+      "side_a_rx_mhz": 145.2875,
+      "side_b_rx_mhz": 432.6500,
+      "ctcss_hz": 71.9,
+      "power_w": 10,
+      "antenna_gain_dbi": 3,
+      "status": "current_ref_active",
+      "review_priority": "next_coverage_review",
+      "coverage_claim": null,
+      "note": "Le répertoire REF publie 335 m sur la ligne VHF et 339 m sur la ligne UHF ; conserver les deux valeurs sans les moyenner.",
+      "frequency_promoted_to_public_pack": false
+    },
+    {
+      "id": "F1ZMU",
+      "kind": "amateur_analog_repeater",
+      "site": "Saint-Nolff",
+      "department": 56,
+      "locator": "IN87QR21GN",
+      "altitude_m": 142,
+      "output_mhz": 430.3250,
+      "input_mhz": 439.7250,
+      "offset_mhz": 9.4000,
+      "power_w": 50,
+      "mode": "FM",
+      "status": "current_ref_active",
+      "review_priority": "next_coverage_review",
+      "coverage_claim": null,
+      "frequency_promoted_to_public_pack": false
+    }
+  ],
+  "resolved_multi_path_candidate": {
+    "id": "F1ZBZ",
+    "kind": "amateur_analog_crossband_transponder_multi_path",
+    "site": "Lorient",
+    "department": 56,
+    "locator": "IN87HR59VP",
+    "altitude_m": 21,
+    "status": "current_ref_active_multi_path_explicit_rows",
+    "mode": "FM",
+    "shared_uhf_mhz": 431.2000,
+    "documented_ref_rows": [
+      {
+        "repeater_emission_mhz": 431.2000,
+        "repeater_reception_mhz": 431.2000,
+        "function": "FM"
+      },
+      {
+        "repeater_emission_mhz": 431.2000,
+        "repeater_reception_mhz": 145.6250,
+        "function": "Transpond."
+      },
+      {
+        "repeater_emission_mhz": 145.0250,
+        "repeater_reception_mhz": 431.2000,
+        "function": "Transpond."
+      },
+      {
+        "repeater_emission_mhz": 431.2000,
+        "repeater_reception_mhz": 145.7375,
+        "function": "Transpond."
+      },
+      {
+        "repeater_emission_mhz": 145.1375,
+        "repeater_reception_mhz": 431.2000,
+        "function": "Transpond."
+      }
+    ],
+    "unique_rx_frequencies_mhz": [431.2000, 145.6250, 145.0250, 145.7375, 145.1375],
+    "selection_status": "research_candidate_multi_path_deduplicated",
+    "coverage_claim": null,
+    "frequency_promoted_to_public_pack": false,
+    "note": "La direction de chaque chemin est conservée exactement selon les colonnes émission/réception du REF. RadioPack écoute les fréquences RF uniques ; 145.1375 et 145.7375 sont déjà présentes via F5ZPE et doivent rester dédupliquées."
+  },
+  "shared_frequency_clusters": [
+    {
+      "frequency_mhz": 432.6500,
+      "roles": ["F5ZIS", "F5ZIT", "F5ZIU", "F5ZIV", "F5ZJR"],
+      "rule": "one_rx_memory_multiple_site_roles"
+    },
+    {
+      "frequency_mhz": 145.1375,
+      "roles": ["F5ZPE input", "F1ZBZ repeater emission path"],
+      "rule": "one_rx_memory_multiple_roles"
+    },
+    {
+      "frequency_mhz": 145.7375,
+      "roles": ["F5ZPE output", "F1ZBZ repeater reception path"],
+      "rule": "one_rx_memory_multiple_roles"
+    }
+  ],
+  "rules": {
+    "ref_active_status_required_for_active_candidate": true,
+    "coverage_not_inferred_from_altitude_power_or_antenna_gain": true,
+    "adrasec_role_not_inferred_from_geography": true,
+    "multi_path_rows_preserve_ref_emission_reception_direction": true,
+    "shared_rf_frequency_deduplicated": true,
+    "tx_disabled_in_future_export": true,
+    "public_export_allowed": false
+  }
+}

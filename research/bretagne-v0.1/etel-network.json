@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "status": "current_network_size_verified_site_inventory_pending",
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "pack": {
     "name": "Bretagne",
     "target_version": "0.1"
@@ -27,6 +27,12 @@
       "title": "Le CROSS Étel",
       "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-etel-a152.html",
       "status": "primary_current_srr_and_weather_emitters_context"
+    },
+    {
+      "authority": "Ministère chargé de la mer",
+      "title": "Règles de sécurité pour les loisirs nautiques en mer",
+      "url": "https://mer.gouv.fr/regles-de-securite-pour-les-loisirs-nautiques-en-mer",
+      "status": "primary_current_2026_morbihan_channels_63_64_statement"
     }
   ],
   "known_weather_sites": [
@@ -58,15 +64,20 @@
   ],
   "channel_64_research": {
     "ministry_current_statement": "Les canaux 63 et 64 diffusent un bulletin météo côtier permanent notamment dans le Morbihan.",
+    "ministry_page_updated": "2026-06-19",
+    "ministry_statement_rechecked": "2026-08-10",
+    "current_cross_etel_html_names_etel_continuous_channel_63": true,
+    "current_cross_etel_html_names_brittany_channel_64_site": false,
     "local_primary_site_identified": false,
     "candidate_station_name": null,
-    "status": "current_network_context_strengthened_transmitter_still_unidentified",
-    "note": "Le dimensionnement à 17 stations confirme l'existence d'un réseau technique plus large que les seuls émetteurs météo nommés. Il ne permet pas d'attribuer le canal 64 à Etel, Groix, Belle-Ile, Penmarc'h ou à un autre site sans source primaire dédiée."
+    "status": "current_ministry_ch63_ch64_morbihan_reconfirmed_local_cross_html_ch64_site_still_unidentified",
+    "note": "La page ministérielle actuelle, mise à jour le 19 juin 2026, confirme toujours les canaux 63 et 64 pour le bulletin côtier permanent notamment dans le Morbihan. La page HTML actuelle du CROSS Étel identifie explicitement Étel sur le canal 63 en diffusion continue mais ne nomme aucun site breton sur le canal 64. Le dimensionnement à 17 stations confirme un réseau technique plus large sans permettre d'attribuer le canal 64 à Étel, Groix, Belle-Ile, Penmarc'h ou à un autre site."
   },
   "rules": {
     "station_count_does_not_imply_station_names": true,
     "known_weather_sites_are_not_complete_network_inventory": true,
     "network_extent_does_not_imply_channel_assignment": true,
+    "ministry_regional_channel_statement_does_not_identify_transmitter_site": true,
     "channel_64_site_must_not_be_guessed": true,
     "paired_rx_policy_applies_after_channel_validation": true,
     "frequency_promoted_to_public_pack": false,

@@ -4,7 +4,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 plan = json.loads((ROOT / "research/paired-rx-deduplicated-memory-plan.json").read_text(encoding="utf-8"))
-assert plan["schema_version"] == "1.2"
+source_plan = json.loads((ROOT / "research/paired-rx-next-version-plan.json").read_text(encoding="utf-8"))
+linked = json.loads((ROOT / "research/bretagne-v0.1/rennes-broceliande-linked-system.json").read_text(encoding="utf-8"))
+assert plan["schema_version"] == "1.3"
+assert source_plan["schema_version"] == "1.3"
 assert plan["status"] == "research_deduplicated_memory_plan_not_public"
 assert plan["source_plan"] == "research/paired-rx-next-version-plan.json"
 assert plan["policy"] == "research/paired-rx-policy.json"
@@ -47,6 +50,10 @@ for name, frequency in {
     "ZOV-B": 431.9750,
 }.items():
     assert normandie[name]["frequency_mhz"] == frequency
+assert "F5ZEB R71 to R3 bridge RX role" in normandie["ZBX-IN"]["roles"]
+assert "F1ZBX R3 to F5ZEB R71 bridge RX role" in normandie["ZBX-OUT"]["roles"]
+assert normandie["ZBX-IN"]["selection_status"] == "operator_supported_long_range_candidate_local_mortain_validation_required"
+assert normandie["ZBX-OUT"]["selection_status"] == "operator_supported_long_range_candidate_local_mortain_validation_required"
 excluded_normandie = "\n".join(regions["normandie-v0.4"]["excluded_or_unresolved"])
 assert "F6ZES" in excluded_normandie
 assert "F1ZBL" not in excluded_normandie
@@ -100,6 +107,28 @@ assert set(bretagne["X145262"]["roles"]) == {
 }
 assert set(bretagne["ZPE-IN"]["roles"]) == {"F5ZPE repeater input", "F1ZBZ repeater emission path"}
 assert set(bretagne["ZPE-OUT"]["roles"]) == {"F5ZPE repeater output", "F1ZBZ repeater reception path"}
+assert bretagne["ZBX-IN"]["roles"] == ["F1ZBX R3 input", "F5ZEB R71 to F1ZBX R3 bridge RX role"]
+assert bretagne["ZBX-OUT"]["roles"] == ["F1ZBX R3 output", "F1ZBX R3 to F5ZEB R71 bridge RX role"]
+assert bretagne["ZEB-A"]["roles"] == ["F5ZEB R71 user input RX"]
+assert bretagne["ZEB-B"]["roles"] == ["F5ZEB R71 output RX"]
+assert bretagne["ZEB-A"]["selection_status"] == "current_operator_operational_linked_system_temporary_site_review_required"
+assert bretagne["ZEB-B"]["selection_status"] == "current_operator_operational_linked_system_temporary_site_review_required"
+
+linked_system = linked["system"]
+assert linked["schema_version"] == "1.0"
+assert linked_system["current_operator_linkage_verified"] is True
+assert linked_system["unique_rx_frequency_count"] == 4
+assert linked_system["new_bretagne_rf_memories_required"] == 0
+assert linked_system["r3_operator_usage_radius_km"] == 150
+assert linked_system["r3_operator_usage_radius_is_reception_guarantee"] is False
+assert linked_system["r3_to_r71_operator_link_distance_km"] == 46.51
+assert {item["frequency_mhz"] for item in linked_system["rf_paths"]} == {145.0750, 145.6750, 431.0750, 438.6750}
+assert linked["export_contract"]["chirp_duplex"] == "off"
+assert linked["export_contract"]["chirp_offset"] == "0.000000"
+assert linked["export_contract"]["tx_disabled"] is True
+assert linked["rules"]["linked_system_does_not_require_duplicate_rf_memories"] is True
+assert linked["rules"]["operator_usage_radius_is_not_guaranteed_coverage"] is True
+assert linked["rules"]["public_export_allowed"] is False
 
 excluded_bretagne = "\n".join(regions["bretagne-v0.1"]["excluded_or_unresolved"])
 assert "F5ZPV" in excluded_bretagne
@@ -110,6 +139,7 @@ assert all(name not in bretagne for name in ("ZPV-IN", "ZPV-OUT", "ZZH-IN", "ZZH
 
 assert plan["rules"]["counts_are_research_counts_not_pack_targets"] is True
 assert plan["rules"]["memory_names_are_hints_not_final_public_names"] is True
+assert plan["rules"]["linked_system_roles_must_not_create_duplicate_rf_memories"] is True
 assert plan["rules"]["stopped_or_unresolved_links_excluded_from_active_memory_list"] is True
 assert plan["rules"]["no_public_export"] is True
 
@@ -118,4 +148,4 @@ assert 'id: "bretagne"' not in registry
 assert 'version: "v0.4"' not in registry
 assert 'version: "v0.3"' not in registry
 
-print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 12, Annecy 10, Bretagne 29 unique RX frequencies, REF expansion and resolved Normandie pairs deduplicated, TX-off contract and no public mutation OK")
+print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 12, Annecy 10, Bretagne 29 unique RX frequencies, R3/R71 four-frequency linked system roles deduplicated with no extra RF memories, TX-off contract and no public mutation OK")

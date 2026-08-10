@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 required_files = [
     "README.md",
+    "PROJECT_STATUS.md",
     ".gitignore",
     ".github/workflows/ci.yml",
     "REGIONAL-PACK-WORKFLOW.md",
@@ -18,6 +19,15 @@ required_files = [
     "generator/options.json",
     "generator/generate_chirp_csv.py",
     "tools/create_regional_pack.py",
+    "tools/build_normandie_v04_internal_candidate.py",
+    "tools/build_normandie_v04_r3_validation_pack.py",
+    "tools/record_normandie_v04_r3_observation.py",
+    "tools/check_normandie_v04_promotion_gates.py",
+    "tools/build_normandie_v04_gate_report.py",
+    "tools/build_normandie_v04_f5zha_validation_pack.py",
+    "tools/build_normandie_v04_readiness_report.py",
+    "tools/build_normandie_v04_promotion_scenarios.py",
+    "tools/run_normandie_v04_checks.py",
     "tests/test_generator.py",
     "tests/test_regional_pack_starter.py",
     "tests/test_paired_rx_policy.py",
@@ -27,9 +37,17 @@ required_files = [
     "tests/test_web_generator.py",
     "tests/test_pack_registry.py",
     "tests/test_built_public_pack_catalog.py",
+    "tests/test_normandie_v04_candidate_delta.py",
+    "tests/test_normandie_v04_internal_candidate.py",
+    "tests/test_normandie_v04_promotion_gates.py",
+    "tests/test_normandie_v04_field_tools.py",
+    "tests/test_normandie_v04_readiness.py",
+    "research/project-resume-state.json",
     "research/paired-rx-policy.json",
     "research/paired-rx-next-version-plan.json",
     "research/emergency-radio-policy.json",
+    "research/sprint-30-34-summary.md",
+    "research/sprint-35-39-summary.md",
     "research/bretagne-v0.1/README.md",
     "research/bretagne-v0.1/pack-plan.json",
     "research/bretagne-v0.1/source-registry.json",
@@ -42,6 +60,13 @@ required_files = [
     "research/normandie-v0.4/pack-plan.json",
     "research/normandie-v0.4/emergency-relays.json",
     "research/normandie-v0.4/mortain-bocage-coverage.json",
+    "research/normandie-v0.4/candidate-memory-delta.json",
+    "research/normandie-v0.4/internal-candidate-map.json",
+    "research/normandie-v0.4/promotion-gates.json",
+    "research/normandie-v0.4/blocked-station-revalidation.json",
+    "research/normandie-v0.4/r3-mortain-field-validation.json",
+    "research/normandie-v0.4/r3-validation-pack.json",
+    "research/normandie-v0.4/f5zha-mortain-validation.json",
     "research/annecy-alpes-leman-v0.3/README.md",
     "research/annecy-alpes-leman-v0.3/pack-plan.json",
     "research/annecy-alpes-leman-v0.3/emergency-relays.json",
@@ -62,14 +87,15 @@ for relative in required_files:
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "État actuel — Sprint 29",
+    "État actuel — Sprint 39",
     "Normandie v0.3.1** — 139 mémoires RX",
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
-    "Bretagne v0.1 — recherche",
+    "Bretagne v0.1",
+    "Normandie v0.4",
+    "142 mémoires",
+    "147 mémoires",
     "Mortain-Bocage / Sud-Manche",
-    "50, 35, 53 et 61",
     "research/paired-rx-policy.json",
-    "deux fréquences RX",
     "Duplex=off",
     "Offset=0.000000",
     "research/normandie-v0.4/mortain-bocage-coverage.json",
@@ -78,29 +104,18 @@ for expected in [
     "F6ZES",
     "F6ZCE",
     "F1ZBX",
-    "Bretagne — VHF maritime publique Sprint 29",
+    "F5ZHA",
+    "F1ZOV",
+    "research/normandie-v0.4/f5zha-mortain-validation.json",
+    "build_normandie_v04_readiness_report.py",
+    "build_normandie_v04_promotion_scenarios.py",
     "research/bretagne-v0.1/public-maritime-radio.json",
-    "Baie du Mont-Saint-Michel",
-    "Pointe de Penmarc'h",
-    "Pointe du Raz",
-    "CROSS Nouvelle génération",
-    "Penmarc'h",
-    "Groix",
-    "Belle-Ile",
-    "Étel",
-    "156.800 MHz",
-    "161.575 MHz",
-    "161.625 MHz",
-    "160.775 MHz",
-    "160.825 MHz",
-    "F5ZZH",
-    "F5ZIS",
-    "F5ZIT",
-    "F1ZBZ",
-    "F5ZPE",
     "tests\\test_paired_rx_policy.py",
     "tests\\test_mortain_bretagne_radio_research.py",
+    "tests\\test_normandie_v04_readiness.py",
     "SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md",
+    "research/sprint-30-34-summary.md",
+    "research/sprint-35-39-summary.md",
     "nothing to commit, working tree clean",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
@@ -108,6 +123,7 @@ for expected in [
 
 gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
 assert "research/annecy-alpes-leman-v0.2/generated/" in gitignore
+assert "research/normandie-v0.4/generated/" in gitignore
 assert "__pycache__/" in gitignore
 assert "*.py[cod]" in gitignore
 
@@ -313,6 +329,12 @@ assert normandie_next["paired_rx"]["published_v0_3_1_maritime_pair_model_already
 assert normandie_next["paired_rx"]["future_analog_repeaters_and_transponders_include_both_verified_sides"] is True
 assert normandie_next["priority_focus"]["label"] == "Mortain-Bocage / Sud-Manche"
 assert normandie_next["priority_focus"]["adjacent_departments_to_check"] == [35, 53, 61]
+assert normandie_next["memory_plan"]["internal_candidate_memory_count"] == 142
+assert normandie_next["memory_plan"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
+assert normandie_next["memory_plan"]["f6zes_excluded_from_known_gate_count_until_frequency_resolved"] is True
+assert normandie_next["memory_plan"]["f5zha_validation_file"] == "research/normandie-v0.4/f5zha-mortain-validation.json"
+assert normandie_next["memory_plan"]["readiness_report_builder"] == "tools/build_normandie_v04_readiness_report.py"
+assert normandie_next["memory_plan"]["promotion_scenario_builder"] == "tools/build_normandie_v04_promotion_scenarios.py"
 assert normandie_next["publication"]["public_export_allowed"] is False
 nrelays = {item["id"]: item for item in normandie_emergency["candidates"]}
 assert nrelays["F5ZHY"]["output_mhz"] == 145.6875
@@ -475,6 +497,8 @@ for expected in [
     "python tests/test_regional_pack_starter.py",
     "Test paired RX policy",
     "python tests/test_paired_rx_policy.py",
+    "Test Normandie v0.4 readiness and scenarios",
+    "python tests/test_normandie_v04_readiness.py",
     "Test Bretagne research scaffold",
     "python tests/test_bretagne_research_scaffold.py",
     "Test emergency and ADRASEC research",
@@ -488,4 +512,4 @@ for expected in [
 ]:
     assert expected in workflow, f"Étape CI absente: {expected}"
 
-print("Tests RadioPack Sprint 29 guards: paired RX policy + TX off/zero + Mortain coverage + Bretagne dual-side marine RX + Corsen current SRR and infrastructures + Pointe du Raz coverage guard + public packs frozen OK")
+print("Tests RadioPack Sprint 39 guards: public packs frozen + paired RX/TX-off + Normandie v0.4 142-memory candidate with guarded 147 known ceiling + F5ZHA diagnostic/readiness tooling + Bretagne research guards OK")

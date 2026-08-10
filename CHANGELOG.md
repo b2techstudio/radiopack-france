@@ -18,7 +18,7 @@
 - Conservation d'une ancienne mention RepeaterBook reliant F5ZIT à F5ZIV/F5ZIU/F5ZIS/F5ZJR comme indice historique secondaire uniquement ; l'interconnexion actuelle du cluster reste `current_primary_linkage_verified: false` faute de source primaire/associative actuelle explicite.
 - Revue Morbihan : F1ZMU reste un candidat distinct avec sa paire 439.725/430.325 MHz malgré sa proximité géométrique avec F5ZPE ; F1ZBZ ajoute trois fréquences RF nouvelles après déduplication avec F5ZPE et reste soumis à une revue de couverture locale.
 - Ajout de `research/normandie-v0.4/paired-rx-refresh.json` : F1ZBL Équeurdreville est désormais résolu en 145.250/431.250 MHz dans les deux sens et F5ZHA Laval en 145.4675/432.575 MHz ; F6ZES Sourdeval reste sans fréquence/mode exploitable.
-- Passage des plans `paired-rx-next-version-plan.json` et `paired-rx-deduplicated-memory-plan.json` au schéma 1.2 ; la carte paired RX atteint désormais **12 fréquences uniques pour Normandie v0.4**, **10 pour Annecy–Alpes–Léman v0.3** et **29 pour Bretagne v0.1**.
+- Passage des plans `paired-rx-next-version-plan.json` et `research/paired-rx-deduplicated-memory-plan.json` au schéma 1.2 ; la carte paired RX atteint désormais **12 fréquences uniques pour Normandie v0.4**, **10 pour Annecy–Alpes–Léman v0.3** et **29 pour Bretagne v0.1**.
 - Ajout de `tests/test_analog_coverage_redundancy_review.py`, mise à jour de `tests/test_paired_rx_memory_plan.py` et ajout de l'étape CI `Test analog coverage and redundancy review`.
 - Le canal 64 Morbihan et l'émetteur actuel du canal 79 Corsen restent non résolus ; aucune attribution n'est inventée.
 - État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
@@ -392,7 +392,7 @@
 
 - Ajout des canaux d'appel FM 145,500 MHz et 433,500 MHz en reception seule.
 - Ajout de 14 sorties de relais ou voies de transpondeurs analogiques verifies en Normandie.
-- Organisation des pack par plages fixes de memoires.
+- Organisation du pack par plages fixes de memoires.
 - Pack Normandie porte a 138 memoires.
 - Ajout d'un guide PDF telechargeable.
 - Ajout d'un export CSV specifique aux relais analogiques normands.

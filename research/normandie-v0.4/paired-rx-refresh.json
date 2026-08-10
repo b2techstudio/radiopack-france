@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "current_pair_refresh_with_source_reconciliation_research_not_public",
   "updated": "2026-08-10",
   "sources": [
@@ -12,6 +12,12 @@
       "authority": "Radio Club Nord Cotentin F6KFW",
       "url": "https://f6kfw.fr/",
       "status": "current_association_source_for_f1zbl"
+    },
+    {
+      "authority": "manuel.la-radio.eu",
+      "url": "https://www.manuel.la-radio.eu/RM18/RM18H01A.HTM",
+      "status": "current_secondary_directory_rechecked_2026_08_10",
+      "note": "La liste actuelle recoupe F1ZBL 145.250/431.250 MHz et F5ZHA 145.4675/432.575 MHz. Elle reste une source secondaire et ne remplace pas une validation locale."
     },
     {
       "authority": "RepeaterBook",
@@ -36,12 +42,13 @@
       "source_reconciliation": {
         "current_ref_pair_mhz": [145.2500, 431.2500],
         "current_local_club_pair_mhz": [145.2500, 431.2500],
+        "current_secondary_manual_pair_mhz": [145.2500, 431.2500],
         "secondary_repeaterbook_conflict_mhz": 431.2250,
         "reconciliation_status": "current_ref_and_local_association_agree_secondary_conflict_rejected",
         "publication_blocked_by_source_conflict": false
       },
       "frequency_promoted_to_public_pack": false,
-      "note": "Le REF actuel et le Radio Club Nord Cotentin publient tous deux 145.250 <-> 431.250 MHz. La valeur secondaire RepeaterBook 431.225 MHz n'est pas retenue."
+      "note": "Le REF actuel, le Radio Club Nord Cotentin et une liste secondaire actuelle publient 145.250 <-> 431.250 MHz. La valeur secondaire RepeaterBook 431.225 MHz n'est pas retenue."
     },
     {
       "id": "F5ZHA",
@@ -53,31 +60,35 @@
       "side_a_rx_mhz": 145.4675,
       "side_b_rx_mhz": 432.5750,
       "mode": "FM",
-      "status": "current_ref_active_explicit_pair_secondary_directory_conflict",
-      "selection_status": "research_pair_retained_publication_reconciliation_required",
+      "status": "current_ref_pair_independently_corroborated_secondary_old_conflict_still_open",
+      "selection_status": "research_pair_retained_publication_local_reconciliation_required",
       "source_reconciliation": {
         "current_ref_pair_mhz": [145.4675, 432.5750],
         "current_secondary_manual_pair_mhz": [145.4675, 432.5750],
+        "independent_current_index_corroborates_ref_pair": true,
         "secondary_repeaterbook_conflict_mhz": 431.4125,
         "repeaterbook_record_age_context": "verification_listing_shows_2017-02-17",
-        "reconciliation_status": "current_ref_preferred_secondary_old_conflict_requires_current_local_recheck_before_publication",
+        "reconciliation_status": "ref_pair_independently_corroborated_but_old_conflict_requires_current_local_source_before_publication",
         "publication_blocked_by_source_conflict": true
       },
       "frequency_promoted_to_public_pack": false,
-      "note": "Le REF actuel publie la paire 145.4675 <-> 432.575 MHz et un second annuaire la reproduit. RepeaterBook affiche encore 431.4125 MHz avec une entrée ancienne ; conserver la paire REF en recherche mais exiger une source locale actuelle supplémentaire avant publication."
+      "note": "Le REF actuel et manuel.la-radio.eu concordent sur 145.4675 <-> 432.575 MHz. RepeaterBook affiche encore 431.4125 MHz avec une entrée ancienne ; la probabilité d'une donnée RepeaterBook obsolète augmente, mais RadioPack exige encore une source locale actuelle avant publication."
     }
   ],
   "still_unresolved": [
     {
       "id": "F6ZES",
       "site": "Sourdeval",
-      "reason": "Le REF courant confirme site, responsable, locator et altitude mais ne publie toujours ni fréquence ni mode exploitable."
+      "current_ref_rechecked": "2026-08-10",
+      "resolution_status": "still_unresolved_after_targeted_recheck_2026_08_10",
+      "reason": "Le REF courant confirme site, responsable F1SMB, locator IN98MR93XV et altitude 230 m mais ne publie toujours ni fréquence ni mode exploitable ; les recherches publiques ciblées du 10/08/2026 n'ont fourni aucune seconde source actuelle suffisamment précise."
     }
   ],
   "rules": {
     "paired_rx_requires_both_verified_frequencies": true,
     "coverage_still_required_before_public_selection": true,
     "current_primary_or_association_source_preferred_over_old_secondary_directory": true,
+    "independent_secondary_corroboration_strengthens_but_does_not_replace_local_validation": true,
     "secondary_directory_conflict_must_be_reconciled_before_publication": true,
     "published_normandie_v0_3_1_immutable": true,
     "tx_disabled_in_future_export": true,

@@ -26,10 +26,15 @@
     "rule": "Sélectionner selon couverture radio utile et non selon la seule limite administrative."
   },
   "memory_plan": {
-    "status": "paired_rx_delta_candidate_defined_not_public",
+    "status": "internal_candidate_defined_not_public",
     "candidate_delta_file": "research/normandie-v0.4/candidate-memory-delta.json",
+    "internal_candidate_map_file": "research/normandie-v0.4/internal-candidate-map.json",
+    "internal_candidate_builder": "tools/build_normandie_v04_internal_candidate.py",
     "r3_field_validation_file": "research/normandie-v0.4/r3-mortain-field-validation.json",
     "expected_memory_count": null,
+    "internal_candidate_memory_count": 142,
+    "internal_candidate_new_memory_count": 3,
+    "internal_candidate_positions_assigned_provisionally": true,
     "paired_rx_research_frequency_count": 12,
     "paired_rx_frequencies_already_in_v0_3_1": 4,
     "maximum_new_paired_rx_frequencies_under_current_research": 8,
@@ -38,11 +43,17 @@
     "source_conflict_and_coverage_validation_required": 2,
     "operator_maintenance_revalidation_required": 1,
     "memory_positions_assigned": false,
-    "new_blocks": []
+    "new_blocks": [
+      {
+        "label": "paired RX internal candidate additions",
+        "locations": [175, 176, 177],
+        "status": "internal_provisional_only"
+      }
+    ]
   },
   "research_priorities": [
     "valider réellement F1ZBX / R3 Brocéliande depuis Mortain-Bocage selon le protocole RX-only dédié",
-    "intégrer au candidat de recherche les côtés manquants suffisamment recoupés de F5ZHY, F6ZCE et F1ZBL sans dupliquer leurs côtés déjà publiés",
+    "conserver le candidat interne 142 mémoires comme base de test sans le confondre avec une prépublication",
     "attendre le retour en service de F1ZOV avant de promouvoir son côté 431.975 MHz dans le delta",
     "fermer le conflit de source F5ZHA et vérifier sa couverture utile avant toute promotion",
     "ADRASEC 14-50 et infrastructures radioamateurs associées",

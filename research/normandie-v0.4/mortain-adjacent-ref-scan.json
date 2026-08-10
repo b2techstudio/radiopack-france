@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "status": "current_ref_adjacent_department_scan_not_public",
+  "updated": "2026-08-10",
+  "focus": "Mortain-Bocage / Sud-Manche",
+  "departments_scanned": [35, 50, 53, 61],
+  "source": {
+    "authority": "Réseau des Émetteurs Français (REF)",
+    "url": "https://www.r-e-f.org/",
+    "accessed": "2026-08-10",
+    "scope": "current public station directory rows for departments 35, 50, 53 and 61"
+  },
+  "department_findings": [
+    {
+      "department": 35,
+      "analog_relevant_rows": [
+        {"id": "F1ZBX", "site": "Paimpont", "state": "Actif", "mode": "FM", "frequencies_mhz": [145.075, 145.675], "already_tracked": true},
+        {"id": "F5ZEB", "site": "Rennes", "state": "Arret_in_REF", "mode": "FM", "frequencies_mhz": [431.075, 438.675], "already_tracked": true, "status_conflict": "ARA35 currently reports R71 operational; operator status takes precedence for current research"},
+        {"id": "F5ZZC", "site": "Bruz", "state": "Arret", "mode": "FM", "frequencies_mhz": [432.975], "already_tracked": true}
+      ],
+      "new_untracked_active_analog_candidate_count": 0
+    },
+    {
+      "department": 50,
+      "analog_relevant_rows": [
+        {"id": "F6ZES", "site": "Sourdeval", "state": null, "mode": null, "frequencies_mhz": [], "already_tracked": true, "unresolved": true},
+        {"id": "F1ZBL", "site": "Equeurdreville-Hainneville", "state": "Actif", "mode": "FM", "frequencies_mhz": [145.25, 431.25], "already_tracked": true},
+        {"id": "F1ZOV", "site": "Equeurdreville-Hainneville", "state": "Actif_in_REF", "mode": "FM", "frequencies_mhz": [430.375, 431.975], "already_tracked": true, "status_conflict": "local operator F6KFW reports maintenance"},
+        {"id": "F5ZHY", "site": "Montabot", "state": "Actif", "mode": "FM", "frequencies_mhz": [145.0875, 145.6875], "already_tracked": true}
+      ],
+      "new_untracked_active_analog_candidate_count": 0
+    },
+    {
+      "department": 53,
+      "analog_relevant_rows": [
+        {"id": "F5ZHA", "site": "Laval", "state": "Actif", "mode": "FM transparent", "frequencies_mhz": [145.4675, 432.575], "already_tracked": true, "source_conflict_open": true},
+        {"id": "F5ZTQ", "site": "Ize", "state": "Arret", "mode": "FM", "frequencies_mhz": [145.3], "already_tracked": true},
+        {"id": "F6ZCE", "site": "Pre-en-Pail", "state": "Actif", "mode": "FM", "frequencies_mhz": [145.1, 145.7], "already_tracked": true}
+      ],
+      "new_untracked_active_analog_candidate_count": 0
+    },
+    {
+      "department": 61,
+      "analog_relevant_rows": [],
+      "digital_rows": [
+        {"id": "F1ZKC", "site": "Saint-Michel-Tuboeuf", "state": "Actif", "mode": "C4FM", "frequencies_mhz": [145.025, 145.625]},
+        {"id": "F1ZPR", "site": "Saint-Michel-Tuboeuf", "state": "Actif", "mode": "DMR", "frequencies_mhz": [430.575, 439.975]}
+      ],
+      "new_untracked_active_analog_candidate_count": 0
+    }
+  ],
+  "assessment": {
+    "new_untracked_active_analog_candidate_count": 0,
+    "candidate_memory_delta": 0,
+    "existing_priority_cases_remain": ["F6ZES", "F1ZBX", "F5ZHA", "F1ZOV"],
+    "reason": "Le scan REF courant des quatre départements de proximité ne fait apparaître aucun relais analogique actif non déjà présent dans les dossiers de recherche. Les lignes restantes sont numériques, arrêtées, déjà suivies ou incomplètes."
+  },
+  "rules": {
+    "directory_scan_is_inventory_evidence_not_reception_proof": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "digital_only_repeaters_do_not_consume_analog_memory": true,
+    "stopped_repeaters_are_not_active_candidates": true,
+    "no_artificial_fill": true,
+    "candidate_not_mutated_by_scan": true,
+    "public_export_allowed": false
+  }
+}

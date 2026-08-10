@@ -61,6 +61,9 @@ jobs:
       - name: Test Normandie v0.4 field and recovery tools
         run: python tests/test_normandie_v04_field_tools.py
 
+      - name: Test Normandie v0.4 readiness and scenarios
+        run: python tests/test_normandie_v04_readiness.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

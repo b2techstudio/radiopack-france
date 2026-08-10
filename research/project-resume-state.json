@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "project_resume_state",
   "updated": "2026-08-10",
-  "current_sprint": 44,
-  "state_version": "0.21.33",
+  "current_sprint": 49,
+  "state_version": "0.21.38",
   "public_packs": {
     "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
     "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
@@ -20,6 +20,9 @@
     "maximum_internal_memory_count_if_all_current_known_gates_clear": 147,
     "final_public_memory_count": null,
     "current_guarded_promotion_plan_eligible_addition_count": 0,
+    "current_candidate_preview_memory_count": 142,
+    "current_release_blocker_count": 7,
+    "source_truth_consistent": true,
     "internal_provisional_additions": [
       {"location": 175, "name": "50-ZHY-IN", "frequency_mhz": 145.0875},
       {"location": 176, "name": "53-ZCE-IN", "frequency_mhz": 145.1},
@@ -27,31 +30,11 @@
     ],
     "blocked_frequency_count": 5,
     "blocked_gates": [
-      {
-        "id": "R3_MORTAIN_RX",
-        "frequencies_mhz": [145.075, 145.675],
-        "memory_delta_if_cleared": 2,
-        "state": "field_evidence_required"
-      },
-      {
-        "id": "F5ZHA_SOURCE_AND_COVERAGE",
-        "frequencies_mhz": [145.4675, 432.575],
-        "memory_delta_if_cleared": 2,
-        "state": "authoritative_source_reconciliation_and_field_evidence_required",
-        "field_observations_can_close_source_conflict": false
-      },
-      {
-        "id": "F1ZOV_OPERATIONAL_STATUS",
-        "frequencies_mhz": [431.975],
-        "memory_delta_if_cleared": 1,
-        "state": "operator_maintenance_revalidation_required"
-      }
+      {"id": "R3_MORTAIN_RX", "frequencies_mhz": [145.075, 145.675], "memory_delta_if_cleared": 2, "state": "field_evidence_required"},
+      {"id": "F5ZHA_SOURCE_AND_COVERAGE", "frequencies_mhz": [145.4675, 432.575], "memory_delta_if_cleared": 2, "state": "authoritative_source_reconciliation_and_field_evidence_required", "field_observations_can_close_source_conflict": false},
+      {"id": "F1ZOV_OPERATIONAL_STATUS", "frequencies_mhz": [431.975], "memory_delta_if_cleared": 1, "state": "operator_maintenance_revalidation_required"}
     ],
-    "unresolved_priority": {
-      "station": "F6ZES Sourdeval",
-      "state": "site_confirmed_frequency_unresolved",
-      "included_in_known_gate_memory_ceiling": false
-    }
+    "unresolved_priority": {"station": "F6ZES Sourdeval", "state": "site_confirmed_frequency_unresolved", "included_in_known_gate_memory_ceiling": false}
   },
   "sources_of_truth": [
     "research/normandie-v0.4/pack-plan.json",
@@ -60,6 +43,7 @@
     "research/normandie-v0.4/promotion-gates.json",
     "research/normandie-v0.4/blocked-station-revalidation.json",
     "research/normandie-v0.4/external-evidence-matrix.json",
+    "research/normandie-v0.4/source-consistency-contract.json",
     "research/normandie-v0.4/r3-mortain-field-validation.json",
     "research/normandie-v0.4/f5zha-mortain-validation.json"
   ],
@@ -69,26 +53,33 @@
     "build_f5zha_validation_pack": "python tools/build_normandie_v04_f5zha_validation_pack.py",
     "record_f5zha_observation": "python tools/record_normandie_v04_f5zha_observation.py --help",
     "check_gates": "python tools/check_normandie_v04_promotion_gates.py",
+    "check_source_consistency": "python tools/check_normandie_v04_source_consistency.py",
     "build_readiness_report": "python tools/build_normandie_v04_readiness_report.py",
     "build_evidence_report": "python tools/build_normandie_v04_evidence_report.py",
     "build_guarded_internal_promotion_plan": "python tools/build_normandie_v04_internal_promotion_plan.py",
+    "build_decision_dossier": "python tools/build_normandie_v04_decision_dossier.py",
+    "build_candidate_preview": "python tools/build_normandie_v04_candidate_preview.py",
+    "build_release_blockers": "python tools/build_normandie_v04_release_blockers.py",
     "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py --extended"
   },
   "recent_sprints": {
-    "40": "F5ZHA field observation protocol and recorder",
-    "41": "External evidence matrix",
-    "42": "Consolidated evidence report",
-    "43": "Guarded non-destructive internal promotion plan",
-    "44": "Evidence pipeline tests, CI and documentation synchronization"
+    "45": "Source consistency contract and checker",
+    "46": "Single internal decision dossier",
+    "47": "Guarded non-public candidate preview dry-run",
+    "48": "Machine-readable release blocker manifest",
+    "49": "Decision pipeline tests, CI and documentation synchronization"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
     "failed_or_unverified_gate_must_not_be_promoted": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
     "field_observations_do_not_close_source_conflicts": true,
     "source_search_failure_is_not_negative_evidence": true,
     "unresolved_frequency_must_not_be_guessed": true,
     "geometry_is_not_reception_proof": true,
     "generated_promotion_plan_does_not_mutate_candidate": true,
+    "candidate_preview_does_not_mutate_candidate": true,
+    "release_blocker_manifest_does_not_publish": true,
     "all_exported_memories_tx_disabled": true
   }
 }

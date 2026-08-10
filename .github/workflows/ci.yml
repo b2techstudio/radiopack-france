@@ -55,6 +55,9 @@ jobs:
       - name: Test Bretagne REF analog expansion
         run: python tests/test_bretagne_ref_analog_expansion.py
 
+      - name: Test analog coverage and redundancy review
+        run: python tests/test_analog_coverage_redundancy_review.py
+
       - name: Test Bretagne research scaffold
         run: python tests/test_bretagne_research_scaffold.py
 

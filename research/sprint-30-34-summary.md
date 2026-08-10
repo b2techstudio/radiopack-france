@@ -63,8 +63,9 @@ Ajout de :
 - `tools/run_normandie_v04_checks.py` — commande unique pour les contrôles Normandie v0.4 ;
 - `tests/test_normandie_v04_field_tools.py` — tests de l'instantané externe, de l'enregistreur, du rapport et du mécanisme de reprise ;
 - une étape GitHub Actions dédiée aux outils terrain/reprise ;
-- passage de `research/normandie-v0.4/pack-plan.json` au schéma 1.2 avec liens vers les nouveaux outils ;
-- renforcement de `tests/test_normandie_v04_candidate_delta.py` afin de garder ces liens cohérents.
+- extension rétrocompatible de `research/normandie-v0.4/pack-plan.json` en conservant le schéma 1.1, avec liens vers les nouveaux outils ;
+- renforcement de `tests/test_normandie_v04_candidate_delta.py` afin de garder ces liens cohérents ;
+- conservation explicite du contrat de schéma 1.1 déjà contrôlé par `tests/test_site_files.py`.
 
 Commande locale principale :
 

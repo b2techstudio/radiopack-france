@@ -81,6 +81,7 @@
     "operator_usage_radius_is_not_guaranteed_coverage": true,
     "operator_linkage_is_not_adrasec_role": true,
     "r71_temporary_site_requires_revalidation_before_publication": true,
-    "published_packs_immutable": true
+    "published_packs_immutable": true,
+    "public_export_allowed": false
   }
 }

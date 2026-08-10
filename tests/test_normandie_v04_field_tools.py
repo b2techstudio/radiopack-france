@@ -40,8 +40,8 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 60
-assert resume["state_version"] == "0.21.49"
+assert resume["current_sprint"] == 61
+assert resume["state_version"] == "0.21.50"
 assert resume["public_packs"]["normandie"]["memory_count"] == 139
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["blocked_frequency_count"] == 5
@@ -58,6 +58,8 @@ assert resume["active_work"]["prepublication_integrity_ok"] is True
 assert resume["active_work"]["prepublication_release_ready"] is False
 assert resume["active_work"]["public_export_allowed"] is False
 assert resume["active_work"]["public_release_ready"] is False
+assert resume["active_work"]["adjacent_ref_scan"]["new_untracked_active_analog_candidate_count"] == 0
+assert resume["active_work"]["adjacent_ref_scan"]["candidate_memory_delta"] == 0
 assert resume["resume_rules"]["published_versions_are_immutable"] is True
 assert resume["resume_rules"]["geometry_is_not_reception_proof"] is True
 assert resume["resume_rules"]["field_observations_do_not_close_source_conflicts"] is True
@@ -65,16 +67,22 @@ assert resume["resume_rules"]["local_operator_status_overrides_general_directory
 assert resume["resume_rules"]["stale_source_blocks_release_review_completion"] is True
 assert resume["resume_rules"]["prepublication_integrity_ok_does_not_mean_release_ready"] is True
 assert resume["resume_rules"]["secondary_source_clue_does_not_replace_required_primary_validation"] is True
+assert resume["resume_rules"]["primary_source_conflict_requires_reconciliation"] is True
+assert resume["resume_rules"]["primary_pdf_identified_but_unread_is_not_negative_evidence"] is True
+assert resume["resume_rules"]["network_counting_units_must_not_be_reconciled_without_definition"] is True
 assert resume["active_work"]["unresolved_priority"]["station"] == "F6ZES Sourdeval"
 assert resume["active_work"]["unresolved_priority"]["candidate_memory_delta"] == 0
 assert resume["bretagne_research_update"]["primary_current_channel79_transmitter_site_confirmed"] is False
 assert resume["bretagne_research_update"]["secondary_current_clue_sites"] == ["Cap Fréhel", "Bodic"]
 assert resume["bretagne_research_update"]["new_rf_memory_delta"] == 0
 assert resume["bretagne_research_update"]["site_assignment_promoted"] is False
+assert resume["bretagne_research_update"]["etel_channel64_current_brittany_site_identified"] is False
+assert resume["bretagne_research_update"]["etel_channel64_primary_source_conflict_open"] is True
+assert resume["bretagne_research_update"]["etel_channel64_new_rf_memory_delta"] == 0
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **60**" in status_text
-assert "État logique : **0.21.49**" in status_text
+assert "Sprint courant : **61**" in status_text
+assert "État logique : **0.21.50**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
@@ -84,6 +92,9 @@ assert "non prêt pour publication" in status_text
 assert "Cap Fréhel" in status_text
 assert "Bodic" in status_text
 assert "delta candidat **0**" in status_text
+assert "conflit primaire actuel" in status_text
+assert "16 stations VHF + 2 MF" in status_text
+assert "17 stations radio" in status_text
 
 recorder = load_module("r3_recorder", RECORDER)
 reporter = load_module("gate_reporter", REPORTER)
@@ -156,5 +167,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained at sprint 60, OK"
+    "non-public, recovery state is self-contained at sprint 61, OK"
 )

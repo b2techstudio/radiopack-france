@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "status": "project_resume_state",
+  "updated": "2026-08-10",
+  "current_sprint": 34,
+  "state_version": "0.21.23",
+  "public_packs": {
+    "normandie": {
+      "version": "0.3.1",
+      "memory_count": 139,
+      "immutable": true
+    },
+    "annecy_alpes_leman": {
+      "version": "0.2",
+      "memory_count": 65,
+      "without_aviation_memory_count": 48,
+      "immutable": true
+    },
+    "bretagne": {
+      "version": null,
+      "memory_count": 0,
+      "research_only": true
+    }
+  },
+  "active_work": {
+    "pack": "Normandie",
+    "target_version": "0.4",
+    "public_export_allowed": false,
+    "internal_candidate_memory_count": 142,
+    "published_base_memory_count": 139,
+    "internal_candidate_new_memory_count": 3,
+    "internal_provisional_additions": [
+      {
+        "location": 175,
+        "name": "50-ZHY-IN",
+        "frequency_mhz": 145.0875
+      },
+      {
+        "location": 176,
+        "name": "53-ZCE-IN",
+        "frequency_mhz": 145.1
+      },
+      {
+        "location": 177,
+        "name": "50-ZBL-U",
+        "frequency_mhz": 431.25
+      }
+    ],
+    "blocked_frequency_count": 5,
+    "blocked_gates": [
+      {
+        "id": "R3_MORTAIN_RX",
+        "frequencies_mhz": [145.075, 145.675],
+        "state": "field_evidence_required",
+        "next_action": "Record at least two independent identified RX sessions on 145.675 MHz from Mortain-Bocage."
+      },
+      {
+        "id": "F5ZHA_SOURCE_AND_COVERAGE",
+        "frequencies_mhz": [145.4675, 432.575],
+        "state": "source_conflict_and_coverage_validation_required",
+        "next_action": "Close the RepeaterBook conflict with a current local/operator-equivalent source and validate useful Mortain relevance."
+      },
+      {
+        "id": "F1ZOV_OPERATIONAL_STATUS",
+        "frequencies_mhz": [431.975],
+        "state": "operator_maintenance_revalidation_required",
+        "next_action": "Recheck the Radio Club Nord Cotentin operator page until maintenance is explicitly cleared."
+      }
+    ],
+    "unresolved_priority": {
+      "station": "F6ZES Sourdeval",
+      "state": "site_confirmed_frequency_unresolved",
+      "next_action": "Keep searching for a second current source with explicit frequency and mode; do not guess."
+    }
+  },
+  "sources_of_truth": [
+    "research/normandie-v0.4/pack-plan.json",
+    "research/normandie-v0.4/candidate-memory-delta.json",
+    "research/normandie-v0.4/internal-candidate-map.json",
+    "research/normandie-v0.4/promotion-gates.json",
+    "research/normandie-v0.4/blocked-station-revalidation.json",
+    "research/normandie-v0.4/r3-mortain-field-validation.json",
+    "research/normandie-v0.4/r3-validation-pack.json"
+  ],
+  "field_tools": {
+    "build_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
+    "record_observation": "python tools/record_normandie_v04_r3_observation.py --help",
+    "check_gates": "python tools/check_normandie_v04_promotion_gates.py",
+    "build_gate_report": "python tools/build_normandie_v04_gate_report.py",
+    "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py"
+  },
+  "resume_rules": {
+    "published_versions_are_immutable": true,
+    "research_candidate_is_not_publication_approval": true,
+    "failed_or_unverified_gate_must_not_be_promoted": true,
+    "source_search_failure_is_not_negative_evidence": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "all_exported_memories_tx_disabled": true
+  }
+}

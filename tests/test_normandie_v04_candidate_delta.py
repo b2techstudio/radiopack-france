@@ -104,7 +104,7 @@ assert field["acceptance_gate"]["promotion_to_public_pack_allowed"] is False
 assert field["observations"] == []
 
 memory_plan = pack_plan["memory_plan"]
-assert pack_plan["schema_version"] == "1.2"
+assert pack_plan["schema_version"] == "1.1"
 assert memory_plan["status"] == "paired_rx_delta_candidate_defined_not_public"
 assert memory_plan["candidate_delta_file"] == "research/normandie-v0.4/candidate-memory-delta.json"
 assert memory_plan["r3_field_validation_file"] == "research/normandie-v0.4/r3-mortain-field-validation.json"

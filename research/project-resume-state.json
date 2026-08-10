@@ -2,25 +2,12 @@
   "schema_version": "1.0",
   "status": "project_resume_state",
   "updated": "2026-08-10",
-  "current_sprint": 39,
-  "state_version": "0.21.28",
+  "current_sprint": 44,
+  "state_version": "0.21.33",
   "public_packs": {
-    "normandie": {
-      "version": "0.3.1",
-      "memory_count": 139,
-      "immutable": true
-    },
-    "annecy_alpes_leman": {
-      "version": "0.2",
-      "memory_count": 65,
-      "without_aviation_memory_count": 48,
-      "immutable": true
-    },
-    "bretagne": {
-      "version": null,
-      "memory_count": 0,
-      "research_only": true
-    }
+    "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
+    "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
+    "bretagne": {"version": null, "memory_count": 0, "research_only": true}
   },
   "active_work": {
     "pack": "Normandie",
@@ -32,22 +19,11 @@
     "internal_candidate_new_memory_count": 3,
     "maximum_internal_memory_count_if_all_current_known_gates_clear": 147,
     "final_public_memory_count": null,
+    "current_guarded_promotion_plan_eligible_addition_count": 0,
     "internal_provisional_additions": [
-      {
-        "location": 175,
-        "name": "50-ZHY-IN",
-        "frequency_mhz": 145.0875
-      },
-      {
-        "location": 176,
-        "name": "53-ZCE-IN",
-        "frequency_mhz": 145.1
-      },
-      {
-        "location": 177,
-        "name": "50-ZBL-U",
-        "frequency_mhz": 431.25
-      }
+      {"location": 175, "name": "50-ZHY-IN", "frequency_mhz": 145.0875},
+      {"location": 176, "name": "53-ZCE-IN", "frequency_mhz": 145.1},
+      {"location": 177, "name": "50-ZBL-U", "frequency_mhz": 431.25}
     ],
     "blocked_frequency_count": 5,
     "blocked_gates": [
@@ -55,32 +31,26 @@
         "id": "R3_MORTAIN_RX",
         "frequencies_mhz": [145.075, 145.675],
         "memory_delta_if_cleared": 2,
-        "state": "field_evidence_required",
-        "next_action": "Record at least two independent identified RX sessions on 145.675 MHz from Mortain-Bocage."
+        "state": "field_evidence_required"
       },
       {
         "id": "F5ZHA_SOURCE_AND_COVERAGE",
         "frequencies_mhz": [145.4675, 432.575],
         "memory_delta_if_cleared": 2,
-        "state": "source_conflict_and_coverage_validation_required",
-        "diagnostic_distance_to_mortain_km": 65.6,
-        "diagnostic_distance_is_reception_proof": false,
-        "legacy_conflict_probe_mhz": 431.4125,
-        "next_action": "Use the RX-only diagnostic pack for local relevance evidence while keeping the source conflict open until authoritative reconciliation."
+        "state": "authoritative_source_reconciliation_and_field_evidence_required",
+        "field_observations_can_close_source_conflict": false
       },
       {
         "id": "F1ZOV_OPERATIONAL_STATUS",
         "frequencies_mhz": [431.975],
         "memory_delta_if_cleared": 1,
-        "state": "operator_maintenance_revalidation_required",
-        "next_action": "Recheck the Radio Club Nord Cotentin operator page until maintenance is explicitly cleared."
+        "state": "operator_maintenance_revalidation_required"
       }
     ],
     "unresolved_priority": {
       "station": "F6ZES Sourdeval",
       "state": "site_confirmed_frequency_unresolved",
-      "included_in_known_gate_memory_ceiling": false,
-      "next_action": "Keep searching for a second current source with explicit frequency and mode; do not guess."
+      "included_in_known_gate_memory_ceiling": false
     }
   },
   "sources_of_truth": [
@@ -89,35 +59,36 @@
     "research/normandie-v0.4/internal-candidate-map.json",
     "research/normandie-v0.4/promotion-gates.json",
     "research/normandie-v0.4/blocked-station-revalidation.json",
+    "research/normandie-v0.4/external-evidence-matrix.json",
     "research/normandie-v0.4/r3-mortain-field-validation.json",
-    "research/normandie-v0.4/r3-validation-pack.json",
     "research/normandie-v0.4/f5zha-mortain-validation.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
     "record_r3_observation": "python tools/record_normandie_v04_r3_observation.py --help",
     "build_f5zha_validation_pack": "python tools/build_normandie_v04_f5zha_validation_pack.py",
+    "record_f5zha_observation": "python tools/record_normandie_v04_f5zha_observation.py --help",
     "check_gates": "python tools/check_normandie_v04_promotion_gates.py",
-    "build_gate_report": "python tools/build_normandie_v04_gate_report.py",
     "build_readiness_report": "python tools/build_normandie_v04_readiness_report.py",
-    "build_promotion_scenarios": "python tools/build_normandie_v04_promotion_scenarios.py",
-    "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py"
+    "build_evidence_report": "python tools/build_normandie_v04_evidence_report.py",
+    "build_guarded_internal_promotion_plan": "python tools/build_normandie_v04_internal_promotion_plan.py",
+    "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py --extended"
   },
   "recent_sprints": {
-    "35": "F5ZHA Mortain diagnostic validation model",
-    "36": "F5ZHA RX-only diagnostic pack builder",
-    "37": "Normandie v0.4 readiness report",
-    "38": "Known promotion scenario matrix",
-    "39": "Readiness tests, CI and documentation synchronization"
+    "40": "F5ZHA field observation protocol and recorder",
+    "41": "External evidence matrix",
+    "42": "Consolidated evidence report",
+    "43": "Guarded non-destructive internal promotion plan",
+    "44": "Evidence pipeline tests, CI and documentation synchronization"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
-    "research_candidate_is_not_publication_approval": true,
     "failed_or_unverified_gate_must_not_be_promoted": true,
+    "field_observations_do_not_close_source_conflicts": true,
     "source_search_failure_is_not_negative_evidence": true,
     "unresolved_frequency_must_not_be_guessed": true,
     "geometry_is_not_reception_proof": true,
-    "scenario_count_is_not_final_public_memory_count": true,
+    "generated_promotion_plan_does_not_mutate_candidate": true,
     "all_exported_memories_tx_disabled": true
   }
 }

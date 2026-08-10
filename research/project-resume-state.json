@@ -1,9 +1,9 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "project_resume_state",
   "updated": "2026-08-10",
-  "current_sprint": 54,
-  "state_version": "0.21.43",
+  "current_sprint": 60,
+  "state_version": "0.21.49",
   "public_packs": {
     "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
     "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
@@ -21,10 +21,10 @@
     "final_public_memory_count": null,
     "current_guarded_promotion_plan_eligible_addition_count": 0,
     "current_candidate_preview_memory_count": 142,
-    "current_release_blocker_count": 7,
-    "current_review_checklist_completed_count": 2,
+    "current_release_blocker_count": 6,
+    "current_review_checklist_completed_count": 3,
     "current_review_checklist_item_count": 9,
-    "current_review_blocking_open_count": 7,
+    "current_review_blocking_open_count": 6,
     "source_truth_consistent": true,
     "source_revalidations_fresh_as_of_2026_08_10": true,
     "prepublication_integrity_ok": true,
@@ -40,7 +40,33 @@
       {"id": "F5ZHA_SOURCE_AND_COVERAGE", "frequencies_mhz": [145.4675, 432.575], "memory_delta_if_cleared": 2, "state": "authoritative_source_reconciliation_and_field_evidence_required", "field_observations_can_close_source_conflict": false},
       {"id": "F1ZOV_OPERATIONAL_STATUS", "frequencies_mhz": [431.975], "memory_delta_if_cleared": 1, "state": "operator_maintenance_revalidation_required"}
     ],
-    "unresolved_priority": {"station": "F6ZES Sourdeval", "state": "site_confirmed_frequency_unresolved", "included_in_known_gate_memory_ceiling": false}
+    "unresolved_priority": {
+      "station": "F6ZES Sourdeval",
+      "state": "current_ref_revalidated_site_confirmed_frequency_mode_unresolved",
+      "revalidation_file": "research/normandie-v0.4/f6zes-revalidation.json",
+      "candidate_memory_delta": 0,
+      "included_in_known_gate_memory_ceiling": false
+    }
+  },
+  "review_handoff": {
+    "review_snapshot_builder": "tools/build_normandie_v04_review_snapshot.py",
+    "review_manifest_builder": "tools/build_normandie_v04_review_manifest.py",
+    "review_drift_checker": "tools/check_normandie_v04_review_drift.py",
+    "publication_dry_run": "tools/run_normandie_v04_publication_dry_run.py",
+    "handoff_test": "tests/test_normandie_v04_review_handoff.py",
+    "snapshot_is_non_public": true,
+    "manifest_is_non_public": true,
+    "clean_drift_is_not_release_approval": true,
+    "dry_run_never_writes_public_files": true
+  },
+  "bretagne_research_update": {
+    "corsen_channel79_evidence_file": "research/bretagne-v0.1/corsen-channel79-evidence.json",
+    "primary_current_channel79_transmitter_site_confirmed": false,
+    "secondary_current_clue_sites": ["Cap Fréhel", "Bodic"],
+    "paired_rx_frequencies_mhz": [156.975, 161.575],
+    "new_rf_memory_delta": 0,
+    "site_assignment_promoted": false,
+    "etel_channel64_current_brittany_site_identified": false
   },
   "sources_of_truth": [
     "research/normandie-v0.4/pack-plan.json",
@@ -52,7 +78,9 @@
     "research/normandie-v0.4/source-consistency-contract.json",
     "research/normandie-v0.4/source-freshness-policy.json",
     "research/normandie-v0.4/r3-mortain-field-validation.json",
-    "research/normandie-v0.4/f5zha-mortain-validation.json"
+    "research/normandie-v0.4/f5zha-mortain-validation.json",
+    "research/normandie-v0.4/f6zes-revalidation.json",
+    "research/bretagne-v0.1/corsen-channel79-evidence.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -70,21 +98,28 @@
     "build_candidate_diff": "python tools/build_normandie_v04_candidate_diff.py",
     "build_release_blockers": "python tools/build_normandie_v04_release_blockers.py",
     "build_review_checklist": "python tools/build_normandie_v04_review_checklist.py",
+    "build_review_snapshot": "python tools/build_normandie_v04_review_snapshot.py",
+    "build_review_manifest": "python tools/build_normandie_v04_review_manifest.py",
+    "check_review_drift": "python tools/check_normandie_v04_review_drift.py --baseline <manifest.json> --require-clean",
     "run_prepublication_audit": "python tools/run_normandie_v04_prepublication_audit.py",
-    "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py --extended"
+    "run_publication_dry_run": "python tools/run_normandie_v04_publication_dry_run.py --baseline <manifest.json>",
+    "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py --extended",
+    "run_sprint60_revalidation_test": "python tests/test_sprint60_revalidation.py"
   },
   "recent_sprints": {
-    "50": "Source freshness policy and checker",
-    "51": "Machine-readable release review checklist",
-    "52": "Published base / internal candidate / guarded preview structural diff",
-    "53": "Unified non-public prepublication integrity audit",
-    "54": "Prepublication audit tests, CI and recovery documentation synchronization"
+    "55": "Deterministic non-public review snapshot",
+    "56": "SHA-256 review fingerprint manifest",
+    "57": "Post-review drift checker",
+    "58": "Separate prepublication readiness from explicit public activation and add guarded dry-run",
+    "59": "Review handoff tests and CI integration",
+    "60": "F6ZES no-guess revalidation and guarded Corsen channel 79 local clues"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
     "failed_or_unverified_gate_must_not_be_promoted": true,
     "local_operator_status_overrides_general_directory_for_current_state": true,
     "field_observations_do_not_close_source_conflicts": true,
+    "secondary_source_clue_does_not_replace_required_primary_validation": true,
     "source_search_failure_is_not_negative_evidence": true,
     "stale_source_is_not_negative_operational_evidence": true,
     "stale_source_blocks_release_review_completion": true,
@@ -93,6 +128,11 @@
     "generated_promotion_plan_does_not_mutate_candidate": true,
     "candidate_preview_does_not_mutate_candidate": true,
     "candidate_diff_does_not_mutate_candidate": true,
+    "review_snapshot_does_not_publish": true,
+    "review_manifest_does_not_publish": true,
+    "review_drift_requires_re_review": true,
+    "clean_review_drift_is_not_release_approval": true,
+    "publication_dry_run_does_not_publish": true,
     "prepublication_integrity_ok_does_not_mean_release_ready": true,
     "release_blocker_manifest_does_not_publish": true,
     "all_exported_memories_tx_disabled": true

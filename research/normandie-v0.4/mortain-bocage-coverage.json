@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.0",
   "status": "research_coverage_priorities_not_public",
   "updated": "2026-08-10",
   "focus": {
@@ -8,8 +8,8 @@
     "departments_checked": [50, 35, 53, 61]
   },
   "priority_tiers": {
-    "tier_1_immediate": ["F6ZES", "F5ZHY", "F1ZBX"],
-    "tier_2_adjacent_high_points": ["F6ZCE", "F5ZHA"],
+    "tier_1_immediate": ["F6ZES", "F5ZHY"],
+    "tier_2_adjacent_high_points": ["F6ZCE", "F1ZBX", "F5ZHA"],
     "metadata_only": ["F5ZIX", "F5ZPO", "F1ZKC", "F5ZTQ"]
   },
   "stations": [
@@ -72,7 +72,7 @@
       "mode": "FM",
       "current_directory_status": "active_analog_fm_current_ref_and_operator",
       "rx_pack_candidate": true,
-      "priority": "immediate_operator_supported_coverage_validation",
+      "priority": "adjacent_operator_supported_coverage_validation",
       "operator_usage_radius_km": 150,
       "operator_usage_radius_is_reception_guarantee": false,
       "linked_system": "F5ZEB R71 Rennes",

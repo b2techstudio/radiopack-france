@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_plan_not_public",
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "policy": "research/paired-rx-policy.json",
   "export_contract": {
     "chirp_duplex": "off",
@@ -169,6 +169,27 @@
           "selection_status": "research_candidate"
         },
         {
+          "id": "F5ZIU",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.4625,
+          "side_b_rx_mhz": 432.6500,
+          "selection_status": "current_ref_active_next_coverage_review"
+        },
+        {
+          "id": "F5ZIV",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.4875,
+          "side_b_rx_mhz": 432.6500,
+          "selection_status": "current_ref_active_next_coverage_review"
+        },
+        {
+          "id": "F5ZJR",
+          "kind": "crossband_transponder",
+          "side_a_rx_mhz": 145.2875,
+          "side_b_rx_mhz": 432.6500,
+          "selection_status": "current_ref_active_next_coverage_review"
+        },
+        {
           "id": "F1ZGS",
           "kind": "crossband_transponder",
           "side_a_rx_mhz": 145.2625,
@@ -195,13 +216,37 @@
           "uplink_rx_mhz": 145.1375,
           "downlink_rx_mhz": 145.7375,
           "selection_status": "research_candidate"
+        },
+        {
+          "id": "F1ZMU",
+          "kind": "amateur_repeater",
+          "uplink_rx_mhz": 439.7250,
+          "downlink_rx_mhz": 430.3250,
+          "selection_status": "current_ref_active_next_coverage_review"
+        },
+        {
+          "id": "F1ZBZ",
+          "kind": "crossband_transponder_multi_path",
+          "rx_frequencies_mhz": [431.2000, 145.6250, 145.0250, 145.7375, 145.1375],
+          "documented_paths": [
+            {"repeater_emission_mhz": 431.2000, "repeater_reception_mhz": 145.6250},
+            {"repeater_emission_mhz": 145.0250, "repeater_reception_mhz": 431.2000},
+            {"repeater_emission_mhz": 431.2000, "repeater_reception_mhz": 145.7375},
+            {"repeater_emission_mhz": 145.1375, "repeater_reception_mhz": 431.2000}
+          ],
+          "selection_status": "current_ref_active_multi_path_research_candidate"
         }
+      ],
+      "deduplication_notes": [
+        "432.650 MHz is shared by F5ZIS, F5ZIT, F5ZIU, F5ZIV and F5ZJR",
+        "145.2625 MHz is shared by F1ZGS, F5ZDV and F5ZZL",
+        "F1ZBZ shares 145.1375 and 145.7375 MHz with the F5ZPE pair, so these RF frequencies remain single memories",
+        "F1ZBZ 431.200 MHz is one shared UHF side across several explicit REF paths"
       ],
       "not_active_or_unresolved": [
         "F5ZPV RU19 pair is documented but relay remains temporarily stopped",
         "F5ZZH R7X pair is documented but relay remains temporarily stopped and searching a new site",
-        "F1ZUG ADRASEC35 transponder frequency remains unpublished",
-        "F1ZBZ Lorient directionality remains under review"
+        "F1ZUG ADRASEC35 transponder frequency remains unpublished"
       ]
     }
   ]

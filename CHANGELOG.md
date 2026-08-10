@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.17 - 2026-08-10
+
+- Ajout de `research/normandie-v0.4/internal-candidate-map.json` et de `tools/build_normandie_v04_internal_candidate.py` pour matérialiser un **candidat interne Normandie v0.4 à 142 mémoires**, toujours hors publication.
+- Le builder conserve les **139 lignes de Normandie v0.3.1 comme préfixe exact** et ajoute uniquement trois côtés paired RX revalidés : `50-ZHY-IN` 145.0875 MHz en location 175, `53-ZCE-IN` 145.1000 MHz en location 176 et `50-ZBL-U` 431.2500 MHz en location 177.
+- Revalidation actuelle des trois ajouts : ARA50 pour F5ZHY 145.0875/145.6875, ARAS72 pour F6ZCE 145.700 MHz avec shift -600 kHz, et Radio Club Nord Cotentin F6KFW + ARA50 pour F1ZBL 145.250/431.250 MHz.
+- Les locations 175–177 sont **internes et provisoires** ; le nombre final de mémoires publiques v0.4 reste `null` et le plan public final n'est pas encore numéroté.
+- R3 Brocéliande reste hors candidat interne tant que la réception depuis Mortain n'est pas validée ; F5ZHA reste bloqué par conflit de source/couverture et F1ZOV 431.975 MHz reste bloqué tant que l'exploitant indique le relais en maintenance.
+- Ajout de `tests/test_normandie_v04_internal_candidate.py` : reconstruction en répertoire temporaire, contrôle du préfixe byte-stable, des 142 lignes, des positions/noms/fréquences uniques, de `Duplex=off`, `Offset=0.000000`, de l'absence de tonalité RX imposée et de toute exposition publique.
+- Ajout de `research/normandie-v0.4/generated/` au `.gitignore` et intégration du nouveau test à la CI ; aucun CSV interne généré n'est suivi dans Git.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.16 - 2026-08-10
 
 - Ajout de `research/normandie-v0.4/candidate-memory-delta.json` pour comparer explicitement les **12 fréquences paired RX de recherche** avec les **139 mémoires figées de Normandie v0.3.1**, sans créer de CSV ni attribuer de positions mémoire.

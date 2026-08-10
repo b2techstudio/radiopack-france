@@ -29,26 +29,31 @@ def build(root: Path) -> dict[str, Any]:
     if not source_check["consistent"]:
         raise ValueError("Source truth is inconsistent")
 
+    r3 = evidence["stations"]["F1ZBX_R3"]
+    f5 = evidence["stations"]["F5ZHA_LAVAL"]
+    f1 = evidence["stations"]["F1ZOV_EQUEURDREVILLE"]
+    f6 = evidence["stations"]["F6ZES_SOURDEVAL"]
+
     station_decisions = {
         "F1ZBX_R3": {
-            "decision": "blocked",
-            "reason": "Mortain field evidence incomplete",
-            "evidence": evidence["stations"]["F1ZBX_R3"],
+            "decision": "eligible_for_internal_plan" if r3["field_gate_supported"] else "blocked",
+            "reason": "Mortain field evidence complete" if r3["field_gate_supported"] else "Mortain field evidence incomplete",
+            "evidence": r3,
         },
         "F5ZHA_LAVAL": {
-            "decision": "blocked",
-            "reason": "authoritative source reconciliation and useful Mortain evidence both required",
-            "evidence": evidence["stations"]["F5ZHA_LAVAL"],
+            "decision": "eligible_for_internal_plan" if f5["promotion_prerequisites_satisfied"] else "blocked",
+            "reason": "source reconciliation and useful Mortain evidence complete" if f5["promotion_prerequisites_satisfied"] else "authoritative source reconciliation and useful Mortain evidence both required",
+            "evidence": f5,
         },
         "F1ZOV_EQUEURDREVILLE": {
-            "decision": "blocked",
-            "reason": "local operator still reports maintenance",
-            "evidence": evidence["stations"]["F1ZOV_EQUEURDREVILLE"],
+            "decision": "eligible_for_internal_plan" if f1["maintenance_cleared"] else "blocked",
+            "reason": "local operator maintenance cleared" if f1["maintenance_cleared"] else "local operator still reports maintenance",
+            "evidence": f1,
         },
         "F6ZES_SOURDEVAL": {
-            "decision": "unresolved",
-            "reason": "frequency and mode remain unresolved",
-            "evidence": evidence["stations"]["F6ZES_SOURDEVAL"],
+            "decision": "candidate_review_required" if f6["frequency_resolved"] else "unresolved",
+            "reason": "frequency resolved; separate candidate review required" if f6["frequency_resolved"] else "frequency and mode remain unresolved",
+            "evidence": f6,
         },
     }
 

@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.2",
-  "status": "current_pair_refresh_with_source_reconciliation_research_not_public",
+  "schema_version": "1.3",
+  "status": "current_pair_refresh_with_source_and_operational_reconciliation_research_not_public",
   "updated": "2026-08-10",
   "sources": [
     {
@@ -11,7 +11,17 @@
     {
       "authority": "Radio Club Nord Cotentin F6KFW",
       "url": "https://f6kfw.fr/",
-      "status": "current_association_source_for_f1zbl"
+      "status": "current_local_operator_source_for_f1zbl_and_f1zov"
+    },
+    {
+      "authority": "ARA50",
+      "url": "https://ref50.jimdofree.com/",
+      "status": "current_department_association_source_updated_2026_06_30_for_f5zhy_and_manche_pairs"
+    },
+    {
+      "authority": "Association des Radioamateurs de la Sarthe (ARAS72)",
+      "url": "https://aras72.r-e-f.org/relais/f1zmp/",
+      "status": "current_association_source_for_f6zce_pair"
     },
     {
       "authority": "manuel.la-radio.eu",
@@ -51,6 +61,28 @@
       "note": "Le REF actuel, le Radio Club Nord Cotentin et une liste secondaire actuelle publient 145.250 <-> 431.250 MHz. La valeur secondaire RepeaterBook 431.225 MHz n'est pas retenue."
     },
     {
+      "id": "F1ZOV",
+      "site": "Équeurdreville-Hainneville / Cherbourg",
+      "department": 50,
+      "kind": "amateur_analog_repeater",
+      "side_a_rx_mhz": 430.3750,
+      "side_b_rx_mhz": 431.9750,
+      "mode": "FM",
+      "status": "pair_currently_verified_local_operator_marks_station_in_maintenance",
+      "selection_status": "pair_resolved_new_side_blocked_until_operator_return_to_service",
+      "source_reconciliation": {
+        "current_ref_pair_mhz": [430.3750, 431.9750],
+        "current_local_club_pair_mhz": [430.3750, 431.9750],
+        "current_ara50_pair_mhz": [430.3750, 431.9750],
+        "current_local_operator_status": "maintenance",
+        "current_ref_status": "active",
+        "operational_status_rule": "current_local_operator_status_preferred_over_general_directory",
+        "publication_blocked_by_operational_status": true
+      },
+      "frequency_promoted_to_public_pack": false,
+      "note": "La paire est recoupée par le Radio Club Nord Cotentin et l'ARA50, mais le club exploitant affiche actuellement F1ZOV en maintenance. La mémoire 430.375 MHz de v0.3.1 reste figée ; le nouveau côté 431.975 MHz n'est pas promu tant que le retour en service n'est pas revalidé."
+    },
+    {
       "id": "F5ZHA",
       "site": "Laval",
       "department": 53,
@@ -72,7 +104,21 @@
         "publication_blocked_by_source_conflict": true
       },
       "frequency_promoted_to_public_pack": false,
-      "note": "Le REF actuel et manuel.la-radio.eu concordent sur 145.4675 <-> 432.575 MHz. RepeaterBook affiche encore 431.4125 MHz avec une entrée ancienne ; la probabilité d'une donnée RepeaterBook obsolète augmente, mais RadioPack exige encore une source locale actuelle avant publication."
+      "note": "Le REF actuel et manuel.la-radio.eu concordent sur 145.4675 <-> 432.575 MHz. RepeaterBook affiche encore 431.4125 MHz avec une entrée ancienne ; RadioPack exige encore une source locale actuelle avant publication."
+    }
+  ],
+  "additional_current_pairs": [
+    {
+      "id": "F5ZHY",
+      "pair_mhz": [145.0875, 145.6875],
+      "source_status": "current_ara50_explicit_tx_rx_pair",
+      "new_side_candidate_mhz": 145.0875
+    },
+    {
+      "id": "F6ZCE",
+      "pair_mhz": [145.1000, 145.7000],
+      "source_status": "current_aras72_output_and_minus_600khz_shift",
+      "new_side_candidate_mhz": 145.1000
     }
   ],
   "still_unresolved": [
@@ -88,8 +134,10 @@
     "paired_rx_requires_both_verified_frequencies": true,
     "coverage_still_required_before_public_selection": true,
     "current_primary_or_association_source_preferred_over_old_secondary_directory": true,
+    "current_local_operator_status_preferred_for_operational_state": true,
     "independent_secondary_corroboration_strengthens_but_does_not_replace_local_validation": true,
     "secondary_directory_conflict_must_be_reconciled_before_publication": true,
+    "maintenance_blocks_new_side_promotion_until_revalidated": true,
     "published_normandie_v0_3_1_immutable": true,
     "tx_disabled_in_future_export": true,
     "public_export_allowed": false

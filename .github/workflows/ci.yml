@@ -149,7 +149,7 @@ jobs:
           WEBSITE_RESULT: ${{ needs.website.result }}
           REPOSITORY: ${{ github.repository }}
           COMMIT_SHA: ${{ github.sha }}
-          RUN_URL: ${{ github.server_url }}/${{ github.run_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         shell: bash
         run: |
           if [[ "$DATA_RESULT" == "success" && "$WEBSITE_RESULT" == "success" ]]; then

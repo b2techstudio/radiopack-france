@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a machine-readable list of every blocker preventing Normandie v0.4 publication."""
+"""Build machine-readable blockers that prevent Normandie v0.4 from becoming activation-ready."""
 from __future__ import annotations
 
 import argparse
@@ -10,6 +10,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT_DIR = Path("research/normandie-v0.4/generated/release-blockers")
+REGISTRY = Path("website/src/lib/packRegistry.ts")
 
 
 def load_module(name: str, path: Path):
@@ -30,29 +31,47 @@ def build(root: Path) -> dict[str, Any]:
     blockers.extend([
         {"id": "FINAL_REVIEW", "kind": "review", "reason": "explicit final review has not been completed"},
         {"id": "FINAL_MEMORY_PLAN", "kind": "planning", "reason": "final public memory count and public positions are not defined"},
-        {"id": "PUBLIC_REGISTRY", "kind": "publication", "reason": "Normandie v0.4 is intentionally absent from the public pack registry"}
     ])
+    registry_text = (root / REGISTRY).read_text(encoding="utf-8")
+    registry_has_v04 = 'version: "v0.4"' in registry_text
+    prepublication_ready = len(blockers) == 0 and not registry_has_v04
     return {
-        "schema_version": "1.0",
-        "status": "release_blockers_not_public",
+        "schema_version": "1.1",
+        "status": "prepublication_blockers_not_public",
         "blocking_count": len(blockers),
         "blockers": blockers,
+        "prepublication_ready": prepublication_ready,
+        "public_registry_has_v04": registry_has_v04,
+        "public_activation_pending": not registry_has_v04,
         "release_allowed": False,
         "public_export_allowed": False,
         "rules": {
-            "non_eligible_station_decision_remains_release_blocker": True,
+            "non_eligible_station_decision_remains_prepublication_blocker": True,
             "zero_station_blockers_still_requires_final_review": True,
             "final_memory_plan_must_be_explicit": True,
-            "public_registry_change_must_be_separate_and_reviewed": True,
-            "published_v0_3_1_remains_immutable": True
-        }
+            "public_registry_must_remain_private_until_prepublication_ready": True,
+            "public_registry_activation_is_separate_and_reviewed": True,
+            "prepublication_ready_does_not_publish": True,
+            "published_v0_3_1_remains_immutable": True,
+        },
     }
 
 
 def markdown(data: dict[str, Any]) -> str:
-    lines = ["# Normandie v0.4 — blocages de publication", "", f"Blocages actifs : **{data['blocking_count']}**", ""]
+    lines = [
+        "# Normandie v0.4 — blocages de prépublication",
+        "",
+        f"Blocages actifs : **{data['blocking_count']}**",
+        f"Prépublication prête : **{'oui' if data['prepublication_ready'] else 'non'}**",
+        f"Activation registre public en attente : **{'oui' if data['public_activation_pending'] else 'non'}**",
+        "",
+    ]
     lines.extend(f"- **{x['id']}** ({x['kind']}) — {x['reason']}" for x in data["blockers"])
-    lines.extend(["", "Publication autorisée : **non**", ""])
+    lines.extend([
+        "",
+        "L'activation du registre public est une étape séparée après prépublication prête ; ce rapport ne publie rien.",
+        "",
+    ])
     return "\n".join(lines)
 
 
@@ -74,7 +93,10 @@ def main() -> None:
     root = args.root.resolve()
     out = args.output_dir if args.output_dir.is_absolute() else root / args.output_dir
     jp, mp, data = write(root, out)
-    print(f"NORMANDIE V0.4 RELEASE BLOCKERS: {data['blocking_count']} active; release=false")
+    print(
+        "NORMANDIE V0.4 PREPUBLICATION BLOCKERS: "
+        f"{data['blocking_count']} active; ready={str(data['prepublication_ready']).lower()}; public=false"
+    )
     print(jp)
     print(mp)
 

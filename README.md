@@ -122,13 +122,13 @@ sourdeval_must_not_be_guessed: true
 - `F5ZHY` — Montabot / Percy-en-Normandie — sortie **145.6875 MHz**, entrée **145.0875 MHz**, FM ;
 - `F6ZCE` — Mont des Avaloirs — sortie **145.700 MHz**, entrée **145.100 MHz**, FM, CTCSS 123 Hz ;
 - `F1ZBX` — Paimpont / Brocéliande — sortie **145.675 MHz**, entrée **145.075 MHz**, FM, CTCSS 71.9 Hz ;
-- `F5ZHA` — Laval — paire paired RX désormais explicite **145.4675 / 432.5750 MHz**, toujours en étude de couverture depuis Mortain ;
-- `F1ZBL` — Équeurdreville-Hainneville — paire cross-band actuelle **145.2500 / 431.2500 MHz** confirmée dans les deux sens par le REF ; directionnalité résolue mais priorité faible pour Mortain ;
+- `F5ZHA` — Laval — le REF actuel publie **145.4675 / 432.5750 MHz** et cette paire reste dans la recherche paired RX. RepeaterBook affiche toutefois encore **431.4125 MHz** sur une fiche de vérification ancienne (2017) : la paire REF est conservée en recherche mais **bloquée avant publication** tant qu'une seconde source locale actuelle ne la recoupe pas ;
+- `F1ZBL` — Équeurdreville-Hainneville — paire cross-band **145.2500 / 431.2500 MHz** confirmée à la fois par le REF et le Radio Club Nord Cotentin. La valeur secondaire `431.2250 MHz` vue dans RepeaterBook n'est donc pas retenue ;
 - `F5ZIX` Tessy-sur-Vire et `F5ZPO` Gorron — APRS 144.800 MHz conservés comme métadonnées de maillage, sans dupliquer la mémoire APRS nationale ;
 - `F1ZKC` Orne — C4FM, conservé comme métadonnée uniquement ;
 - `F5ZTQ` Izé — arrêté, exclu des candidats.
 
-Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. La carte paired RX Normandie passe ainsi de 8 à **12 fréquences RF uniques de recherche** ; F6ZES reste le principal blocage immédiat. Aucune de ces nouvelles recherches n'est encore promue.
+Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. La carte paired RX Normandie reste à **12 fréquences RF uniques de recherche** ; ce compte inclut F5ZHA comme paire de recherche, mais son conflit secondaire doit être réconcilié avant toute publication. F6ZES reste le principal blocage immédiat. Aucune de ces nouvelles recherches n'est encore promue.
 
 ## Annecy–Alpes–Léman v0.3 — recherche secours et paired RX
 
@@ -255,9 +255,9 @@ Le répertoire REF actuel documente cinq transpondeurs analogiques actifs partag
 
 La fréquence 432.650 MHz reste donc **une seule mémoire RX** avec cinq rôles de site. Les centres des locators REF placent les deux extrêmes Matignon / Perros-Guirec à environ **90,6 km** l'un de l'autre : c'est un indicateur de diversité géographique, **pas une mesure de couverture radio**. Les altitudes, puissances et gains d'antenne publiés servent uniquement à prioriser la prochaine revue ; RadioPack n'en déduit aucune portée réelle.
 
-Une ancienne fiche RepeaterBook de F5ZIT, revue en 2016, indiquait explicitement un lien avec F5ZIV, F5ZIU, F5ZIS et F5ZJR. Cette information reste un **indice historique secondaire** : le REF actuel confirme les cinq sites actifs, le même responsable F6HRP, le même côté 432.650 MHz et le même CTCSS 71.9 Hz, mais ne publie pas explicitement leur interconnexion actuelle. RadioPack conserve donc `current_primary_linkage_verified: false`.
+Une cartographie radioamateur actuelle indépendante retrouve également les cinq sites séparément. Elle corrobore donc la **présence actuelle du groupe de cinq**, mais ne documente aucune liaison entre eux. Une ancienne fiche RepeaterBook de F5ZIT, revue en 2016, indiquait explicitement un lien avec F5ZIV, F5ZIU, F5ZIS et F5ZJR ; cette information reste un **indice historique secondaire**. Le REF actuel confirme les cinq sites actifs, le même responsable F6HRP, le même côté 432.650 MHz et le même CTCSS 71.9 Hz, mais aucune source actuelle exploitée ne publie explicitement leur interconnexion. RadioPack conserve donc `current_primary_linkage_verified: false` et `current_association_linkage_verified: false`.
 
-Au niveau de la recherche mémoire, 432.650 MHz reçoit une priorité élevée d'**efficacité mémoire** : une seule fréquence RF représente cinq sites actifs. Les cinq côtés VHF restent en revanche distincts et sont tous conservés dans la carte paired RX.
+Au niveau de la recherche mémoire, 432.650 MHz reçoit une priorité élevée d'**efficacité mémoire** : une seule fréquence RF représente cinq sites actifs, même si ces sites n'étaient finalement pas interconnectés. Les cinq côtés VHF restent en revanche distincts et sont tous conservés dans la carte paired RX.
 
 ### Finistère
 
@@ -273,7 +273,7 @@ Le côté 145.2625 MHz reste une seule mémoire RF partagée entre ces trois tra
 - `F5ZPE` — Bignan — entrée **145.1375 MHz** / sortie **145.7375 MHz** ;
 - `F1ZBZ` — Lorient — cas multi-chemins désormais explicite dans le REF autour du côté commun **431.2000 MHz**.
 
-Les centres de locators placent F1ZMU à environ **19 km** de F5ZPE. Cette proximité n'en fait pas un doublon : F1ZMU apporte une paire UHF entièrement distincte et reste un candidat de recherche prioritaire à vérifier sur le terrain ou par étude de propagation.
+Les centres de locators placent F1ZMU à environ **19 km** de F5ZPE. Cette proximité n'en fait pas un doublon : F1ZMU apporte une paire UHF entièrement distincte et reste un candidat de recherche prioritaire à vérifier sur le terrain ou par étude de propagation. Les autres services pouvant partager l'indicatif de base F1ZMU ne sont pas utilisés pour attribuer automatiquement un rôle au relais phonie.
 
 Pour `F1ZBZ`, les lignes REF documentent notamment 431.200→/←145.6250, 145.0250→/←431.2000, 431.200→/←145.7375 et 145.1375→/←431.2000 selon les colonnes émission/réception du répertoire. RadioPack conserve donc cinq fréquences RX uniques pour ce transpondeur : **431.2000, 145.6250, 145.0250, 145.7375 et 145.1375 MHz**. Les deux dernières sont déjà présentes via F5ZPE et restent dédupliquées ; F1ZBZ ajoute donc **trois fréquences RF nouvelles** au plan après déduplication. Sa sélection reste conditionnée à une revue de couverture locale.
 
@@ -407,19 +407,20 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 
 ## Prochaines priorités
 
-1. revalider par source actuelle l'interconnexion éventuelle du cluster Côtes-d'Armor **432.650 MHz** et obtenir une validation terrain/propagation avant sélection publique ;
-2. vérifier la couverture utile de F1ZMU, F1ZBZ et F5ZHA sans la déduire des seules puissances/altitudes ;
-3. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
-4. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
-5. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
-6. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
-7. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
-8. trouver une seconde source actuelle pour F6ZES Sourdeval ;
-9. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
-10. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
-11. revalider les redémarrages éventuels de F5ZPV RU19 et F5ZZH R7X ;
-12. recontrôler les satellites avant Annecy v0.3 ;
-13. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
+1. revalider par source associative actuelle l'interconnexion éventuelle du cluster Côtes-d'Armor **432.650 MHz** ; la présence des cinq sites est désormais recoupée indépendamment mais l'interconnexion reste non prouvée ;
+2. trouver une source locale actuelle supplémentaire pour **F5ZHA Laval** afin de réconcilier le conflit REF 145.4675/432.5750 contre l'ancienne donnée secondaire 431.4125 ;
+3. vérifier la couverture utile de F1ZMU, F1ZBZ et F5ZHA sans la déduire des seules puissances/altitudes ;
+4. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
+5. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
+6. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
+7. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
+8. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
+9. trouver une seconde source actuelle pour F6ZES Sourdeval ;
+10. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
+11. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
+12. revalider les redémarrages éventuels de F5ZPV RU19 et F5ZZH R7X ;
+13. recontrôler les satellites avant Annecy v0.3 ;
+14. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
 
 ## Maintenance
 

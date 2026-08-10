@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 plan = json.loads((ROOT / "research/paired-rx-deduplicated-memory-plan.json").read_text(encoding="utf-8"))
+assert plan["schema_version"] == "1.1"
 assert plan["status"] == "research_deduplicated_memory_plan_not_public"
 assert plan["source_plan"] == "research/paired-rx-next-version-plan.json"
 assert plan["policy"] == "research/paired-rx-policy.json"
@@ -18,7 +19,7 @@ regions = {region["id"]: region for region in plan["regions"]}
 assert set(regions) == {"normandie-v0.4", "annecy-alpes-leman-v0.3", "bretagne-v0.1"}
 assert regions["normandie-v0.4"]["unique_frequency_count"] == 8
 assert regions["annecy-alpes-leman-v0.3"]["unique_frequency_count"] == 10
-assert regions["bretagne-v0.1"]["unique_frequency_count"] == 21
+assert regions["bretagne-v0.1"]["unique_frequency_count"] == 29
 
 for region in regions.values():
     memories = region["memories"]
@@ -57,20 +58,41 @@ expected_marine = {
 }
 for name, frequency in expected_marine.items():
     assert bretagne[name]["frequency_mhz"] == frequency
+
 assert bretagne["X432650"]["frequency_mhz"] == 432.6500
-assert set(bretagne["X432650"]["roles"]) == {"F5ZIS transponder side B", "F5ZIT transponder side B"}
+assert set(bretagne["X432650"]["roles"]) == {
+    "F5ZIS transponder side B",
+    "F5ZIT transponder side B",
+    "F5ZIU transponder side B",
+    "F5ZIV transponder side B",
+    "F5ZJR transponder side B",
+}
+for name, frequency in {
+    "ZIU-A": 145.4625,
+    "ZIV-A": 145.4875,
+    "ZJR-A": 145.2875,
+    "ZMU-OUT": 430.3250,
+    "ZMU-IN": 439.7250,
+    "ZBZ-U": 431.2000,
+    "ZBZ-VA": 145.6250,
+    "ZBZ-VB": 145.0250,
+}.items():
+    assert bretagne[name]["frequency_mhz"] == frequency
+
 assert bretagne["X145262"]["frequency_mhz"] == 145.2625
 assert set(bretagne["X145262"]["roles"]) == {
     "F1ZGS transponder side A",
     "F5ZDV transponder side A",
     "F5ZZL transponder side A",
 }
+assert set(bretagne["ZPE-IN"]["roles"]) == {"F5ZPE repeater input", "F1ZBZ repeater emission path"}
+assert set(bretagne["ZPE-OUT"]["roles"]) == {"F5ZPE repeater output", "F1ZBZ repeater reception path"}
 
 excluded_bretagne = "\n".join(regions["bretagne-v0.1"]["excluded_or_unresolved"])
 assert "F5ZPV" in excluded_bretagne
 assert "F5ZZH" in excluded_bretagne
 assert "F1ZUG" in excluded_bretagne
-assert "F1ZBZ" in excluded_bretagne
+assert "F1ZBZ" not in excluded_bretagne
 assert all(name not in bretagne for name in ("ZPV-IN", "ZPV-OUT", "ZZH-IN", "ZZH-OUT"))
 
 assert plan["rules"]["counts_are_research_counts_not_pack_targets"] is True
@@ -83,4 +105,4 @@ assert 'id: "bretagne"' not in registry
 assert 'version: "v0.4"' not in registry
 assert 'version: "v0.3"' not in registry
 
-print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 8, Annecy 10, Bretagne 21 unique RX frequencies, TX-off contract and no public mutation OK")
+print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 8, Annecy 10, Bretagne 29 unique RX frequencies, REF expansion deduplicated, TX-off contract and no public mutation OK")

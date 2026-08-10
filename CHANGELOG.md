@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.13 - 2026-08-10
+
+- Ajout d'une règle explicite de hiérarchie pour les statuts opérationnels des relais : lorsqu'une association exploitante actuelle et un annuaire général divergent, l'état de l'exploitant local est retenu pour la recherche courante et le conflit reste enregistré.
+- Rennes : l'ARA35 maintient `F5ZEB` / R71 opérationnel depuis le 25 septembre 2025 alors que le REF l'affiche arrêté ; R71 reste une donnée opérationnelle de recherche mais non sélectionnée avant revue de couverture.
+- Rennes : l'ARA35 indique `F5ZPV` / RU19 temporairement arrêté sans redémarrage confirmé alors que le REF l'affiche actif ; RU19 reste hors candidats actifs. `F5ZZH` / R7X est arrêté dans les deux sources.
+- `F5ZHA` Laval : la paire REF **145.4675 / 432.575 MHz** est désormais corroborée par `manuel.la-radio.eu` ; l'ancien conflit RepeaterBook 431.4125 devient moins crédible mais la publication reste bloquée jusqu'à une source locale actuelle.
+- `F6ZES` Sourdeval, le canal 64 Morbihan et l'émetteur actuel du canal 79 Corsen restent non résolus après recontrôle ciblé du 10 août 2026 ; aucune valeur n'est inventée.
+- Passage des revues Bretagne/Normandie au schéma 1.2 et renforcement du test couverture/redondance avec les conflits de statuts exploitant/annuaire.
+- Comptes paired RX inchangés : **Normandie 12, Annecy 10, Bretagne 29** ; ces nombres restent des comptes de recherche et non des tailles cibles.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.12 - 2026-08-10
 
 - Renforcement de la qualité des sources paired RX : un conflit secondaire ancien ne remplace plus une paire actuelle recoupée, mais déclenche explicitement une porte de réconciliation avant publication lorsqu'il n'est pas fermé par une seconde source actuelle.
@@ -350,7 +361,7 @@
 - Retrait des liens directs vers les CSV et PDF Annecy v0.1 des pages publiques.
 - Renommage de la prochaine zone en Annecy–Alpes–Léman.
 - Passage du statut public à « En préparation » pour la future v0.2.
-- Mise à jour de l'accueil, de la liste des régions, des téléchargements et de la page des versions.
+- Mise à jour de l'accueil, de la liste des régions, des telechargements et de la page des versions.
 - Adaptation du composant de carte régionale aux packs non disponibles.
 - Ajout de contrôles empêchant la republication accidentelle des liens Annecy v0.1.
 - Ajout d'une base de recherche structurée pour Annecy–Alpes–Léman v0.2.

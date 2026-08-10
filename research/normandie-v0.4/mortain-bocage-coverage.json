@@ -1,15 +1,15 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_coverage_priorities_not_public",
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "focus": {
     "name": "Mortain-Bocage / Sud-Manche",
     "strategy": "prioritize_realistic_radio_coverage_over_administrative_boundaries",
     "departments_checked": [50, 35, 53, 61]
   },
   "priority_tiers": {
-    "tier_1_immediate": ["F6ZES", "F5ZHY"],
-    "tier_2_adjacent_high_points": ["F6ZCE", "F1ZBX", "F5ZHA"],
+    "tier_1_immediate": ["F6ZES", "F5ZHY", "F1ZBX"],
+    "tier_2_adjacent_high_points": ["F6ZCE", "F5ZHA"],
     "metadata_only": ["F5ZIX", "F5ZPO", "F1ZKC", "F5ZTQ"]
   },
   "stations": [
@@ -70,9 +70,15 @@
       "input_mhz": 145.0750,
       "ctcss_hz": 71.9,
       "mode": "FM",
-      "current_directory_status": "active_analog_fm",
+      "current_directory_status": "active_analog_fm_current_ref_and_operator",
       "rx_pack_candidate": true,
-      "priority": "adjacent_coverage_to_verify",
+      "priority": "immediate_operator_supported_coverage_validation",
+      "operator_usage_radius_km": 150,
+      "operator_usage_radius_is_reception_guarantee": false,
+      "linked_system": "F5ZEB R71 Rennes",
+      "operator_link_distance_km": 46.51,
+      "linked_system_research_file": "research/bretagne-v0.1/rennes-broceliande-linked-system.json",
+      "coverage_status": "operator_documents_wide_usage_radius_local_mortain_validation_still_required",
       "sources": ["https://www.r-e-f.org/", "https://ara35.fr/frequences/relais-phonie/r3/"],
       "frequency_promoted_to_public_pack": false
     },
@@ -90,7 +96,7 @@
       "rx_pack_candidate": false,
       "priority": "coverage_to_verify",
       "note": "Potentiellement utile à l'est du secteur, mais son intérêt réel depuis Mortain-Bocage doit être vérifié avant toute mémoire.",
-      "sources": ["https://www.r-e-f.org/"],
+      "sources": ["https://www.r-e-f.org/", "https://www.manuel.la-radio.eu/RM18/RM18H01A.HTM"],
       "frequency_promoted_to_public_pack": false
     },
     {
@@ -150,6 +156,8 @@
   "rules": {
     "sourdeval_must_not_be_guessed": true,
     "coverage_must_be_verified_before_publication": true,
+    "operator_usage_radius_is_not_guaranteed_reception": true,
+    "linked_system_metadata_does_not_create_duplicate_memories": true,
     "digital_only_repeaters_do_not_consume_analog_memory": true,
     "national_aprs_frequency_not_duplicated_by_site": true,
     "published_normandie_v0_3_1_must_not_change": true,

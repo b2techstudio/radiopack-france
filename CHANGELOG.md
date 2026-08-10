@@ -361,7 +361,7 @@
 - Retrait des liens directs vers les CSV et PDF Annecy v0.1 des pages publiques.
 - Renommage de la prochaine zone en Annecy–Alpes–Léman.
 - Passage du statut public à « En préparation » pour la future v0.2.
-- Mise à jour de l'accueil, de la liste des régions, des telechargements et de la page des versions.
+- Mise à jour de l'accueil, de la liste des régions, des téléchargements et de la page des versions.
 - Adaptation du composant de carte régionale aux packs non disponibles.
 - Ajout de contrôles empêchant la republication accidentelle des liens Annecy v0.1.
 - Ajout d'une base de recherche structurée pour Annecy–Alpes–Léman v0.2.

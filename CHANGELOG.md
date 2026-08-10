@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.43 - 2026-08-10
+
+- Consolidation des **Sprints 50 à 54** : politique de fraîcheur des sources, checklist de revue, diff structurel candidat et audit prépublication non public.
+- Ajout de `research/normandie-v0.4/source-freshness-policy.json` et de `tools/check_normandie_v04_source_freshness.py` : une revalidation périmée bloque la revue sans devenir une preuve d'arrêt ou d'absence.
+- Ajout de `tools/build_normandie_v04_review_checklist.py` : état courant **2/9 points complétés** et **7 blocages ouverts**.
+- Ajout de `tools/build_normandie_v04_candidate_diff.py` : contrôle structurel exact **139 → 142 → preview 142**, sans réécriture de la base publiée et avec RX-only maintenu.
+- Ajout de `tools/run_normandie_v04_prepublication_audit.py` et `tests/test_normandie_v04_prepublication_audit.py` : état courant `integrity_ok=true` mais `release_ready=false`.
+- Intégration du nouvel audit au runner local et à GitHub Actions ; mise à jour de `README.md`, `PROJECT_STATUS.md`, `pack-plan.json` et `research/project-resume-state.json` au **Sprint 54 / 0.21.43**.
+- Les étapes intermédiaires **0.21.19 à 0.21.42** sont détaillées dans `research/sprint-30-34-summary.md`, `research/sprint-35-39-summary.md`, `research/sprint-40-44-summary.md`, `research/sprint-45-49-summary.md` et `research/sprint-50-54-summary.md`.
+- État public inchangé : Normandie v0.3.1 reste figée à **139 mémoires**, Annecy–Alpes–Léman v0.2 à **65/48 mémoires**, Bretagne reste non publique et Normandie v0.4 reste un candidat interne non public à **142 mémoires**.
+
 ## 0.21.18 - 2026-08-10
 
 - Ajout de `research/normandie-v0.4/promotion-gates.json` pour centraliser les **5 fréquences encore exclues** du candidat interne 142 mémoires : R3/F1ZBX 145.075/145.675, F5ZHA 145.4675/432.575 et F1ZOV 431.975 MHz.

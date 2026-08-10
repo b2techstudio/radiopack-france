@@ -73,6 +73,9 @@ jobs:
       - name: Test Normandie v0.4 prepublication audit
         run: python tests/test_normandie_v04_prepublication_audit.py
 
+      - name: Test Normandie v0.4 review handoff and drift guards
+        run: python tests/test_normandie_v04_review_handoff.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

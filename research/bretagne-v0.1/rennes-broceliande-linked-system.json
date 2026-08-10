@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "status": "current_operator_linked_system_research_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Modéliser le système analogique public R3 Brocéliande / R71 Rennes comme une chaîne liée à quatre fréquences RX distinctes, sans déduire de couverture garantie ni activer le TX.",
+  "sources": [
+    {
+      "authority": "Association des Radioamateurs d'Ille-et-Vilaine (ARA35)",
+      "url": "https://ara35.fr/frequences/relais-phonie/r3/",
+      "status": "current_operator_source_r3"
+    },
+    {
+      "authority": "Association des Radioamateurs d'Ille-et-Vilaine (ARA35)",
+      "url": "https://ara35.fr/frequences/relais-phonie/transpondeur-ru71/",
+      "status": "current_operator_source_r71"
+    },
+    {
+      "authority": "Réseau des Émetteurs Français (REF)",
+      "url": "https://www.r-e-f.org/",
+      "status": "current_directory_frequency_corroboration_with_r71_status_conflict"
+    }
+  ],
+  "system": {
+    "id": "F1ZBX_F5ZEB_LINKED",
+    "name": "R3 Brocéliande / R71 Rennes",
+    "operator": "ARA35",
+    "current_operator_linkage_verified": true,
+    "current_operator_status": "r3_operational_r71_operational_since_2025_09_25_on_temporary_site",
+    "directory_status_conflict": {
+      "r3": false,
+      "r71": true,
+      "r71_ref_status": "stopped",
+      "r71_operator_status": "operational",
+      "rule": "current_local_operator_status_preferred_for_operational_state"
+    },
+    "rf_paths": [
+      {
+        "frequency_mhz": 431.0750,
+        "role": "user_to_r71_input_rx",
+        "site_context": "Rennes basin"
+      },
+      {
+        "frequency_mhz": 145.0750,
+        "role": "r71_to_r3_bridge_and_r3_input_rx",
+        "site_context": "Rennes to Broceliande link / R3 input"
+      },
+      {
+        "frequency_mhz": 145.6750,
+        "role": "r3_output_and_r3_to_r71_bridge_rx",
+        "site_context": "Brocéliande / linked feed toward Rennes"
+      },
+      {
+        "frequency_mhz": 438.6750,
+        "role": "r71_output_rx",
+        "site_context": "Rennes basin"
+      }
+    ],
+    "unique_rx_frequency_count": 4,
+    "all_four_frequencies_already_present_in_bretagne_deduplicated_plan": true,
+    "new_bretagne_rf_memories_required": 0,
+    "r3_operator_usage_radius_km": 150,
+    "r3_operator_usage_radius_is_reception_guarantee": false,
+    "r3_to_r71_operator_link_distance_km": 46.51,
+    "r71_current_site": "temporary",
+    "r71_operator_coverage_context": "very_good_clearance_over_rennes_basin",
+    "mortain_relevance": {
+      "r3_priority": "high_operator_documented_long_range_candidate_for_local_validation",
+      "r71_priority": "bretagne_east_local_candidate_not_assumed_useful_from_mortain",
+      "local_reception_or_propagation_validation_required": true
+    }
+  },
+  "export_contract": {
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "same_rf_frequency_deduplicated": true,
+    "public_export_allowed": false
+  },
+  "rules": {
+    "linked_system_does_not_require_duplicate_rf_memories": true,
+    "operator_usage_radius_is_not_guaranteed_coverage": true,
+    "operator_linkage_is_not_adrasec_role": true,
+    "r71_temporary_site_requires_revalidation_before_publication": true,
+    "published_packs_immutable": true
+  }
+}

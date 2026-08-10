@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.21.10 - 2026-08-10
+
+- Ajout de `research/bretagne-v0.1/ref-analog-expansion.json` après recontrôle du répertoire REF actuel pour étendre l'inventaire analogique Bretagne sans publication.
+- Ajout de trois transpondeurs actifs Côtes-d'Armor partageant 432.650 MHz : `F5ZIU` La Harmoye 145.4625/432.6500, `F5ZIV` Saint-Brieuc 145.4875/432.6500 et `F5ZJR` Plessala 145.2875/432.6500 MHz ; le cluster 432.650 regroupe désormais cinq sites avec F5ZIS/F5ZIT.
+- Ajout de `F1ZMU` Saint-Nolff comme relais analogique actif Morbihan, sortie 430.325 MHz / entrée 439.725 MHz, 50 W selon le REF.
+- Résolution du cas `F1ZBZ` Lorient comme transpondeur multi-chemins : conservation exacte des lignes REF autour de 431.200 MHz et des fréquences 145.6250, 145.0250, 145.7375 et 145.1375 MHz, sans déduire de couverture.
+- Passage de la carte paired RX Bretagne de **21 à 29 fréquences RF uniques de recherche** après déduplication ; 145.1375 et 145.7375 restent partagées avec F5ZPE, 432.650 reste une seule mémoire RF pour cinq transpondeurs.
+- Passage de `research/paired-rx-next-version-plan.json` et `research/paired-rx-deduplicated-memory-plan.json` au schéma 1.1 ; F1ZBZ sort de la liste non résolue mais reste soumis à revue de couverture/redondance.
+- Ajout de `tests/test_bretagne_ref_analog_expansion.py`, mise à jour de `tests/test_paired_rx_memory_plan.py` et ajout de l'étape CI correspondante ; aucune couverture ni rôle ADRASEC n'est inféré des seules métadonnées techniques.
+- Le canal 64 Morbihan et l'émetteur actuel du canal 79 Corsen restent non résolus ; aucune attribution n'est inventée.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.9 - 2026-08-09
 
 - Ajout de `research/paired-rx-deduplicated-memory-plan.json` pour matérialiser les fréquences RX uniques issues des paires duplex/split déjà documentées, sans attribuer de positions mémoire ni publier de nouvelle version.

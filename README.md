@@ -65,7 +65,7 @@ La carte des fréquences uniques après déduplication est désormais séparée 
 research/paired-rx-deduplicated-memory-plan.json
 ```
 
-Elle matérialise uniquement les paires déjà documentées et encore actives au niveau recherche : **8 fréquences uniques pour Normandie v0.4**, **10 pour Annecy–Alpes–Léman v0.3** et **21 pour Bretagne v0.1**. Ces nombres ne sont **pas** des tailles finales de packs ni des objectifs de remplissage. Les fréquences partagées sont fusionnées par région et les liaisons arrêtées ou non résolues restent hors de cette liste active.
+Elle matérialise uniquement les paires déjà documentées et encore actives au niveau recherche : **8 fréquences uniques pour Normandie v0.4**, **10 pour Annecy–Alpes–Léman v0.3** et désormais **29 pour Bretagne v0.1**. Ces nombres ne sont **pas** des tailles finales de packs ni des objectifs de remplissage. Les fréquences partagées sont fusionnées par région et les liaisons arrêtées ou non résolues restent hors de cette liste active.
 
 La **Normandie v0.3.1** publiée applique déjà cette logique à la VHF marine avec des paires comme `M01-S` / `M01-C`. Elle reste figée. La **Normandie v0.4**, **Annecy–Alpes–Léman v0.3** et **Bretagne v0.1** appliquent désormais cette règle à toute nouvelle liaison publique duplex/split retenue.
 
@@ -216,25 +216,49 @@ Le décret primaire de 2003 reste utile pour l'historique : Stiff en VHF, Pointe
 
 ## Bretagne — ADRASEC et relais analogiques
 
-L'inventaire reste :
+L'inventaire principal reste :
 
 ```text
 research/bretagne-v0.1/emergency-relays.json
 ```
 
-Il couvre les organisations ADRASEC 22 / 29 / 35 / 56 et plusieurs relais analogiques régionaux :
+L'extension REF actuelle est conservée séparément dans :
+
+```text
+research/bretagne-v0.1/ref-analog-expansion.json
+```
+
+Elle permet de compléter les candidats analogiques actuels sans confondre leurs métadonnées techniques avec une couverture mesurée.
+
+### Côtes-d'Armor — cluster 432.650 MHz
+
+Le répertoire REF actuel documente cinq transpondeurs analogiques actifs partageant le côté **432.650 MHz** :
 
 - `F5ZIS` — Matignon — 145.2375 / 432.6500 MHz ;
 - `F5ZIT` — Perros-Guirec — 145.2250 / 432.6500 MHz ;
-- `F1ZBX` — Brocéliande — entrée 145.0750 / sortie 145.6750 MHz ;
+- `F5ZIU` — La Harmoye — **145.4625 / 432.6500 MHz** ;
+- `F5ZIV` — Saint-Brieuc — **145.4875 / 432.6500 MHz** ;
+- `F5ZJR` — Plessala — **145.2875 / 432.6500 MHz**.
+
+La fréquence 432.650 MHz reste donc **une seule mémoire RX** avec cinq rôles de site. Les altitudes, puissances et gains d'antenne publiés servent uniquement à prioriser la prochaine revue ; RadioPack n'en déduit aucune couverture radio réelle.
+
+### Finistère
+
 - `F1ZGS` — Plouhinec — 145.2625 / 431.4250 MHz ;
 - `F5ZDV` — Morlaix — 145.2625 / 438.7000 MHz ;
-- `F5ZZL` — Cast — 145.2625 / 431.3750 MHz ;
-- `F1ZBZ` — Lorient — sortie 431.200 MHz avec plusieurs voies publiées, direction exacte encore à revoir ;
-- `F5ZPE` — Bignan — entrée 145.1375 / sortie 145.7375 MHz ;
-- `F1ZBH`, `F1ZGQ` et `F1ZAJ` — APRS 144.800 MHz conservés comme métadonnées sans doublon mémoire.
+- `F5ZZL` — Cast — 145.2625 / 431.3750 MHz.
 
-Le plan paired RX conserve les deux côtés des relais/transpondeurs dont la paire est suffisamment explicite. Les fréquences partagées 145.2625 et 432.6500 resteront dédupliquées dans le futur pack.
+Le côté 145.2625 MHz reste une seule mémoire RF partagée entre ces trois transpondeurs.
+
+### Morbihan — F1ZMU, F1ZBZ et F5ZPE
+
+- `F1ZMU` — Saint-Nolff — relais FM actif, **sortie 430.3250 MHz / entrée 439.7250 MHz**, 50 W selon le REF ;
+- `F5ZPE` — Bignan — entrée **145.1375 MHz** / sortie **145.7375 MHz** ;
+- `F1ZBZ` — Lorient — cas multi-chemins désormais explicite dans le REF autour du côté commun **431.2000 MHz**.
+
+Pour `F1ZBZ`, les lignes REF documentent notamment 431.200→/←145.6250, 145.0250→/←431.2000, 431.200→/←145.7375 et 145.1375→/←431.2000 selon les colonnes émission/réception du répertoire. RadioPack conserve donc cinq fréquences RX uniques pour ce transpondeur : **431.2000, 145.6250, 145.0250, 145.7375 et 145.1375 MHz**. Les deux dernières sont déjà présentes via F5ZPE et restent dédupliquées.
+
+Les infrastructures APRS `F1ZBH`, `F1ZGQ` et `F1ZAJ` restent des métadonnées sans doublon 144.800 MHz.
 
 ### ADRASEC 35 : F1ZUG
 
@@ -315,6 +339,7 @@ python tests\test_regional_pack_starter.py
 python tests\test_paired_rx_policy.py
 python tests\test_paired_rx_memory_plan.py
 python tests\test_etel_network_research.py
+python tests\test_bretagne_ref_analog_expansion.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
 python tests\test_mortain_bretagne_radio_research.py
@@ -362,15 +387,15 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 
 ## Prochaines priorités
 
-1. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
-2. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
-3. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
-4. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
-5. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
-6. trouver une seconde source actuelle pour F6ZES Sourdeval ;
-7. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
-8. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
-9. revoir couverture et redondance des relais/transpondeurs avant toute sélection mémoire ;
+1. revoir la couverture et la redondance du cluster Côtes-d'Armor **432.650 MHz**, de F1ZMU et du multi-chemins F1ZBZ avant toute sélection mémoire ;
+2. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
+3. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
+4. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
+5. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
+6. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
+7. trouver une seconde source actuelle pour F6ZES Sourdeval ;
+8. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
+9. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
 10. revalider les redémarrages éventuels de F5ZPV RU19 et F5ZZH R7X ;
 11. recontrôler les satellites avant Annecy v0.3 ;
 12. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.

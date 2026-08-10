@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "status": "diagnostic_validation_pack_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Préparer une validation RX-only reproductible de F5ZHA Laval depuis Mortain-Bocage sans considérer la géométrie comme preuve de couverture et sans fermer artificiellement le conflit de source historique.",
+  "station": {
+    "id": "F5ZHA",
+    "name": "F5ZHA Laval",
+    "site": "Laval",
+    "locator": "IN98OB86BQ",
+    "locator_center_coordinates": [48.069531, -0.766146],
+    "mortain_reference_coordinates": [48.64782, -0.94055],
+    "straight_line_distance_to_mortain_km": 65.6,
+    "distance_method": "great_circle_from_maidenhead_locator_cell_center",
+    "geometry_is_reception_proof": false
+  },
+  "current_authoritative_pair": {
+    "source": "https://www.r-e-f.org/index.php?option=com_content&view=",
+    "source_authority": "REF current national repeater directory",
+    "state": "active",
+    "side_a_mhz": 145.4675,
+    "side_b_mhz": 432.575,
+    "mode": "FM",
+    "function": "transparent analog cross-band transponder"
+  },
+  "historical_conflict": {
+    "source": "https://www.repeaterbook.com/row_repeaters/location_search.php?loc=Laval&state_id=FR&type=city",
+    "conflicting_frequency_mhz": 431.4125,
+    "diagnostic_only": true,
+    "must_not_override_current_ref_pair": true,
+    "field_non_reception_does_not_resolve_source_conflict": true
+  },
+  "memories": [
+    {
+      "location": 0,
+      "name": "ZHA-VHF",
+      "frequency_mhz": 145.4675,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "current REF pair VHF side RX",
+      "comment": "F5ZHA Laval VHF 145.4675 - sonde RX Mortain - TX bloque"
+    },
+    {
+      "location": 1,
+      "name": "ZHA-UHF",
+      "frequency_mhz": 432.575,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "current REF pair UHF side RX",
+      "comment": "F5ZHA Laval UHF 432.575 - sonde RX Mortain - TX bloque"
+    },
+    {
+      "location": 2,
+      "name": "ZHA-OLD",
+      "frequency_mhz": 431.4125,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "legacy conflicting directory diagnostic only",
+      "comment": "F5ZHA ancienne valeur secondaire 431.4125 - diagnostic RX uniquement"
+    }
+  ],
+  "validation": {
+    "current_pair_primary_probes_mhz": [145.4675, 432.575],
+    "legacy_conflict_probe_mhz": 431.4125,
+    "minimum_independent_sessions_for_useful_coverage": 2,
+    "repeatable_identified_reception_required": true,
+    "hearing_legacy_frequency_alone_is_source_resolution": false,
+    "not_hearing_any_frequency_is_negative_operational_evidence": false
+  },
+  "rules": {
+    "standalone_diagnostic_pack_only": true,
+    "must_not_be_appended_to_internal_candidate_automatically": true,
+    "names_max_10_characters": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "ctcss_rx_filter_enabled": false,
+    "geometry_is_not_reception_proof": true,
+    "source_conflict_remains_open_until_authoritative_reconciliation": true,
+    "public_export_allowed": false
+  }
+}

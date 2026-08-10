@@ -16,6 +16,7 @@ FOCUSED_TESTS = [
     "tests/test_normandie_v04_field_tools.py",
     "tests/test_normandie_v04_readiness.py",
     "tests/test_normandie_v04_evidence_pipeline.py",
+    "tests/test_normandie_v04_decision_pipeline.py",
 ]
 
 EXTENDED_TESTS = [
@@ -36,24 +37,14 @@ def run_test(relative_path: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--extended",
-        action="store_true",
-        help="Also run paired-RX and public-site guard tests.",
-    )
+    parser.add_argument("--extended", action="store_true", help="Also run paired-RX and public-site guard tests.")
     args = parser.parse_args()
-
     tests = list(FOCUSED_TESTS)
     if args.extended:
         tests.extend(EXTENDED_TESTS)
-
     for test in tests:
         run_test(test)
-
-    print(
-        f"\nNORMANDIE V0.4 LOCAL CHECKS: {len(tests)} test scripts passed "
-        f"(extended={str(args.extended).lower()})"
-    )
+    print(f"\nNORMANDIE V0.4 LOCAL CHECKS: {len(tests)} test scripts passed (extended={str(args.extended).lower()})")
 
 
 if __name__ == "__main__":

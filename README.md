@@ -2,7 +2,7 @@
 
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 49
+## État actuel — Sprint 54
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -22,6 +22,7 @@ Le générateur public ne propose que les versions publiées. Point de reprise :
 - Versions publiées immuables.
 - Géométrie, altitude, puissance ou rayon annoncé ne valent pas preuve de réception.
 - Une recherche infructueuse n'est pas une preuve d'arrêt.
+- Une source périmée bloque une revue mais n'est jamais une preuve d'arrêt ou d'absence.
 - Une fréquence non résolue n'est jamais devinée.
 - Le statut opérateur local prime sur un annuaire général pour l'état opérationnel courant.
 - Une observation terrain ne ferme jamais un conflit de source.
@@ -42,6 +43,7 @@ research/normandie-v0.4/promotion-gates.json
 research/normandie-v0.4/blocked-station-revalidation.json
 research/normandie-v0.4/external-evidence-matrix.json
 research/normandie-v0.4/source-consistency-contract.json
+research/normandie-v0.4/source-freshness-policy.json
 research/normandie-v0.4/r3-mortain-field-validation.json
 research/normandie-v0.4/f5zha-mortain-validation.json
 ```
@@ -66,7 +68,7 @@ python tools\record_normandie_v04_f5zha_observation.py --help
 
 Le protocole `research/normandie-v0.4/f5zha-mortain-validation.json` conserve la valeur historique 431.4125 MHz uniquement comme sonde diagnostique. Une observation terrain ne peut jamais fermer le conflit de source.
 
-### Readiness, preuves et décision — Sprints 40 à 49
+### Readiness, décision et prépublication — Sprints 40 à 54
 
 ```powershell
 python tools\build_normandie_v04_readiness_report.py
@@ -74,14 +76,18 @@ python tools\build_normandie_v04_promotion_scenarios.py
 python tools\build_normandie_v04_evidence_report.py
 python tools\build_normandie_v04_internal_promotion_plan.py
 python tools\check_normandie_v04_source_consistency.py
+python tools\check_normandie_v04_source_freshness.py
 python tools\build_normandie_v04_decision_dossier.py
 python tools\build_normandie_v04_candidate_preview.py
+python tools\build_normandie_v04_candidate_diff.py
 python tools\build_normandie_v04_release_blockers.py
+python tools\build_normandie_v04_review_checklist.py
+python tools\run_normandie_v04_prepublication_audit.py
 ```
 
-Le readiness report conserve la publication bloquée. La matrice de scénarios couvre les 8 scénarios 142→147. Le rapport de preuves sépare paramètres techniques, statut opérateur, réception terrain et conflits de sources. Le contrôle de cohérence empêche les sources de vérité du dépôt de diverger et protège la priorité du statut exploitant local. Le dossier de décision agrège toutes les preuves. Le preview candidat est un dry-run RX-only non destructif. Le manifeste de publication compte actuellement **7 blocages actifs**.
+Le contrôle de cohérence protège les sources de vérité. La politique de fraîcheur empêche une décision de s'appuyer silencieusement sur un état ancien. Le dossier de décision et le preview restent non destructifs. Le diff vérifie l'empilement exact **139 → 142 → preview**. La checklist actuelle est à **2/9** et le manifeste compte **7 blocages actifs**.
 
-Au Sprint 49 : **0 ajout éligible**, preview courant **142 mémoires**, publication v0.4 toujours interdite.
+Au Sprint 54 : **0 ajout éligible**, preview courant **142 mémoires**, audit prépublication **integrity_ok=true** mais **release_ready=false**. L'intégrité technique du pipeline n'est jamais une autorisation de publication.
 
 ## Bretagne v0.1
 
@@ -94,6 +100,7 @@ Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`. Les rec
 - [research/sprint-35-39-summary.md](research/sprint-35-39-summary.md)
 - [research/sprint-40-44-summary.md](research/sprint-40-44-summary.md)
 - [research/sprint-45-49-summary.md](research/sprint-45-49-summary.md)
+- [research/sprint-50-54-summary.md](research/sprint-50-54-summary.md)
 
 Architecture publique : `website/src/lib/chirpPack.ts`, `website/src/lib/annecyPack.ts`, `website/src/lib/packRegistry.ts`.
 
@@ -105,6 +112,7 @@ python tests\test_mortain_bretagne_radio_research.py
 python tests\test_normandie_v04_readiness.py
 python tests\test_normandie_v04_evidence_pipeline.py
 python tests\test_normandie_v04_decision_pipeline.py
+python tests\test_normandie_v04_prepublication_audit.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
@@ -125,6 +133,7 @@ python tests\test_pack_registry.py
 python tests\test_normandie_v04_readiness.py
 python tests\test_normandie_v04_evidence_pipeline.py
 python tests\test_normandie_v04_decision_pipeline.py
+python tests\test_normandie_v04_prepublication_audit.py
 
 git status
 ```

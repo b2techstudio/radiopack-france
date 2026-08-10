@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "status": "field_validation_pack_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Fournir un mini-pack CHIRP RX-only dédié à la validation locale de F1ZBX / R3 Brocéliande depuis Mortain-Bocage, sans modifier le candidat interne Normandie v0.4 ni aucun pack public.",
+  "station": "F1ZBX / R3 Brocéliande",
+  "operator": "ARA35",
+  "source": "https://ara35.fr/frequences/relais-phonie/r3/",
+  "memories": [
+    {
+      "location": 0,
+      "name": "R3-OUT",
+      "frequency_mhz": 145.675,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "primary R3 output coverage probe",
+      "comment": "R3 Broceliande sortie 145.675 - sonde principale RX Mortain - TX bloque"
+    },
+    {
+      "location": 1,
+      "name": "R3-IN",
+      "frequency_mhz": 145.075,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "opportunistic R3 input listening",
+      "comment": "R3 Broceliande entree 145.075 - ecoute opportuniste RX - TX bloque"
+    },
+    {
+      "location": 2,
+      "name": "CTRL-ZHY",
+      "frequency_mhz": 145.6875,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "role": "optional local receiver antenna sanity control",
+      "comment": "F5ZHY sortie 145.6875 - controle recepteur facultatif - TX bloque"
+    }
+  ],
+  "validation": {
+    "primary_probe_mhz": 145.675,
+    "input_probe_is_optional": true,
+    "control_frequency_is_optional": true,
+    "ctcss_rx_filter_enabled": false,
+    "minimum_independent_sessions": 2,
+    "protocol_file": "research/normandie-v0.4/r3-mortain-field-validation.json"
+  },
+  "rules": {
+    "standalone_validation_pack_only": true,
+    "must_not_be_appended_to_internal_candidate_automatically": true,
+    "names_max_10_characters": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "public_export_allowed": false
+  }
+}

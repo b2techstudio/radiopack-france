@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.15 - 2026-08-10
+
+- Qualification géométrique de `F1ZBX` / R3 Brocéliande depuis Mortain : distance directe d'environ **119,3 km** à partir des coordonnées opérateur ARA35 et du référentiel géographique de Mortain.
+- Le rayon d'usage de **150 km** publié par l'ARA35 place Mortain géométriquement environ **30,7 km** à l'intérieur de ce rayon ; R3 devient une priorité de validation terrain, mais `actual_reception_from_mortain_verified` reste à `false`.
+- Ajout du garde-fou `geometric_inclusion_in_operator_radius_is_not_reception_proof` dans le système R3/R71 et la couverture Mortain afin d'interdire toute promotion basée sur la seule géométrie.
+- Canal 64 Morbihan : la page ministérielle mise à jour le **19 juin 2026** reconfirme les canaux 63/64 pour le bulletin côtier permanent dans le Morbihan, tandis que la page HTML actuelle du CROSS Étel nomme Étel sur 63 mais aucun site Bretagne sur 64.
+- Ajout du garde-fou `ministry_regional_channel_statement_does_not_identify_transmitter_site` ; le site actuel du canal 64 reste non identifié et aucune attribution n'est inventée.
+- `F5ZHA` Laval, `F6ZES` Sourdeval et l'émetteur actuel du canal 79 Corsen restent ouverts faute de nouvelle preuve suffisamment forte ; les comptes paired RX restent **Normandie 12 / Annecy 10 / Bretagne 29** avec TX toujours bloqué.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.14 - 2026-08-10
 
 - Ajout de `research/bretagne-v0.1/rennes-broceliande-linked-system.json` pour modéliser le système analogique actuellement lié **R3 Brocéliande / R71 Rennes** à partir des pages de l'exploitant ARA35.

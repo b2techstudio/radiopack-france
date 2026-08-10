@@ -40,22 +40,25 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 39
-assert resume["state_version"] == "0.21.28"
+assert resume["current_sprint"] == 44
+assert resume["state_version"] == "0.21.33"
 assert resume["public_packs"]["normandie"]["memory_count"] == 139
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["blocked_frequency_count"] == 5
 assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
+assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
 assert resume["active_work"]["public_export_allowed"] is False
 assert resume["active_work"]["public_release_ready"] is False
 assert resume["resume_rules"]["published_versions_are_immutable"] is True
 assert resume["resume_rules"]["geometry_is_not_reception_proof"] is True
+assert resume["resume_rules"]["field_observations_do_not_close_source_conflicts"] is True
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **39**" in status_text
-assert "État logique : **0.21.28**" in status_text
+assert "Sprint courant : **44**" in status_text
+assert "État logique : **0.21.33**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
+assert "0 ajout éligible" in status_text
 
 recorder = load_module("r3_recorder", RECORDER)
 reporter = load_module("gate_reporter", REPORTER)
@@ -133,5 +136,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained at sprint 39, OK"
+    "non-public, recovery state is self-contained at sprint 44, OK"
 )

@@ -62,7 +62,7 @@ def build_report(root: Path) -> dict[str, Any]:
     if set(stations) != expected:
         raise ValueError("Unexpected evidence matrix station set")
 
-    r3_required = int(r3["acceptance_gate"]["minimum_independent_sessions"])
+    r3_required = int(r3["protocol"]["minimum_sessions"])
     r3_valid = valid_sessions(r3.get("observations", []), {145.675}, 3)
     r3_count = independent_count(r3_valid)
 
@@ -86,7 +86,7 @@ def build_report(root: Path) -> dict[str, Any]:
                 "valid_mortain_sessions": r3_count,
                 "required_mortain_sessions": r3_required,
                 "field_gate_supported": r3_count >= r3_required,
-                "promotion_allowed": False,
+                "promotion_allowed": False
             },
             "F5ZHA_LAVAL": {
                 "technical_parameters_verified": stations["F5ZHA_LAVAL"]["technical_parameters_verified"],
@@ -96,28 +96,28 @@ def build_report(root: Path) -> dict[str, Any]:
                 "field_coverage_supported": f5_field_coverage_supported,
                 "authoritative_source_reconciled": f5_source_reconciled,
                 "promotion_prerequisites_satisfied": f5_field_coverage_supported and f5_source_reconciled,
-                "promotion_allowed": False,
+                "promotion_allowed": False
             },
             "F1ZOV_EQUEURDREVILLE": {
                 "technical_parameters_verified": stations["F1ZOV_EQUEURDREVILLE"]["technical_parameters_verified"],
                 "operator_status": stations["F1ZOV_EQUEURDREVILLE"]["operator_status"],
                 "maintenance_cleared": stations["F1ZOV_EQUEURDREVILLE"]["operator_status"] != "maintenance",
-                "promotion_allowed": False,
+                "promotion_allowed": False
             },
             "F6ZES_SOURDEVAL": {
                 "technical_parameters_verified": stations["F6ZES_SOURDEVAL"]["technical_parameters_verified"],
                 "frequency_resolved": bool(stations["F6ZES_SOURDEVAL"]["current_frequencies_mhz"]),
                 "must_not_guess": True,
-                "promotion_allowed": False,
-            },
+                "promotion_allowed": False
+            }
         },
         "rules": {
             "evidence_report_does_not_modify_promotion_gates": True,
             "field_evidence_does_not_close_f5zha_source_conflict": True,
             "operator_maintenance_blocks_f1zov": True,
             "unresolved_f6zes_frequency_blocks_candidate_creation": True,
-            "published_v0_3_1_remains_immutable": True,
-        },
+            "published_v0_3_1_remains_immutable": True
+        }
     }
     return report
 
@@ -133,7 +133,7 @@ def markdown(report: dict[str, Any]) -> str:
         f"- F6ZES : fréquence résolue = {'oui' if s['F6ZES_SOURDEVAL']['frequency_resolved'] else 'non'}.",
         "",
         "Ce rapport est informatif et ne modifie aucune porte de promotion ni aucun pack public.",
-        "",
+        ""
     ])
 
 

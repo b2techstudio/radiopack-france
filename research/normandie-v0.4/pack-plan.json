@@ -1,7 +1,8 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "research_next_version_not_public",
   "created": "2026-08-09",
+  "updated": "2026-08-10",
   "pack": {
     "name": "Normandie",
     "slug": "normandie",
@@ -25,13 +26,26 @@
     "rule": "Sélectionner selon couverture radio utile et non selon la seule limite administrative."
   },
   "memory_plan": {
-    "status": "not_defined",
+    "status": "paired_rx_delta_candidate_defined_not_public",
+    "candidate_delta_file": "research/normandie-v0.4/candidate-memory-delta.json",
+    "r3_field_validation_file": "research/normandie-v0.4/r3-mortain-field-validation.json",
     "expected_memory_count": null,
+    "paired_rx_research_frequency_count": 12,
+    "paired_rx_frequencies_already_in_v0_3_1": 4,
+    "maximum_new_paired_rx_frequencies_under_current_research": 8,
+    "ready_research_candidates": 3,
+    "local_mortain_validation_required": 2,
+    "source_conflict_and_coverage_validation_required": 2,
+    "operator_maintenance_revalidation_required": 1,
+    "memory_positions_assigned": false,
     "new_blocks": []
   },
   "research_priorities": [
+    "valider réellement F1ZBX / R3 Brocéliande depuis Mortain-Bocage selon le protocole RX-only dédié",
+    "intégrer au candidat de recherche les côtés manquants suffisamment recoupés de F5ZHY, F6ZCE et F1ZBL sans dupliquer leurs côtés déjà publiés",
+    "attendre le retour en service de F1ZOV avant de promouvoir son côté 431.975 MHz dans le delta",
+    "fermer le conflit de source F5ZHA et vérifier sa couverture utile avant toute promotion",
     "ADRASEC 14-50 et infrastructures radioamateurs associées",
-    "relais analogiques Sud-Manche avec écoute de l'entrée et de la sortie lorsqu'elles sont toutes deux vérifiées",
     "relais proches de Sourdeval et Mortain-Bocage",
     "relais utiles en 35, 53 et 61",
     "réseaux de secours publics ou amateur uniquement lorsqu'ils sont publiquement documentés et compatibles RX"

@@ -229,7 +229,7 @@
 
 ## 0.13.0 - 2026-08-08
 
-- Reclassement des contrôles NOTAM France et Suisse en vérifications facultatives et non bloquants pour les packs d'écoute RX.
+- Reclassement des contrôles NOTAM France et Suisse en vérifications facultatives et non bloquantes pour les packs d'écoute RX.
 - Ajout du contrat `generator/options.json` avec deux options indépendantes : inclusion de l'aviation et état du contrôle NOTAM.
 - Ajout de `tools/check_annecy_release_readiness.py` pour distinguer les portes bloquantes des contrôles informatifs.
 - Recontrôle officiel AMSAT de SO-50, AO-91 et AO-123 ; passage de `dynamic_satellites` à `passed_official_amsat_recheck`.

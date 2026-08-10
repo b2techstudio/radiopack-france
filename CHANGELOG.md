@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.50 - 2026-08-10
+
+- **Sprint 61** : approfondissement de la recherche CROSS Étel/Corsen et relecture analogique autour de Mortain-Bocage, sans mutation des packs publics.
+- Ajout de `research/bretagne-v0.1/etel-channel64-evidence.json` : le canal 64 Morbihan est désormais classé **conflit entre sources primaires actuelles**. Le ministère maintient l'affirmation 63/64 tandis que la page CROSS Étel, son planning météo lié et le bilan 2025 nomment les émetteurs/canaux courants sans mentionner 64 ; aucun site n'est attribué et l'absence locale n'est pas traitée comme preuve d'arrêt.
+- `research/bretagne-v0.1/etel-network.json` passe au schéma 1.1 et conserve séparément les dimensions de réseau **17 stations radio** (offre technique 2026) et **16 VHF + 2 MF** (bilan 2025), sans réconciliation arithmétique faute de définition commune.
+- `research/bretagne-v0.1/corsen-channel79-evidence.json` passe au schéma 1.1 : le bilan officiel Corsen 2025 est identifié mais son PDF volumineux n'est pas exploité dans ce workflow ; Cap Fréhel/Bodic restent des indices secondaires, sans attribution primaire Ch79.
+- Ajout de `research/normandie-v0.4/mortain-adjacent-ref-scan.json` : recontrôle REF des départements 35, 50, 53 et 61, avec **0 nouveau relais analogique actif non déjà suivi** et delta candidat **0**.
+- Ajout de `tests/test_sprint61_research.py`, mise à jour de `tests/test_etel_network_research.py` et des garde-fous de reprise Sprint 61 ; intégration du nouveau test à GitHub Actions.
+- Mise à jour de `README.md`, `PROJECT_STATUS.md`, `research/project-resume-state.json` et ajout de `research/sprint-61-summary.md` au **Sprint 61 / 0.21.50**.
+- État public inchangé : Normandie v0.3.1 reste figée à **139 mémoires**, Annecy–Alpes–Léman v0.2 à **65/48 mémoires**, Bretagne reste non publique et Normandie v0.4 reste un candidat interne non public à **142 mémoires** avec **3/9** points de revue, **6** blocages et **0** ajout éligible.
+
 ## 0.21.49 - 2026-08-10
 
 - Consolidation des **Sprints 55 à 60** dans `research/sprint-55-60-summary.md` : snapshot de revue, manifeste SHA-256, détection de dérive, dry-run de publication, handoff de revue et reprise de recherche externe prioritaire.
@@ -134,7 +145,7 @@
 
 ## 0.21.8 - 2026-08-09
 
-- Ajout de `research/bretagne-v0.1/etel-network.json` à partir d'une source officielle DIRM NAMO 2026 indiquant que le service technique du CROSS Étel maintient **17 stations radio réparties sur le littoral, de la Pointe de Penmarc'h à Biarritz**.
+- Ajout de `research/bretagne-v0.1/etel-network.json` à partir d'une source officielle DIRM NAMO 2026 indiquant que le service technique du CROSS Etel maintient **17 stations radio réparties sur le littoral, de la Pointe de Penmarc'h à Biarritz**.
 - Séparation explicite entre le dimensionnement du réseau et son inventaire nominatif : le nombre de 17 stations ne permet pas d'en déduire leurs noms, leurs canaux ni leur couverture individuelle.
 - Conservation des émetteurs météo déjà primaire-vérifiés comme inventaire partiel : Penmarc'h, Groix et Belle-Ile sur le canal 80, Étel sur le canal 63 ; Chassiron sur 63 est conservé comme contexte hors Bretagne.
 - Renforcement du dossier **canal 64 Morbihan** : le réseau Étel est plus large que les seuls émetteurs météo nommés, mais aucun site primaire actuel n'est encore identifié pour 64 ; `channel_64_site_must_not_be_guessed` reste obligatoire.

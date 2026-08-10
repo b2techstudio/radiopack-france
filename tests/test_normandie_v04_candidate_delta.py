@@ -109,7 +109,7 @@ assert field["acceptance_gate"]["promotion_to_public_pack_allowed"] is False
 assert field["observations"] == []
 
 memory_plan = pack_plan["memory_plan"]
-assert pack_plan["schema_version"] == "1.2"
+assert pack_plan["schema_version"] == "1.1"
 assert pack_plan["project_resume_state"] == "research/project-resume-state.json"
 assert pack_plan["project_status_document"] == "PROJECT_STATUS.md"
 assert memory_plan["status"] == "internal_candidate_defined_not_public"

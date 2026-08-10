@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "status": "research_deduplicated_memory_plan_not_public",
   "updated": "2026-08-10",
   "source_plan": "research/paired-rx-next-version-plan.json",
@@ -23,8 +23,8 @@
         {"name_hint": "ZHY-OUT", "frequency_mhz": 145.6875, "roles": ["F5ZHY repeater output"], "selection_status": "research_candidate"},
         {"name_hint": "ZCE-IN", "frequency_mhz": 145.1000, "roles": ["F6ZCE repeater input"], "selection_status": "research_candidate"},
         {"name_hint": "ZCE-OUT", "frequency_mhz": 145.7000, "roles": ["F6ZCE repeater output"], "selection_status": "research_candidate"},
-        {"name_hint": "ZBX-IN", "frequency_mhz": 145.0750, "roles": ["F1ZBX repeater input"], "selection_status": "coverage_pending"},
-        {"name_hint": "ZBX-OUT", "frequency_mhz": 145.6750, "roles": ["F1ZBX repeater output"], "selection_status": "coverage_pending"},
+        {"name_hint": "ZBX-IN", "frequency_mhz": 145.0750, "roles": ["F1ZBX repeater input", "F5ZEB R71 to R3 bridge RX role"], "selection_status": "operator_supported_long_range_candidate_local_mortain_validation_required"},
+        {"name_hint": "ZBX-OUT", "frequency_mhz": 145.6750, "roles": ["F1ZBX repeater output", "F1ZBX R3 to F5ZEB R71 bridge RX role"], "selection_status": "operator_supported_long_range_candidate_local_mortain_validation_required"},
         {"name_hint": "ZHA-A", "frequency_mhz": 145.4675, "roles": ["F5ZHA transponder side A"], "selection_status": "coverage_pending"},
         {"name_hint": "ZHA-B", "frequency_mhz": 432.5750, "roles": ["F5ZHA transponder side B"], "selection_status": "coverage_pending"},
         {"name_hint": "ZBL-A", "frequency_mhz": 145.2500, "roles": ["F1ZBL transponder side A"], "selection_status": "pair_resolved_low_priority_for_mortain"},
@@ -68,10 +68,10 @@
         {"name_hint": "M79-C", "frequency_mhz": 161.5750, "roles": ["marine channel 79 coast-to-ship RX"], "selection_status": "current_corsen_emitter_pending"},
         {"name_hint": "M80-S", "frequency_mhz": 157.0250, "roles": ["marine channel 80 ship-to-coast RX"], "selection_status": "research_verified_frequency_pair"},
         {"name_hint": "M80-C", "frequency_mhz": 161.6250, "roles": ["marine channel 80 coast-to-ship RX"], "selection_status": "research_verified_frequency_pair"},
-        {"name_hint": "ZBX-IN", "frequency_mhz": 145.0750, "roles": ["F1ZBX repeater input"], "selection_status": "research_candidate"},
-        {"name_hint": "ZBX-OUT", "frequency_mhz": 145.6750, "roles": ["F1ZBX repeater output"], "selection_status": "research_candidate"},
-        {"name_hint": "ZEB-A", "frequency_mhz": 431.0750, "roles": ["F5ZEB transponder side A"], "selection_status": "coverage_and_redundancy_pending"},
-        {"name_hint": "ZEB-B", "frequency_mhz": 438.6750, "roles": ["F5ZEB transponder side B"], "selection_status": "coverage_and_redundancy_pending"},
+        {"name_hint": "ZBX-IN", "frequency_mhz": 145.0750, "roles": ["F1ZBX R3 input", "F5ZEB R71 to F1ZBX R3 bridge RX role"], "selection_status": "current_operator_linked_system_verified"},
+        {"name_hint": "ZBX-OUT", "frequency_mhz": 145.6750, "roles": ["F1ZBX R3 output", "F1ZBX R3 to F5ZEB R71 bridge RX role"], "selection_status": "current_operator_linked_system_verified"},
+        {"name_hint": "ZEB-A", "frequency_mhz": 431.0750, "roles": ["F5ZEB R71 user input RX"], "selection_status": "current_operator_operational_linked_system_temporary_site_review_required"},
+        {"name_hint": "ZEB-B", "frequency_mhz": 438.6750, "roles": ["F5ZEB R71 output RX"], "selection_status": "current_operator_operational_linked_system_temporary_site_review_required"},
         {"name_hint": "ZIS-A", "frequency_mhz": 145.2375, "roles": ["F5ZIS transponder side A"], "selection_status": "research_candidate"},
         {"name_hint": "X432650", "frequency_mhz": 432.6500, "roles": ["F5ZIS transponder side B", "F5ZIT transponder side B", "F5ZIU transponder side B", "F5ZIV transponder side B", "F5ZJR transponder side B"], "selection_status": "deduplicated_shared_frequency"},
         {"name_hint": "ZIT-A", "frequency_mhz": 145.2250, "roles": ["F5ZIT transponder side A"], "selection_status": "research_candidate"},
@@ -100,6 +100,7 @@
   "rules": {
     "counts_are_research_counts_not_pack_targets": true,
     "memory_names_are_hints_not_final_public_names": true,
+    "linked_system_roles_must_not_create_duplicate_rf_memories": true,
     "stopped_or_unresolved_links_excluded_from_active_memory_list": true,
     "no_public_export": true
   }

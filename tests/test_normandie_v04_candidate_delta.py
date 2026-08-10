@@ -109,12 +109,20 @@ assert field["acceptance_gate"]["promotion_to_public_pack_allowed"] is False
 assert field["observations"] == []
 
 memory_plan = pack_plan["memory_plan"]
-assert pack_plan["schema_version"] == "1.1"
+assert pack_plan["schema_version"] == "1.2"
+assert pack_plan["project_resume_state"] == "research/project-resume-state.json"
+assert pack_plan["project_status_document"] == "PROJECT_STATUS.md"
 assert memory_plan["status"] == "internal_candidate_defined_not_public"
 assert memory_plan["candidate_delta_file"] == "research/normandie-v0.4/candidate-memory-delta.json"
 assert memory_plan["internal_candidate_map_file"] == "research/normandie-v0.4/internal-candidate-map.json"
 assert memory_plan["internal_candidate_builder"] == "tools/build_normandie_v04_internal_candidate.py"
+assert memory_plan["promotion_gates_file"] == "research/normandie-v0.4/promotion-gates.json"
+assert memory_plan["blocked_station_revalidation_file"] == "research/normandie-v0.4/blocked-station-revalidation.json"
+assert memory_plan["promotion_gate_report_builder"] == "tools/build_normandie_v04_gate_report.py"
 assert memory_plan["r3_field_validation_file"] == "research/normandie-v0.4/r3-mortain-field-validation.json"
+assert memory_plan["r3_validation_pack_file"] == "research/normandie-v0.4/r3-validation-pack.json"
+assert memory_plan["r3_observation_recorder"] == "tools/record_normandie_v04_r3_observation.py"
+assert memory_plan["local_check_runner"] == "tools/run_normandie_v04_checks.py"
 assert memory_plan["internal_candidate_memory_count"] == 142
 assert memory_plan["internal_candidate_new_memory_count"] == 3
 assert memory_plan["internal_candidate_positions_assigned_provisionally"] is True
@@ -140,4 +148,4 @@ assert refresh["rules"]["maintenance_blocks_new_side_promotion_until_revalidated
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'version: "v0.4"' not in registry
 
-print("Tests Normandie v0.4 candidate delta: frozen v0.3.1 + 8 possible paired sides classified, 3 promoted only into a 142-memory internal candidate with provisional locations 175-177; no public mutation OK")
+print("Tests Normandie v0.4 candidate delta: frozen v0.3.1 + 8 possible paired sides classified, 3 promoted only into a 142-memory internal candidate with provisional locations 175-177; field/recovery tooling linked; no public mutation OK")

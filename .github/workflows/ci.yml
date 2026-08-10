@@ -76,6 +76,9 @@ jobs:
       - name: Test Normandie v0.4 review handoff and drift guards
         run: python tests/test_normandie_v04_review_handoff.py
 
+      - name: Test Sprint 60 guarded revalidation
+        run: python tests/test_sprint60_revalidation.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

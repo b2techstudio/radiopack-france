@@ -32,6 +32,7 @@ Le générateur public `/generateur` continue de proposer uniquement Annecy–Al
 - Un rôle ADRASEC n'est jamais déduit uniquement de l'implantation géographique d'un relais.
 - Une infrastructure radio actuelle vérifiée ne vaut pas automatiquement validation d'un canal ou d'une fréquence précise.
 - Une preuve de couverture VHF dans un secteur ne permet pas d'identifier automatiquement le site émetteur.
+- Pour l'état courant d'un relais géré par une association locale, la page opérationnelle de l'exploitant est prioritaire sur un annuaire général lorsqu'ils divergent ; le conflit reste toutefois documenté.
 - Les réseaux professionnels privés de sécurité/secours restent hors des packs lorsqu'ils ne sont pas explicitement destinés à l'écoute publique ou au service amateur ouvert.
 
 ## Politique paired RX — écouter les deux sens
@@ -81,6 +82,8 @@ Peuvent être étudiés pour une future intégration RX : relais et transpondeur
 
 Pour les relais analogiques retenus dans une prochaine version, entrée et sortie vérifiées seront toutes deux disponibles à l'écoute conformément à la politique paired RX.
 
+Pour les **statuts opérationnels**, RadioPack distingue désormais explicitement l'annuaire technique de la source exploitante : lorsqu'une association responsable publie qu'un relais est arrêté ou opérationnel et que le REF affiche l'inverse, l'état de l'exploitant local est retenu pour la recherche courante, le désaccord est conservé et aucune couverture n'est déduite de ce seul statut.
+
 Restent hors publication par défaut les canaux opérationnels internes PPDR/PMR de police, gendarmerie, SDIS, SAMU, Protection Civile, Croix-Rouge ou autres réseaux professionnels privés lorsqu'ils ne sont pas explicitement destinés à l'écoute publique ou au service amateur ouvert.
 
 ## Normandie v0.4 — recherche Mortain-Bocage / Sud-Manche
@@ -109,7 +112,7 @@ Le périmètre vérifié couvre volontairement **50, 35, 53 et 61**, parce que l
 
 Le répertoire courant confirme `F6ZES` à **Sourdeval**, responsable `F1SMB`, locator `IN98MR93XV`, altitude 230 m.
 
-En revanche, aucune fréquence ni aucun mode exploitable ne sont actuellement fournis dans la fiche vérifiée. RadioPack applique donc une règle stricte :
+En revanche, aucune fréquence ni aucun mode exploitable ne sont actuellement fournis dans la fiche vérifiée. Un nouveau recontrôle ciblé le **10 août 2026** n'a pas fourni de seconde source publique actuelle suffisamment précise. RadioPack applique donc une règle stricte :
 
 ```text
 sourdeval_must_not_be_guessed: true
@@ -122,13 +125,13 @@ sourdeval_must_not_be_guessed: true
 - `F5ZHY` — Montabot / Percy-en-Normandie — sortie **145.6875 MHz**, entrée **145.0875 MHz**, FM ;
 - `F6ZCE` — Mont des Avaloirs — sortie **145.700 MHz**, entrée **145.100 MHz**, FM, CTCSS 123 Hz ;
 - `F1ZBX` — Paimpont / Brocéliande — sortie **145.675 MHz**, entrée **145.075 MHz**, FM, CTCSS 71.9 Hz ;
-- `F5ZHA` — Laval — le REF actuel publie **145.4675 / 432.5750 MHz** et cette paire reste dans la recherche paired RX. RepeaterBook affiche toutefois encore **431.4125 MHz** sur une fiche de vérification ancienne (2017) : la paire REF est conservée en recherche mais **bloquée avant publication** tant qu'une seconde source locale actuelle ne la recoupe pas ;
-- `F1ZBL` — Équeurdreville-Hainneville — paire cross-band **145.2500 / 431.2500 MHz** confirmée à la fois par le REF et le Radio Club Nord Cotentin. La valeur secondaire `431.2250 MHz` vue dans RepeaterBook n'est donc pas retenue ;
+- `F5ZHA` — Laval — le REF actuel et `manuel.la-radio.eu` concordent sur **145.4675 / 432.5750 MHz**. RepeaterBook affiche toutefois encore **431.4125 MHz** sur une donnée ancienne : la paire REF est renforcée et reste dans la recherche paired RX, mais elle demeure **bloquée avant publication** tant qu'une source locale actuelle ne ferme pas définitivement le conflit ;
+- `F1ZBL` — Équeurdreville-Hainneville — paire cross-band **145.2500 / 431.2500 MHz** confirmée à la fois par le REF et le Radio Club Nord Cotentin. La liste `manuel.la-radio.eu` concorde également ; la valeur secondaire `431.2250 MHz` vue dans RepeaterBook n'est donc pas retenue ;
 - `F5ZIX` Tessy-sur-Vire et `F5ZPO` Gorron — APRS 144.800 MHz conservés comme métadonnées de maillage, sans dupliquer la mémoire APRS nationale ;
 - `F1ZKC` Orne — C4FM, conservé comme métadonnée uniquement ;
 - `F5ZTQ` Izé — arrêté, exclu des candidats.
 
-Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. La carte paired RX Normandie reste à **12 fréquences RF uniques de recherche** ; ce compte inclut F5ZHA comme paire de recherche, mais son conflit secondaire doit être réconcilié avant toute publication. F6ZES reste le principal blocage immédiat. Aucune de ces nouvelles recherches n'est encore promue.
+Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. La carte paired RX Normandie reste à **12 fréquences RF uniques de recherche** ; ce compte inclut F5ZHA comme paire de recherche, mais son conflit secondaire doit être réconcilié localement avant toute publication. F6ZES reste le principal blocage immédiat. Aucune de ces nouvelles recherches n'est encore promue.
 
 ## Annecy–Alpes–Léman v0.3 — recherche secours et paired RX
 
@@ -200,7 +203,7 @@ research/bretagne-v0.1/etel-network.json
 
 Une offre officielle DIRM NAMO de juillet 2026 indique que le service technique du CROSS Étel assure la maintenance de **17 stations radio littorales de la Pointe de Penmarc'h à Biarritz**. Ce chiffre confirme que les quatre émetteurs météo bretons nommés ne constituent qu'un inventaire partiel du réseau. La page actuelle du CROSS Étel confirme aussi Chassiron et Étel sur le canal 63 en diffusion continue ; Chassiron reste une métadonnée hors Bretagne.
 
-Le nombre de stations ne permet pas d'en déduire les noms ni les canaux. Le ministère mentionne toujours une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan, mais les sources locales exploitées n'identifient explicitement aucun site Bretagne sur le canal 64. RadioPack conserve donc le canal 64 en recherche sans inventer de site, tout en gardant sa paire de fréquences RX comme donnée réglementaire.
+Le nombre de stations ne permet pas d'en déduire les noms ni les canaux. Le ministère mentionne toujours une diffusion permanente sur les canaux 63/64 notamment dans le Morbihan, mais les sources locales exploitées n'identifient explicitement aucun site Bretagne sur le canal 64. Les recherches ciblées du 10 août 2026 n'ont pas fermé cette attribution. RadioPack conserve donc le canal 64 en recherche sans inventer de site, tout en gardant sa paire de fréquences RX comme donnée réglementaire.
 
 ### CROSS Corsen : SRR, infrastructures et couverture du Raz
 
@@ -219,7 +222,7 @@ Le centre principal actuel du CROSS Corsen à la **Pointe de Corsen / Plouarzel*
 
 Le projet **CROSS Nouvelle génération** prévoit un regroupement fonctionnel Étel/Corsen avec un horizon opérationnel 2027. Cette réorganisation future ne modifie ni les fréquences actuelles ni les exigences de validation site par site.
 
-Le décret primaire de 2003 reste utile pour l'historique : Stiff en VHF, Pointe du Raz en VHF/MF, Corsen en secours multicanal et diffusion régulière d'informations/météo sur le canal 79 après appel sur le canal 16. Le canal 79 reste sans émetteur actuel primaire-vérifié.
+Le décret primaire de 2003 reste utile pour l'historique : Stiff en VHF, Pointe du Raz en VHF/MF, Corsen en secours multicanal et diffusion régulière d'informations/météo sur le canal 79 après appel sur le canal 16. Un nouveau recontrôle ciblé le 10 août 2026 n'a toujours pas identifié l'émetteur actuel du canal 79 ; aucune attribution au Stiff, à la Pointe du Raz ou à Corsen n'est déduite.
 
 ## Bretagne — ADRASEC et relais analogiques
 
@@ -290,11 +293,13 @@ La fréquence de ce transpondeur ADRASEC n'est pas publiée dans la source consu
 
 ### Rennes : F5ZEB R71, F5ZPV RU19 et F5ZZH R7X
 
-- `F5ZEB` / **R71** — Rennes Est — entrée **431.075 MHz**, sortie **438.675 MHz**, CTCSS 71.9 Hz ; paire conservée dans le plan RX, mais sélection finale encore soumise à la couverture/redondance.
-- `F5ZPV` / **RU19** — Rennes-Beaulieu — entrée **430.475 MHz**, sortie **439.875 MHz**, FM/C4FM ; toujours temporairement arrêté, donc hors candidats actifs.
-- `F5ZZH` / **R7X** — Rennes-Beaulieu / Cesson-Sévigné — entrée **145.1875 MHz**, sortie **145.7875 MHz**, FM ; toujours temporairement arrêté et à la recherche d'un nouveau site, donc hors candidats actifs.
+Le recontrôle du 10 août 2026 met en évidence une divergence de statut entre le REF et les pages de l'**ARA35**, qui exploite ces équipements. RadioPack retient donc la source locale pour l'état opérationnel courant tout en conservant le désaccord :
 
-Les recherches ADRASEC 22, 29 et 56 restent ouvertes : un relais radioamateur ne reçoit jamais un rôle ADRASEC sur la seule base de sa localisation.
+- `F5ZEB` / **R71** — Rennes Est — entrée **431.075 MHz**, sortie **438.675 MHz**, CTCSS 71.9 Hz. L'ARA35 l'indique **opérationnel depuis le 25 septembre 2025** sur un site temporaire, alors que le REF l'affiche arrêté. Pour la recherche courante, R71 est donc considéré opérationnel, mais reste hors sélection publique tant que couverture/redondance ne sont pas validées ;
+- `F5ZPV` / **RU19** — Rennes-Beaulieu — entrée **430.475 MHz**, sortie **439.875 MHz**, FM/C4FM. L'ARA35 l'indique **temporairement arrêté** sans confirmation actuelle de redémarrage, alors que le REF l'affiche actif : il reste donc hors candidats actifs ;
+- `F5ZZH` / **R7X** — Rennes-Beaulieu / Cesson-Sévigné — entrée **145.1875 MHz**, sortie **145.7875 MHz**, FM. L'ARA35 indique un arrêt temporaire et la recherche d'un nouveau site ; le REF l'affiche également arrêté. Il reste hors candidats actifs.
+
+Cette hiérarchie ne change aucune fréquence et ne transforme jamais un statut « opérationnel » en preuve de couverture. Les recherches ADRASEC 22, 29 et 56 restent ouvertes : un relais radioamateur ne reçoit jamais un rôle ADRASEC sur la seule base de sa localisation.
 
 ## Packs publics actuels
 
@@ -408,17 +413,17 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 ## Prochaines priorités
 
 1. revalider par source associative actuelle l'interconnexion éventuelle du cluster Côtes-d'Armor **432.650 MHz** ; la présence des cinq sites est désormais recoupée indépendamment mais l'interconnexion reste non prouvée ;
-2. trouver une source locale actuelle supplémentaire pour **F5ZHA Laval** afin de réconcilier le conflit REF 145.4675/432.5750 contre l'ancienne donnée secondaire 431.4125 ;
-3. vérifier la couverture utile de F1ZMU, F1ZBZ et F5ZHA sans la déduire des seules puissances/altitudes ;
-4. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
-5. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
-6. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
-7. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
-8. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
-9. trouver une seconde source actuelle pour F6ZES Sourdeval ;
-10. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
-11. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
-12. revalider les redémarrages éventuels de F5ZPV RU19 et F5ZZH R7X ;
+2. trouver une source locale actuelle supplémentaire pour **F5ZHA Laval** afin de fermer définitivement le conflit 432.5750 / 431.4125, même si deux listes actuelles concordent déjà sur 432.5750 ;
+3. suivre les statuts **F5ZEB R71 / F5ZPV RU19 / F5ZZH R7X** sur les pages ARA35 et ne réactiver RU19/R7X qu'après annonce explicite de redémarrage ;
+4. vérifier la couverture utile de F1ZMU, F1ZBZ, F5ZHA et F5ZEB sans la déduire des seules puissances, altitudes ou états opérationnels ;
+5. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
+6. identifier progressivement les **17 stations radio du CROSS Étel** et le site actuel du canal 64 sans déduction à partir du seul nombre de stations ;
+7. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
+8. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;
+9. revalider l'installation VHF/MF historique de la **Pointe du Raz** et l'installation radio locale historique de **Corsen** ;
+10. trouver une seconde source actuelle pour F6ZES Sourdeval ;
+11. retrouver la fréquence du transpondeur ADRASEC 35 de F1ZUG sans la déduire de l'APRS ;
+12. poursuivre les inventaires ADRASEC 22/29/56 et Sud-Manche ;
 13. recontrôler les satellites avant Annecy v0.3 ;
 14. ne publier aucune nouvelle mémoire avant revue explicite de la prochaine version.
 

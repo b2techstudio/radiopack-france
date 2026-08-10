@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.18 - 2026-08-10
+
+- Ajout de `research/normandie-v0.4/promotion-gates.json` pour centraliser les **5 fréquences encore exclues** du candidat interne 142 mémoires : R3/F1ZBX 145.075/145.675, F5ZHA 145.4675/432.575 et F1ZOV 431.975 MHz.
+- Recontrôle courant : aucune preuve publique fiable de réception R3 depuis Mortain n'a été trouvée ; le Radio Club Nord Cotentin indique toujours F1ZOV **En Maintenance** ; F5ZHA reste en conflit entre REF + `manuel.la-radio.eu` sur 145.4675/432.575 MHz et RepeaterBook sur 431.4125 MHz.
+- Ajout de `research/normandie-v0.4/r3-validation-pack.json` et de `tools/build_normandie_v04_r3_validation_pack.py` : mini-pack autonome de trois mémoires RX (`R3-OUT`, `R3-IN`, `CTRL-ZHY`), sans tonalité RX filtrante, `Duplex=off`, `Offset=0.000000` et TX bloqué.
+- Ajout de `tools/check_normandie_v04_promotion_gates.py` : la porte R3 ne peut passer qu'après au moins **deux sessions RX indépendantes** identifiant la sortie 145.675 MHz avec intelligibilité suffisante ; F5ZHA et F1ZOV restent soumis à leurs preuves externes respectives.
+- Renforcement de `r3-mortain-field-validation.json` et `pack-plan.json` avec les liens vers le mini-pack, l'évaluateur et les portes de promotion ; une recherche web infructueuse ne vaut jamais preuve d'arrêt ou d'absence.
+- Ajout de `tests/test_normandie_v04_promotion_gates.py` et de l'étape CI correspondante : génération temporaire du mini-pack, contrôle RX-only, simulation de deux sessions R3 valides et interdiction de toute exposition publique.
+- Le candidat interne Normandie v0.4 reste à **142 mémoires** : aucune des cinq fréquences bloquées n'est ajoutée automatiquement et les locations provisoires 175–177 restent les seuls ajouts internes actuels.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.17 - 2026-08-10
 
 - Ajout de `research/normandie-v0.4/internal-candidate-map.json` et de `tools/build_normandie_v04_internal_candidate.py` pour matérialiser un **candidat interne Normandie v0.4 à 142 mémoires**, toujours hors publication.

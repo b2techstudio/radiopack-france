@@ -83,14 +83,18 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-decision-") as tmp:
     jp3, mp3, blockers_written = blocker_builder.write(ROOT, Path(tmp) / "blockers")
     assert jp3.is_file() and mp3.is_file()
     assert blockers_written["release_allowed"] is False
+    assert blockers_written["prepublication_ready"] is False
 
 blockers = blocker_builder.build(ROOT)
-assert blockers["status"] == "release_blockers_not_public"
-assert blockers["blocking_count"] == 7
+assert blockers["status"] == "prepublication_blockers_not_public"
+assert blockers["blocking_count"] == 6
+assert blockers["prepublication_ready"] is False
+assert blockers["public_registry_has_v04"] is False
+assert blockers["public_activation_pending"] is True
 assert blockers["release_allowed"] is False
 assert blockers["public_export_allowed"] is False
 ids = {x["id"] for x in blockers["blockers"]}
-assert {"F1ZBX_R3", "F5ZHA_LAVAL", "F1ZOV_EQUEURDREVILLE", "F6ZES_SOURDEVAL", "FINAL_REVIEW", "FINAL_MEMORY_PLAN", "PUBLIC_REGISTRY"} == ids
+assert {"F1ZBX_R3", "F5ZHA_LAVAL", "F1ZOV_EQUEURDREVILLE", "F6ZES_SOURDEVAL", "FINAL_REVIEW", "FINAL_MEMORY_PLAN"} == ids
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'version: "v0.4"' not in registry
@@ -98,5 +102,5 @@ assert 'version: "v0.4"' not in registry
 print(
     "Tests Normandie v0.4 decision pipeline: source truth consistent, internal decision dossier blocked, "
     "current preview remains 142 memories, synthetic gated preview safely reaches 144 RX-only memories, "
-    "7 release blockers remain active, no public mutation OK"
+    "6 prepublication blockers remain and public activation stays separate, no public mutation OK"
 )

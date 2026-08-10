@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "diagnostic_validation_pack_not_public",
   "updated": "2026-08-10",
   "purpose": "Préparer une validation RX-only reproductible de F5ZHA Laval depuis Mortain-Bocage sans considérer la géométrie comme preuve de couverture et sans fermer artificiellement le conflit de source historique.",
@@ -63,10 +63,16 @@
     "current_pair_primary_probes_mhz": [145.4675, 432.575],
     "legacy_conflict_probe_mhz": 431.4125,
     "minimum_independent_sessions_for_useful_coverage": 2,
+    "minimum_intelligibility_0_to_5": 3,
+    "accepted_identification_confidence": ["high", "unmistakable", "confirmed"],
     "repeatable_identified_reception_required": true,
     "hearing_legacy_frequency_alone_is_source_resolution": false,
-    "not_hearing_any_frequency_is_negative_operational_evidence": false
+    "not_hearing_any_frequency_is_negative_operational_evidence": false,
+    "useful_coverage_can_be_supported_by_field_observations": true,
+    "source_conflict_can_be_closed_by_field_observations": false,
+    "promotion_requires_both_useful_coverage_and_authoritative_source_reconciliation": true
   },
+  "observations": [],
   "rules": {
     "standalone_diagnostic_pack_only": true,
     "must_not_be_appended_to_internal_candidate_automatically": true,
@@ -77,6 +83,7 @@
     "ctcss_rx_filter_enabled": false,
     "geometry_is_not_reception_proof": true,
     "source_conflict_remains_open_until_authoritative_reconciliation": true,
+    "field_observations_never_close_source_conflict": true,
     "public_export_allowed": false
   }
 }

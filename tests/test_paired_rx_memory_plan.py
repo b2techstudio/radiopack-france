@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 plan = json.loads((ROOT / "research/paired-rx-deduplicated-memory-plan.json").read_text(encoding="utf-8"))
 source_plan = json.loads((ROOT / "research/paired-rx-next-version-plan.json").read_text(encoding="utf-8"))
 linked = json.loads((ROOT / "research/bretagne-v0.1/rennes-broceliande-linked-system.json").read_text(encoding="utf-8"))
+mortain_data = json.loads((ROOT / "research/normandie-v0.4/mortain-bocage-coverage.json").read_text(encoding="utf-8"))
 assert plan["schema_version"] == "1.3"
 assert source_plan["schema_version"] == "1.3"
 assert plan["status"] == "research_deduplicated_memory_plan_not_public"
@@ -123,12 +124,27 @@ assert linked_system["r3_operator_usage_radius_km"] == 150
 assert linked_system["r3_operator_usage_radius_is_reception_guarantee"] is False
 assert linked_system["r3_to_r71_operator_link_distance_km"] == 46.51
 assert {item["frequency_mhz"] for item in linked_system["rf_paths"]} == {145.0750, 145.6750, 431.0750, 438.6750}
+mortain_relevance = linked_system["mortain_relevance"]
+assert mortain_relevance["straight_line_distance_km"] == 119.3
+assert mortain_relevance["inside_operator_usage_radius_geometrically"] is True
+assert mortain_relevance["operator_usage_radius_margin_km"] == 30.7
+assert mortain_relevance["actual_reception_from_mortain_verified"] is False
 assert linked["export_contract"]["chirp_duplex"] == "off"
 assert linked["export_contract"]["chirp_offset"] == "0.000000"
 assert linked["export_contract"]["tx_disabled"] is True
 assert linked["rules"]["linked_system_does_not_require_duplicate_rf_memories"] is True
 assert linked["rules"]["operator_usage_radius_is_not_guaranteed_coverage"] is True
+assert linked["rules"]["geometric_inclusion_in_operator_radius_is_not_reception_proof"] is True
 assert linked["rules"]["public_export_allowed"] is False
+
+mortain_stations = {item["id"]: item for item in mortain_data["stations"]}
+r3 = mortain_stations["F1ZBX"]
+assert r3["field_validation_priority"] == "immediate"
+assert r3["straight_line_distance_to_mortain_km"] == 119.3
+assert r3["inside_operator_usage_radius_geometrically"] is True
+assert r3["operator_usage_radius_margin_km"] == 30.7
+assert r3["actual_reception_from_mortain_verified"] is False
+assert mortain_data["rules"]["geometric_inclusion_in_operator_radius_is_not_reception_proof"] is True
 
 excluded_bretagne = "\n".join(regions["bretagne-v0.1"]["excluded_or_unresolved"])
 assert "F5ZPV" in excluded_bretagne
@@ -148,4 +164,4 @@ assert 'id: "bretagne"' not in registry
 assert 'version: "v0.4"' not in registry
 assert 'version: "v0.3"' not in registry
 
-print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 12, Annecy 10, Bretagne 29 unique RX frequencies, R3/R71 four-frequency linked system roles deduplicated with no extra RF memories, TX-off contract and no public mutation OK")
+print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 12, Annecy 10, Bretagne 29 unique RX frequencies, R3/R71 four-frequency linked system deduplicated and R3 at 119.3 km from Mortain inside the operator 150 km usage radius geometrically without claiming reception, TX-off contract and no public mutation OK")

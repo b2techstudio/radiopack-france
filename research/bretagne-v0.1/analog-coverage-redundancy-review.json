@@ -1,19 +1,25 @@
 {
-  "schema_version": "1.1",
-  "status": "research_geometry_redundancy_and_topology_review_not_public",
+  "schema_version": "1.2",
+  "status": "research_geometry_redundancy_topology_and_operational_status_review_not_public",
   "updated": "2026-08-10",
-  "purpose": "Qualifier la valeur mémoire, la diversité géographique et le niveau de preuve topologique des relais/transpondeurs analogiques Bretagne déjà vérifiés, sans transformer les locators, altitudes, puissances ou gains en preuve de couverture radio réelle.",
+  "purpose": "Qualifier la valeur mémoire, la diversité géographique, le niveau de preuve topologique et les conflits de statut opérationnel des relais/transpondeurs analogiques Bretagne déjà vérifiés, sans transformer les locators, altitudes, puissances ou gains en preuve de couverture radio réelle.",
   "sources": [
     {
       "authority": "Réseau des Émetteurs Français (REF)",
       "url": "https://www.r-e-f.org/",
-      "status": "current_primary_directory_for_active_status_frequencies_locators_and_technical_metadata"
+      "status": "current_primary_directory_for_frequencies_locators_technical_metadata_and_directory_status"
     },
     {
       "authority": "Ham_Map F5AIB",
       "url": "https://f5aib.net/carto/Localiser.php",
       "status": "current_secondary_independent_site_presence_corroboration",
       "note": "La cartographie actuelle retrouve séparément F5ZIS, F5ZIT, F5ZIU, F5ZIV et F5ZJR sur leurs sites respectifs. Elle confirme la présence des cinq sites mais ne documente pas une interconnexion."
+    },
+    {
+      "authority": "ARA35",
+      "url": "https://ara35.fr/frequences/relais-phonie/",
+      "status": "current_local_operator_source_for_rennes_operational_status",
+      "note": "Pour l'état réellement en service ou arrêté des équipements qu'elle exploite, la page opérationnelle de l'ARA35 est prioritaire sur un annuaire général lorsqu'ils divergent."
     },
     {
       "authority": "RepeaterBook",
@@ -27,6 +33,7 @@
     "distance_is_coverage": false,
     "altitude_power_gain_are_coverage": false,
     "independent_site_directory_is_linkage_proof": false,
+    "local_operator_page_preferred_for_operational_status": true,
     "priority_basis": "efficacité mémoire RF, diversité géographique, statut actif actuel et degré de redondance fréquentielle uniquement"
   },
   "cluster_432_650": {
@@ -125,11 +132,47 @@
       "note": "F1ZBZ reste utile comme cas multi-chemins local : trois fréquences RF sont nouvelles après déduplication et deux sont partagées avec F5ZPE. Altitude et puissance ne sont pas utilisées pour affirmer une portée."
     }
   },
+  "rennes_operational_status_reconciliation": {
+    "source_priority_rule": "Pour un équipement géré par l'ARA35, son état opérationnel courant est pris sur la page de l'association exploitante lorsqu'il diverge du statut de l'annuaire REF ; le désaccord reste enregistré et n'est jamais effacé.",
+    "F5ZEB": {
+      "service": "R71 transpondeur Rennes Est vers R3 Brocéliande",
+      "paired_rx_mhz": [431.0750, 438.6750],
+      "local_operator_status": "operational_since_2025_09_25_on_temporary_site",
+      "ref_directory_status": "arret",
+      "effective_research_status": "operational_local_operator_source_preferred",
+      "status_conflict": true,
+      "coverage_claim": null,
+      "rx_pack_candidate": false,
+      "note": "L'ARA35 indique le R71 de nouveau opérationnel depuis le 25/09/2025 sur un nouvel emplacement temporaire. Le REF l'affiche arrêté : le statut ARA35 est retenu pour l'exploitation courante, sans en déduire une couverture suffisante pour publication."
+    },
+    "F5ZPV": {
+      "service": "RU19 Rennes-Beaulieu",
+      "paired_rx_mhz": [430.4750, 439.8750],
+      "local_operator_status": "temporarily_stopped_no_restart_currently_confirmed",
+      "ref_directory_status": "actif",
+      "effective_research_status": "stopped_local_operator_source_preferred",
+      "status_conflict": true,
+      "rx_pack_candidate": false,
+      "note": "La page ARA35 actuelle indique explicitement un arrêt temporaire et un retour espéré pour l'été 2026, mais aucune confirmation de redémarrage n'est publiée. Le statut REF actif n'est donc pas utilisé pour réactiver le candidat."
+    },
+    "F5ZZH": {
+      "service": "R7X Rennes-Beaulieu / Cesson-Sévigné",
+      "paired_rx_mhz": [145.1875, 145.7875],
+      "local_operator_status": "temporarily_stopped_searching_new_site",
+      "ref_directory_status": "arret",
+      "effective_research_status": "stopped_sources_agree",
+      "status_conflict": false,
+      "rx_pack_candidate": false,
+      "note": "L'ARA35 indique un arrêt temporaire et la recherche d'un nouveau site ; le REF l'affiche également arrêté."
+    }
+  },
   "recommendations": {
     "retain_432_650_shared_memory_in_research_plan": true,
     "retain_all_five_unique_vhf_sides_in_research_plan": true,
     "retain_f1zmu_pair_in_research_plan": true,
     "retain_f1zbz_multi_path_frequencies_in_research_plan": true,
+    "retain_f5zeb_pair_as_operational_research_metadata": true,
+    "keep_f5zpv_and_f5zzh_out_of_active_candidates": true,
     "field_or_propagation_validation_required_before_public_selection": true,
     "current_linkage_of_432_650_cluster_requires_current_primary_or_association_source": true
   },
@@ -138,6 +181,10 @@
     "technical_metadata_is_not_radio_coverage": true,
     "independent_site_corroboration_is_not_linkage_proof": true,
     "historical_secondary_linkage_is_not_current_primary_linkage": true,
+    "local_operator_current_status_overrides_directory_status_when_conflicting": true,
+    "directory_status_conflict_is_recorded_not_silently_discarded": true,
+    "operational_status_does_not_imply_coverage": true,
+    "stopped_relay_is_not_active_candidate": true,
     "shared_rf_frequency_is_deduplicated": true,
     "priority_is_not_public_selection": true,
     "tx_disabled_in_future_export": true,

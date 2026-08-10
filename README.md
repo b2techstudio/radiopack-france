@@ -106,6 +106,20 @@ Le rafraîchissement paired RX courant est séparé dans :
 research/normandie-v0.4/paired-rx-refresh.json
 ```
 
+Le premier **delta mémoire candidat non public** est maintenant défini dans :
+
+```text
+research/normandie-v0.4/candidate-memory-delta.json
+```
+
+Il compare les 12 fréquences paired RX de recherche avec les **139 mémoires figées de la v0.3.1**. Quatre côtés sont déjà présents dans la base (`145.6875`, `145.7000`, `145.2500`, `430.3750 MHz`) ; le delta paired RX maximal actuellement étudié est donc de **8 fréquences nouvelles**, sans positions mémoire attribuées. Trois sont déjà `ready_research_candidate`, deux nécessitent une validation locale R3/Mortain, deux restent bloquées par le conflit F5ZHA et une par la maintenance actuelle de F1ZOV. Ce compte n'est pas une taille cible de v0.4.
+
+Le protocole RX-only pour R3 est séparé dans :
+
+```text
+research/normandie-v0.4/r3-mortain-field-validation.json
+```
+
 Le périmètre vérifié couvre volontairement **50, 35, 53 et 61**, parce que la couverture radio utile autour de Mortain-Bocage ne suit pas les frontières départementales.
 
 ### Sourdeval F6ZES
@@ -122,16 +136,17 @@ sourdeval_must_not_be_guessed: true
 
 ### Relais documentés autour du secteur
 
-- `F5ZHY` — Montabot / Percy-en-Normandie — sortie **145.6875 MHz**, entrée **145.0875 MHz**, FM ;
-- `F6ZCE` — Mont des Avaloirs — sortie **145.700 MHz**, entrée **145.100 MHz**, FM, CTCSS 123 Hz ;
+- `F5ZHY` — Montabot / Percy-en-Normandie — sortie **145.6875 MHz**, entrée **145.0875 MHz**, FM ; l'entrée 145.0875 MHz devient un ajout paired RX prêt au niveau recherche puisque la sortie est déjà dans v0.3.1 ;
+- `F6ZCE` — Mont des Avaloirs — sortie **145.700 MHz**, entrée **145.100 MHz**, FM, CTCSS 123 Hz ; l'entrée 145.100 MHz devient un ajout paired RX prêt au niveau recherche puisque la sortie est déjà dans v0.3.1 ;
 - `F1ZBX` — Paimpont / Brocéliande — sortie **145.675 MHz**, entrée **145.075 MHz**, FM, CTCSS 71.9 Hz. L'ARA35 documente son lien avec R71 Rennes à **46,51 km** et un **rayon d'usage de 150 km** pour R3. D'après les coordonnées publiées par l'exploitant et la référence géographique de Mortain, la distance directe R3–Mortain est d'environ **119,3 km**, soit environ **30,7 km** à l'intérieur de ce rayon d'usage ; cette inclusion géométrique en fait une priorité de validation terrain, mais ne constitue pas une preuve de réception ;
 - `F5ZHA` — Laval — le REF actuel et `manuel.la-radio.eu` concordent sur **145.4675 / 432.5750 MHz**. RepeaterBook affiche toutefois encore **431.4125 MHz** sur une donnée ancienne : la paire REF est renforcée et reste dans la recherche paired RX, mais elle demeure **bloquée avant publication** tant qu'une source locale actuelle ne ferme pas définitivement le conflit ;
-- `F1ZBL` — Équeurdreville-Hainneville — paire cross-band **145.2500 / 431.2500 MHz** confirmée à la fois par le REF et le Radio Club Nord Cotentin. La liste `manuel.la-radio.eu` concorde également ; la valeur secondaire `431.2250 MHz` vue dans RepeaterBook n'est donc pas retenue ;
+- `F1ZBL` — Équeurdreville-Hainneville — paire cross-band **145.2500 / 431.2500 MHz** confirmée à la fois par le REF et le Radio Club Nord Cotentin. La liste `manuel.la-radio.eu` concorde également ; la valeur secondaire `431.2250 MHz` vue dans RepeaterBook n'est donc pas retenue. Le côté 431.250 MHz devient un ajout paired RX prêt au niveau recherche puisque 145.250 MHz existe déjà dans v0.3.1 ;
+- `F1ZOV` — Équeurdreville-Hainneville — paire **430.3750 / 431.9750 MHz** recoupée par le Radio Club Nord Cotentin et l'ARA50. Le club exploitant affiche toutefois actuellement le relais **en maintenance** : la mémoire 430.375 MHz de v0.3.1 reste figée et le nouveau côté 431.975 MHz est bloqué jusqu'à revalidation du retour en service ;
 - `F5ZIX` Tessy-sur-Vire et `F5ZPO` Gorron — APRS 144.800 MHz conservés comme métadonnées de maillage, sans dupliquer la mémoire APRS nationale ;
 - `F1ZKC` Orne — C4FM, conservé comme métadonnée uniquement ;
 - `F5ZTQ` Izé — arrêté, exclu des candidats.
 
-Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. La carte paired RX Normandie reste à **12 fréquences RF uniques de recherche** ; ce compte inclut F5ZHA comme paire de recherche, mais son conflit secondaire doit être réconcilié localement avant toute publication. F1ZBX/R3 devient une **priorité de validation terrain immédiate** : sa géométrie 119,3 km / 150 km est favorable à une vérification locale, sans que la réception depuis Mortain soit encore considérée comme validée. F6ZES reste le principal blocage immédiat. Aucune de ces nouvelles recherches n'est encore promue.
+Dans Normandie v0.4, les relais analogiques finalement sélectionnés conserveront **entrée et sortie** comme mémoires RX distinctes lorsque les deux fréquences sont vérifiées. Le delta actuel distingue désormais **3 ajouts prêts en recherche** (`145.0875`, `145.1000`, `431.2500 MHz`), **2 fréquences R3 à valider localement**, **2 fréquences F5ZHA bloquées source/couverture** et **1 fréquence F1ZOV bloquée maintenance**. F6ZES reste sans paire exploitable. Aucune position mémoire n'est encore assignée et aucune nouvelle mémoire n'est publique.
 
 ## Annecy–Alpes–Léman v0.3 — recherche secours et paired RX
 
@@ -370,6 +385,7 @@ python tests\test_pack_registry.py
 python tests\test_regional_pack_starter.py
 python tests\test_paired_rx_policy.py
 python tests\test_paired_rx_memory_plan.py
+python tests\test_normandie_v04_candidate_delta.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_ref_analog_expansion.py
 python tests\test_analog_coverage_redundancy_review.py
@@ -420,12 +436,12 @@ Les archives de sprint sont des sauvegardes de référence uniquement : ne pas l
 
 ## Prochaines priorités
 
-1. valider réellement depuis **Mortain-Bocage** la réception utile de `F1ZBX` / R3 Brocéliande : la distance directe est d'environ **119,3 km** pour un rayon d'usage opérateur annoncé de 150 km, mais cette inclusion géométrique doit encore être confirmée en réception ou par étude de propagation ;
-2. revalider par source associative actuelle l'interconnexion éventuelle du cluster Côtes-d'Armor **432.650 MHz** ; la présence des cinq sites est désormais recoupée indépendamment mais l'interconnexion reste non prouvée ;
-3. trouver une source locale actuelle supplémentaire pour **F5ZHA Laval** afin de fermer définitivement le conflit 432.5750 / 431.4125, même si deux listes actuelles concordent déjà sur 432.5750 ;
-4. suivre les statuts **F5ZEB R71 / F5ZPV RU19 / F5ZZH R7X** sur les pages ARA35 et revalider le site temporaire R71 ; ne réactiver RU19/R7X qu'après annonce explicite de redémarrage ;
-5. vérifier la couverture utile de F1ZMU, F1ZBZ, F5ZHA et F5ZEB sans la déduire des seules puissances, altitudes ou états opérationnels ;
-6. faire évoluer la carte RX dédupliquée au fil des validations, puis l'intégrer aux assembleurs des prochaines versions seulement lorsque leurs plans mémoire seront ouverts ;
+1. exécuter le protocole `research/normandie-v0.4/r3-mortain-field-validation.json` pour valider réellement depuis **Mortain-Bocage** la réception utile de `F1ZBX` / R3 Brocéliande ;
+2. préparer l'allocation interne des **3 côtés paired RX prêts en recherche** de Normandie v0.4 (`145.0875`, `145.1000`, `431.2500 MHz`) sans encore leur attribuer de positions publiques ;
+3. revalider par source associative actuelle l'interconnexion éventuelle du cluster Côtes-d'Armor **432.650 MHz** ; la présence des cinq sites est désormais recoupée indépendamment mais l'interconnexion reste non prouvée ;
+4. trouver une source locale actuelle supplémentaire pour **F5ZHA Laval** afin de fermer définitivement le conflit 432.5750 / 431.4125, même si deux listes actuelles concordent déjà sur 432.5750 ;
+5. surveiller le retour en service de **F1ZOV** avant d'ajouter 431.975 MHz au delta actif ; suivre aussi les statuts **F5ZEB R71 / F5ZPV RU19 / F5ZZH R7X** sur les pages ARA35 ;
+6. vérifier la couverture utile de F1ZMU, F1ZBZ, F5ZHA et F5ZEB sans la déduire des seules puissances, altitudes ou états opérationnels ;
 7. identifier progressivement les **17 stations radio du CROSS Étel** et surtout le site actuel du canal 64 : la page ministérielle 2026 confirme le canal dans le Morbihan, mais cette validation régionale ne permet toujours pas d'identifier l'émetteur ;
 8. identifier par source primaire actuelle les autres sites du réseau de **10 stations VHF et 2 stations MF** du CROSS Corsen ;
 9. identifier le ou les émetteurs actuels du **canal 79** sans les déduire de la couverture du Raz ;

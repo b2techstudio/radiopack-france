@@ -3,11 +3,7 @@
   "status": "research_next_version_not_public",
   "created": "2026-08-09",
   "updated": "2026-08-10",
-  "pack": {
-    "name": "Normandie",
-    "slug": "normandie",
-    "target_version": "0.4"
-  },
+  "pack": {"name": "Normandie", "slug": "normandie", "target_version": "0.4"},
   "based_on_published_version": "0.3.1",
   "published_base_is_immutable": true,
   "paired_rx_policy": "research/paired-rx-policy.json",
@@ -36,9 +32,14 @@
     "promotion_gate_checker": "tools/check_normandie_v04_promotion_gates.py",
     "blocked_station_revalidation_file": "research/normandie-v0.4/blocked-station-revalidation.json",
     "external_evidence_matrix_file": "research/normandie-v0.4/external-evidence-matrix.json",
+    "source_consistency_contract_file": "research/normandie-v0.4/source-consistency-contract.json",
+    "source_consistency_checker": "tools/check_normandie_v04_source_consistency.py",
     "promotion_gate_report_builder": "tools/build_normandie_v04_gate_report.py",
     "evidence_report_builder": "tools/build_normandie_v04_evidence_report.py",
     "guarded_internal_promotion_plan_builder": "tools/build_normandie_v04_internal_promotion_plan.py",
+    "decision_dossier_builder": "tools/build_normandie_v04_decision_dossier.py",
+    "candidate_preview_builder": "tools/build_normandie_v04_candidate_preview.py",
+    "release_blocker_builder": "tools/build_normandie_v04_release_blockers.py",
     "r3_field_validation_file": "research/normandie-v0.4/r3-mortain-field-validation.json",
     "r3_validation_pack_file": "research/normandie-v0.4/r3-validation-pack.json",
     "r3_validation_pack_builder": "tools/build_normandie_v04_r3_validation_pack.py",
@@ -64,28 +65,20 @@
     "source_conflict_and_coverage_validation_required": 2,
     "operator_maintenance_revalidation_required": 1,
     "current_guarded_promotion_plan_eligible_addition_count": 0,
+    "current_release_blocker_count": 7,
     "memory_positions_assigned": false,
-    "new_blocks": [
-      {
-        "label": "paired RX internal candidate additions",
-        "locations": [175, 176, 177],
-        "status": "internal_provisional_only"
-      }
-    ]
+    "new_blocks": [{"label": "paired RX internal candidate additions", "locations": [175, 176, 177], "status": "internal_provisional_only"}]
   },
   "research_priorities": [
-    "générer le mini-pack RX-only R3/Mortain et enregistrer au moins deux sessions indépendantes identifiant réellement la sortie 145.675 MHz",
-    "utiliser l'enregistreur F5ZHA pour conserver les essais terrain sans édition JSON manuelle et sans jamais fermer le conflit de source par observation radio",
-    "utiliser external-evidence-matrix.json comme séparation explicite entre paramètres techniques, état opérateur, preuve terrain et conflit de source",
-    "utiliser les rapports readiness/evidence et le plan de promotion interne comme outils de décision uniquement ; aucune sortie générée ne modifie le candidat ni ne publie automatiquement une mémoire",
-    "conserver le candidat interne 142 mémoires comme base de test sans le confondre avec une prépublication",
-    "attendre le retour en service de F1ZOV avant de promouvoir son côté 431.975 MHz dans le delta",
-    "fermer le conflit de source F5ZHA par une source locale ou équivalente suffisamment autoritative avant toute promotion",
-    "maintenir F6ZES sans fréquence tant qu'une seconde source actuelle explicite n'est pas trouvée",
-    "ADRASEC 14-50 et infrastructures radioamateurs associées",
-    "relais proches de Sourdeval et Mortain-Bocage",
-    "relais utiles en 35, 53 et 61",
-    "réseaux de secours publics ou amateur uniquement lorsqu'ils sont publiquement documentés et compatibles RX"
+    "enregistrer au moins deux sessions RX indépendantes identifiant réellement R3 145.675 MHz depuis Mortain-Bocage",
+    "documenter F5ZHA par observations terrain sans jamais transformer ces observations en réconciliation de source",
+    "maintenir la cohérence automatique entre promotion-gates, revalidation externe et matrice de preuves",
+    "utiliser le dossier de décision, le preview candidat et le manifeste de blocages comme outils internes non destructifs",
+    "conserver le candidat interne 142 mémoires comme base de test tant qu'aucune porte n'est réellement franchie",
+    "attendre le retour en service de F1ZOV confirmé par F6KFW avant promotion du côté 431.975 MHz",
+    "fermer le conflit F5ZHA par une source locale ou équivalente suffisamment autoritative",
+    "maintenir F6ZES sans fréquence tant qu'une source actuelle explicite ne résout pas fréquence et mode",
+    "poursuivre les infrastructures publiques/amateur utiles autour de Mortain-Bocage sans modifier les packs publiés"
   ],
   "publication": {
     "public_export_allowed": false,

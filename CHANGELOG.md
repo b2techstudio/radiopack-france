@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.12 - 2026-08-10
+
+- Renforcement de la qualité des sources paired RX : un conflit secondaire ancien ne remplace plus une paire actuelle recoupée, mais déclenche explicitement une porte de réconciliation avant publication lorsqu'il n'est pas fermé par une seconde source actuelle.
+- `F1ZBL` Équeurdreville est confirmé en **145.250 / 431.250 MHz** par le REF actuel et le Radio Club Nord Cotentin ; la valeur secondaire RepeaterBook 431.225 MHz est rejetée comme conflit non concordant.
+- `F5ZHA` Laval reste en recherche sur **145.4675 / 432.575 MHz** selon le REF actuel, mais une ancienne fiche RepeaterBook indique 431.4125 MHz ; la paire reste donc `publication_blocked_by_source_conflict: true` jusqu'à recoupement local actuel supplémentaire.
+- Cluster Côtes-d'Armor **432.650 MHz** : une cartographie radioamateur actuelle indépendante corrobore la présence des cinq sites F5ZIS/F5ZIT/F5ZIU/F5ZIV/F5ZJR, sans prouver leur interconnexion ; `current_primary_linkage_verified` et `current_association_linkage_verified` restent à `false`.
+- Passage de `research/normandie-v0.4/paired-rx-refresh.json` et `research/bretagne-v0.1/analog-coverage-redundancy-review.json` au schéma 1.1 ; renforcement de `tests/test_analog_coverage_redundancy_review.py` pour figer les niveaux de confiance et les conflits de sources.
+- Les comptes paired RX restent inchangés à **12 fréquences uniques pour Normandie v0.4**, **10 pour Annecy–Alpes–Léman v0.3** et **29 pour Bretagne v0.1** ; F5ZHA est compté comme paire de recherche mais non publiable tant que le conflit n'est pas réconcilié.
+- Le canal 64 Morbihan, l'émetteur actuel du canal 79 Corsen et F6ZES Sourdeval restent non résolus ; aucune donnée n'est inventée pour fermer artificiellement ces dossiers.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.11 - 2026-08-10
 
 - Ajout de `research/bretagne-v0.1/analog-coverage-redundancy-review.json` pour qualifier la diversité géographique et la redondance des relais/transpondeurs analogiques sans transformer locators, altitudes, puissances ou gains d'antenne en preuve de couverture radio.

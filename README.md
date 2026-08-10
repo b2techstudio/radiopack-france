@@ -2,9 +2,7 @@
 
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 54
-
-Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
+## État actuel — Sprint 60 / 0.21.49
 
 Packs publics immuables :
 
@@ -13,7 +11,7 @@ Packs publics immuables :
 
 Recherche : **Normandie v0.4** à **142 mémoires** internes, plafond de travail connu **147 mémoires**, **Bretagne v0.1** non publique et Annecy–Alpes–Léman v0.3 non publique.
 
-Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md` et `research/project-resume-state.json`.
+Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json` et `research/sprint-55-60-summary.md`.
 
 ## Règles permanentes
 
@@ -21,11 +19,12 @@ Le générateur public ne propose que les versions publiées. Point de reprise :
 - Pas de remplissage artificiel ; maximum 200 mémoires.
 - Versions publiées immuables.
 - Géométrie, altitude, puissance ou rayon annoncé ne valent pas preuve de réception.
-- Une recherche infructueuse n'est pas une preuve d'arrêt.
-- Une source périmée bloque une revue mais n'est jamais une preuve d'arrêt ou d'absence.
+- Une recherche infructueuse n'est pas une preuve d'arrêt ou d'absence.
+- Une source périmée bloque une revue mais n'est jamais une preuve négative.
 - Une fréquence non résolue n'est jamais devinée.
 - Le statut opérateur local prime sur un annuaire général pour l'état opérationnel courant.
 - Une observation terrain ne ferme jamais un conflit de source.
+- Une source secondaire actuelle peut orienter une recherche mais ne remplace pas une validation primaire lorsqu'elle est exigée.
 - `research/paired-rx-policy.json` impose les deux côtés RX lorsqu'une liaison duplex/split distincte est vérifiée.
 - Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint.
 
@@ -33,7 +32,7 @@ Le générateur public ne propose que les versions publiées. Point de reprise :
 
 Le périmètre suit la couverture radio utile dans les départements 50, 35, 53 et 61. Stations suivies : **F5ZHY**, **F6ZES**, **F6ZCE**, **F1ZBX**, **F5ZHA**, **F1ZOV**.
 
-Fichiers de vérité :
+Fichiers de vérité principaux :
 
 ```text
 research/normandie-v0.4/mortain-bocage-coverage.json
@@ -46,6 +45,7 @@ research/normandie-v0.4/source-consistency-contract.json
 research/normandie-v0.4/source-freshness-policy.json
 research/normandie-v0.4/r3-mortain-field-validation.json
 research/normandie-v0.4/f5zha-mortain-validation.json
+research/normandie-v0.4/f6zes-revalidation.json
 ```
 
 Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 431.2500 MHz aux 139 mémoires figées de v0.3.1.
@@ -55,7 +55,7 @@ Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 
 - F1ZBX / R3 : 145.075 / 145.675 MHz, validation réelle depuis Mortain requise.
 - F5ZHA : 145.4675 / 432.575 MHz, conflit source + couverture utile à fermer.
 - F1ZOV : 431.975 MHz, opérateur local toujours en maintenance même si le REF général le liste actif.
-- F6ZES Sourdeval : site connu mais fréquence/mode non résolus ; `sourdeval_must_not_be_guessed: true`.
+- F6ZES Sourdeval : le REF courant confirme site/responsable/locator/altitude mais ne renseigne toujours ni fréquence, ni bande, ni mode, ni état. Delta candidat **0** et `sourdeval_must_not_be_guessed: true`.
 
 ### Terrain R3 et F5ZHA
 
@@ -68,7 +68,7 @@ python tools\record_normandie_v04_f5zha_observation.py --help
 
 Le protocole `research/normandie-v0.4/f5zha-mortain-validation.json` conserve la valeur historique 431.4125 MHz uniquement comme sonde diagnostique. Une observation terrain ne peut jamais fermer le conflit de source.
 
-### Readiness, décision et prépublication — Sprints 40 à 54
+### Readiness, revue et handoff — Sprints 40 à 59
 
 ```powershell
 python tools\build_normandie_v04_readiness_report.py
@@ -83,15 +83,32 @@ python tools\build_normandie_v04_candidate_diff.py
 python tools\build_normandie_v04_release_blockers.py
 python tools\build_normandie_v04_review_checklist.py
 python tools\run_normandie_v04_prepublication_audit.py
+python tools\build_normandie_v04_review_snapshot.py
+python tools\build_normandie_v04_review_manifest.py
+python tools\check_normandie_v04_review_drift.py --baseline <manifest.json> --require-clean
+python tools\run_normandie_v04_publication_dry_run.py --baseline <manifest.json>
 ```
 
-Le contrôle de cohérence protège les sources de vérité. La politique de fraîcheur empêche une décision de s'appuyer silencieusement sur un état ancien. Le dossier de décision et le preview restent non destructifs. Le diff vérifie l'empilement exact **139 → 142 → preview**. La checklist actuelle est à **2/9** et le manifeste compte **7 blocages actifs**.
+Le snapshot capture un état de revue déterministe. Le manifeste surveille onze entrées par SHA-256, y compris le CSV public Normandie v0.3.1 et `packRegistry.ts`. Toute dérive impose une nouvelle revue. Le dry-run ne modifie ni CSV public ni registre.
 
-Au Sprint 54 : **0 ajout éligible**, preview courant **142 mémoires**, audit prépublication **integrity_ok=true** mais **release_ready=false**. L'intégrité technique du pipeline n'est jamais une autorisation de publication.
+État courant vérifié : **3/9 points de revue**, **6 blocages ouverts**, **0 ajout éligible**, candidat/preview **142/142**, release toujours non prête.
 
 ## Bretagne v0.1
 
-Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`. Les recherches conservent les contextes CROSS Corsen / Étel, Baie du Mont-Saint-Michel, Pointe de Penmarc'h, Pointe du Raz, CROSS Nouvelle génération, Penmarc'h, Groix, Belle-Ile, Étel et les fréquences 156.800 MHz, 161.575 MHz, 161.625 MHz, 160.775 MHz, 160.825 MHz. Les relais F5ZZH, F5ZIS, F5ZIT, F1ZBZ et F5ZPE restent documentés sans publication.
+Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`. Les recherches conservent les contextes CROSS Corsen / Étel, Baie du Mont-Saint-Michel, Pointe de Penmarc'h, Pointe du Raz, CROSS Nouvelle génération, Penmarc'h, Groix, Belle-Ile, Étel et les fréquences 156.800 MHz, 161.575 MHz, 161.625 MHz, 160.775 MHz et 160.825 MHz.
+
+### CROSS Corsen — canal 79
+
+`research/bretagne-v0.1/corsen-channel79-evidence.json` formalise la reprise du Sprint 60.
+
+- La paire RX **156.975 / 161.575 MHz** était déjà connue et ne crée aucun nouveau delta RF.
+- Le contexte primaire actuel confirme le réseau radio Corsen sans identifier le site Ch79.
+- Une source locale actuelle du Club de Voile de la Baie d'Erquy associe Ch79 à **Cap Fréhel** et **Bodic** ; elle est conservée comme indice secondaire local actuel uniquement.
+- Cap Fréhel et Bodic deviennent des priorités de revalidation primaire, sans attribution de site ni publication.
+
+### CROSS Étel — canal 64
+
+Le ministère confirme encore les canaux 63/64 dans le Morbihan, mais le site breton actuel du canal 64 reste non identifié. Ne pas l'attribuer par déduction à Étel, Groix, Belle-Ile, Penmarc'h ou un autre site.
 
 ## Historique et architecture
 
@@ -101,6 +118,7 @@ Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`. Les rec
 - [research/sprint-40-44-summary.md](research/sprint-40-44-summary.md)
 - [research/sprint-45-49-summary.md](research/sprint-45-49-summary.md)
 - [research/sprint-50-54-summary.md](research/sprint-50-54-summary.md)
+- [research/sprint-55-60-summary.md](research/sprint-55-60-summary.md)
 
 Architecture publique : `website/src/lib/chirpPack.ts`, `website/src/lib/annecyPack.ts`, `website/src/lib/packRegistry.ts`.
 
@@ -113,6 +131,8 @@ python tests\test_normandie_v04_readiness.py
 python tests\test_normandie_v04_evidence_pipeline.py
 python tests\test_normandie_v04_decision_pipeline.py
 python tests\test_normandie_v04_prepublication_audit.py
+python tests\test_normandie_v04_review_handoff.py
+python tests\test_sprint60_revalidation.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
@@ -126,14 +146,12 @@ cd "C:\Users\cross\Documents\CODE\PROJETS\RadioPack-France"
 
 git pull --ff-only
 
+python tools\run_normandie_v04_checks.py --extended
+python tests\test_sprint60_revalidation.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
-python tests\test_normandie_v04_readiness.py
-python tests\test_normandie_v04_evidence_pipeline.py
-python tests\test_normandie_v04_decision_pipeline.py
-python tests\test_normandie_v04_prepublication_audit.py
 
 git status
 ```

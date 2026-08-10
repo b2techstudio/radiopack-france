@@ -13,7 +13,7 @@
 
 ## 0.21.11 - 2026-08-10
 
-- Ajout de `research/bretagne-v0.1/analog-coverage-redundancy-review.json` pour qualifier la diversité géographique et la redondance des relais/transpondeurs analogiques sans transformer locators, altitudes, puissances ou gains d'antenne en preuve de couverture radio.
+- Ajout de `research/bretagne-v0.1/analog-coverage-redundancy-review.json` pour qualifier la diversité géographique et la redondance des relais/transpondeurs analogiques sans transformer locators, altitudes, puissances ou gains en preuve de couverture radio.
 - Cluster Côtes-d'Armor 432.650 MHz : cinq sites REF actuels restent actifs sur la même fréquence avec F6HRP et CTCSS 71.9 Hz ; les centres des locators Matignon / Perros-Guirec sont distants d'environ 90,6 km, ce qui justifie une priorité élevée d'efficacité mémoire mais ne prouve aucune portée radio.
 - Conservation d'une ancienne mention RepeaterBook reliant F5ZIT à F5ZIV/F5ZIU/F5ZIS/F5ZJR comme indice historique secondaire uniquement ; l'interconnexion actuelle du cluster reste `current_primary_linkage_verified: false` faute de source primaire/associative actuelle explicite.
 - Revue Morbihan : F1ZMU reste un candidat distinct avec sa paire 439.725/430.325 MHz malgré sa proximité géométrique avec F5ZPE ; F1ZBZ ajoute trois fréquences RF nouvelles après déduplication avec F5ZPE et reste soumis à une revue de couverture locale.

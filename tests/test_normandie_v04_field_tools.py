@@ -80,7 +80,7 @@ assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
 assert "6 blocages ouverts" in status_text
 assert "3/9 points complétés" in status_text
-assert "release_ready=false" in status_text
+assert "non prêt pour publication" in status_text
 assert "Cap Fréhel" in status_text
 assert "Bodic" in status_text
 assert "delta candidat **0**" in status_text

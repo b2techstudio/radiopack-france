@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.16 - 2026-08-10
+
+- Ajout de `research/normandie-v0.4/candidate-memory-delta.json` pour comparer explicitement les **12 fréquences paired RX de recherche** avec les **139 mémoires figées de Normandie v0.3.1**, sans créer de CSV ni attribuer de positions mémoire.
+- Quatre fréquences paired RX sont déjà présentes dans la base publiée (`145.6875`, `145.7000`, `145.2500`, `430.3750 MHz`) ; le delta maximal actuellement étudié est donc de **8 nouvelles fréquences RX**.
+- Classification du delta : **3 ajouts prêts au niveau recherche** (`145.0875`, `145.1000`, `431.2500 MHz`), **2 fréquences R3 Brocéliande** soumises à validation RX depuis Mortain, **2 fréquences F5ZHA** bloquées par conflit de source/couverture et **1 fréquence F1ZOV** bloquée par le statut maintenance de l'exploitant local.
+- Ajout de `research/normandie-v0.4/r3-mortain-field-validation.json` comme protocole RX-only : aucune transmission, réception répétable requise, un simple porteuse faible ne suffit pas et la géométrie 119,3 km / 150 km n'est jamais une preuve de couverture.
+- Réconciliation F1ZOV : la paire **430.375 / 431.975 MHz** est recoupée, mais le Radio Club Nord Cotentin indique actuellement le relais en maintenance ; la mémoire 430.375 MHz de v0.3.1 reste immuable et le nouveau côté 431.975 MHz reste bloqué jusqu'au retour en service vérifié.
+- Ajout de `tests/test_normandie_v04_candidate_delta.py`, intégration à la CI et mise à niveau des garde-fous `test_site_files.py` / `test_analog_coverage_redundancy_review.py` sans affaiblir les contrôles existants.
+- Le plan mémoire v0.4 devient un **delta candidat défini mais non public** ; le nombre final de mémoires reste volontairement `null` et aucune position n'est attribuée.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.15 - 2026-08-10
 
 - Qualification géométrique de `F1ZBX` / R3 Brocéliande depuis Mortain : distance directe d'environ **119,3 km** à partir des coordonnées opérateur ARA35 et du référentiel géographique de Mortain.

@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "status": "current_ref_pair_refresh_research_not_public",
+  "updated": "2026-08-10",
+  "source": {
+    "authority": "Réseau des Émetteurs Français (REF)",
+    "url": "https://www.r-e-f.org/",
+    "status": "current_directory_rechecked_2026_08_10"
+  },
+  "resolved_pairs": [
+    {
+      "id": "F1ZBL",
+      "site": "Équeurdreville-Hainneville",
+      "department": 50,
+      "locator": "IN99EP14CA",
+      "altitude_m": 58,
+      "kind": "amateur_analog_crossband_transponder",
+      "side_a_rx_mhz": 145.2500,
+      "side_b_rx_mhz": 431.2500,
+      "mode": "FM",
+      "status": "current_ref_active_explicit_bidirectional_rows",
+      "selection_status": "low_priority_for_mortain_but_pair_resolved",
+      "frequency_promoted_to_public_pack": false,
+      "note": "Le REF actuel publie les deux lignes du transpondeur : émission 145.250 / réception 431.250 et émission 431.250 / réception 145.250. La directionnalité n'est plus un blocage."
+    },
+    {
+      "id": "F5ZHA",
+      "site": "Laval",
+      "department": 53,
+      "locator": "IN98OB86BQ",
+      "altitude_m": 55,
+      "kind": "amateur_analog_crossband_transponder",
+      "side_a_rx_mhz": 145.4675,
+      "side_b_rx_mhz": 432.5750,
+      "mode": "FM",
+      "status": "current_ref_active_explicit_pair",
+      "selection_status": "coverage_to_verify_for_mortain",
+      "frequency_promoted_to_public_pack": false,
+      "note": "La paire est suffisamment explicite pour le plan paired RX, mais sa pertinence réelle depuis Mortain-Bocage reste à vérifier avant sélection publique."
+    }
+  ],
+  "still_unresolved": [
+    {
+      "id": "F6ZES",
+      "site": "Sourdeval",
+      "reason": "Le REF courant confirme site, responsable, locator et altitude mais ne publie toujours ni fréquence ni mode exploitable."
+    }
+  ],
+  "rules": {
+    "paired_rx_requires_both_verified_frequencies": true,
+    "coverage_still_required_before_public_selection": true,
+    "published_normandie_v0_3_1_immutable": true,
+    "tx_disabled_in_future_export": true,
+    "public_export_allowed": false
+  }
+}

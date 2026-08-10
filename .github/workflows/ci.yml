@@ -52,6 +52,9 @@ jobs:
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 
+      - name: Test Bretagne REF analog expansion
+        run: python tests/test_bretagne_ref_analog_expansion.py
+
       - name: Test Bretagne research scaffold
         run: python tests/test_bretagne_research_scaffold.py
 

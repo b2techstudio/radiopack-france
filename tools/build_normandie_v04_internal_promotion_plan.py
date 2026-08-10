@@ -55,7 +55,8 @@ def build_plan(root: Path) -> dict[str, Any]:
     }
 
     current_count = int(internal_map["candidate"]["memory_count"])
-    next_location = max(int(item["location"]) for item in internal_map["candidate"]["new_memories"]) + 1
+    existing_additions = internal_map.get("additions", [])
+    next_location = max((int(item["location"]) for item in existing_additions), default=-1) + 1
     additions: list[dict[str, Any]] = []
     for gate_id in ("R3_MORTAIN_RX", "F5ZHA_SOURCE_AND_COVERAGE", "F1ZOV_OPERATIONAL_STATUS"):
         if not gate_passed[gate_id]:

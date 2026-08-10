@@ -24,7 +24,7 @@ def load_module(name: str, path: Path):
 
 
 f5zha = json.loads(F5ZHA_PLAN.read_text(encoding="utf-8"))
-assert f5zha["schema_version"] == "1.0"
+assert f5zha["schema_version"] == "1.1"
 assert f5zha["status"] == "diagnostic_validation_pack_not_public"
 assert f5zha["station"]["locator"] == "IN98OB86BQ"
 assert f5zha["station"]["straight_line_distance_to_mortain_km"] == 65.6
@@ -33,6 +33,8 @@ assert f5zha["current_authoritative_pair"]["side_a_mhz"] == 145.4675
 assert f5zha["current_authoritative_pair"]["side_b_mhz"] == 432.575
 assert f5zha["historical_conflict"]["conflicting_frequency_mhz"] == 431.4125
 assert f5zha["historical_conflict"]["diagnostic_only"] is True
+assert f5zha["validation"]["promotion_requires_both_useful_coverage_and_authoritative_source_reconciliation"] is True
+assert f5zha["observations"] == []
 assert f5zha["rules"]["tx_disabled"] is True
 assert f5zha["rules"]["public_export_allowed"] is False
 assert f5zha["rules"]["source_conflict_remains_open_until_authoritative_reconciliation"] is True

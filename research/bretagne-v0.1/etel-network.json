@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "status": "current_network_size_verified_site_inventory_pending",
+  "schema_version": "1.1",
+  "status": "current_network_dimensions_verified_channel64_primary_conflict_documented",
   "updated": "2026-08-10",
   "pack": {
     "name": "Bretagne",
@@ -8,12 +8,15 @@
   },
   "cross": "CROSS Etel",
   "official_srr_extent": "Pointe de Penmarc'h (Finistère) à la frontière espagnole",
+  "channel64_evidence_file": "research/bretagne-v0.1/etel-channel64-evidence.json",
   "current_radio_network": {
-    "station_count": 17,
+    "maintenance_station_count_2026": 17,
+    "annual_report_2025_vhf_station_count": 16,
+    "annual_report_2025_mf_station_count": 2,
     "maintenance_extent": "Pointe de Penmarc'h aux Pyrénées-Atlantiques (Biarritz)",
     "maintained_by": "service technique du CROSS Etel",
-    "status": "primary_current_2026_network_size_verified_station_names_pending",
-    "note": "Une offre officielle DIRM NAMO publiée en juillet 2026 indique que le service technique du CROSS Etel assure la maintenance des installations du centre et de ses 17 stations radio réparties sur le littoral, de la pointe de Penmarc'h à Biarritz. Cette source donne le nombre de stations et l'étendue générale, pas leur liste nominative ni leurs canaux."
+    "status": "primary_current_network_dimensions_verified_counting_units_not_reconciled",
+    "note": "L'offre officielle DIRM NAMO de juillet 2026 indique la maintenance des installations du centre et de ses 17 stations radio. Le bilan d'activité 2025, publié en mars 2026, décrit séparément 16 stations radioélectriques VHF et 2 stations MF. Les unités de comptage ne sont pas définies de façon identique et ne doivent pas être réconciliées par simple addition ou soustraction."
   },
   "primary_sources": [
     {
@@ -23,10 +26,22 @@
       "status": "primary_current_17_radio_stations_penmarch_to_biarritz"
     },
     {
+      "authority": "DIRM NAMO / CROSS-A Etel",
+      "title": "Bilan d'activité 2025 du CROSS-A Étel",
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/IMG/pdf/cross-a_etel-bilan_d_activite_2025_final_cle71cd33.pdf",
+      "status": "primary_current_16_vhf_2_mf_and_weather_emitter_inventory"
+    },
+    {
       "authority": "DIRM NAMO",
       "title": "Le CROSS Étel",
-      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-etel-a152.html",
-      "status": "primary_current_srr_and_weather_emitters_context"
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-c-r-o-s-s-etel-a152.html",
+      "status": "primary_current_srr_and_channel63_weather_context"
+    },
+    {
+      "authority": "DIRM NAMO / CROSS Etel",
+      "title": "Heures de diffusion des bulletins météo par le CROSS Etel",
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/IMG/pdf/Heures_de_diffusion_des_bulletins_meteo_par_le_CROSS_Etel-_cle537cc8.pdf",
+      "status": "primary_current_linked_weather_schedule_no_channel64_site"
     },
     {
       "authority": "Ministère chargé de la mer",
@@ -67,16 +82,23 @@
     "ministry_page_updated": "2026-06-19",
     "ministry_statement_rechecked": "2026-08-10",
     "current_cross_etel_html_names_etel_continuous_channel_63": true,
+    "current_cross_etel_schedule_mentions_channel64": false,
+    "annual_report_2025_mentions_channel64": false,
+    "annual_report_2025_names_etel_as_reinforced_channel63_emitter": true,
     "current_cross_etel_html_names_brittany_channel_64_site": false,
     "local_primary_site_identified": false,
     "candidate_station_name": null,
-    "status": "current_ministry_ch63_ch64_morbihan_reconfirmed_local_cross_html_ch64_site_still_unidentified",
-    "note": "La page ministérielle actuelle, mise à jour le 19 juin 2026, confirme toujours les canaux 63 et 64 pour le bulletin côtier permanent notamment dans le Morbihan. La page HTML actuelle du CROSS Étel identifie explicitement Étel sur le canal 63 en diffusion continue mais ne nomme aucun site breton sur le canal 64. Le dimensionnement à 17 stations confirme un réseau technique plus large sans permettre d'attribuer le canal 64 à Étel, Groix, Belle-Ile, Penmarc'h ou à un autre site."
+    "primary_source_conflict_open": true,
+    "status": "primary_current_ministry_regional_ch64_statement_conflicts_with_local_cross_documents_omitting_ch64_site_unresolved",
+    "note": "La page ministérielle actuelle conserve l'affirmation 63/64 pour le Morbihan. En revanche la page CROSS Étel actuelle, le planning météo qu'elle lie et le bilan d'activité 2025 décrivent les émetteurs météo en nommant Étel sur le canal 63 sans mentionner le canal 64. Cette absence ne prouve pas l'arrêt du canal 64, mais crée une divergence primaire actuelle qui doit être réconciliée avant toute attribution de site."
   },
   "rules": {
     "station_count_does_not_imply_station_names": true,
+    "network_counting_units_must_not_be_reconciled_without_definition": true,
     "known_weather_sites_are_not_complete_network_inventory": true,
     "network_extent_does_not_imply_channel_assignment": true,
+    "absence_from_current_local_documents_is_not_negative_operational_evidence": true,
+    "primary_source_conflict_requires_reconciliation": true,
     "ministry_regional_channel_statement_does_not_identify_transmitter_site": true,
     "channel_64_site_must_not_be_guessed": true,
     "paired_rx_policy_applies_after_channel_validation": true,

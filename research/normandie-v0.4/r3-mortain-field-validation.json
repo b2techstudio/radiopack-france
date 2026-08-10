@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "status": "field_validation_protocol_not_yet_observed",
+  "updated": "2026-08-10",
+  "purpose": "Définir un protocole RX-only reproductible pour vérifier l'utilité réelle de F1ZBX / R3 Brocéliande depuis Mortain-Bocage avant toute promotion dans Normandie v0.4.",
+  "station": {
+    "id": "F1ZBX",
+    "name": "R3 Brocéliande",
+    "site": "Paimpont / Beauvais",
+    "operator": "ARA35",
+    "input_rx_mhz": 145.0750,
+    "output_rx_mhz": 145.6750,
+    "ctcss_context_hz": 71.9,
+    "operator_usage_radius_km": 150,
+    "mortain_straight_line_distance_km": 119.3,
+    "geometric_margin_inside_operator_radius_km": 30.7,
+    "geometry_is_reception_proof": false
+  },
+  "rx_only_contract": {
+    "transmission_forbidden": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "output_frequency_is_primary_coverage_probe": true,
+    "input_frequency_is_opportunistic_listening_only": true,
+    "input_frequency_does_not_need_to_be_heard_from_mortain_to_keep_paired_rx_policy": true
+  },
+  "protocol": {
+    "minimum_sessions": 2,
+    "sessions_should_be_independent": true,
+    "preferred_contexts": [
+      "Mortain-Bocage representative urban or village location",
+      "open or elevated local location when legally and safely accessible",
+      "different time or day from the first session"
+    ],
+    "required_log_fields": [
+      "date_local",
+      "time_local",
+      "location_description",
+      "receiver_model",
+      "antenna_description",
+      "frequency_mhz",
+      "signal_detected",
+      "identification_confidence",
+      "intelligibility_0_to_5",
+      "signal_strength_observation",
+      "notes"
+    ],
+    "reference_control": {
+      "frequency_mhz": 145.6875,
+      "station": "F5ZHY",
+      "purpose": "optional local receiver/antenna sanity check only; hearing or not hearing F5ZHY does not determine R3 validity"
+    }
+  },
+  "acceptance_gate": {
+    "current_state": "not_tested",
+    "actual_reception_from_mortain_verified": false,
+    "repeatable_reception_required": true,
+    "suggested_minimum_evidence": "R3 output 145.675 MHz identified with intelligible traffic or unmistakable repeater identification in at least two independent RX-only sessions, or equivalent documented local reception evidence from a reliable current source.",
+    "single_weak_carrier_is_sufficient": false,
+    "geometric_inclusion_is_sufficient": false,
+    "operator_usage_radius_is_sufficient": false,
+    "promotion_to_public_pack_allowed": false
+  },
+  "observations": [],
+  "rules": {
+    "no_tx_test_required_or_allowed": true,
+    "do_not_use_ctcss_as_rx_filter_by_default": true,
+    "paired_rx_keeps_both_verified_sides_if_station_is_selected": true,
+    "field_observation_must_not_mutate_published_v0_3_1": true,
+    "public_export_allowed": false
+  }
+}

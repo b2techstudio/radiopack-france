@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 plan = json.loads((ROOT / "research/paired-rx-deduplicated-memory-plan.json").read_text(encoding="utf-8"))
-assert plan["schema_version"] == "1.1"
+assert plan["schema_version"] == "1.2"
 assert plan["status"] == "research_deduplicated_memory_plan_not_public"
 assert plan["source_plan"] == "research/paired-rx-next-version-plan.json"
 assert plan["policy"] == "research/paired-rx-policy.json"
@@ -17,7 +17,7 @@ assert plan["export_contract"]["public_pack_mutation_allowed"] is False
 
 regions = {region["id"]: region for region in plan["regions"]}
 assert set(regions) == {"normandie-v0.4", "annecy-alpes-leman-v0.3", "bretagne-v0.1"}
-assert regions["normandie-v0.4"]["unique_frequency_count"] == 8
+assert regions["normandie-v0.4"]["unique_frequency_count"] == 12
 assert regions["annecy-alpes-leman-v0.3"]["unique_frequency_count"] == 10
 assert regions["bretagne-v0.1"]["unique_frequency_count"] == 29
 
@@ -32,12 +32,25 @@ for region in regions.values():
         assert item["selection_status"]
 
 normandie = {item["name_hint"]: item for item in regions["normandie-v0.4"]["memories"]}
-assert normandie["ZHY-IN"]["frequency_mhz"] == 145.0875
-assert normandie["ZHY-OUT"]["frequency_mhz"] == 145.6875
-assert normandie["ZCE-IN"]["frequency_mhz"] == 145.1000
-assert normandie["ZCE-OUT"]["frequency_mhz"] == 145.7000
-assert normandie["ZBX-IN"]["frequency_mhz"] == 145.0750
-assert normandie["ZBX-OUT"]["frequency_mhz"] == 145.6750
+for name, frequency in {
+    "ZHY-IN": 145.0875,
+    "ZHY-OUT": 145.6875,
+    "ZCE-IN": 145.1000,
+    "ZCE-OUT": 145.7000,
+    "ZBX-IN": 145.0750,
+    "ZBX-OUT": 145.6750,
+    "ZHA-A": 145.4675,
+    "ZHA-B": 432.5750,
+    "ZBL-A": 145.2500,
+    "ZBL-B": 431.2500,
+    "ZOV-A": 430.3750,
+    "ZOV-B": 431.9750,
+}.items():
+    assert normandie[name]["frequency_mhz"] == frequency
+excluded_normandie = "\n".join(regions["normandie-v0.4"]["excluded_or_unresolved"])
+assert "F6ZES" in excluded_normandie
+assert "F1ZBL" not in excluded_normandie
+assert "F5ZHA" not in excluded_normandie
 
 annecy = {item["name_hint"]: item for item in regions["annecy-alpes-leman-v0.3"]["memories"]}
 assert annecy["SAT-UP850"]["frequency_mhz"] == 145.8500
@@ -105,4 +118,4 @@ assert 'id: "bretagne"' not in registry
 assert 'version: "v0.4"' not in registry
 assert 'version: "v0.3"' not in registry
 
-print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 8, Annecy 10, Bretagne 29 unique RX frequencies, REF expansion deduplicated, TX-off contract and no public mutation OK")
+print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 12, Annecy 10, Bretagne 29 unique RX frequencies, REF expansion and resolved Normandie pairs deduplicated, TX-off contract and no public mutation OK")

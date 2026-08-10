@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.14 - 2026-08-10
+
+- Ajout de `research/bretagne-v0.1/rennes-broceliande-linked-system.json` pour modéliser le système analogique actuellement lié **R3 Brocéliande / R71 Rennes** à partir des pages de l'exploitant ARA35.
+- La chaîne liée est représentée par quatre fréquences RX distinctes déjà présentes dans le plan Bretagne : **431.075, 145.075, 145.675 et 438.675 MHz** ; aucun doublon ni mémoire RF supplémentaire n'est créé.
+- Le R3 `F1ZBX` conserve sa paire 145.075/145.675 MHz et gagne un contexte de couverture opérateur : rayon d'usage annoncé de **150 km** et liaison R71 documentée à **46,51 km** ; ces valeurs renforcent la priorité de vérification depuis Mortain sans constituer une garantie de réception.
+- Passage de `paired-rx-next-version-plan.json` et `paired-rx-deduplicated-memory-plan.json` au schéma 1.3 afin d'enrichir les rôles R3/R71 tout en conservant les comptes **Normandie 12 / Annecy 10 / Bretagne 29**.
+- Renforcement de `tests/test_paired_rx_memory_plan.py` : contrôle des quatre rôles RF du système lié, de l'absence de nouvelle mémoire Bretagne et du contrat `Duplex=off` / `Offset=0.000000` / TX désactivé.
+- `F6ZES` Sourdeval, le site actuel du canal 64 Morbihan et l'émetteur actuel du canal 79 Corsen restent non résolus ; aucune valeur n'est inventée.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.13 - 2026-08-10
 
 - Ajout d'une règle explicite de hiérarchie pour les statuts opérationnels des relais : lorsqu'une association exploitante actuelle et un annuaire général divergent, l'état de l'exploitant local est retenu pour la recherche courante et le conflit reste enregistré.

@@ -62,6 +62,51 @@ Le test dédié reconstruit le candidat dans un dossier temporaire et vérifie n
 python tests\test_normandie_v04_internal_candidate.py
 ```
 
+### Portes de promotion — 5 fréquences encore exclues
+
+Les blocages restants sont désormais centralisés dans :
+
+```text
+research/normandie-v0.4/promotion-gates.json
+```
+
+Ils couvrent exactement **5 fréquences** hors candidat interne :
+
+- R3 / F1ZBX : `145.075` et `145.675 MHz` — preuve RX réelle depuis Mortain requise ;
+- F5ZHA Laval : `145.4675` et `432.575 MHz` — conflit de source et pertinence/couverture à fermer ;
+- F1ZOV : `431.975 MHz` — retour en service à confirmer chez l'exploitant local.
+
+Leur état peut être relu sans modifier les données avec :
+
+```powershell
+python tools\check_normandie_v04_promotion_gates.py
+```
+
+Une recherche web infructueuse n'est jamais traitée comme une preuve d'arrêt ou d'absence : seule une source affirmative ou une observation locale conforme peut faire évoluer une porte.
+
+### Mini-pack RX R3 / Mortain
+
+La validation R3 dispose maintenant d'un mini-pack CHIRP autonome :
+
+```text
+research/normandie-v0.4/r3-validation-pack.json
+tools/build_normandie_v04_r3_validation_pack.py
+```
+
+Il contient seulement trois mémoires RX :
+
+- `R3-OUT` — `145.675 MHz` — sonde principale de couverture ;
+- `R3-IN` — `145.075 MHz` — écoute opportuniste de l'entrée ;
+- `CTRL-ZHY` — `145.6875 MHz` — contrôle facultatif du récepteur/antenne.
+
+Toutes utilisent `Duplex=off`, `Offset=0.000000`, aucune tonalité RX filtrante et aucun TX. Génération locale :
+
+```powershell
+python tools\build_normandie_v04_r3_validation_pack.py
+```
+
+Le checker R3 ne considère la porte franchie qu'après **au moins deux sessions indépendantes** sur `145.675 MHz` avec signal identifié et intelligible. Les observations restent enregistrées dans `r3-mortain-field-validation.json` et n'ajoutent jamais automatiquement une fréquence au pack public.
+
 ### Prêtes au niveau recherche
 
 - `145.0875` — F5ZHY entrée, paire actuelle explicitement publiée par l'ARA50 ;

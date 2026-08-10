@@ -157,6 +157,30 @@ jobs:
       - name: Test built public pack catalog
         run: cd .. && python tests/test_built_public_pack_catalog.py
 
+  reference-archive:
+    name: Build opt-in reference archive
+    needs:
+      - data
+      - website
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[reference-archive]') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Create exact source archive
+        shell: bash
+        run: git archive --format=zip --output="RadioPack-France-${GITHUB_SHA}.zip" HEAD
+
+      - name: Upload reference archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: radiopack-reference-${{ github.sha }}
+          path: RadioPack-France-${{ github.sha }}.zip
+          if-no-files-found: error
+          retention-days: 30
+
   report-status:
     name: Publish combined CI status
     needs:

@@ -1,13 +1,19 @@
 {
-  "schema_version": "1.0",
-  "status": "research_geometry_and_redundancy_review_not_public",
+  "schema_version": "1.1",
+  "status": "research_geometry_redundancy_and_topology_review_not_public",
   "updated": "2026-08-10",
-  "purpose": "Qualifier la valeur mémoire et la diversité géographique des relais/transpondeurs analogiques Bretagne déjà vérifiés, sans transformer les locators, altitudes, puissances ou gains en preuve de couverture radio réelle.",
+  "purpose": "Qualifier la valeur mémoire, la diversité géographique et le niveau de preuve topologique des relais/transpondeurs analogiques Bretagne déjà vérifiés, sans transformer les locators, altitudes, puissances ou gains en preuve de couverture radio réelle.",
   "sources": [
     {
       "authority": "Réseau des Émetteurs Français (REF)",
       "url": "https://www.r-e-f.org/",
       "status": "current_primary_directory_for_active_status_frequencies_locators_and_technical_metadata"
+    },
+    {
+      "authority": "Ham_Map F5AIB",
+      "url": "https://f5aib.net/carto/Localiser.php",
+      "status": "current_secondary_independent_site_presence_corroboration",
+      "note": "La cartographie actuelle retrouve séparément F5ZIS, F5ZIT, F5ZIU, F5ZIV et F5ZJR sur leurs sites respectifs. Elle confirme la présence des cinq sites mais ne documente pas une interconnexion."
     },
     {
       "authority": "RepeaterBook",
@@ -20,6 +26,7 @@
     "geometry": "Distances géodésiques approximatives calculées entre les centres des locators Maidenhead 10 caractères publiés par le REF.",
     "distance_is_coverage": false,
     "altitude_power_gain_are_coverage": false,
+    "independent_site_directory_is_linkage_proof": false,
     "priority_basis": "efficacité mémoire RF, diversité géographique, statut actif actuel et degré de redondance fréquentielle uniquement"
   },
   "cluster_432_650": {
@@ -28,12 +35,15 @@
     "current_common_responsible": "F6HRP",
     "current_common_ctcss_hz": 71.9,
     "current_primary_shared_frequency_verified": true,
+    "current_independent_site_set_corroborated": true,
     "current_primary_linkage_verified": false,
+    "current_association_linkage_verified": false,
     "historical_secondary_linkage_documented": true,
+    "topology_status": "five_current_sites_and_shared_rf_confirmed_current_interconnection_still_unverified",
     "locator_span_max_km": 90.6,
     "max_span_sites": ["F5ZIS Matignon", "F5ZIT Perros-Guirec"],
     "selection_priority": "high_memory_efficiency_research_candidate",
-    "selection_reason": "Une seule mémoire RX 432.650 MHz représente cinq transpondeurs actifs répartis sur plusieurs ancrages côtiers et intérieurs ; conserver une seule fréquence RF avec cinq rôles.",
+    "selection_reason": "Une seule mémoire RX 432.650 MHz représente cinq transpondeurs actifs répartis sur plusieurs ancrages côtiers et intérieurs ; conserver une seule fréquence RF avec cinq rôles. Cette efficacité mémoire ne dépend pas de l'existence d'une interconnexion entre sites.",
     "sites": [
       {
         "id": "F5ZIS",
@@ -100,7 +110,7 @@
       "distance_to_f5zpe_km": 19.0,
       "redundancy_status": "geographic_neighbor_but_different_rf_pair",
       "coverage_claim": null,
-      "note": "La proximité géométrique avec F5ZPE ne constitue pas un doublon : F1ZMU apporte une paire UHF distincte."
+      "note": "La proximité géométrique avec F5ZPE ne constitue pas un doublon : F1ZMU apporte une paire UHF distincte. Les autres services partageant l'indicatif de base F1ZMU ne sont pas utilisés pour attribuer un rôle à ce relais phonie."
     },
     "F1ZBZ": {
       "site": "Lorient",
@@ -126,6 +136,7 @@
   "rules": {
     "locator_distance_is_not_radio_coverage": true,
     "technical_metadata_is_not_radio_coverage": true,
+    "independent_site_corroboration_is_not_linkage_proof": true,
     "historical_secondary_linkage_is_not_current_primary_linkage": true,
     "shared_rf_frequency_is_deduplicated": true,
     "priority_is_not_public_selection": true,

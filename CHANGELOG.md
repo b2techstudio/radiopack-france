@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.21.11 - 2026-08-10
+
+- Ajout de `research/bretagne-v0.1/analog-coverage-redundancy-review.json` pour qualifier la diversité géographique et la redondance des relais/transpondeurs analogiques sans transformer locators, altitudes, puissances ou gains d'antenne en preuve de couverture radio.
+- Cluster Côtes-d'Armor 432.650 MHz : cinq sites REF actuels restent actifs sur la même fréquence avec F6HRP et CTCSS 71.9 Hz ; les centres des locators Matignon / Perros-Guirec sont distants d'environ 90,6 km, ce qui justifie une priorité élevée d'efficacité mémoire mais ne prouve aucune portée radio.
+- Conservation d'une ancienne mention RepeaterBook reliant F5ZIT à F5ZIV/F5ZIU/F5ZIS/F5ZJR comme indice historique secondaire uniquement ; l'interconnexion actuelle du cluster reste `current_primary_linkage_verified: false` faute de source primaire/associative actuelle explicite.
+- Revue Morbihan : F1ZMU reste un candidat distinct avec sa paire 439.725/430.325 MHz malgré sa proximité géométrique avec F5ZPE ; F1ZBZ ajoute trois fréquences RF nouvelles après déduplication avec F5ZPE et reste soumis à une revue de couverture locale.
+- Ajout de `research/normandie-v0.4/paired-rx-refresh.json` : F1ZBL Équeurdreville est désormais résolu en 145.250/431.250 MHz dans les deux sens et F5ZHA Laval en 145.4675/432.575 MHz ; F6ZES Sourdeval reste sans fréquence/mode exploitable.
+- Passage des plans `paired-rx-next-version-plan.json` et `paired-rx-deduplicated-memory-plan.json` au schéma 1.2 ; la carte paired RX atteint désormais **12 fréquences uniques pour Normandie v0.4**, **10 pour Annecy–Alpes–Léman v0.3** et **29 pour Bretagne v0.1**.
+- Ajout de `tests/test_analog_coverage_redundancy_review.py`, mise à jour de `tests/test_paired_rx_memory_plan.py` et ajout de l'étape CI `Test analog coverage and redundancy review`.
+- Le canal 64 Morbihan et l'émetteur actuel du canal 79 Corsen restent non résolus ; aucune attribution n'est inventée.
+- État public inchangé : Normandie v0.3.1 reste figée à 139 mémoires, Annecy–Alpes–Léman v0.2 reste figé à 65/48 mémoires et Bretagne reste non publique.
+
 ## 0.21.10 - 2026-08-10
 
 - Ajout de `research/bretagne-v0.1/ref-analog-expansion.json` après recontrôle du répertoire REF actuel pour étendre l'inventaire analogique Bretagne sans publication.
@@ -217,7 +229,7 @@
 
 ## 0.13.0 - 2026-08-08
 
-- Reclassement des contrôles NOTAM France et Suisse en vérifications facultatives et non bloquantes pour les packs d'écoute RX.
+- Reclassement des contrôles NOTAM France et Suisse en vérifications facultatives et non bloquants pour les packs d'écoute RX.
 - Ajout du contrat `generator/options.json` avec deux options indépendantes : inclusion de l'aviation et état du contrôle NOTAM.
 - Ajout de `tools/check_annecy_release_readiness.py` pour distinguer les portes bloquantes des contrôles informatifs.
 - Recontrôle officiel AMSAT de SO-50, AO-91 et AO-123 ; passage de `dynamic_satellites` à `passed_official_amsat_recheck`.

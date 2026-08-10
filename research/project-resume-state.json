@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "project_resume_state",
   "updated": "2026-08-10",
-  "current_sprint": 49,
-  "state_version": "0.21.38",
+  "current_sprint": 54,
+  "state_version": "0.21.43",
   "public_packs": {
     "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
     "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
@@ -22,7 +22,13 @@
     "current_guarded_promotion_plan_eligible_addition_count": 0,
     "current_candidate_preview_memory_count": 142,
     "current_release_blocker_count": 7,
+    "current_review_checklist_completed_count": 2,
+    "current_review_checklist_item_count": 9,
+    "current_review_blocking_open_count": 7,
     "source_truth_consistent": true,
+    "source_revalidations_fresh_as_of_2026_08_10": true,
+    "prepublication_integrity_ok": true,
+    "prepublication_release_ready": false,
     "internal_provisional_additions": [
       {"location": 175, "name": "50-ZHY-IN", "frequency_mhz": 145.0875},
       {"location": 176, "name": "53-ZCE-IN", "frequency_mhz": 145.1},
@@ -44,6 +50,7 @@
     "research/normandie-v0.4/blocked-station-revalidation.json",
     "research/normandie-v0.4/external-evidence-matrix.json",
     "research/normandie-v0.4/source-consistency-contract.json",
+    "research/normandie-v0.4/source-freshness-policy.json",
     "research/normandie-v0.4/r3-mortain-field-validation.json",
     "research/normandie-v0.4/f5zha-mortain-validation.json"
   ],
@@ -54,20 +61,24 @@
     "record_f5zha_observation": "python tools/record_normandie_v04_f5zha_observation.py --help",
     "check_gates": "python tools/check_normandie_v04_promotion_gates.py",
     "check_source_consistency": "python tools/check_normandie_v04_source_consistency.py",
+    "check_source_freshness": "python tools/check_normandie_v04_source_freshness.py",
     "build_readiness_report": "python tools/build_normandie_v04_readiness_report.py",
     "build_evidence_report": "python tools/build_normandie_v04_evidence_report.py",
     "build_guarded_internal_promotion_plan": "python tools/build_normandie_v04_internal_promotion_plan.py",
     "build_decision_dossier": "python tools/build_normandie_v04_decision_dossier.py",
     "build_candidate_preview": "python tools/build_normandie_v04_candidate_preview.py",
+    "build_candidate_diff": "python tools/build_normandie_v04_candidate_diff.py",
     "build_release_blockers": "python tools/build_normandie_v04_release_blockers.py",
+    "build_review_checklist": "python tools/build_normandie_v04_review_checklist.py",
+    "run_prepublication_audit": "python tools/run_normandie_v04_prepublication_audit.py",
     "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py --extended"
   },
   "recent_sprints": {
-    "45": "Source consistency contract and checker",
-    "46": "Single internal decision dossier",
-    "47": "Guarded non-public candidate preview dry-run",
-    "48": "Machine-readable release blocker manifest",
-    "49": "Decision pipeline tests, CI and documentation synchronization"
+    "50": "Source freshness policy and checker",
+    "51": "Machine-readable release review checklist",
+    "52": "Published base / internal candidate / guarded preview structural diff",
+    "53": "Unified non-public prepublication integrity audit",
+    "54": "Prepublication audit tests, CI and recovery documentation synchronization"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
@@ -75,10 +86,14 @@
     "local_operator_status_overrides_general_directory_for_current_state": true,
     "field_observations_do_not_close_source_conflicts": true,
     "source_search_failure_is_not_negative_evidence": true,
+    "stale_source_is_not_negative_operational_evidence": true,
+    "stale_source_blocks_release_review_completion": true,
     "unresolved_frequency_must_not_be_guessed": true,
     "geometry_is_not_reception_proof": true,
     "generated_promotion_plan_does_not_mutate_candidate": true,
     "candidate_preview_does_not_mutate_candidate": true,
+    "candidate_diff_does_not_mutate_candidate": true,
+    "prepublication_integrity_ok_does_not_mean_release_ready": true,
     "release_blocker_manifest_does_not_publish": true,
     "all_exported_memories_tx_disabled": true
   }

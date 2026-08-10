@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "status": "research_candidate_delta_defined_not_public",
+  "updated": "2026-08-10",
+  "purpose": "Définir uniquement le delta paired RX potentiel de Normandie v0.4 par rapport à la v0.3.1 publiée, sans attribuer de positions mémoire ni créer de CSV public.",
+  "base": {
+    "version": "0.3.1",
+    "memory_count": 139,
+    "immutable": true,
+    "csv": "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
+  },
+  "sources": {
+    "paired_memory_plan": "research/paired-rx-deduplicated-memory-plan.json",
+    "pair_refresh": "research/normandie-v0.4/paired-rx-refresh.json",
+    "coverage_review": "research/normandie-v0.4/mortain-bocage-coverage.json",
+    "r3_field_validation": "research/normandie-v0.4/r3-mortain-field-validation.json"
+  },
+  "paired_rx_research_frequency_count": 12,
+  "already_present_in_published_base": [
+    {
+      "frequency_mhz": 145.6875,
+      "published_name": "50-F5ZHY",
+      "role": "F5ZHY repeater output"
+    },
+    {
+      "frequency_mhz": 430.3750,
+      "published_name": "50-F1ZOV",
+      "role": "F1ZOV paired side A",
+      "current_operational_note": "local operator currently marks F1ZOV in maintenance; published v0.3.1 remains immutable"
+    },
+    {
+      "frequency_mhz": 145.2500,
+      "published_name": "50-F1ZBL",
+      "role": "F1ZBL transponder side A"
+    },
+    {
+      "frequency_mhz": 145.7000,
+      "published_name": "53-F6ZCE",
+      "role": "F6ZCE repeater output"
+    }
+  ],
+  "new_frequency_candidates": [
+    {
+      "name_hint": "ZHY-IN",
+      "frequency_mhz": 145.0875,
+      "role": "F5ZHY repeater input RX",
+      "state": "ready_research_candidate",
+      "reason": "current ARA50 publishes F5ZHY TX 145.0875 / RX 145.6875 and the output already exists in v0.3.1",
+      "publication_allowed": false
+    },
+    {
+      "name_hint": "ZCE-IN",
+      "frequency_mhz": 145.1000,
+      "role": "F6ZCE repeater input RX",
+      "state": "ready_research_candidate",
+      "reason": "current ARAS72 documents 145.700 MHz with -600 kHz shift and the output already exists in v0.3.1",
+      "publication_allowed": false
+    },
+    {
+      "name_hint": "ZBL-B",
+      "frequency_mhz": 431.2500,
+      "role": "F1ZBL transponder side B RX",
+      "state": "ready_research_candidate",
+      "reason": "current Radio Club Nord Cotentin publishes the bidirectional 145.250 / 431.250 MHz transponder and side A already exists in v0.3.1",
+      "publication_allowed": false
+    },
+    {
+      "name_hint": "ZBX-IN",
+      "frequency_mhz": 145.0750,
+      "role": "F1ZBX R3 input RX",
+      "state": "local_mortain_validation_required",
+      "reason": "operator pair is current and Mortain is geometrically inside the published 150 km usage radius, but actual reception from Mortain is not yet verified",
+      "publication_allowed": false
+    },
+    {
+      "name_hint": "ZBX-OUT",
+      "frequency_mhz": 145.6750,
+      "role": "F1ZBX R3 output RX",
+      "state": "local_mortain_validation_required",
+      "reason": "operator pair is current and Mortain is geometrically inside the published 150 km usage radius, but actual reception from Mortain is not yet verified",
+      "publication_allowed": false
+    },
+    {
+      "name_hint": "ZHA-A",
+      "frequency_mhz": 145.4675,
+      "role": "F5ZHA transponder side A RX",
+      "state": "source_conflict_and_coverage_validation_required",
+      "reason": "REF and a current secondary list agree, but an older RepeaterBook frequency conflicts and no current local operator source has closed the discrepancy",
+      "publication_allowed": false
+    },
+    {
+      "name_hint": "ZHA-B",
+      "frequency_mhz": 432.5750,
+      "role": "F5ZHA transponder side B RX",
+      "state": "source_conflict_and_coverage_validation_required",
+      "reason": "REF and a current secondary list agree, but an older RepeaterBook frequency conflicts and no current local operator source has closed the discrepancy",
+      "publication_allowed": false
+    },
+    {
+      "name_hint": "ZOV-B",
+      "frequency_mhz": 431.9750,
+      "role": "F1ZOV paired side B RX",
+      "state": "operator_maintenance_revalidation_required",
+      "reason": "current Radio Club Nord Cotentin and ARA50 confirm the pair, but the local operator currently marks F1ZOV in maintenance",
+      "publication_allowed": false
+    }
+  ],
+  "summary": {
+    "maximum_new_paired_rx_frequencies_under_current_research": 8,
+    "ready_research_candidates": 3,
+    "local_mortain_validation_required": 2,
+    "source_conflict_and_coverage_validation_required": 2,
+    "operator_maintenance_revalidation_required": 1,
+    "final_v0_4_memory_count": null,
+    "memory_positions_assigned": false
+  },
+  "rules": {
+    "delta_only_does_not_rewrite_published_base": true,
+    "frequency_present_in_base_must_not_be_added_again": true,
+    "ready_research_candidate_does_not_mean_publication_approved": true,
+    "temporary_maintenance_blocks_new_side_promotion_until_revalidated": true,
+    "local_geometry_is_not_reception_proof": true,
+    "all_future_exported_memories_tx_disabled": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "public_export_allowed": false
+  }
+}

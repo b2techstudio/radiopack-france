@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.52 - 2026-08-11
+
+- **Sprint 63** : revalidation ciblée des blocages externes Normandie v0.4 et nouvelle tentative d'exploitation du Guide Marine 2026, sans mutation des packs publics.
+- Ajout de `research/sprint-63-source-revalidation.json` et `research/sprint-63-summary.md` : F1ZOV reste **En Maintenance** chez l'exploitant local, F6ZES reste sans fréquence/mode exploitable et R3 reste sans nouvelle observation terrain.
+- F5ZHA : le REF conserve **145.4675 / 432.575 MHz** ; la valeur conflictuelle RepeaterBook **431.4125 MHz** est désormais qualifiée comme conflit secondaire stale car la page de vérification affiche **2017-02-17** et `Off-Air`. Cette requalification ne ferme ni l'exigence de réconciliation autoritative ni la validation de couverture Mortain.
+- Guide Marine 2026 : URL PDF directe identifiée et chargement retenté le 11 août 2026 ; le workflow web retourne toujours un `cache miss`, donc aucun contenu/capture PDF exploitable et aucune conclusion Ch64/Ch79.
+- Ajout de `tests/test_sprint63_blocker_revalidation.py`, intégration CI et mise à jour des garde-fous de reprise au **Sprint 63 / 0.21.52**.
+- État Normandie v0.4 inchangé : **142 mémoires**, preview 142, plafond 147, revue **3/9**, **6 blocages**, **0 ajout éligible**.
+- État public inchangé : Normandie v0.3.1 **139**, Annecy–Alpes–Léman v0.2 **65/48**, Bretagne non publique.
+
 ## 0.21.51 - 2026-08-11
 
 - **Sprint 62** : séparation renforcée entre convergence documentaire, infrastructure radio actuelle, contexte primaire historique et affectation opérationnelle actuelle des canaux CROSS.

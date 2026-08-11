@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.21.54 - 2026-08-11
+
+- **Sprint 65** : recontrôle daté des sources primaires encore utiles à F5ZHA/F6ZES et aux dossiers CROSS Étel Ch64 / Corsen Ch79, sans promotion ni mutation publique.
+- Ajout de `research/sprint-65-primary-recheck.json` : F5ZHA reste affiché actif par le REF sur **145.4675 / 432.575 MHz**, mais la réconciliation locale/autoritative et le terrain Mortain restent requis ; F6ZES reste sans fréquence, mode ni état exploitable.
+- Revalidation primaire Bretagne : la page ministérielle mise à jour le **19 juin 2026** maintient Ch79/80 pour les diffusions CROSS et Ch63/64 en diffusion permanente notamment dans le Morbihan, sans nommer de site Ch64.
+- Les pages DIRM courantes maintiennent **Étel + Chassiron sur Ch63** et le réseau VHF/MHF côtier de **CROSS Corsen**, sans fournir respectivement de site Ch64 ni de mapping Ch79 ↔ station.
+- Ajout des garde-fous `current_regional_channel_statement_does_not_identify_transmitter_site` et `current_cross_network_statement_does_not_map_channel_to_station` ; infrastructure, réseau et déclaration régionale ne valent jamais affectation automatique de canal/site.
+- Le Guide Marine 2026 reste identifié mais non extractible dans le workflow (`cache miss`) ; aucune inférence Ch64/Ch79 n'en est tirée.
+- Ajout de `tests/test_sprint65_primary_recheck.py`, intégration CI et mise à jour de `README.md`, `PROJECT_STATUS.md`, `research/project-resume-state.json` et des garde-fous de reprise au **Sprint 65 / 0.21.54**.
+- État Normandie v0.4 inchangé : **142 mémoires**, preview 142, plafond 147, revue **3/9**, **6 blocages**, **0 ajout éligible**.
+- État public inchangé : Normandie v0.3.1 **139**, Annecy–Alpes–Léman v0.2 **65/48**, Bretagne non publique.
+
 ## 0.21.53 - 2026-08-11
 
 - **Sprint 64** : clarification définitive entre nombre de mémoires RX et nombre de sessions de validation pour R3/F1ZBX, CROSS Étel Ch64 et CROSS Corsen Ch79.

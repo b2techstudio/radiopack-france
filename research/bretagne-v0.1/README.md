@@ -4,9 +4,11 @@ Cet espace initialise le troisième pack régional RadioPack France à partir du
 
 ## État actuel
 
-- statut : `research_scaffold_not_public` ;
-- aucune fréquence n'est encore retenue publiquement ;
-- aucun nombre cible de mémoires n'est imposé ;
+- statut : `internal_candidate_135_not_public` ;
+- **candidat interne : 135 mémoires RX**, sans publication ;
+- composition : 16 PMR446 + 90 VHF maritime + 6 écoutes amateur + 2 appels amateur + 21 mémoires régionales dédupliquées ;
+- canaux 64 et 79 présents génériquement en deux mémoires RX chacun, sans attribution locale de site ;
+- aviation : 0 mémoire, positions 130–149 réservées en attente d'une extraction SIA actuelle ;
 - aucun fichier public n'est créé ;
 - aucune entrée n'est ajoutée à `website/src/lib/packRegistry.ts` ;
 - aucune entrée n'est ajoutée à `website/src/data/regions.json`.
@@ -75,7 +77,7 @@ Le planning officiel de diffusion météo du CROSS Étel permet maintenant d'ide
 - **Belle-Ile — canal 80** ;
 - **Étel — canal 63 en diffusion continue**.
 
-Le ministère indique par ailleurs que le canal 16 annonce les bulletins sur 79/80 et mentionne une diffusion permanente sur 63/64 notamment dans le Morbihan. Le planning primaire CROSS Étel exploité n'identifie toutefois pas d'émetteur Bretagne sur le canal 64. RadioPack conserve donc le canal 64 comme donnée réglementaire de recherche, sans lui attribuer de site breton tant que ce point n'est pas réconcilié par une source primaire locale actuelle.
+Le ministère indique par ailleurs que le canal 16 annonce les bulletins sur 79/80 et mentionne une diffusion permanente sur 63/64 notamment dans le Morbihan. Le planning primaire CROSS Étel exploité n'identifie toutefois pas d'émetteur Bretagne sur le canal 64. Le candidat interne conserve donc **la paire générique Ch64 156.225 / 160.825 MHz comme deux mémoires RX**, sans lui attribuer de site breton tant que ce point n'est pas réconcilié par une source primaire locale actuelle.
 
 ### Réseau technique CROSS Étel — 17 stations actuelles
 
@@ -95,7 +97,7 @@ Le canal 64 reste non attribué : le fait que le réseau compte 17 stations ne p
 
 Le réseau actuel est documenté à 10 stations VHF et 2 stations MF. Cap Fréhel et Stiff/Ouessant sont primaire-vérifiés comme infrastructures radio actuelles sans canal publié. Une opération officielle confirme une couverture VHF actuelle au nord de la Pointe du Raz, sans identifier l'émetteur ni le canal.
 
-Le canal 79 reste donc sans émetteur actuel primaire-vérifié. La frontière SAR à Penmarc'h, la couverture VHF du Raz et l'existence d'une infrastructure radio ne doivent jamais être utilisés pour inventer une affectation de canal.
+Le canal 79 reste donc sans émetteur actuel primaire-vérifié. Le candidat interne conserve **la paire générique Ch79 156.975 / 161.575 MHz comme deux mémoires RX**, mais la frontière SAR à Penmarc'h, la couverture VHF du Raz et l'existence d'une infrastructure radio ne doivent jamais être utilisés pour inventer une affectation de site.
 
 ### Premiers constats officiels
 

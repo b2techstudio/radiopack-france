@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.21.60 - 2026-08-11
+
+- **Sprint 71** : revalidation Normandie v0.5 sans promotion ; candidat maintenu à 142 mémoires.
+- Bretagne v0.1 passe du plan mémoire vide à un **candidat interne de 135 mémoires RX**, toujours non public.
+- Composition Bretagne : 16 PMR446 + 90 VHF maritime + 6 écoutes amateur + 2 appels amateur + 21 mémoires régionales uniques après déduplication.
+- Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) sont présents en deux mémoires RX génériques chacun, sans attribution de site Étel/Corsen non prouvée.
+- Aviation Bretagne maintenue à 0 mémoire, emplacements 130–149 réservés en attente d'une extraction SIA actuelle.
+- Ajout du builder `tools/build_bretagne_internal_candidate.py` et des garde-fous Sprint 71 ; aucun fichier public Bretagne ajouté.
+
 ## 0.21.59 - 2026-08-11
 
 - **Sprint 70** : initialisation de Normandie v0.5 en recherche sur la base publique immuable v0.4 = 142 mémoires.

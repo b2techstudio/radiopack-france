@@ -1,8 +1,8 @@
 {
-  "schema_version": "1.3",
-  "status": "blocked_research_in_progress",
+  "schema_version": "1.4",
+  "status": "internal_candidate_built_publication_still_blocked",
   "created": "2026-08-09",
-  "updated": "2026-08-09",
+  "updated": "2026-08-11",
   "pack": {
     "name": "Bretagne",
     "slug": "bretagne",
@@ -12,15 +12,15 @@
   "gates": [
     {
       "id": "sources",
-      "status": "seed_sources_identified_not_validated",
+      "status": "core_frequency_sources_validated_aviation_and_some_local_metadata_pending",
       "required_for_public_release": true,
-      "description": "Sources principales identifiées, extraction et validation encore à réaliser"
+      "description": "Blocs nationaux, VHF maritime générique et principaux relais analogiques de recherche suffisamment sourcés pour un candidat interne ; aviation Bretagne et certaines métadonnées locales restent à valider."
     },
     {
       "id": "maritime_zoning",
-      "status": "etel_penmarch_interface_verified_corsen_sites_and_radio_overlap_pending",
+      "status": "generic_channel_frequencies_validated_local_site_mapping_pending",
       "required_for_public_release": true,
-      "description": "Le début de compétence du CROSS Étel à la Pointe de Penmarc'h et plusieurs émetteurs météo Bretagne sont maintenant sourcés ; restent à inventorier les stations VHF de CROSS Corsen, les recouvrements radio et la couverture réelle avant publication"
+      "description": "Les fréquences VHF maritimes génériques sont validées et intégrables sans attribution de site ; les mappings locaux Ch64/Ch79 restent recherche uniquement et ne doivent pas être revendiqués."
     },
     {
       "id": "emergency_relay_inventory",
@@ -30,15 +30,15 @@
     },
     {
       "id": "memory_plan",
-      "status": "pending",
+      "status": "passed_internal_candidate_135_not_public",
       "required_for_public_release": true,
-      "description": "Plan mémoire à définir sans remplissage artificiel et sans dupliquer une fréquence uniquement pour changer son étiquette de zone ou de site"
+      "description": "Plan mémoire interne construit à 135 mémoires, sans remplissage artificiel et avec déduplication RF."
     },
     {
       "id": "data_validation",
-      "status": "pending",
+      "status": "partial_core_blocks_validated_aviation_pending",
       "required_for_public_release": true,
-      "description": "Fréquences retenues à recouper selon leur domaine, leur sous-zone Bretagne et leur compatibilité RX"
+      "description": "Blocs nationaux et régional analogique de base contrôlés ; aviation et revue finale restent à compléter."
     },
     {
       "id": "dynamic_rechecks",

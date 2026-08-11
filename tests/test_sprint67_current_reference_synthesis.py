@@ -99,12 +99,13 @@ assert e["decisions"]["public_pack_mutated"] is False
 assert e["decisions"]["public_export_allowed"] is False
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
+normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert resume["current_sprint"] >= 67
 assert resume["state_version"] >= "0.21.56"
-assert resume["active_work"]["internal_candidate_memory_count"] == 142
-assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
-assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert resume["active_work"]["latest_current_reference_synthesis"]["file"] == "research/sprint-67-current-reference-synthesis.json"
+assert normandie_work["internal_candidate_memory_count"] == 142
+assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
+assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
+assert normandie_work["latest_current_reference_synthesis"]["file"] == "research/sprint-67-current-reference-synthesis.json"
 assert resume["bretagne_research_update"]["ministry_leisure_guide_2026_pdf_extracted"] is True
 assert resume["bretagne_research_update"]["ministry_leisure_guide_2026_names_transmitter_sites"] is False
 assert resume["bretagne_research_update"]["corsen_secondary_current_stiff_channel79_clue_exists"] is True

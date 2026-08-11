@@ -96,12 +96,13 @@ assert evidence["decisions"]["public_pack_mutated"] is False
 assert evidence["decisions"]["public_export_allowed"] is False
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
+normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 # Sprint 65 evidence is immutable historical evidence; the project state may advance.
 assert resume["current_sprint"] >= evidence["sprint"]
-assert resume["active_work"]["internal_candidate_memory_count"] == 142
-assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
-assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert resume["active_work"]["public_release_ready"] is False
+assert normandie_work["internal_candidate_memory_count"] == 142
+assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
+assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
+assert normandie_work["public_release_ready"] is False
 assert resume["resume_rules"]["current_regional_channel_statement_does_not_identify_transmitter_site"] is True
 assert resume["resume_rules"]["current_cross_network_statement_does_not_map_channel_to_station"] is True
 

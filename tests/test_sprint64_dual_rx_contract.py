@@ -10,6 +10,7 @@ policy = json.loads((ROOT / "research/paired-rx-policy.json").read_text(encoding
 next_plan = json.loads((ROOT / "research/paired-rx-next-version-plan.json").read_text(encoding="utf-8"))
 r3_pack = json.loads((ROOT / "research/normandie-v0.4/r3-validation-pack.json").read_text(encoding="utf-8"))
 resume = json.loads((ROOT / "research/project-resume-state.json").read_text(encoding="utf-8"))
+normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 
 assert contract["status"] == "dual_rx_contract_snapshot_not_public"
 assert contract["public_export_allowed"] is False
@@ -88,8 +89,8 @@ registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8"
 assert 'version: "v0.4"' in registry
 assert 'id: "bretagne"' not in registry
 assert resume["public_packs"]["normandie"]["memory_count"] == 142
-assert resume["active_work"]["internal_candidate_memory_count"] == 142
-assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
+assert normandie_work["internal_candidate_memory_count"] == 142
+assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
 
 print(
     "Tests Sprint 64 dual RX contract: R3 keeps exactly two pair memories independently of its two field sessions, "

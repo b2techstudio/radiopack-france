@@ -23,10 +23,10 @@ memory = json.loads((RESEARCH / "memory-plan.json").read_text(encoding="utf-8"))
 maritime = json.loads((RESEARCH / "maritime-zones.json").read_text(encoding="utf-8"))
 emergency = json.loads((RESEARCH / "emergency-relays.json").read_text(encoding="utf-8"))
 
-assert plan["status"] == "research_scaffold_not_public"
+assert plan["status"] == "internal_candidate_in_progress_not_public"
 assert plan["pack"] == {"name": "Bretagne", "slug": "bretagne", "target_version": "0.1"}
-assert plan["memory_plan"]["expected_memory_count"] is None
-assert plan["memory_plan"]["blocks"] == []
+assert plan["memory_plan"]["expected_memory_count"] == 135
+assert len(plan["memory_plan"]["blocks"]) == 5
 assert plan["publication"]["public_export_allowed"] is False
 assert plan["publication"]["public_registry_allowed"] is False
 assert plan["publication"]["public_routes_allowed"] is False
@@ -64,19 +64,20 @@ assert sources["rules"]["seed_source_does_not_equal_validated_frequency"] is Tru
 assert sources["rules"]["maritime_cross_assignment_must_be_zone_specific"] is True
 assert sources["rules"]["exact_current_srr_boundary_required_before_publication"] is True
 
-assert gates["status"] == "blocked_research_in_progress"
+assert gates["status"] == "internal_candidate_built_publication_still_blocked"
 assert gates["public_release_allowed"] is False
 assert len(gates["gates"]) == 8
 assert all(gate["required_for_public_release"] is True for gate in gates["gates"])
-assert all(not gate["status"].startswith("passed_") for gate in gates["gates"])
 gate_map = {gate["id"]: gate for gate in gates["gates"]}
-assert gate_map["maritime_zoning"]["status"] == "etel_penmarch_interface_verified_corsen_sites_and_radio_overlap_pending"
+assert gate_map["memory_plan"]["status"] == "passed_internal_candidate_135_not_public"
+assert all(not gate["status"].startswith("passed_") for gate in gates["gates"] if gate["id"] != "memory_plan")
+assert gate_map["maritime_zoning"]["status"] == "generic_channel_frequencies_validated_local_site_mapping_pending"
 assert gate_map["emergency_relay_inventory"]["status"] == "adrasec_22_29_35_56_and_regional_relays_pending"
 
-assert memory["status"] == "draft_no_channels"
-assert memory["expected_memory_count"] is None
-assert memory["blocks"] == []
-assert memory["reserved_positions"] == []
+assert memory["status"] == "internal_candidate_135_not_public"
+assert memory["expected_memory_count"] == 135
+assert len(memory["blocks"]) == 6
+assert memory["reserved_positions"] == [{"start": 130, "end": 149, "purpose": "aviation_bretagne_pending_current_sia_validation"}]
 assert memory["rules"]["duplex"] == "off"
 assert memory["rules"]["no_artificial_fill"] is True
 

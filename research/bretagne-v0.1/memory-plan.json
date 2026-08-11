@@ -1,20 +1,94 @@
 {
-  "schema_version": "1.0",
-  "status": "draft_no_channels",
+  "schema_version": "1.1",
+  "status": "internal_candidate_135_not_public",
   "created": "2026-08-09",
+  "updated": "2026-08-11",
   "pack": {
     "name": "Bretagne",
     "slug": "bretagne",
     "target_version": "0.1"
   },
-  "expected_memory_count": null,
-  "blocks": [],
-  "reserved_positions": [],
+  "expected_memory_count": 135,
+  "internal_candidate": {
+    "status": "built_from_verified_national_blocks_and_guarded_regional_research",
+    "expected_memory_count": 135,
+    "public_export_allowed": false,
+    "builder": "tools/build_bretagne_internal_candidate.py",
+    "regional_unique_memory_count": 21,
+    "regional_source_memory_count_before_national_deduplication": 29,
+    "generic_marine_memory_count": 90,
+    "generic_marine_includes_channel64_pair": true,
+    "generic_marine_includes_channel79_pair": true,
+    "site_specific_channel64_assignment_claimed": false,
+    "site_specific_channel79_assignment_claimed": false
+  },
+  "blocks": [
+    {
+      "id": "pmr446",
+      "start": 0,
+      "end": 15,
+      "count": 16,
+      "source": "data/national/pmr446.json",
+      "status": "verified_national"
+    },
+    {
+      "id": "marine_vhf",
+      "start": 20,
+      "end": 109,
+      "count": 90,
+      "source": "data/national/marine-vhf-rx.json",
+      "status": "verified_national_generic_channels"
+    },
+    {
+      "id": "amateur_listening",
+      "start": 120,
+      "end": 125,
+      "count": 6,
+      "source": "data/national/amateur-listening-rx.json",
+      "status": "verified_national"
+    },
+    {
+      "id": "aviation",
+      "start": 130,
+      "end": 149,
+      "count": 0,
+      "source": null,
+      "status": "reserved_pending_current_sia_extraction"
+    },
+    {
+      "id": "amateur_calls",
+      "start": 150,
+      "end": 151,
+      "count": 2,
+      "source": "data/national/amateur-calls-rx.json",
+      "status": "verified_national"
+    },
+    {
+      "id": "regional_analog",
+      "start": 160,
+      "end": 180,
+      "count": 21,
+      "source": "research/paired-rx-deduplicated-memory-plan.json",
+      "status": "guarded_research_candidate"
+    }
+  ],
+  "reserved_positions": [
+    {
+      "start": 130,
+      "end": 149,
+      "purpose": "aviation_bretagne_pending_current_sia_validation"
+    }
+  ],
   "rules": {
     "max_memories": 200,
     "max_name_length": 10,
     "duplex": "off",
     "offset": "0.000000",
-    "no_artificial_fill": true
+    "no_artificial_fill": true,
+    "same_rf_frequency_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "generic_marine_channel_frequency_does_not_require_local_transmitter_site_claim": true,
+    "unverified_local_transmitter_site_must_not_appear_in_memory_comment": true,
+    "internal_candidate_is_not_public_release": true
   }
 }

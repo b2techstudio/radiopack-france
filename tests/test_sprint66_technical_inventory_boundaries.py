@@ -107,11 +107,12 @@ assert e["decisions"]["public_pack_mutated"] is False
 assert e["decisions"]["public_export_allowed"] is False
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
+normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert resume["current_sprint"] >= e["sprint"]
-assert resume["active_work"]["internal_candidate_memory_count"] == 142
-assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
-assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert resume["active_work"]["latest_technical_inventory_recheck"]["file"] == "research/sprint-66-technical-inventory-boundaries.json"
+assert normandie_work["internal_candidate_memory_count"] == 142
+assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
+assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
+assert normandie_work["latest_technical_inventory_recheck"]["file"] == "research/sprint-66-technical-inventory-boundaries.json"
 assert resume["bretagne_research_update"]["etel_2026_technical_maintenance_station_count"] == 17
 assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_is_current_primary_validation"] is False
 for key in [

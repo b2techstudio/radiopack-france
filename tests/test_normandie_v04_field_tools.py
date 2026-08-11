@@ -40,52 +40,53 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
+normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert resume["current_sprint"] >= 68
 assert resume["state_version"] >= "0.21.57"
 assert resume["public_packs"]["normandie"]["memory_count"] == 142
-assert resume["active_work"]["internal_candidate_memory_count"] == 142
-assert resume["active_work"]["blocked_frequency_count"] == 5
-assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
-assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert resume["active_work"]["current_candidate_preview_memory_count"] == 142
-assert resume["active_work"]["current_release_blocker_count"] == 0
-assert resume["active_work"]["current_review_checklist_completed_count"] == 9
-assert resume["active_work"]["current_review_checklist_item_count"] == 9
-assert resume["active_work"]["current_review_blocking_open_count"] == 0
-assert resume["active_work"]["source_truth_consistent"] is True
-assert resume["active_work"]["source_revalidations_fresh_as_of_2026_08_10"] is True
-assert resume["active_work"]["source_revalidations_fresh_as_of_2026_08_11"] is True
-assert resume["active_work"]["prepublication_integrity_ok"] is True
-assert resume["active_work"]["prepublication_release_ready"] is True
-assert resume["active_work"]["public_export_allowed"] is False
-assert resume["active_work"]["public_release_ready"] is False
-assert resume["active_work"]["adjacent_ref_scan"]["new_untracked_active_analog_candidate_count"] == 0
-assert resume["active_work"]["adjacent_ref_scan"]["candidate_memory_delta"] == 0
-assert resume["active_work"]["latest_source_revalidation"]["gate_cleared_count"] == 0
-assert resume["active_work"]["latest_source_revalidation"]["f1zov_operator_status"] == "En Maintenance"
-assert resume["active_work"]["latest_source_revalidation"]["f5zha_repeaterbook_verification_date_shown"] == "2017-02-17"
-assert resume["active_work"]["latest_source_revalidation"]["f5zha_authoritative_reconciliation_complete"] is False
-assert resume["active_work"]["latest_source_revalidation"]["f6zes_frequency_mode_resolved"] is False
-assert resume["active_work"]["dual_rx_contract"]["r3_pair_frequencies_mhz"] == [145.075, 145.675]
-assert resume["active_work"]["dual_rx_contract"]["r3_required_rx_memory_count_if_promoted"] == 2
-assert resume["active_work"]["dual_rx_contract"]["r3_minimum_independent_field_sessions"] == 2
-assert resume["active_work"]["dual_rx_contract"]["r3_sessions_are_evidence_not_memories"] is True
-assert resume["active_work"]["dual_rx_contract"]["r3_control_memory_is_pair_member"] is False
-assert resume["active_work"]["dual_rx_contract"]["r3_memory_delta_if_gate_clears"] == 2
-assert resume["active_work"]["latest_primary_recheck"]["file"] == "research/sprint-65-primary-recheck.json"
-assert resume["active_work"]["latest_primary_recheck"]["f5zha_current_ref_pair_mhz"] == [145.4675, 432.575]
-assert resume["active_work"]["latest_primary_recheck"]["f5zha_current_ref_active"] is True
-assert resume["active_work"]["latest_primary_recheck"]["f5zha_authoritative_reconciliation_complete"] is False
-assert resume["active_work"]["latest_primary_recheck"]["f6zes_frequency_mode_resolved"] is False
-assert resume["active_work"]["latest_primary_recheck"]["normandie_gate_cleared_count"] == 0
-assert resume["active_work"]["latest_primary_recheck"]["candidate_memory_delta"] == 0
-assert resume["active_work"]["latest_technical_inventory_recheck"]["file"] == "research/sprint-66-technical-inventory-boundaries.json"
-assert resume["active_work"]["latest_technical_inventory_recheck"]["f5zha_authoritative_reconciliation_complete"] is False
-assert resume["active_work"]["latest_technical_inventory_recheck"]["f6zes_frequency_mode_resolved"] is False
-assert resume["active_work"]["latest_technical_inventory_recheck"]["normandie_gate_cleared_count"] == 0
-assert resume["active_work"]["latest_technical_inventory_recheck"]["candidate_memory_delta"] == 0
-assert resume["active_work"]["latest_current_reference_synthesis"]["file"] == "research/sprint-67-current-reference-synthesis.json"
-assert resume["active_work"]["latest_current_reference_synthesis"]["candidate_memory_delta"] == 0
+assert normandie_work["internal_candidate_memory_count"] == 142
+assert normandie_work["blocked_frequency_count"] == 5
+assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
+assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
+assert normandie_work["current_candidate_preview_memory_count"] == 142
+assert normandie_work["current_release_blocker_count"] == 0
+assert normandie_work["current_review_checklist_completed_count"] == 9
+assert normandie_work["current_review_checklist_item_count"] == 9
+assert normandie_work["current_review_blocking_open_count"] == 0
+assert normandie_work["source_truth_consistent"] is True
+assert normandie_work["source_revalidations_fresh_as_of_2026_08_10"] is True
+assert normandie_work["source_revalidations_fresh_as_of_2026_08_11"] is True
+assert normandie_work["prepublication_integrity_ok"] is True
+assert normandie_work["prepublication_release_ready"] is True
+assert normandie_work["public_export_allowed"] is False
+assert normandie_work["public_release_ready"] is False
+assert normandie_work["adjacent_ref_scan"]["new_untracked_active_analog_candidate_count"] == 0
+assert normandie_work["adjacent_ref_scan"]["candidate_memory_delta"] == 0
+assert normandie_work["latest_source_revalidation"]["gate_cleared_count"] == 0
+assert normandie_work["latest_source_revalidation"]["f1zov_operator_status"] == "En Maintenance"
+assert normandie_work["latest_source_revalidation"]["f5zha_repeaterbook_verification_date_shown"] == "2017-02-17"
+assert normandie_work["latest_source_revalidation"]["f5zha_authoritative_reconciliation_complete"] is False
+assert normandie_work["latest_source_revalidation"]["f6zes_frequency_mode_resolved"] is False
+assert normandie_work["dual_rx_contract"]["r3_pair_frequencies_mhz"] == [145.075, 145.675]
+assert normandie_work["dual_rx_contract"]["r3_required_rx_memory_count_if_promoted"] == 2
+assert normandie_work["dual_rx_contract"]["r3_minimum_independent_field_sessions"] == 2
+assert normandie_work["dual_rx_contract"]["r3_sessions_are_evidence_not_memories"] is True
+assert normandie_work["dual_rx_contract"]["r3_control_memory_is_pair_member"] is False
+assert normandie_work["dual_rx_contract"]["r3_memory_delta_if_gate_clears"] == 2
+assert normandie_work["latest_primary_recheck"]["file"] == "research/sprint-65-primary-recheck.json"
+assert normandie_work["latest_primary_recheck"]["f5zha_current_ref_pair_mhz"] == [145.4675, 432.575]
+assert normandie_work["latest_primary_recheck"]["f5zha_current_ref_active"] is True
+assert normandie_work["latest_primary_recheck"]["f5zha_authoritative_reconciliation_complete"] is False
+assert normandie_work["latest_primary_recheck"]["f6zes_frequency_mode_resolved"] is False
+assert normandie_work["latest_primary_recheck"]["normandie_gate_cleared_count"] == 0
+assert normandie_work["latest_primary_recheck"]["candidate_memory_delta"] == 0
+assert normandie_work["latest_technical_inventory_recheck"]["file"] == "research/sprint-66-technical-inventory-boundaries.json"
+assert normandie_work["latest_technical_inventory_recheck"]["f5zha_authoritative_reconciliation_complete"] is False
+assert normandie_work["latest_technical_inventory_recheck"]["f6zes_frequency_mode_resolved"] is False
+assert normandie_work["latest_technical_inventory_recheck"]["normandie_gate_cleared_count"] == 0
+assert normandie_work["latest_technical_inventory_recheck"]["candidate_memory_delta"] == 0
+assert normandie_work["latest_current_reference_synthesis"]["file"] == "research/sprint-67-current-reference-synthesis.json"
+assert normandie_work["latest_current_reference_synthesis"]["candidate_memory_delta"] == 0
 assert resume["resume_rules"]["published_versions_are_immutable"] is True
 assert resume["resume_rules"]["geometry_is_not_reception_proof"] is True
 assert resume["resume_rules"]["field_observations_do_not_close_source_conflicts"] is True
@@ -113,8 +114,8 @@ assert resume["resume_rules"]["current_primary_channel_confirmation_without_site
 assert resume["resume_rules"]["secondary_source_convergence_does_not_become_primary_validation"] is True
 assert resume["resume_rules"]["current_display_badge_does_not_override_dated_verification_provenance"] is True
 assert resume["resume_rules"]["network_counting_units_must_not_be_reconciled_without_definition"] is True
-assert resume["active_work"]["unresolved_priority"]["station"] == "F6ZES Sourdeval"
-assert resume["active_work"]["unresolved_priority"]["candidate_memory_delta"] == 0
+assert normandie_work["unresolved_priority"]["station"] == "F6ZES Sourdeval"
+assert normandie_work["unresolved_priority"]["candidate_memory_delta"] == 0
 assert resume["bretagne_research_update"]["primary_current_channel79_transmitter_site_confirmed"] is False
 assert resume["bretagne_research_update"]["current_primary_corsen_infrastructure_sites_verified"] == ["Cap Fréhel", "Stiff / Ouessant"]
 assert resume["bretagne_research_update"]["historical_primary_channel79_context_exists"] is True
@@ -150,8 +151,8 @@ assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_s
 assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_is_current_primary_validation"] is False
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **70**" in status_text
-assert "État logique : **0.21.59**" in status_text
+assert "Sprint courant : **71**" in status_text
+assert "État logique : **0.21.60**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
@@ -244,5 +245,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained through sprint 70, OK"
+    "non-public, recovery state is self-contained through sprint 71, OK"
 )

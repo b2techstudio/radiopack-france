@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **11 août 2026**
-Sprint courant : **70**
-État logique : **0.21.59**
+Sprint courant : **71**
+État logique : **0.21.60**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md` et `research/sprint-70-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md` et `research/sprint-71-summary.md`.
 
 ## État public
 
@@ -13,6 +13,14 @@ Ce fichier sert de point de reprise humain. L'état machine correspondant est da
 - **Annecy–Alpes–Léman v0.2** : 65 mémoires RX, variante 48 sans aviation, publiée et immuable.
 - **Bretagne v0.1** : recherche uniquement, aucune publication.
 
+
+## Sprint 71 — Normandie v0.5 revalidée / Bretagne v0.1 candidat interne
+
+- **Normandie v0.5** reste à **142 mémoires**, avec **0 ajout éligible** : R3 manque toujours les 2 sessions Mortain, F5ZHA manque la réconciliation autoritative + terrain, F1ZOV reste en maintenance et F6ZES reste sans fréquence/mode prouvés.
+- **Bretagne v0.1** dispose désormais d'un **candidat interne de 135 mémoires RX**, non public : 16 PMR446 + 90 VHF maritime + 6 écoutes amateur + 2 appels amateur + 21 mémoires régionales dédupliquées.
+- Les canaux **64** (156.225 / 160.825 MHz) et **79** (156.975 / 161.575 MHz) sont présents comme **deux mémoires RX génériques chacun**. Aucun site Étel/Corsen n'est attribué sans preuve primaire explicite.
+- Les positions aviation 130–149 restent réservées, avec **0 fréquence aviation promue** tant que l'extraction SIA actuelle n'est pas validée.
+- Bretagne reste absente du registre public et des téléchargements publics.
 
 ## État final après Sprint 70
 

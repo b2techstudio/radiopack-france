@@ -94,6 +94,9 @@ jobs:
       - name: Test Sprint 65 current primary recheck
         run: python tests/test_sprint65_primary_recheck.py
 
+      - name: Test Sprint 66 technical inventory boundaries
+        run: python tests/test_sprint66_technical_inventory_boundaries.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

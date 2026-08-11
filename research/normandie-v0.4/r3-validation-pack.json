@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "status": "field_validation_pack_not_public",
-  "updated": "2026-08-10",
+  "updated": "2026-08-11",
   "purpose": "Fournir un mini-pack CHIRP RX-only dédié à la validation locale de F1ZBX / R3 Brocéliande depuis Mortain-Bocage, sans modifier le candidat interne Normandie v0.4 ni aucun pack public.",
   "station": "F1ZBX / R3 Brocéliande",
   "operator": "ARA35",
@@ -14,6 +14,7 @@
       "mode": "NFM",
       "tstep_khz": 12.5,
       "role": "primary R3 output coverage probe",
+      "pair_member": true,
       "comment": "R3 Broceliande sortie 145.675 - sonde principale RX Mortain - TX bloque"
     },
     {
@@ -23,6 +24,7 @@
       "mode": "NFM",
       "tstep_khz": 12.5,
       "role": "opportunistic R3 input listening",
+      "pair_member": true,
       "comment": "R3 Broceliande entree 145.075 - ecoute opportuniste RX - TX bloque"
     },
     {
@@ -32,20 +34,28 @@
       "mode": "NFM",
       "tstep_khz": 12.5,
       "role": "optional local receiver antenna sanity control",
+      "pair_member": false,
       "comment": "F5ZHY sortie 145.6875 - controle recepteur facultatif - TX bloque"
     }
   ],
   "validation": {
     "primary_probe_mhz": 145.675,
-    "input_probe_is_optional": true,
+    "input_probe_is_optional_for_field_gate": true,
     "control_frequency_is_optional": true,
     "ctcss_rx_filter_enabled": false,
     "minimum_independent_sessions": 2,
+    "field_sessions_are_evidence_not_memories": true,
+    "required_r3_pair_rx_memory_count": 2,
+    "required_r3_pair_memory_names": ["R3-OUT", "R3-IN"],
+    "required_r3_pair_frequencies_mhz": [145.075, 145.675],
+    "control_memory_is_part_of_r3_pair": false,
     "protocol_file": "research/normandie-v0.4/r3-mortain-field-validation.json"
   },
   "rules": {
     "standalone_validation_pack_only": true,
     "must_not_be_appended_to_internal_candidate_automatically": true,
+    "if_r3_gate_clears_both_distinct_pair_frequencies_remain_separate_rx_memories": true,
+    "field_session_count_never_creates_extra_memories": true,
     "names_max_10_characters": true,
     "chirp_duplex": "off",
     "chirp_offset": "0.000000",

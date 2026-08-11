@@ -112,7 +112,7 @@ assert resume["resume_rules"]["current_infrastructure_procurement_does_not_assig
 assert resume["resume_rules"]["current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter"] is True
 assert resume["resume_rules"]["secondary_source_convergence_does_not_become_primary_validation"] is True
 assert resume["resume_rules"]["current_display_badge_does_not_override_dated_verification_provenance"] is True
-assert resume["resume_rules"]["network_counting_units_must_not_be_arithmetically_reconciled_without_definition"] is True
+assert resume["resume_rules"]["network_counting_units_must_not_be_reconciled_without_definition"] is True
 assert resume["active_work"]["unresolved_priority"]["station"] == "F6ZES Sourdeval"
 assert resume["active_work"]["unresolved_priority"]["candidate_memory_delta"] == 0
 assert resume["bretagne_research_update"]["primary_current_channel79_transmitter_site_confirmed"] is False

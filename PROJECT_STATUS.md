@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **11 août 2026**  
-Sprint courant : **64**  
-État logique : **0.21.53**
+Sprint courant : **65**  
+État logique : **0.21.54**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md` et `research/sprint-64-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md` et `research/sprint-65-summary.md`.
 
 ## État public
 
@@ -35,9 +35,17 @@ Le snapshot capture l'état logique de revue. Le manifeste enregistre les SHA-25
 ## Dossiers Normandie encore bloqués
 
 - **R3 / F1ZBX** : paramètres opérateur confirmés sur 145.075 / 145.675 MHz. Si la porte est franchie, la paire représente exactement **2 mémoires RX**. La réception Mortain reste à démontrer par **2 sessions** indépendantes sur la sortie identifiée 145.675 MHz ; ces sessions sont des preuves et ne changent pas le nombre de mémoires.
-- **F5ZHA Laval** : le REF courant conserve 145.4675 / 432.575 MHz. La valeur conflictuelle RepeaterBook 431.4125 MHz est qualifiée secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. Une source locale actuelle ou autoritative équivalente et la couverture utile Mortain restent requises.
+- **F5ZHA Laval** : recontrôle Sprint 65, le REF courant affiche toujours F5ZHA actif sur **145.4675 / 432.575 MHz**. La valeur conflictuelle RepeaterBook 431.4125 MHz reste secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. Une source locale actuelle ou autoritative équivalente et la couverture utile Mortain restent requises.
 - **F1ZOV** : recontrôle du 11 août 2026, l'exploitant local F6KFW l'indique toujours **En Maintenance** sur 430.375 / 431.975 MHz ; le statut exploitant local reste prioritaire.
-- **F6ZES Sourdeval** : le REF confirme site/responsable/locator/altitude mais laisse état, bande, émission, réception et mode vides. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+- **F6ZES Sourdeval** : recontrôle Sprint 65, le REF confirme site/responsable/locator/altitude mais laisse toujours état, bande, émission, réception et mode vides. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+
+### Recontrôle primaire courant — Sprint 65
+
+`research/sprint-65-primary-recheck.json` enregistre la passe actuelle sans toucher au candidat.
+
+- F5ZHA : paire REF 145.4675 / 432.575 MHz maintenue comme paire de travail ; réconciliation locale/autoritative toujours incomplète et terrain toujours requis.
+- F6ZES : F1SMB, `IN98MR93XV` et 230 m restent présents, mais fréquence/mode/état opérationnel restent absents.
+- Résultat : **0 porte franchie, 0 ajout éligible, candidat/preview 142/142, plafond 147, revue 3/9, 6 blocages**.
 
 ### Contrat deux mémoires RX — Sprint 64
 
@@ -63,6 +71,16 @@ Le contrat ne modifie ni candidat, ni `promotion-gates.json`, ni pack public.
 `research/normandie-v0.4/mortain-adjacent-ref-scan.json` recontrôle les départements **35, 50, 53 et 61**. Résultat : **0 nouveau relais analogique actif non déjà suivi**, donc delta candidat **0**.
 
 Ce scan est une preuve d'inventaire, pas une preuve de réception. Il ne modifie ni candidat ni pack public.
+
+## Bretagne — recontrôle primaire Sprint 65
+
+Trois frontières sont désormais rafraîchies avec leurs dates courantes :
+
+- la page du ministère chargée de la mer, mise à jour le **19 juin 2026**, maintient que le canal 16 annonce les diffusions météo CROSS sur **79 et 80**, et que les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan ; elle ne nomme aucun site Ch64 ;
+- la page du CROSS Étel, mise à jour le **24 novembre 2025**, maintient les vacations annoncées sur 16 puis diffusées sur 79/80 et la diffusion continue **Étel + Chassiron sur Ch63**, sans site Ch64 ;
+- la page du CROSS Corsen, mise à jour le **24 mars 2026**, confirme le réseau VHF/MHF permanent et les bulletins météo diffusés depuis des stations littorales, sans mapping **Ch79 ↔ station**.
+
+Règles renforcées : une déclaration régionale de canal ne nomme pas automatiquement son émetteur et la confirmation d'un réseau CROSS ne mappe pas automatiquement un canal vers une station.
 
 ## Bretagne — CROSS Corsen canal 79
 
@@ -93,6 +111,12 @@ L'offre technique DIRM de juillet 2026 parle de **17 stations radio** maintenues
 
 La paire Ch64 **156.225 / 160.825 MHz** est verrouillée comme **2 mémoires RX distinctes** si Ch64 devient publiable. Elle était déjà dans la recherche Bretagne : delta RF actuel **0**.
 
+## Guide Marine 2026
+
+La page Météo-France datée du 5 août 2026 indique toujours que le Guide Marine contient les horaires, fréquences radio et contenus des bulletins VHF. Le lien direct du PDF 2026 a été retenté le 11 août 2026 ; le workflow retourne toujours `cache miss`.
+
+Conséquence : contenu non extrait, aucune capture PDF disponible, aucune inférence Ch64 et aucune attribution Ch79.
+
 ## Commandes de reprise
 
 ```powershell
@@ -111,6 +135,7 @@ python tests\test_sprint61_research.py
 python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
+python tests\test_sprint65_primary_recheck.py
 python tests\test_etel_network_research.py
 
 git status
@@ -144,6 +169,8 @@ python tools\record_normandie_v04_f5zha_observation.py --help
 - une convergence documentaire locale sur un canal ne réfute pas automatiquement un autre canal mentionné par une source primaire conflictuelle ;
 - l'absence d'une donnée dans un document local courant n'est pas automatiquement une preuve d'arrêt ;
 - une source primaire identifiée mais non extractible n'est pas une preuve négative ;
+- une déclaration régionale actuelle sur un canal ne permet pas d'identifier automatiquement son site émetteur ;
+- la confirmation d'un réseau CROSS courant ne permet pas de mapper automatiquement un canal vers une station ;
 - une infrastructure radio actuelle ne permet pas d'attribuer un canal précis ;
 - une affectation historique primaire ne vaut pas validation opérationnelle actuelle ;
 - une source périmée bloque une revue mais ne prouve jamais un arrêt ;

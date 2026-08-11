@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-11",
-  "current_sprint": 64,
-  "state_version": "0.21.53",
+  "current_sprint": 65,
+  "state_version": "0.21.54",
   "public_packs": {
     "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
     "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
@@ -76,6 +76,16 @@
       "r3_control_memory_is_pair_member": false,
       "r3_current_candidate_memory_delta": 0,
       "r3_memory_delta_if_gate_clears": 2
+    },
+    "latest_primary_recheck": {
+      "file": "research/sprint-65-primary-recheck.json",
+      "checked_on": "2026-08-11",
+      "f5zha_current_ref_pair_mhz": [145.4675, 432.575],
+      "f5zha_current_ref_active": true,
+      "f5zha_authoritative_reconciliation_complete": false,
+      "f6zes_frequency_mode_resolved": false,
+      "normandie_gate_cleared_count": 0,
+      "candidate_memory_delta": 0
     }
   },
   "review_handoff": {
@@ -117,7 +127,17 @@
     "etel_network_maintenance_station_count_2026": 17,
     "etel_annual_report_2025_vhf_station_count": 16,
     "etel_annual_report_2025_mf_station_count": 2,
-    "etel_network_counts_must_not_be_arithmetically_reconciled_without_definition": true
+    "etel_network_counts_must_not_be_arithmetically_reconciled_without_definition": true,
+    "latest_primary_recheck_file": "research/sprint-65-primary-recheck.json",
+    "ministry_vhf_statement_page_updated": "2026-06-19",
+    "ministry_current_channels63_and64_permanent_in_morbihan": true,
+    "ministry_current_channel64_site_named": false,
+    "cross_etel_page_updated": "2025-11-24",
+    "cross_etel_current_etel_chassiron_channel63": true,
+    "cross_etel_current_channel64_site_named": false,
+    "cross_corsen_page_updated": "2026-03-24",
+    "cross_corsen_current_coastal_station_network_confirmed": true,
+    "cross_corsen_current_channel79_site_mapping_present": false
   },
   "sources_of_truth": [
     "research/normandie-v0.4/pack-plan.json",
@@ -138,7 +158,8 @@
     "research/bretagne-v0.1/etel-channel64-evidence.json",
     "research/bretagne-v0.1/corsen-channel79-evidence.json",
     "research/sprint-63-source-revalidation.json",
-    "research/sprint-64-dual-rx-contract.json"
+    "research/sprint-64-dual-rx-contract.json",
+    "research/sprint-65-primary-recheck.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -166,7 +187,8 @@
     "run_sprint61_research_test": "python tests/test_sprint61_research.py",
     "run_sprint62_primary_reference_test": "python tests/test_sprint62_primary_reference_boundaries.py",
     "run_sprint63_blocker_revalidation_test": "python tests/test_sprint63_blocker_revalidation.py",
-    "run_sprint64_dual_rx_contract_test": "python tests/test_sprint64_dual_rx_contract.py"
+    "run_sprint64_dual_rx_contract_test": "python tests/test_sprint64_dual_rx_contract.py",
+    "run_sprint65_primary_recheck_test": "python tests/test_sprint65_primary_recheck.py"
   },
   "recent_sprints": {
     "55": "Deterministic non-public review snapshot",
@@ -178,7 +200,8 @@
     "61": "CROSS Etel channel 64 primary-source conflict, Corsen primary revalidation boundary, and adjacent REF analog scan",
     "62": "Meteo-France Guide Marine primary-reference target, Etel channel 63 operational convergence boundary, and Corsen current infrastructure versus historical/current channel assignment separation",
     "63": "Current blocker revalidation: F1ZOV still in operator maintenance, F5ZHA RepeaterBook conflict dated as stale secondary without clearing authoritative/field gates, F6ZES still unresolved, Guide Marine PDF retry still unread",
-    "64": "Dual RX contract: R3 uses two pair memories independently of two field sessions; Etel Ch64 and Corsen Ch79 each retain both maritime RX directions while publication gates stay closed"
+    "64": "Dual RX contract: R3 uses two pair memories independently of two field sessions; Etel Ch64 and Corsen Ch79 each retain both maritime RX directions while publication gates stay closed",
+    "65": "Current primary-source recheck: Ministry regional VHF statement, local CROSS Etel/Corsen boundaries, F5ZHA current REF pair, F6ZES unresolved; no site inference or promotion"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
@@ -198,6 +221,8 @@
     "local_channel63_convergence_does_not_disprove_channel64": true,
     "current_radio_infrastructure_does_not_imply_channel_assignment": true,
     "historical_primary_channel_assignment_is_not_current_validation": true,
+    "current_regional_channel_statement_does_not_identify_transmitter_site": true,
+    "current_cross_network_statement_does_not_map_channel_to_station": true,
     "stale_source_is_not_negative_operational_evidence": true,
     "stale_source_blocks_release_review_completion": true,
     "unresolved_frequency_must_not_be_guessed": true,

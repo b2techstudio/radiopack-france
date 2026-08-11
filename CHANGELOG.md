@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.21.55 - 2026-08-11
+
+- **Sprint 66** : recontrôle des inventaires techniques capables de relier stations et canaux, sans abaisser les portes de publication.
+- CROSS Étel : l'offre DIRM `2026-2341297` confirme **17 stations radio** maintenues de Penmarc'h à Biarritz dans un contexte MHF/VHF, mais sans noms de stations ni canaux ; Ch64 reste sans site attribué.
+- CROSS Corsen : Stiff/Ouessant reste revalidé comme infrastructure radio actuelle ; le marché `DGAMPA-SNC1-2025-03_STIFF` confirme un projet de rénovation 2026 sans mapping Ch79. Une source secondaire non datée restitue Fréhel/Bodic/Batz/Stiff/Raz sur Ch79 mais reste une piste, pas une validation primaire actuelle.
+- F5ZHA : ARAM53 est identifiable comme association active, mais aucune publication technique locale actuelle exploitée ne valide la paire ; l'existence associative ne ferme pas le conflit. F6ZES reste sans fréquence/mode/état exploitable.
+- Guide Marine 2026 : nouvelle tentative de lecture toujours en `cache miss`; aucune inférence Ch64/Ch79 depuis un PDF non lu.
+- Mise à jour de `corsen-channel79-evidence.json` (schéma 1.2) et `etel-channel64-evidence.json` (schéma 1.1), ajout de `research/sprint-66-technical-inventory-boundaries.json` et `research/sprint-66-summary.md`.
+- Ajout de `tests/test_sprint66_technical_inventory_boundaries.py`, intégration CI, passage du point de reprise au **Sprint 66 / 0.21.55** et maintien des anciens tests comme garde-fous historiques.
+- État Normandie v0.4 inchangé : **142 mémoires**, preview 142, plafond 147, revue **3/9**, **6 blocages**, **0 ajout éligible**.
+- État public inchangé : Normandie v0.3.1 **139**, Annecy–Alpes–Léman v0.2 **65/48**, Bretagne non publique.
+
 ## 0.21.54 - 2026-08-11
 
 - **Sprint 65** : recontrôle daté des sources primaires encore utiles à F5ZHA/F6ZES et aux dossiers CROSS Étel Ch64 / Corsen Ch79, sans promotion ni mutation publique.

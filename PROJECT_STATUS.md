@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **11 août 2026**  
-Sprint courant : **63**  
-État logique : **0.21.52**
+Sprint courant : **64**  
+État logique : **0.21.53**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md` et `research/sprint-63-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md` et `research/sprint-64-summary.md`.
 
 ## État public
 
@@ -34,10 +34,20 @@ Le snapshot capture l'état logique de revue. Le manifeste enregistre les SHA-25
 
 ## Dossiers Normandie encore bloqués
 
-- **R3 / F1ZBX** : paramètres opérateur confirmés sur 145.075 / 145.675 MHz ; réception Mortain encore à démontrer par au moins deux sessions indépendantes.
-- **F5ZHA Laval** : le REF courant conserve 145.4675 / 432.575 MHz. La valeur conflictuelle RepeaterBook 431.4125 MHz est maintenant mieux qualifiée : sa page de vérification par âge affiche **2017-02-17** et `Off-Air`. Ce conflit secondaire stale ne remplace cependant pas l'exigence d'une source locale actuelle ou autoritative équivalente, et la couverture utile Mortain reste non validée.
-- **F1ZOV** : recontrôle du 11 août 2026, l'exploitant local F6KFW l'indique toujours **En Maintenance** sur 430.375 / 431.975 MHz ; le statut exploitant local reste prioritaire sur le REF général.
-- **F6ZES Sourdeval** : recontrôle ciblé du 11 août 2026. Le REF confirme toujours site/responsable/locator/altitude mais laisse état, bande, émission, réception et mode vides. Les recherches ciblées n'ont pas fourni de seconde source actuelle de fréquence/mode. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+- **R3 / F1ZBX** : paramètres opérateur confirmés sur 145.075 / 145.675 MHz. Si la porte est franchie, la paire représente exactement **2 mémoires RX**. La réception Mortain reste à démontrer par **2 sessions** indépendantes sur la sortie identifiée 145.675 MHz ; ces sessions sont des preuves et ne changent pas le nombre de mémoires.
+- **F5ZHA Laval** : le REF courant conserve 145.4675 / 432.575 MHz. La valeur conflictuelle RepeaterBook 431.4125 MHz est qualifiée secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. Une source locale actuelle ou autoritative équivalente et la couverture utile Mortain restent requises.
+- **F1ZOV** : recontrôle du 11 août 2026, l'exploitant local F6KFW l'indique toujours **En Maintenance** sur 430.375 / 431.975 MHz ; le statut exploitant local reste prioritaire.
+- **F6ZES Sourdeval** : le REF confirme site/responsable/locator/altitude mais laisse état, bande, émission, réception et mode vides. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+
+### Contrat deux mémoires RX — Sprint 64
+
+`research/sprint-64-dual-rx-contract.json` sépare explicitement le nombre de mémoires du nombre de preuves terrain.
+
+- **R3** : `R3-OUT` 145.675 et `R3-IN` 145.075 sont les deux membres de paire. `CTRL-ZHY` 145.6875 est seulement un contrôle facultatif hors paire. Deux sessions de terrain sont toujours nécessaires, mais si la porte passe le delta reste **+2 mémoires**, pas +4.
+- **CROSS Étel Ch64** : 156.225 + 160.825 MHz = **2 mémoires RX** si le canal devient publiable ; conflit primaire/site toujours non résolu, delta actuel 0.
+- **CROSS Corsen Ch79** : 156.975 + 161.575 MHz = **2 mémoires RX** si le canal devient publiable ; attribution primaire actuelle de l'émetteur toujours non résolue, delta actuel 0.
+
+Le contrat ne modifie ni candidat, ni `promotion-gates.json`, ni pack public.
 
 ### Revalidation des blocages — Sprint 63
 
@@ -48,16 +58,9 @@ Le snapshot capture l'état logique de revue. Le manifeste enregistre les SHA-25
 - F6ZES : aucun champ fréquence/mode nouveau, delta **0**.
 - R3 : aucune nouvelle observation terrain dans le dépôt, delta **0**.
 
-Cette passe ne modifie ni `promotion-gates.json`, ni le candidat interne, ni les artefacts publics.
-
 ### Scan REF adjacent — Sprint 61
 
 `research/normandie-v0.4/mortain-adjacent-ref-scan.json` recontrôle les départements **35, 50, 53 et 61**. Résultat : **0 nouveau relais analogique actif non déjà suivi**, donc delta candidat **0**.
-
-- 35 : R3/F1ZBX reste le cas analogique actif pertinent ; R71/F5ZEB conserve le conflit REF/opérateur déjà documenté.
-- 50 : F5ZHY, F1ZBL et F1ZOV sont déjà suivis ; F6ZES reste incomplet.
-- 53 : F6ZCE et F5ZHA restent les cas analogiques pertinents ; F5ZTQ est arrêté.
-- 61 : les lignes courantes F1ZKC et F1ZPR sont numériques C4FM/DMR et n'entrent pas dans le profil analogique.
 
 Ce scan est une preuve d'inventaire, pas une preuve de réception. Il ne modifie ni candidat ni pack public.
 
@@ -65,20 +68,15 @@ Ce scan est une preuve d'inventaire, pas une preuve de réception. Il ne modifie
 
 `research/bretagne-v0.1/corsen-channel79-evidence.json` reste le dossier de vérité courant.
 
-Le contexte primaire actuel confirme le réseau VHF/MF Corsen sans identifier le site actuel du canal 79. Une source locale actuelle du Club de Voile de la Baie d'Erquy associe le canal 79 à **Cap Fréhel** et **Bodic** avec des horaires de diffusion. Cette donnée reste une **piste secondaire**, pas une validation primaire : aucune attribution de site n'est promue.
+Le contexte primaire actuel confirme le réseau VHF/MF Corsen sans identifier le site actuel du canal 79. Une source locale actuelle du Club de Voile de la Baie d'Erquy associe le canal 79 à **Cap Fréhel** et **Bodic** avec des horaires de diffusion. Cette donnée reste une **piste secondaire**, pas une validation primaire.
 
-Sprint 62 qualifie séparément deux infrastructures actuelles :
+- **Cap Fréhel** : infrastructure CROSS actuelle vérifiée ;
+- **Stiff / Ouessant** : équipements radio actuels vérifiés ;
+- ces infrastructures **n'attribuent aucun canal**.
 
-- **Cap Fréhel** : la DIRM confirme que le CROSS Corsen dispose au phare d'équipements de suivi et de liaison avec les navires ;
-- **Stiff / Ouessant** : l'offre officielle 2026 et le marché DGAMPA de rénovation confirment des équipements de radiocommunications/radio actuellement nécessaires au CROSS Corsen.
+Le bilan officiel CROSS Corsen 2025 et le Guide Marine 2026 restent identifiés mais non exploitables dans le workflow courant. Une source non lue n'est pas une preuve négative.
 
-Ces preuves d'infrastructure **n'attribuent aucun canal**. Une source primaire historique de 2003 documente l'usage du canal 79 par Ouessant Traffic / CROSS Corsen et l'architecture radio historique autour du Stiff/Pointe du Raz/Corsen ; elle reste historique et ne vaut pas validation 2026.
-
-Le bilan officiel CROSS Corsen 2025, publié le 2 mars 2026, reste identifié mais son PDF de 14,6 Mio n'a pas pu être chargé par l'outil de lecture courant ; son contenu canal/site n'est donc pas utilisé. Cette impossibilité d'extraction n'est pas une preuve négative.
-
-Météo-France présente depuis le **5 août 2026** son Guide Marine comme contenant notamment horaires, fréquences radio et contenu des bulletins VHF. Le lien direct du Guide Marine 2026 a été identifié, mais un nouveau chargement le 11 août 2026 a encore échoué dans le workflow web (`cache miss`). Le contenu n'a pas été extrait et aucune capture PDF n'a pu être obtenue : aucune attribution Ch79 n'en est déduite.
-
-Les deux fréquences paired RX du canal 79, **156.975 / 161.575 MHz**, étaient déjà dans la recherche Bretagne : aucun delta mémoire RF.
+La paire Ch79 **156.975 / 161.575 MHz** est verrouillée comme **2 mémoires RX distinctes** si Ch79 devient publiable. Les deux fréquences étaient déjà dans la recherche Bretagne : aucun delta mémoire RF actuel.
 
 ## Bretagne — CROSS Étel canal 64
 
@@ -89,13 +87,11 @@ Les deux fréquences paired RX du canal 79, **156.975 / 161.575 MHz**, étaient 
 - le planning météo actuellement lié par le CROSS liste les émetteurs/canaux et ne mentionne pas 64 ;
 - le bilan officiel 2025 décrit **16 stations VHF + 2 MF**, nomme les émetteurs météo réguliers et les stations renforcées **Étel/Chassiron/Ferret sur 63**, sans mention de canal 64.
 
-Sprint 62 formalise donc une **convergence opérationnelle locale sur Ch63** : trois sources opérationnelles locales actuelles exploitées mentionnent explicitement 63, aucune de ces trois ne mentionne 64. Cette convergence renforce le conflit avec la page ministérielle générique, mais **ne prouve ni que Ch64 fonctionne actuellement, ni qu'il est arrêté**. Aucun site Ch64 n'est attribué.
+La **convergence opérationnelle locale sur Ch63** ne prouve ni que Ch64 fonctionne actuellement, ni qu'il est arrêté. Aucun site Ch64 n'est attribué.
 
-Le **Guide Marine 2026** reste une cible primaire prioritaire. Son URL PDF directe est maintenant connue mais le nouveau chargement du 11 août 2026 a échoué ; un PDF non lu ne produit aucune conclusion Ch64.
+L'offre technique DIRM de juillet 2026 parle de **17 stations radio** maintenues ; ce nombre ne doit pas être réconcilié arithmétiquement avec « 16 VHF + 2 MF » sans définition commune.
 
-L'offre technique DIRM de juillet 2026 parle par ailleurs de **17 stations radio** maintenues de Penmarc'h à Biarritz. Ce nombre ne doit pas être réconcilié arithmétiquement avec « 16 VHF + 2 MF » sans définition commune des unités de comptage.
-
-La paire RX 64 **156.225 / 160.825 MHz** était déjà dans la recherche Bretagne : delta RF **0**.
+La paire Ch64 **156.225 / 160.825 MHz** est verrouillée comme **2 mémoires RX distinctes** si Ch64 devient publiable. Elle était déjà dans la recherche Bretagne : delta RF actuel **0**.
 
 ## Commandes de reprise
 
@@ -114,6 +110,7 @@ python tests\test_sprint60_revalidation.py
 python tests\test_sprint61_research.py
 python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_sprint63_blocker_revalidation.py
+python tests\test_sprint64_dual_rx_contract.py
 python tests\test_etel_network_research.py
 
 git status
@@ -138,6 +135,9 @@ python tools\record_normandie_v04_f5zha_observation.py --help
 - ne jamais réécrire une version publiée ;
 - le statut opérateur local prime pour l'état opérationnel courant ;
 - une observation radio ne ferme pas un conflit de source ;
+- **le nombre de sessions terrain ne définit jamais le nombre de mémoires** ;
+- une paire vérifiée de deux fréquences distinctes conserve **2 mémoires RX** après franchissement des portes ;
+- une mémoire de contrôle facultative n'est pas membre de la paire ;
 - une source secondaire actuelle peut prioriser une recherche mais ne remplace pas une validation primaire requise ;
 - une source secondaire stale ne remplace pas la réconciliation autoritative explicitement exigée par une porte ;
 - un conflit entre sources primaires actuelles doit être réconcilié avant promotion ;

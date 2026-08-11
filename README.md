@@ -2,7 +2,7 @@
 
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 65 / 0.21.54
+## État actuel — Sprint 66 / 0.21.55
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -13,7 +13,7 @@ Packs publics immuables :
 
 Recherche : **Normandie v0.4** à **142 mémoires** internes, plafond de travail connu **147 mémoires**, **Bretagne v0.1** non publique et Annecy–Alpes–Léman v0.3 non publique.
 
-Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md` et `research/sprint-65-summary.md`.
+Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md` et `research/sprint-66-summary.md`.
 
 ## Règles permanentes
 
@@ -64,6 +64,7 @@ research/normandie-v0.4/mortain-adjacent-ref-scan.json
 research/sprint-63-source-revalidation.json
 research/sprint-64-dual-rx-contract.json
 research/sprint-65-primary-recheck.json
+research/sprint-66-technical-inventory-boundaries.json
 ```
 
 Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 431.2500 MHz aux 139 mémoires figées de v0.3.1.
@@ -74,6 +75,18 @@ Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 
 - **F5ZHA** : recontrôle Sprint 65, le REF courant continue d'afficher F5ZHA actif avec **145.4675 / 432.575 MHz**. La valeur conflictuelle RepeaterBook 431.4125 MHz reste classée secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. La porte exige toujours une source locale actuelle ou autoritative équivalente et une validation de pertinence/réception depuis Mortain.
 - **F1ZOV** : 431.975 MHz reste bloquée ; recontrôle du 11 août 2026, le Radio Club Nord Cotentin marque toujours le relais **En Maintenance**.
 - **F6ZES Sourdeval** : recontrôle Sprint 65, le REF confirme toujours site/responsable/locator/altitude mais ne renseigne toujours ni fréquence, ni mode, ni état opérationnel exploitable. Delta candidat **0** et `sourdeval_must_not_be_guessed: true`.
+
+### Inventaires techniques — Sprint 66
+
+`research/sprint-66-technical-inventory-boundaries.json` pousse les recherches vers les inventaires nominatifs sans abaisser les portes de preuve.
+
+- **F5ZHA** : l'association locale ARAM53 est identifiable comme active en 2026, mais son existence ne valide aucune fréquence ; aucune publication technique locale actuelle exploitée ne ferme la réconciliation.
+- **F6ZES** : toujours aucun champ fréquence/mode/état exploitable ; delta 0, aucune conjecture.
+- **Étel** : une offre DIRM 2026 confirme **17 stations radio** maintenues de Penmarc'h à Biarritz dans un contexte MHF/VHF, mais ne donne ni inventaire nominatif ni canaux ; aucun site Ch64 n'en découle.
+- **Corsen** : le Stiff est encore revalidé comme infrastructure radio actuelle et par un marché de rénovation 2026, sans mapping Ch79. Une source secondaire non datée restitue Fréhel/Bodic/Batz/Stiff/Raz sur Ch79 : piste de recherche seulement, jamais validation primaire actuelle.
+- Le Guide Marine 2026 a de nouveau retourné `cache miss` : aucune inférence depuis un PDF non lu.
+
+Résultat : **0 porte franchie, 0 ajout éligible, candidat/preview 142/142, plafond 147, revue 3/9, 6 blocages**.
 
 ### Recontrôle primaire — Sprint 65
 
@@ -141,6 +154,10 @@ python tools\run_normandie_v04_publication_dry_run.py --baseline <manifest.json>
 
 Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`.
 
+### Inventaire technique — Sprint 66
+
+Le périmètre technique courant est mieux borné sans attribution nouvelle : l'offre DIRM `2026-2341297` confirme les **17 stations radio** du CROSS Étel et le contexte MHF/VHF, mais pas leurs noms/canaux ; côté Corsen, Stiff reste une infrastructure radio actuelle sans mapping Ch79. La chaîne secondaire Fréhel/Bodic/Batz/Stiff/Raz reste une cible de recherche uniquement.
+
 ### Recontrôle primaire — Sprint 65
 
 La page du ministère chargée de la mer, mise à jour le **19 juin 2026**, maintient actuellement deux informations distinctes : le canal 16 annonce les diffusions météo CROSS sur **79 et 80**, et les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan. Cette déclaration reste régionale et **ne nomme aucun site Ch64**.
@@ -190,6 +207,7 @@ L'offre technique DIRM 2026 mentionne **17 stations radio** maintenues ; ce nomb
 - [research/sprint-63-summary.md](research/sprint-63-summary.md)
 - [research/sprint-64-summary.md](research/sprint-64-summary.md)
 - [research/sprint-65-summary.md](research/sprint-65-summary.md)
+- [research/sprint-66-summary.md](research/sprint-66-summary.md)
 
 Architecture publique : `website/src/lib/chirpPack.ts`, `website/src/lib/annecyPack.ts`, `website/src/lib/packRegistry.ts`.
 
@@ -209,6 +227,7 @@ python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
+python tests\test_sprint66_technical_inventory_boundaries.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
@@ -230,6 +249,7 @@ python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
+python tests\test_sprint66_technical_inventory_boundaries.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py

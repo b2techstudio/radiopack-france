@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "status": "secondary_current_clues_recorded_primary_current_channel79_site_validation_pending",
-  "updated": "2026-08-10",
+  "updated": "2026-08-11",
   "cross": "CROSS Corsen",
   "channel": 79,
   "paired_rx": {
@@ -16,7 +16,7 @@
       "title": "CROSS Corsen",
       "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
       "page_updated": "2026-03-24",
-      "accessed": "2026-08-10",
+      "accessed": "2026-08-11",
       "supports": "Le CROSS Corsen exploite un réseau radio VHF/MF permanent et diffuse les bulletins météo via ses stations côtières.",
       "channel_79_transmitter_site_identified": false
     },
@@ -25,18 +25,41 @@
       "title": "CROSS Corsen : bilan 2025",
       "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/cross-corsen-bilan-2025-a1709.html",
       "published": "2026-03-02",
-      "accessed": "2026-08-10",
+      "accessed": "2026-08-11",
       "supports": "Une source primaire actuelle de bilan 2025 existe et référence un PDF officiel de 14,6 Mio.",
       "pdf_channel_content_extracted_in_current_workflow": false,
       "channel_79_transmitter_site_identified": false,
       "note": "Le PDF officiel a été identifié mais n'a pas pu être chargé par l'outil de lecture courant en raison de sa taille. Il n'est donc pas utilisé pour inférer un site ou un canal. Une indisponibilité d'extraction n'est pas une preuve négative."
     },
     {
+      "authority": "DIRM NAMO",
+      "title": "Restauration de la lanterne du phare du Cap Fréhel",
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/restauration-de-la-lanterne-du-phare-du-cap-frehel-a1473.html",
+      "published": "2023-11-30",
+      "updated": "2023-12-11",
+      "accessed": "2026-08-11",
+      "supports": "Le CROSS Corsen dispose au phare du Cap Fréhel d'équipements de suivi et de liaison avec les navires, indispensables à la surveillance du trafic et à la coordination des secours.",
+      "current_radio_or_liaison_infrastructure_verified": true,
+      "channel_79_transmitter_site_identified": false
+    },
+    {
       "authority": "Direction Interrégionale de la Mer Nord Atlantique Manche Ouest / Choisir le service public",
       "title": "Directeur/trice du CROSS Corsen - réf. 2026-2244363",
       "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/2026-2244363/",
-      "accessed": "2026-08-10",
+      "accessed": "2026-08-11",
       "supports": "Le centre principal bénéficie de la Tour du Stiff à Ouessant, qui abrite radars et équipements de radiocommunications.",
+      "current_radio_infrastructure_verified": true,
+      "channel_79_transmitter_site_identified": false
+    },
+    {
+      "authority": "DGAMPA / PLACE",
+      "title": "Marché de conception/réalisation pour la rénovation de la tour radar du Stiff (29)",
+      "reference": "DGAMPA-SNC1-2024-03-CR_STIFF",
+      "url": "https://www.marches-publics.gouv.fr/index.php?id=2495216&orgAcronyme=d4t&page=Entreprise.EntrepriseDemandeTelechargementDce",
+      "deadline": "2025-01-17",
+      "accessed": "2026-08-11",
+      "supports": "La vigie du Stiff n'abrite aujourd'hui que les équipements radio et informatiques nécessaires au CROSS Corsen pour l'exercice de ses missions, en plus des équipements radar décrits séparément.",
+      "current_radio_infrastructure_verified": true,
       "channel_79_transmitter_site_identified": false
     },
     {
@@ -44,9 +67,20 @@
       "title": "Assistance à navire en difficulté - Intervention coordonnée au large de la Pointe du Raz",
       "url": "https://www.premar-atlantique.gouv.fr/communiques-presse/assistance-a-navire-en-difficulte-intervention-coordonnee-au-large-de-la-pointe-du-raz",
       "evidence_date": "2025-09-21",
-      "accessed": "2026-08-10",
+      "accessed": "2026-08-11",
       "supports": "Un contact VHF opérationnel du CROSS Corsen dans le secteur nord de la Pointe du Raz.",
       "channel_79_transmitter_site_identified": false
+    }
+  ],
+  "historical_primary_channel79_context": [
+    {
+      "authority": "Légifrance",
+      "date": "2003",
+      "source_class": "historical_primary",
+      "supports": "La documentation réglementaire historique associe les informations régulières et météorologiques d'Ouessant Traffic / CROSS Corsen au canal VHF 79 après appel sur 16 et documente des équipements radio au Stiff ainsi que des installations à la Pointe du Raz et à Corsen.",
+      "current_site_channel_validation": false,
+      "historical_evidence_can_promote_current_site_assignment": false,
+      "note": "Cette source est utile pour comprendre l'architecture historique et expliquer pourquoi Stiff/Pointe du Raz restent des cibles de revalidation. Elle ne prouve pas l'affectation 2026 du canal 79."
     }
   ],
   "secondary_current_clues": [
@@ -54,7 +88,7 @@
       "source": "Club de Voile de la Baie d'Erquy",
       "title": "Météo pour Erquy : Prévisions - Par V.H.F.",
       "url": "https://cvberquy.org/erquy/meteo/avoirPrevisions.xml",
-      "accessed": "2026-08-10",
+      "accessed": "2026-08-11",
       "source_class": "local_secondary_current",
       "reported_channel": 79,
       "reported_sites": [
@@ -70,22 +104,40 @@
       "scope_note": "Cette page locale est utile comme indice actuel pour la côte d'Erquy. Elle ne constitue pas l'inventaire primaire complet des stations Corsen et ne suffit pas à attribuer définitivement le canal 79 à ces sites dans RadioPack."
     }
   ],
+  "primary_reference_targets": [
+    {
+      "authority": "Météo-France",
+      "title": "Les guides de Météo-France",
+      "url": "https://meteofrance.fr/actualite/publications/les-collections/les-guides-de-meteo-france",
+      "page_updated": "2026-08-05",
+      "accessed": "2026-08-11",
+      "supports": "La page indique que le Guide Marine contient notamment les horaires, fréquences radio et contenus des bulletins diffusés par VHF.",
+      "guide_2026_url": "https://meteofrance.fr/sites/default/files/files/editorial/Guide%20MARINE%202026.pdf",
+      "guide_pdf_content_extracted_in_current_workflow": false,
+      "channel79_site_conclusion_from_unread_guide": null,
+      "note": "Le Guide Marine 2026 est une cible primaire de réconciliation, mais son contenu n'a pas été extrait dans ce workflow ; aucune attribution de site ne peut en être déduite."
+    }
+  ],
   "primary_revalidation_search": {
-    "queries_rechecked": ["Cap Fréhel canal 79", "Bodic canal 79", "Batz canal 79"],
-    "official_domains_checked": ["dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr", "premar-atlantique.gouv.fr", "choisirleservicepublic.gouv.fr"],
+    "queries_rechecked": ["Cap Fréhel canal 79", "Bodic canal 79", "Batz canal 79", "Stiff Ouessant canal 79", "Pointe du Raz canal 79"],
+    "official_domains_checked": ["dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr", "premar-atlantique.gouv.fr", "choisirleservicepublic.gouv.fr", "marches-publics.gouv.fr", "legifrance.gouv.fr", "meteofrance.fr"],
     "direct_primary_channel79_site_match_found": false,
     "search_failure_is_negative_evidence": false
   },
   "assessment": {
     "primary_current_channel79_transmitter_site_confirmed": false,
+    "current_primary_infrastructure_sites_verified": ["Cap Fréhel", "Stiff / Ouessant"],
     "secondary_clue_sites": ["Cap Fréhel", "Bodic"],
+    "historical_primary_channel79_context_exists": true,
     "priority_for_primary_revalidation": ["Cap Fréhel", "Bodic", "Batz", "Stiff / Ouessant", "Pointe du Raz"],
     "channel79_frequency_pair_is_already_verified": true,
     "site_assignment_can_be_promoted": false,
-    "reason": "La piste Cap Fréhel/Bodic reste concrète grâce à une source locale actuelle. Les sources primaires actuelles recontrôlées confirment le réseau Corsen et le Stiff comme infrastructure radio, mais aucune source exploitable dans cette passe ne rattache explicitement le canal 79 à Cap Fréhel, Bodic ou au Stiff."
+    "reason": "Cap Fréhel et le Stiff sont désormais séparément confirmés comme infrastructures actuelles utiles au CROSS Corsen. La documentation historique primaire explique le rôle ancien du canal 79 et du Stiff, et une source locale actuelle pointe Cap Fréhel/Bodic. Mais aucune source primaire actuelle exploitable ne rattache explicitement le canal 79 à Cap Fréhel, Bodic, Batz, Stiff ou Pointe du Raz : aucune attribution de site n'est donc promue."
   },
   "rules": {
     "secondary_current_clue_is_not_primary_validation": true,
+    "historical_primary_channel_assignment_is_not_current_validation": true,
+    "unread_primary_reference_is_not_negative_evidence": true,
     "primary_pdf_identified_but_unread_is_not_negative_evidence": true,
     "current_radio_infrastructure_does_not_imply_channel_assignment": true,
     "current_sector_vhf_contact_does_not_identify_transmitter_site": true,

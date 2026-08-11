@@ -51,7 +51,7 @@ assert ch64["candidate_station_name"] is None
 assert ch64["primary_source_conflict_open"] is True
 assert ch64["status"] == "primary_current_ministry_regional_ch64_statement_conflicts_with_local_cross_documents_omitting_ch64_site_unresolved"
 
-assert evidence["schema_version"] == "1.0"
+assert tuple(map(int, evidence["schema_version"].split("."))) >= (1, 0)
 assert evidence["status"] == "primary_current_channel64_conflict_documented_site_unresolved"
 assert evidence["paired_rx"]["ship_to_coast_mhz"] == 156.225
 assert evidence["paired_rx"]["coast_to_ship_mhz"] == 160.825

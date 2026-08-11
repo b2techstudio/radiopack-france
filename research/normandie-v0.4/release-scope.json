@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "status": "v0_4_prepublication_scope_frozen_not_public",
+  "updated": "2026-08-11",
+  "pack": "Normandie",
+  "target_version": "0.4",
+  "published_base_version": "0.3.1",
+  "published_base_memory_count": 139,
+  "final_memory_count": 142,
+  "final_positions_assigned": true,
+  "final_candidate_source": "research/normandie-v0.4/internal-candidate-map.json",
+  "included_additions": [
+    {
+      "location": 175,
+      "name": "50-ZHY-IN",
+      "frequency_mhz": 145.0875
+    },
+    {
+      "location": 176,
+      "name": "53-ZCE-IN",
+      "frequency_mhz": 145.1
+    },
+    {
+      "location": 177,
+      "name": "50-ZBL-U",
+      "frequency_mhz": 431.25
+    }
+  ],
+  "deferred_to_v0_5": [
+    {
+      "id": "R3_MORTAIN_RX",
+      "station": "F1ZBX / R3 Broceliande",
+      "frequencies_mhz": [
+        145.075,
+        145.675
+      ],
+      "reason": "field evidence from Mortain remains incomplete",
+      "potential_memory_delta": 2
+    },
+    {
+      "id": "F5ZHA_SOURCE_AND_COVERAGE",
+      "station": "F5ZHA Laval",
+      "frequencies_mhz": [
+        145.4675,
+        432.575
+      ],
+      "reason": "authoritative reconciliation and useful Mortain evidence remain incomplete",
+      "potential_memory_delta": 2
+    },
+    {
+      "id": "F1ZOV_OPERATIONAL_STATUS",
+      "station": "F1ZOV Equeurdreville-Hainneville",
+      "frequencies_mhz": [
+        431.975
+      ],
+      "reason": "local operator still reports maintenance",
+      "potential_memory_delta": 1
+    },
+    {
+      "id": "F6ZES_RESOLVED",
+      "station": "F6ZES Sourdeval",
+      "frequencies_mhz": [],
+      "reason": "frequency and mode remain unresolved",
+      "potential_memory_delta": null
+    }
+  ],
+  "deferred_gate_ids": [
+    "R3_MORTAIN_RX",
+    "F5ZHA_SOURCE_AND_COVERAGE",
+    "F1ZOV_OPERATIONAL_STATUS",
+    "F6ZES_RESOLVED"
+  ],
+  "review_decision": "approved_for_prepublication_at_frozen_scope",
+  "review_completed": true,
+  "public_activation_completed": false,
+  "public_export_allowed": false,
+  "rules": {
+    "deferred_item_is_not_validated": true,
+    "deferred_item_must_not_be_added_to_v0_4": true,
+    "deferred_item_may_be_reconsidered_only_in_later_version": true,
+    "final_v0_4_bytes_must_equal_142_memory_internal_candidate": true,
+    "published_v0_3_1_remains_immutable": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "no_frequency_may_be_guessed": true
+  }
+}

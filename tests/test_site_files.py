@@ -79,6 +79,16 @@ required_files = [
     "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts",
     "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts",
     "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv",
+    "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv",
+    "research/normandie-v0.4/publication-record.json",
+    "research/normandie-v0.5/README.md",
+    "research/normandie-v0.5/pack-plan.json",
+    "research/normandie-v0.5/backlog.json",
+    "tests/test_normandie_v04_public_release.py",
+    "tests/test_normandie_v05_initialization.py",
+    "research/sprint-68-summary.md",
+    "research/sprint-69-summary.md",
+    "research/sprint-70-summary.md",
 ]
 for relative in required_files:
     path = ROOT / relative
@@ -88,7 +98,7 @@ for relative in required_files:
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
     "État actuel — Sprint 39",
-    "Normandie v0.3.1** — 139 mémoires RX",
+    "Normandie v0.4** — 142 mémoires RX",
     "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
     "Bretagne v0.1",
     "Normandie v0.4",
@@ -389,22 +399,21 @@ regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding
 assert len(regions) == 2
 assert {region["slug"] for region in regions} == {"annecy-haute-savoie", "normandie"}
 assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 65
-assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 139
+assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 142
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
     'id: "annecy-alpes-leman"',
     'id: "normandie"',
     'version: "v0.2"',
-    'version: "v0.3.1"',
+    'version: "v0.4"',
     'memoryCount: 65',
     'memoryCount: 48',
-    'memoryCount: 139',
+    'memoryCount: 142',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
 assert registry.count('downloadUrl: "') == 3
 assert 'id: "bretagne"' not in registry
-assert 'version: "v0.4"' not in registry
 assert 'version: "v0.3"' not in registry
 assert not (ROOT / "website/src/pages/regions/bretagne.astro").exists()
 assert not (ROOT / "website/public/downloads/bretagne").exists()

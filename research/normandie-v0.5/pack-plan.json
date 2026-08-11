@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "status": "research_next_version_not_public",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "based_on_published_version": "0.4",
+  "published_base_memory_count": 142,
+  "published_base_is_immutable": true,
+  "backlog_file": "research/normandie-v0.5/backlog.json",
+  "current_candidate_memory_count": 142,
+  "current_new_memory_count": 0,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "rules": {
+    "deferred_item_is_not_validated": true,
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true
+  }
+}

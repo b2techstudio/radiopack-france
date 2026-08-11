@@ -1,7 +1,7 @@
 {
   "schema_version": "3.0",
   "status": "multi_region_public_generator",
-  "updated": "2026-08-09",
+  "updated": "2026-08-11",
   "purpose": "Définir le comportement du générateur public RadioPack multi-régions et ses options spécifiques par pack.",
   "implementation": {
     "generic_pack_library": "website/src/lib/chirpPack.ts",
@@ -24,20 +24,25 @@
         "version": "v0.2",
         "default_memory_count": 65,
         "optional_memory_count": 48,
-        "options": ["include_aviation", "notam_check"]
+        "options": [
+          "include_aviation",
+          "notam_check"
+        ]
       },
       {
         "id": "normandie",
         "name": "Normandie",
-        "version": "v0.3.1",
-        "default_memory_count": 139,
+        "version": "v0.4",
+        "default_memory_count": 142,
         "options": []
       }
     ]
   },
   "options": {
     "include_aviation": {
-      "scope": ["annecy-alpes-leman"],
+      "scope": [
+        "annecy-alpes-leman"
+      ],
       "type": "boolean",
       "default": true,
       "label": "Inclure les fréquences aviation",
@@ -48,13 +53,19 @@
       "description": "Sélectionne la variante Annecy publique avec ou sans les blocs aviation validés, sans renuméroter les autres mémoires."
     },
     "notam_check": {
-      "scope": ["annecy-alpes-leman"],
+      "scope": [
+        "annecy-alpes-leman"
+      ],
       "type": "state",
       "default": "disabled",
       "label": "Contrôle NOTAM avant génération",
       "affects_csv_content": false,
       "blocks_generation": false,
-      "states": ["disabled", "requested_unconfirmed", "user_confirmed"],
+      "states": [
+        "disabled",
+        "requested_unconfirmed",
+        "user_confirmed"
+      ],
       "future_state_reserved": "automatic_verified",
       "description": "Contrôle opérationnel facultatif affiché pour Annecy. Il ne modifie jamais automatiquement les fréquences AIP/AIRAC du CSV."
     }
@@ -66,7 +77,13 @@
     "download_strategy": "direct_validated_route",
     "unsupported_options_hidden": true,
     "generation_allowed_when_notam_unconfirmed": true,
-    "summary_fields": ["pack", "memory_count", "aviation_state", "notam_state", "selected_filename"]
+    "summary_fields": [
+      "pack",
+      "memory_count",
+      "aviation_state",
+      "notam_state",
+      "selected_filename"
+    ]
   },
   "services": {
     "FR": {

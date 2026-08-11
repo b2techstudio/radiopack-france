@@ -1,86 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
-<BaseLayout title="Pack Normandie v0.3.1 - RadioPack France" description="CSV CHIRP Normandie de 139 memoires pour Quansheng UV-K5, configure en reception seule et documente en PDF.">
+<BaseLayout title="Pack Normandie v0.4 - RadioPack France" description="CSV CHIRP Normandie v0.4 de 142 mémoires pour Quansheng UV-K5, en réception seule.">
   <section class="section"><div class="container page-grid">
     <div class="copy">
-      <span class="eyebrow">Pack regional beta - v0.3.1</span>
+      <span class="eyebrow">Pack régional - v0.4</span>
       <h1>Normandie</h1>
-      <p class="lead">La version 0.3.1 ajoute les canaux d'appel FM 2 m / 70 cm et quinze sorties de relais ou voies de transpondeurs analogiques verifiees dans la Manche, la Mayenne, le Calvados et la Seine-Maritime.</p>
+      <p class="lead">La version 0.4 contient 142 mémoires RX validées. Elle conserve intégralement la base v0.3.1 et ajoute trois mémoires radioamateur vérifiées sans intégrer les dossiers encore incertains.</p>
       <div class="button-row">
-        <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.3.1.csv" download>Telecharger le CSV v0.3.1</a>
-        <a class="button button-orange" href="/downloads/normandie/radiopack-france-normandie-v0.3.1-guide.pdf" download>Telecharger le guide PDF</a>
-        <a class="button button-secondary" href="/documentation">Procedure CHIRP</a>
+        <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.4.csv" download>Télécharger le CSV v0.4</a>
+        <a class="button button-secondary" href="/documentation">Procédure CHIRP</a>
       </div>
-
-      <div class="card legal">
-        <strong>Reception seule sur les 139 memoires</strong>
-        <p>Toutes les lignes sont exportees avec <code>Duplex=off</code>. Les frequences radioamateurs sont fournies pour l'ecoute; aucun droit d'emission n'est accorde par le fichier.</p>
-      </div>
-
-      <div class="memory-map card">
-        <h2>Organisation des memoires</h2>
-        <div class="ranges">
-          <span><b>0-15</b> PMR446</span>
-          <span><b>20-109</b> Marine</span>
-          <span><b>120-125</b> APRS / ISS</span>
-          <span><b>130-139</b> Aviation</span>
-          <span><b>150-151</b> Appels amateur</span>
-          <span><b>160-174</b> Relais analogiques</span>
-        </div>
-      </div>
-
-      <div class="grid-2 category-grid">
-        <article class="card"><span class="badge badge-green">16</span><h3>PMR446</h3><p>16 canaux analogiques en NFM, reception seule.</p></article>
-        <article class="card"><span class="badge">90</span><h3>VHF marine</h3><p>Simplex, cotes navire/cote des duplex, canal 16, DSC et AIS.</p></article>
-        <article class="card"><span class="badge badge-orange">23</span><h3>Radioamateur</h3><p>2 canaux d'appel, APRS/ISS et 15 relais ou transpondeurs analogiques.</p></article>
-        <article class="card"><span class="badge badge-green">10</span><h3>Aviation Normandie</h3><p>Caen, Deauville, Cherbourg, Le Havre, Rouen et urgence aeronautique.</p></article>
-      </div>
+      <div class="card legal"><strong>Réception seule sur les 142 mémoires</strong><p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. Le pack n'accorde aucun droit d'émission.</p></div>
+      <div class="memory-map card"><h2>Évolution v0.4</h2><div class="ranges"><span><b>Base</b> 139 mémoires v0.3.1 conservées</span><span><b>175</b> 50-ZHY-IN · 145.0875</span><span><b>176</b> 53-ZCE-IN · 145.1000</span><span><b>177</b> 50-ZBL-U · 431.2500</span></div></div>
     </div>
-
-    <aside class="card status-card">
-      <span class="badge badge-green">Beta disponible - v0.3.1</span>
-      <h3>139 memoires sur 200</h3>
-      <div class="meter"><span></span></div>
-      <ul>
-        <li>122 memoires conservees de v0.2</li>
-        <li>2 canaux d'appel radioamateur</li>
-        <li>15 sorties de relais analogiques</li>
-        <li>61 positions encore disponibles</li>
-      </ul>
-      <hr />
-      <h4>Relais verifies</h4>
-      <ul class="future">
-        <li>Manche : Mont Robin et Cherbourg</li>
-        <li>Mayenne : Mont des Avaloirs / Pre-en-Pail</li>
-        <li>Calvados : Jurques</li>
-        <li>Seine-Maritime : Le Havre, Dieppe, Rouen, Fecamp et Etretat</li>
-        <li>Sources : ARA50, REF, SHTSF et F8KII</li>
-      </ul>
-      <hr />
-      <h4>Documentation</h4>
-      <ul class="future">
-        <li>Guide PDF complet</li>
-        <li>Table des 139 memoires</li>
-        <li>Sources et date de verification</li>
-      </ul>
-    </aside>
+    <aside class="card status-card"><span class="badge badge-green">Disponible - v0.4</span><h3>142 mémoires sur 200</h3><div class="meter"><span></span></div><ul><li>RX-only</li><li>3 ajouts validés depuis v0.3.1</li><li>R3, F5ZHA, F1ZOV et F6ZES reportés à v0.5</li><li>Aucune fréquence incertaine ajoutée</li></ul></aside>
   </div></section>
 </BaseLayout>
 <style>
-  .page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}
-  .copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}
-  .status-card{padding:28px}.status-card h3{margin:18px 0 10px}.status-card h4{margin:20px 0 8px}
-  .status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}
-  .status-card hr{border:0;border-top:1px solid var(--line);margin:22px 0 0}
-  .meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}
-  .meter span{display:block;width:69.5%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}
-  .legal{padding:20px;background:linear-gradient(120deg,rgba(110,61,232,.1),rgba(255,255,255,.76))}
-  .legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}
-  .memory-map{padding:24px;background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(230,241,252,.82))}
-  .memory-map h2{margin-bottom:16px}.ranges{display:flex;flex-wrap:wrap;gap:10px}
-  .ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.8);color:var(--muted);font-size:.82rem}
-  .ranges b{color:#5f31cf;margin-right:4px}
-  .category-grid article{padding:22px}.category-grid h3{margin:14px 0 7px}.category-grid p{color:var(--muted)}
-  @media(max-width:800px){.page-grid{grid-template-columns:1fr}}
+.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}.meter span{display:block;width:71%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}.legal,.memory-map{padding:22px}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.8);color:var(--muted);font-size:.82rem}.ranges b{color:#5f31cf;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}}
 </style>

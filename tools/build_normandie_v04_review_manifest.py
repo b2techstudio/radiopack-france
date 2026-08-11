@@ -22,6 +22,8 @@ REVIEWED_INPUTS = [
     "research/normandie-v0.4/source-freshness-policy.json",
     "research/normandie-v0.4/r3-mortain-field-validation.json",
     "research/normandie-v0.4/f5zha-mortain-validation.json",
+    "research/normandie-v0.4/release-scope.json",
+    "research/normandie-v0.4/pack-plan.json",
     "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv",
     "website/src/lib/packRegistry.ts",
 ]

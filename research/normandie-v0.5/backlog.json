@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "status": "research_backlog_not_public",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "based_on_published_version": "0.4",
+  "published_base_memory_count": 142,
+  "public_export_allowed": false,
+  "items": [
+    {
+      "id": "R3_MORTAIN_RX",
+      "station": "F1ZBX / R3 Broceliande",
+      "frequencies_mhz": [
+        145.075,
+        145.675
+      ],
+      "potential_memory_delta": 2,
+      "state": "field_evidence_required",
+      "requirements": [
+        "2 independent RX sessions from Mortain on identified output"
+      ],
+      "sessions_are_evidence_not_memories": true
+    },
+    {
+      "id": "F5ZHA_SOURCE_AND_COVERAGE",
+      "station": "F5ZHA Laval",
+      "frequencies_mhz": [
+        145.4675,
+        432.575
+      ],
+      "potential_memory_delta": 2,
+      "state": "authoritative_source_reconciliation_and_field_evidence_required",
+      "field_observations_can_close_source_conflict": false
+    },
+    {
+      "id": "F1ZOV_OPERATIONAL_STATUS",
+      "station": "F1ZOV Equeurdreville-Hainneville",
+      "frequencies_mhz": [
+        431.975
+      ],
+      "potential_memory_delta": 1,
+      "state": "operator_maintenance_revalidation_required"
+    },
+    {
+      "id": "F6ZES_RESOLVED",
+      "station": "F6ZES Sourdeval",
+      "frequencies_mhz": [],
+      "potential_memory_delta": null,
+      "state": "frequency_mode_operational_state_unresolved",
+      "must_not_guess": true
+    }
+  ],
+  "rules": {
+    "deferred_item_is_not_validated": true,
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true
+  }
+}

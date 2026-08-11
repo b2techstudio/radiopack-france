@@ -80,7 +80,7 @@ with tempfile.TemporaryDirectory(prefix="radiopack-normandie-v04-") as tmp:
     assert len(frequencies) == len(set(frequencies))
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' not in registry
-assert not (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
+assert 'version: "v0.4"' in registry
+assert (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
 
 print("Tests Normandie v0.4 internal candidate: frozen 139-row v0.3.1 is exact prefix + locations 175-177 for ZHY-IN/ZCE-IN/ZBL-U = 142 RX-only memories, generated outside public tree, no public mutation OK")

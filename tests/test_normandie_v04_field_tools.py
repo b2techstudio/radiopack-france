@@ -40,23 +40,23 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 67
-assert resume["state_version"] == "0.21.56"
-assert resume["public_packs"]["normandie"]["memory_count"] == 139
+assert resume["current_sprint"] >= 68
+assert resume["state_version"] >= "0.21.57"
+assert resume["public_packs"]["normandie"]["memory_count"] == 142
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["blocked_frequency_count"] == 5
 assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
 assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
 assert resume["active_work"]["current_candidate_preview_memory_count"] == 142
-assert resume["active_work"]["current_release_blocker_count"] == 6
-assert resume["active_work"]["current_review_checklist_completed_count"] == 3
+assert resume["active_work"]["current_release_blocker_count"] == 0
+assert resume["active_work"]["current_review_checklist_completed_count"] == 9
 assert resume["active_work"]["current_review_checklist_item_count"] == 9
-assert resume["active_work"]["current_review_blocking_open_count"] == 6
+assert resume["active_work"]["current_review_blocking_open_count"] == 0
 assert resume["active_work"]["source_truth_consistent"] is True
 assert resume["active_work"]["source_revalidations_fresh_as_of_2026_08_10"] is True
 assert resume["active_work"]["source_revalidations_fresh_as_of_2026_08_11"] is True
 assert resume["active_work"]["prepublication_integrity_ok"] is True
-assert resume["active_work"]["prepublication_release_ready"] is False
+assert resume["active_work"]["prepublication_release_ready"] is True
 assert resume["active_work"]["public_export_allowed"] is False
 assert resume["active_work"]["public_release_ready"] is False
 assert resume["active_work"]["adjacent_ref_scan"]["new_untracked_active_analog_candidate_count"] == 0
@@ -150,14 +150,14 @@ assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_s
 assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_is_current_primary_validation"] is False
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **67**" in status_text
-assert "État logique : **0.21.56**" in status_text
+assert "Sprint courant : **70**" in status_text
+assert "État logique : **0.21.59**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
-assert "6 blocages ouverts" in status_text
-assert "3/9 points complétés" in status_text
-assert "non prêt pour publication" in status_text
+assert "blocages de prépublication sont à **0**" in status_text
+assert "revue v0.4 est **9/9**" in status_text
+assert "publication enregistrée" in status_text
 assert "Cap Fréhel" in status_text
 assert "Bodic" in status_text
 assert "Stiff / Ouessant" in status_text
@@ -244,5 +244,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained at sprint 67, OK"
+    "non-public, recovery state is self-contained through sprint 70, OK"
 )

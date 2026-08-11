@@ -11,7 +11,7 @@ ANNECY_LIBRARY = ROOT / "website/src/lib/annecyPack.ts"
 PACK_REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 STANDARD_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
 NO_AIR_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"
-NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
+NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
 
 for path in [
     PAGE,
@@ -48,7 +48,7 @@ for expected in [
     'id="file-summary"',
     'id="download-csv"',
     "Générateur web · multi-régions",
-    "Normandie · 139",
+    "Normandie · 142",
     "Annecy · 65 / 48",
     "Contrôle NOTAM avant génération",
     "J'ai vérifié les NOTAM applicables",
@@ -87,10 +87,10 @@ for expected in [
     'id: "normandie"',
     'memoryCount: 65',
     'memoryCount: 48',
-    'memoryCount: 139',
+    'memoryCount: 142',
     '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv',
     '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv',
-    '/downloads/normandie/radiopack-france-normandie-v0.3.1.csv',
+    '/downloads/normandie/radiopack-france-normandie-v0.4.csv',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"

@@ -120,7 +120,7 @@ assert plan["public_export_allowed"] is False
 assert all(value is False for value in plan["gate_status"].values())
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' not in registry
+assert 'version: "v0.4"' in registry
 
 print(
     "Tests Normandie v0.4 evidence pipeline: F5ZHA observations recorded safely without source reconciliation, "

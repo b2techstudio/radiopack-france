@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: radiopack-ci-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   data:
@@ -257,60 +257,3 @@ jobs:
             --header "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${REPOSITORY}/statuses/${COMMIT_SHA}" \
             --data "$payload"
-
-  sprint70-finalize:
-    name: Apply verified Sprint 70 final publication
-    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'Sprint 70 trigger final publication' }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout main
-        uses: actions/checkout@v6
-        with:
-          ref: main
-          fetch-depth: 0
-
-      - name: Verify, apply, test and commit final state
-        shell: bash
-        run: |
-          cat research/.rp70-final-00 research/.rp70-final-01 research/.rp70-final-02 research/.rp70-final-03 research/.rp70-final-04 research/.rp70-final-05 \
-            | base64 --decode | gzip --decompress > /tmp/rp70.patch
-          test "$(wc -c < /tmp/rp70.patch)" = "150438"
-          test "$(sha256sum /tmp/rp70.patch | awk '{print $1}')" = "736229e0dc3dcd8a62f5a2e4645c580bf8b7e29bc6a5b6fdbda4788b65fee306"
-          git apply --check /tmp/rp70.patch
-          git apply /tmp/rp70.patch
-          rm -f research/.rp70-final-00 research/.rp70-final-01 research/.rp70-final-02 research/.rp70-final-03 research/.rp70-final-04 research/.rp70-final-05 research/.rp70-trigger
-          rm -f research/.s68-clean-0 research/.s68-clean-1 research/.s68-clean-2 research/.s68-clean-3 research/.s68-trigger
-          rm -f .github/workflows/sprint68-clean-apply.yml
-          python - <<'PYCI'
-          from pathlib import Path
-          p = Path('.github/workflows/ci.yml')
-          text = p.read_text(encoding='utf-8')
-          marker = '\n  sprint70-finalize:'
-          if marker not in text:
-              raise SystemExit('Sprint 70 finalizer marker missing')
-          text = text.split(marker, 1)[0].rstrip() + '\n'
-          text = text.replace('cancel-in-progress: false', 'cancel-in-progress: true', 1)
-          p.write_text(text, encoding='utf-8')
-          PYCI
-          python tools/run_normandie_v04_checks.py --extended
-          python tools/check_normandie_v04_source_consistency.py
-          python tools/check_normandie_v04_source_freshness.py
-          python tools/build_normandie_v04_review_snapshot.py
-          python tools/build_normandie_v04_review_manifest.py
-          python tools/run_normandie_v04_prepublication_audit.py
-          python tests/test_sprint68_scope_closure.py
-          python tests/test_normandie_v04_public_release.py
-          python tests/test_normandie_v05_initialization.py
-          python tests/test_bretagne_research_scaffold.py
-          python tests/test_emergency_relay_research.py
-          python tests/test_site_files.py
-          python tests/test_pack_registry.py
-          git diff --check
-          git config user.name "b2techstudio"
-          git config user.email "actions@users.noreply.github.com"
-          git add -A
-          git commit -m "Sprint 70 publish Normandie v0.4 and initialize v0.5 [reference-archive]"
-          git push origin HEAD:main

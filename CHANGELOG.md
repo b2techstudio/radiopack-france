@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.21.59 - 2026-08-11
+
+- **Sprint 70** : initialisation de Normandie v0.5 en recherche sur la base publique immuable v0.4 = 142 mémoires.
+- Backlog v0.5 créé pour R3/F1ZBX, F5ZHA, F1ZOV et F6ZES, sans validation implicite ni ajout RF.
+- R3 reste une paire de 2 mémoires potentielles avec 2 sessions terrain comme preuves ; F6ZES reste strictement sans conjecture.
+- Ajout de `tests/test_normandie_v05_initialization.py` et mise à jour du point de reprise.
+
+## 0.21.58 - 2026-08-11
+
+- **Sprint 69** : publication de **Normandie v0.4 à 142 mémoires RX**.
+- Le CSV public v0.4 correspond exactement au candidat revu ; la v0.3.1 à 139 mémoires reste intacte et immuable.
+- Registre public, générateur et pages du site basculés vers Normandie v0.4.
+- Ajout de `research/normandie-v0.4/publication-record.json` et `tests/test_normandie_v04_public_release.py`.
+- R3/F1ZBX, F5ZHA, F1ZOV et F6ZES restent exclus de v0.4 et reportés à v0.5.
+
+## 0.21.57 - 2026-08-11
+
+- **Sprint 68** : clôture de périmètre Normandie v0.4 à **142 mémoires RX**.
+- Revue v0.4 portée à **9/9**, blocages de prépublication à **0**, audit d'intégrité **OK** et dry-run activation-ready avec baseline propre.
+- R3/F1ZBX, F5ZHA, F1ZOV et F6ZES reportés explicitement à Normandie v0.5, sans validation implicite ni ajout RF.
+- Aucun fichier public v0.4 ni registre public modifié dans ce sprint ; v0.3.1 reste immuable.
+- Ajout de `release-scope.json`, `review-baseline.json` et du garde-fou `test_sprint68_scope_closure.py`.
+
 ## 0.21.56 - 2026-08-11
 
 - **Sprint 67** : synthèse des références courantes sans promotion ni mutation publique.

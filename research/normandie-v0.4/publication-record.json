@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-11",
+  "pack": "Normandie",
+  "version": "0.4",
+  "memory_count": 142,
+  "public_csv": "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv",
+  "public_csv_sha256": "3da26f18cefbf7ec1dfb6a991101d07f6a8ce9fb921015a7202870fc9b9db66d",
+  "based_on_version": "0.3.1",
+  "base_csv_sha256": "d5eedd82017bd4fb3d28520f620073313033500e791b7bf4cf8b652a80a5db38",
+  "base_memory_count": 139,
+  "published_version_is_immutable": true,
+  "review_baseline": "research/normandie-v0.4/review-baseline.json",
+  "release_scope": "research/normandie-v0.4/release-scope.json",
+  "deferred_to_v0_5": [
+    "R3_MORTAIN_RX",
+    "F5ZHA_SOURCE_AND_COVERAGE",
+    "F1ZOV_OPERATIONAL_STATUS",
+    "F6ZES_RESOLVED"
+  ],
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "unproven_candidates_absent": true,
+    "v0_3_1_unchanged": true
+  }
+}

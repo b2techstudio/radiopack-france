@@ -33,22 +33,22 @@ current_day = date(2026, 8, 10)
 snapshot = snapshot_builder.build(ROOT, current_day)
 assert snapshot["status"] == "review_snapshot_not_public"
 assert snapshot["integrity_ok"] is True
-assert snapshot["release_ready"] is False
+assert snapshot["release_ready"] is True
 assert snapshot["published_base_memory_count"] == 139
 assert snapshot["internal_candidate_memory_count"] == 142
 assert snapshot["guarded_preview_memory_count"] == 142
 assert snapshot["eligible_future_addition_count"] == 0
-assert snapshot["review_completed_count"] == 3
+assert snapshot["review_completed_count"] == 9
 assert snapshot["review_item_count"] == 9
-assert len(snapshot["review_blocking_open_ids"]) == 6
+assert len(snapshot["review_blocking_open_ids"]) == 0
 assert len(snapshot["snapshot_id"]) == 64
 assert snapshot_builder.build(ROOT, current_day)["snapshot_id"] == snapshot["snapshot_id"]
 
 manifest = manifest_builder.build(ROOT, current_day)
 assert manifest["status"] == "review_fingerprint_manifest_not_public"
 assert manifest["review_snapshot_id"] == snapshot["snapshot_id"]
-assert manifest["reviewed_input_count"] == 11
-assert len(manifest["reviewed_input_sha256"]) == 11
+assert manifest["reviewed_input_count"] == 13
+assert len(manifest["reviewed_input_sha256"]) == 13
 assert all(len(digest) == 64 for digest in manifest["reviewed_input_sha256"].values())
 assert manifest["internal_candidate_memory_count"] == 142
 assert manifest["guarded_preview_memory_count"] == 142
@@ -76,14 +76,15 @@ assert drifted["changed_inputs"][0]["path"] == first_path
 
 without_baseline = dry_run_builder.build(ROOT, None, current_day)
 assert without_baseline["status"] == "publication_dry_run_not_public"
-assert without_baseline["prepublication_ready"] is False
+assert without_baseline["prepublication_ready"] is True
 assert without_baseline["baseline_provided"] is False
 assert without_baseline["review_drift_clean"] is None
 assert without_baseline["activation_ready"] is False
 assert without_baseline["would_publish_memory_count"] is None
 assert without_baseline["candidate_mutated"] is False
 assert without_baseline["public_files_written"] is False
-assert {"PREPUBLICATION_NOT_READY", "REVIEW_BASELINE_NOT_PROVIDED"}.issubset(set(without_baseline["activation_blockers"]))
+assert without_baseline["publication_completed"] is True
+assert without_baseline["activation_blockers"] == ["REVIEW_BASELINE_NOT_PROVIDED", "PUBLICATION_ALREADY_COMPLETED"]
 
 with tempfile.TemporaryDirectory(prefix="radiopack-v04-review-handoff-") as tmp:
     baseline = Path(tmp) / "baseline.json"
@@ -91,9 +92,10 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-review-handoff-") as tmp:
     clean_dry_run = dry_run_builder.build(ROOT, baseline, current_day)
     assert clean_dry_run["baseline_provided"] is True
     assert clean_dry_run["review_drift_clean"] is True
-    assert clean_dry_run["prepublication_ready"] is False
+    assert clean_dry_run["prepublication_ready"] is True
+    assert clean_dry_run["publication_completed"] is True
     assert clean_dry_run["activation_ready"] is False
-    assert clean_dry_run["activation_blockers"] == ["PREPUBLICATION_NOT_READY"]
+    assert clean_dry_run["activation_blockers"] == ["PUBLICATION_ALREADY_COMPLETED"]
 
     jp, mp, written = snapshot_builder.write(ROOT, Path(tmp) / "snapshot", current_day)
     assert jp.is_file() and mp.is_file()
@@ -104,5 +106,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-review-handoff-") as tmp:
 
 print(
     "Tests Normandie v0.4 review handoff: deterministic review snapshot and SHA-256 manifest built, "
-    "clean baseline stays clean, synthetic input drift forces re-review, publication dry-run remains non-public and blocked, OK"
+    "clean current baseline stays clean, synthetic input drift forces re-review, and a published v0.4 cannot be reactivated by the dry-run, OK"
 )

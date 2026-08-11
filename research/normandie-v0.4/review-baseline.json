@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "status": "review_fingerprint_manifest_not_public",
+  "as_of": "2026-08-11",
+  "review_snapshot_id": "81040b3d1d13d1396cb6daee5f44b7d848a5417147c68437b0e6df2dd0227d59",
+  "reviewed_input_count": 13,
+  "reviewed_input_sha256": {
+    "research/normandie-v0.4/candidate-memory-delta.json": "22d707384c722c7183f3006220d8eb5c325215bd1937d6e129c25e5b729f097e",
+    "research/normandie-v0.4/internal-candidate-map.json": "906681611f1bd21936e34857957bf845da27989fe35ad976eabc8375d1529bc7",
+    "research/normandie-v0.4/promotion-gates.json": "55dedada3b1da69f7e34453806665915536e6e0d5e5cf93ae2f54d5964410a13",
+    "research/normandie-v0.4/blocked-station-revalidation.json": "f9ee6169d98af166ff3e873b22217b41f0ea25e771a31e523980f1b06f8ccd21",
+    "research/normandie-v0.4/external-evidence-matrix.json": "b5d05fbbe965d0bd5893303c0c7224a012df8f5d09e5f2a1184ded9c4b5ff698",
+    "research/normandie-v0.4/source-consistency-contract.json": "8362e9fdd7ece613a4407ed40582342c6927cddc93289052d487baffdc580df6",
+    "research/normandie-v0.4/source-freshness-policy.json": "3025b39f42edafec44370d79fa1c3f2ac4c523a3b6ee1f566b2e5a2043099d71",
+    "research/normandie-v0.4/r3-mortain-field-validation.json": "208a53b4eef8bede8150052e3316e6c5c5113a4d351e51ba7258387abf70e1b5",
+    "research/normandie-v0.4/f5zha-mortain-validation.json": "174f9c8ea1c7ce070dcc92e166cec32f7c06b1b94af6eb13beaa05c1ce75eedf",
+    "research/normandie-v0.4/release-scope.json": "f62bcf7bbd16ee3a5e7121448bd93e3ba8240415905926e4443037f82f8ca94d",
+    "research/normandie-v0.4/pack-plan.json": "64ed4a2491f94c5548c6146ed36629047c3f6cb540adfa4ec592d15039e67123",
+    "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv": "d5eedd82017bd4fb3d28520f620073313033500e791b7bf4cf8b652a80a5db38",
+    "website/src/lib/packRegistry.ts": "a7d10c41303e289cf65669b513d43f095dcf349f045a9463bd1fdbc01958dc7c"
+  },
+  "internal_candidate_memory_count": 142,
+  "internal_candidate_sha256": "3da26f18cefbf7ec1dfb6a991101d07f6a8ce9fb921015a7202870fc9b9db66d",
+  "guarded_preview_memory_count": 142,
+  "guarded_preview_sha256": "3da26f18cefbf7ec1dfb6a991101d07f6a8ce9fb921015a7202870fc9b9db66d",
+  "public_export_allowed": false,
+  "rules": {
+    "manifest_is_integrity_evidence_only": true,
+    "all_hashes_are_sha256": true,
+    "manifest_does_not_mutate_candidate": true,
+    "manifest_does_not_publish": true,
+    "pack_registry_is_reviewed_for_public_absence_or_later_explicit_change": true
+  },
+  "manifest_id": "e6f1574cec64506012f1fe347e059a72a72603f4f0de0b0c7898cb499d302ce4"
+}

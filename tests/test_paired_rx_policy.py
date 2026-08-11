@@ -99,9 +99,9 @@ assert '"0.000000"' in chirp_pack
 
 # Published packs remain frozen; the new paired RX behaviour targets only new versions.
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.3.1"' in registry
+assert 'version: "v0.4"' in registry
 assert 'version: "v0.2"' in registry
-assert 'version: "v0.4"' not in registry
+assert 'version: "v0.4"' in registry
 assert 'version: "v0.3"' not in registry
 assert 'id: "bretagne"' not in registry
 

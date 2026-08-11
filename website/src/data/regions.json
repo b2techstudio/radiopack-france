@@ -3,11 +3,16 @@
     "slug": "normandie",
     "name": "Normandie",
     "shortName": "Normandie",
-    "status": "Bêta disponible",
+    "status": "v0.4 disponible",
     "accent": "purple",
-    "description": "Pack de 139 mémoires RX : PMR446, marine, aviation, APRS/ISS, appels et relais analogiques vérifiés.",
-    "memoryCount": 139,
-    "categories": ["PMR446 RX", "VHF marine RX", "Radioamateur RX", "Aviation RX"],
+    "description": "Pack de 142 mémoires RX : PMR446, marine, aviation, APRS/ISS, appels et radioamateur analogique vérifié.",
+    "memoryCount": 142,
+    "categories": [
+      "PMR446 RX",
+      "VHF marine RX",
+      "Radioamateur RX",
+      "Aviation RX"
+    ],
     "available": true
   },
   {
@@ -18,7 +23,12 @@
     "accent": "cyan",
     "description": "Pack RX de 65 mémoires pour les Alpes du Nord et le bassin lémanique, avec variante 48 mémoires sans aviation.",
     "memoryCount": 65,
-    "categories": ["France & Suisse", "Radioamateur analogique", "Aviation RX", "APRS / ISS / satellites"],
+    "categories": [
+      "France & Suisse",
+      "Radioamateur analogique",
+      "Aviation RX",
+      "APRS / ISS / satellites"
+    ],
     "available": true
   }
 ]

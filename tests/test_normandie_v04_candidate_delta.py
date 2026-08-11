@@ -130,8 +130,8 @@ assert memory_plan["paired_rx_research_frequency_count"] == 12
 assert memory_plan["paired_rx_frequencies_already_in_v0_3_1"] == 4
 assert memory_plan["maximum_new_paired_rx_frequencies_under_current_research"] == 8
 assert memory_plan["ready_research_candidates"] == 3
-assert memory_plan["expected_memory_count"] is None
-assert memory_plan["memory_positions_assigned"] is False
+assert memory_plan["expected_memory_count"] == 142
+assert memory_plan["memory_positions_assigned"] is True
 assert memory_plan["new_blocks"][0]["locations"] == [175, 176, 177]
 assert pack_plan["publication"]["public_export_allowed"] is False
 
@@ -146,6 +146,6 @@ assert f1zov["source_reconciliation"]["publication_blocked_by_operational_status
 assert refresh["rules"]["maintenance_blocks_new_side_promotion_until_revalidated"] is True
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' not in registry
+assert 'version: "v0.4"' in registry
 
-print("Tests Normandie v0.4 candidate delta: frozen v0.3.1 + 8 possible paired sides classified, 3 promoted only into a 142-memory internal candidate with provisional locations 175-177; field/recovery tooling linked; no public mutation OK")
+print("Tests Normandie v0.4 candidate delta: frozen v0.3.1 + 8 possible paired sides classified, 3 promoted only into a 142-memory internal candidate with locations 175-177 frozen for v0.4; field/recovery tooling linked; no public mutation OK")

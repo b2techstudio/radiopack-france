@@ -2,13 +2,15 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-11",
-  "current_sprint": 67,
-  "state_version": "0.21.56",
+  "current_sprint": 70,
+  "state_version": "0.21.59",
   "public_packs": {
     "normandie": {
-      "version": "0.3.1",
-      "memory_count": 139,
-      "immutable": true
+      "version": "0.4",
+      "memory_count": 142,
+      "immutable": true,
+      "previous_immutable_version": "0.3.1",
+      "previous_memory_count": 139
     },
     "annecy_alpes_leman": {
       "version": "0.2",
@@ -24,25 +26,42 @@
   },
   "active_work": {
     "pack": "Normandie",
-    "target_version": "0.4",
+    "target_version": "0.5",
+    "status": "research_backlog_not_public",
     "public_export_allowed": false,
     "public_release_ready": false,
+    "published_base_version": "0.4",
+    "published_base_memory_count": 142,
     "internal_candidate_memory_count": 142,
-    "published_base_memory_count": 139,
-    "internal_candidate_new_memory_count": 3,
+    "internal_candidate_new_memory_count": 0,
+    "known_potential_ceiling_excluding_f6zes": 147,
+    "backlog_file": "research/normandie-v0.5/backlog.json",
+    "pack_plan_file": "research/normandie-v0.5/pack-plan.json",
+    "backlog_item_count": 4,
+    "backlog_ids": [
+      "R3_MORTAIN_RX",
+      "F5ZHA_SOURCE_AND_COVERAGE",
+      "F1ZOV_OPERATIONAL_STATUS",
+      "F6ZES_RESOLVED"
+    ],
+    "r3_required_rx_memory_count_if_promoted": 2,
+    "r3_minimum_independent_field_sessions": 2,
+    "r3_sessions_are_evidence_not_memories": true,
+    "f5zha_field_observations_can_close_source_conflict": false,
+    "f6zes_must_not_guess": true,
     "maximum_internal_memory_count_if_all_current_known_gates_clear": 147,
-    "final_public_memory_count": null,
+    "final_public_memory_count": 142,
     "current_guarded_promotion_plan_eligible_addition_count": 0,
     "current_candidate_preview_memory_count": 142,
-    "current_release_blocker_count": 6,
-    "current_review_checklist_completed_count": 3,
+    "current_release_blocker_count": 0,
+    "current_review_checklist_completed_count": 9,
     "current_review_checklist_item_count": 9,
-    "current_review_blocking_open_count": 6,
+    "current_review_blocking_open_count": 0,
     "source_truth_consistent": true,
     "source_revalidations_fresh_as_of_2026_08_10": true,
     "source_revalidations_fresh_as_of_2026_08_11": true,
     "prepublication_integrity_ok": true,
-    "prepublication_release_ready": false,
+    "prepublication_release_ready": true,
     "internal_provisional_additions": [
       {
         "location": 175,
@@ -165,6 +184,23 @@
       "f6zes_frequency_mode_resolved": false,
       "normandie_gate_cleared_count": 0,
       "candidate_memory_delta": 0
+    },
+    "historical_v0_4_closure": {
+      "version": "0.4",
+      "published_memory_count": 142,
+      "review_completed_count": 9,
+      "review_item_count": 9,
+      "release_blocker_count": 0,
+      "prepublication_integrity_ok": true,
+      "prepublication_ready_before_activation": true,
+      "publication_completed": true,
+      "publication_record": "research/normandie-v0.4/publication-record.json",
+      "deferred_gate_ids": [
+        "R3_MORTAIN_RX",
+        "F5ZHA_SOURCE_AND_COVERAGE",
+        "F1ZOV_OPERATIONAL_STATUS",
+        "F6ZES_RESOLVED"
+      ]
     }
   },
   "review_handoff": {
@@ -271,7 +307,13 @@
     "research/sprint-64-dual-rx-contract.json",
     "research/sprint-65-primary-recheck.json",
     "research/sprint-66-technical-inventory-boundaries.json",
-    "research/sprint-67-current-reference-synthesis.json"
+    "research/sprint-67-current-reference-synthesis.json",
+    "research/normandie-v0.4/publication-record.json",
+    "research/normandie-v0.5/pack-plan.json",
+    "research/normandie-v0.5/backlog.json",
+    "research/sprint-68-summary.md",
+    "research/sprint-69-summary.md",
+    "research/sprint-70-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -302,23 +344,56 @@
     "run_sprint64_dual_rx_contract_test": "python tests/test_sprint64_dual_rx_contract.py",
     "run_sprint65_primary_recheck_test": "python tests/test_sprint65_primary_recheck.py",
     "run_sprint66_technical_inventory_test": "python tests/test_sprint66_technical_inventory_boundaries.py",
-    "run_sprint67_current_reference_synthesis_test": "python tests/test_sprint67_current_reference_synthesis.py"
+    "run_sprint67_current_reference_synthesis_test": "python tests/test_sprint67_current_reference_synthesis.py",
+    "run_sprint68_scope_closure_test": "python tests/test_sprint68_scope_closure.py",
+    "run_normandie_v04_public_release_test": "python tests/test_normandie_v04_public_release.py",
+    "run_normandie_v05_initialization_test": "python tests/test_normandie_v05_initialization.py"
   },
-  "recent_sprints": {
-    "55": "Deterministic non-public review snapshot",
-    "56": "SHA-256 review fingerprint manifest",
-    "57": "Post-review drift checker",
-    "58": "Separate prepublication readiness from explicit public activation and add guarded dry-run",
-    "59": "Review handoff tests and CI integration",
-    "60": "F6ZES no-guess revalidation and guarded Corsen channel 79 local clues",
-    "61": "CROSS Etel channel 64 primary-source conflict, Corsen primary revalidation boundary, and adjacent REF analog scan",
-    "62": "Meteo-France Guide Marine primary-reference target, Etel channel 63 operational convergence boundary, and Corsen current infrastructure versus historical/current channel assignment separation",
-    "63": "Current blocker revalidation: F1ZOV still in operator maintenance, F5ZHA RepeaterBook conflict dated as stale secondary without clearing authoritative/field gates, F6ZES still unresolved, Guide Marine PDF retry still unread",
-    "64": "Dual RX contract: R3 uses two pair memories independently of two field sessions; Etel Ch64 and Corsen Ch79 each retain both maritime RX directions while publication gates stay closed",
-    "65": "Current primary-source recheck: Ministry regional VHF statement, local CROSS Etel/Corsen boundaries, F5ZHA current REF pair, F6ZES unresolved; no site inference or promotion",
-    "66": "Technical inventory boundaries: Etel 17-station MHF/VHF maintenance scope stays unnamed by channel; Corsen Stiff current infrastructure and full secondary Ch79 chain remain below primary site-assignment threshold",
-    "67": "Current reference synthesis: official 2026 leisure guide confirms channel level without transmitter sites; secondary Ch79 convergence remains non-primary; RepeaterBook current badge cannot override dated stale provenance"
-  },
+  "recent_sprints": [
+    {
+      "sprint": 70,
+      "state_version": "0.21.59",
+      "summary": "Normandie v0.5 initialized from immutable public v0.4=142.",
+      "summary_file": "research/sprint-70-summary.md"
+    },
+    {
+      "sprint": 69,
+      "state_version": "0.21.58",
+      "summary": "Normandie v0.4 published at 142 RX memories.",
+      "summary_file": "research/sprint-69-summary.md"
+    },
+    {
+      "sprint": 68,
+      "state_version": "0.21.57",
+      "summary": "Normandie v0.4 scope frozen at 142; review 9/9; four dossiers deferred.",
+      "summary_file": "research/sprint-68-summary.md"
+    },
+    {
+      "sprint": 67,
+      "state_version": "0.21.56",
+      "summary_file": "research/sprint-67-summary.md"
+    },
+    {
+      "sprint": 66,
+      "state_version": "0.21.55",
+      "summary_file": "research/sprint-66-summary.md"
+    },
+    {
+      "sprint": 65,
+      "state_version": "0.21.54",
+      "summary_file": "research/sprint-65-summary.md"
+    },
+    {
+      "sprint": 64,
+      "state_version": "0.21.53",
+      "summary_file": "research/sprint-64-summary.md"
+    },
+    {
+      "sprint": 63,
+      "state_version": "0.21.52",
+      "summary_file": "research/sprint-63-summary.md"
+    }
+  ],
   "resume_rules": {
     "published_versions_are_immutable": true,
     "failed_or_unverified_gate_must_not_be_promoted": true,
@@ -362,6 +437,20 @@
     "current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter": true,
     "secondary_source_convergence_does_not_become_primary_validation": true,
     "current_primary_infrastructure_plus_secondary_channel_clue_does_not_equal_primary_site_channel_mapping": true,
-    "current_display_badge_does_not_override_dated_verification_provenance": true
+    "current_display_badge_does_not_override_dated_verification_provenance": true,
+    "deferred_gate_is_not_validation": true,
+    "deferred_gate_does_not_block_frozen_prior_release": true,
+    "v0_4_final_scope_is_142_memories": true,
+    "v0_3_1_remains_immutable_after_v0_4_publication": true
+  },
+  "completed_release": {
+    "pack": "Normandie",
+    "version": "0.4",
+    "memory_count": 142,
+    "published_on": "2026-08-11",
+    "publication_record": "research/normandie-v0.4/publication-record.json",
+    "review_completed_count": 9,
+    "review_item_count": 9,
+    "release_blocker_count": 0
   }
 }

@@ -161,7 +161,7 @@ assert plan["rules"]["no_public_export"] is True
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' not in registry
-assert 'version: "v0.4"' not in registry
+assert 'version: "v0.4"' in registry
 assert 'version: "v0.3"' not in registry
 
 print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 12, Annecy 10, Bretagne 29 unique RX frequencies, R3/R71 four-frequency linked system deduplicated and R3 at 119.3 km from Mortain inside the operator 150 km usage radius geometrically without claiming reception, TX-off contract and no public mutation OK")

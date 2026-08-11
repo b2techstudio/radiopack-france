@@ -35,7 +35,7 @@ def build(root: Path, as_of: date | None = None) -> dict[str, Any]:
         "published_base_exact_prefix": bool(diff["published_base_is_exact_prefix_of_internal_candidate"]),
         "internal_candidate_exact_preview_prefix": bool(diff["internal_candidate_is_exact_prefix_of_guarded_preview"]),
         "candidate_not_mutated": diff["candidate_mutated"] is False,
-        "public_registry_stays_private_during_prepublication": checklist["public_registry_has_v04"] is False,
+        "public_activation_state_coherent": bool(checklist["public_activation_state_coherent"]),
         "public_export_stays_disabled": diff["public_export_allowed"] is False and checklist["public_export_allowed"] is False and blockers["public_export_allowed"] is False,
     }
     integrity_errors = [key for key, value in integrity_checks.items() if not value]
@@ -60,12 +60,16 @@ def build(root: Path, as_of: date | None = None) -> dict[str, Any]:
         "prepublication_ready": prepublication_ready,
         "release_ready": prepublication_ready,
         "public_registry_has_v04": checklist["public_registry_has_v04"],
-        "public_activation_pending": prepublication_ready and not checklist["public_registry_has_v04"],
+        "publication_completed": checklist["publication_completed"],
+        "public_activation_state_coherent": checklist["public_activation_state_coherent"],
+        "public_activation_pending": blockers["public_activation_pending"],
+        "public_activation_completed": blockers["public_activation_completed"],
         "public_export_allowed": False,
         "rules": {
             "integrity_ok_does_not_mean_prepublication_ready": True,
             "prepublication_ready_requires_zero_review_and_release_blockers": True,
-            "public_registry_must_remain_private_during_prepublication": True,
+            "public_registry_must_remain_private_until_publication_record_exists": True,
+            "postpublication_registry_must_match_publication_record": True,
             "public_activation_is_separate_after_prepublication_ready": True,
             "audit_never_mutates_candidate": True,
             "audit_never_publishes": True,
@@ -88,8 +92,9 @@ def markdown(data: dict[str, Any]) -> str:
         f"- Blocages prépublication : **{data['release_blocking_count']}**",
         f"- Prépublication prête : **{'oui' if data['prepublication_ready'] else 'non'}**",
         f"- Activation publique en attente : **{'oui' if data['public_activation_pending'] else 'non'}**",
+        f"- Publication enregistrée : **{'oui' if data['publication_completed'] else 'non'}**",
         "",
-        "Un audit d'intégrité OK signifie seulement que le pipeline est cohérent. L'activation du registre public reste une étape séparée après prépublication prête.",
+        "Un audit d'intégrité OK signifie que le périmètre gelé reste cohérent. Avant publication, l'activation du registre est séparée ; après publication, le registre doit correspondre au journal de publication.",
         "",
     ])
 

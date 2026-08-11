@@ -103,8 +103,8 @@ counts = {item["candidate_memory_count_if_only_these_known_gates_clear"] for ite
 assert counts == {142, 143, 144, 145, 146, 147}
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' not in registry
-assert not (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
+assert 'version: "v0.4"' in registry
+assert (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
 
 print(
     "Tests Normandie v0.4 readiness: F5ZHA 3-memory RX-only diagnostic pack guarded, "

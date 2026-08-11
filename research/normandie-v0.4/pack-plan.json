@@ -2,8 +2,12 @@
   "schema_version": "1.1",
   "status": "research_next_version_not_public",
   "created": "2026-08-09",
-  "updated": "2026-08-10",
-  "pack": {"name": "Normandie", "slug": "normandie", "target_version": "0.4"},
+  "updated": "2026-08-11",
+  "pack": {
+    "name": "Normandie",
+    "slug": "normandie",
+    "target_version": "0.4"
+  },
   "based_on_published_version": "0.3.1",
   "published_base_is_immutable": true,
   "paired_rx_policy": "research/paired-rx-policy.json",
@@ -20,7 +24,11 @@
   "priority_focus": {
     "label": "Mortain-Bocage / Sud-Manche",
     "department": 50,
-    "adjacent_departments_to_check": [35, 53, 61],
+    "adjacent_departments_to_check": [
+      35,
+      53,
+      61
+    ],
     "rule": "Sélectionner selon couverture radio utile et non selon la seule limite administrative."
   },
   "memory_plan": {
@@ -55,7 +63,7 @@
     "readiness_report_builder": "tools/build_normandie_v04_readiness_report.py",
     "promotion_scenario_builder": "tools/build_normandie_v04_promotion_scenarios.py",
     "local_check_runner": "tools/run_normandie_v04_checks.py",
-    "expected_memory_count": null,
+    "expected_memory_count": 142,
     "internal_candidate_memory_count": 142,
     "internal_candidate_new_memory_count": 3,
     "internal_candidate_positions_assigned_provisionally": true,
@@ -72,30 +80,38 @@
     "current_guarded_promotion_plan_eligible_addition_count": 0,
     "current_candidate_preview_memory_count": 142,
     "current_source_revalidations_fresh": true,
-    "current_review_checklist_completed_count": 2,
+    "current_review_checklist_completed_count": 9,
     "current_review_checklist_item_count": 9,
-    "current_release_blocker_count": 7,
+    "current_release_blocker_count": 0,
     "current_prepublication_integrity_ok": true,
-    "memory_positions_assigned": false,
-    "new_blocks": [{"label": "paired RX internal candidate additions", "locations": [175, 176, 177], "status": "internal_provisional_only"}]
+    "memory_positions_assigned": true,
+    "new_blocks": [
+      {
+        "label": "paired RX internal candidate additions",
+        "locations": [
+          175,
+          176,
+          177
+        ],
+        "status": "internal_provisional_only"
+      }
+    ],
+    "release_scope_file": "research/normandie-v0.4/release-scope.json",
+    "final_v0_4_memory_count": 142,
+    "deferred_to_v0_5_count": 4
   },
   "research_priorities": [
-    "enregistrer au moins deux sessions RX indépendantes identifiant réellement R3 145.675 MHz depuis Mortain-Bocage",
-    "documenter F5ZHA par observations terrain sans jamais transformer ces observations en réconciliation de source",
-    "maintenir la cohérence automatique entre promotion-gates, revalidation externe et matrice de preuves",
-    "revalider les sources avant expiration de leur fenêtre de fraîcheur interne ; une source périmée ne devient jamais une preuve négative",
-    "utiliser la checklist, le diff candidat et l'audit prépublication comme garde-fous de revue non destructifs",
-    "conserver le candidat interne 142 mémoires comme base de test tant qu'aucune porte n'est réellement franchie",
-    "attendre le retour en service de F1ZOV confirmé par F6KFW avant promotion du côté 431.975 MHz",
-    "fermer le conflit F5ZHA par une source locale ou équivalente suffisamment autoritative",
-    "maintenir F6ZES sans fréquence tant qu'une source actuelle explicite ne résout pas fréquence et mode",
-    "poursuivre les infrastructures publiques/amateur utiles autour de Mortain-Bocage sans modifier les packs publiés"
+    "publier Normandie v0.4 uniquement avec les 142 mémoires du périmètre figé",
+    "reporter R3/F1ZBX, F5ZHA, F1ZOV et F6ZES vers Normandie v0.5 sans les considérer validés",
+    "préserver Normandie v0.3.1 comme version publique immuable"
   ],
   "publication": {
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_routes_allowed": false,
     "review_required": true,
-    "review_completed": false
+    "review_completed": true,
+    "scope_frozen": true,
+    "final_memory_count": 142
   }
 }

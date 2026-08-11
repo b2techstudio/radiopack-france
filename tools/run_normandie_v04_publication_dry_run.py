@@ -37,11 +37,13 @@ def build(root: Path, baseline_path: Path | None = None, as_of: date | None = No
 
     baseline_provided = drift is not None
     drift_clean = bool(baseline_provided and drift["drift_detected"] is False)
+    publication_completed = bool(audit.get("publication_completed"))
     activation_ready = bool(
         audit["prepublication_ready"]
         and baseline_provided
         and drift_clean
         and audit["public_registry_has_v04"] is False
+        and not publication_completed
     )
 
     activation_blockers = list(audit.get("integrity_errors", []))
@@ -51,7 +53,9 @@ def build(root: Path, baseline_path: Path | None = None, as_of: date | None = No
         activation_blockers.append("REVIEW_BASELINE_NOT_PROVIDED")
     elif not drift_clean:
         activation_blockers.append("REVIEW_DRIFT_DETECTED")
-    if audit["public_registry_has_v04"]:
+    if publication_completed:
+        activation_blockers.append("PUBLICATION_ALREADY_COMPLETED")
+    elif audit["public_registry_has_v04"]:
         activation_blockers.append("PUBLIC_REGISTRY_ALREADY_CHANGED")
 
     return {
@@ -67,6 +71,7 @@ def build(root: Path, baseline_path: Path | None = None, as_of: date | None = No
         "activation_ready": activation_ready,
         "would_publish_memory_count": audit["internal_candidate_memory_count"] if activation_ready else None,
         "public_registry_has_v04": audit["public_registry_has_v04"],
+        "publication_completed": publication_completed,
         "candidate_mutated": False,
         "public_files_written": False,
         "public_export_allowed": False,
@@ -77,7 +82,9 @@ def build(root: Path, baseline_path: Path | None = None, as_of: date | None = No
             "activation_requires_captured_review_baseline": True,
             "activation_requires_zero_review_drift": True,
             "activation_ready_is_not_automatic_publication": True,
+            "published_release_is_not_reactivated_by_dry_run": True,
             "published_v0_3_1_remains_immutable": True,
+            "published_v0_4_is_immutable": True,
         },
     }
 
@@ -90,6 +97,7 @@ def markdown(data: dict[str, Any]) -> str:
         f"- Baseline de revue fournie : **{'oui' if data['baseline_provided'] else 'non'}**",
         f"- Dérive de revue propre : **{('oui' if data['review_drift_clean'] else 'non') if data['review_drift_clean'] is not None else 'non vérifiée'}**",
         f"- Activation prête : **{'oui' if data['activation_ready'] else 'non'}**",
+        f"- Publication déjà enregistrée : **{'oui' if data['publication_completed'] else 'non'}**",
         f"- Blocages activation : **{data['activation_blocking_count']}**",
         "",
     ]

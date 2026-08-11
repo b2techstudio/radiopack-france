@@ -126,6 +126,6 @@ assert normandie["rules"]["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' not in registry
-assert 'version: "v0.4"' not in registry
+assert 'version: "v0.4"' in registry
 
 print("Tests analog coverage/redundancy review: Bretagne 432.650 linkage remains unverified, Rennes status conflicts stay conservative, Normandie F1ZBL/F1ZOV/F5ZHA source and operational gates are explicit, no public mutation OK")

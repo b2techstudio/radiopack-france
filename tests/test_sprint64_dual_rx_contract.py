@@ -85,9 +85,9 @@ public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-n
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
 assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' not in registry
+assert 'version: "v0.4"' in registry
 assert 'id: "bretagne"' not in registry
-assert resume["public_packs"]["normandie"]["memory_count"] == 139
+assert resume["public_packs"]["normandie"]["memory_count"] == 142
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
 

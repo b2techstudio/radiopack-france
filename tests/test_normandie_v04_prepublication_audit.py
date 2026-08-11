@@ -44,25 +44,20 @@ assert stale["release_review_freshness_gate_passed"] is False
 assert all(item["stale_state_is_negative_operational_evidence"] is False for item in stale["stations"].values())
 
 review = checklist.build(ROOT, current_day)
-assert review["schema_version"] == "1.1"
+assert review["schema_version"] == "1.3"
 assert review["status"] == "release_review_checklist_not_public"
 assert review["item_count"] == 9
-assert review["completed_count"] == 3
-assert review["blocking_open_count"] == 6
-assert review["release_review_complete"] is False
-assert review["public_registry_has_v04"] is False
+assert review["completed_count"] == 9
+assert review["blocking_open_count"] == 0
+assert review["release_review_complete"] is True
+assert review["public_registry_has_v04"] is True
+assert review["publication_completed"] is True
+assert review["public_activation_state_coherent"] is True
 assert review["public_activation_is_separate_step"] is True
 assert review["public_export_allowed"] is False
 completed = {item["id"] for item in review["items"] if item["completed"]}
-assert completed == {"SOURCE_CONSISTENCY", "SOURCE_FRESHNESS", "PUBLIC_REGISTRY_STILL_PRIVATE"}
-assert set(review["blocking_open_ids"]) == {
-    "R3_MORTAIN_RX",
-    "F5ZHA_SOURCE_AND_COVERAGE",
-    "F1ZOV_OPERATIONAL_STATUS",
-    "F6ZES_RESOLVED",
-    "FINAL_MEMORY_PLAN",
-    "FINAL_REVIEW",
-}
+assert len(completed) == 9
+assert review["blocking_open_ids"] == []
 
 candidate_diff = diff.build(ROOT)
 assert candidate_diff["status"] == "candidate_structural_diff_not_public"
@@ -88,23 +83,26 @@ assert audit_result["published_base_memory_count"] == 139
 assert audit_result["internal_candidate_memory_count"] == 142
 assert audit_result["guarded_preview_memory_count"] == 142
 assert audit_result["currently_eligible_future_addition_count"] == 0
-assert audit_result["review_completed_count"] == 3
+assert audit_result["review_completed_count"] == 9
 assert audit_result["review_item_count"] == 9
-assert audit_result["review_blocking_open_count"] == 6
-assert audit_result["release_blocking_count"] == 6
-assert audit_result["prepublication_ready"] is False
-assert audit_result["release_ready"] is False
-assert audit_result["public_registry_has_v04"] is False
+assert audit_result["review_blocking_open_count"] == 0
+assert audit_result["release_blocking_count"] == 0
+assert audit_result["prepublication_ready"] is True
+assert audit_result["release_ready"] is True
+assert audit_result["public_registry_has_v04"] is True
+assert audit_result["publication_completed"] is True
+assert audit_result["public_activation_state_coherent"] is True
 assert audit_result["public_activation_pending"] is False
+assert audit_result["public_activation_completed"] is True
 assert audit_result["public_export_allowed"] is False
 assert all(audit_result["integrity_checks"].values())
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' not in registry
-assert not (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
+assert 'version: "v0.4"' in registry
+assert (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
 
 print(
     "Tests Normandie v0.4 prepublication audit: source freshness current/stale behavior guarded, "
-    "review checklist is 3/9 with 6 true prepublication blockers, structural diff preserves 139->142->142 exact prefixes, "
-    "audit integrity OK while prepublication remains blocked and public v0.4 stays absent, OK"
+    "review checklist is 9/9 with zero blockers after explicit scope freeze, structural diff preserves 139->142->142 exact prefixes, "
+    "audit integrity OK, frozen prepublication remains replayable, and current public v0.4 matches its publication record, OK"
 )

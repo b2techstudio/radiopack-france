@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 GENERATOR = ROOT / "website/src/pages/generateur.astro"
 REGIONS = ROOT / "website/src/data/regions.json"
-NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
+NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
 
 for path in [REGISTRY, GENERATOR, REGIONS, NORMANDIE]:
     assert path.is_file(), f"Fichier multi-régions manquant: {path.relative_to(ROOT)}"
@@ -23,10 +23,10 @@ for expected in [
     'memoryCount: 48',
     'id: "normandie"',
     'regionSlug: "normandie"',
-    'version: "v0.3.1"',
+    'version: "v0.4"',
     'defaultVariant: "standard"',
-    'memoryCount: 139',
-    '/downloads/normandie/radiopack-france-normandie-v0.3.1.csv',
+    'memoryCount: 142',
+    '/downloads/normandie/radiopack-france-normandie-v0.4.csv',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
     "export const getPublicPack",
     "export const getPublicVariant",
@@ -51,7 +51,7 @@ for expected in [
     "notamFieldset.hidden = !pack.notamCheck",
     "downloadLink.href = variant.downloadUrl",
     'downloadLink.setAttribute("download", variant.filename)',
-    "Normandie · 139",
+    "Normandie · 142",
     "Annecy · 65 / 48",
 ]:
     assert expected in page, f"Contrat générateur multi-régions absent: {expected}"
@@ -62,11 +62,11 @@ assert "URL.createObjectURL" not in page
 with NORMANDIE.open(encoding="utf-8", newline="") as handle:
     rows = list(csv.DictReader(handle))
 
-assert len(rows) == 139
+assert len(rows) == 142
 assert all(row["Duplex"] == "off" for row in rows)
 assert all(row["Offset"] == "0.000000" for row in rows)
 assert all(len(row["Name"]) <= 10 for row in rows)
-assert len({row["Location"] for row in rows}) == 139
-assert len({row["Name"] for row in rows}) == 139
+assert len({row["Location"] for row in rows}) == 142
+assert len({row["Name"] for row in rows}) == 142
 
-print("Tests RadioPack Sprint 23 public pack registry: Annecy 65/48 + Normandie 139 OK")
+print("Tests RadioPack Sprint 23 public pack registry: Annecy 65/48 + Normandie 142 OK")

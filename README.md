@@ -1,19 +1,32 @@
 # RadioPack France
 
+**État courant : Sprint 70 / 0.21.59 — Normandie v0.4 publiée à 142 mémoires ; Normandie v0.5 initialisée en recherche.**
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 67 / 0.21.56
+## État actuel — Sprint 70 / 0.21.59
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
 Packs publics immuables :
 
-- **Normandie v0.3.1** — 139 mémoires RX ;
+- **Normandie v0.4** — 142 mémoires RX ;
+- Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation.
 
-Recherche : **Normandie v0.4** à **142 mémoires** internes, plafond de travail connu **147 mémoires**, **Bretagne v0.1** non publique et Annecy–Alpes–Léman v0.3 non publique.
+Recherche : **Normandie v0.5** initialisée sur la base publique immuable v0.4 (142 mémoires), avec R3/F1ZBX, F5ZHA, F1ZOV et F6ZES en backlog non validé ; **Bretagne v0.1** et Annecy–Alpes–Léman v0.3 restent non publiques.
 
-Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md` et `research/sprint-67-summary.md`.
+Le générateur public propose Normandie v0.4 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md` et `research/sprint-70-summary.md`.
+
+
+## Normandie v0.4 — publication achevée
+
+Normandie v0.4 est publiée avec **142 mémoires RX**. Le CSV public est exactement le candidat revu : base v0.3.1 immuable (139) + `50-ZHY-IN` 145.0875 MHz + `53-ZCE-IN` 145.1000 MHz + `50-ZBL-U` 431.2500 MHz. La revue de périmètre est 9/9 et les quatre dossiers insuffisamment prouvés sont exclus de cette version.
+
+Fichiers de publication : `research/normandie-v0.4/publication-record.json` et `website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv`.
+
+## Normandie v0.5 — backlog initial
+
+`research/normandie-v0.5/backlog.json` reprend R3/F1ZBX, F5ZHA, F1ZOV et F6ZES. Un report n'est jamais une validation. R3 conserve exactement deux mémoires potentielles (145.075 / 145.675 MHz) et exige deux sessions RX indépendantes ; F5ZHA conserve deux mémoires potentielles mais nécessite réconciliation autoritative + terrain ; F1ZOV attend la sortie de maintenance ; F6ZES reste sans fréquence/mode deviné. Le plafond potentiel connu, hors F6ZES, reste **147 mémoires**.
 
 ## Règles permanentes
 

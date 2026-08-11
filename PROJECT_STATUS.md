@@ -1,24 +1,49 @@
 # RadioPack France — point de reprise
 
-Dernière mise à jour : **11 août 2026**  
-Sprint courant : **67**  
-État logique : **0.21.56**
+Dernière mise à jour : **11 août 2026**
+Sprint courant : **70**
+État logique : **0.21.59**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md` et `research/sprint-67-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md` et `research/sprint-70-summary.md`.
 
 ## État public
 
-- **Normandie v0.3.1** : 139 mémoires RX, publiée et immuable.
+- **Normandie v0.4** : **142 mémoires RX**, publiée et immuable.
+- **Normandie v0.3.1** : 139 mémoires RX, historique immuable.
 - **Annecy–Alpes–Léman v0.2** : 65 mémoires RX, variante 48 sans aviation, publiée et immuable.
 - **Bretagne v0.1** : recherche uniquement, aucune publication.
 
-## Travail actif — Normandie v0.4
+
+## État final après Sprint 70
+
+- Normandie v0.4 : **publiée, 142 mémoires RX**, CSV public figé.
+- Revue v0.4 : **9/9**, périmètre clos ; publication enregistrée dans `research/normandie-v0.4/publication-record.json`.
+- Normandie v0.5 : **initialisée en recherche**, base publique v0.4=142, aucun ajout encore promu.
+- Backlog v0.5 : R3/F1ZBX (+2 potentiels après 2 sessions RX), F5ZHA (+2 potentiels après source+terrain), F1ZOV (+1 potentiel après sortie de maintenance), F6ZES (delta inconnu tant que fréquence/mode ne sont pas prouvés).
+- Bretagne v0.1 reste recherche uniquement.
+
+## Historique de préparation — Normandie v0.4
 
 Candidat interne reproductible : **142 mémoires**, non public. Les trois portes de fréquence connues représentent au maximum +5 mémoires, soit un plafond de travail connu à **147 mémoires**. Ce plafond n'est pas la taille publique finale et F6ZES reste hors calcul tant que fréquence et mode ne sont pas résolus.
 
 Ajouts internes actuels : `50-ZHY-IN` 145.0875 MHz (175), `53-ZCE-IN` 145.1000 MHz (176), `50-ZBL-U` 431.2500 MHz (177).
 
-État de revue actuel vérifié par `tests/test_normandie_v04_review_handoff.py` : **3/9 points complétés**, **6 blocages ouverts**, **0 ajout éligible**, preview **142 mémoires**. L'audit reste non prêt pour publication.
+État historique avant la clôture Sprint 68 : **3/9 points complétés**, **6 blocages ouverts**, **0 ajout éligible**, preview **142 mémoires**. Cet état est conservé dans les sources historiques ; la clôture Sprint 68 l'a ensuite porté à 9/9 avec zéro blocage.
+
+
+## Clôture de périmètre Normandie v0.4 — Sprint 68
+
+Normandie v0.4 est figée à **142 mémoires RX**. Les trois ajouts sont `50-ZHY-IN` 145.0875 MHz, `53-ZCE-IN` 145.1000 MHz et `50-ZBL-U` 431.2500 MHz.
+
+R3/F1ZBX, F5ZHA, F1ZOV et F6ZES sont **reportés à Normandie v0.5** sans être considérés validés. La revue v0.4 est **9/9**, les blocages de prépublication sont à **0**, l'audit est **OK** et le dry-run avec baseline propre est prêt pour l'activation publique. La publication reste une étape séparée.
+
+## Publication Normandie v0.4 — Sprint 69
+
+Le CSV public `website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv` contient **142 mémoires RX** et correspond octet pour octet au candidat revu. La v0.3.1 à 139 mémoires reste intacte. Le registre public, les pages du site et le générateur public pointent désormais vers v0.4. Le journal immuable de publication est `research/normandie-v0.4/publication-record.json`.
+
+## Initialisation Normandie v0.5 — Sprint 70
+
+La prochaine version active est **Normandie v0.5**, recherche uniquement, basée sur la v0.4 publique immuable à 142 mémoires. `research/normandie-v0.5/backlog.json` reprend R3/F1ZBX, F5ZHA, F1ZOV et F6ZES sans les considérer validés. Aucun ajout v0.5 n'est encore promu.
 
 ## Chaîne de revue — Sprints 55 à 59
 
@@ -167,7 +192,22 @@ python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
 python tests\test_sprint66_technical_inventory_boundaries.py
 python tests\test_sprint67_current_reference_synthesis.py
+python tests\test_sprint68_scope_closure.py
+python tests\test_normandie_v04_public_release.py
+python tests\test_normandie_v05_initialization.py
 python tests\test_etel_network_research.py
+python tests\test_bretagne_research_scaffold.py
+python tests\test_emergency_relay_research.py
+python tests\test_site_files.py
+python tests\test_pack_registry.py
+
+cd website
+npm ci
+npm run build
+cd ..
+
+python tests\test_built_annecy_public_csv.py
+python tests\test_built_public_pack_catalog.py
 
 git status
 ```

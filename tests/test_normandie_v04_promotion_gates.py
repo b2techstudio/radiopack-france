@@ -146,7 +146,7 @@ with tempfile.TemporaryDirectory(prefix="radiopack-r3-gate-") as tmp:
     assert simulated["all_blocked_gates_passed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' not in registry
-assert not (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
+assert 'version: "v0.4"' in registry
+assert (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv").exists()
 
 print("Tests Normandie v0.4 promotion gates: 5 blocked frequencies remain excluded, R3 standalone 3-memory RX-only validation pack builds safely, two independent confirmed sessions are required, F5ZHA/F1ZOV remain source-gated, no public mutation OK")

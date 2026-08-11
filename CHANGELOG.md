@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.53 - 2026-08-11
+
+- **Sprint 64** : clarification définitive entre nombre de mémoires RX et nombre de sessions de validation pour R3/F1ZBX, CROSS Étel Ch64 et CROSS Corsen Ch79.
+- `research/paired-rx-policy.json` passe au schéma 1.1 : une paire vérifiée de deux fréquences distinctes conserve exactement **2 mémoires RX**, tandis que le nombre de sessions terrain reste un nombre de preuves et ne crée aucune mémoire supplémentaire.
+- `research/normandie-v0.4/r3-validation-pack.json` marque `R3-OUT` 145.675 et `R3-IN` 145.075 comme les **2 membres de paire R3** ; `CTRL-ZHY` reste un contrôle facultatif hors paire. La porte R3 exige toujours **2 sessions indépendantes**, avec delta futur +2 seulement si elle passe.
+- Ajout de `research/sprint-64-dual-rx-contract.json` : Ch64 reste verrouillé en **156.225 / 160.825 MHz** et Ch79 en **156.975 / 161.575 MHz**, soit 2 mémoires RX par voie duplex si elles deviennent publiables.
+- Ajout de `tests/test_sprint64_dual_rx_contract.py` et intégration CI pour empêcher toute confusion future entre sessions de preuve et mémoires, ou toute perte d'un sens RX sur Ch64/Ch79.
+- Mise à jour de `README.md`, `PROJECT_STATUS.md`, `research/project-resume-state.json` et des garde-fous de reprise au **Sprint 64 / 0.21.53**.
+- État Normandie v0.4 inchangé : **142 mémoires**, preview 142, plafond 147, revue **3/9**, **6 blocages**, **0 ajout éligible**.
+- État public inchangé : Normandie v0.3.1 **139**, Annecy–Alpes–Léman v0.2 **65/48**, Bretagne non publique.
+
 ## 0.21.52 - 2026-08-11
 
 - **Sprint 63** : revalidation ciblée des blocages externes Normandie v0.4 et nouvelle tentative d'exploitation du Guide Marine 2026, sans mutation des packs publics.

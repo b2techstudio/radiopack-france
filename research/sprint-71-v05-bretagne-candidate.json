@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "status": "sprint71_v05_revalidation_and_bretagne_internal_candidate_not_public",
+  "sprint": 71,
+  "state_version": "0.21.60",
+  "checked_on": "2026-08-11",
+  "normandie_v0_5": {
+    "published_base_memory_count": 142,
+    "candidate_memory_count": 142,
+    "eligible_addition_count": 0,
+    "gate_cleared_count": 0,
+    "r3": {
+      "pair_mhz": [145.075, 145.675],
+      "current_operator_pair_revalidated": true,
+      "source": "https://ara35.fr/frequences/relais-phonie/r3/",
+      "two_independent_mortain_rx_sessions_present_in_repository": false,
+      "promotion": false
+    },
+    "f5zha": {
+      "pair_mhz": [145.4675, 432.575],
+      "current_ref_active": true,
+      "source": "https://www.r-e-f.org/",
+      "local_or_equivalent_authoritative_reconciliation_complete": false,
+      "mortain_field_relevance_verified": false,
+      "promotion": false
+    },
+    "f1zov": {
+      "pair_known_mhz": [430.375, 431.975],
+      "local_operator_status": "En Maintenance",
+      "source": "https://f6kfw.fr/",
+      "promotion": false
+    },
+    "f6zes": {
+      "site": "Sourdeval",
+      "responsible": "F1SMB",
+      "locator": "IN98MR93XV",
+      "altitude_m": 230,
+      "current_ref_frequency_present": false,
+      "current_ref_mode_present": false,
+      "must_not_guess": true,
+      "promotion": false
+    }
+  },
+  "bretagne_v0_1": {
+    "internal_candidate_memory_count": 135,
+    "public_export_allowed": false,
+    "national_blocks": {
+      "pmr446": 16,
+      "marine_vhf": 90,
+      "amateur_listening": 6,
+      "amateur_calls": 2
+    },
+    "regional_unique_memories_after_national_deduplication": 21,
+    "regional_source_unique_count": 29,
+    "marine_policy": {
+      "channel64_pair_mhz": [156.225, 160.825],
+      "channel79_pair_mhz": [156.975, 161.575],
+      "channel64_two_generic_rx_memories_in_candidate": true,
+      "channel79_two_generic_rx_memories_in_candidate": true,
+      "channel64_local_site_claimed": false,
+      "channel79_local_site_claimed": false,
+      "generic_channel_frequency_validation_is_distinct_from_local_site_assignment": true
+    },
+    "current_ref_rechecks": {
+      "f5zis_f5zit_f5ziu_f5ziv_f5zjr_active_shared_432_650": true,
+      "f1zmu_active_pair_mhz": [430.325, 439.725],
+      "f1zbz_active_multi_path": true,
+      "r3_r71_operator_link_current": true
+    },
+    "aviation": {
+      "memory_count": 0,
+      "status": "pending_current_sia_extraction",
+      "reserved_locations": [130, 149]
+    }
+  },
+  "rules": {
+    "failed_or_unverified_normandie_gate_is_not_promoted": true,
+    "internal_candidate_is_not_publication": true,
+    "generic_marine_channel_does_not_claim_transmitter_site": true,
+    "site_mapping_search_failure_is_not_negative_evidence": true,
+    "tx_disabled": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000"
+  }
+}

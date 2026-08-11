@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-11",
-  "current_sprint": 62,
-  "state_version": "0.21.51",
+  "current_sprint": 63,
+  "state_version": "0.21.52",
   "public_packs": {
     "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
     "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
@@ -53,6 +53,19 @@
       "departments": [35, 50, 53, 61],
       "new_untracked_active_analog_candidate_count": 0,
       "candidate_memory_delta": 0
+    },
+    "latest_source_revalidation": {
+      "file": "research/sprint-63-source-revalidation.json",
+      "checked_on": "2026-08-11",
+      "gate_cleared_count": 0,
+      "candidate_memory_delta": 0,
+      "f1zov_operator_status": "En Maintenance",
+      "f5zha_repeaterbook_conflict_frequency_mhz": 431.4125,
+      "f5zha_repeaterbook_verification_date_shown": "2017-02-17",
+      "f5zha_repeaterbook_conflict_classified_stale_secondary": true,
+      "f5zha_authoritative_reconciliation_complete": false,
+      "f6zes_frequency_mode_resolved": false,
+      "r3_new_field_observation_available": false
     }
   },
   "review_handoff": {
@@ -86,6 +99,9 @@
     "etel_channel64_stopped_proven": false,
     "etel_channel64_new_rf_memory_delta": 0,
     "etel_meteofrance_guide_2026_identified_but_not_extracted": true,
+    "meteofrance_guide_2026_direct_pdf_url_identified": true,
+    "meteofrance_guide_2026_fetch_retried_2026_08_11": true,
+    "meteofrance_guide_2026_content_extracted": false,
     "etel_network_maintenance_station_count_2026": 17,
     "etel_annual_report_2025_vhf_station_count": 16,
     "etel_annual_report_2025_mf_station_count": 2,
@@ -106,7 +122,8 @@
     "research/normandie-v0.4/mortain-adjacent-ref-scan.json",
     "research/bretagne-v0.1/etel-network.json",
     "research/bretagne-v0.1/etel-channel64-evidence.json",
-    "research/bretagne-v0.1/corsen-channel79-evidence.json"
+    "research/bretagne-v0.1/corsen-channel79-evidence.json",
+    "research/sprint-63-source-revalidation.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -132,7 +149,8 @@
     "run_local_normandie_checks": "python tools/run_normandie_v04_checks.py --extended",
     "run_sprint60_revalidation_test": "python tests/test_sprint60_revalidation.py",
     "run_sprint61_research_test": "python tests/test_sprint61_research.py",
-    "run_sprint62_primary_reference_test": "python tests/test_sprint62_primary_reference_boundaries.py"
+    "run_sprint62_primary_reference_test": "python tests/test_sprint62_primary_reference_boundaries.py",
+    "run_sprint63_blocker_revalidation_test": "python tests/test_sprint63_blocker_revalidation.py"
   },
   "recent_sprints": {
     "55": "Deterministic non-public review snapshot",
@@ -142,7 +160,8 @@
     "59": "Review handoff tests and CI integration",
     "60": "F6ZES no-guess revalidation and guarded Corsen channel 79 local clues",
     "61": "CROSS Etel channel 64 primary-source conflict, Corsen primary revalidation boundary, and adjacent REF analog scan",
-    "62": "Meteo-France Guide Marine primary-reference target, Etel channel 63 operational convergence boundary, and Corsen current infrastructure versus historical/current channel assignment separation"
+    "62": "Meteo-France Guide Marine primary-reference target, Etel channel 63 operational convergence boundary, and Corsen current infrastructure versus historical/current channel assignment separation",
+    "63": "Current blocker revalidation: F1ZOV still in operator maintenance, F5ZHA RepeaterBook conflict dated as stale secondary without clearing authoritative/field gates, F6ZES still unresolved, Guide Marine PDF retry still unread"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
@@ -150,6 +169,7 @@
     "local_operator_status_overrides_general_directory_for_current_state": true,
     "field_observations_do_not_close_source_conflicts": true,
     "secondary_source_clue_does_not_replace_required_primary_validation": true,
+    "stale_secondary_conflict_does_not_replace_required_authoritative_reconciliation": true,
     "primary_source_conflict_requires_reconciliation": true,
     "source_search_failure_is_not_negative_evidence": true,
     "primary_pdf_identified_but_unread_is_not_negative_evidence": true,

@@ -97,6 +97,9 @@ jobs:
       - name: Test Sprint 66 technical inventory boundaries
         run: python tests/test_sprint66_technical_inventory_boundaries.py
 
+      - name: Test Sprint 67 current reference synthesis
+        run: python tests/test_sprint67_current_reference_synthesis.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

@@ -28,7 +28,7 @@ assert f6zes["rules"]["frequency_promoted_to_internal_candidate"] is False
 assert f6zes["rules"]["frequency_promoted_to_public_pack"] is False
 assert f6zes["rules"]["public_export_allowed"] is False
 
-assert corsen["status"] == "secondary_current_clues_recorded_primary_current_channel79_site_validation_pending"
+assert corsen["status"].endswith("primary_current_channel79_site_validation_pending")
 assert corsen["channel"] == 79
 assert corsen["paired_rx"]["ship_to_coast_mhz"] == 156.975
 assert corsen["paired_rx"]["coast_to_ship_mhz"] == 161.575

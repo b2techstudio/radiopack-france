@@ -82,6 +82,9 @@ jobs:
       - name: Test Sprint 61 guarded research
         run: python tests/test_sprint61_research.py
 
+      - name: Test Sprint 62 primary reference boundaries
+        run: python tests/test_sprint62_primary_reference_boundaries.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

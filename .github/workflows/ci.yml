@@ -109,6 +109,12 @@ jobs:
       - name: Test Sprint 70 Normandie v0.5 initialization
         run: python tests/test_normandie_v05_initialization.py
 
+      - name: Test Bretagne v0.1 internal candidate
+        run: python tests/test_bretagne_internal_candidate.py
+
+      - name: Test Sprint 71 v0.5 and Bretagne candidate
+        run: python tests/test_sprint71_v05_bretagne_candidate.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 
@@ -257,36 +263,3 @@ jobs:
             --header "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${REPOSITORY}/statuses/${COMMIT_SHA}" \
             --data "$payload"
-
-  sprint71-finalize:
-    name: Apply verified Sprint 71 candidate
-    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'Sprint 71 trigger candidate' }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout main
-        uses: actions/checkout@v6
-        with:
-          ref: main
-          fetch-depth: 0
-      - name: Verify apply test and commit
-        shell: bash
-        run: |
-          cat research/.s71-stage-0 research/.s71-stage-1 research/.s71-stage-2 research/.s71-stage-3 research/.s71-stage-4 | base64 --decode | gzip --decompress > /tmp/s71.patch
-          test "$(wc -c < /tmp/s71.patch)" = "60879"
-          test "$(sha256sum /tmp/s71.patch | awk '{print $1}')" = "21d8d891157862d9bbb363fbcc8b40b983bda78814eba5bdbb8dcbb0aae7f32f"
-          git apply --check /tmp/s71.patch
-          git apply /tmp/s71.patch
-          rm -f research/.s71-stage-0 research/.s71-stage-1 research/.s71-stage-2 research/.s71-stage-3 research/.s71-stage-4 research/.s71-trigger
-          python tests/test_bretagne_internal_candidate.py
-          python tests/test_sprint71_v05_bretagne_candidate.py
-          python tests/test_normandie_v04_field_tools.py
-          python tests/test_bretagne_research_scaffold.py
-          python tests/test_site_files.py
-          git diff --check
-          git config user.name "b2techstudio"
-          git config user.email "actions@users.noreply.github.com"
-          git add -A
-          git commit -m "Sprint 71 build Bretagne v0.1 internal candidate"
-          git push origin HEAD:main

@@ -123,4 +123,4 @@ Normandie v0.4 :
 - maintien des paires à 2 mémoires RX ;
 - absence de toute mutation publique.
 
-Finalisation : garde-fou Sprint 67 intégré à la CI ; aucun fichier public n'est modifié. Le finaliseur CI a été corrigé pour produire le changelog et l'archive exacts.
+Finalisation : garde-fou Sprint 67 intégré à la CI ; aucun fichier public n'est modifié. Le finaliseur CI utilise désormais un YAML validé localement et une entrée changelog Base64 mono-ligne.

@@ -2,7 +2,7 @@
 
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 61 / 0.21.50
+## État actuel — Sprint 62 / 0.21.51
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -13,7 +13,7 @@ Packs publics immuables :
 
 Recherche : **Normandie v0.4** à **142 mémoires** internes, plafond de travail connu **147 mémoires**, **Bretagne v0.1** non publique et Annecy–Alpes–Léman v0.3 non publique.
 
-Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md` et `research/sprint-61-summary.md`.
+Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md` et `research/sprint-62-summary.md`.
 
 ## Règles permanentes
 
@@ -29,7 +29,10 @@ Le générateur public ne propose que les versions publiées. Point de reprise :
 - Une observation terrain ne ferme jamais un conflit de source.
 - Une source secondaire actuelle peut orienter une recherche mais ne remplace pas une validation primaire lorsqu'elle est exigée.
 - Un conflit entre sources primaires actuelles doit être réconcilié avant promotion.
+- Une convergence locale sur un canal ne réfute pas automatiquement un autre canal mentionné par une source primaire conflictuelle.
 - Une absence dans un document local actuel ne constitue pas automatiquement une preuve d'arrêt.
+- Une infrastructure radio actuelle ne permet pas d'attribuer un canal précis.
+- Une affectation historique primaire ne vaut pas validation opérationnelle actuelle.
 - Des nombres de stations fondés sur des unités non définies identiquement ne sont pas réconciliés par simple calcul.
 - `research/paired-rx-policy.json` impose les deux côtés RX lorsqu'une liaison duplex/split distincte est vérifiée.
 - Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint.
@@ -116,18 +119,28 @@ Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`. Les rec
 - Le contexte primaire actuel confirme le réseau radio Corsen sans identifier le site Ch79.
 - Une source locale actuelle du Club de Voile de la Baie d'Erquy associe Ch79 à **Cap Fréhel** et **Bodic** ; elle est conservée comme indice secondaire local actuel uniquement.
 - Le bilan officiel Corsen 2025 est identifié, mais son PDF de 14,6 Mio n'a pas pu être chargé dans le workflow courant ; aucune donnée canal/site n'en est déduite.
-- Cap Fréhel et Bodic restent des priorités de revalidation primaire, sans attribution de site ni publication.
+- La DIRM confirme actuellement au **Cap Fréhel** des équipements CROSS de suivi et de liaison avec les navires.
+- Une offre officielle 2026 et le marché public DGAMPA confirment au **Stiff / Ouessant** des équipements de radiocommunications/radio nécessaires au CROSS Corsen.
+- Ces infrastructures actuelles ne permettent pas d'attribuer Ch79.
+- Une source primaire historique de 2003 documente Ch79 dans l'architecture d'Ouessant Traffic / CROSS Corsen ; elle explique les cibles Stiff/Pointe du Raz mais ne vaut pas validation 2026.
+- Le **Guide Marine 2026 de Météo-France**, dont la page de présentation est datée du 5 août 2026 et indique qu'il contient les fréquences/horaire VHF, devient une cible primaire de réconciliation. Son PDF n'a pas été extrait dans ce workflow et n'autorise donc aucune attribution.
+
+Cap Fréhel, Bodic, Batz, Stiff/Ouessant et Pointe du Raz restent des cibles de recherche ; aucun site n'est promu.
 
 ### CROSS Étel — canal 64
 
-`research/bretagne-v0.1/etel-channel64-evidence.json` documente désormais un **conflit entre sources primaires actuelles** :
+`research/bretagne-v0.1/etel-channel64-evidence.json` documente toujours un **conflit entre sources primaires actuelles** :
 
 - le ministère, page mise à jour le 19 juin 2026, maintient l'affirmation **canaux 63 et 64 dans le Morbihan** ;
-- la page actuelle du CROSS Étel nomme Étel en diffusion continue sur **63** ;
+- la page actuelle du CROSS Étel nomme Étel et Chassiron en diffusion continue sur **63** ;
 - le planning météo lié actuellement par le CROSS liste ses émetteurs/canaux sans aucun 64 ;
 - le bilan 2025 décrit **16 stations VHF + 2 MF**, les émetteurs météo réguliers et les stations renforcées **Étel / Chassiron / Ferret sur 63**, sans mentionner 64.
 
-Cette absence locale de 64 ne vaut pas preuve d'arrêt. Aucun site n'est attribué au canal 64 tant qu'une source primaire ne réconcilie pas la divergence. L'offre technique DIRM 2026 mentionne **17 stations radio** maintenues ; ce nombre n'est pas assimilé arithmétiquement aux 16 VHF + 2 MF faute de définition commune.
+Sprint 62 formalise la convergence opérationnelle locale : **3 sources locales actuelles explicitent Ch63, 0 de ces 3 n'explicite Ch64**. Cela ne prouve ni l'opération actuelle de Ch64 ni son arrêt. Aucun site n'est attribué au canal 64 tant qu'une source primaire ne réconcilie pas la divergence.
+
+Le **Guide Marine 2026 de Météo-France** est maintenant une cible primaire prioritaire parce que Météo-France indique qu'il contient les fréquences et horaires des bulletins VHF. Son PDF n'a pas été extrait dans le workflow courant ; aucune conclusion Ch64 n'en est tirée.
+
+L'offre technique DIRM 2026 mentionne **17 stations radio** maintenues ; ce nombre n'est pas assimilé arithmétiquement aux 16 VHF + 2 MF faute de définition commune.
 
 La paire RX **156.225 / 160.825 MHz** était déjà présente dans la recherche : delta RF **0**.
 
@@ -141,6 +154,7 @@ La paire RX **156.225 / 160.825 MHz** était déjà présente dans la recherche 
 - [research/sprint-50-54-summary.md](research/sprint-50-54-summary.md)
 - [research/sprint-55-60-summary.md](research/sprint-55-60-summary.md)
 - [research/sprint-61-summary.md](research/sprint-61-summary.md)
+- [research/sprint-62-summary.md](research/sprint-62-summary.md)
 
 Architecture publique : `website/src/lib/chirpPack.ts`, `website/src/lib/annecyPack.ts`, `website/src/lib/packRegistry.ts`.
 
@@ -156,6 +170,7 @@ python tests\test_normandie_v04_prepublication_audit.py
 python tests\test_normandie_v04_review_handoff.py
 python tests\test_sprint60_revalidation.py
 python tests\test_sprint61_research.py
+python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
@@ -173,6 +188,7 @@ git pull --ff-only
 python tools\run_normandie_v04_checks.py --extended
 python tests\test_sprint60_revalidation.py
 python tests\test_sprint61_research.py
+python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py

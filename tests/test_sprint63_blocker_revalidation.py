@@ -69,12 +69,13 @@ normandie_public = ROOT / "website/public/downloads/normandie/radiopack-france-n
 assert normandie_public.is_file()
 assert len(normandie_public.read_text(encoding="utf-8").splitlines()) == 140
 
+# Sprint 63 evidence remains immutable historical evidence. The project resume state is
+# allowed to advance to later sprints as long as the guarded conclusions stay intact.
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 63
-assert resume["state_version"] == "0.21.52"
+assert resume["current_sprint"] >= evidence["sprint"]
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0
 assert resume["active_work"]["public_release_ready"] is False
 assert resume["resume_rules"]["stale_secondary_conflict_does_not_replace_required_authoritative_reconciliation"] is True
 
-print("Sprint 63 blocker revalidation: no gate cleared, stale F5ZHA secondary conflict correctly bounded, F1ZOV/F6ZES still blocked, unread Guide Marine produces no inference, public packs unchanged, OK")
+print("Sprint 63 blocker revalidation: historical evidence remains guarded after later sprints; no gate cleared, stale F5ZHA secondary conflict correctly bounded, F1ZOV/F6ZES still blocked, unread Guide Marine produces no inference, public packs unchanged, OK")

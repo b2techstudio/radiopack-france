@@ -40,8 +40,8 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 65
-assert resume["state_version"] == "0.21.54"
+assert resume["current_sprint"] == 66
+assert resume["state_version"] == "0.21.55"
 assert resume["public_packs"]["normandie"]["memory_count"] == 139
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["blocked_frequency_count"] == 5
@@ -79,6 +79,11 @@ assert resume["active_work"]["latest_primary_recheck"]["f5zha_authoritative_reco
 assert resume["active_work"]["latest_primary_recheck"]["f6zes_frequency_mode_resolved"] is False
 assert resume["active_work"]["latest_primary_recheck"]["normandie_gate_cleared_count"] == 0
 assert resume["active_work"]["latest_primary_recheck"]["candidate_memory_delta"] == 0
+assert resume["active_work"]["latest_technical_inventory_recheck"]["file"] == "research/sprint-66-technical-inventory-boundaries.json"
+assert resume["active_work"]["latest_technical_inventory_recheck"]["f5zha_authoritative_reconciliation_complete"] is False
+assert resume["active_work"]["latest_technical_inventory_recheck"]["f6zes_frequency_mode_resolved"] is False
+assert resume["active_work"]["latest_technical_inventory_recheck"]["normandie_gate_cleared_count"] == 0
+assert resume["active_work"]["latest_technical_inventory_recheck"]["candidate_memory_delta"] == 0
 assert resume["resume_rules"]["published_versions_are_immutable"] is True
 assert resume["resume_rules"]["geometry_is_not_reception_proof"] is True
 assert resume["resume_rules"]["field_observations_do_not_close_source_conflicts"] is True
@@ -98,6 +103,10 @@ assert resume["resume_rules"]["current_radio_infrastructure_does_not_imply_chann
 assert resume["resume_rules"]["historical_primary_channel_assignment_is_not_current_validation"] is True
 assert resume["resume_rules"]["current_regional_channel_statement_does_not_identify_transmitter_site"] is True
 assert resume["resume_rules"]["current_cross_network_statement_does_not_map_channel_to_station"] is True
+assert resume["resume_rules"]["current_maintenance_scope_does_not_name_station_channels"] is True
+assert resume["resume_rules"]["association_existence_does_not_validate_repeater_frequency"] is True
+assert resume["resume_rules"]["undated_secondary_schedule_is_not_current_primary_validation"] is True
+assert resume["resume_rules"]["current_infrastructure_procurement_does_not_assign_channel"] is True
 assert resume["resume_rules"]["network_counting_units_must_not_be_reconciled_without_definition"] is True
 assert resume["active_work"]["unresolved_priority"]["station"] == "F6ZES Sourdeval"
 assert resume["active_work"]["unresolved_priority"]["candidate_memory_delta"] == 0
@@ -127,10 +136,17 @@ assert resume["bretagne_research_update"]["cross_etel_current_etel_chassiron_cha
 assert resume["bretagne_research_update"]["cross_etel_current_channel64_site_named"] is False
 assert resume["bretagne_research_update"]["cross_corsen_current_coastal_station_network_confirmed"] is True
 assert resume["bretagne_research_update"]["cross_corsen_current_channel79_site_mapping_present"] is False
+assert resume["bretagne_research_update"]["latest_technical_inventory_recheck_file"] == "research/sprint-66-technical-inventory-boundaries.json"
+assert resume["bretagne_research_update"]["etel_2026_technical_maintenance_station_count"] == 17
+assert resume["bretagne_research_update"]["etel_2026_technical_maintenance_names_channels_listed"] is False
+assert resume["bretagne_research_update"]["corsen_stiff_2026_radio_infrastructure_revalidated"] is True
+assert resume["bretagne_research_update"]["corsen_stiff_2026_channel79_mapping_present"] is False
+assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_sites"] == ["Cap Fréhel", "Bodic", "Batz", "Stiff / Ouessant", "Pointe du Raz"]
+assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_is_current_primary_validation"] is False
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **65**" in status_text
-assert "État logique : **0.21.54**" in status_text
+assert "Sprint courant : **66**" in status_text
+assert "État logique : **0.21.55**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
@@ -150,7 +166,7 @@ assert "2017-02-17" in status_text
 assert "2 mémoires RX" in status_text
 assert "2 sessions" in status_text
 assert "19 juin 2026" in status_text
-assert "Sprint 65" in status_text
+assert "Sprint 66" in status_text
 
 recorder = load_module("r3_recorder", RECORDER)
 reporter = load_module("gate_reporter", REPORTER)
@@ -223,5 +239,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained at sprint 65, OK"
+    "non-public, recovery state is self-contained at sprint 66, OK"
 )

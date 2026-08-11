@@ -40,8 +40,8 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 63
-assert resume["state_version"] == "0.21.52"
+assert resume["current_sprint"] == 64
+assert resume["state_version"] == "0.21.53"
 assert resume["public_packs"]["normandie"]["memory_count"] == 139
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["blocked_frequency_count"] == 5
@@ -66,9 +66,18 @@ assert resume["active_work"]["latest_source_revalidation"]["f1zov_operator_statu
 assert resume["active_work"]["latest_source_revalidation"]["f5zha_repeaterbook_verification_date_shown"] == "2017-02-17"
 assert resume["active_work"]["latest_source_revalidation"]["f5zha_authoritative_reconciliation_complete"] is False
 assert resume["active_work"]["latest_source_revalidation"]["f6zes_frequency_mode_resolved"] is False
+assert resume["active_work"]["dual_rx_contract"]["r3_pair_frequencies_mhz"] == [145.075, 145.675]
+assert resume["active_work"]["dual_rx_contract"]["r3_required_rx_memory_count_if_promoted"] == 2
+assert resume["active_work"]["dual_rx_contract"]["r3_minimum_independent_field_sessions"] == 2
+assert resume["active_work"]["dual_rx_contract"]["r3_sessions_are_evidence_not_memories"] is True
+assert resume["active_work"]["dual_rx_contract"]["r3_control_memory_is_pair_member"] is False
+assert resume["active_work"]["dual_rx_contract"]["r3_memory_delta_if_gate_clears"] == 2
 assert resume["resume_rules"]["published_versions_are_immutable"] is True
 assert resume["resume_rules"]["geometry_is_not_reception_proof"] is True
 assert resume["resume_rules"]["field_observations_do_not_close_source_conflicts"] is True
+assert resume["resume_rules"]["field_session_count_does_not_define_memory_count"] is True
+assert resume["resume_rules"]["verified_distinct_pair_uses_two_rx_memories"] is True
+assert resume["resume_rules"]["optional_control_memory_is_not_pair_member"] is True
 assert resume["resume_rules"]["local_operator_status_overrides_general_directory_for_current_state"] is True
 assert resume["resume_rules"]["stale_secondary_conflict_does_not_replace_required_authoritative_reconciliation"] is True
 assert resume["resume_rules"]["stale_source_blocks_release_review_completion"] is True
@@ -88,6 +97,8 @@ assert resume["bretagne_research_update"]["current_primary_corsen_infrastructure
 assert resume["bretagne_research_update"]["historical_primary_channel79_context_exists"] is True
 assert resume["bretagne_research_update"]["historical_primary_channel79_context_is_current_validation"] is False
 assert resume["bretagne_research_update"]["secondary_current_clue_sites"] == ["Cap Fréhel", "Bodic"]
+assert resume["bretagne_research_update"]["paired_rx_frequencies_mhz"] == [156.975, 161.575]
+assert resume["bretagne_research_update"]["corsen_channel79_required_rx_memory_count_if_published"] == 2
 assert resume["bretagne_research_update"]["new_rf_memory_delta"] == 0
 assert resume["bretagne_research_update"]["site_assignment_promoted"] is False
 assert resume["bretagne_research_update"]["etel_channel64_current_brittany_site_identified"] is False
@@ -95,13 +106,14 @@ assert resume["bretagne_research_update"]["etel_channel64_primary_source_conflic
 assert resume["bretagne_research_update"]["etel_local_operational_sources_converge_on_channel63"] is True
 assert resume["bretagne_research_update"]["etel_channel64_current_operation_proven"] is False
 assert resume["bretagne_research_update"]["etel_channel64_stopped_proven"] is False
+assert resume["bretagne_research_update"]["etel_channel64_required_rx_memory_count_if_published"] == 2
 assert resume["bretagne_research_update"]["etel_channel64_new_rf_memory_delta"] == 0
 assert resume["bretagne_research_update"]["meteofrance_guide_2026_fetch_retried_2026_08_11"] is True
 assert resume["bretagne_research_update"]["meteofrance_guide_2026_content_extracted"] is False
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **63**" in status_text
-assert "État logique : **0.21.52**" in status_text
+assert "Sprint courant : **64**" in status_text
+assert "État logique : **0.21.53**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
@@ -118,6 +130,8 @@ assert "16 stations VHF + 2 MF" in status_text
 assert "17 stations radio" in status_text
 assert "Guide Marine 2026" in status_text
 assert "2017-02-17" in status_text
+assert "2 mémoires RX" in status_text
+assert "2 sessions" in status_text
 
 recorder = load_module("r3_recorder", RECORDER)
 reporter = load_module("gate_reporter", REPORTER)
@@ -190,5 +204,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained at sprint 63, OK"
+    "non-public, recovery state is self-contained at sprint 64, OK"
 )

@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0",
+  "status": "technical_inventory_recheck_no_promotion_not_public",
+  "sprint": 66,
+  "state_version": "0.21.55",
+  "checked_on": "2026-08-11",
+  "public_export_allowed": false,
+  "candidate_mutation_allowed": false,
+  "normandie_v04": {
+    "f5zha": {
+      "current_ref_source": "https://www.r-e-f.org/index.php?dept=DPT39&option=com_content&view=frontpage",
+      "current_ref_active": true,
+      "paired_rx_frequencies_mhz": [
+        145.4675,
+        432.575
+      ],
+      "mode": "FM",
+      "local_association_identity_source": "https://www.pappers.fr/entreprise/radio-club-des-fourches-529017485",
+      "local_association": "Radio-Club des Fourches - ARAM53",
+      "local_association_currently_active_as_association": true,
+      "local_association_current_technical_frequency_publication_found": false,
+      "association_existence_is_frequency_validation": false,
+      "local_operator_or_equivalent_authoritative_reconciliation_found": false,
+      "authoritative_source_gate_cleared": false,
+      "mortain_field_gate_cleared": false,
+      "candidate_memory_delta": 0
+    },
+    "f6zes": {
+      "current_ref_source": "https://r-e-f.org/index.php?limitstart=3",
+      "station": "F6ZES Sourdeval",
+      "responsible": "F1SMB",
+      "locator": "IN98MR93XV",
+      "altitude_m": 230,
+      "frequency_present": false,
+      "mode_present": false,
+      "operational_state_present": false,
+      "second_current_frequency_mode_source_found": false,
+      "frequency_mode_resolved": false,
+      "candidate_memory_delta": 0,
+      "must_not_guess_frequency": true
+    },
+    "gate_cleared_count": 0,
+    "candidate_memory_count_before": 142,
+    "candidate_memory_count_after": 142,
+    "known_ceiling_memory_count": 147,
+    "eligible_addition_count": 0
+  },
+  "bretagne_v01": {
+    "cross_etel_technical_maintenance": {
+      "source": "https://choisirleservicepublic.gouv.fr/offre-emploi/technicien-ne-de-maintien-en-conditions-operationnelles-cross-reference-2026-2341297/",
+      "source_class": "current_primary_dirm_recruitment",
+      "reference": "2026-2341297",
+      "application_deadline": "2026-08-06",
+      "station_count": 17,
+      "coastal_extent": "Pointe de Penmarc'h to Biarritz / Pyrénées-Atlantiques",
+      "mhf_vhf_maintenance_context": true,
+      "station_names_listed": false,
+      "channels_listed": false,
+      "channel64_site_mapping_present": false,
+      "channel64_current_operation_proven": false
+    },
+    "cross_corsen_current_infrastructure": {
+      "director_job_source": "https://choisirleservicepublic.gouv.fr/offre-emploi/2026-2244363/",
+      "director_job_reference": "2026-2244363",
+      "director_job_confirms_stiff_radio_communications_equipment": true,
+      "place_source": "https://www.marches-publics.gouv.fr/entreprise/consultation/2860972?orgAcronyme=d4t",
+      "place_reference": "DGAMPA-SNC1-2025-03_STIFF",
+      "place_deadline": "2026-01-26",
+      "place_confirms_current_stiff_renovation_project": true,
+      "channel79_mapping_present": false,
+      "current_channel79_transmitter_site_confirmed": false
+    },
+    "corsen_secondary_full_chain_clue": {
+      "source": "https://www.randokayak.com/comment-utiliser-une-vhf-en-kayak-de-mer/comment-page-1/",
+      "source_class": "secondary_undated_schedule",
+      "publication_date_visible": false,
+      "reported_channel": 79,
+      "reported_sites": [
+        "Cap Fréhel",
+        "Bodic",
+        "Batz",
+        "Stiff",
+        "Pointe du Raz"
+      ],
+      "reported_schedule_present": true,
+      "can_validate_current_primary_site_assignment": false,
+      "note": "The full five-site Ch79 chain is useful as a search target only. The page does not provide a sufficiently controlled current primary basis for publication."
+    },
+    "corsen_local_secondary_current": {
+      "source": "https://cvberquy.org/erquy/meteo/avoirPrevisions.xml",
+      "reported_channel": 79,
+      "reported_sites": [
+        "Cap Fréhel",
+        "Bodic"
+      ],
+      "can_replace_primary_validation": false
+    },
+    "corsen_historical_primary": {
+      "source": "https://www.legifrance.gouv.fr/loda/article_lc/JORFARTI000002109564/",
+      "source_class": "historical_primary",
+      "channels79_and80_documented": true,
+      "stiff_radio_architecture_documented": true,
+      "current_2026_site_channel_validation": false
+    },
+    "meteofrance_guide_marine_2026": {
+      "landing_page": "https://meteofrance.fr/actualite/publications/les-collections/les-guides-de-meteo-france",
+      "landing_page_date": "2026-08-05",
+      "direct_pdf": "https://meteofrance.fr/sites/default/files/files/editorial/Guide%20MARINE%202026.pdf",
+      "fetch_retried_on": "2026-08-11",
+      "fetch_result": "cache_miss",
+      "pdf_content_extracted": false,
+      "pdf_screenshot_available": false,
+      "channel64_inference": false,
+      "channel79_site_inference": false
+    },
+    "etel_channel64_pair_rx_frequencies_mhz": [
+      156.225,
+      160.825
+    ],
+    "etel_channel64_required_rx_memory_count_if_published": 2,
+    "corsen_channel79_pair_rx_frequencies_mhz": [
+      156.975,
+      161.575
+    ],
+    "corsen_channel79_required_rx_memory_count_if_published": 2,
+    "new_site_assignment_count": 0,
+    "new_rf_memory_delta": 0,
+    "public_promotion_allowed": false
+  },
+  "next_primary_targets": {
+    "etel_channel64": [
+      "named technical inventory of the 17 radio stations with channels",
+      "operator/ministry document mapping channel 64 to a Morbihan site",
+      "extractible Guide Marine 2026 table"
+    ],
+    "corsen_channel79": [
+      "current primary weather table mapping Ch79 to Cap Fréhel/Bodic/Batz/Stiff/Raz",
+      "current technical inventory with station/channel mapping",
+      "extractible Guide Marine 2026 table"
+    ],
+    "f5zha": [
+      "current ARAM53/operator technical publication for F5ZHA",
+      "equivalent current authoritative local frequency source"
+    ],
+    "f6zes": [
+      "current operator/association source explicitly giving frequency and mode"
+    ]
+  },
+  "decisions": {
+    "normandie_gate_cleared_count": 0,
+    "normandie_candidate_mutated": false,
+    "bretagne_site_assignment_promoted": false,
+    "public_pack_mutated": false,
+    "public_export_allowed": false
+  },
+  "rules": {
+    "current_maintenance_scope_does_not_name_station_channels": true,
+    "association_existence_does_not_validate_repeater_frequency": true,
+    "undated_secondary_schedule_is_not_current_primary_validation": true,
+    "current_infrastructure_procurement_does_not_assign_channel": true,
+    "historical_primary_channel_assignment_is_not_current_validation": true,
+    "unread_primary_pdf_produces_no_inference": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "failed_search_is_not_negative_evidence": true,
+    "published_versions_are_immutable": true,
+    "all_exported_memories_tx_disabled": true
+  }
+}

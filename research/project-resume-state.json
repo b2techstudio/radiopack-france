@@ -2,12 +2,25 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-11",
-  "current_sprint": 65,
-  "state_version": "0.21.54",
+  "current_sprint": 66,
+  "state_version": "0.21.55",
   "public_packs": {
-    "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
-    "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
-    "bretagne": {"version": null, "memory_count": 0, "research_only": true}
+    "normandie": {
+      "version": "0.3.1",
+      "memory_count": 139,
+      "immutable": true
+    },
+    "annecy_alpes_leman": {
+      "version": "0.2",
+      "memory_count": 65,
+      "without_aviation_memory_count": 48,
+      "immutable": true
+    },
+    "bretagne": {
+      "version": null,
+      "memory_count": 0,
+      "research_only": true
+    }
   },
   "active_work": {
     "pack": "Normandie",
@@ -31,15 +44,51 @@
     "prepublication_integrity_ok": true,
     "prepublication_release_ready": false,
     "internal_provisional_additions": [
-      {"location": 175, "name": "50-ZHY-IN", "frequency_mhz": 145.0875},
-      {"location": 176, "name": "53-ZCE-IN", "frequency_mhz": 145.1},
-      {"location": 177, "name": "50-ZBL-U", "frequency_mhz": 431.25}
+      {
+        "location": 175,
+        "name": "50-ZHY-IN",
+        "frequency_mhz": 145.0875
+      },
+      {
+        "location": 176,
+        "name": "53-ZCE-IN",
+        "frequency_mhz": 145.1
+      },
+      {
+        "location": 177,
+        "name": "50-ZBL-U",
+        "frequency_mhz": 431.25
+      }
     ],
     "blocked_frequency_count": 5,
     "blocked_gates": [
-      {"id": "R3_MORTAIN_RX", "frequencies_mhz": [145.075, 145.675], "memory_delta_if_cleared": 2, "state": "field_evidence_required"},
-      {"id": "F5ZHA_SOURCE_AND_COVERAGE", "frequencies_mhz": [145.4675, 432.575], "memory_delta_if_cleared": 2, "state": "authoritative_source_reconciliation_and_field_evidence_required", "field_observations_can_close_source_conflict": false},
-      {"id": "F1ZOV_OPERATIONAL_STATUS", "frequencies_mhz": [431.975], "memory_delta_if_cleared": 1, "state": "operator_maintenance_revalidation_required"}
+      {
+        "id": "R3_MORTAIN_RX",
+        "frequencies_mhz": [
+          145.075,
+          145.675
+        ],
+        "memory_delta_if_cleared": 2,
+        "state": "field_evidence_required"
+      },
+      {
+        "id": "F5ZHA_SOURCE_AND_COVERAGE",
+        "frequencies_mhz": [
+          145.4675,
+          432.575
+        ],
+        "memory_delta_if_cleared": 2,
+        "state": "authoritative_source_reconciliation_and_field_evidence_required",
+        "field_observations_can_close_source_conflict": false
+      },
+      {
+        "id": "F1ZOV_OPERATIONAL_STATUS",
+        "frequencies_mhz": [
+          431.975
+        ],
+        "memory_delta_if_cleared": 1,
+        "state": "operator_maintenance_revalidation_required"
+      }
     ],
     "unresolved_priority": {
       "station": "F6ZES Sourdeval",
@@ -50,7 +99,12 @@
     },
     "adjacent_ref_scan": {
       "file": "research/normandie-v0.4/mortain-adjacent-ref-scan.json",
-      "departments": [35, 50, 53, 61],
+      "departments": [
+        35,
+        50,
+        53,
+        61
+      ],
       "new_untracked_active_analog_candidate_count": 0,
       "candidate_memory_delta": 0
     },
@@ -69,7 +123,10 @@
     },
     "dual_rx_contract": {
       "file": "research/sprint-64-dual-rx-contract.json",
-      "r3_pair_frequencies_mhz": [145.075, 145.675],
+      "r3_pair_frequencies_mhz": [
+        145.075,
+        145.675
+      ],
       "r3_required_rx_memory_count_if_promoted": 2,
       "r3_minimum_independent_field_sessions": 2,
       "r3_sessions_are_evidence_not_memories": true,
@@ -80,8 +137,19 @@
     "latest_primary_recheck": {
       "file": "research/sprint-65-primary-recheck.json",
       "checked_on": "2026-08-11",
-      "f5zha_current_ref_pair_mhz": [145.4675, 432.575],
+      "f5zha_current_ref_pair_mhz": [
+        145.4675,
+        432.575
+      ],
       "f5zha_current_ref_active": true,
+      "f5zha_authoritative_reconciliation_complete": false,
+      "f6zes_frequency_mode_resolved": false,
+      "normandie_gate_cleared_count": 0,
+      "candidate_memory_delta": 0
+    },
+    "latest_technical_inventory_recheck": {
+      "file": "research/sprint-66-technical-inventory-boundaries.json",
+      "checked_on": "2026-08-11",
       "f5zha_authoritative_reconciliation_complete": false,
       "f6zes_frequency_mode_resolved": false,
       "normandie_gate_cleared_count": 0,
@@ -102,11 +170,20 @@
   "bretagne_research_update": {
     "corsen_channel79_evidence_file": "research/bretagne-v0.1/corsen-channel79-evidence.json",
     "primary_current_channel79_transmitter_site_confirmed": false,
-    "current_primary_corsen_infrastructure_sites_verified": ["Cap Fréhel", "Stiff / Ouessant"],
+    "current_primary_corsen_infrastructure_sites_verified": [
+      "Cap Fréhel",
+      "Stiff / Ouessant"
+    ],
     "historical_primary_channel79_context_exists": true,
     "historical_primary_channel79_context_is_current_validation": false,
-    "secondary_current_clue_sites": ["Cap Fréhel", "Bodic"],
-    "paired_rx_frequencies_mhz": [156.975, 161.575],
+    "secondary_current_clue_sites": [
+      "Cap Fréhel",
+      "Bodic"
+    ],
+    "paired_rx_frequencies_mhz": [
+      156.975,
+      161.575
+    ],
     "corsen_channel79_required_rx_memory_count_if_published": 2,
     "new_rf_memory_delta": 0,
     "site_assignment_promoted": false,
@@ -137,7 +214,21 @@
     "cross_etel_current_channel64_site_named": false,
     "cross_corsen_page_updated": "2026-03-24",
     "cross_corsen_current_coastal_station_network_confirmed": true,
-    "cross_corsen_current_channel79_site_mapping_present": false
+    "cross_corsen_current_channel79_site_mapping_present": false,
+    "latest_technical_inventory_recheck_file": "research/sprint-66-technical-inventory-boundaries.json",
+    "etel_2026_technical_maintenance_station_count": 17,
+    "etel_2026_technical_maintenance_names_channels_listed": false,
+    "etel_2026_technical_maintenance_channel64_mapping_present": false,
+    "corsen_stiff_2026_radio_infrastructure_revalidated": true,
+    "corsen_stiff_2026_channel79_mapping_present": false,
+    "corsen_secondary_undated_full_chain_sites": [
+      "Cap Fréhel",
+      "Bodic",
+      "Batz",
+      "Stiff / Ouessant",
+      "Pointe du Raz"
+    ],
+    "corsen_secondary_undated_full_chain_is_current_primary_validation": false
   },
   "sources_of_truth": [
     "research/normandie-v0.4/pack-plan.json",
@@ -159,7 +250,8 @@
     "research/bretagne-v0.1/corsen-channel79-evidence.json",
     "research/sprint-63-source-revalidation.json",
     "research/sprint-64-dual-rx-contract.json",
-    "research/sprint-65-primary-recheck.json"
+    "research/sprint-65-primary-recheck.json",
+    "research/sprint-66-technical-inventory-boundaries.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -188,7 +280,8 @@
     "run_sprint62_primary_reference_test": "python tests/test_sprint62_primary_reference_boundaries.py",
     "run_sprint63_blocker_revalidation_test": "python tests/test_sprint63_blocker_revalidation.py",
     "run_sprint64_dual_rx_contract_test": "python tests/test_sprint64_dual_rx_contract.py",
-    "run_sprint65_primary_recheck_test": "python tests/test_sprint65_primary_recheck.py"
+    "run_sprint65_primary_recheck_test": "python tests/test_sprint65_primary_recheck.py",
+    "run_sprint66_technical_inventory_test": "python tests/test_sprint66_technical_inventory_boundaries.py"
   },
   "recent_sprints": {
     "55": "Deterministic non-public review snapshot",
@@ -201,7 +294,8 @@
     "62": "Meteo-France Guide Marine primary-reference target, Etel channel 63 operational convergence boundary, and Corsen current infrastructure versus historical/current channel assignment separation",
     "63": "Current blocker revalidation: F1ZOV still in operator maintenance, F5ZHA RepeaterBook conflict dated as stale secondary without clearing authoritative/field gates, F6ZES still unresolved, Guide Marine PDF retry still unread",
     "64": "Dual RX contract: R3 uses two pair memories independently of two field sessions; Etel Ch64 and Corsen Ch79 each retain both maritime RX directions while publication gates stay closed",
-    "65": "Current primary-source recheck: Ministry regional VHF statement, local CROSS Etel/Corsen boundaries, F5ZHA current REF pair, F6ZES unresolved; no site inference or promotion"
+    "65": "Current primary-source recheck: Ministry regional VHF statement, local CROSS Etel/Corsen boundaries, F5ZHA current REF pair, F6ZES unresolved; no site inference or promotion",
+    "66": "Technical inventory boundaries: Etel 17-station MHF/VHF maintenance scope stays unnamed by channel; Corsen Stiff current infrastructure and full secondary Ch79 chain remain below primary site-assignment threshold"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
@@ -238,6 +332,10 @@
     "publication_dry_run_does_not_publish": true,
     "prepublication_integrity_ok_does_not_mean_release_ready": true,
     "release_blocker_manifest_does_not_publish": true,
-    "all_exported_memories_tx_disabled": true
+    "all_exported_memories_tx_disabled": true,
+    "current_maintenance_scope_does_not_name_station_channels": true,
+    "association_existence_does_not_validate_repeater_frequency": true,
+    "undated_secondary_schedule_is_not_current_primary_validation": true,
+    "current_infrastructure_procurement_does_not_assign_channel": true
   }
 }

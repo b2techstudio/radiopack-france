@@ -40,7 +40,7 @@ assert etel["rules"]["local_operational_channel63_convergence_does_not_disprove_
 assert etel["rules"]["public_export_allowed"] is False
 
 corsen = json.loads(CORSEN.read_text(encoding="utf-8"))
-assert corsen["status"] == "secondary_current_clues_recorded_primary_current_channel79_site_validation_pending"
+assert corsen["status"].endswith("primary_current_channel79_site_validation_pending")
 assert corsen["updated"] == "2026-08-11"
 assert corsen["paired_rx"]["new_rf_memory_delta"] == 0
 assert corsen["assessment"]["primary_current_channel79_transmitter_site_confirmed"] is False

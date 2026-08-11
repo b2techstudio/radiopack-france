@@ -2,7 +2,7 @@
 
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 66 / 0.21.55
+## État actuel — Sprint 67 / 0.21.56
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -13,7 +13,7 @@ Packs publics immuables :
 
 Recherche : **Normandie v0.4** à **142 mémoires** internes, plafond de travail connu **147 mémoires**, **Bretagne v0.1** non publique et Annecy–Alpes–Léman v0.3 non publique.
 
-Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md` et `research/sprint-66-summary.md`.
+Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md` et `research/sprint-67-summary.md`.
 
 ## Règles permanentes
 
@@ -65,6 +65,7 @@ research/sprint-63-source-revalidation.json
 research/sprint-64-dual-rx-contract.json
 research/sprint-65-primary-recheck.json
 research/sprint-66-technical-inventory-boundaries.json
+research/sprint-67-current-reference-synthesis.json
 ```
 
 Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 431.2500 MHz aux 139 mémoires figées de v0.3.1.
@@ -75,6 +76,18 @@ Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 
 - **F5ZHA** : recontrôle Sprint 65, le REF courant continue d'afficher F5ZHA actif avec **145.4675 / 432.575 MHz**. La valeur conflictuelle RepeaterBook 431.4125 MHz reste classée secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. La porte exige toujours une source locale actuelle ou autoritative équivalente et une validation de pertinence/réception depuis Mortain.
 - **F1ZOV** : 431.975 MHz reste bloquée ; recontrôle du 11 août 2026, le Radio Club Nord Cotentin marque toujours le relais **En Maintenance**.
 - **F6ZES Sourdeval** : recontrôle Sprint 65, le REF confirme toujours site/responsable/locator/altitude mais ne renseigne toujours ni fréquence, ni mode, ni état opérationnel exploitable. Delta candidat **0** et `sourdeval_must_not_be_guessed: true`.
+
+### Synthèse des références courantes — Sprint 67
+
+`research/sprint-67-current-reference-synthesis.json` verrouille une nouvelle frontière de preuve sans toucher au candidat.
+
+- Le **Guide des loisirs nautiques en mer — édition 2026** du ministère a cette fois été réellement extrait et la page radio a été contrôlée : 79/80 sont confirmés pour les bulletins CROSS et 63/64 pour le bulletin côtier permanent, mais **aucun site émetteur n'est nommé**.
+- **Ch64** reste donc sans site Morbihan primaire-vérifié malgré la confirmation actuelle du canal ; la convergence locale CROSS Étel sur Ch63 reste distincte et le conflit primaire demeure ouvert.
+- **Ch79** gagne une convergence secondaire utile : Fréhel/Bodic, la chaîne Fréhel/Bodic/Batz/Stiff/Raz et une piste récente sur Stiff. Avec les infrastructures primaires actuelles de Fréhel et Stiff, cela priorise la recherche, mais **ne crée toujours aucun mapping primaire Ch79 ↔ site**.
+- **F5ZHA** : RepeaterBook affiche actuellement 431.4125 avec un indicateur vert, alors que sa page d'âge de vérification conserve `2017-02-17` et `Off-Air`. Le badge d'affichage ne remplace pas la provenance datée ; la réconciliation autoritative reste incomplète.
+- F6ZES et R3 restent inchangés ; aucune porte n'est franchie.
+
+Résultat : **142/142**, plafond **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**, aucun changement public.
 
 ### Inventaires techniques — Sprint 66
 
@@ -228,6 +241,7 @@ python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
 python tests\test_sprint66_technical_inventory_boundaries.py
+python tests\test_sprint67_current_reference_synthesis.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
@@ -250,6 +264,7 @@ python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
 python tests\test_sprint66_technical_inventory_boundaries.py
+python tests\test_sprint67_current_reference_synthesis.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py

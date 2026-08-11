@@ -2,7 +2,7 @@
 
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 64 / 0.21.53
+## État actuel — Sprint 65 / 0.21.54
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -13,7 +13,7 @@ Packs publics immuables :
 
 Recherche : **Normandie v0.4** à **142 mémoires** internes, plafond de travail connu **147 mémoires**, **Bretagne v0.1** non publique et Annecy–Alpes–Léman v0.3 non publique.
 
-Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md` et `research/sprint-64-summary.md`.
+Le générateur public ne propose que les versions publiées. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md` et `research/sprint-65-summary.md`.
 
 ## Règles permanentes
 
@@ -34,6 +34,8 @@ Le générateur public ne propose que les versions publiées. Point de reprise :
 - Une absence dans un document local actuel ne constitue pas automatiquement une preuve d'arrêt.
 - Une infrastructure radio actuelle ne permet pas d'attribuer un canal précis.
 - Une affectation historique primaire ne vaut pas validation opérationnelle actuelle.
+- Une déclaration régionale courante sur un canal ne permet pas d'identifier automatiquement son site émetteur.
+- La confirmation d'un réseau CROSS actuel ne permet pas de mapper automatiquement un canal vers une station.
 - Des nombres de stations fondés sur des unités non définies identiquement ne sont pas réconciliés par simple calcul.
 - `research/paired-rx-policy.json` impose les deux côtés RX lorsqu'une liaison duplex/split distincte est vérifiée.
 - **Le nombre de sessions terrain est un nombre de preuves, pas un nombre de mémoires.** Une paire de deux fréquences distinctes conserve deux mémoires RX après validation, quel que soit le nombre de sessions nécessaires.
@@ -61,6 +63,7 @@ research/normandie-v0.4/f6zes-revalidation.json
 research/normandie-v0.4/mortain-adjacent-ref-scan.json
 research/sprint-63-source-revalidation.json
 research/sprint-64-dual-rx-contract.json
+research/sprint-65-primary-recheck.json
 ```
 
 Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 431.2500 MHz aux 139 mémoires figées de v0.3.1.
@@ -68,9 +71,17 @@ Le candidat interne ajoute actuellement seulement 145.0875 MHz, 145.1000 MHz et 
 ### Portes encore fermées
 
 - **F1ZBX / R3** : la paire 145.075 / 145.675 MHz représente **2 mémoires RX distinctes** si la porte est franchie. La validation réelle depuis Mortain exige toujours **2 sessions RX indépendantes** sur la sortie identifiée 145.675 MHz. Deux sessions ne créent pas deux mémoires supplémentaires.
-- **F5ZHA** : le REF courant conserve 145.4675 / 432.575 MHz. Sprint 63 date précisément la valeur conflictuelle RepeaterBook 431.4125 MHz : sa page de vérification affiche **2017-02-17** et `Off-Air`. Elle est classée comme conflit secondaire stale, sans fermer la porte qui exige toujours une source locale actuelle ou autoritative équivalente et une validation de pertinence/réception depuis Mortain.
+- **F5ZHA** : recontrôle Sprint 65, le REF courant continue d'afficher F5ZHA actif avec **145.4675 / 432.575 MHz**. La valeur conflictuelle RepeaterBook 431.4125 MHz reste classée secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. La porte exige toujours une source locale actuelle ou autoritative équivalente et une validation de pertinence/réception depuis Mortain.
 - **F1ZOV** : 431.975 MHz reste bloquée ; recontrôle du 11 août 2026, le Radio Club Nord Cotentin marque toujours le relais **En Maintenance**.
-- **F6ZES Sourdeval** : recontrôle ciblé du 11 août 2026 ; le REF confirme toujours site/responsable/locator/altitude mais ne renseigne ni fréquence, ni bande, ni mode, ni état. Les recherches ciblées n'ont fourni aucune seconde source actuelle exploitable. Delta candidat **0** et `sourdeval_must_not_be_guessed: true`.
+- **F6ZES Sourdeval** : recontrôle Sprint 65, le REF confirme toujours site/responsable/locator/altitude mais ne renseigne toujours ni fréquence, ni mode, ni état opérationnel exploitable. Delta candidat **0** et `sourdeval_must_not_be_guessed: true`.
+
+### Recontrôle primaire — Sprint 65
+
+`research/sprint-65-primary-recheck.json` rafraîchit les limites courantes sans modifier les portes existantes.
+
+- F5ZHA : paire REF inchangée, source locale/autoritative équivalente toujours manquante, terrain toujours requis.
+- F6ZES : fréquence/mode toujours non résolus.
+- Normandie : **0 porte franchie**, candidat/preview **142/142**, plafond connu **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**.
 
 ### Contrat double RX — Sprint 64
 
@@ -130,6 +141,16 @@ python tools\run_normandie_v04_publication_dry_run.py --baseline <manifest.json>
 
 Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`.
 
+### Recontrôle primaire — Sprint 65
+
+La page du ministère chargée de la mer, mise à jour le **19 juin 2026**, maintient actuellement deux informations distinctes : le canal 16 annonce les diffusions météo CROSS sur **79 et 80**, et les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan. Cette déclaration reste régionale et **ne nomme aucun site Ch64**.
+
+La page DIRM du CROSS Étel, mise à jour le **24 novembre 2025**, maintient les vacations annoncées sur 16 puis diffusées sur 79/80 et la diffusion continue **Étel + Chassiron sur Ch63**. Elle ne nomme toujours aucun site Ch64 ; cette absence ne prouve ni fonctionnement ni arrêt du canal 64.
+
+La page DIRM du CROSS Corsen, mise à jour le **24 mars 2026**, confirme toujours le réseau VHF/MHF permanent et les bulletins météo diffusés depuis des stations littorales, mais ne fournit toujours aucun mapping **Ch79 ↔ station**.
+
+Ces trois sources primaires actuelles renforcent les frontières documentaires, sans produire de nouvelle attribution ni de nouveau delta RF.
+
 ### CROSS Corsen — canal 79
 
 `research/bretagne-v0.1/corsen-channel79-evidence.json` reste le dossier courant.
@@ -140,7 +161,7 @@ Dossier principal : `research/bretagne-v0.1/public-maritime-radio.json`.
 - **Cap Fréhel** et **Stiff / Ouessant** sont revalidés comme infrastructures radio CROSS actuelles, sans attribution Ch79.
 - Une source primaire historique 2003 documente Ch79 dans l'architecture Corsen/Ouessant, mais ne vaut pas validation actuelle.
 - Le bilan officiel Corsen 2025 reste identifié mais non extractible dans le workflow courant.
-- Le **Guide Marine 2026 de Météo-France** reste une cible primaire. Sprint 63 identifie son URL PDF directe, mais une nouvelle tentative de chargement le 11 août 2026 a échoué (`cache miss`) ; le PDF n'a pas été lu et aucune attribution Ch79 n'en est déduite.
+- Le **Guide Marine 2026 de Météo-France** reste une cible primaire. Une nouvelle tentative le 11 août 2026 retourne toujours `cache miss` ; le PDF n'a pas été lu et aucune attribution Ch79 n'en est déduite.
 
 ### CROSS Étel — canal 64
 
@@ -168,6 +189,7 @@ L'offre technique DIRM 2026 mentionne **17 stations radio** maintenues ; ce nomb
 - [research/sprint-62-summary.md](research/sprint-62-summary.md)
 - [research/sprint-63-summary.md](research/sprint-63-summary.md)
 - [research/sprint-64-summary.md](research/sprint-64-summary.md)
+- [research/sprint-65-summary.md](research/sprint-65-summary.md)
 
 Architecture publique : `website/src/lib/chirpPack.ts`, `website/src/lib/annecyPack.ts`, `website/src/lib/packRegistry.ts`.
 
@@ -186,6 +208,7 @@ python tests\test_sprint61_research.py
 python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
+python tests\test_sprint65_primary_recheck.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py
@@ -206,6 +229,7 @@ python tests\test_sprint61_research.py
 python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
+python tests\test_sprint65_primary_recheck.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
 python tests\test_emergency_relay_research.py

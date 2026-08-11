@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "status": "source_revalidation_no_gate_cleared_not_public",
+  "updated": "2026-08-11",
+  "sprint": 63,
+  "state_version": "0.21.52",
+  "normandie_v04": {
+    "f1zov": {
+      "station": "F1ZOV Equeurdreville-Hainneville",
+      "current_local_operator_source": "https://f6kfw.fr/",
+      "checked_on": "2026-08-11",
+      "operator_status": "En Maintenance",
+      "paired_rx_frequencies_mhz": [430.375, 431.975],
+      "operator_status_gate_cleared": false,
+      "candidate_memory_delta": 0,
+      "note": "Le statut courant publié par l'exploitant local reste prioritaire sur le statut actif du répertoire général REF."
+    },
+    "f5zha": {
+      "station": "F5ZHA Laval",
+      "checked_on": "2026-08-11",
+      "current_ref": {
+        "url": "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "state": "Actif",
+        "paired_rx_frequencies_mhz": [145.4675, 432.575],
+        "mode": "FM",
+        "function": "transparent analog cross-band transponder"
+      },
+      "conflicting_repeaterbook": {
+        "location_search_url": "https://www.repeaterbook.com/row_repeaters/location_search.php?loc=Laval&state_id=FR&type=city",
+        "verification_age_url": "https://www.repeaterbook.com/row_repeaters/verify.php?state_id=FR&type=age",
+        "conflicting_frequency_mhz": 431.4125,
+        "verification_date_shown": "2017-02-17",
+        "verification_page_status_shown": "Off-Air",
+        "classified_as_stale_secondary_conflict": true
+      },
+      "current_local_operator_or_equivalent_authoritative_frequency_source_found": false,
+      "source_search_failure_is_negative_evidence": false,
+      "stale_secondary_conflict_alone_closes_authoritative_reconciliation_gate": false,
+      "useful_mortain_coverage_verified": false,
+      "source_gate_cleared": false,
+      "coverage_gate_cleared": false,
+      "candidate_memory_delta": 0,
+      "note": "La date de vérification ancienne de RepeaterBook réduit le poids du conflit secondaire mais ne remplace pas l'exigence explicite d'une source locale actuelle ou autoritative équivalente."
+    },
+    "f6zes": {
+      "station": "F6ZES Sourdeval",
+      "checked_on": "2026-08-11",
+      "current_ref_url": "https://www.r-e-f.org/index.php?option=com_content&view=",
+      "current_ref_confirms": {
+        "site": "Sourdeval",
+        "responsible": "F1SMB",
+        "locator": "IN98MR93XV",
+        "altitude_m": 230
+      },
+      "current_ref_unresolved_fields": ["operational_state", "band", "tx_mhz", "rx_mhz", "mode"],
+      "targeted_search_variants": ["F6ZES F1SMB", "F6ZES 145", "F6ZES 430", "F6ZES FM"],
+      "second_current_frequency_mode_source_found": false,
+      "search_failure_is_negative_evidence": false,
+      "frequency_resolved": false,
+      "mode_resolved": false,
+      "candidate_memory_delta": 0,
+      "must_not_guess_frequency": true
+    },
+    "r3": {
+      "station": "F1ZBX / R3 Broceliande",
+      "field_gate_state": "field_evidence_required",
+      "new_field_observation_available_in_repository": false,
+      "candidate_memory_delta": 0
+    },
+    "candidate_memory_count_before": 142,
+    "candidate_memory_count_after": 142,
+    "known_ceiling_memory_count": 147,
+    "review_completed_count": 3,
+    "review_item_count": 9,
+    "release_blocker_count": 6,
+    "eligible_addition_count": 0
+  },
+  "bretagne_v01": {
+    "meteofrance_guide_marine_2026": {
+      "landing_page_url": "https://meteofrance.fr/actualite/publications/les-collections/les-guides-de-meteo-france",
+      "landing_page_date": "2026-08-05",
+      "landing_page_supports": "Le Guide Marine contient notamment horaires, fréquences radio et contenu des bulletins diffusés par VHF.",
+      "direct_pdf_url_identified": "https://meteofrance.fr/sites/default/files/files/editorial/Guide%20MARINE%202026.pdf",
+      "pdf_fetch_attempted_on": "2026-08-11",
+      "pdf_fetch_result": "cache_miss_unavailable_in_current_web_workflow",
+      "pdf_content_extracted": false,
+      "pdf_screenshot_available": false,
+      "channel64_conclusion_from_unread_pdf": false,
+      "channel79_site_conclusion_from_unread_pdf": false
+    },
+    "current_ministry_context": {
+      "url": "https://mer.gouv.fr/regles-de-securite-pour-les-loisirs-nautiques-en-mer",
+      "supports": "Le canal 16 annonce les bulletins sur 79/80 et les canaux 63/64 sont indiqués en diffusion permanente notamment dans le Morbihan.",
+      "identifies_specific_channel64_transmitter_site": false,
+      "identifies_specific_channel79_transmitter_site": false
+    },
+    "etel_channel64_site_confirmed": false,
+    "corsen_channel79_site_confirmed": false,
+    "new_rf_memory_delta": 0
+  },
+  "decisions": {
+    "normandie_gate_cleared_count": 0,
+    "normandie_candidate_mutated": false,
+    "bretagne_site_assignment_promoted": false,
+    "public_pack_mutated": false,
+    "public_export_allowed": false
+  },
+  "rules": {
+    "stale_secondary_conflict_does_not_replace_required_authoritative_reconciliation": true,
+    "local_operator_current_status_has_priority": true,
+    "failed_search_is_not_negative_evidence": true,
+    "unread_primary_pdf_produces_no_channel_or_site_inference": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "field_evidence_must_not_be_fabricated": true,
+    "published_versions_are_immutable": true,
+    "tx_disabled": true
+  }
+}

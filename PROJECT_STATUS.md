@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
-Dernière mise à jour : **10 août 2026**  
-Sprint courant : **61**  
-État logique : **0.21.50**
+Dernière mise à jour : **11 août 2026**  
+Sprint courant : **62**  
+État logique : **0.21.51**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md` et la passe actuelle dans `research/sprint-61-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md` et `research/sprint-62-summary.md`.
 
 ## État public
 
@@ -56,22 +56,31 @@ Ce scan est une preuve d'inventaire, pas une preuve de réception. Il ne modifie
 
 Le contexte primaire actuel confirme le réseau VHF/MF Corsen sans identifier le site actuel du canal 79. Une source locale actuelle du Club de Voile de la Baie d'Erquy associe le canal 79 à **Cap Fréhel** et **Bodic** avec des horaires de diffusion. Cette donnée reste une **piste secondaire**, pas une validation primaire : aucune attribution de site n'est promue.
 
-Le bilan officiel CROSS Corsen 2025, publié le 2 mars 2026, a été identifié pendant le Sprint 61. Son PDF de 14,6 Mio n'a pas pu être chargé par l'outil de lecture courant ; son contenu canal/site n'est donc pas utilisé. Cette impossibilité d'extraction n'est pas une preuve négative.
+Sprint 62 qualifie séparément deux infrastructures actuelles :
+
+- **Cap Fréhel** : la DIRM confirme que le CROSS Corsen dispose au phare d'équipements de suivi et de liaison avec les navires ;
+- **Stiff / Ouessant** : l'offre officielle 2026 et le marché DGAMPA de rénovation confirment des équipements de radiocommunications/radio actuellement nécessaires au CROSS Corsen.
+
+Ces preuves d'infrastructure **n'attribuent aucun canal**. Une source primaire historique de 2003 documente l'usage du canal 79 par Ouessant Traffic / CROSS Corsen et l'architecture radio historique autour du Stiff/Pointe du Raz/Corsen ; elle reste historique et ne vaut pas validation 2026.
+
+Le bilan officiel CROSS Corsen 2025, publié le 2 mars 2026, reste identifié mais son PDF de 14,6 Mio n'a pas pu être chargé par l'outil de lecture courant ; son contenu canal/site n'est donc pas utilisé. Cette impossibilité d'extraction n'est pas une preuve négative.
+
+Météo-France présente depuis le **5 août 2026** son Guide Marine comme contenant notamment horaires, fréquences radio et contenu des bulletins VHF. Le Guide Marine 2026 est enregistré comme nouvelle cible primaire de réconciliation, mais son PDF n'a pas pu être exploité dans ce workflow : aucune attribution Ch79 n'en est déduite.
 
 Les deux fréquences paired RX du canal 79, **156.975 / 161.575 MHz**, étaient déjà dans la recherche Bretagne : aucun delta mémoire RF.
 
 ## Bretagne — CROSS Étel canal 64
 
-Nouveau dossier : `research/bretagne-v0.1/etel-channel64-evidence.json`.
-
-Le canal 64 est désormais classé **conflit primaire actuel**, pas simplement « site inconnu » :
+`research/bretagne-v0.1/etel-channel64-evidence.json` conserve le **conflit primaire actuel** :
 
 - la page ministérielle actuelle, mise à jour le **19 juin 2026**, affirme que les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan ;
-- la page actuelle du CROSS Étel nomme Étel en diffusion continue sur **63** ;
+- la page actuelle du CROSS Étel nomme Étel et Chassiron en diffusion continue sur **63** ;
 - le planning météo actuellement lié par le CROSS liste les émetteurs/canaux et ne mentionne pas 64 ;
-- le bilan officiel 2025, publié en mars 2026, décrit **16 stations VHF + 2 MF**, nomme les émetteurs météo réguliers et les stations renforcées **Étel/Chassiron/Ferret sur 63**, sans mention de canal 64.
+- le bilan officiel 2025 décrit **16 stations VHF + 2 MF**, nomme les émetteurs météo réguliers et les stations renforcées **Étel/Chassiron/Ferret sur 63**, sans mention de canal 64.
 
-Cette divergence entre sources primaires actuelles doit être réconciliée. L'absence de 64 dans les documents locaux actuels **ne prouve pas son arrêt** et ne permet pas d'attribuer le canal à Étel, Groix, Belle-Ile, Penmarc'h ou un autre site.
+Sprint 62 formalise donc une **convergence opérationnelle locale sur Ch63** : trois sources opérationnelles locales actuelles exploitées mentionnent explicitement 63, aucune de ces trois ne mentionne 64. Cette convergence renforce le conflit avec la page ministérielle générique, mais **ne prouve ni que Ch64 fonctionne actuellement, ni qu'il est arrêté**. Aucun site Ch64 n'est attribué.
+
+Météo-France publie une page Guide Marine datée du **5 août 2026** indiquant que le guide contient les horaires et fréquences radio des bulletins VHF. Le PDF du Guide Marine 2026 a été identifié mais n'est pas extractible dans le workflow courant ; il devient une cible primaire prioritaire sans produire de conclusion par défaut.
 
 L'offre technique DIRM de juillet 2026 parle par ailleurs de **17 stations radio** maintenues de Penmarc'h à Biarritz. Ce nombre ne doit pas être réconcilié arithmétiquement avec « 16 VHF + 2 MF » sans définition commune des unités de comptage.
 
@@ -92,6 +101,7 @@ python tools\run_normandie_v04_prepublication_audit.py
 python tests\test_normandie_v04_review_handoff.py
 python tests\test_sprint60_revalidation.py
 python tests\test_sprint61_research.py
+python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_etel_network_research.py
 
 git status
@@ -118,8 +128,11 @@ python tools\record_normandie_v04_f5zha_observation.py --help
 - une observation radio ne ferme pas un conflit de source ;
 - une source secondaire actuelle peut prioriser une recherche mais ne remplace pas une validation primaire requise ;
 - un conflit entre sources primaires actuelles doit être réconcilié avant promotion ;
+- une convergence documentaire locale sur un canal ne réfute pas automatiquement un autre canal mentionné par une source primaire conflictuelle ;
 - l'absence d'une donnée dans un document local courant n'est pas automatiquement une preuve d'arrêt ;
 - une source primaire identifiée mais non extractible n'est pas une preuve négative ;
+- une infrastructure radio actuelle ne permet pas d'attribuer un canal précis ;
+- une affectation historique primaire ne vaut pas validation opérationnelle actuelle ;
 - une source périmée bloque la revue mais ne prouve jamais un arrêt ;
 - une recherche infructueuse n'est pas une preuve négative ;
 - une fréquence non résolue n'est jamais devinée ;

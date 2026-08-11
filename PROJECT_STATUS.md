@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **11 août 2026**  
-Sprint courant : **66**  
-État logique : **0.21.55**
+Sprint courant : **67**  
+État logique : **0.21.56**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md` et `research/sprint-66-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md` et `research/sprint-67-summary.md`.
 
 ## État public
 
@@ -38,6 +38,17 @@ Le snapshot capture l'état logique de revue. Le manifeste enregistre les SHA-25
 - **F5ZHA Laval** : recontrôle Sprint 65, le REF courant affiche toujours F5ZHA actif sur **145.4675 / 432.575 MHz**. La valeur conflictuelle RepeaterBook 431.4125 MHz reste secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. Une source locale actuelle ou autoritative équivalente et la couverture utile Mortain restent requises.
 - **F1ZOV** : recontrôle du 11 août 2026, l'exploitant local F6KFW l'indique toujours **En Maintenance** sur 430.375 / 431.975 MHz ; le statut exploitant local reste prioritaire.
 - **F6ZES Sourdeval** : recontrôle Sprint 65, le REF confirme site/responsable/locator/altitude mais laisse toujours état, bande, émission, réception et mode vides. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+
+### Synthèse des références courantes — Sprint 67
+
+Le guide ministériel 2026 a été extrait et contrôlé visuellement. Il confirme **79/80** au niveau des bulletins CROSS et **63/64** pour le bulletin côtier permanent, mais ne nomme aucun émetteur. Cette preuve actuelle améliore la fraîcheur documentaire sans résoudre les sites.
+
+- Ch64 : 156.225 / 160.825 MHz reste une paire de **2 mémoires RX** si publiable ; aucun site Morbihan primaire actuel n'est identifié, conflit ouvert.
+- Ch79 : 156.975 / 161.575 MHz reste une paire de **2 mémoires RX** si publiable ; Fréhel et Stiff sont des infrastructures primaires actuelles, tandis que les indices Ch79 secondaires convergent vers Fréhel/Bodic/Stiff et la chaîne Fréhel/Bodic/Batz/Stiff/Raz. Cette convergence ne vaut pas mapping primaire.
+- F5ZHA : l'indicateur vert de la fiche RepeaterBook 431.4125 ne supplante pas sa provenance `2017-02-17` / `Off-Air`; source autoritative actuelle toujours requise.
+- F6ZES : aucune fréquence/mode/état nouveau ; R3 : toujours 2 mémoires si promotion et 2 sessions de preuve.
+
+État inchangé : **142**, plafond **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**, non prêt pour publication.
 
 ### Inventaires techniques courants — Sprint 66
 
@@ -155,6 +166,7 @@ python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
 python tests\test_sprint66_technical_inventory_boundaries.py
+python tests\test_sprint67_current_reference_synthesis.py
 python tests\test_etel_network_research.py
 
 git status

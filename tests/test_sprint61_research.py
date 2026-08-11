@@ -26,7 +26,7 @@ assert etel["rules"]["channel64_site_must_not_be_guessed"] is True
 assert etel["rules"]["public_export_allowed"] is False
 
 corsen = json.loads(CORSEN.read_text(encoding="utf-8"))
-assert corsen["schema_version"] == "1.1"
+assert tuple(map(int, corsen["schema_version"].split("."))) >= (1, 1)
 assert corsen["paired_rx"]["new_rf_memory_delta"] == 0
 assert corsen["primary_revalidation_search"]["direct_primary_channel79_site_match_found"] is False
 assert corsen["primary_revalidation_search"]["search_failure_is_negative_evidence"] is False

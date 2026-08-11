@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "status": "primary_recheck_no_promotion_not_public",
+  "sprint": 65,
+  "state_version": "0.21.54",
+  "checked_on": "2026-08-11",
+  "public_export_allowed": false,
+  "candidate_mutation_allowed": false,
+  "normandie_v04": {
+    "f5zha": {
+      "source": "https://www.r-e-f.org/index.php?dept=DPT39&option=com_content&view=frontpage",
+      "source_class": "current_national_amateur_association_directory",
+      "station": "F5ZHA Laval",
+      "current_page_shows_active": true,
+      "paired_rx_frequencies_mhz": [145.4675, 432.575],
+      "mode": "FM",
+      "function": "Transpar.",
+      "local_operator_or_equivalent_authoritative_reconciliation_found": false,
+      "authoritative_source_gate_cleared": false,
+      "mortain_field_gate_cleared": false,
+      "candidate_memory_delta": 0,
+      "note": "The current REF pair remains the working pair, but this recheck does not replace the explicitly required local-operator or equivalent authoritative reconciliation and field validation."
+    },
+    "f6zes": {
+      "source": "https://www.r-e-f.org/index.php?dept=DPT39&option=com_content&view=frontpage",
+      "source_class": "current_national_amateur_association_directory",
+      "station": "F6ZES Sourdeval",
+      "responsible": "F1SMB",
+      "locator": "IN98MR93XV",
+      "altitude_m": 230,
+      "frequency_present_in_current_source": false,
+      "mode_present_in_current_source": false,
+      "operational_state_present_in_current_source": false,
+      "frequency_mode_resolved": false,
+      "candidate_memory_delta": 0,
+      "must_not_guess_frequency": true
+    },
+    "gate_cleared_count": 0,
+    "candidate_memory_count_before": 142,
+    "candidate_memory_count_after": 142,
+    "known_ceiling_memory_count": 147,
+    "eligible_addition_count": 0
+  },
+  "bretagne_v01": {
+    "ministry_current_vhf_statement": {
+      "source": "https://www.mer.gouv.fr/regles-de-securite-pour-les-loisirs-nautiques-en-mer",
+      "source_class": "current_primary_ministry",
+      "page_updated": "2026-06-19",
+      "channel16_announces_79_and_80": true,
+      "channels63_and64_permanent_coastal_weather_in_morbihan": true,
+      "channel64_transmitter_site_named": false,
+      "regional_channel_statement_is_site_assignment": false
+    },
+    "cross_etel_current": {
+      "source": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-c-r-o-s-s-etel-a152.html",
+      "source_class": "current_primary_local_cross",
+      "page_updated": "2025-11-24",
+      "scheduled_weather_call_on_16_then_79_or80": true,
+      "etel_and_chassiron_continuous_channel63": true,
+      "channel64_site_named": false,
+      "channel64_current_operation_proven_by_this_source": false,
+      "channel64_stopped_proven_by_this_source": false
+    },
+    "cross_corsen_current": {
+      "source": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
+      "source_class": "current_primary_local_cross",
+      "page_updated": "2026-03-24",
+      "permanent_vhf_mhf_network_confirmed": true,
+      "weather_from_coastal_vhf_mhf_stations_confirmed": true,
+      "channel79_site_mapping_present": false,
+      "current_channel79_transmitter_site_confirmed": false
+    },
+    "cap_frehel_current_infrastructure": {
+      "source": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/restauration-de-la-lanterne-du-phare-du-cap-frehel-a1473.html",
+      "source_class": "primary_dirm_infrastructure",
+      "cross_tracking_and_ship_liaison_equipment_confirmed": true,
+      "channel79_assignment_confirmed": false
+    },
+    "meteofrance_guide_marine_2026": {
+      "landing_page": "https://meteofrance.fr/actualite/publications/les-collections/les-guides-de-meteo-france",
+      "landing_page_date": "2026-08-05",
+      "landing_page_says_guide_contains_radio_frequencies_and_vhf_schedules": true,
+      "direct_pdf_identified": true,
+      "pdf_fetch_retried_on": "2026-08-11",
+      "pdf_content_extracted": false,
+      "pdf_screenshot_available": false,
+      "failure": "cache_miss",
+      "channel64_inference_from_unread_pdf": false,
+      "channel79_site_inference_from_unread_pdf": false
+    },
+    "etel_channel64_pair_rx_frequencies_mhz": [156.225, 160.825],
+    "etel_channel64_required_rx_memory_count_if_published": 2,
+    "corsen_channel79_pair_rx_frequencies_mhz": [156.975, 161.575],
+    "corsen_channel79_required_rx_memory_count_if_published": 2,
+    "new_site_assignment_count": 0,
+    "new_rf_memory_delta": 0,
+    "public_promotion_allowed": false
+  },
+  "decisions": {
+    "normandie_gate_cleared_count": 0,
+    "normandie_candidate_mutated": false,
+    "bretagne_site_assignment_promoted": false,
+    "public_pack_mutated": false,
+    "public_export_allowed": false
+  },
+  "rules": {
+    "current_regional_channel_statement_does_not_identify_transmitter_site": true,
+    "current_cross_network_statement_does_not_map_channel_to_station": true,
+    "local_channel63_statement_does_not_disprove_channel64": true,
+    "current_radio_infrastructure_does_not_imply_channel_assignment": true,
+    "unread_primary_pdf_produces_no_inference": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "failed_search_is_not_negative_evidence": true,
+    "published_versions_are_immutable": true,
+    "all_exported_memories_tx_disabled": true
+  }
+}

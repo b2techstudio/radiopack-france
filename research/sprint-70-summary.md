@@ -23,3 +23,7 @@ Les sessions terrain restent des preuves et ne modifient jamais le nombre de mé
 ## État public
 
 Aucune nouvelle publication n'est créée en Sprint 70. Normandie v0.4 reste le pack public courant et immuable.
+
+## Clôture technique
+
+Le commit de clôture Sprint 70 demande explicitement l'archive de référence et la validation CI complète du dépôt public.

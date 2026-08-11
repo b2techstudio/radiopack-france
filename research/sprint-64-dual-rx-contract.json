@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "status": "dual_rx_contract_snapshot_not_public",
+  "updated": "2026-08-11",
+  "purpose": "Figer explicitement la distinction entre nombre de mémoires RX et nombre de sessions de validation pour R3, CROSS Étel canal 64 et CROSS Corsen canal 79.",
+  "public_export_allowed": false,
+  "candidate_mutation_allowed": false,
+  "contracts": [
+    {
+      "id": "F1ZBX_R3",
+      "label": "F1ZBX / R3 Brocéliande",
+      "kind": "amateur_repeater",
+      "rx_frequencies_mhz": [145.075, 145.675],
+      "required_distinct_rx_memory_count_if_promoted": 2,
+      "minimum_independent_field_sessions": 2,
+      "field_sessions_are_evidence_not_memories": true,
+      "field_gate_currently_cleared": false,
+      "promotion_currently_allowed": false,
+      "current_candidate_memory_delta": 0,
+      "memory_delta_if_gate_clears": 2
+    },
+    {
+      "id": "CROSS_ETEL_CHANNEL_64",
+      "label": "CROSS Étel canal 64",
+      "kind": "maritime_duplex",
+      "rx_frequencies_mhz": [156.225, 160.825],
+      "directions": ["ship_to_coast", "coast_to_ship"],
+      "required_distinct_rx_memory_count_if_published": 2,
+      "frequency_pair_already_in_bretagne_research_plan": true,
+      "current_site_identified": false,
+      "primary_source_conflict_open": true,
+      "promotion_currently_allowed": false,
+      "new_rf_memory_delta": 0
+    },
+    {
+      "id": "CROSS_CORSEN_CHANNEL_79",
+      "label": "CROSS Corsen canal 79",
+      "kind": "maritime_duplex",
+      "rx_frequencies_mhz": [156.975, 161.575],
+      "directions": ["ship_to_coast", "coast_to_ship"],
+      "required_distinct_rx_memory_count_if_published": 2,
+      "frequency_pair_already_in_bretagne_research_plan": true,
+      "current_primary_transmitter_context_confirmed": false,
+      "promotion_currently_allowed": false,
+      "new_rf_memory_delta": 0
+    }
+  ],
+  "rules": {
+    "distinct_verified_duplex_pair_uses_two_rx_memories": true,
+    "two_field_sessions_do_not_mean_two_additional_memories": true,
+    "same_rf_frequency_still_deduplicated": true,
+    "unresolved_site_or_source_gate_still_blocks_publication": true,
+    "all_memories_rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true
+  }
+}

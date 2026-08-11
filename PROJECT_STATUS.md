@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **11 août 2026**  
-Sprint courant : **62**  
-État logique : **0.21.51**
+Sprint courant : **63**  
+État logique : **0.21.52**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md` et `research/sprint-62-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md` et `research/sprint-63-summary.md`.
 
 ## État public
 
@@ -35,9 +35,20 @@ Le snapshot capture l'état logique de revue. Le manifeste enregistre les SHA-25
 ## Dossiers Normandie encore bloqués
 
 - **R3 / F1ZBX** : paramètres opérateur confirmés sur 145.075 / 145.675 MHz ; réception Mortain encore à démontrer par au moins deux sessions indépendantes.
-- **F5ZHA Laval** : REF courant sur 145.4675 / 432.575 MHz ; conflit historique 431.4125 encore ouvert et couverture utile Mortain non validée.
-- **F1ZOV** : le REF le liste actif, mais l'exploitant local F6KFW l'indique toujours **En Maintenance** ; le statut exploitant local reste prioritaire.
-- **F6ZES Sourdeval** : revalidation du 10 août 2026 dans `research/normandie-v0.4/f6zes-revalidation.json`. Le REF confirme site/responsable/locator/altitude mais laisse état, bande, émission, réception et mode vides. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+- **F5ZHA Laval** : le REF courant conserve 145.4675 / 432.575 MHz. La valeur conflictuelle RepeaterBook 431.4125 MHz est maintenant mieux qualifiée : sa page de vérification par âge affiche **2017-02-17** et `Off-Air`. Ce conflit secondaire stale ne remplace cependant pas l'exigence d'une source locale actuelle ou autoritative équivalente, et la couverture utile Mortain reste non validée.
+- **F1ZOV** : recontrôle du 11 août 2026, l'exploitant local F6KFW l'indique toujours **En Maintenance** sur 430.375 / 431.975 MHz ; le statut exploitant local reste prioritaire sur le REF général.
+- **F6ZES Sourdeval** : recontrôle ciblé du 11 août 2026. Le REF confirme toujours site/responsable/locator/altitude mais laisse état, bande, émission, réception et mode vides. Les recherches ciblées n'ont pas fourni de seconde source actuelle de fréquence/mode. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+
+### Revalidation des blocages — Sprint 63
+
+`research/sprint-63-source-revalidation.json` conserve la passe datée sans modifier les critères des portes existantes.
+
+- F1ZOV : maintenance opérateur confirmée à nouveau, delta **0**.
+- F5ZHA : conflit RepeaterBook 431.4125 reclassé **secondaire stale** grâce à la date de vérification 2017-02-17 ; réconciliation autoritative toujours incomplète et terrain toujours requis, delta **0**.
+- F6ZES : aucun champ fréquence/mode nouveau, delta **0**.
+- R3 : aucune nouvelle observation terrain dans le dépôt, delta **0**.
+
+Cette passe ne modifie ni `promotion-gates.json`, ni le candidat interne, ni les artefacts publics.
 
 ### Scan REF adjacent — Sprint 61
 
@@ -65,7 +76,7 @@ Ces preuves d'infrastructure **n'attribuent aucun canal**. Une source primaire h
 
 Le bilan officiel CROSS Corsen 2025, publié le 2 mars 2026, reste identifié mais son PDF de 14,6 Mio n'a pas pu être chargé par l'outil de lecture courant ; son contenu canal/site n'est donc pas utilisé. Cette impossibilité d'extraction n'est pas une preuve négative.
 
-Météo-France présente depuis le **5 août 2026** son Guide Marine comme contenant notamment horaires, fréquences radio et contenu des bulletins VHF. Le Guide Marine 2026 est enregistré comme nouvelle cible primaire de réconciliation, mais son PDF n'a pas pu être exploité dans ce workflow : aucune attribution Ch79 n'en est déduite.
+Météo-France présente depuis le **5 août 2026** son Guide Marine comme contenant notamment horaires, fréquences radio et contenu des bulletins VHF. Le lien direct du Guide Marine 2026 a été identifié, mais un nouveau chargement le 11 août 2026 a encore échoué dans le workflow web (`cache miss`). Le contenu n'a pas été extrait et aucune capture PDF n'a pu être obtenue : aucune attribution Ch79 n'en est déduite.
 
 Les deux fréquences paired RX du canal 79, **156.975 / 161.575 MHz**, étaient déjà dans la recherche Bretagne : aucun delta mémoire RF.
 
@@ -73,14 +84,14 @@ Les deux fréquences paired RX du canal 79, **156.975 / 161.575 MHz**, étaient 
 
 `research/bretagne-v0.1/etel-channel64-evidence.json` conserve le **conflit primaire actuel** :
 
-- la page ministérielle actuelle, mise à jour le **19 juin 2026**, affirme que les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan ;
+- la page ministérielle actuelle affirme que les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan ;
 - la page actuelle du CROSS Étel nomme Étel et Chassiron en diffusion continue sur **63** ;
 - le planning météo actuellement lié par le CROSS liste les émetteurs/canaux et ne mentionne pas 64 ;
 - le bilan officiel 2025 décrit **16 stations VHF + 2 MF**, nomme les émetteurs météo réguliers et les stations renforcées **Étel/Chassiron/Ferret sur 63**, sans mention de canal 64.
 
 Sprint 62 formalise donc une **convergence opérationnelle locale sur Ch63** : trois sources opérationnelles locales actuelles exploitées mentionnent explicitement 63, aucune de ces trois ne mentionne 64. Cette convergence renforce le conflit avec la page ministérielle générique, mais **ne prouve ni que Ch64 fonctionne actuellement, ni qu'il est arrêté**. Aucun site Ch64 n'est attribué.
 
-Météo-France publie une page Guide Marine datée du **5 août 2026** indiquant que le guide contient les horaires et fréquences radio des bulletins VHF. Le PDF du Guide Marine 2026 a été identifié mais n'est pas extractible dans le workflow courant ; il devient une cible primaire prioritaire sans produire de conclusion par défaut.
+Le **Guide Marine 2026** reste une cible primaire prioritaire. Son URL PDF directe est maintenant connue mais le nouveau chargement du 11 août 2026 a échoué ; un PDF non lu ne produit aucune conclusion Ch64.
 
 L'offre technique DIRM de juillet 2026 parle par ailleurs de **17 stations radio** maintenues de Penmarc'h à Biarritz. Ce nombre ne doit pas être réconcilié arithmétiquement avec « 16 VHF + 2 MF » sans définition commune des unités de comptage.
 
@@ -102,6 +113,7 @@ python tests\test_normandie_v04_review_handoff.py
 python tests\test_sprint60_revalidation.py
 python tests\test_sprint61_research.py
 python tests\test_sprint62_primary_reference_boundaries.py
+python tests\test_sprint63_blocker_revalidation.py
 python tests\test_etel_network_research.py
 
 git status
@@ -127,13 +139,14 @@ python tools\record_normandie_v04_f5zha_observation.py --help
 - le statut opérateur local prime pour l'état opérationnel courant ;
 - une observation radio ne ferme pas un conflit de source ;
 - une source secondaire actuelle peut prioriser une recherche mais ne remplace pas une validation primaire requise ;
+- une source secondaire stale ne remplace pas la réconciliation autoritative explicitement exigée par une porte ;
 - un conflit entre sources primaires actuelles doit être réconcilié avant promotion ;
 - une convergence documentaire locale sur un canal ne réfute pas automatiquement un autre canal mentionné par une source primaire conflictuelle ;
 - l'absence d'une donnée dans un document local courant n'est pas automatiquement une preuve d'arrêt ;
 - une source primaire identifiée mais non extractible n'est pas une preuve négative ;
 - une infrastructure radio actuelle ne permet pas d'attribuer un canal précis ;
 - une affectation historique primaire ne vaut pas validation opérationnelle actuelle ;
-- une source périmée bloque la revue mais ne prouve jamais un arrêt ;
+- une source périmée bloque une revue mais ne prouve jamais un arrêt ;
 - une recherche infructueuse n'est pas une preuve négative ;
 - une fréquence non résolue n'est jamais devinée ;
 - des nombres de stations issus de définitions différentes ne sont pas réconciliés sans définition commune ;

@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **11 août 2026**  
-Sprint courant : **65**  
-État logique : **0.21.54**
+Sprint courant : **66**  
+État logique : **0.21.55**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md` et `research/sprint-65-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md` et `research/sprint-66-summary.md`.
 
 ## État public
 
@@ -39,6 +39,18 @@ Le snapshot capture l'état logique de revue. Le manifeste enregistre les SHA-25
 - **F1ZOV** : recontrôle du 11 août 2026, l'exploitant local F6KFW l'indique toujours **En Maintenance** sur 430.375 / 431.975 MHz ; le statut exploitant local reste prioritaire.
 - **F6ZES Sourdeval** : recontrôle Sprint 65, le REF confirme site/responsable/locator/altitude mais laisse toujours état, bande, émission, réception et mode vides. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
 
+### Inventaires techniques courants — Sprint 66
+
+`research/sprint-66-technical-inventory-boundaries.json` enregistre la nouvelle passe sans toucher au candidat.
+
+- F5ZHA : ARAM53 est identifiable comme association active, mais aucune publication technique locale actuelle exploitée ne valide la paire ; existence associative ≠ validation de fréquence.
+- F6ZES : fréquence/mode/état toujours absents ; delta candidat **0**.
+- CROSS Étel : l'offre DIRM `2026-2341297` confirme **17 stations radio** de Penmarc'h à Biarritz et un contexte MHF/VHF, mais aucun nom de station ni canal : Ch64 reste sans site.
+- CROSS Corsen : Stiff est revalidé comme infrastructure radio 2026 ; le marché `DGAMPA-SNC1-2025-03_STIFF` confirme le projet de rénovation mais aucun Ch79. Une source secondaire non datée restitue Fréhel/Bodic/Batz/Stiff/Raz sur Ch79, uniquement comme cible de recherche.
+- Guide Marine 2026 : nouvelle tentative `cache miss`, donc aucune inférence.
+
+État inchangé : **142**, plafond **147**, revue **3/9**, **6 blocages ouverts**, **0 ajout éligible**, non prêt pour publication.
+
 ### Recontrôle primaire courant — Sprint 65
 
 `research/sprint-65-primary-recheck.json` enregistre la passe actuelle sans toucher au candidat.
@@ -71,6 +83,12 @@ Le contrat ne modifie ni candidat, ni `promotion-gates.json`, ni pack public.
 `research/normandie-v0.4/mortain-adjacent-ref-scan.json` recontrôle les départements **35, 50, 53 et 61**. Résultat : **0 nouveau relais analogique actif non déjà suivi**, donc delta candidat **0**.
 
 Ce scan est une preuve d'inventaire, pas une preuve de réception. Il ne modifie ni candidat ni pack public.
+
+## Bretagne — inventaires techniques Sprint 66
+
+La maintenance 2026 du CROSS Étel confirme 17 stations radio et le domaine MHF/VHF sans fournir l'inventaire nominatif ou les canaux. Le Stiff / Ouessant reste une infrastructure radio Corsen actuelle, mais ni le poste 2026 ni le marché de rénovation ne l'associent à Ch79. La chaîne secondaire Fréhel/Bodic/Batz/Stiff/Raz ne devient pas une preuve primaire actuelle.
+
+Les paires restent **Ch64 156.225 / 160.825 MHz = 2 mémoires RX** et **Ch79 156.975 / 161.575 MHz = 2 mémoires RX** si leurs portes sont un jour franchies ; delta RF actuel **0**.
 
 ## Bretagne — recontrôle primaire Sprint 65
 
@@ -136,6 +154,7 @@ python tests\test_sprint62_primary_reference_boundaries.py
 python tests\test_sprint63_blocker_revalidation.py
 python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
+python tests\test_sprint66_technical_inventory_boundaries.py
 python tests\test_etel_network_research.py
 
 git status

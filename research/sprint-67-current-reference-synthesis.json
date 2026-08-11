@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "sprint": 67,
+  "state_version": "0.21.56",
+  "updated": "2026-08-11",
+  "status": "current_reference_synthesis_no_promotion_not_public",
+  "public_export_allowed": false,
+  "candidate_mutation_allowed": false,
+  "normandie_v04": {
+    "f5zha": {
+      "working_pair_mhz": [145.4675, 432.575],
+      "repeaterbook_current_display_frequency_mhz": 431.4125,
+      "repeaterbook_current_display_shows_green_status": true,
+      "repeaterbook_verification_date_shown": "2017-02-17",
+      "repeaterbook_verification_page_shows_off_air": true,
+      "current_display_state_overrides_dated_verification_provenance": false,
+      "authoritative_source_reconciliation_complete": false,
+      "mortain_field_gate_cleared": false,
+      "candidate_memory_delta": 0
+    },
+    "f6zes": {
+      "frequency_mode_operational_state_resolved": false,
+      "must_not_guess_frequency": true,
+      "candidate_memory_delta": 0
+    },
+    "r3": {
+      "pair_rx_frequencies_mhz": [145.075, 145.675],
+      "required_rx_memory_count_if_promoted": 2,
+      "minimum_independent_field_sessions": 2,
+      "field_sessions_are_evidence_not_memories": true,
+      "field_gate_cleared": false,
+      "candidate_memory_delta": 0
+    },
+    "candidate_memory_count_before": 142,
+    "candidate_memory_count_after": 142,
+    "known_ceiling_memory_count": 147,
+    "review_completed_count": 3,
+    "review_item_count": 9,
+    "release_blocker_count": 6,
+    "eligible_addition_count": 0
+  },
+  "bretagne_v01": {
+    "ministry_leisure_guide_2026": {
+      "authority": "Ministère chargé de la mer",
+      "title": "Guide des loisirs nautiques en mer - Sécurité et environnement - Édition 2026",
+      "source_class": "current_primary",
+      "source_page_updated": "2026-06-19",
+      "accessed": "2026-08-11",
+      "pdf_extracted": true,
+      "pdf_page_visually_checked": true,
+      "pdf_relevant_page_index_zero_based": 5,
+      "confirms_cross_weather_channels_79_80": true,
+      "confirms_permanent_coastal_weather_channels_63_64": true,
+      "names_channel64_transmitter_site": false,
+      "names_channel79_transmitter_site": false,
+      "channel_level_confirmation_is_site_assignment": false
+    },
+    "cross_etel_channel64": {
+      "pair_rx_frequencies_mhz": [156.225, 160.825],
+      "required_rx_memory_count_if_published": 2,
+      "current_primary_regional_channel_confirmation": true,
+      "current_local_cross_channel63_convergence": true,
+      "current_channel64_site_confirmed": false,
+      "current_channel64_operation_at_named_site_confirmed": false,
+      "current_channel64_stopped_proven": false,
+      "primary_conflict_open": true,
+      "new_rf_memory_delta": 0
+    },
+    "cross_corsen_channel79": {
+      "pair_rx_frequencies_mhz": [156.975, 161.575],
+      "required_rx_memory_count_if_published": 2,
+      "current_primary_channel_level_confirmation": true,
+      "current_primary_transmitter_site_confirmed": false,
+      "current_primary_infrastructure_sites": ["Cap Fréhel", "Stiff / Ouessant"],
+      "current_local_secondary_sites": ["Cap Fréhel", "Bodic"],
+      "secondary_full_chain_sites": ["Cap Fréhel", "Bodic", "Batz", "Stiff / Ouessant", "Pointe du Raz"],
+      "secondary_current_stiff_channel79_clue_exists": true,
+      "secondary_convergence_can_promote_current_primary_site_assignment": false,
+      "priority_primary_revalidation_sites": ["Stiff / Ouessant", "Cap Fréhel", "Bodic", "Batz", "Pointe du Raz"],
+      "new_rf_memory_delta": 0
+    },
+    "new_site_assignment_count": 0,
+    "new_rf_memory_delta": 0,
+    "public_promotion_allowed": false
+  },
+  "rules": {
+    "current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter": true,
+    "secondary_source_convergence_does_not_become_primary_validation": true,
+    "current_primary_infrastructure_plus_secondary_channel_clue_does_not_equal_primary_site_channel_mapping": true,
+    "current_display_badge_does_not_override_explicit_dated_verification_provenance": true,
+    "historical_primary_assignment_does_not_validate_current_operation": true,
+    "field_observations_do_not_close_source_conflicts": true,
+    "field_session_count_does_not_define_memory_count": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "public_packs_remain_immutable": true
+  },
+  "decisions": {
+    "normandie_gate_cleared_count": 0,
+    "normandie_candidate_mutated": false,
+    "bretagne_site_assignment_promoted": false,
+    "public_pack_mutated": false,
+    "public_export_allowed": false
+  }
+}

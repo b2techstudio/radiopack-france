@@ -1,0 +1,195 @@
+name: Sprint 67 atomic finalizer
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: ${{ github.event.head_commit.message == 'Sprint 67 arm atomic finalizer' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Patch Sprint 67 state docs tests and CI
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          # Machine resume state.
+          p = Path('research/project-resume-state.json')
+          state = json.loads(p.read_text(encoding='utf-8'))
+          assert state['current_sprint'] == 66
+          assert state['state_version'] == '0.21.55'
+          state['current_sprint'] = 67
+          state['state_version'] = '0.21.56'
+          state['active_work']['latest_current_reference_synthesis'] = {
+              'file': 'research/sprint-67-current-reference-synthesis.json',
+              'checked_on': '2026-08-11',
+              'ministry_leisure_guide_2026_pdf_extracted': True,
+              'ministry_leisure_guide_names_transmitter_sites': False,
+              'f5zha_repeaterbook_display_badge_overrides_dated_provenance': False,
+              'f5zha_authoritative_reconciliation_complete': False,
+              'f6zes_frequency_mode_resolved': False,
+              'normandie_gate_cleared_count': 0,
+              'candidate_memory_delta': 0,
+          }
+          b = state['bretagne_research_update']
+          b['latest_current_reference_synthesis_file'] = 'research/sprint-67-current-reference-synthesis.json'
+          b['ministry_leisure_guide_2026_pdf_extracted'] = True
+          b['ministry_leisure_guide_2026_pdf_page_visually_checked'] = True
+          b['ministry_leisure_guide_2026_confirms_channels79_80'] = True
+          b['ministry_leisure_guide_2026_confirms_channels63_64'] = True
+          b['ministry_leisure_guide_2026_names_transmitter_sites'] = False
+          b['corsen_secondary_current_stiff_channel79_clue_exists'] = True
+          b['corsen_secondary_convergence_is_current_primary_validation'] = False
+          source = 'research/sprint-67-current-reference-synthesis.json'
+          if source not in state['sources_of_truth']:
+              state['sources_of_truth'].append(source)
+          state['field_tools']['run_sprint67_current_reference_synthesis_test'] = 'python tests/test_sprint67_current_reference_synthesis.py'
+          state['recent_sprints']['67'] = 'Current reference synthesis: official 2026 leisure guide confirms channel level without transmitter sites; secondary Ch79 convergence remains non-primary; RepeaterBook current badge cannot override dated stale provenance'
+          rr = state['resume_rules']
+          rr['current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter'] = True
+          rr['secondary_source_convergence_does_not_become_primary_validation'] = True
+          rr['current_primary_infrastructure_plus_secondary_channel_clue_does_not_equal_primary_site_channel_mapping'] = True
+          rr['current_display_badge_does_not_override_dated_verification_provenance'] = True
+          p.write_text(json.dumps(state, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # README.
+          p = Path('README.md')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('## État actuel — Sprint 66 / 0.21.55', '## État actuel — Sprint 67 / 0.21.56', 1)
+          s = s.replace('`research/sprint-65-summary.md` et `research/sprint-66-summary.md`.', '`research/sprint-65-summary.md`, `research/sprint-66-summary.md` et `research/sprint-67-summary.md`.', 1)
+          s = s.replace('research/sprint-66-technical-inventory-boundaries.json\n```', 'research/sprint-66-technical-inventory-boundaries.json\nresearch/sprint-67-current-reference-synthesis.json\n```', 1)
+          marker = '### Inventaires techniques — Sprint 66\n'
+          assert marker in s
+          section = '''### Synthèse des références courantes — Sprint 67
+
+`research/sprint-67-current-reference-synthesis.json` verrouille une nouvelle frontière de preuve sans toucher au candidat.
+
+- Le **Guide des loisirs nautiques en mer — édition 2026** du ministère a cette fois été réellement extrait et la page radio a été contrôlée : 79/80 sont confirmés pour les bulletins CROSS et 63/64 pour le bulletin côtier permanent, mais **aucun site émetteur n'est nommé**.
+- **Ch64** reste donc sans site Morbihan primaire-vérifié malgré la confirmation actuelle du canal ; la convergence locale CROSS Étel sur Ch63 reste distincte et le conflit primaire demeure ouvert.
+- **Ch79** gagne une convergence secondaire utile : Fréhel/Bodic, la chaîne Fréhel/Bodic/Batz/Stiff/Raz et une piste récente sur Stiff. Avec les infrastructures primaires actuelles de Fréhel et Stiff, cela priorise la recherche, mais **ne crée toujours aucun mapping primaire Ch79 ↔ site**.
+- **F5ZHA** : RepeaterBook affiche actuellement 431.4125 avec un indicateur vert, alors que sa page d'âge de vérification conserve `2017-02-17` et `Off-Air`. Le badge d'affichage ne remplace pas la provenance datée ; la réconciliation autoritative reste incomplète.
+- F6ZES et R3 restent inchangés ; aucune porte n'est franchie.
+
+Résultat : **142/142**, plafond **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**, aucun changement public.
+
+'''
+          s = s.replace(marker, section + marker, 1)
+          s = s.replace('python tests\\test_sprint66_technical_inventory_boundaries.py\n', 'python tests\\test_sprint66_technical_inventory_boundaries.py\npython tests\\test_sprint67_current_reference_synthesis.py\n')
+          assert 'Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.' in s
+          p.write_text(s, encoding='utf-8')
+
+          # Human status.
+          p = Path('PROJECT_STATUS.md')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('Sprint courant : **66**', 'Sprint courant : **67**', 1)
+          s = s.replace('État logique : **0.21.55**', 'État logique : **0.21.56**', 1)
+          s = s.replace('`research/sprint-65-summary.md` et `research/sprint-66-summary.md`.', '`research/sprint-65-summary.md`, `research/sprint-66-summary.md` et `research/sprint-67-summary.md`.', 1)
+          marker = '### Inventaires techniques courants — Sprint 66\n'
+          assert marker in s
+          section = '''### Synthèse des références courantes — Sprint 67
+
+Le guide ministériel 2026 a été extrait et contrôlé visuellement. Il confirme **79/80** au niveau des bulletins CROSS et **63/64** pour le bulletin côtier permanent, mais ne nomme aucun émetteur. Cette preuve actuelle améliore la fraîcheur documentaire sans résoudre les sites.
+
+- Ch64 : 156.225 / 160.825 MHz reste une paire de **2 mémoires RX** si publiable ; aucun site Morbihan primaire actuel n'est identifié, conflit ouvert.
+- Ch79 : 156.975 / 161.575 MHz reste une paire de **2 mémoires RX** si publiable ; Fréhel et Stiff sont des infrastructures primaires actuelles, tandis que les indices Ch79 secondaires convergent vers Fréhel/Bodic/Stiff et la chaîne Fréhel/Bodic/Batz/Stiff/Raz. Cette convergence ne vaut pas mapping primaire.
+- F5ZHA : l'indicateur vert de la fiche RepeaterBook 431.4125 ne supplante pas sa provenance `2017-02-17` / `Off-Air`; source autoritative actuelle toujours requise.
+- F6ZES : aucune fréquence/mode/état nouveau ; R3 : toujours 2 mémoires si promotion et 2 sessions de preuve.
+
+État inchangé : **142**, plafond **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**, non prêt pour publication.
+
+'''
+          s = s.replace(marker, section + marker, 1)
+          s = s.replace('python tests\\test_sprint66_technical_inventory_boundaries.py\n', 'python tests\\test_sprint66_technical_inventory_boundaries.py\npython tests\\test_sprint67_current_reference_synthesis.py\n')
+          p.write_text(s, encoding='utf-8')
+
+          # Main recovery test follows current sprint.
+          p = Path('tests/test_normandie_v04_field_tools.py')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('assert resume["current_sprint"] == 66', 'assert resume["current_sprint"] == 67', 1)
+          s = s.replace('assert resume["state_version"] == "0.21.55"', 'assert resume["state_version"] == "0.21.56"', 1)
+          s = s.replace('assert "Sprint courant : **66**" in status_text', 'assert "Sprint courant : **67**" in status_text', 1)
+          s = s.replace('assert "État logique : **0.21.55**" in status_text', 'assert "État logique : **0.21.56**" in status_text', 1)
+          needle = 'assert resume["active_work"]["latest_technical_inventory_recheck"]["candidate_memory_delta"] == 0\n'
+          assert needle in s
+          extra = needle + 'assert resume["active_work"]["latest_current_reference_synthesis"]["file"] == "research/sprint-67-current-reference-synthesis.json"\nassert resume["active_work"]["latest_current_reference_synthesis"]["candidate_memory_delta"] == 0\n'
+          s = s.replace(needle, extra, 1)
+          needle = 'assert resume["resume_rules"]["current_infrastructure_procurement_does_not_assign_channel"] is True\n'
+          assert needle in s
+          extra = needle + 'assert resume["resume_rules"]["current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter"] is True\nassert resume["resume_rules"]["secondary_source_convergence_does_not_become_primary_validation"] is True\nassert resume["resume_rules"]["current_display_badge_does_not_override_dated_verification_provenance"] is True\n'
+          s = s.replace(needle, extra, 1)
+          s = s.replace('recovery state is self-contained at sprint 66', 'recovery state is self-contained at sprint 67')
+          p.write_text(s, encoding='utf-8')
+
+          # Sprint 66 evidence is historical; let the project advance.
+          p = Path('tests/test_sprint66_technical_inventory_boundaries.py')
+          s = p.read_text(encoding='utf-8')
+          old = 'assert resume["current_sprint"] == 66\nassert resume["state_version"] == "0.21.55"\n'
+          assert old in s
+          s = s.replace(old, 'assert resume["current_sprint"] >= e["sprint"]\n', 1)
+          p.write_text(s, encoding='utf-8')
+
+          # CI.
+          p = Path('.github/workflows/ci.yml')
+          s = p.read_text(encoding='utf-8')
+          marker = '      - name: Test Sprint 66 technical inventory boundaries\n        run: python tests/test_sprint66_technical_inventory_boundaries.py\n'
+          assert marker in s
+          addition = marker + '\n      - name: Test Sprint 67 current reference synthesis\n        run: python tests/test_sprint67_current_reference_synthesis.py\n'
+          s = s.replace(marker, addition, 1)
+          p.write_text(s, encoding='utf-8')
+
+          # Changelog: prepend only, preserve every historical byte after the common header.
+          p = Path('CHANGELOG.md')
+          old = p.read_text(encoding='utf-8')
+          prefix = '# Changelog\n\n'
+          assert old.startswith(prefix + '## 0.21.55 - 2026-08-11\n')
+          assert '## 0.21.56 - 2026-08-11' not in old
+          entry = '''## 0.21.56 - 2026-08-11
+
+- **Sprint 67** : synthèse des références courantes sans promotion ni mutation publique.
+- Le Guide ministériel des loisirs nautiques en mer **édition 2026** a été extrait et contrôlé : 79/80 et 63/64 sont confirmés au niveau canal, mais aucun site émetteur Ch64/Ch79 n'est nommé.
+- Ch79 : convergence secondaire renforcée autour de Fréhel/Bodic/Stiff et de la chaîne Fréhel/Bodic/Batz/Stiff/Raz ; les infrastructures primaires actuelles de Fréhel/Stiff ne transforment pas ces indices en mapping primaire.
+- F5ZHA : la fiche RepeaterBook 431.4125 affiche un indicateur vert tandis que la provenance de vérification reste `2017-02-17` / `Off-Air`; le badge courant n'écrase pas la provenance datée et la réconciliation autoritative reste ouverte.
+- F6ZES et R3 inchangés ; R3 reste à 2 mémoires RX si promotion et 2 sessions terrain de preuve.
+- Ajout de `research/sprint-67-current-reference-synthesis.json`, `research/sprint-67-summary.md` et `tests/test_sprint67_current_reference_synthesis.py`, avec intégration CI et garde-fous historiques adaptés.
+- Passage du point de reprise au **Sprint 67 / 0.21.56** ; état Normandie v0.4 inchangé à **142**, plafond 147, revue **3/9**, **6 blocages**, **0 ajout éligible**.
+- État public inchangé : Normandie v0.3.1 **139**, Annecy–Alpes–Léman v0.2 **65/48**, Bretagne non publique.
+
+'''
+          new = prefix + entry + old[len(prefix):]
+          assert new.endswith(old[len(prefix):])
+          p.write_text(new, encoding='utf-8')
+          PY
+
+          git diff --check
+          python - <<'PY'
+          from pathlib import Path
+          readme = Path('README.md').read_text(encoding='utf-8')
+          assert 'État actuel — Sprint 39' in readme
+          assert 'Sprint 67 / 0.21.56' in readme
+          changelog = Path('CHANGELOG.md').read_text(encoding='utf-8')
+          assert changelog.startswith('# Changelog\n\n## 0.21.56 - 2026-08-11\n')
+          PY
+
+      - name: Remove one-shot workflow and commit final Sprint 67 HEAD
+        shell: bash
+        run: |
+          rm .github/workflows/sprint67-finalize.yml
+          git config user.name "b2techstudio"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "Sprint 67 finalize current reference synthesis [reference-archive]"
+          git push origin HEAD:main

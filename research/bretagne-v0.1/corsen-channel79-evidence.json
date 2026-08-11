@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.1",
-  "status": "secondary_current_clues_recorded_primary_current_channel79_site_validation_pending",
+  "schema_version": "1.2",
+  "status": "secondary_full_chain_clue_recorded_primary_current_channel79_site_validation_pending",
   "updated": "2026-08-11",
   "cross": "CROSS Corsen",
   "channel": 79,
@@ -70,6 +70,17 @@
       "accessed": "2026-08-11",
       "supports": "Un contact VHF opérationnel du CROSS Corsen dans le secteur nord de la Pointe du Raz.",
       "channel_79_transmitter_site_identified": false
+    },
+    {
+      "authority": "DGAMPA / PLACE",
+      "title": "Rénovation de la tour radar du STIFF",
+      "reference": "DGAMPA-SNC1-2025-03_STIFF",
+      "url": "https://www.marches-publics.gouv.fr/entreprise/consultation/2860972?orgAcronyme=d4t",
+      "deadline": "2026-01-26",
+      "accessed": "2026-08-11",
+      "supports": "Un marché DGAMPA 2026 confirme la poursuite d'un projet de rénovation de la tour du Stiff, infrastructure actuelle du dispositif Corsen.",
+      "current_infrastructure_project_verified": true,
+      "channel_79_transmitter_site_identified": false
     }
   ],
   "historical_primary_channel79_context": [
@@ -94,14 +105,44 @@
       "reported_sites": [
         {
           "site": "Cap Fréhel",
-          "reported_local_times": ["05:45", "08:03", "12:03*", "16:33", "20:03"]
+          "reported_local_times": [
+            "05:45",
+            "08:03",
+            "12:03*",
+            "16:33",
+            "20:03"
+          ]
         },
         {
           "site": "Bodic",
-          "reported_local_times": ["05:33", "07:45", "11:45*", "16:15", "19:45"]
+          "reported_local_times": [
+            "05:33",
+            "07:45",
+            "11:45*",
+            "16:15",
+            "19:45"
+          ]
         }
       ],
       "scope_note": "Cette page locale est utile comme indice actuel pour la côte d'Erquy. Elle ne constitue pas l'inventaire primaire complet des stations Corsen et ne suffit pas à attribuer définitivement le canal 79 à ces sites dans RadioPack."
+    },
+    {
+      "source": "Randonnée Kayak",
+      "title": "Comment utiliser une VHF en kayak de Mer",
+      "url": "https://www.randokayak.com/comment-utiliser-une-vhf-en-kayak-de-mer/comment-page-1/",
+      "accessed": "2026-08-11",
+      "source_class": "secondary_undated_schedule",
+      "publication_date_visible": false,
+      "reported_channel": 79,
+      "reported_sites": [
+        "Cap Fréhel",
+        "Bodic",
+        "Batz",
+        "Stiff",
+        "Pointe du Raz"
+      ],
+      "current_primary_validation": false,
+      "scope_note": "La chaîne complète est une piste de recherche utile, mais l'absence de date de publication contrôlée et le caractère secondaire interdisent toute promotion actuelle."
     }
   ],
   "primary_reference_targets": [
@@ -119,20 +160,55 @@
     }
   ],
   "primary_revalidation_search": {
-    "queries_rechecked": ["Cap Fréhel canal 79", "Bodic canal 79", "Batz canal 79", "Stiff Ouessant canal 79", "Pointe du Raz canal 79"],
-    "official_domains_checked": ["dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr", "premar-atlantique.gouv.fr", "choisirleservicepublic.gouv.fr", "marches-publics.gouv.fr", "legifrance.gouv.fr", "meteofrance.fr"],
+    "queries_rechecked": [
+      "Cap Fréhel canal 79",
+      "Bodic canal 79",
+      "Batz canal 79",
+      "Stiff Ouessant canal 79",
+      "Pointe du Raz canal 79",
+      "CROSS Corsen canal 79 current technical inventory",
+      "Cap Fréhel Bodic Batz Stiff Raz canal 79"
+    ],
+    "official_domains_checked": [
+      "dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr",
+      "premar-atlantique.gouv.fr",
+      "choisirleservicepublic.gouv.fr",
+      "marches-publics.gouv.fr",
+      "legifrance.gouv.fr",
+      "meteofrance.fr"
+    ],
     "direct_primary_channel79_site_match_found": false,
     "search_failure_is_negative_evidence": false
   },
   "assessment": {
     "primary_current_channel79_transmitter_site_confirmed": false,
-    "current_primary_infrastructure_sites_verified": ["Cap Fréhel", "Stiff / Ouessant"],
-    "secondary_clue_sites": ["Cap Fréhel", "Bodic"],
+    "current_primary_infrastructure_sites_verified": [
+      "Cap Fréhel",
+      "Stiff / Ouessant"
+    ],
+    "secondary_clue_sites": [
+      "Cap Fréhel",
+      "Bodic"
+    ],
     "historical_primary_channel79_context_exists": true,
-    "priority_for_primary_revalidation": ["Cap Fréhel", "Bodic", "Batz", "Stiff / Ouessant", "Pointe du Raz"],
+    "priority_for_primary_revalidation": [
+      "Cap Fréhel",
+      "Bodic",
+      "Batz",
+      "Stiff / Ouessant",
+      "Pointe du Raz"
+    ],
     "channel79_frequency_pair_is_already_verified": true,
     "site_assignment_can_be_promoted": false,
-    "reason": "Cap Fréhel et le Stiff sont désormais séparément confirmés comme infrastructures actuelles utiles au CROSS Corsen. La documentation historique primaire explique le rôle ancien du canal 79 et du Stiff, et une source locale actuelle pointe Cap Fréhel/Bodic. Mais aucune source primaire actuelle exploitable ne rattache explicitement le canal 79 à Cap Fréhel, Bodic, Batz, Stiff ou Pointe du Raz : aucune attribution de site n'est donc promue."
+    "reason": "Les sources primaires 2026 continuent de confirmer des infrastructures Corsen actuelles, notamment le Stiff, mais sans mapping Ch79. Une source secondaire non datée restitue la chaîne Fréhel/Bodic/Batz/Stiff/Raz et la source locale d'Erquy conserve Fréhel/Bodic ; ces indices orientent la recherche mais ne remplacent pas une attribution primaire actuelle.",
+    "secondary_undated_full_chain_sites": [
+      "Cap Fréhel",
+      "Bodic",
+      "Batz",
+      "Stiff / Ouessant",
+      "Pointe du Raz"
+    ],
+    "secondary_undated_full_chain_is_current_primary_validation": false
   },
   "rules": {
     "secondary_current_clue_is_not_primary_validation": true,
@@ -144,6 +220,8 @@
     "channel79_site_must_not_be_guessed": true,
     "no_new_rf_memory_from_site_metadata": true,
     "frequency_promoted_to_public_pack": false,
-    "public_export_allowed": false
+    "public_export_allowed": false,
+    "undated_secondary_schedule_is_not_current_primary_validation": true,
+    "current_infrastructure_procurement_does_not_imply_channel_assignment": true
   }
 }

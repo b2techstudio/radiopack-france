@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.21.51 - 2026-08-11
+
+- **Sprint 62** : séparation renforcée entre convergence documentaire, infrastructure radio actuelle, contexte primaire historique et affectation opérationnelle actuelle des canaux CROSS.
+- `research/bretagne-v0.1/etel-channel64-evidence.json` formalise une convergence de trois sources opérationnelles locales actuelles vers le **canal 63**, tout en maintenant le canal 64 en conflit primaire non résolu : ni fonctionnement actuel, ni arrêt, ni site Ch64 ne sont considérés comme prouvés.
+- Ajout du **Guide Marine 2026 de Météo-France** comme cible primaire de réconciliation pour Étel et Corsen ; sa page de présentation du 5 août 2026 indique que le guide contient horaires et fréquences radio des bulletins VHF, mais le PDF non extractible dans ce workflow ne produit aucune inférence.
+- `research/bretagne-v0.1/corsen-channel79-evidence.json` qualifie **Cap Fréhel** et **Stiff / Ouessant** comme infrastructures CROSS actuelles vérifiées, sans leur attribuer Ch79 ; le contexte primaire historique 2003 reste explicitement distinct d'une validation 2026.
+- Ajout de `tests/test_sprint62_primary_reference_boundaries.py` et intégration CI pour interdire qu'une convergence Ch63 réfute Ch64, qu'une infrastructure radio implique un canal, qu'une affectation historique soit traitée comme actuelle ou qu'une référence primaire non lue produise une conclusion.
+- Ajout de `research/sprint-62-summary.md` et mise à jour de `README.md`, `PROJECT_STATUS.md`, `research/project-resume-state.json` et des garde-fous de reprise au **Sprint 62 / 0.21.51**.
+- État Normandie v0.4 inchangé : **142 mémoires internes**, preview 142, plafond de travail connu 147, **3/9** points de revue, **6** blocages et **0** ajout éligible.
+- État public inchangé : Normandie v0.3.1 reste figée à **139 mémoires**, Annecy–Alpes–Léman v0.2 à **65/48 mémoires** et Bretagne reste non publique.
+
 ## 0.21.50 - 2026-08-10
 
 - **Sprint 61** : approfondissement de la recherche CROSS Étel/Corsen et relecture analogique autour de Mortain-Bocage, sans mutation des packs publics.

@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-11",
-  "current_sprint": 63,
-  "state_version": "0.21.52",
+  "current_sprint": 64,
+  "state_version": "0.21.53",
   "public_packs": {
     "normandie": {"version": "0.3.1", "memory_count": 139, "immutable": true},
     "annecy_alpes_leman": {"version": "0.2", "memory_count": 65, "without_aviation_memory_count": 48, "immutable": true},
@@ -66,6 +66,16 @@
       "f5zha_authoritative_reconciliation_complete": false,
       "f6zes_frequency_mode_resolved": false,
       "r3_new_field_observation_available": false
+    },
+    "dual_rx_contract": {
+      "file": "research/sprint-64-dual-rx-contract.json",
+      "r3_pair_frequencies_mhz": [145.075, 145.675],
+      "r3_required_rx_memory_count_if_promoted": 2,
+      "r3_minimum_independent_field_sessions": 2,
+      "r3_sessions_are_evidence_not_memories": true,
+      "r3_control_memory_is_pair_member": false,
+      "r3_current_candidate_memory_delta": 0,
+      "r3_memory_delta_if_gate_clears": 2
     }
   },
   "review_handoff": {
@@ -87,6 +97,7 @@
     "historical_primary_channel79_context_is_current_validation": false,
     "secondary_current_clue_sites": ["Cap Fréhel", "Bodic"],
     "paired_rx_frequencies_mhz": [156.975, 161.575],
+    "corsen_channel79_required_rx_memory_count_if_published": 2,
     "new_rf_memory_delta": 0,
     "site_assignment_promoted": false,
     "corsen_2025_report_identified_but_channel_content_not_extracted_in_current_workflow": true,
@@ -97,6 +108,7 @@
     "etel_local_operational_sources_converge_on_channel63": true,
     "etel_channel64_current_operation_proven": false,
     "etel_channel64_stopped_proven": false,
+    "etel_channel64_required_rx_memory_count_if_published": 2,
     "etel_channel64_new_rf_memory_delta": 0,
     "etel_meteofrance_guide_2026_identified_but_not_extracted": true,
     "meteofrance_guide_2026_direct_pdf_url_identified": true,
@@ -117,13 +129,16 @@
     "research/normandie-v0.4/source-consistency-contract.json",
     "research/normandie-v0.4/source-freshness-policy.json",
     "research/normandie-v0.4/r3-mortain-field-validation.json",
+    "research/normandie-v0.4/r3-validation-pack.json",
     "research/normandie-v0.4/f5zha-mortain-validation.json",
     "research/normandie-v0.4/f6zes-revalidation.json",
     "research/normandie-v0.4/mortain-adjacent-ref-scan.json",
+    "research/paired-rx-policy.json",
     "research/bretagne-v0.1/etel-network.json",
     "research/bretagne-v0.1/etel-channel64-evidence.json",
     "research/bretagne-v0.1/corsen-channel79-evidence.json",
-    "research/sprint-63-source-revalidation.json"
+    "research/sprint-63-source-revalidation.json",
+    "research/sprint-64-dual-rx-contract.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -150,7 +165,8 @@
     "run_sprint60_revalidation_test": "python tests/test_sprint60_revalidation.py",
     "run_sprint61_research_test": "python tests/test_sprint61_research.py",
     "run_sprint62_primary_reference_test": "python tests/test_sprint62_primary_reference_boundaries.py",
-    "run_sprint63_blocker_revalidation_test": "python tests/test_sprint63_blocker_revalidation.py"
+    "run_sprint63_blocker_revalidation_test": "python tests/test_sprint63_blocker_revalidation.py",
+    "run_sprint64_dual_rx_contract_test": "python tests/test_sprint64_dual_rx_contract.py"
   },
   "recent_sprints": {
     "55": "Deterministic non-public review snapshot",
@@ -161,13 +177,17 @@
     "60": "F6ZES no-guess revalidation and guarded Corsen channel 79 local clues",
     "61": "CROSS Etel channel 64 primary-source conflict, Corsen primary revalidation boundary, and adjacent REF analog scan",
     "62": "Meteo-France Guide Marine primary-reference target, Etel channel 63 operational convergence boundary, and Corsen current infrastructure versus historical/current channel assignment separation",
-    "63": "Current blocker revalidation: F1ZOV still in operator maintenance, F5ZHA RepeaterBook conflict dated as stale secondary without clearing authoritative/field gates, F6ZES still unresolved, Guide Marine PDF retry still unread"
+    "63": "Current blocker revalidation: F1ZOV still in operator maintenance, F5ZHA RepeaterBook conflict dated as stale secondary without clearing authoritative/field gates, F6ZES still unresolved, Guide Marine PDF retry still unread",
+    "64": "Dual RX contract: R3 uses two pair memories independently of two field sessions; Etel Ch64 and Corsen Ch79 each retain both maritime RX directions while publication gates stay closed"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
     "failed_or_unverified_gate_must_not_be_promoted": true,
     "local_operator_status_overrides_general_directory_for_current_state": true,
     "field_observations_do_not_close_source_conflicts": true,
+    "field_session_count_does_not_define_memory_count": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "optional_control_memory_is_not_pair_member": true,
     "secondary_source_clue_does_not_replace_required_primary_validation": true,
     "stale_secondary_conflict_does_not_replace_required_authoritative_reconciliation": true,
     "primary_source_conflict_requires_reconciliation": true,

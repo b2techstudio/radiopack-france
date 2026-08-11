@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-11",
-  "current_sprint": 66,
-  "state_version": "0.21.55",
+  "current_sprint": 67,
+  "state_version": "0.21.56",
   "public_packs": {
     "normandie": {
       "version": "0.3.1",
@@ -154,6 +154,17 @@
       "f6zes_frequency_mode_resolved": false,
       "normandie_gate_cleared_count": 0,
       "candidate_memory_delta": 0
+    },
+    "latest_current_reference_synthesis": {
+      "file": "research/sprint-67-current-reference-synthesis.json",
+      "checked_on": "2026-08-11",
+      "ministry_leisure_guide_2026_pdf_extracted": true,
+      "ministry_leisure_guide_names_transmitter_sites": false,
+      "f5zha_repeaterbook_display_badge_overrides_dated_provenance": false,
+      "f5zha_authoritative_reconciliation_complete": false,
+      "f6zes_frequency_mode_resolved": false,
+      "normandie_gate_cleared_count": 0,
+      "candidate_memory_delta": 0
     }
   },
   "review_handoff": {
@@ -228,7 +239,15 @@
       "Stiff / Ouessant",
       "Pointe du Raz"
     ],
-    "corsen_secondary_undated_full_chain_is_current_primary_validation": false
+    "corsen_secondary_undated_full_chain_is_current_primary_validation": false,
+    "latest_current_reference_synthesis_file": "research/sprint-67-current-reference-synthesis.json",
+    "ministry_leisure_guide_2026_pdf_extracted": true,
+    "ministry_leisure_guide_2026_pdf_page_visually_checked": true,
+    "ministry_leisure_guide_2026_confirms_channels79_80": true,
+    "ministry_leisure_guide_2026_confirms_channels63_64": true,
+    "ministry_leisure_guide_2026_names_transmitter_sites": false,
+    "corsen_secondary_current_stiff_channel79_clue_exists": true,
+    "corsen_secondary_convergence_is_current_primary_validation": false
   },
   "sources_of_truth": [
     "research/normandie-v0.4/pack-plan.json",
@@ -251,7 +270,8 @@
     "research/sprint-63-source-revalidation.json",
     "research/sprint-64-dual-rx-contract.json",
     "research/sprint-65-primary-recheck.json",
-    "research/sprint-66-technical-inventory-boundaries.json"
+    "research/sprint-66-technical-inventory-boundaries.json",
+    "research/sprint-67-current-reference-synthesis.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -281,7 +301,8 @@
     "run_sprint63_blocker_revalidation_test": "python tests/test_sprint63_blocker_revalidation.py",
     "run_sprint64_dual_rx_contract_test": "python tests/test_sprint64_dual_rx_contract.py",
     "run_sprint65_primary_recheck_test": "python tests/test_sprint65_primary_recheck.py",
-    "run_sprint66_technical_inventory_test": "python tests/test_sprint66_technical_inventory_boundaries.py"
+    "run_sprint66_technical_inventory_test": "python tests/test_sprint66_technical_inventory_boundaries.py",
+    "run_sprint67_current_reference_synthesis_test": "python tests/test_sprint67_current_reference_synthesis.py"
   },
   "recent_sprints": {
     "55": "Deterministic non-public review snapshot",
@@ -295,7 +316,8 @@
     "63": "Current blocker revalidation: F1ZOV still in operator maintenance, F5ZHA RepeaterBook conflict dated as stale secondary without clearing authoritative/field gates, F6ZES still unresolved, Guide Marine PDF retry still unread",
     "64": "Dual RX contract: R3 uses two pair memories independently of two field sessions; Etel Ch64 and Corsen Ch79 each retain both maritime RX directions while publication gates stay closed",
     "65": "Current primary-source recheck: Ministry regional VHF statement, local CROSS Etel/Corsen boundaries, F5ZHA current REF pair, F6ZES unresolved; no site inference or promotion",
-    "66": "Technical inventory boundaries: Etel 17-station MHF/VHF maintenance scope stays unnamed by channel; Corsen Stiff current infrastructure and full secondary Ch79 chain remain below primary site-assignment threshold"
+    "66": "Technical inventory boundaries: Etel 17-station MHF/VHF maintenance scope stays unnamed by channel; Corsen Stiff current infrastructure and full secondary Ch79 chain remain below primary site-assignment threshold",
+    "67": "Current reference synthesis: official 2026 leisure guide confirms channel level without transmitter sites; secondary Ch79 convergence remains non-primary; RepeaterBook current badge cannot override dated stale provenance"
   },
   "resume_rules": {
     "published_versions_are_immutable": true,
@@ -336,6 +358,10 @@
     "current_maintenance_scope_does_not_name_station_channels": true,
     "association_existence_does_not_validate_repeater_frequency": true,
     "undated_secondary_schedule_is_not_current_primary_validation": true,
-    "current_infrastructure_procurement_does_not_assign_channel": true
+    "current_infrastructure_procurement_does_not_assign_channel": true,
+    "current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter": true,
+    "secondary_source_convergence_does_not_become_primary_validation": true,
+    "current_primary_infrastructure_plus_secondary_channel_clue_does_not_equal_primary_site_channel_mapping": true,
+    "current_display_badge_does_not_override_dated_verification_provenance": true
   }
 }

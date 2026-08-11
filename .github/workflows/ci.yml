@@ -88,6 +88,9 @@ jobs:
       - name: Test Sprint 63 blocker source revalidation
         run: python tests/test_sprint63_blocker_revalidation.py
 
+      - name: Test Sprint 64 dual RX contract
+        run: python tests/test_sprint64_dual_rx_contract.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

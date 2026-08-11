@@ -277,16 +277,17 @@ jobs:
           assert '## 0.21.56 - 2026-08-11' not in old
           entry = '''## 0.21.56 - 2026-08-11
 
-- **Sprint 67** : synthèse des références courantes sans promotion ni mutation publique.
-- Le Guide ministériel des loisirs nautiques en mer **édition 2026** a été extrait et contrôlé : 79/80 et 63/64 sont confirmés au niveau canal, mais aucun site émetteur Ch64/Ch79 n'est nommé.
-- Ch79 : convergence secondaire renforcée autour de Fréhel/Bodic/Stiff et de la chaîne Fréhel/Bodic/Batz/Stiff/Raz ; les infrastructures primaires actuelles de Fréhel/Stiff ne transforment pas ces indices en mapping primaire.
-- F5ZHA : la fiche RepeaterBook 431.4125 affiche un indicateur vert tandis que la provenance de vérification reste `2017-02-17` / `Off-Air`; le badge courant n'écrase pas la provenance datée et la réconciliation autoritative reste ouverte.
-- F6ZES et R3 inchangés ; R3 reste à 2 mémoires RX si promotion et 2 sessions terrain de preuve.
-- Ajout de `research/sprint-67-current-reference-synthesis.json`, `research/sprint-67-summary.md` et `tests/test_sprint67_current_reference_synthesis.py`, avec intégration CI et garde-fous historiques adaptés.
-- Passage du point de reprise au **Sprint 67 / 0.21.56** ; état Normandie v0.4 inchangé à **142**, plafond 147, revue **3/9**, **6 blocages**, **0 ajout éligible**.
-- État public inchangé : Normandie v0.3.1 **139**, Annecy–Alpes–Léman v0.2 **65/48**, Bretagne non publique.
+          - **Sprint 67** : synthèse des références courantes sans promotion ni mutation publique.
+          - Le Guide ministériel des loisirs nautiques en mer **édition 2026** a été extrait et contrôlé : 79/80 et 63/64 sont confirmés au niveau canal, mais aucun site émetteur Ch64/Ch79 n'est nommé.
+          - Ch79 : convergence secondaire renforcée autour de Fréhel/Bodic/Stiff et de la chaîne Fréhel/Bodic/Batz/Stiff/Raz ; les infrastructures primaires actuelles de Fréhel/Stiff ne transforment pas ces indices en mapping primaire.
+          - F5ZHA : la fiche RepeaterBook 431.4125 affiche un indicateur vert tandis que la provenance de vérification reste `2017-02-17` / `Off-Air`; le badge courant n'écrase pas la provenance datée et la réconciliation autoritative reste ouverte.
+          - F6ZES et R3 inchangés ; R3 reste à 2 mémoires RX si promotion et 2 sessions terrain de preuve.
+          - Ajout de `research/sprint-67-current-reference-synthesis.json`, `research/sprint-67-summary.md` et `tests/test_sprint67_current_reference_synthesis.py`, avec intégration CI et garde-fous historiques adaptés.
+          - Passage du point de reprise au **Sprint 67 / 0.21.56** ; état Normandie v0.4 inchangé à **142**, plafond 147, revue **3/9**, **6 blocages**, **0 ajout éligible**.
+          - État public inchangé : Normandie v0.3.1 **139**, Annecy–Alpes–Léman v0.2 **65/48**, Bretagne non publique.
 
-'''
+          '''
+          entry = '\n'.join(line[10:] if line.startswith('          ') else line for line in entry.split('\n'))
           new = prefix + entry + old[len(prefix):]
           assert new.endswith(old[len(prefix):])
           changelog.write_text(new, encoding='utf-8')

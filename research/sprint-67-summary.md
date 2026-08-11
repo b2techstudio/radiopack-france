@@ -122,3 +122,5 @@ Normandie v0.4 :
 - badge d'annuaire courant ≠ remplacement d'une provenance datée ;
 - maintien des paires à 2 mémoires RX ;
 - absence de toute mutation publique.
+
+Finalisation : garde-fou Sprint 67 intégré à la CI ; aucun fichier public n'est modifié.

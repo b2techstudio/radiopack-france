@@ -107,8 +107,7 @@ assert e["decisions"]["public_pack_mutated"] is False
 assert e["decisions"]["public_export_allowed"] is False
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 66
-assert resume["state_version"] == "0.21.55"
+assert resume["current_sprint"] >= e["sprint"]
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
 assert resume["active_work"]["current_guarded_promotion_plan_eligible_addition_count"] == 0

@@ -40,8 +40,8 @@ assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-assert resume["current_sprint"] == 62
-assert resume["state_version"] == "0.21.51"
+assert resume["current_sprint"] == 63
+assert resume["state_version"] == "0.21.52"
 assert resume["public_packs"]["normandie"]["memory_count"] == 139
 assert resume["active_work"]["internal_candidate_memory_count"] == 142
 assert resume["active_work"]["blocked_frequency_count"] == 5
@@ -61,10 +61,16 @@ assert resume["active_work"]["public_export_allowed"] is False
 assert resume["active_work"]["public_release_ready"] is False
 assert resume["active_work"]["adjacent_ref_scan"]["new_untracked_active_analog_candidate_count"] == 0
 assert resume["active_work"]["adjacent_ref_scan"]["candidate_memory_delta"] == 0
+assert resume["active_work"]["latest_source_revalidation"]["gate_cleared_count"] == 0
+assert resume["active_work"]["latest_source_revalidation"]["f1zov_operator_status"] == "En Maintenance"
+assert resume["active_work"]["latest_source_revalidation"]["f5zha_repeaterbook_verification_date_shown"] == "2017-02-17"
+assert resume["active_work"]["latest_source_revalidation"]["f5zha_authoritative_reconciliation_complete"] is False
+assert resume["active_work"]["latest_source_revalidation"]["f6zes_frequency_mode_resolved"] is False
 assert resume["resume_rules"]["published_versions_are_immutable"] is True
 assert resume["resume_rules"]["geometry_is_not_reception_proof"] is True
 assert resume["resume_rules"]["field_observations_do_not_close_source_conflicts"] is True
 assert resume["resume_rules"]["local_operator_status_overrides_general_directory_for_current_state"] is True
+assert resume["resume_rules"]["stale_secondary_conflict_does_not_replace_required_authoritative_reconciliation"] is True
 assert resume["resume_rules"]["stale_source_blocks_release_review_completion"] is True
 assert resume["resume_rules"]["prepublication_integrity_ok_does_not_mean_release_ready"] is True
 assert resume["resume_rules"]["secondary_source_clue_does_not_replace_required_primary_validation"] is True
@@ -90,10 +96,12 @@ assert resume["bretagne_research_update"]["etel_local_operational_sources_conver
 assert resume["bretagne_research_update"]["etel_channel64_current_operation_proven"] is False
 assert resume["bretagne_research_update"]["etel_channel64_stopped_proven"] is False
 assert resume["bretagne_research_update"]["etel_channel64_new_rf_memory_delta"] == 0
+assert resume["bretagne_research_update"]["meteofrance_guide_2026_fetch_retried_2026_08_11"] is True
+assert resume["bretagne_research_update"]["meteofrance_guide_2026_content_extracted"] is False
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **62**" in status_text
-assert "État logique : **0.21.51**" in status_text
+assert "Sprint courant : **63**" in status_text
+assert "État logique : **0.21.52**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text
@@ -109,6 +117,7 @@ assert "convergence opérationnelle locale sur Ch63" in status_text
 assert "16 stations VHF + 2 MF" in status_text
 assert "17 stations radio" in status_text
 assert "Guide Marine 2026" in status_text
+assert "2017-02-17" in status_text
 
 recorder = load_module("r3_recorder", RECORDER)
 reporter = load_module("gate_reporter", REPORTER)
@@ -181,5 +190,5 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
 print(
     "Tests Normandie v0.4 field tools: current external revalidation snapshot guarded, "
     "R3 observation recorder validates/atomically appends RX-only evidence, gate report stays "
-    "non-public, recovery state is self-contained at sprint 62, OK"
+    "non-public, recovery state is self-contained at sprint 63, OK"
 )

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "primary_current_channel64_conflict_documented_site_unresolved",
   "updated": "2026-08-11",
   "cross": "CROSS Etel",
@@ -45,8 +45,22 @@
       "published": "2026-03-13",
       "accessed": "2026-08-11",
       "supports_network": "Le bilan indique 16 stations radioélectriques VHF et 2 stations MF pour la couverture du littoral et du hauturier.",
-      "supports_regular_weather_emitters": ["Penmarc'h", "Groix", "Saint-Nazaire", "Les Sables-d'Olonne", "Belle-Ile", "Yeu", "Soulac", "Contis", "Biarritz"],
-      "supports_reinforced_channel63_emitters": ["Etel", "Chassiron", "Ferret"],
+      "supports_regular_weather_emitters": [
+        "Penmarc'h",
+        "Groix",
+        "Saint-Nazaire",
+        "Les Sables-d'Olonne",
+        "Belle-Ile",
+        "Yeu",
+        "Soulac",
+        "Contis",
+        "Biarritz"
+      ],
+      "supports_reinforced_channel63_emitters": [
+        "Etel",
+        "Chassiron",
+        "Ferret"
+      ],
       "mentions_channel64": false,
       "identifies_brittany_channel64_site": false
     },
@@ -57,7 +71,11 @@
       "published": "2026-07",
       "accessed": "2026-08-11",
       "supports": "Le service technique maintient les installations du CROSS et ses 17 stations radio réparties de Penmarc'h à Biarritz.",
-      "identifies_station_names_or_channels": false
+      "identifies_station_names_or_channels": false,
+      "application_deadline": "2026-08-06",
+      "supports_mhf_vhf_maintenance_context": true,
+      "station_count": 17,
+      "identifies_brittany_channel64_site": false
     }
   ],
   "operational_primary_convergence": {
@@ -103,7 +121,9 @@
       "inventaire technique nominatif des stations CROSS Etel",
       "document opérateur explicitant le canal 64 dans le Morbihan",
       "mise à jour ministérielle ou CROSS réconciliant le canal 64"
-    ]
+    ],
+    "current_technical_maintenance_scope_17_stations_verified": true,
+    "technical_maintenance_scope_names_channels": false
   },
   "network_count_note": {
     "annual_report_2025": "16 VHF + 2 MF",
@@ -121,6 +141,7 @@
     "channel64_site_must_not_be_guessed": true,
     "no_new_rf_memory_from_site_metadata": true,
     "frequency_promoted_to_public_pack": false,
-    "public_export_allowed": false
+    "public_export_allowed": false,
+    "current_maintenance_scope_does_not_name_station_channels": true
   }
 }

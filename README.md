@@ -1,9 +1,9 @@
 # RadioPack France
 
-**État courant : Sprint 74 / 0.21.63 — Bretagne v0.2 initialisée en recherche à partir de la v0.1 immuable, candidat 135 mémoires RX, delta 0.**
+**État courant : Sprint 75 / 0.21.64 — Bretagne v0.2 candidat interne 151 mémoires RX, dont +16 aviation AIRAC 08/26 ; Bretagne v0.1 reste publique et immuable à 135.**
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 74 / 0.21.63
+## État actuel — Sprint 75 / 0.21.64
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -14,13 +14,33 @@ Packs publics immuables :
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation ;
 - **Bretagne v0.1** — 135 mémoires RX, publiée et immuable.
 
-Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion ; **Bretagne v0.2** est initialisée à partir de la v0.1 immuable avec un candidat courant à 135 mémoires et un delta de 0. Annecy–Alpes–Léman v0.3 reste non publique.
+Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion ; **Bretagne v0.2** est maintenant à **151 mémoires RX**, soit **+16 aviation** par rapport à la base publique v0.1=135. Annecy–Alpes–Léman v0.3 reste non publique.
 
-Le générateur public propose Normandie v0.4, Bretagne v0.1 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md`, `research/sprint-73-summary.md` et `research/sprint-74-summary.md`.
+Le générateur public propose Normandie v0.4, Bretagne v0.1 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md`, `research/sprint-73-summary.md`, `research/sprint-74-summary.md` et `research/sprint-75-summary.md`.
+
+## Bretagne v0.2 — aviation Sprint 75
+
+Le candidat interne Bretagne v0.2 passe de **135 à 151 mémoires RX** avec **16 mémoires aviation** aux positions 130–145. Les positions 146–149 restent libres : aucun remplissage artificiel. La v0.1 publique reste inchangée et aucun CSV public v0.2 n'est créé.
+
+Le produit SIA courant **AIRAC 08/26 - CORRIGENDUM** est en vigueur du 6 août au 2 septembre 2026 inclus. Le projet applique la même méthode que pour Annecy–Alpes–Léman : contexte AIRAC courant vérifié + dernière page AIP primaire publique effective pour le service. Le dépôt ne prétend pas avoir extrait les octets du XML courant ni avoir comparé chaque champ directement à cet XML.
+
+Périmètre Sprint 75 : Rennes Saint-Jacques (7 fréquences uniques), Brest Bretagne (5), Dinard Pleurtuit Saint-Malo (2), Quimper Pluguffan (1) et 121.500 MHz aviation urgence (1). Toutes les mémoires sont AM, pas 8.33 kHz, RX-only ; les doublons de service sur une même fréquence sont fusionnés.
+
+Fichiers Sprint 75 :
+
+```text
+research/bretagne-v0.2/aviation-airac-08.json
+research/bretagne-v0.2/candidate-memory-delta.json
+research/sprint-75-summary.md
+tools/build_bretagne_v02_internal_candidate.py
+tests/test_sprint75_bretagne_aviation.py
+```
+
+Les autres dossiers v0.2 restent ouverts : ADRASEC public, F1ZUG/ADRASEC 35, mapping local CROSS Étel Ch64, mapping local CROSS Corsen Ch79 et infrastructures radioamateur à revalider.
 
 ## Bretagne v0.2 — initialisation Sprint 74
 
-Bretagne v0.2 est désormais la version de recherche active. Elle part strictement du pack public **Bretagne v0.1 = 135 mémoires RX**, qui reste immuable. Aucun ajout n'est promu au démarrage : candidat **135**, delta **0**, aucun export public v0.2 et aucun changement du registre public.
+Bretagne v0.2 a été initialisée comme version de recherche active à partir du pack public **Bretagne v0.1 = 135 mémoires RX**, qui reste immuable. Au démarrage : candidat **135**, delta **0**, aucun export public v0.2 et aucun changement du registre public.
 
 Le backlog `research/bretagne-v0.2/backlog.json` reprend six dossiers : extraction de la source aviation courante, revalidation de données ADRASEC publiquement vérifiables, cas F1ZUG / ADRASEC 35 sans déduction depuis l'APRS, attribution locale CROSS Étel Ch64, attribution locale CROSS Corsen Ch79 et infrastructures radioamateur arrêtées/ambiguës à revalider. Ch64 et Ch79 étant déjà présents génériquement dans la base v0.1, une future attribution locale ne doit pas créer de doublon RF.
 
@@ -296,6 +316,7 @@ L'offre technique DIRM 2026 mentionne **17 stations radio** maintenues ; ce nomb
 - [research/sprint-72-summary.md](research/sprint-72-summary.md)
 - [research/sprint-73-summary.md](research/sprint-73-summary.md)
 - [research/sprint-74-summary.md](research/sprint-74-summary.md)
+- [research/sprint-75-summary.md](research/sprint-75-summary.md)
 
 Architecture publique : `website/src/lib/chirpPack.ts`, `website/src/lib/annecyPack.ts`, `website/src/lib/packRegistry.ts`.
 
@@ -327,6 +348,7 @@ python tests\test_sprint72_bretagne_scope_closure.py
 python tests\test_bretagne_public_release.py
 python tests\test_sprint73_bretagne_publication.py
 python tests\test_sprint74_bretagne_v02_initialization.py
+python tests\test_sprint75_bretagne_aviation.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
@@ -355,9 +377,12 @@ python tests\test_sprint72_bretagne_scope_closure.py
 python tests\test_bretagne_public_release.py
 python tests\test_sprint73_bretagne_publication.py
 python tests\test_sprint74_bretagne_v02_initialization.py
+python tests\test_sprint75_bretagne_aviation.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+
+python tools\build_bretagne_v02_internal_candidate.py
 
 cd website
 npm ci

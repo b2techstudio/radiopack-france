@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **80**
-État logique : **0.21.69**
+Sprint courant : **81**
+État logique : **0.21.70**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-80-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-81-summary.md`.
 
 ## État public
 
@@ -16,6 +16,18 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 81 — Bretagne v0.3 initialisée à 151
+
+La prochaine version Bretagne démarre depuis la v0.2 publique immuable, sans ajout automatique : **151 mémoires RX, delta 0**. Le builder v0.3 recopie exactement la v0.2 et vérifie son SHA-256.
+
+- aucune v0.3 publique ni bascule de registre ;
+- AIRAC 08/26 reste courant jusqu’au 2 septembre 2026 inclus ; AIRAC 09/26 commence le 3 septembre ;
+- toute future publication v0.3 après cette transition doit revalider l’aviation ;
+- seuls F1ZUG public, CROSS Ch64/Ch79, F5ZPV, F5ZZH et F5ZZC-4 restent reportés, plus la transition AIRAC ;
+- les revues ADRASEC générales à delta 0 et F1ZBZ ne sont pas rouvertes sans nouvelle preuve.
+
+Test : `tests/test_sprint81_bretagne_v03_initialization.py`.
 
 ## Sprint 80 — Bretagne v0.2 publiée à 151
 
@@ -139,6 +151,8 @@ python tools\run_bretagne_v02_prepublication_audit.py --require-prepublication-r
 python tests\test_sprint79_bretagne_v02_maturity.py
 python tests\test_bretagne_v02_public_release.py
 python tests\test_sprint80_bretagne_v02_publication.py
+python tools\build_bretagne_v03_internal_candidate.py
+python tests\test_sprint81_bretagne_v03_initialization.py
 python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py

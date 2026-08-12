@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.70 - 2026-08-12
+
+- **Sprint 81** : initialisation de Bretagne v0.3 à partir de la v0.2 publique immuable = **151 mémoires RX**.
+- Candidat interne initial **151, delta 0**, copie exacte du CSV public v0.2 contrôlée par SHA-256 ; aucune publication v0.3 ni changement de registre.
+- Politique de transition AIRAC : 08/26 valable jusqu’au 2 septembre 2026 inclus, 09/26 effectif le 3 septembre ; revalidation aviation obligatoire avant toute publication v0.3 post-transition.
+- Backlog réduit aux dossiers encore ouverts : F1ZUG public uniquement, CROSS Ch64/Ch79, F5ZPV, F5ZZH, F5ZZC-4 et transition AIRAC 09/26.
+- Ajout du builder v0.3, du garde-fou Sprint 81 et adaptation forward-compatible du test de publication Sprint 80.
+
 ## 0.21.69 - 2026-08-12
 
 - **Sprint 80** : publication de Bretagne v0.2 à **151 mémoires RX**, désormais immuable.

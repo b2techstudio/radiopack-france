@@ -36,9 +36,19 @@ assert record["version"] == "0.1" and record["memory_count"] == 135
 assert record["public_csv_sha256"] == hashlib.sha256(PUBLIC.read_bytes()).hexdigest()
 assert record["published_version_is_immutable"] is True
 assert len(record["deferred_to_v0_2"]) == 4
+
+# v0.1 remains immutable and downloadable from the repository even after v0.2 becomes current.
 registry = REGISTRY.read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
-assert 'memoryCount: 135' in registry
-assert '/downloads/bretagne/radiopack-france-bretagne-v0.1.csv' in registry
+state = json.loads((ROOT / "research/project-resume-state.json").read_text(encoding="utf-8"))
+if state["current_sprint"] < 80:
+    assert 'memoryCount: 135' in registry
+    assert '/downloads/bretagne/radiopack-france-bretagne-v0.1.csv' in registry
+else:
+    assert state["public_packs"]["bretagne"]["version"] == "0.2"
+    assert state["public_packs"]["bretagne"]["memory_count"] == 151
+    assert 'memoryCount: 151' in registry
+    assert '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv' in registry
+assert PUBLIC.is_file()
 assert (ROOT / "website/src/pages/regions/bretagne.astro").is_file()
-print("Bretagne v0.1 public release: immutable 135-memory RX-only CSV exactly matches reviewed candidate OK")
+print("Bretagne v0.1 public release: immutable 135-memory RX-only historical CSV still exactly matches reviewed candidate after later Bretagne publication OK")

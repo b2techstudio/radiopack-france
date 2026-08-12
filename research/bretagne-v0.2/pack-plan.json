@@ -1,14 +1,20 @@
 {
-  "schema_version": "1.0",
-  "status": "research_next_version_not_public",
+  "schema_version": "1.1",
+  "status": "research_internal_candidate_151_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
   "based_on_published_version": "0.1",
   "published_base_memory_count": 135,
   "published_base_is_immutable": true,
   "backlog_file": "research/bretagne-v0.2/backlog.json",
-  "current_candidate_memory_count": 135,
-  "current_new_memory_count": 0,
+  "aviation_file": "research/bretagne-v0.2/aviation-airac-08.json",
+  "candidate_delta_file": "research/bretagne-v0.2/candidate-memory-delta.json",
+  "internal_candidate_builder": "tools/build_bretagne_v02_internal_candidate.py",
+  "current_candidate_memory_count": 151,
+  "current_new_memory_count": 16,
+  "aviation_memory_count": 16,
+  "aviation_locations": [130, 145],
+  "unused_reserved_aviation_locations": [146, 149],
   "public_export_allowed": false,
   "public_registry_allowed": false,
   "inherited_generic_maritime_pairs": {
@@ -17,6 +23,17 @@
     "local_site_metadata_creates_new_memory": false,
     "new_rf_memory_delta": 0
   },
+  "aviation_validation": {
+    "cycle": "AIRAC 08/26",
+    "effective_from": "2026-08-06",
+    "effective_until_inclusive": "2026-09-02",
+    "current_sia_product_verified": true,
+    "current_xml_export_bytes_extracted": false,
+    "latest_effective_public_aip_pages_used": true,
+    "methodology_precedent": "research/annecy-alpes-leman-v0.2/aviation-france-airac-08.json",
+    "internal_candidate_allowed": true,
+    "public_release_review_required": true
+  },
   "rules": {
     "deferred_item_is_not_validated": true,
     "published_base_must_not_be_modified": true,
@@ -24,7 +41,9 @@
     "same_rf_deduplicated": true,
     "verified_distinct_pair_uses_two_rx_memories": true,
     "unpublished_data_must_not_be_inferred": true,
-    "current_source_extract_required_before_aviation_promotion": true,
-    "generic_memory_must_not_be_duplicated_for_local_site_metadata": true
+    "current_airac_context_plus_latest_effective_primary_aip_required_for_aviation_internal_candidate": true,
+    "current_xml_field_match_must_not_be_claimed_without_xml_extraction": true,
+    "generic_memory_must_not_be_duplicated_for_local_site_metadata": true,
+    "no_artificial_fill": true
   }
 }

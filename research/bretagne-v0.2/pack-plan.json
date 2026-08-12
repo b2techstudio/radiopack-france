@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.4",
-  "status": "research_internal_candidate_151_not_public",
+  "schema_version": "1.5",
+  "status": "scope_frozen_151_prepublication_ready_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
   "based_on_published_version": "0.1",
@@ -12,12 +12,24 @@
   "amateur_revalidation_file": "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
   "adrasec_revalidation_file": "research/bretagne-v0.2/adrasec-public-revalidation.json",
   "cross_revalidation_file": "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
+  "maturity_review_file": "research/bretagne-v0.2/maturity-review.json",
+  "release_scope_file": "research/bretagne-v0.2/release-scope.json",
+  "review_checklist_file": "research/bretagne-v0.2/review-checklist.json",
+  "publication_gates_file": "research/bretagne-v0.2/publication-gates.json",
+  "prepublication_audit_tool": "tools/run_bretagne_v02_prepublication_audit.py",
   "internal_candidate_builder": "tools/build_bretagne_v02_internal_candidate.py",
   "current_candidate_memory_count": 151,
   "current_new_memory_count": 16,
   "aviation_memory_count": 16,
   "aviation_locations": [130, 145],
   "unused_reserved_aviation_locations": [146, 149],
+  "scope_frozen": true,
+  "prepublication_ready": true,
+  "review_completed": 10,
+  "review_total": 10,
+  "release_blocker_count": 0,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
   "latest_amateur_revalidation": {
     "checked_on": "2026-08-12",
     "reviewed_ids": ["F5ZPV", "F5ZZH", "F1ZBZ", "F5ZZC-4"],
@@ -61,8 +73,25 @@
     "corsen_secondary_site_chain_promoted": false,
     "guide_marine_2026_identified_but_not_extracted": true
   },
-  "public_export_allowed": false,
-  "public_registry_allowed": false,
+  "latest_maturity_review": {
+    "reviewed_on": "2026-08-12",
+    "candidate_memory_count_before": 151,
+    "candidate_memory_count_after": 151,
+    "candidate_memory_delta": 0,
+    "scope_freeze_allowed": true,
+    "scope_frozen": true,
+    "review": "10/10",
+    "release_blocker_count": 0,
+    "prepublication_ready": true,
+    "public_release_allowed": false,
+    "aviation_airac08_current_on_review_date": true,
+    "deferred_non_blocking_ids": [
+      "F1ZUG_ADRASEC35_ROLE_REVALIDATION",
+      "CROSS_ETEL_CH64_LOCAL_MAPPING",
+      "CROSS_CORSEN_CH79_LOCAL_MAPPING",
+      "AMATEUR_INFRASTRUCTURE_REVALIDATION"
+    ]
+  },
   "inherited_generic_maritime_pairs": {
     "channel64_present_in_published_base": true,
     "channel79_present_in_published_base": true,
@@ -74,10 +103,13 @@
     "effective_from": "2026-08-06",
     "effective_until_inclusive": "2026-09-02",
     "current_sia_product_verified": true,
+    "freshness_rechecked_on": "2026-08-12",
     "current_xml_export_bytes_extracted": false,
     "latest_effective_public_aip_pages_used": true,
     "methodology_precedent": "research/annecy-alpes-leman-v0.2/aviation-france-airac-08.json",
     "internal_candidate_allowed": true,
+    "prepublication_scope_allowed": true,
+    "direct_xml_field_match_claimed": false,
     "public_release_review_required": true
   },
   "rules": {
@@ -101,6 +133,9 @@
     "secondary_site_clue_is_not_primary_validation": true,
     "unread_primary_pdf_is_not_negative_evidence": true,
     "primary_source_conflict_requires_reconciliation": true,
+    "unresolved_optional_item_may_be_deferred_without_blocking_frozen_scope": true,
+    "prepublication_ready_does_not_equal_public_release_allowed": true,
+    "explicit_publication_is_separate_step": true,
     "no_artificial_fill": true
   }
 }

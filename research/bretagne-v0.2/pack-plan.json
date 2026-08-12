@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "research_internal_candidate_151_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
@@ -9,12 +9,22 @@
   "backlog_file": "research/bretagne-v0.2/backlog.json",
   "aviation_file": "research/bretagne-v0.2/aviation-airac-08.json",
   "candidate_delta_file": "research/bretagne-v0.2/candidate-memory-delta.json",
+  "amateur_revalidation_file": "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
   "internal_candidate_builder": "tools/build_bretagne_v02_internal_candidate.py",
   "current_candidate_memory_count": 151,
   "current_new_memory_count": 16,
   "aviation_memory_count": 16,
   "aviation_locations": [130, 145],
   "unused_reserved_aviation_locations": [146, 149],
+  "latest_amateur_revalidation": {
+    "checked_on": "2026-08-12",
+    "reviewed_ids": ["F5ZPV", "F5ZZH", "F1ZBZ", "F5ZZC-4"],
+    "resolved_zero_delta_ids": ["F1ZBZ"],
+    "still_blocked_or_unresolved_ids": ["F5ZPV", "F5ZZH", "F5ZZC-4"],
+    "new_active_candidate_count": 0,
+    "candidate_memory_delta": 0,
+    "candidate_memory_count_after_review": 151
+  },
   "public_export_allowed": false,
   "public_registry_allowed": false,
   "inherited_generic_maritime_pairs": {
@@ -44,6 +54,9 @@
     "current_airac_context_plus_latest_effective_primary_aip_required_for_aviation_internal_candidate": true,
     "current_xml_field_match_must_not_be_claimed_without_xml_extraction": true,
     "generic_memory_must_not_be_duplicated_for_local_site_metadata": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "similar_callsign_does_not_prove_same_service": true,
+    "stopped_infrastructure_not_promoted": true,
     "no_artificial_fill": true
   }
 }

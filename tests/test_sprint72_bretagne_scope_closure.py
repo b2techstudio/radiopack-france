@@ -23,6 +23,11 @@ assert scope['included']['channel79_pair_mhz']==[156.975,161.575]
 assert scope['rules']['explicit_publication_is_separate_step'] is True
 if state['current_sprint'] == 72:
     assert state['public_packs']['bretagne']['research_only'] is True and state['public_packs']['bretagne']['memory_count']==0
-else:
+elif state['current_sprint'] < 80:
     assert state['public_packs']['bretagne']['immutable'] is True and state['public_packs']['bretagne']['memory_count']==135
-print('Sprint 72: Bretagne v0.1 scope frozen at 135, prepublication ready 8/8 with zero blockers, historical prepublication scope remains auditable after later-version initialization OK')
+else:
+    assert state['public_packs']['bretagne']['immutable'] is True
+    assert state['public_packs']['bretagne']['version']=='0.2' and state['public_packs']['bretagne']['memory_count']==151
+    assert state['public_packs']['bretagne']['previous_immutable_version']=='0.1'
+    assert state['public_packs']['bretagne']['previous_memory_count']==135
+print('Sprint 72: Bretagne v0.1 scope frozen at 135 remains auditable after explicit v0.2 publication OK')

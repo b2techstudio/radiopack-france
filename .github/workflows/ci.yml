@@ -269,3 +269,57 @@ jobs:
             --header "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${REPOSITORY}/statuses/${COMMIT_SHA}" \
             --data "$payload"
+
+  sprint73-apply:
+    name: Apply exact Sprint 73 publication
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'Sprint 73 trigger publication' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply verified publication patch and clean staging
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat research/.s73-stage-0 research/.s73-stage-1 \
+            | base64 --decode \
+            | gzip --decompress \
+            > /tmp/s73.patch
+
+          test "$(wc -c < /tmp/s73.patch)" = "97140"
+          test "$(sha256sum /tmp/s73.patch | awk '{print $1}')" = "0939f39ea0d8e4928cf14776f07050f814b3a51715f51716ffb67617f2109b25"
+
+          # Remove this temporary CI job from the final tree before applying
+          # the intended Sprint 73 patch, whose ci.yml is based on Sprint 72.
+          git checkout 8b814389727299fca1ae9ebb112634c4f8b9fa7e -- .github/workflows/ci.yml .gitignore
+
+          git apply --check /tmp/s73.patch
+          git apply /tmp/s73.patch
+
+          rm -f \
+            research/.s73-stage-0 \
+            research/.s73-stage-1 \
+            research/.s73-stage-2 \
+            research/.s73-trigger \
+            research/.s73-trigger-2 \
+            research/.s73-trigger-3 \
+            research/.s73-trigger-4 \
+            research/.s73-cleanup-request \
+            research/sprint73-cleanup-note.txt \
+            tools/_sprint73_publish.py \
+            .github/workflows/sprint73-publish.yml
+
+          git config user.name "b2techstudio"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git -c core.whitespace=cr-at-eol diff --cached --check
+
+          git commit -m "Sprint 73 publish Bretagne v0.1 at 135 [reference-archive]"
+          git push origin HEAD:main

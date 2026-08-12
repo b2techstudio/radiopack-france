@@ -17,26 +17,97 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
-      - name: Build, verify and publish Bretagne v0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Apply exact Sprint 73 patch, verify and publish
         shell: bash
         run: |
-          python tools/_sprint73_publish.py
-          python tests/test_bretagne_v01_public_release.py
+          set -euo pipefail
+
+          cat research/.s73-stage-0 research/.s73-stage-1 \
+            | base64 --decode \
+            | gzip --decompress \
+            > /tmp/s73.patch
+
+          test "$(wc -c < /tmp/s73.patch)" = "97140"
+          test "$(sha256sum /tmp/s73.patch | awk '{print $1}')" = "0939f39ea0d8e4928cf14776f07050f814b3a51715f51716ffb67617f2109b25"
+
+          git apply --check /tmp/s73.patch
+          git apply /tmp/s73.patch
+
+          # Restore the exact Sprint 72 ignore file: the extra comment came only
+          # from an abandoned Sprint 73 cleanup attempt and is not product state.
+          git checkout 8b814389727299fca1ae9ebb112634c4f8b9fa7e -- .gitignore
+
+          # Remove every temporary artifact from both Sprint 73 attempts,
+          # including this one-shot workflow itself.
+          rm -f \
+            research/.s73-stage-0 \
+            research/.s73-stage-1 \
+            research/.s73-stage-2 \
+            research/.s73-trigger \
+            research/.s73-trigger-2 \
+            research/.s73-cleanup-request \
+            research/sprint73-cleanup-note.txt \
+            tools/_sprint73_publish.py \
+            .github/workflows/sprint73-publish.yml
+
+          python tools/run_normandie_v04_checks.py --extended
+          python tools/check_normandie_v04_source_consistency.py
+          python tools/check_normandie_v04_source_freshness.py
+          python tools/build_normandie_v04_review_snapshot.py
+          python tools/build_normandie_v04_review_manifest.py
+          python tools/run_normandie_v04_prepublication_audit.py
+
+          python tools/build_bretagne_internal_candidate.py
+          python tools/build_bretagne_review_snapshot.py
+          python tools/run_bretagne_prepublication_audit.py --require-prepublication-ready
           python tests/test_bretagne_internal_candidate.py
-          python tests/test_sprint71_v05_bretagne_candidate.py
           python tests/test_bretagne_prepublication_review.py
           python tests/test_sprint72_bretagne_scope_closure.py
+          python tests/test_bretagne_public_release.py
+          python tests/test_sprint73_bretagne_publication.py
+          python tests/test_bretagne_research_scaffold.py
+          python tests/test_etel_network_research.py
+          python tests/test_bretagne_ref_analog_expansion.py
+          python tests/test_analog_coverage_redundancy_review.py
+          python tests/test_emergency_relay_research.py
+          python tests/test_mortain_bretagne_radio_research.py
           python tests/test_site_files.py
           python tests/test_pack_registry.py
-          git diff --check
-          rm -f tools/_sprint73_publish.py research/.s73-trigger research/.s73-stage-0 research/.s73-stage-1 research/.s73-stage-2
+
+          cd website
+          npm ci
+          npm run build
+          cd ..
+          python tests/test_built_annecy_public_csv.py
+          python tests/test_built_public_pack_catalog.py
+
+          git -c core.whitespace=cr-at-eol diff --check
+
           git config user.name "b2techstudio"
           git config user.email "actions@users.noreply.github.com"
           git add -A
-          git diff --cached --check
-          git commit -m "Sprint 73 publish Bretagne v0.1 at 135 RX memories"
+
+          test ! -e research/.s73-stage-0
+          test ! -e research/.s73-stage-1
+          test ! -e research/.s73-trigger
+          test ! -e research/.s73-trigger-2
+          test ! -e research/.s73-cleanup-request
+          test ! -e research/sprint73-cleanup-note.txt
+          test ! -e .github/workflows/sprint73-publish.yml
+          git -c core.whitespace=cr-at-eol diff --cached --check
+
+          git commit -m "Sprint 73 publish Bretagne v0.1 at 135 [reference-archive]"
           git push origin HEAD:main

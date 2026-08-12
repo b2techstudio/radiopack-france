@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-12",
-  "current_sprint": 75,
-  "state_version": "0.21.64",
+  "current_sprint": 76,
+  "state_version": "0.21.65",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -28,7 +28,7 @@
   "active_work": {
     "pack": "Bretagne",
     "target_version": "0.2",
-    "status": "internal_candidate_151_airac08_not_public",
+    "status": "internal_candidate_151_airac08_amateur_revalidated_not_public",
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_release_ready": false,
@@ -42,6 +42,7 @@
     "backlog": "research/bretagne-v0.2/backlog.json",
     "candidate_delta": "research/bretagne-v0.2/candidate-memory-delta.json",
     "aviation_evidence": "research/bretagne-v0.2/aviation-airac-08.json",
+    "amateur_revalidation": "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
     "backlog_item_count": 6,
     "backlog_ids": [
       "AVIATION_CURRENT_SOURCE_EXTRACT",
@@ -62,6 +63,14 @@
     "current_sia_xml_export_bytes_extracted": false,
     "latest_effective_public_primary_aip_pages_used": true,
     "current_xml_field_match_claimed": false,
+    "amateur_revalidation_checked_on": "2026-08-12",
+    "amateur_revalidation_candidate_memory_delta": 0,
+    "amateur_resolved_zero_delta_ids": ["F1ZBZ"],
+    "amateur_still_blocked_or_unresolved_ids": ["F5ZPV", "F5ZZH", "F5ZZC-4"],
+    "f5zpv_local_operator_stopped_overrides_directory_active": true,
+    "f5zzh_stopped": true,
+    "f1zbz_all_current_directory_rf_already_represented": true,
+    "f5zzc_dash4_current_frequency_validated": false,
     "channel64_generic_pair_in_published_base": true,
     "channel79_generic_pair_in_published_base": true,
     "channel64_local_site_claimed": false,
@@ -106,20 +115,11 @@
   "bretagne_research_update": {
     "corsen_channel79_evidence_file": "research/bretagne-v0.1/corsen-channel79-evidence.json",
     "primary_current_channel79_transmitter_site_confirmed": false,
-    "current_primary_corsen_infrastructure_sites_verified": [
-      "Cap Fréhel",
-      "Stiff / Ouessant"
-    ],
+    "current_primary_corsen_infrastructure_sites_verified": ["Cap Fréhel", "Stiff / Ouessant"],
     "historical_primary_channel79_context_exists": true,
     "historical_primary_channel79_context_is_current_validation": false,
-    "secondary_current_clue_sites": [
-      "Cap Fréhel",
-      "Bodic"
-    ],
-    "paired_rx_frequencies_mhz": [
-      156.975,
-      161.575
-    ],
+    "secondary_current_clue_sites": ["Cap Fréhel", "Bodic"],
+    "paired_rx_frequencies_mhz": [156.975, 161.575],
     "corsen_channel79_required_rx_memory_count_if_published": 2,
     "new_rf_memory_delta": 0,
     "site_assignment_promoted": false,
@@ -157,13 +157,7 @@
     "etel_2026_technical_maintenance_channel64_mapping_present": false,
     "corsen_stiff_2026_radio_infrastructure_revalidated": true,
     "corsen_stiff_2026_channel79_mapping_present": false,
-    "corsen_secondary_undated_full_chain_sites": [
-      "Cap Fréhel",
-      "Bodic",
-      "Batz",
-      "Stiff / Ouessant",
-      "Pointe du Raz"
-    ],
+    "corsen_secondary_undated_full_chain_sites": ["Cap Fréhel", "Bodic", "Batz", "Stiff / Ouessant", "Pointe du Raz"],
     "corsen_secondary_undated_full_chain_is_current_primary_validation": false,
     "latest_current_reference_synthesis_file": "research/sprint-67-current-reference-synthesis.json",
     "ministry_leisure_guide_2026_pdf_extracted": true,
@@ -215,7 +209,9 @@
     "research/sprint-74-summary.md",
     "research/bretagne-v0.2/aviation-airac-08.json",
     "research/bretagne-v0.2/candidate-memory-delta.json",
-    "research/sprint-75-summary.md"
+    "research/sprint-75-summary.md",
+    "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
+    "research/sprint-76-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -261,9 +257,16 @@
     "run_sprint73_test": "python tests/test_sprint73_bretagne_publication.py",
     "run_sprint74_test": "python tests/test_sprint74_bretagne_v02_initialization.py",
     "build_bretagne_v02_internal_candidate": "python tools/build_bretagne_v02_internal_candidate.py",
-    "run_sprint75_test": "python tests/test_sprint75_bretagne_aviation.py"
+    "run_sprint75_test": "python tests/test_sprint75_bretagne_aviation.py",
+    "run_sprint76_test": "python tests/test_sprint76_bretagne_amateur_revalidation.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 76,
+      "state_version": "0.21.65",
+      "summary": "Bretagne v0.2 amateur infrastructure revalidation resolved F1ZBZ at zero RF delta while F5ZPV, F5ZZH and F5ZZC-4 remain excluded or unresolved; candidate stays 151.",
+      "summary_file": "research/sprint-76-summary.md"
+    },
     {
       "sprint": 75,
       "state_version": "0.21.64",
@@ -398,7 +401,12 @@
     "prepublication_ready_does_not_equal_publication": true,
     "bretagne_v0_1_remains_immutable_after_publication": true,
     "bretagne_v0_2_initializes_from_immutable_v0_1_135": true,
-    "local_site_metadata_must_not_duplicate_existing_rf_memory": true
+    "local_site_metadata_must_not_duplicate_existing_rf_memory": true,
+    "stopped_infrastructure_not_promoted": true,
+    "directory_active_does_not_override_local_operator_stopped": true,
+    "similar_callsign_does_not_prove_same_service": true,
+    "stale_role_evidence_does_not_validate_current_frequency": true,
+    "direction_review_does_not_create_duplicate_rf_memory": true
   },
   "completed_release": {
     "pack": "Normandie",
@@ -424,12 +432,7 @@
     "backlog_file": "research/normandie-v0.5/backlog.json",
     "pack_plan_file": "research/normandie-v0.5/pack-plan.json",
     "backlog_item_count": 4,
-    "backlog_ids": [
-      "R3_MORTAIN_RX",
-      "F5ZHA_SOURCE_AND_COVERAGE",
-      "F1ZOV_OPERATIONAL_STATUS",
-      "F6ZES_RESOLVED"
-    ],
+    "backlog_ids": ["R3_MORTAIN_RX", "F5ZHA_SOURCE_AND_COVERAGE", "F1ZOV_OPERATIONAL_STATUS", "F6ZES_RESOLVED"],
     "r3_required_rx_memory_count_if_promoted": 2,
     "r3_minimum_independent_field_sessions": 2,
     "r3_sessions_are_evidence_not_memories": true,
@@ -449,48 +452,28 @@
     "prepublication_integrity_ok": true,
     "prepublication_release_ready": true,
     "internal_provisional_additions": [
-      {
-        "location": 175,
-        "name": "50-ZHY-IN",
-        "frequency_mhz": 145.0875
-      },
-      {
-        "location": 176,
-        "name": "53-ZCE-IN",
-        "frequency_mhz": 145.1
-      },
-      {
-        "location": 177,
-        "name": "50-ZBL-U",
-        "frequency_mhz": 431.25
-      }
+      {"location": 175, "name": "50-ZHY-IN", "frequency_mhz": 145.0875},
+      {"location": 176, "name": "53-ZCE-IN", "frequency_mhz": 145.1},
+      {"location": 177, "name": "50-ZBL-U", "frequency_mhz": 431.25}
     ],
     "blocked_frequency_count": 5,
     "blocked_gates": [
       {
         "id": "R3_MORTAIN_RX",
-        "frequencies_mhz": [
-          145.075,
-          145.675
-        ],
+        "frequencies_mhz": [145.075, 145.675],
         "memory_delta_if_cleared": 2,
         "state": "field_evidence_required"
       },
       {
         "id": "F5ZHA_SOURCE_AND_COVERAGE",
-        "frequencies_mhz": [
-          145.4675,
-          432.575
-        ],
+        "frequencies_mhz": [145.4675, 432.575],
         "memory_delta_if_cleared": 2,
         "state": "authoritative_source_reconciliation_and_field_evidence_required",
         "field_observations_can_close_source_conflict": false
       },
       {
         "id": "F1ZOV_OPERATIONAL_STATUS",
-        "frequencies_mhz": [
-          431.975
-        ],
+        "frequencies_mhz": [431.975],
         "memory_delta_if_cleared": 1,
         "state": "operator_maintenance_revalidation_required"
       }
@@ -504,12 +487,7 @@
     },
     "adjacent_ref_scan": {
       "file": "research/normandie-v0.4/mortain-adjacent-ref-scan.json",
-      "departments": [
-        35,
-        50,
-        53,
-        61
-      ],
+      "departments": [35, 50, 53, 61],
       "new_untracked_active_analog_candidate_count": 0,
       "candidate_memory_delta": 0
     },
@@ -528,10 +506,7 @@
     },
     "dual_rx_contract": {
       "file": "research/sprint-64-dual-rx-contract.json",
-      "r3_pair_frequencies_mhz": [
-        145.075,
-        145.675
-      ],
+      "r3_pair_frequencies_mhz": [145.075, 145.675],
       "r3_required_rx_memory_count_if_promoted": 2,
       "r3_minimum_independent_field_sessions": 2,
       "r3_sessions_are_evidence_not_memories": true,
@@ -542,10 +517,7 @@
     "latest_primary_recheck": {
       "file": "research/sprint-65-primary-recheck.json",
       "checked_on": "2026-08-11",
-      "f5zha_current_ref_pair_mhz": [
-        145.4675,
-        432.575
-      ],
+      "f5zha_current_ref_pair_mhz": [145.4675, 432.575],
       "f5zha_current_ref_active": true,
       "f5zha_authoritative_reconciliation_complete": false,
       "f6zes_frequency_mode_resolved": false,
@@ -581,12 +553,7 @@
       "prepublication_ready_before_activation": true,
       "publication_completed": true,
       "publication_record": "research/normandie-v0.4/publication-record.json",
-      "deferred_gate_ids": [
-        "R3_MORTAIN_RX",
-        "F5ZHA_SOURCE_AND_COVERAGE",
-        "F1ZOV_OPERATIONAL_STATUS",
-        "F6ZES_RESOLVED"
-      ]
+      "deferred_gate_ids": ["R3_MORTAIN_RX", "F5ZHA_SOURCE_AND_COVERAGE", "F1ZOV_OPERATIONAL_STATUS", "F6ZES_RESOLVED"]
     },
     "latest_v0_5_revalidation": {
       "file": "research/sprint-71-v05-bretagne-candidate.json",
@@ -621,14 +588,8 @@
     "current_sia_cycle": "AIRAC 08/26",
     "current_sia_valid_from": "2026-08-06",
     "current_sia_valid_through": "2026-09-02",
-    "channel64_pair_mhz": [
-      156.225,
-      160.825
-    ],
-    "channel79_pair_mhz": [
-      156.975,
-      161.575
-    ],
+    "channel64_pair_mhz": [156.225, 160.825],
+    "channel79_pair_mhz": [156.975, 161.575],
     "local_site_mapping_claimed": false
   },
   "latest_sprint74_initialization": {
@@ -661,6 +622,19 @@
     "current_sia_valid_from": "2026-08-06",
     "current_sia_valid_through": "2026-09-02",
     "current_sia_xml_export_bytes_extracted": false,
+    "public_export_allowed": false,
+    "public_registry_allowed": false
+  },
+  "latest_sprint76_amateur_revalidation": {
+    "file": "research/sprint-76-summary.md",
+    "evidence": "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
+    "test": "tests/test_sprint76_bretagne_amateur_revalidation.py",
+    "candidate_memory_count_before": 151,
+    "candidate_memory_count_after": 151,
+    "candidate_memory_delta": 0,
+    "reviewed_ids": ["F5ZPV", "F5ZZH", "F1ZBZ", "F5ZZC-4"],
+    "resolved_zero_delta_ids": ["F1ZBZ"],
+    "still_blocked_or_unresolved_ids": ["F5ZPV", "F5ZZH", "F5ZZC-4"],
     "public_export_allowed": false,
     "public_registry_allowed": false
   }

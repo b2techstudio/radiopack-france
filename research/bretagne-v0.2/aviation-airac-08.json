@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "status": "verified_for_internal_candidate_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "updated": "2026-08-12",
+  "default_export_policy": "rx_only",
+  "cycle": {
+    "validation_cycle": "AIRAC 08/26",
+    "effective_from": "2026-08-06",
+    "effective_until_inclusive": "2026-09-02",
+    "current_product": "Données aéronautiques XML AIRAC 08/26 - CORRIGENDUM",
+    "current_product_verified": true,
+    "current_xml_export_bytes_extracted_in_repository_workflow": false,
+    "validation_basis": "SIA current AIRAC 08/26 product plus latest effective public SIA AIP pages for the scoped services",
+    "methodology_precedent": "research/annecy-alpes-leman-v0.2/aviation-france-airac-08.json"
+  },
+  "methodology": {
+    "latest_effective_public_aip_page_may_predate_cycle_start": true,
+    "requires_current_cycle_context": true,
+    "does_not_claim_current_xml_field_match_without_xml_extraction": true,
+    "secondary_only_frequency_must_not_be_promoted": true,
+    "same_rf_frequency_deduplicated": true,
+    "internal_candidate_only": true,
+    "public_export_allowed": false
+  },
+  "sources": [
+    {
+      "id": "SIA-XML-0826",
+      "title": "SIA - Données aéronautiques XML AIRAC 08/26 - CORRIGENDUM",
+      "url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "SIA-LFRN-CURRENT",
+      "icao": "LFRN",
+      "title": "SIA eAIP - Rennes Saint-Jacques, latest effective public page",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRN-fr-FR.html",
+      "page_effective_from": "2026-06-11",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "SIA-LFRB-CURRENT",
+      "icao": "LFRB",
+      "title": "SIA eAIP - Brest Bretagne, latest effective public page",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRB-fr-FR.html",
+      "page_effective_from": "2026-06-11",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "SIA-LFRD-CURRENT",
+      "icao": "LFRD",
+      "title": "SIA eAIP - Dinard Pleurtuit Saint-Malo, latest effective public page",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRD-fr-FR.html",
+      "page_effective_from": "2026-06-11",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "SIA-LFRQ-CURRENT",
+      "icao": "LFRQ",
+      "title": "SIA eAIP - Quimper Pluguffan, latest effective public page",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRQ-fr-FR.html",
+      "page_effective_from": "2026-05-14",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "SIA-LFRL-EMERGENCY",
+      "icao": "LFRL",
+      "title": "SIA eAIP - Lanvéoc Poulmic, public AIP evidence for aviation emergency 121.500 MHz",
+      "url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRL-fr-FR.html",
+      "page_effective_from": "2026-05-14",
+      "accessed": "2026-08-12",
+      "scope_note": "Only 121.500 MHz emergency is used from this page; other Lanvéoc frequencies are outside Sprint 75 scope."
+    }
+  ],
+  "channels": [
+    {"name":"AIR-EMERG","frequency_mhz":121.5,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Bretagne / aviation","services":["EMERGENCY"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRL-EMERGENCY"],"comment":"Aviation urgence 121.500 - AIRAC 08/26 - RX seule"},
+    {"name":"RNS-COT-A","frequency_mhz":120.35,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Rennes / secteur Cotentin","services":["FIS","APP"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRN-CURRENT"],"comment":"Rennes Info/App Cotentin 120.350 - AIRAC 08/26 - RX seule"},
+    {"name":"RNS-NORD","frequency_mhz":126.95,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Rennes / secteur Nord","services":["FIS","APP","VDF"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRN-CURRENT"],"comment":"Rennes Info/App Nord 126.950 - AIRAC 08/26 - RX seule"},
+    {"name":"RNS-SUD","frequency_mhz":134.0,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Rennes / secteur Sud","services":["FIS","APP","VDF"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRN-CURRENT"],"comment":"Rennes Info/App Sud 134.000 - AIRAC 08/26 - RX seule"},
+    {"name":"RNS-COT-B","frequency_mhz":134.2,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Rennes / secteur Cotentin","services":["FIS","APP"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRN-CURRENT"],"comment":"Rennes Info/App Cotentin 134.200 - AIRAC 08/26 - RX seule"},
+    {"name":"RNS-GND","frequency_mhz":121.73,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Rennes Saint-Jacques","services":["GND"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRN-CURRENT"],"comment":"Rennes Sol 121.730 - AIRAC 08/26 - RX seule"},
+    {"name":"RNS-TWR","frequency_mhz":120.505,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Rennes Saint-Jacques","services":["TWR","VDF"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRN-CURRENT"],"comment":"Rennes Tour 120.505 - AIRAC 08/26 - RX seule"},
+    {"name":"RNS-ATIS","frequency_mhz":136.405,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Rennes Saint-Jacques","services":["ATIS"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRN-CURRENT"],"comment":"Rennes ATIS 136.405 - AIRAC 08/26 - RX seule"},
+    {"name":"BES-IRO1","frequency_mhz":119.575,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Brest / SIV Iroise","services":["FIS","VDF"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRB-CURRENT"],"comment":"Iroise Information 119.575 - AIRAC 08/26 - RX seule"},
+    {"name":"BES-IRO2","frequency_mhz":135.83,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Brest / SIV Iroise","services":["FIS","VDF"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRB-CURRENT"],"comment":"Iroise Information 135.830 - AIRAC 08/26 - RX seule"},
+    {"name":"BES-APP","frequency_mhz":125.86,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Brest Bretagne / Iroise","services":["APP","VDF"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRB-CURRENT"],"comment":"Iroise Approche 125.860 - AIRAC 08/26 - RX seule"},
+    {"name":"BES-TWR","frequency_mhz":120.105,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Brest Bretagne","services":["TWR","VDF"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRB-CURRENT"],"comment":"Brest Bretagne Tour 120.105 - AIRAC 08/26 - RX seule"},
+    {"name":"BES-ATIS","frequency_mhz":129.355,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Brest Bretagne","services":["ATIS"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRB-CURRENT"],"comment":"Brest Bretagne ATIS 129.355 - AIRAC 08/26 - RX seule"},
+    {"name":"DIN-TWR","frequency_mhz":120.155,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Dinard Pleurtuit Saint-Malo","services":["TWR","VDF","A/A"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRD-CURRENT"],"comment":"Dinard Tour/A-A 120.155 - AIRAC 08/26 - RX seule"},
+    {"name":"DIN-ATIS","frequency_mhz":124.58,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Dinard Pleurtuit Saint-Malo","services":["ATIS"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRD-CURRENT"],"comment":"Dinard ATIS 124.580 - AIRAC 08/26 - RX seule"},
+    {"name":"QUIM-TWR","frequency_mhz":118.625,"mode":"AM","step_khz":8.33,"tx_policy":"rx_only","area":"Quimper Pluguffan","services":["TWR","A/A"],"verification":"verified_airac08_latest_effective_public","source_ids":["SIA-XML-0826","SIA-LFRQ-CURRENT"],"comment":"Quimper Tour/A-A 118.625 - AIRAC 08/26 - RX seule"}
+  ],
+  "selection": {
+    "scoped_airfields": ["LFRN", "LFRB", "LFRD", "LFRQ"],
+    "airfield_unique_memory_count": 15,
+    "generic_emergency_memory_count": 1,
+    "total_memory_count": 16,
+    "reserved_locations": [130, 149],
+    "candidate_locations_used": [130, 145],
+    "unused_reserved_locations": [146, 149],
+    "no_artificial_fill": true
+  },
+  "excluded_from_sprint75_scope": {
+    "additional_bretagne_airfields": "not researched for promotion in this sprint",
+    "military_specific_channels": "not part of the scoped four-airfield civil aviation expansion",
+    "navigation_aids": "not selected as operational voice memories"
+  }
+}

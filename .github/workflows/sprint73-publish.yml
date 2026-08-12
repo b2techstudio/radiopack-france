@@ -1,0 +1,42 @@
+name: Sprint 73 Bretagne publication
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    if: ${{ github.event.head_commit.message == 'Sprint 73 trigger publication' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Build, verify and publish Bretagne v0.1
+        shell: bash
+        run: |
+          python tools/_sprint73_publish.py
+          python tests/test_bretagne_v01_public_release.py
+          python tests/test_bretagne_internal_candidate.py
+          python tests/test_sprint71_v05_bretagne_candidate.py
+          python tests/test_bretagne_prepublication_review.py
+          python tests/test_sprint72_bretagne_scope_closure.py
+          python tests/test_site_files.py
+          python tests/test_pack_registry.py
+          git diff --check
+          rm -f tools/_sprint73_publish.py research/.s73-trigger research/.s73-stage-0 research/.s73-stage-1 research/.s73-stage-2
+          git config user.name "b2techstudio"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "Sprint 73 publish Bretagne v0.1 at 135 RX memories"
+          git push origin HEAD:main

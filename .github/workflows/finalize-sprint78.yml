@@ -31,6 +31,7 @@ jobs:
         run: |
           git config user.name "B2tech Studio"
           git config user.email "b2techstudio@gmail.com"
+          git checkout -- .github/workflows/ci.yml .github/workflows/finalize-sprint78.yml
           git add -A
           git commit -m "Sprint 78 finalize project state and documentation [reference-archive]"
           git push origin HEAD:main

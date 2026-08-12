@@ -139,6 +139,9 @@ jobs:
       - name: Test Sprint 77 Bretagne ADRASEC public revalidation
         run: python tests/test_sprint77_bretagne_adrasec_public_revalidation.py
 
+      - name: Test Sprint 78 Bretagne CROSS mapping revalidation
+        run: python tests/test_sprint78_bretagne_cross_mapping_revalidation.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 
@@ -237,7 +240,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: radiopack-reference-${{ github.sha }}
-          path: RadioPack-France-${{ github.sha }}.zip
+          path: RadioPack-France-${GITHUB_SHA}.zip
           if-no-files-found: error
           retention-days: 30
 

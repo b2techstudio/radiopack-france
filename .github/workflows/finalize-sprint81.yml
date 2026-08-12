@@ -1,0 +1,35 @@
+name: Finalize Sprint 81
+
+on:
+  push:
+    paths:
+      - ".github/sprint81-finalize-trigger"
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Finalize Sprint 81
+        run: python tools/finalize_sprint81.py
+
+      - name: Commit final state
+        shell: bash
+        run: |
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git add -A
+          git commit -m "Sprint 81 finalize Bretagne v0.3 initialization"
+          git push

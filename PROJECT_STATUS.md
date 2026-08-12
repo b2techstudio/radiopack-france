@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **77**
-État logique : **0.21.66**
+Sprint courant : **78**
+État logique : **0.21.67**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-77-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-78-summary.md`.
 
 ## État public
 
@@ -16,6 +16,17 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.1 : **135 mémoires RX**, publiée et immuable.
 - Bretagne v0.2 : aucune publication ; le registre public reste sur v0.1.
+
+## Sprint 78 — CROSS Ch64 / Ch79, candidat toujours 151
+
+La revalidation primaire des mappings locaux CROSS produit un **delta candidat 0** et aucune attribution de site.
+
+- Étel Ch64 : l'affirmation ministérielle régionale 63/64 dans le Morbihan ne nomme pas de site ; la documentation opérationnelle actuelle mappe Étel sur Ch63. Le conflit primaire reste ouvert et Ch64 n'est ni déclaré arrêté ni attribué à un site précis.
+- Corsen Ch79 : le réseau côtier actuel est confirmé, mais aucun mapping primaire actuel Ch79 → émetteur précis n'est exploitable. Fréhel/Bodic/Batz/Stiff/Raz restent des pistes secondaires ou historiques, pas des attributions promues.
+- Le Guide Marine 2026 est identifié mais son PDF n'est pas extrait dans le workflow courant ; son indisponibilité ne vaut pas preuve négative.
+- Les deux paires RF sont déjà présentes génériquement : aucune duplication mémoire.
+
+Test : `tests/test_sprint78_bretagne_cross_mapping_revalidation.py`.
 
 ## Sprint 77 — ADRASEC public, candidat toujours 151
 
@@ -101,6 +112,7 @@ python tools\build_bretagne_v02_internal_candidate.py
 python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
 python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
+python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
 python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py

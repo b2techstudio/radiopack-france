@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-12",
-  "current_sprint": 77,
-  "state_version": "0.21.66",
+  "current_sprint": 78,
+  "state_version": "0.21.67",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -28,7 +28,7 @@
   "active_work": {
     "pack": "Bretagne",
     "target_version": "0.2",
-    "status": "internal_candidate_151_airac08_amateur_adrasec_revalidated_not_public",
+    "status": "internal_candidate_151_airac08_amateur_adrasec_cross_revalidated_not_public",
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_release_ready": false,
@@ -104,7 +104,18 @@
     "adrasec29_frequency_mhz": 144.8,
     "adrasec29_frequency_already_present_nationally": true,
     "f1zug_adrasec_transponder_frequency_published": false,
-    "adrasec56_service_specific_frequency_promoted": false
+    "adrasec56_service_specific_frequency_promoted": false,
+    "cross_revalidation": "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
+    "cross_revalidation_checked_on": "2026-08-12",
+    "cross_revalidation_candidate_memory_delta": 0,
+    "cross_local_site_metadata_promoted_count": 0,
+    "etel_channel63_current_local_mapping_confirmed": true,
+    "etel_channel64_current_brittany_site_confirmed": false,
+    "etel_channel64_primary_source_conflict_open": true,
+    "corsen_current_cross_network_confirmed": true,
+    "corsen_channel79_primary_current_transmitter_site_confirmed": false,
+    "corsen_secondary_site_chain_promoted": false,
+    "guide_marine_2026_identified_but_not_extracted": true
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -255,7 +266,9 @@
     "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
     "research/sprint-76-summary.md",
     "research/bretagne-v0.2/adrasec-public-revalidation.json",
-    "research/sprint-77-summary.md"
+    "research/sprint-77-summary.md",
+    "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
+    "research/sprint-78-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -303,9 +316,16 @@
     "build_bretagne_v02_internal_candidate": "python tools/build_bretagne_v02_internal_candidate.py",
     "run_sprint75_test": "python tests/test_sprint75_bretagne_aviation.py",
     "run_sprint76_test": "python tests/test_sprint76_bretagne_amateur_revalidation.py",
-    "run_sprint77_test": "python tests/test_sprint77_bretagne_adrasec_public_revalidation.py"
+    "run_sprint77_test": "python tests/test_sprint77_bretagne_adrasec_public_revalidation.py",
+    "run_sprint78_test": "python tests/test_sprint78_bretagne_cross_mapping_revalidation.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 78,
+      "state_version": "0.21.67",
+      "summary": "Bretagne v0.2 CROSS Etel Ch64 and Corsen Ch79 local mapping revalidation produced zero RF delta and no promoted site metadata; candidate stays 151.",
+      "summary_file": "research/sprint-78-summary.md"
+    },
     {
       "sprint": 77,
       "state_version": "0.21.66",
@@ -462,7 +482,13 @@
     "geography_does_not_prove_adrasec_role": true,
     "aprs_role_does_not_imply_other_service_frequency": true,
     "historical_role_does_not_equal_current_role": true,
-    "private_ppdr_operational_data_excluded": true
+    "private_ppdr_operational_data_excluded": true,
+    "regional_channel_statement_does_not_name_transmitter_site": true,
+    "current_cross_network_does_not_map_channel_to_station": true,
+    "secondary_site_clue_is_not_primary_validation": true,
+    "unread_primary_pdf_is_not_negative_evidence": true,
+    "cross_site_assignment_must_not_be_guessed": true,
+    "generic_rf_pair_must_not_be_duplicated_for_site_metadata": true
   },
   "completed_release": {
     "pack": "Normandie",
@@ -772,6 +798,31 @@
     "department35_f1zug_transponder_frequency_published": false,
     "department56_service_specific_frequency_promoted": false,
     "private_ppdr_operational_data_excluded": true,
+    "public_export_allowed": false,
+    "public_registry_allowed": false
+  },
+  "latest_sprint78_cross_revalidation": {
+    "file": "research/sprint-78-summary.md",
+    "evidence": "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
+    "test": "tests/test_sprint78_bretagne_cross_mapping_revalidation.py",
+    "candidate_memory_count_before": 151,
+    "candidate_memory_count_after": 151,
+    "candidate_memory_delta": 0,
+    "local_site_metadata_promoted_count": 0,
+    "channel64_pair_mhz": [
+      156.225,
+      160.825
+    ],
+    "channel79_pair_mhz": [
+      156.975,
+      161.575
+    ],
+    "etel_channel63_current_local_mapping_confirmed": true,
+    "etel_channel64_current_brittany_site_confirmed": false,
+    "etel_channel64_primary_source_conflict_open": true,
+    "corsen_current_cross_network_confirmed": true,
+    "corsen_channel79_primary_current_transmitter_site_confirmed": false,
+    "guide_marine_2026_identified_but_not_extracted": true,
     "public_export_allowed": false,
     "public_registry_allowed": false
   }

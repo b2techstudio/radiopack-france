@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 77 / 0.21.66 — Bretagne v0.2 reste à 151 mémoires RX après revalidation publique ADRASEC, delta RF 0.**
+**État courant : Sprint 78 / 0.21.67 — Bretagne v0.2 reste à 151 mémoires RX après revalidation CROSS Ch64/Ch79, delta RF 0 et aucun site local promu.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 77 / 0.21.66
+## État actuel — Sprint 78 / 0.21.67
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -17,7 +17,18 @@ Packs publics immuables :
 
 Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.2 est à **151 mémoires RX** : base publique v0.1=135 + 16 mémoires aviation AIRAC 08/26. Aucun CSV public Bretagne v0.2 n'existe et le registre public reste sur v0.1.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md` et `research/sprint-77-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md` et `research/sprint-78-summary.md`.
+
+## Sprint 78 — revalidation CROSS Bretagne v0.2
+
+`research/bretagne-v0.2/cross-local-mapping-revalidation.json` revalide les mappings locaux **CROSS Étel Ch64** et **CROSS Corsen Ch79** sans ajouter de mémoire ni promouvoir d'attribution locale.
+
+- **Étel Ch64** : le ministère conserve une affirmation régionale 63/64 dans le Morbihan, tandis que la documentation opérationnelle actuelle du CROSS Étel mappe explicitement Étel sur Ch63. Le conflit primaire reste ouvert ; aucun site Ch64 n'est deviné.
+- **Corsen Ch79** : le réseau VHF/MHF actuel est confirmé mais aucune source primaire actuelle exploitée ne mappe Ch79 vers Cap Fréhel, Bodic, Batz, Stiff ou Pointe du Raz. Les pistes secondaires restent des indices uniquement.
+- Le **Guide Marine 2026** est identifié comme référence primaire pertinente mais son PDF n'est pas extractible dans le workflow courant ; aucune conclusion n'est tirée de cette indisponibilité.
+- Les paires Ch64 `156.225 / 160.825 MHz` et Ch79 `156.975 / 161.575 MHz` sont déjà présentes génériquement : **delta RF 0**, candidat toujours **151**.
+
+Garde-fou : `tests/test_sprint78_bretagne_cross_mapping_revalidation.py`.
 
 ## Sprint 77 — revalidation publique ADRASEC Bretagne v0.2
 
@@ -126,7 +137,7 @@ Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normand
 - `research/sprint-30-34-summary.md`
 - `research/sprint-35-39-summary.md`
 - `research/sprint-55-60-summary.md`
-- `research/sprint-61-summary.md` à `research/sprint-77-summary.md`
+- `research/sprint-61-summary.md` à `research/sprint-78-summary.md`
 
 ## Tests principaux
 
@@ -138,6 +149,7 @@ python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
 python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
+python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
@@ -153,6 +165,7 @@ python tools\build_bretagne_v02_internal_candidate.py
 python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
 python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
+python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
 

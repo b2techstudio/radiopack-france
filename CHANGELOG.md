@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.67 - 2026-08-12
+
+- **Sprint 78** : revalidation des mappings locaux CROSS Étel Ch64 et Corsen Ch79 ; Bretagne v0.2 reste à **151 mémoires RX**, delta RF **0**.
+- Étel : affirmation ministérielle régionale 63/64 conservée, mais la documentation opérationnelle actuelle associe explicitement Étel à Ch63 ; aucun site Ch64 n'est promu et le conflit primaire reste ouvert.
+- Corsen : réseau VHF/MHF actuel confirmé sans mapping primaire actuel Ch79 → site ; Fréhel/Bodic/Batz/Stiff/Raz restent des pistes non promotables.
+- Guide Marine 2026 identifié comme référence primaire mais non extractible dans le workflow ; aucune preuve négative ni attribution n'en est déduite.
+- Ajout de `cross-local-mapping-revalidation.json` et du garde-fou Sprint 78 ; aucune mutation publique Bretagne v0.2.
+
 ## 0.21.66 - 2026-08-12
 
 - **Sprint 77** : revalidation publique ADRASEC Bretagne (22/29/35/56), candidat Bretagne v0.2 maintenu à **151 mémoires RX**, delta RF **0**.

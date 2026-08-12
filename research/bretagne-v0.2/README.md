@@ -2,9 +2,9 @@
 
 Bretagne v0.2 est la version de recherche active basée sur Bretagne v0.1 publiée et immuable (**135 mémoires RX**).
 
-## État Sprint 77
+## État Sprint 78
 
-Le candidat interne reste à **151 mémoires RX** : base v0.1=135 + **16 mémoires aviation AIRAC 08/26**. Les revalidations radioamateur du Sprint 76 et ADRASEC publique du Sprint 77 produisent chacune un **delta RF de 0**. Aucun export public v0.2 n'existe et le registre public reste sur Bretagne v0.1.
+Le candidat interne reste à **151 mémoires RX** : base v0.1=135 + **16 mémoires aviation AIRAC 08/26**. Les revalidations radioamateur du Sprint 76, ADRASEC publique du Sprint 77 et CROSS Ch64/Ch79 du Sprint 78 produisent chacune un **delta RF de 0**. Aucun export public v0.2 n'existe et le registre public reste sur Bretagne v0.1.
 
 ### Aviation
 
@@ -34,6 +34,16 @@ Le builder non public `tools/build_bretagne_v02_internal_candidate.py` reconstru
 - ADRASEC 22 ne reçoit aucune fréquence par simple géographie ou appartenance.
 
 Les données opérationnelles privées PPDR restent hors périmètre.
+
+### CROSS Étel Ch64 / Corsen Ch79 — Sprint 78
+
+`cross-local-mapping-revalidation.json` confirme que les paires RF Ch64 et Ch79 restent génériques et déjà dédupliquées.
+
+- Étel : le site est explicitement associé à Ch63 dans la documentation opérationnelle actuelle ; l'affirmation régionale Ch64 dans le Morbihan ne suffit pas à nommer un émetteur Ch64.
+- Corsen : le réseau radio côtier actuel est confirmé mais Ch79 n'est toujours pas mappé par une source primaire actuelle vers Fréhel, Bodic, Batz, Stiff ou Pointe du Raz.
+- Les indices secondaires ne sont pas promus et les PDF primaires identifiés mais non extraits ne produisent aucune conclusion négative.
+
+Résultat : **151 mémoires RX, delta 0, 0 attribution locale promue**.
 
 ## Backlog restant
 

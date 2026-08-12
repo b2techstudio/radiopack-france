@@ -1,9 +1,9 @@
 # RadioPack France
 
-**État courant : Sprint 73 / 0.21.62 — Bretagne v0.1 publiée et figée immuable à 135 mémoires RX.**
+**État courant : Sprint 74 / 0.21.63 — Bretagne v0.2 initialisée en recherche à partir de la v0.1 immuable, candidat 135 mémoires RX, delta 0.**
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 73 / 0.21.62
+## État actuel — Sprint 74 / 0.21.63
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -14,10 +14,25 @@ Packs publics immuables :
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation ;
 - **Bretagne v0.1** — 135 mémoires RX, publiée et immuable.
 
-Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion ; **Bretagne v0.2** reste à initialiser pour les éléments différés de v0.1. Annecy–Alpes–Léman v0.3 reste non publique.
+Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion ; **Bretagne v0.2** est initialisée à partir de la v0.1 immuable avec un candidat courant à 135 mémoires et un delta de 0. Annecy–Alpes–Léman v0.3 reste non publique.
 
-Le générateur public propose Normandie v0.4, Bretagne v0.1 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md` et `research/sprint-73-summary.md`.
+Le générateur public propose Normandie v0.4, Bretagne v0.1 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md`, `research/sprint-73-summary.md` et `research/sprint-74-summary.md`.
 
+## Bretagne v0.2 — initialisation Sprint 74
+
+Bretagne v0.2 est désormais la version de recherche active. Elle part strictement du pack public **Bretagne v0.1 = 135 mémoires RX**, qui reste immuable. Aucun ajout n'est promu au démarrage : candidat **135**, delta **0**, aucun export public v0.2 et aucun changement du registre public.
+
+Le backlog `research/bretagne-v0.2/backlog.json` reprend six dossiers : extraction de la source aviation courante, revalidation de données ADRASEC publiquement vérifiables, cas F1ZUG / ADRASEC 35 sans déduction depuis l'APRS, attribution locale CROSS Étel Ch64, attribution locale CROSS Corsen Ch79 et infrastructures radioamateur arrêtées/ambiguës à revalider. Ch64 et Ch79 étant déjà présents génériquement dans la base v0.1, une future attribution locale ne doit pas créer de doublon RF.
+
+Fichiers Sprint 74 :
+
+```text
+research/bretagne-v0.2/README.md
+research/bretagne-v0.2/pack-plan.json
+research/bretagne-v0.2/backlog.json
+research/sprint-74-summary.md
+tests/test_sprint74_bretagne_v02_initialization.py
+```
 
 ## Normandie v0.4 — publication achevée
 
@@ -273,6 +288,14 @@ L'offre technique DIRM 2026 mentionne **17 stations radio** maintenues ; ce nomb
 - [research/sprint-64-summary.md](research/sprint-64-summary.md)
 - [research/sprint-65-summary.md](research/sprint-65-summary.md)
 - [research/sprint-66-summary.md](research/sprint-66-summary.md)
+- [research/sprint-67-summary.md](research/sprint-67-summary.md)
+- [research/sprint-68-summary.md](research/sprint-68-summary.md)
+- [research/sprint-69-summary.md](research/sprint-69-summary.md)
+- [research/sprint-70-summary.md](research/sprint-70-summary.md)
+- [research/sprint-71-summary.md](research/sprint-71-summary.md)
+- [research/sprint-72-summary.md](research/sprint-72-summary.md)
+- [research/sprint-73-summary.md](research/sprint-73-summary.md)
+- [research/sprint-74-summary.md](research/sprint-74-summary.md)
 
 Architecture publique : `website/src/lib/chirpPack.ts`, `website/src/lib/annecyPack.ts`, `website/src/lib/packRegistry.ts`.
 
@@ -294,8 +317,16 @@ python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
 python tests\test_sprint66_technical_inventory_boundaries.py
 python tests\test_sprint67_current_reference_synthesis.py
+python tests\test_sprint68_scope_closure.py
+python tests\test_normandie_v04_public_release.py
+python tests\test_normandie_v05_initialization.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
+python tests\test_bretagne_prepublication_review.py
+python tests\test_sprint72_bretagne_scope_closure.py
+python tests\test_bretagne_public_release.py
+python tests\test_sprint73_bretagne_publication.py
+python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
@@ -319,9 +350,22 @@ python tests\test_sprint66_technical_inventory_boundaries.py
 python tests\test_sprint67_current_reference_synthesis.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
+python tests\test_bretagne_prepublication_review.py
+python tests\test_sprint72_bretagne_scope_closure.py
+python tests\test_bretagne_public_release.py
+python tests\test_sprint73_bretagne_publication.py
+python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+
+cd website
+npm ci
+npm run build
+cd ..
+
+python tests\test_built_annecy_public_csv.py
+python tests\test_built_public_pack_catalog.py
 
 git status
 ```

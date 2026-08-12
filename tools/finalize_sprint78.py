@@ -108,9 +108,19 @@ Garde-fou : `tests/test_sprint78_bretagne_cross_mapping_revalidation.py`.
 
 """
 readme = replace_once(readme, "## Sprint 77 — revalidation publique ADRASEC Bretagne v0.2\n", section78 + "## Sprint 77 — revalidation publique ADRASEC Bretagne v0.2\n", "README Sprint 78 insertion")
-readme = replace_once(readme, "`research/sprint-61-summary.md` à `research/sprint-76-summary.md`", "`research/sprint-61-summary.md` à `research/sprint-78-summary.md`", "README history range")
-readme = replace_once(readme, "python tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\n", "python tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\npython tests\\test_sprint78_bretagne_cross_mapping_revalidation.py\n", "README tests")
-readme = replace_once(readme, "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_site_files.py", "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint78_bretagne_cross_mapping_revalidation.py\npython tests\\test_site_files.py", "README sync")
+readme = replace_once(readme, "`research/sprint-61-summary.md` à `research/sprint-77-summary.md`", "`research/sprint-61-summary.md` à `research/sprint-78-summary.md`", "README history range")
+readme = replace_once(
+    readme,
+    "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\npython tests\\test_bretagne_public_release.py",
+    "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\npython tests\\test_sprint78_bretagne_cross_mapping_revalidation.py\npython tests\\test_bretagne_public_release.py",
+    "README tests",
+)
+readme = replace_once(
+    readme,
+    "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\npython tests\\test_site_files.py",
+    "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\npython tests\\test_sprint78_bretagne_cross_mapping_revalidation.py\npython tests\\test_site_files.py",
+    "README sync",
+)
 readme_path.write_text(readme, encoding="utf-8")
 
 # PROJECT_STATUS.
@@ -132,7 +142,12 @@ Test : `tests/test_sprint78_bretagne_cross_mapping_revalidation.py`.
 
 """
 status = replace_once(status, "## Sprint 77 — ADRASEC public, candidat toujours 151\n", status78 + "## Sprint 77 — ADRASEC public, candidat toujours 151\n", "status Sprint 78 insertion")
-status = replace_once(status, "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint74_bretagne_v02_initialization.py", "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint78_bretagne_cross_mapping_revalidation.py\npython tests\\test_sprint74_bretagne_v02_initialization.py", "status commands")
+status = replace_once(
+    status,
+    "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\npython tests\\test_sprint74_bretagne_v02_initialization.py",
+    "python tests\\test_sprint76_bretagne_amateur_revalidation.py\npython tests\\test_sprint77_bretagne_adrasec_public_revalidation.py\npython tests\\test_sprint78_bretagne_cross_mapping_revalidation.py\npython tests\\test_sprint74_bretagne_v02_initialization.py",
+    "status commands",
+)
 status_path.write_text(status, encoding="utf-8")
 
 # Bretagne v0.2 research README.

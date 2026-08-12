@@ -142,6 +142,9 @@ jobs:
       - name: Test Sprint 78 Bretagne CROSS mapping revalidation
         run: python tests/test_sprint78_bretagne_cross_mapping_revalidation.py
 
+      - name: Test Sprint 79 Bretagne v0.2 maturity and prepublication
+        run: python tests/test_sprint79_bretagne_v02_maturity.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

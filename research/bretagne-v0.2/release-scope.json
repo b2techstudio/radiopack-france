@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "status": "scope_frozen_151_prepublication_not_public",
+  "sprint": 79,
+  "state_version": "0.21.68",
+  "frozen_on": "2026-08-12",
+  "pack": {
+    "name": "Bretagne",
+    "slug": "bretagne",
+    "target_version": "0.2"
+  },
+  "final_candidate_memory_count": 151,
+  "new_memory_count_vs_v0_1": 16,
+  "public_export_allowed": false,
+  "prepublication_ready": true,
+  "included": {
+    "published_v0_1_base": 135,
+    "aviation_airac08": 16,
+    "aviation_positions": [130, 145],
+    "channel64_pair_mhz": [156.225, 160.825],
+    "channel79_pair_mhz": [156.975, 161.575]
+  },
+  "deferred_after_v0_2": [
+    {
+      "id": "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
+      "reason": "unpublished service-specific frequency is never inferred",
+      "adds_to_v0_2": false
+    },
+    {
+      "id": "CROSS_LOCAL_TRANSMITTER_SITE_MAPPING",
+      "reason": "generic Ch64/Ch79 RF pairs are already valid without unproven local transmitter metadata",
+      "adds_to_v0_2": false
+    },
+    {
+      "id": "STOPPED_OR_UNRESOLVED_AMATEUR_INFRASTRUCTURE",
+      "reason": "F5ZPV, F5ZZH and F5ZZC-4 remain excluded until current source conditions change",
+      "adds_to_v0_2": false
+    }
+  ],
+  "aviation_release_boundary": {
+    "cycle": "AIRAC 08/26",
+    "valid_from": "2026-08-06",
+    "valid_through": "2026-09-02",
+    "freshness_rechecked_on": "2026-08-12",
+    "current_sia_product_verified": true,
+    "current_xml_export_bytes_extracted": false,
+    "direct_xml_field_match_claimed": false,
+    "latest_effective_public_primary_aip_pages_used": true
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "max_memories": 200,
+    "max_name_length": 10,
+    "same_rf_frequency_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "no_artificial_fill": true,
+    "deferred_item_is_not_validated": true,
+    "scope_deferral_does_not_claim_absence_or_stoppage": true,
+    "published_versions_are_immutable": true,
+    "explicit_publication_is_separate_step": true,
+    "direct_xml_match_must_not_be_claimed_without_xml_extraction": true
+  }
+}

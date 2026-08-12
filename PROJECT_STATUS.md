@@ -6,6 +6,8 @@ Sprint courant : **76**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
+Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
+
 L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-76-summary.md`.
 
 ## État public
@@ -47,8 +49,6 @@ Ch64 et Ch79 existent déjà génériquement dans la base v0.1 : une attribution
 ## Normandie v0.5 — état conservé
 
 Normandie v0.5 reste à 142 mémoires avec **0 ajout éligible** et un plafond de travail connu à **147 mémoires** hors F6ZES.
-
-La **revue v0.4 est 9/9** et les **blocages de prépublication sont à 0** ; la **publication enregistrée** de v0.4 reste historique et immuable.
 
 - R3 / F1ZBX : une paire représente **2 mémoires RX** si validée ; **2 sessions** terrain indépendantes restent des preuves, pas des mémoires.
 - F5ZHA : conflit de source historique ; la provenance RepeaterBook conserve `2017-02-17` / Off-Air.

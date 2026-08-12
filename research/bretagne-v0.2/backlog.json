@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_backlog_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
@@ -9,16 +9,29 @@
     {
       "id": "AVIATION_CURRENT_SOURCE_EXTRACT",
       "category": "aviation",
-      "state": "current_exact_source_extract_required",
+      "state": "validated_for_internal_candidate_airac08_latest_effective_primary_aip",
       "current_cycle_at_initialization": "AIRAC 08/26",
       "valid_from": "2026-08-06",
       "valid_through": "2026-09-02",
-      "potential_memory_delta": null,
+      "potential_memory_delta": 16,
+      "internal_candidate_memory_delta": 16,
+      "internal_candidate_promoted": true,
       "promoted": false,
+      "public_promotion": false,
+      "evidence": "research/bretagne-v0.2/aviation-airac-08.json",
+      "candidate_delta": "research/bretagne-v0.2/candidate-memory-delta.json",
       "source_context": "research/bretagne-v0.1/sia-airac-08-review.json",
-      "requirements": [
-        "extract and review the exact current SIA source before promoting any aviation entry",
-        "do not present an older exact value as current"
+      "methodology": {
+        "current_airac_product_verified": true,
+        "current_xml_export_bytes_extracted": false,
+        "latest_effective_public_primary_aip_pages_used": true,
+        "project_precedent": "research/annecy-alpes-leman-v0.2/aviation-france-airac-08.json",
+        "does_not_claim_xml_field_match_without_extraction": true
+      },
+      "requirements_before_publication": [
+        "retain AIRAC 08/26 validity boundary through 2026-09-02",
+        "perform final freshness and release review before any public v0.2 export",
+        "do not claim a direct current XML field match unless the XML bytes are actually extracted"
       ]
     },
     {
@@ -96,6 +109,7 @@
     "private_ppdr_operational_data_excluded": true,
     "secondary_clue_does_not_replace_required_primary_validation": true,
     "current_local_metadata_does_not_create_duplicate_memory": true,
+    "internal_candidate_promotion_is_not_publication": true,
     "public_export_allowed": false
   }
 }

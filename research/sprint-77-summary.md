@@ -1,7 +1,7 @@
 # Sprint 77 — Bretagne v0.2 revalidation publique ADRASEC
 
 Date : 12 août 2026
-État logique visé : `0.21.66`
+État logique : `0.21.66`
 
 ## Résultat
 
@@ -73,3 +73,7 @@ Le garde-fou Sprint 74 est rendu compatible avec la résolution ultérieure du d
 - les données PPDR privées restent hors périmètre ;
 - toutes les sorties RadioPack restent RX-only ;
 - aucune publication Bretagne v0.2 n'est effectuée.
+
+## Clôture documentaire
+
+`README.md`, `PROJECT_STATUS.md`, `research/project-resume-state.json` et `research/bretagne-v0.2/README.md` sont synchronisés sur **Sprint 77 / 0.21.66**. Le `CHANGELOG.md` a également été rattrapé pour les états `0.21.63` à `0.21.66`, supprimant le trou documentaire qui s'arrêtait auparavant au Sprint 73.

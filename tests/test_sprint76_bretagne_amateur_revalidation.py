@@ -7,6 +7,7 @@ REVALIDATION = ROOT / "research/bretagne-v0.2/amateur-infrastructure-revalidatio
 PAIRED = ROOT / "research/paired-rx-deduplicated-memory-plan.json"
 BUILDER = ROOT / "tools/build_bretagne_v02_internal_candidate.py"
 PUBLIC_V02 = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv"
+PUBLICATION_RECORD = ROOT / "research/bretagne-v0.2/publication-record.json"
 
 
 def load_module(name: str, path: Path):
@@ -101,6 +102,12 @@ assert candidate["memory_count"] == 151
 assert candidate["new_memory_count"] == 16
 assert candidate["aviation_memory_count"] == 16
 assert candidate["public_export_allowed"] is False
-assert not PUBLIC_V02.exists()
+if PUBLICATION_RECORD.exists():
+    record = json.loads(PUBLICATION_RECORD.read_text(encoding="utf-8"))
+    assert record["status"] == "published_immutable"
+    assert record["version"] == "0.2" and record["memory_count"] == 151
+    assert PUBLIC_V02.is_file()
+else:
+    assert not PUBLIC_V02.exists()
 
-print("Sprint 76 Bretagne amateur revalidation: F1ZBZ resolved at zero RF delta; F5ZPV/F5ZZH/F5ZZC-4 remain excluded or unresolved; candidate stays 151 and public v0.2 remains absent OK")
+print("Sprint 76 Bretagne amateur revalidation: F1ZBZ resolved at zero RF delta; excluded/unresolved amateur items remain historically auditable before or after v0.2 publication OK")

@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0",
+  "status": "research_backlog_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.3",
+  "based_on_published_version": "0.2",
+  "published_base_memory_count": 151,
+  "public_export_allowed": false,
+  "items": [
+    {
+      "id": "AIRAC_09_BRETAGNE_REVALIDATION",
+      "category": "aviation",
+      "state": "scheduled_transition_required_before_post_2026_09_02_v0_3_publication",
+      "current_cycle": "AIRAC 08/26",
+      "current_cycle_valid_through_inclusive": "2026-09-02",
+      "next_cycle": "AIRAC 09/26",
+      "next_cycle_effective_from": "2026-09-03",
+      "potential_memory_delta": null,
+      "promoted": false,
+      "requirements": [
+        "revalidate Bretagne aviation against the current AIRAC cycle before any v0.3 publication on or after 2026-09-03",
+        "use latest effective primary AIP material for frequency validation",
+        "do not claim direct XML field equality unless current XML bytes are actually extracted",
+        "review deduplication and memory placement before any aviation delta is promoted"
+      ]
+    },
+    {
+      "id": "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
+      "category": "emergency_amateur_research",
+      "state": "public_frequency_unpublished_watch_only",
+      "aprs_frequency_mhz": 144.8,
+      "aprs_frequency_already_present_nationally": true,
+      "adrasec_transponder_frequency_mhz": null,
+      "potential_memory_delta": null,
+      "promoted": false,
+      "private_operational_research_allowed": false,
+      "requirements": [
+        "accept only a current explicitly public service-specific source",
+        "do not infer transponder frequency from APRS",
+        "do not search for or reconstruct private operational PPDR or ADRASEC data"
+      ]
+    },
+    {
+      "id": "CROSS_ETEL_CH64_LOCAL_MAPPING",
+      "category": "maritime_metadata",
+      "state": "optional_local_metadata_unresolved",
+      "generic_pair_mhz": [156.225, 160.825],
+      "generic_memory_already_present_in_published_base": true,
+      "potential_new_rf_memory_delta": 0,
+      "promoted_local_site_mapping": false,
+      "requirements": [
+        "require a current primary source explicitly mapping channel 64 to a Brittany transmitter site",
+        "resolve the existing primary-source conflict before attribution",
+        "never duplicate the generic RF pair merely to add site metadata"
+      ]
+    },
+    {
+      "id": "CROSS_CORSEN_CH79_LOCAL_MAPPING",
+      "category": "maritime_metadata",
+      "state": "optional_local_metadata_unresolved",
+      "generic_pair_mhz": [156.975, 161.575],
+      "generic_memory_already_present_in_published_base": true,
+      "potential_new_rf_memory_delta": 0,
+      "promoted_local_site_mapping": false,
+      "requirements": [
+        "require a current primary source explicitly mapping channel 79 to a Brittany transmitter site",
+        "secondary site-chain convergence remains a clue only",
+        "never duplicate the generic RF pair merely to add site metadata"
+      ]
+    },
+    {
+      "id": "F5ZPV_RESTART_REVALIDATION",
+      "category": "radioamateur",
+      "state": "stopped_by_local_operator_reconsider_only_after_restart_evidence",
+      "last_documented_pair_mhz": [430.475, 439.875],
+      "potential_memory_delta": null,
+      "promoted": false,
+      "requirements": [
+        "require current local-operator restart evidence",
+        "revalidate frequencies and deduplication only after restart is established",
+        "do not let a general directory active flag override the local operator stopped state"
+      ]
+    },
+    {
+      "id": "F5ZZH_RESTART_REVALIDATION",
+      "category": "radioamateur",
+      "state": "stopped_reconsider_only_after_restart_and_site_evidence",
+      "last_documented_pair_mhz": [145.1875, 145.7875],
+      "potential_memory_delta": null,
+      "promoted": false,
+      "requirements": [
+        "require current restart evidence from the local operator or equally authoritative source",
+        "require current site and frequency validation",
+        "review deduplication before any candidate promotion"
+      ]
+    },
+    {
+      "id": "F5ZZC4_CURRENT_APRS_FREQUENCY",
+      "category": "radioamateur_emergency_metadata",
+      "state": "current_service_specific_frequency_unresolved",
+      "potential_memory_delta": null,
+      "promoted": false,
+      "must_not_conflate_with_f5zzc_analog": true,
+      "requirements": [
+        "require a current service-specific public source for F5ZZC-4",
+        "do not reuse the separate stopped F5ZZC analog frequency",
+        "deduplicate against national APRS 144.800 MHz if that frequency is later explicitly validated"
+      ]
+    }
+  ],
+  "rules": {
+    "deferred_item_is_not_validated": true,
+    "published_base_is_immutable": true,
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "resolved_zero_delta_item_is_not_reopened_without_new_evidence": true,
+    "unpublished_data_must_not_be_inferred": true,
+    "private_ppdr_operational_data_excluded": true,
+    "local_metadata_does_not_create_duplicate_memory": true,
+    "stopped_infrastructure_not_promoted": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "airac_transition_is_a_freshness_gate_not_an_automatic_frequency_delta": true
+  }
+}

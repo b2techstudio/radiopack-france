@@ -40,3 +40,14 @@ Les revues ADRASEC générales déjà résolues à delta RF 0 et F1ZBZ déjà en
 ## Garde-fou
 
 `tests/test_sprint81_bretagne_v03_initialization.py` vérifie l'identité exacte avec le CSV v0.2, le SHA-256, 151 mémoires RX uniques, l'absence de v0.3 publique, le maintien du registre v0.2 et les frontières du backlog/AIRAC.
+
+## Validation finale
+
+- HEAD de pré-clôture propre : `0248000c1152b83ee15cb512b24e9876b14402e2` ;
+- CI complète de pré-clôture : **succès** (run 845) ;
+- garde-fou Sprint 81 : **succès** ;
+- build Astro de production : **succès** ;
+- générateur web et catalogue des packs publics : **succès** ;
+- helper, trigger et workflow temporaires de finalisation : **supprimés du dépôt**.
+
+Le commit de clôture porte le marqueur `[reference-archive]` afin de générer l'archive source exacte du HEAD final après validation complète de la CI.

@@ -1,12 +1,12 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **74**
-État logique : **0.21.63**
+Sprint courant : **75**
+État logique : **0.21.64**
 
-Repère de compatibilité historique conservé pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
+Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md`, `research/sprint-73-summary.md` et `research/sprint-74-summary.md`.
+Ce fichier est le point de reprise humain. L'état machine correspondant est `research/project-resume-state.json`. Le résumé courant est `research/sprint-75-summary.md`.
 
 ## État public
 
@@ -14,195 +14,92 @@ Ce fichier sert de point de reprise humain. L'état machine correspondant est da
 - **Normandie v0.3.1** : 139 mémoires RX, historique immuable.
 - **Annecy–Alpes–Léman v0.2** : 65 mémoires RX, variante 48 sans aviation, publiée et immuable.
 - **Bretagne v0.1** : **135 mémoires RX**, publiée et immuable.
+- Aucun CSV Bretagne v0.2 n'est public ; le registre public reste sur Bretagne v0.1.
 
-## Sprint 74 — initialisation Bretagne v0.2 à 135, delta 0
+## Sprint 75 — Bretagne v0.2 à 151 mémoires
 
-- **Bretagne v0.2** devient la version de recherche active, basée sur **Bretagne v0.1 = 135 mémoires RX**, qui reste immuable.
-- Candidat initial : **135 mémoires**, **0 ajout**, aucun export public v0.2 et aucun changement du registre public.
-- `research/bretagne-v0.2/pack-plan.json` verrouille la base publique, le delta nul et l'interdiction de publication directe.
-- `research/bretagne-v0.2/backlog.json` reprend six dossiers : source aviation courante, données ADRASEC publiquement vérifiables, cas F1ZUG / ADRASEC 35, mapping local CROSS Étel Ch64, mapping local CROSS Corsen Ch79 et infrastructures radioamateur à revalider.
-- Ch64 et Ch79 sont déjà présents comme mémoires génériques dans la v0.1 ; une future attribution locale ne crée donc pas de nouvelle mémoire RF par simple ajout de métadonnée.
-- Les données non publiées ne sont jamais déduites ; les données privées PPDR restent exclues.
-- Test de garde-fou : `tests/test_sprint74_bretagne_v02_initialization.py` et étape CI dédiée.
+Bretagne v0.2 est la version de recherche active. Elle repart toujours de la base publique immuable **v0.1 = 135 mémoires** et ajoute **16 mémoires aviation RX** aux positions 130 à 145. Le candidat interne atteint donc **151 mémoires RX**.
 
-## Sprint 73 — publication Bretagne v0.1 à 135
+Les positions 146 à 149 restent libres : aucun remplissage artificiel. Le builder `tools/build_bretagne_v02_internal_candidate.py` reconstruit d'abord exactement la base v0.1 puis ajoute l'aviation, sans modifier aucun fichier public.
 
-- **Bretagne v0.1** est désormais publique avec **135 mémoires RX** et devient immuable.
-- Le CSV public est identique octet pour octet au candidat figé/revu au Sprint 72 ; `research/bretagne-v0.1/publication-record.json` enregistre son SHA-256.
-- Le registre public, le générateur, les pages régions/téléchargements/versions et le sitemap exposent désormais Bretagne v0.1.
-- Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) restent deux paires RX génériques ; aucun site local non prouvé n'est ajouté.
-- Aviation AIRAC courante, fréquences opérationnelles ADRASEC non publiées, mappings locaux CROSS et infrastructures amateur arrêtées/non résolues restent différés à **Bretagne v0.2**.
-- Les artefacts de prépublication Sprint 72 restent des preuves historiques ; leur statut n'est pas réécrit.
+### Aviation AIRAC 08/26
 
-## Sprint 72 — Bretagne v0.1 prépublication prête à 135
+Le produit SIA courant **AIRAC 08/26 - CORRIGENDUM** est en vigueur du **6 août au 2 septembre 2026 inclus**. La validation Sprint 75 suit le précédent déjà utilisé pour Annecy–Alpes–Léman : contexte AIRAC courant vérifié + dernière page AIP primaire publique effective pour le service.
 
-- **Bretagne v0.1** est figée à **135 mémoires RX**, revue **8/8**, avec **0 blocage** pour le périmètre v0.1.
-- L'aviation reste à **0 mémoire** dans v0.1 : le cycle SIA courant **AIRAC 08/26** est identifié comme valide du 06/08/2026 au 02/09/2026, mais l'export exact courant n'est pas extrait ; les fréquences exactes de pages AIP plus anciennes ne sont donc pas promues comme si elles étaient courantes.
-- Les fréquences opérationnelles ADRASEC non publiées, les affectations locales de sites CROSS Ch64/Ch79 et les infrastructures amateur arrêtées/non résolues sont reportées à **Bretagne v0.2** sans validation implicite.
-- Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) restent bien **deux mémoires RX génériques chacun**, sans site local inventé.
-- `research/bretagne-v0.1/release-scope.json`, `review-checklist.json` et `sia-airac-08-review.json` verrouillent la revue. La publication publique reste une étape explicite séparée.
+Le dépôt ne prétend pas avoir extrait les octets du fichier XML courant et ne prétend pas avoir fait une correspondance champ par champ avec cet XML. Cette limite est explicite dans `research/bretagne-v0.2/aviation-airac-08.json`.
 
-## Sprint 71 — Normandie v0.5 revalidée / Bretagne v0.1 candidat interne
+Périmètre retenu :
 
-- **Normandie v0.5** reste à **142 mémoires**, avec **0 ajout éligible** : R3 manque toujours les 2 sessions Mortain, F5ZHA manque la réconciliation autoritative + terrain, F1ZOV reste en maintenance et F6ZES reste sans fréquence/mode prouvés.
-- **Bretagne v0.1** dispose désormais d'un **candidat interne de 135 mémoires RX**, non public : 16 PMR446 + 90 VHF maritime + 6 écoutes amateur + 2 appels amateur + 21 mémoires régionales dédupliquées.
-- Les canaux **64** (156.225 / 160.825 MHz) et **79** (156.975 / 161.575 MHz) sont présents comme **deux mémoires RX génériques chacun**. Aucun site Étel/Corsen n'est attribué sans preuve primaire explicite.
-- Les positions aviation 130–149 restent réservées, avec **0 fréquence aviation promue** tant que l'extraction SIA actuelle n'est pas validée.
-- Historique Sprint 71 : Bretagne était encore absente du registre public et des téléchargements publics à ce stade.
+- Rennes Saint-Jacques : 7 fréquences uniques ;
+- Brest Bretagne : 5 ;
+- Dinard Pleurtuit Saint-Malo : 2 ;
+- Quimper Pluguffan : 1 ;
+- aviation urgence 121.500 MHz : 1.
 
-## État final après Sprint 70
+Toutes sont AM, pas 8.33 kHz, RX-only. Les doublons de services sur la même RF sont dédupliqués.
 
-- Normandie v0.4 : **publiée, 142 mémoires RX**, CSV public figé.
-- Revue v0.4 : **9/9**, périmètre clos ; publication enregistrée dans `research/normandie-v0.4/publication-record.json`.
-- Normandie v0.5 : **initialisée en recherche**, base publique v0.4=142, aucun ajout encore promu.
-- Backlog v0.5 : R3/F1ZBX (+2 potentiels après 2 sessions RX), F5ZHA (+2 potentiels après source+terrain), F1ZOV (+1 potentiel après sortie de maintenance), F6ZES (delta inconnu tant que fréquence/mode ne sont pas prouvés).
-- Bretagne v0.1 reste recherche uniquement dans cet état historique.
-
-## Historique de préparation — Normandie v0.4
-
-Candidat interne reproductible : **142 mémoires**, non public. Les trois portes de fréquence connues représentent au maximum +5 mémoires, soit un plafond de travail connu à **147 mémoires**. Ce plafond n'est pas la taille publique finale et F6ZES reste hors calcul tant que fréquence et mode ne sont pas résolus.
-
-Ajouts internes actuels : `50-ZHY-IN` 145.0875 MHz (175), `53-ZCE-IN` 145.1000 MHz (176), `50-ZBL-U` 431.2500 MHz (177).
-
-État historique avant la clôture Sprint 68 : **3/9 points complétés**, **6 blocages ouverts**, **0 ajout éligible**, preview **142 mémoires**. Cet état est conservé dans les sources historiques ; la clôture Sprint 68 l'a ensuite porté à 9/9 avec zéro blocage.
-
-## Clôture de périmètre Normandie v0.4 — Sprint 68
-
-Normandie v0.4 est figée à **142 mémoires RX**. Les trois ajouts sont `50-ZHY-IN` 145.0875 MHz, `53-ZCE-IN` 145.1000 MHz et `50-ZBL-U` 431.2500 MHz.
-
-R3/F1ZBX, F5ZHA, F1ZOV et F6ZES sont **reportés à Normandie v0.5** sans être considérés validés. La revue v0.4 est **9/9**, les blocages de prépublication sont à **0**, l'audit est **OK** et le dry-run avec baseline propre est prêt pour l'activation publique. La publication reste une étape séparée.
-
-## Publication Normandie v0.4 — Sprint 69
-
-Le CSV public `website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv` contient **142 mémoires RX** et correspond octet pour octet au candidat revu. La v0.3.1 à 139 mémoires reste intacte. Le registre public, les pages du site et le générateur public pointent désormais vers v0.4. Le journal immuable de publication est `research/normandie-v0.4/publication-record.json`.
-
-## Initialisation Normandie v0.5 — Sprint 70
-
-La prochaine version active est **Normandie v0.5**, recherche uniquement, basée sur la v0.4 publique immuable à 142 mémoires. `research/normandie-v0.5/backlog.json` reprend R3/F1ZBX, F5ZHA, F1ZOV et F6ZES sans les considérer validés. Aucun ajout v0.5 n'est encore promu.
-
-## Chaîne de revue — Sprints 55 à 59
+Artefacts :
 
 ```text
-tools/build_normandie_v04_review_snapshot.py
-tools/build_normandie_v04_review_manifest.py
-tools/check_normandie_v04_review_drift.py
-tools/run_normandie_v04_publication_dry_run.py
-tests/test_normandie_v04_review_handoff.py
+research/bretagne-v0.2/aviation-airac-08.json
+research/bretagne-v0.2/candidate-memory-delta.json
+research/bretagne-v0.2/pack-plan.json
+research/bretagne-v0.2/backlog.json
+research/sprint-75-summary.md
+tools/build_bretagne_v02_internal_candidate.py
+tests/test_sprint75_bretagne_aviation.py
 ```
 
-Le snapshot capture l'état logique de revue. Le manifeste enregistre les SHA-256 des entrées, du candidat et du preview. Le drift checker impose une nouvelle revue dès qu'une entrée suivie change. Le dry-run sépare la prépublication de l'activation publique et n'écrit jamais de fichier public.
+## Backlog Bretagne v0.2 restant
 
-## Dossiers Normandie encore bloqués
+L'aviation est validée **pour le candidat interne uniquement**, pas pour une publication automatique. Restent ouverts :
 
-- **R3 / F1ZBX** : paramètres opérateur confirmés sur 145.075 / 145.675 MHz. Si la porte est franchie, la paire représente exactement **2 mémoires RX**. La réception Mortain reste à démontrer par **2 sessions** indépendantes sur la sortie identifiée 145.675 MHz ; ces sessions sont des preuves et ne changent pas le nombre de mémoires.
-- **F5ZHA Laval** : recontrôle Sprint 65, le REF courant affiche toujours F5ZHA actif sur **145.4675 / 432.575 MHz**. La valeur conflictuelle RepeaterBook 431.4125 MHz reste secondaire stale avec vérification affichée **2017-02-17** et `Off-Air`. Une source locale actuelle ou autoritative équivalente et la couverture utile Mortain restent requises.
-- **F1ZOV** : recontrôle du 11 août 2026, l'exploitant local F6KFW l'indique toujours **En Maintenance** sur 430.375 / 431.975 MHz ; le statut exploitant local reste prioritaire.
-- **F6ZES Sourdeval** : recontrôle Sprint 65, le REF confirme site/responsable/locator/altitude mais laisse toujours état, bande, émission, réception et mode vides. Fréquence/mode non résolus, delta candidat **0**, aucune conjecture autorisée.
+- données ADRASEC publiquement vérifiables pour 22 / 29 / 35 / 56 ;
+- cas F1ZUG / ADRASEC 35, sans jamais déduire une fréquence d'une entrée APRS ;
+- attribution locale CROSS Étel Ch64 ;
+- attribution locale CROSS Corsen Ch79 ;
+- revalidation des infrastructures radioamateur F5ZPV, F5ZZH, F1ZBZ et F5ZZC-4.
 
-### Synthèse des références courantes — Sprint 67
+Ch64 et Ch79 existent déjà génériquement dans la base publique v0.1 ; une attribution locale future ne crée pas de doublon RF.
 
-Le guide ministériel 2026 a été extrait et contrôlé visuellement. Il confirme **79/80** au niveau des bulletins CROSS et **63/64** pour le bulletin côtier permanent, mais ne nomme aucun émetteur. Cette preuve actuelle améliore la fraîcheur documentaire sans résoudre les sites.
+## Historique Sprint 74
 
-- Ch64 : 156.225 / 160.825 MHz reste une paire de **2 mémoires RX** si publiable ; aucun site Morbihan primaire actuel n'est identifié, conflit ouvert.
-- Ch79 : 156.975 / 161.575 MHz reste une paire de **2 mémoires RX** si publiable ; Fréhel et Stiff sont des infrastructures primaires actuelles, tandis que les indices Ch79 secondaires convergent vers Fréhel/Bodic/Stiff et la chaîne Fréhel/Bodic/Batz/Stiff/Raz. Cette convergence ne vaut pas mapping primaire.
-- F5ZHA : l'indicateur vert de la fiche RepeaterBook 431.4125 ne supplante pas sa provenance `2017-02-17` / `Off-Air`; source autoritative actuelle toujours requise.
-- F6ZES : aucune fréquence/mode/état nouveau ; R3 : toujours 2 mémoires si promotion et 2 sessions de preuve.
+Bretagne v0.2 a été initialisée sur v0.1=135 avec candidat 135, delta 0 et six dossiers de recherche. Cette initialisation reste auditable dans `research/sprint-74-summary.md` même après le passage du candidat à 151.
 
-État historique de la recherche avant clôture v0.4 : **142**, plafond **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**, non prêt pour publication.
+## Historique Bretagne v0.1
 
-### Inventaires techniques courants — Sprint 66
+Bretagne v0.1 a été publiée au Sprint 73 avec **135 mémoires RX**, après une revue 8/8 sans blocage du périmètre figé. Son CSV public reste identique au candidat revu et la version reste immuable.
 
-`research/sprint-66-technical-inventory-boundaries.json` enregistre la passe sans toucher au candidat.
+Les données aviation, ADRASEC non publiées, mappings CROSS locaux et infrastructures amateur non résolues avaient été reportés à v0.2 sans validation implicite.
 
-- F5ZHA : ARAM53 est identifiable comme association active, mais aucune publication technique locale actuelle exploitée ne valide la paire ; existence associative ≠ validation de fréquence.
-- F6ZES : fréquence/mode/état toujours absents ; delta candidat **0**.
-- CROSS Étel : l'offre DIRM `2026-2341297` confirme **17 stations radio** de Penmarc'h à Biarritz et un contexte MHF/VHF, mais aucun nom de station ni canal : Ch64 reste sans site.
-- CROSS Corsen : Stiff est revalidé comme infrastructure radio 2026 ; le marché `DGAMPA-SNC1-2025-03_STIFF` confirme le projet de rénovation mais aucun Ch79. Une source secondaire non datée restitue Fréhel/Bodic/Batz/Stiff/Raz sur Ch79, uniquement comme cible de recherche.
-- Guide Marine 2026 : nouvelle tentative `cache miss`, donc aucune inférence.
+## Normandie v0.5 — état inchangé
 
-### Recontrôle primaire courant — Sprint 65
+Normandie v0.5 reste basée sur v0.4=142, avec **0 ajout éligible** et un plafond potentiel connu à **147 mémoires** hors F6ZES.
 
-`research/sprint-65-primary-recheck.json` enregistre la passe actuelle sans toucher au candidat.
+- **R3 / F1ZBX** : paire 145.075 / 145.675 MHz = **2 mémoires RX** si validation. Il faut toujours **2 sessions** RX indépendantes depuis Mortain ; les sessions sont des preuves, pas des mémoires.
+- **F5ZHA** : le REF courant conserve 145.4675 / 432.575 MHz ; la donnée conflictuelle RepeaterBook reste associée à `2017-02-17` / `Off-Air`. La réconciliation autoritative et le terrain restent nécessaires.
+- **F1ZOV** : toujours En Maintenance selon l'opérateur local au dernier contrôle.
+- **F6ZES Sourdeval** : fréquence et mode toujours non résolus ; delta candidat **0** et aucune conjecture autorisée.
 
-- F5ZHA : paire REF 145.4675 / 432.575 MHz maintenue comme paire de travail ; réconciliation locale/autoritative toujours incomplète et terrain toujours requis.
-- F6ZES : F1SMB, `IN98MR93XV` et 230 m restent présents, mais fréquence/mode/état opérationnel restent absents.
-- Résultat : **0 porte franchie, 0 ajout éligible, candidat/preview 142/142, plafond 147, revue 3/9, 6 blocages**.
+La revue v0.4 est **9/9** et les blocages de prépublication sont à **0** ; la publication enregistrée de v0.4 reste distincte des dossiers reportés à v0.5.
 
-### Contrat deux mémoires RX — Sprint 64
+## Bretagne — frontières CROSS conservées
 
-`research/sprint-64-dual-rx-contract.json` sépare explicitement le nombre de mémoires du nombre de preuves terrain.
+### CROSS Étel Ch64
 
-- **R3** : `R3-OUT` 145.675 et `R3-IN` 145.075 sont les deux membres de paire. `CTRL-ZHY` 145.6875 est seulement un contrôle facultatif hors paire. Deux sessions de terrain sont toujours nécessaires, mais si la porte passe le delta reste **+2 mémoires**, pas +4.
-- **CROSS Étel Ch64** : 156.225 + 160.825 MHz = **2 mémoires RX** si le canal devient publiable ; conflit primaire/site toujours non résolu, delta actuel 0.
-- **CROSS Corsen Ch79** : 156.975 + 161.575 MHz = **2 mémoires RX** si le canal devient publiable ; attribution primaire actuelle de l'émetteur toujours non résolue, delta actuel 0.
+Le **conflit primaire actuel** demeure : la source ministérielle maintient 63/64 dans le Morbihan, tandis que les sources locales CROSS Étel convergent sur Ch63. La **convergence opérationnelle locale sur Ch63** ne prouve ni fonctionnement ni arrêt de Ch64.
 
-Le contrat ne modifie ni candidat, ni `promotion-gates.json`, ni pack public.
+Le bilan 2025 parle de **16 stations VHF + 2 MF** et la maintenance 2026 de **17 stations radio** ; ces nombres ne sont pas réconciliés sans définition commune.
 
-### Revalidation des blocages — Sprint 63
+### CROSS Corsen Ch79
 
-`research/sprint-63-source-revalidation.json` conserve la passe datée sans modifier les critères des portes existantes.
+Les pistes secondaires incluent **Cap Fréhel**, **Bodic** et la chaîne jusqu'au **Stiff / Ouessant**. Elles ne remplacent toujours pas le mapping primaire actuel requis.
 
-- F1ZOV : maintenance opérateur confirmée à nouveau, delta **0**.
-- F5ZHA : conflit RepeaterBook 431.4125 reclassé **secondaire stale** grâce à la date de vérification 2017-02-17 ; réconciliation autoritative toujours incomplète et terrain toujours requis, delta **0**.
-- F6ZES : aucun champ fréquence/mode nouveau, delta **0**.
-- R3 : aucune nouvelle observation terrain dans le dépôt, delta **0**.
+La page ministérielle de référence a été recontrôlée le **19 juin 2026**. Le **Guide Marine 2026** reste un élément de recherche documentaire distinct des mappings de sites.
 
-### Scan REF adjacent — Sprint 61
+## Sprint 66 — inventaires techniques historiques
 
-`research/normandie-v0.4/mortain-adjacent-ref-scan.json` recontrôle les départements **35, 50, 53 et 61**. Résultat : **0 nouveau relais analogique actif non déjà suivi**, donc delta candidat **0**.
-
-Ce scan est une preuve d'inventaire, pas une preuve de réception. Il ne modifie ni candidat ni pack public.
-
-## Bretagne — inventaires techniques Sprint 66
-
-La maintenance 2026 du CROSS Étel confirme 17 stations radio et le domaine MHF/VHF sans fournir l'inventaire nominatif ou les canaux. Le Stiff / Ouessant reste une infrastructure radio Corsen actuelle, mais ni le poste 2026 ni le marché de rénovation ne l'associent à Ch79. La chaîne secondaire Fréhel/Bodic/Batz/Stiff/Raz ne devient pas une preuve primaire actuelle.
-
-Les paires restent **Ch64 156.225 / 160.825 MHz = 2 mémoires RX** et **Ch79 156.975 / 161.575 MHz = 2 mémoires RX** si leurs portes sont un jour franchies ; delta RF actuel **0**.
-
-## Bretagne — recontrôle primaire Sprint 65
-
-Trois frontières sont désormais rafraîchies avec leurs dates courantes :
-
-- la page du ministère chargée de la mer, mise à jour le **19 juin 2026**, maintient que le canal 16 annonce les diffusions météo CROSS sur **79 et 80**, et que les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan ; elle ne nomme aucun site Ch64 ;
-- la page du CROSS Étel, mise à jour le **24 novembre 2025**, maintient les vacations annoncées sur 16 puis diffusées sur 79/80 et la diffusion continue **Étel + Chassiron sur Ch63**, sans site Ch64 ;
-- la page du CROSS Corsen, mise à jour le **24 mars 2026**, confirme le réseau VHF/MHF permanent et les bulletins météo diffusés depuis des stations littorales, sans mapping **Ch79 ↔ station**.
-
-Règles renforcées : une déclaration régionale de canal ne nomme pas automatiquement son émetteur et la confirmation d'un réseau CROSS ne mappe pas automatiquement un canal vers une station.
-
-## Bretagne — CROSS Corsen canal 79
-
-`research/bretagne-v0.1/corsen-channel79-evidence.json` reste le dossier de vérité courant.
-
-Le contexte primaire actuel confirme le réseau VHF/MF Corsen sans identifier le site actuel du canal 79. Une source locale actuelle du Club de Voile de la Baie d'Erquy associe le canal 79 à **Cap Fréhel** et **Bodic** avec des horaires de diffusion. Cette donnée reste une **piste secondaire**, pas une validation primaire.
-
-- **Cap Fréhel** : infrastructure CROSS actuelle vérifiée ;
-- **Stiff / Ouessant** : équipements radio actuels vérifiés ;
-- ces infrastructures **n'attribuent aucun canal**.
-
-Le bilan officiel CROSS Corsen 2025 et le Guide Marine 2026 restent identifiés mais non exploitables dans le workflow courant. Une source non lue n'est pas une preuve négative.
-
-La paire Ch79 **156.975 / 161.575 MHz** est verrouillée comme **2 mémoires RX distinctes** si Ch79 devient publiable. Les deux fréquences étaient déjà dans la recherche Bretagne : aucun delta mémoire RF actuel.
-
-## Bretagne — CROSS Étel canal 64
-
-`research/bretagne-v0.1/etel-channel64-evidence.json` conserve le **conflit primaire actuel** :
-
-- la page ministérielle actuelle affirme que les canaux **63 et 64** diffusent un bulletin côtier permanent notamment dans le Morbihan ;
-- la page actuelle du CROSS Étel nomme Étel et Chassiron en diffusion continue sur **63** ;
-- le planning météo actuellement lié par le CROSS liste les émetteurs/canaux et ne mentionne pas 64 ;
-- le bilan officiel 2025 décrit **16 stations VHF + 2 MF**, nomme les émetteurs météo réguliers et les stations renforcées **Étel/Chassiron/Ferret sur 63**, sans mention de canal 64.
-
-La **convergence opérationnelle locale sur Ch63** ne prouve ni que Ch64 fonctionne actuellement, ni qu'il est arrêté. Aucun site Ch64 n'est attribué.
-
-L'offre technique DIRM de juillet 2026 parle de **17 stations radio** maintenues ; ce nombre ne doit pas être réconcilié arithmétiquement avec « 16 VHF + 2 MF » sans définition commune.
-
-La paire Ch64 **156.225 / 160.825 MHz** est verrouillée comme **2 mémoires RX distinctes** si Ch64 devient publiable. Elle était déjà dans la recherche Bretagne : delta RF actuel **0**.
-
-## Guide Marine 2026
-
-La page Météo-France datée du 5 août 2026 indique toujours que le Guide Marine contient les horaires, fréquences radio et contenus des bulletins VHF. Le lien direct du PDF 2026 a été retenté le 11 août 2026 ; le workflow retourne toujours `cache miss`.
-
-Conséquence : contenu non extrait, aucune capture PDF disponible, aucune inférence Ch64 et aucune attribution Ch79.
+Le Sprint 66 a confirmé des infrastructures et périmètres techniques sans transformer existence d'infrastructure en attribution de canal. Ce principe reste actif pour Bretagne v0.2 et Normandie v0.5.
 
 ## Commandes de reprise
 
@@ -210,12 +107,14 @@ Conséquence : contenu non extrait, aucune capture PDF disponible, aucune infér
 cd "C:\Users\cross\Documents\CODE\PROJETS\RadioPack-France"
 git pull --ff-only
 
+python tools\build_bretagne_v02_internal_candidate.py
+python tests\test_sprint75_bretagne_aviation.py
+python tests\test_sprint74_bretagne_v02_initialization.py
+python tests\test_bretagne_public_release.py
+python tests\test_pack_registry.py
+python tests\test_site_files.py
+
 python tools\run_normandie_v04_checks.py --extended
-python tools\check_normandie_v04_source_consistency.py
-python tools\check_normandie_v04_source_freshness.py
-python tools\build_normandie_v04_review_snapshot.py
-python tools\build_normandie_v04_review_manifest.py
-python tools\run_normandie_v04_prepublication_audit.py
 python tests\test_normandie_v04_review_handoff.py
 python tests\test_sprint60_revalidation.py
 python tests\test_sprint61_research.py
@@ -225,19 +124,6 @@ python tests\test_sprint64_dual_rx_contract.py
 python tests\test_sprint65_primary_recheck.py
 python tests\test_sprint66_technical_inventory_boundaries.py
 python tests\test_sprint67_current_reference_synthesis.py
-python tests\test_sprint68_scope_closure.py
-python tests\test_normandie_v04_public_release.py
-python tests\test_normandie_v05_initialization.py
-python tests\test_etel_network_research.py
-python tests\test_bretagne_research_scaffold.py
-python tests\test_bretagne_prepublication_review.py
-python tests\test_sprint72_bretagne_scope_closure.py
-python tests\test_bretagne_public_release.py
-python tests\test_sprint73_bretagne_publication.py
-python tests\test_sprint74_bretagne_v02_initialization.py
-python tests\test_emergency_relay_research.py
-python tests\test_site_files.py
-python tests\test_pack_registry.py
 
 cd website
 npm ci
@@ -267,28 +153,18 @@ python tools\record_normandie_v04_f5zha_observation.py --help
 ## Règles de reprise
 
 - ne jamais réécrire une version publiée ;
-- le statut opérateur local prime pour l'état opérationnel courant ;
-- une observation radio ne ferme pas un conflit de source ;
-- **le nombre de sessions terrain ne définit jamais le nombre de mémoires** ;
-- une paire vérifiée de deux fréquences distinctes conserve **2 mémoires RX** après franchissement des portes ;
-- une mémoire de contrôle facultative n'est pas membre de la paire ;
-- une source secondaire actuelle peut prioriser une recherche mais ne remplace pas une validation primaire requise ;
-- une source secondaire stale ne remplace pas la réconciliation autoritative explicitement exigée par une porte ;
-- un conflit entre sources primaires actuelles doit être réconcilié avant promotion ;
-- une convergence documentaire locale sur un canal ne réfute pas automatiquement un autre canal mentionné par une source primaire conflictuelle ;
-- l'absence d'une donnée dans un document local courant n'est pas automatiquement une preuve d'arrêt ;
-- une source primaire identifiée mais non extractible n'est pas une preuve négative ;
-- une déclaration régionale actuelle sur un canal ne permet pas d'identifier automatiquement son site émetteur ;
-- la confirmation d'un réseau CROSS courant ne permet pas de mapper automatiquement un canal vers une station ;
-- une infrastructure radio actuelle ne permet pas d'attribuer un canal précis ;
-- une affectation historique primaire ne vaut pas validation opérationnelle actuelle ;
-- une source périmée bloque une revue mais ne prouve jamais un arrêt ;
-- une recherche infructueuse n'est pas une preuve négative ;
-- une fréquence non résolue n'est jamais devinée ;
-- des nombres de stations issus de définitions différentes ne sont pas réconciliés sans définition commune ;
-- géométrie et rayon annoncé ne sont pas des preuves de réception ;
 - toutes les mémoires restent RX-only avec `Duplex=off` et `Offset=0.000000` ;
-- une porte non franchie reste hors candidat ;
-- snapshot, manifeste, drift check, preview, diff, audit et dry-run sont non destructifs et non publics ;
-- **integrity_ok** ou un drift propre ne signifie jamais **release_ready** ;
-- revue finale, plan mémoire final et changement explicite du registre public restent obligatoires avant publication.
+- aucune fréquence non résolue n'est devinée ;
+- aucune donnée opérationnelle privée PPDR n'est intégrée ;
+- une source secondaire ne remplace pas une validation primaire exigée ;
+- une infrastructure actuelle ne permet pas d'attribuer automatiquement un canal ;
+- une déclaration régionale de canal ne permet pas d'identifier automatiquement son émetteur ;
+- une observation terrain ne ferme pas un conflit de source ;
+- le nombre de sessions terrain ne définit jamais le nombre de mémoires ;
+- une paire vérifiée de deux fréquences distinctes conserve 2 mémoires RX ;
+- une source primaire identifiée mais non lue n'est pas une preuve négative ;
+- pour l'aviation, le contexte AIRAC courant et la dernière page AIP primaire effective peuvent valider un candidat interne selon le précédent du projet ;
+- ne jamais revendiquer une correspondance de champs XML si les octets XML n'ont pas été réellement extraits ;
+- une promotion vers le candidat interne n'est jamais une publication ;
+- pas de remplissage artificiel ; maximum 200 mémoires ;
+- revue finale et changement explicite du registre public restent obligatoires avant toute publication.

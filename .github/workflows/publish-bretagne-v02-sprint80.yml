@@ -1,0 +1,43 @@
+name: Publish Bretagne v0.2 Sprint 80
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: ${{ contains(github.event.head_commit.message, '[publish-bretagne-v02-sprint80]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Apply publication anchor compatibility
+        shell: bash
+        run: |
+          sed -i 's/## État Sprint 79 — prépublication prête/## État Sprint 79/' tools/publish_bretagne_v02_sprint80.py
+
+      - name: Publish immutable Bretagne v0.2
+        run: python tools/publish_bretagne_v02_sprint80.py
+
+      - name: Commit Sprint 80 publication
+        shell: bash
+        run: |
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git checkout -- .github/workflows/ci.yml .github/workflows/publish-bretagne-v02-sprint80.yml
+          rm -f tools/publish_bretagne_v02_sprint80.py research/.sprint80-publish-trigger
+          git add -A
+          git commit -m "Sprint 80 publish Bretagne v0.2 immutable 151 RX [reference-archive]"
+          git push origin HEAD:main

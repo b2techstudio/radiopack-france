@@ -35,14 +35,15 @@
     "slug": "bretagne",
     "name": "Bretagne",
     "shortName": "Bretagne",
-    "status": "v0.1 disponible",
+    "status": "v0.2 disponible",
     "accent": "blue",
-    "description": "Pack de 135 mémoires RX : PMR446, VHF marine, écoute radioamateur et fréquences régionales analogiques dédupliquées.",
-    "memoryCount": 135,
+    "description": "Pack de 151 mémoires RX : socle Bretagne v0.1 complété par 16 mémoires aviation AIRAC 08/26, toujours en réception seule.",
+    "memoryCount": 151,
     "categories": [
       "PMR446 RX",
       "VHF marine RX",
       "Radioamateur RX",
+      "Aviation RX",
       "Ch64 / Ch79 RX"
     ],
     "available": true

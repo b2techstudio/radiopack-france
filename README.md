@@ -201,6 +201,8 @@ python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
 python tools\run_bretagne_v02_prepublication_audit.py --require-prepublication-ready
 python tests\test_sprint79_bretagne_v02_maturity.py
+python tests\test_bretagne_v02_public_release.py
+python tests\test_sprint80_bretagne_v02_publication.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
 

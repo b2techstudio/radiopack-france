@@ -433,7 +433,7 @@ assert len(regions) == 3
 assert {region["slug"] for region in regions} == {"annecy-haute-savoie", "normandie", "bretagne"}
 assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 65
 assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 142
-assert next(region for region in regions if region["slug"] == "bretagne")["memoryCount"] == 135
+assert next(region for region in regions if region["slug"] == "bretagne")["memoryCount"] == 151
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
@@ -445,15 +445,16 @@ for expected in [
     'memoryCount: 65',
     'memoryCount: 48',
     'memoryCount: 142',
-    'memoryCount: 135',
+    'memoryCount: 151',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
 assert registry.count('downloadUrl: "') == 4
 assert 'id: "bretagne"' in registry
-assert 'version: "v0.1"' in registry
+assert 'version: "v0.2"' in registry
 assert 'version: "v0.3"' not in registry
 assert (ROOT / "website/src/pages/regions/bretagne.astro").is_file()
 assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv").is_file()
+assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv").is_file()
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()

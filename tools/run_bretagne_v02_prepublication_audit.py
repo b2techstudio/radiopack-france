@@ -53,10 +53,10 @@ def main() -> None:
         errors.append("unexpected aviation AIRAC cycle")
     if cycle["effective_from"] != "2026-08-06" or cycle["effective_until_inclusive"] != "2026-09-02":
         errors.append("unexpected aviation validity window")
-    if aviation["methodology"]["current_xml_export_bytes_extracted"] is not False:
+    if cycle["current_xml_export_bytes_extracted_in_repository_workflow"] is not False:
         errors.append("audit assumptions changed: XML extraction unexpectedly true")
-    if aviation["methodology"]["direct_current_xml_field_match_claimed"] is not False:
-        errors.append("unperformed direct XML field match is being claimed")
+    if aviation["methodology"]["does_not_claim_current_xml_field_match_without_xml_extraction"] is not True:
+        errors.append("aviation methodology no longer guards unperformed XML field match")
 
     with tempfile.TemporaryDirectory() as temp_dir:
         temp = Path(temp_dir)

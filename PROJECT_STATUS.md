@@ -4,6 +4,8 @@ Dernière mise à jour : **12 août 2026**
 Sprint courant : **74**
 État logique : **0.21.63**
 
+Repère de compatibilité historique conservé pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
+
 Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md`, `research/sprint-73-summary.md` et `research/sprint-74-summary.md`.
 
 ## État public

@@ -133,6 +133,9 @@ jobs:
       - name: Test Sprint 75 Bretagne AIRAC 08 aviation
         run: python tests/test_sprint75_bretagne_aviation.py
 
+      - name: Test Sprint 76 Bretagne amateur revalidation
+        run: python tests/test_sprint76_bretagne_amateur_revalidation.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

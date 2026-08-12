@@ -5,13 +5,12 @@ ROOT = Path(__file__).resolve().parents[1]
 PLAN = json.loads((ROOT / 'research/bretagne-v0.2/pack-plan.json').read_text(encoding='utf-8'))
 BACKLOG = json.loads((ROOT / 'research/bretagne-v0.2/backlog.json').read_text(encoding='utf-8'))
 
-assert PLAN['status'] == 'research_next_version_not_public'
 assert PLAN['target_version'] == '0.2'
 assert PLAN['based_on_published_version'] == '0.1'
 assert PLAN['published_base_memory_count'] == 135
 assert PLAN['published_base_is_immutable'] is True
-assert PLAN['current_candidate_memory_count'] == 135
-assert PLAN['current_new_memory_count'] == 0
+assert PLAN['current_candidate_memory_count'] >= 135
+assert PLAN['current_new_memory_count'] == PLAN['current_candidate_memory_count'] - 135
 assert PLAN['public_export_allowed'] is False
 assert PLAN['public_registry_allowed'] is False
 assert PLAN['inherited_generic_maritime_pairs']['channel64_present_in_published_base'] is True
@@ -32,8 +31,17 @@ aviation = items['AVIATION_CURRENT_SOURCE_EXTRACT']
 assert aviation['current_cycle_at_initialization'] == 'AIRAC 08/26'
 assert aviation['valid_from'] == '2026-08-06'
 assert aviation['valid_through'] == '2026-09-02'
-assert aviation['potential_memory_delta'] is None
 assert aviation['promoted'] is False
+if PLAN['current_candidate_memory_count'] == 135:
+    assert PLAN['current_new_memory_count'] == 0
+    assert aviation['potential_memory_delta'] is None
+else:
+    assert PLAN['current_candidate_memory_count'] == 151
+    assert PLAN['current_new_memory_count'] == 16
+    assert aviation['potential_memory_delta'] == 16
+    assert aviation['internal_candidate_memory_delta'] == 16
+    assert aviation['internal_candidate_promoted'] is True
+    assert aviation['public_promotion'] is False
 
 adrasec = items['ADRASEC_PUBLIC_DATA_REVALIDATION']
 assert adrasec['departments'] == [22, 29, 35, 56]
@@ -63,4 +71,4 @@ assert BACKLOG['rules']['unpublished_data_must_not_be_inferred'] is True
 assert BACKLOG['rules']['private_ppdr_operational_data_excluded'] is True
 assert BACKLOG['rules']['public_export_allowed'] is False
 
-print('Sprint 74 Bretagne v0.2 initialized from immutable public v0.1=135 with six deferred research dossiers and zero promotion OK')
+print('Sprint 74 Bretagne v0.2 initialization remains auditable from immutable public v0.1=135 while later internal candidate increments are allowed without public promotion OK')

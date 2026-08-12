@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "status": "research_next_version_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.3",
+  "based_on_published_version": "0.2",
+  "published_base_memory_count": 151,
+  "published_base_is_immutable": true,
+  "published_base_csv": "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv",
+  "published_base_sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4",
+  "published_base_record": "research/bretagne-v0.2/publication-record.json",
+  "backlog_file": "research/bretagne-v0.3/backlog.json",
+  "airac_transition_policy_file": "research/bretagne-v0.3/airac-transition-policy.json",
+  "internal_candidate_builder": "tools/build_bretagne_v03_internal_candidate.py",
+  "current_candidate_memory_count": 151,
+  "current_new_memory_count": 0,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "initialization": {
+    "sprint": 81,
+    "date": "2026-08-12",
+    "candidate_is_exact_public_v0_2_base": true,
+    "new_rf_promoted": false,
+    "new_metadata_promoted": false
+  },
+  "airac_baseline": {
+    "inherited_cycle": "AIRAC 08/26",
+    "inherited_cycle_valid_through_inclusive": "2026-09-02",
+    "next_cycle": "AIRAC 09/26",
+    "next_cycle_effective_from": "2026-09-03",
+    "freshness_revalidation_required_before_post_transition_publication": true
+  },
+  "carried_open_dossiers": [
+    "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
+    "CROSS_ETEL_CH64_LOCAL_MAPPING",
+    "CROSS_CORSEN_CH79_LOCAL_MAPPING",
+    "F5ZPV_RESTART_REVALIDATION",
+    "F5ZZH_RESTART_REVALIDATION",
+    "F5ZZC4_CURRENT_APRS_FREQUENCY"
+  ],
+  "scheduled_transition_dossiers": [
+    "AIRAC_09_BRETAGNE_REVALIDATION"
+  ],
+  "resolved_v0_2_items_not_reopened": [
+    "ADRASEC_PUBLIC_DATA_REVALIDATION",
+    "F1ZBZ_RF_DIRECTION_REVIEW"
+  ],
+  "rules": {
+    "published_v0_2_must_not_be_modified": true,
+    "initial_v0_3_candidate_must_reproduce_v0_2_exactly": true,
+    "deferred_item_is_not_validated": true,
+    "resolved_zero_delta_item_is_not_reopened_without_new_evidence": true,
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unpublished_data_must_not_be_inferred": true,
+    "private_ppdr_operational_data_excluded": true,
+    "generic_memory_must_not_be_duplicated_for_local_site_metadata": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "stopped_infrastructure_not_promoted": true,
+    "airac_transition_requires_explicit_freshness_review": true,
+    "direct_xml_field_match_must_not_be_claimed_without_xml_extraction": true,
+    "internal_candidate_promotion_is_not_publication": true
+  }
+}

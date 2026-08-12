@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "status": "internal_candidate_delta_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "base": {
+    "published_version": "0.1",
+    "memory_count": 135,
+    "immutable": true
+  },
+  "delta": {
+    "aviation_airac08_memory_count": 16,
+    "other_new_memory_count": 0,
+    "total_new_memory_count": 16,
+    "candidate_memory_count": 151
+  },
+  "aviation": {
+    "source": "research/bretagne-v0.2/aviation-airac-08.json",
+    "location_start": 130,
+    "location_end": 145,
+    "reserved_location_end": 149,
+    "mode": "AM",
+    "step_khz": 8.33,
+    "rx_only": true,
+    "same_rf_frequency_deduplicated": true,
+    "current_cycle": "AIRAC 08/26",
+    "effective_from": "2026-08-06",
+    "effective_until_inclusive": "2026-09-02",
+    "internal_candidate_allowed": true,
+    "public_export_allowed": false
+  },
+  "rules": {
+    "published_v0_1_must_not_be_modified": true,
+    "candidate_must_reproduce_v0_1_base_exactly": true,
+    "no_artificial_fill": true,
+    "max_memories": 200,
+    "max_name_length": 10,
+    "tx_disabled": true,
+    "public_pack_mutation_allowed": false
+  }
+}

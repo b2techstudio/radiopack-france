@@ -1,21 +1,34 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **79**
-État logique : **0.21.68**
+Sprint courant : **80**
+État logique : **0.21.69**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-79-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-80-summary.md`.
 
 ## État public
 
 - Normandie v0.4 : **142 mémoires RX**, publiée et immuable.
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
-- Bretagne v0.1 : **135 mémoires RX**, publiée et immuable.
-- Bretagne v0.2 : aucune publication ; le registre public reste sur v0.1.
+- Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
+- Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 80 — Bretagne v0.2 publiée à 151
+
+La publication explicite est terminée : le candidat gelé au Sprint 79 est devenu le CSV public Bretagne v0.2, **octet pour octet identique** au builder.
+
+- **151 mémoires RX**, dont 16 aviation AIRAC 08/26 ;
+- SHA-256 public : `73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4` ;
+- AIRAC 08/26 recontrôlé courant le 12 août 2026, valable jusqu'au 2 septembre 2026 inclus ;
+- registre et page Bretagne basculés sur v0.2 ;
+- v0.1 conservée comme historique immuable ;
+- dossiers F1ZUG, mappings CROSS et relais amateur arrêtés/non résolus restent reportés hors scope sans être inventés.
+
+Tests : `tests/test_bretagne_v02_public_release.py` et `tests/test_sprint80_bretagne_v02_publication.py`.
 
 ## Sprint 79 — scope v0.2 figé, prépublication prête
 
@@ -124,6 +137,8 @@ python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
 python tools\run_bretagne_v02_prepublication_audit.py --require-prepublication-ready
 python tests\test_sprint79_bretagne_v02_maturity.py
+python tests\test_bretagne_v02_public_release.py
+python tests\test_sprint80_bretagne_v02_publication.py
 python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py

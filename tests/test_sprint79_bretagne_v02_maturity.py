@@ -10,6 +10,7 @@ maturity = json.loads((RESEARCH / "maturity-review.json").read_text(encoding="ut
 scope = json.loads((RESEARCH / "release-scope.json").read_text(encoding="utf-8"))
 checklist = json.loads((RESEARCH / "review-checklist.json").read_text(encoding="utf-8"))
 gates = json.loads((RESEARCH / "publication-gates.json").read_text(encoding="utf-8"))
+record_path = RESEARCH / "publication-record.json"
 
 assert maturity["status"] == "scope_freeze_recommended_prepublication_ready_not_public"
 assert maturity["candidate_memory_count"] == 151
@@ -41,25 +42,31 @@ assert checklist["blocker_count"] == 0
 assert checklist["prepublication_ready"] is True
 assert all(item["passed"] is True for item in checklist["checks"])
 
-assert gates["status"] == "prepublication_ready_151_not_public"
 assert gates["prepublication_ready"] is True
 assert gates["public_release_allowed"] is False
 assert gates["gates"][-1]["id"] == "explicit_publication"
-assert gates["gates"][-1]["status"] == "pending_separate_publication_sprint"
+if record_path.exists():
+    assert gates["status"] == "published_immutable_151"
+    assert gates["gates"][-1]["status"] == "passed_publication_completed_immutable"
+else:
+    assert gates["status"] == "prepublication_ready_151_not_public"
+    assert gates["gates"][-1]["status"] == "pending_separate_publication_sprint"
 
-subprocess.run(
-    [
-        sys.executable,
-        str(ROOT / "tools/run_bretagne_v02_prepublication_audit.py"),
-        "--root",
-        str(ROOT),
-        "--require-prepublication-ready",
-    ],
-    check=True,
-)
+subprocess.run([
+    sys.executable,
+    str(ROOT / "tools/run_bretagne_v02_prepublication_audit.py"),
+    "--root",
+    str(ROOT),
+    "--require-prepublication-ready",
+], check=True)
 
-assert not (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv").exists()
+public = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv"
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert "radiopack-france-bretagne-v0.2.csv" not in registry
+if record_path.exists():
+    assert public.exists()
+    assert "radiopack-france-bretagne-v0.2.csv" in registry
+else:
+    assert not public.exists()
+    assert "radiopack-france-bretagne-v0.2.csv" not in registry
 
-print("Sprint 79 Bretagne v0.2 maturity: scope frozen at 151, review 10/10, blockers 0, prepublication ready and still not public OK")
+print("Sprint 79 Bretagne v0.2 maturity: frozen 151-memory scope remains auditable before or after explicit Sprint 80 publication OK")

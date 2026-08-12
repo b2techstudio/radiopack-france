@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-12",
+  "publication_sprint": 80,
+  "state_version": "0.21.69",
+  "pack": "Bretagne",
+  "version": "0.2",
+  "memory_count": 151,
+  "new_memory_count_vs_v0_1": 16,
+  "public_csv": "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv",
+  "public_csv_sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4",
+  "candidate_builder": "tools/build_bretagne_v02_internal_candidate.py",
+  "release_scope": "research/bretagne-v0.2/release-scope.json",
+  "review_checklist": "research/bretagne-v0.2/review-checklist.json",
+  "publication_gates": "research/bretagne-v0.2/publication-gates.json",
+  "maturity_review": "research/bretagne-v0.2/maturity-review.json",
+  "previous_public_version": "0.1",
+  "previous_public_memory_count": 135,
+  "previous_public_csv": "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv",
+  "aviation": {
+    "memory_count": 16,
+    "cycle": "AIRAC 08/26",
+    "valid_from": "2026-08-06",
+    "valid_through_inclusive": "2026-09-02",
+    "freshness_rechecked_on": "2026-08-12",
+    "current_sia_product_verified": true,
+    "current_xml_export_bytes_extracted": false,
+    "direct_xml_field_match_claimed": false
+  },
+  "deferred_after_v0_2": [
+    "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
+    "CROSS_LOCAL_TRANSMITTER_SITE_MAPPING",
+    "STOPPED_OR_UNRESOLVED_AMATEUR_INFRASTRUCTURE"
+  ],
+  "published_version_is_immutable": true,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "no_artificial_fill": true,
+    "unpublished_data_not_inferred": true,
+    "generic_ch64_ch79_do_not_claim_local_transmitter_site": true
+  }
+}

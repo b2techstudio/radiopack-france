@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 79 / 0.21.68 — Bretagne v0.2 est figée à 151 mémoires RX, revue 10/10, 0 bloqueur, prépublication prête mais non publique.**
+**État courant : Sprint 80 / 0.21.69 — Bretagne v0.2 est publiée et immuable à 151 mémoires RX, avec 16 mémoires aviation AIRAC 08/26.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 79 / 0.21.68
+## État actuel — Sprint 80 / 0.21.69
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -13,11 +13,27 @@ Packs publics immuables :
 - **Normandie v0.4** — 142 mémoires RX ;
 - Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation ;
-- **Bretagne v0.1** — 135 mémoires RX, publiée et immuable.
+- **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
+- Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.2 est à **151 mémoires RX** : base publique v0.1=135 + 16 mémoires aviation AIRAC 08/26. Aucun CSV public Bretagne v0.2 n'existe et le registre public reste sur v0.1.
+Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.2 est désormais **publique à 151 mémoires RX** : base historique v0.1=135 + 16 mémoires aviation AIRAC 08/26.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md` et `research/sprint-79-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md` et `research/sprint-80-summary.md`.
+
+## Sprint 80 — publication Bretagne v0.2
+
+Bretagne v0.2 est publiée et immuable à **151 mémoires RX**. Le CSV public correspond exactement au candidat gelé au Sprint 79 et son SHA-256 est enregistré dans `research/bretagne-v0.2/publication-record.json`.
+
+- 135 mémoires héritées de la v0.1 immuable + **16 aviation AIRAC 08/26** ;
+- cycle SIA recontrôlé le 12 août 2026, valable jusqu'au **2 septembre 2026 inclus** ;
+- RX-only, zéro doublon RF, aucun remplissage artificiel ;
+- aucune fréquence ADRASEC non publiée ni attribution locale CROSS non prouvée ;
+- la v0.1 reste disponible dans l'historique du dépôt mais le registre courant pointe vers v0.2.
+
+CSV : `website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv`  
+SHA-256 : `73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4`
+
+Garde-fous : `tests/test_bretagne_v02_public_release.py` et `tests/test_sprint80_bretagne_v02_publication.py`.
 
 ## Sprint 79 — maturité et prépublication Bretagne v0.2
 
@@ -151,7 +167,7 @@ Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normand
 - `research/sprint-30-34-summary.md`
 - `research/sprint-35-39-summary.md`
 - `research/sprint-55-60-summary.md`
-- `research/sprint-61-summary.md` à `research/sprint-79-summary.md`
+- `research/sprint-61-summary.md` à `research/sprint-80-summary.md`
 
 ## Tests principaux
 
@@ -165,6 +181,8 @@ python tests\test_sprint76_bretagne_amateur_revalidation.py
 python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
 python tests\test_sprint79_bretagne_v02_maturity.py
+python tests\test_bretagne_v02_public_release.py
+python tests\test_sprint80_bretagne_v02_publication.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py

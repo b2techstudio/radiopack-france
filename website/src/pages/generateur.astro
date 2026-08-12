@@ -158,9 +158,9 @@ const defaultVariant = defaultPack.variants.find((variant) => variant.id === def
         <p>Le générateur propose directement le CSV Normandie v0.4 déjà validé.</p>
       </article>
       <article class="card info-card">
-        <span class="badge badge-green">Bretagne · 135</span>
+        <span class="badge badge-green">Bretagne · 151</span>
         <h3>Pack fixe publié</h3>
-        <p>Le générateur propose directement le CSV Bretagne v0.1 validé, sans aviation dans ce périmètre.</p>
+        <p>Le générateur propose directement le CSV Bretagne v0.2 validé, avec 16 mémoires aviation AIRAC 08/26.</p>
       </article>
     </div>
   </section>
@@ -235,8 +235,10 @@ const defaultVariant = defaultPack.variants.find((variant) => variant.id === def
         aviationSummary.textContent = variant.aviationIncluded ? `Incluse · ${pack.aviationToggle.memoryCount}` : "Exclue · 0";
         if (variantNote) variantNote.textContent = "Pour Annecy, retirer l'aviation conserve les emplacements mémoire des autres blocs.";
       } else {
-        aviationSummary.textContent = "Configuration fixe";
-        if (variantNote) variantNote.textContent = "Ce pack est proposé dans sa variante publique fixe déjà validée.";
+        aviationSummary.textContent = variant.aviationIncluded ? "Incluse · variante fixe" : "Configuration fixe";
+        if (variantNote) variantNote.textContent = variant.aviationIncluded
+          ? "Ce pack public fixe inclut son bloc aviation validé."
+          : "Ce pack est proposé dans sa variante publique fixe déjà validée.";
       }
 
       const notamActive = Boolean(pack.notamCheck && notam?.checked);

@@ -1,10 +1,16 @@
 # Bretagne v0.2 — recherche
 
-Bretagne v0.2 est la version de recherche active basée sur Bretagne v0.1 publiée et immuable (**135 mémoires RX**).
+Bretagne v0.2 est publiée et immuable à **151 mémoires RX**, construite depuis Bretagne v0.1 historique et immuable (**135 mémoires RX**) + 16 mémoires aviation AIRAC 08/26.
 
-## État Sprint 79
+## État Sprint 80 — publiée
 
-Le candidat interne est désormais **figé à 151 mémoires RX** : base v0.1=135 + **16 mémoires aviation AIRAC 08/26**. Les revalidations radioamateur du Sprint 76, ADRASEC publique du Sprint 77 et CROSS Ch64/Ch79 du Sprint 78 produisent chacune un **delta RF de 0**. Le Sprint 79 clôt la revue de maturité à **10/10, 0 bloqueur, prépublication prête**. Aucun export public v0.2 n'existe et le registre public reste sur Bretagne v0.1.
+Le candidat interne est désormais **figé à 151 mémoires RX** : base v0.1=135 + **16 mémoires aviation AIRAC 08/26**. Les revalidations radioamateur du Sprint 76, ADRASEC publique du Sprint 77 et CROSS Ch64/Ch79 du Sprint 78 produisent chacune un **delta RF de 0**. Le Sprint 79 clôt la revue de maturité à **10/10, 0 bloqueur, prépublication prête**. Le CSV public v0.2 et le registre sont désormais publiés ; Bretagne v0.1 reste conservée comme historique immuable.
+
+### Publication Sprint 80
+
+Le CSV public `website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv` est la copie exacte du candidat figé à 151 mémoires. Son SHA-256 est `73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4`.
+
+`publication-record.json` enregistre l'empreinte, le cycle AIRAC 08/26, la fenêtre de validité jusqu'au 2 septembre 2026 inclus et les dossiers explicitement reportés après v0.2.
 
 ### Aviation
 

@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-12",
-  "current_sprint": 79,
-  "state_version": "0.21.68",
+  "current_sprint": 80,
+  "state_version": "0.21.69",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -19,19 +19,21 @@
       "immutable": true
     },
     "bretagne": {
-      "version": "0.1",
-      "memory_count": 135,
+      "version": "0.2",
+      "memory_count": 151,
       "immutable": true,
-      "research_only": false
+      "research_only": false,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 135
     }
   },
   "active_work": {
     "pack": "Bretagne",
     "target_version": "0.2",
-    "status": "scope_frozen_151_review_10_of_10_zero_blockers_prepublication_ready_not_public",
+    "status": "published_immutable_151_airac08_scope",
     "public_export_allowed": false,
     "public_registry_allowed": false,
-    "public_release_ready": false,
+    "public_release_ready": true,
     "published_base_version": "0.1",
     "published_base_memory_count": 135,
     "published_base_is_immutable": true,
@@ -134,7 +136,13 @@
       "CROSS_ETEL_CH64_LOCAL_MAPPING",
       "CROSS_CORSEN_CH79_LOCAL_MAPPING",
       "AMATEUR_INFRASTRUCTURE_REVALIDATION"
-    ]
+    ],
+    "published": true,
+    "publication_sprint": 80,
+    "published_on": "2026-08-12",
+    "publication_record": "research/bretagne-v0.2/publication-record.json",
+    "public_csv": "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv",
+    "public_csv_sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4"
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -292,7 +300,9 @@
     "research/bretagne-v0.2/release-scope.json",
     "research/bretagne-v0.2/review-checklist.json",
     "research/bretagne-v0.2/publication-gates.json",
-    "research/sprint-79-summary.md"
+    "research/sprint-79-summary.md",
+    "research/bretagne-v0.2/publication-record.json",
+    "research/sprint-80-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -343,9 +353,17 @@
     "run_sprint77_test": "python tests/test_sprint77_bretagne_adrasec_public_revalidation.py",
     "run_sprint78_test": "python tests/test_sprint78_bretagne_cross_mapping_revalidation.py",
     "run_bretagne_v02_prepublication_audit": "python tools/run_bretagne_v02_prepublication_audit.py --require-prepublication-ready",
-    "run_sprint79_test": "python tests/test_sprint79_bretagne_v02_maturity.py"
+    "run_sprint79_test": "python tests/test_sprint79_bretagne_v02_maturity.py",
+    "run_sprint80_test": "python tests/test_sprint80_bretagne_v02_publication.py",
+    "run_bretagne_v02_public_release_test": "python tests/test_bretagne_v02_public_release.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 80,
+      "state_version": "0.21.69",
+      "summary": "Bretagne v0.2 published immutable at 151 RX memories; public CSV equals frozen candidate and AIRAC 08/26 freshness boundary is recorded.",
+      "summary_file": "research/sprint-80-summary.md"
+    },
     {
       "sprint": 79,
       "state_version": "0.21.68",
@@ -525,7 +543,11 @@
     "scope_freeze_requires_explicit_deferred_item_list": true,
     "prepublication_ready_does_not_equal_public_release_allowed": true,
     "explicit_publication_must_be_separate_step": true,
-    "aviation_freshness_must_be_rechecked_if_publication_occurs_after_current_airac_window": true
+    "aviation_freshness_must_be_rechecked_if_publication_occurs_after_current_airac_window": true,
+    "published_version_is_immutable": true,
+    "publication_record_hash_must_match_public_csv": true,
+    "historical_public_csv_must_be_retained": true,
+    "airac_publication_freshness_boundary_must_be_recorded": true
   },
   "completed_release": {
     "pack": "Normandie",
@@ -883,5 +905,20 @@
     "aviation_valid_through": "2026-09-02",
     "public_export_allowed": false,
     "public_registry_allowed": false
+  },
+  "latest_sprint80_publication": {
+    "file": "research/sprint-80-summary.md",
+    "publication_record": "research/bretagne-v0.2/publication-record.json",
+    "test": "tests/test_sprint80_bretagne_v02_publication.py",
+    "public_release_test": "tests/test_bretagne_v02_public_release.py",
+    "version": "0.2",
+    "memory_count": 151,
+    "new_memory_count_vs_v0_1": 16,
+    "public_csv": "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv",
+    "public_csv_sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4",
+    "airac_cycle": "AIRAC 08/26",
+    "airac_valid_through_inclusive": "2026-09-02",
+    "published_on": "2026-08-12",
+    "immutable": true
   }
 }

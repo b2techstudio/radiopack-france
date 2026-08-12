@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "prepublication_ready_151_not_public",
+  "status": "published_immutable_151",
   "created": "2026-08-12",
   "updated": "2026-08-12",
   "pack": {
@@ -11,14 +11,61 @@
   "prepublication_ready": true,
   "public_release_allowed": false,
   "gates": [
-    {"id": "sources", "status": "passed_for_frozen_151_scope", "required_for_public_release": true, "description": "All 151 included memories have accepted source lineage; unresolved optional items are outside the frozen scope."},
-    {"id": "aviation_freshness", "status": "passed_airac08_current_on_2026_08_12", "required_for_public_release": true, "description": "AIRAC 08/26 is current from 2026-08-06 through 2026-09-02 inclusive; final publication must remain within this declared freshness boundary or be rechecked."},
-    {"id": "aviation_methodology", "status": "passed_without_unperformed_xml_claim", "required_for_public_release": true, "description": "Current AIRAC context plus latest effective public primary AIP pages accepted; no direct XML field match is claimed because XML bytes were not extracted."},
-    {"id": "maritime_zoning", "status": "passed_generic_channels_local_site_metadata_deferred", "required_for_public_release": true, "description": "Ch64/Ch79 generic pairs are valid and deduplicated; unresolved local site metadata is not claimed."},
-    {"id": "emergency_relay_inventory", "status": "passed_scope_exclusion_unpublished_operational_frequencies", "required_for_public_release": true, "description": "Public ADRASEC evidence is retained while unpublished operational frequencies remain excluded."},
-    {"id": "amateur_infrastructure", "status": "passed_scope_exclusion_stopped_or_unresolved", "required_for_public_release": true, "description": "Stopped or unresolved F5ZPV/F5ZZH/F5ZZC-4 are outside the frozen v0.2 scope; F1ZBZ is resolved at zero RF delta."},
-    {"id": "memory_plan", "status": "passed_internal_candidate_151_frozen", "required_for_public_release": true, "description": "Memory plan frozen at 151 RX memories with 16 new aviation memories and no artificial fill."},
-    {"id": "review_map", "status": "passed_review_checklist_10_of_10", "required_for_public_release": true, "description": "Release review checklist is complete at 10/10 with zero blockers for the frozen scope."},
-    {"id": "explicit_publication", "status": "pending_separate_publication_sprint", "required_for_public_release": true, "description": "Registry, public CSV and publication record remain unchanged until a separate explicit publication sprint."}
-  ]
+    {
+      "id": "sources",
+      "status": "passed_for_frozen_151_scope",
+      "required_for_public_release": true,
+      "description": "All 151 included memories have accepted source lineage; unresolved optional items are outside the frozen scope."
+    },
+    {
+      "id": "aviation_freshness",
+      "status": "passed_airac08_current_on_2026_08_12",
+      "required_for_public_release": true,
+      "description": "AIRAC 08/26 is current from 2026-08-06 through 2026-09-02 inclusive; final publication must remain within this declared freshness boundary or be rechecked."
+    },
+    {
+      "id": "aviation_methodology",
+      "status": "passed_without_unperformed_xml_claim",
+      "required_for_public_release": true,
+      "description": "Current AIRAC context plus latest effective public primary AIP pages accepted; no direct XML field match is claimed because XML bytes were not extracted."
+    },
+    {
+      "id": "maritime_zoning",
+      "status": "passed_generic_channels_local_site_metadata_deferred",
+      "required_for_public_release": true,
+      "description": "Ch64/Ch79 generic pairs are valid and deduplicated; unresolved local site metadata is not claimed."
+    },
+    {
+      "id": "emergency_relay_inventory",
+      "status": "passed_scope_exclusion_unpublished_operational_frequencies",
+      "required_for_public_release": true,
+      "description": "Public ADRASEC evidence is retained while unpublished operational frequencies remain excluded."
+    },
+    {
+      "id": "amateur_infrastructure",
+      "status": "passed_scope_exclusion_stopped_or_unresolved",
+      "required_for_public_release": true,
+      "description": "Stopped or unresolved F5ZPV/F5ZZH/F5ZZC-4 are outside the frozen v0.2 scope; F1ZBZ is resolved at zero RF delta."
+    },
+    {
+      "id": "memory_plan",
+      "status": "passed_internal_candidate_151_frozen",
+      "required_for_public_release": true,
+      "description": "Memory plan frozen at 151 RX memories with 16 new aviation memories and no artificial fill."
+    },
+    {
+      "id": "review_map",
+      "status": "passed_review_checklist_10_of_10",
+      "required_for_public_release": true,
+      "description": "Release review checklist is complete at 10/10 with zero blockers for the frozen scope."
+    },
+    {
+      "id": "explicit_publication",
+      "status": "passed_publication_completed_immutable",
+      "required_for_public_release": true,
+      "description": "Bretagne v0.2 published explicitly at 151 RX memories; CSV and registry are now immutable for this version."
+    }
+  ],
+  "published_on": "2026-08-12",
+  "public_csv_sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4"
 }

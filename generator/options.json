@@ -39,9 +39,11 @@
       {
         "id": "bretagne",
         "name": "Bretagne",
-        "version": "v0.1",
-        "default_memory_count": 135,
-        "options": []
+        "version": "v0.2",
+        "default_memory_count": 151,
+        "options": [],
+        "aviation_included": true,
+        "aviation_memory_count": 16
       }
     ]
   },

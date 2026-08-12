@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.69 - 2026-08-12
+
+- **Sprint 80** : publication de Bretagne v0.2 à **151 mémoires RX**, désormais immuable.
+- CSV public généré directement depuis le candidat gelé au Sprint 79 ; SHA-256 `73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4` enregistré dans `publication-record.json`.
+- AIRAC 08/26 recontrôlé courant le 12 août 2026, valable jusqu'au 2 septembre 2026 inclus ; aucune comparaison XML champ par champ non effectuée n'est revendiquée.
+- Registre, générateur et page Bretagne basculés sur v0.2 ; Bretagne v0.1 reste conservée comme historique immuable.
+- Ajout des tests de publication v0.2 et adaptation forward-compatible des garde-fous Sprint 73/79.
+
 ## 0.21.68 - 2026-08-12
 
 - **Sprint 79** : revue de maturité Bretagne v0.2 et gel du périmètre à **151 mémoires RX**.

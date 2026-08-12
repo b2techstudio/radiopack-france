@@ -22,4 +22,10 @@ Bretagne v0.2 est publiée et immuable à **151 mémoires RX**. Le fichier publi
 - record : `research/bretagne-v0.2/publication-record.json` ;
 - Bretagne v0.1 reste conservée comme publication historique immuable.
 
-La bascule du registre et de la page Bretagne pointe maintenant vers v0.2.
+La bascule du registre, de la page Bretagne, du générateur et de `website/src/data/regions.json` pointe maintenant vers v0.2 / 151 mémoires.
+
+## Compatibilité historique
+
+Les garde-fous des Sprints 71, 73 et 79 restent exécutables après publication : ils vérifient toujours les états historiques v0.1 / prépublication v0.2 sans exiger qu'ils soient encore la version publique courante. `test_site_files.py` conserve également la présence du CSV v0.1 historique tout en validant la métadonnée publique v0.2 / 151.
+
+Les tests de publication courants sont `tests/test_bretagne_v02_public_release.py` et `tests/test_sprint80_bretagne_v02_publication.py`, tous deux branchés dans la CI principale.

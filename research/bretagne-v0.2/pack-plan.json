@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "status": "research_internal_candidate_151_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
@@ -10,6 +10,7 @@
   "aviation_file": "research/bretagne-v0.2/aviation-airac-08.json",
   "candidate_delta_file": "research/bretagne-v0.2/candidate-memory-delta.json",
   "amateur_revalidation_file": "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
+  "adrasec_revalidation_file": "research/bretagne-v0.2/adrasec-public-revalidation.json",
   "internal_candidate_builder": "tools/build_bretagne_v02_internal_candidate.py",
   "current_candidate_memory_count": 151,
   "current_new_memory_count": 16,
@@ -24,6 +25,23 @@
     "new_active_candidate_count": 0,
     "candidate_memory_delta": 0,
     "candidate_memory_count_after_review": 151
+  },
+  "latest_adrasec_revalidation": {
+    "checked_on": "2026-08-12",
+    "departments": [22, 29, 35, 56],
+    "current_membership_confirmed_for_all_departments": true,
+    "resolved_zero_delta": true,
+    "new_unique_rf_memory_count": 0,
+    "candidate_memory_delta": 0,
+    "candidate_memory_count_after_review": 151,
+    "department29_current_public_role_frequency_validated": true,
+    "department29_frequency_mhz": 144.8,
+    "department29_frequency_already_present_nationally": true,
+    "department35_f1zug_aprs_frequency_mhz": 144.8,
+    "department35_f1zug_adrasec_transponder_frequency_published": false,
+    "department56_current_public_activity_confirmed": true,
+    "department56_service_specific_adrasec_frequency_promoted": false,
+    "private_ppdr_operational_data_excluded": true
   },
   "public_export_allowed": false,
   "public_registry_allowed": false,
@@ -57,6 +75,9 @@
     "local_operator_status_overrides_general_directory_for_current_state": true,
     "similar_callsign_does_not_prove_same_service": true,
     "stopped_infrastructure_not_promoted": true,
+    "organisation_membership_does_not_publish_frequency": true,
+    "historical_role_does_not_equal_current_role": true,
+    "private_ppdr_operational_data_excluded": true,
     "no_artificial_fill": true
   }
 }

@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-12",
-  "current_sprint": 78,
-  "state_version": "0.21.67",
+  "current_sprint": 79,
+  "state_version": "0.21.68",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -28,7 +28,7 @@
   "active_work": {
     "pack": "Bretagne",
     "target_version": "0.2",
-    "status": "internal_candidate_151_airac08_amateur_adrasec_cross_revalidated_not_public",
+    "status": "scope_frozen_151_review_10_of_10_zero_blockers_prepublication_ready_not_public",
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_release_ready": false,
@@ -115,7 +115,26 @@
     "corsen_current_cross_network_confirmed": true,
     "corsen_channel79_primary_current_transmitter_site_confirmed": false,
     "corsen_secondary_site_chain_promoted": false,
-    "guide_marine_2026_identified_but_not_extracted": true
+    "guide_marine_2026_identified_but_not_extracted": true,
+    "scope_frozen": true,
+    "prepublication_ready": true,
+    "release_blocker_count": 0,
+    "review_completed": 10,
+    "review_total": 10,
+    "maturity_review": "research/bretagne-v0.2/maturity-review.json",
+    "release_scope": "research/bretagne-v0.2/release-scope.json",
+    "review_checklist": "research/bretagne-v0.2/review-checklist.json",
+    "publication_gates": "research/bretagne-v0.2/publication-gates.json",
+    "prepublication_audit_tool": "tools/run_bretagne_v02_prepublication_audit.py",
+    "release_scope_frozen_on": "2026-08-12",
+    "aviation_freshness_rechecked_on": "2026-08-12",
+    "aviation_current_on_maturity_review_date": true,
+    "deferred_non_blocking_ids": [
+      "F1ZUG_ADRASEC35_ROLE_REVALIDATION",
+      "CROSS_ETEL_CH64_LOCAL_MAPPING",
+      "CROSS_CORSEN_CH79_LOCAL_MAPPING",
+      "AMATEUR_INFRASTRUCTURE_REVALIDATION"
+    ]
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -268,7 +287,12 @@
     "research/bretagne-v0.2/adrasec-public-revalidation.json",
     "research/sprint-77-summary.md",
     "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
-    "research/sprint-78-summary.md"
+    "research/sprint-78-summary.md",
+    "research/bretagne-v0.2/maturity-review.json",
+    "research/bretagne-v0.2/release-scope.json",
+    "research/bretagne-v0.2/review-checklist.json",
+    "research/bretagne-v0.2/publication-gates.json",
+    "research/sprint-79-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -317,9 +341,17 @@
     "run_sprint75_test": "python tests/test_sprint75_bretagne_aviation.py",
     "run_sprint76_test": "python tests/test_sprint76_bretagne_amateur_revalidation.py",
     "run_sprint77_test": "python tests/test_sprint77_bretagne_adrasec_public_revalidation.py",
-    "run_sprint78_test": "python tests/test_sprint78_bretagne_cross_mapping_revalidation.py"
+    "run_sprint78_test": "python tests/test_sprint78_bretagne_cross_mapping_revalidation.py",
+    "run_bretagne_v02_prepublication_audit": "python tools/run_bretagne_v02_prepublication_audit.py --require-prepublication-ready",
+    "run_sprint79_test": "python tests/test_sprint79_bretagne_v02_maturity.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 79,
+      "state_version": "0.21.68",
+      "summary": "Bretagne v0.2 scope frozen at 151 RX memories; review 10/10, zero blockers, prepublication ready, still not public.",
+      "summary_file": "research/sprint-79-summary.md"
+    },
     {
       "sprint": 78,
       "state_version": "0.21.67",
@@ -488,7 +520,12 @@
     "secondary_site_clue_is_not_primary_validation": true,
     "unread_primary_pdf_is_not_negative_evidence": true,
     "cross_site_assignment_must_not_be_guessed": true,
-    "generic_rf_pair_must_not_be_duplicated_for_site_metadata": true
+    "generic_rf_pair_must_not_be_duplicated_for_site_metadata": true,
+    "unresolved_optional_item_may_be_deferred_without_blocking_frozen_scope": true,
+    "scope_freeze_requires_explicit_deferred_item_list": true,
+    "prepublication_ready_does_not_equal_public_release_allowed": true,
+    "explicit_publication_must_be_separate_step": true,
+    "aviation_freshness_must_be_rechecked_if_publication_occurs_after_current_airac_window": true
   },
   "completed_release": {
     "pack": "Normandie",
@@ -823,6 +860,27 @@
     "corsen_current_cross_network_confirmed": true,
     "corsen_channel79_primary_current_transmitter_site_confirmed": false,
     "guide_marine_2026_identified_but_not_extracted": true,
+    "public_export_allowed": false,
+    "public_registry_allowed": false
+  },
+  "latest_sprint79_maturity": {
+    "file": "research/sprint-79-summary.md",
+    "maturity_review": "research/bretagne-v0.2/maturity-review.json",
+    "release_scope": "research/bretagne-v0.2/release-scope.json",
+    "review_checklist": "research/bretagne-v0.2/review-checklist.json",
+    "publication_gates": "research/bretagne-v0.2/publication-gates.json",
+    "audit_tool": "tools/run_bretagne_v02_prepublication_audit.py",
+    "test": "tests/test_sprint79_bretagne_v02_maturity.py",
+    "candidate_memory_count": 151,
+    "candidate_memory_delta": 0,
+    "review": "10/10",
+    "release_blocker_count": 0,
+    "scope_frozen": true,
+    "prepublication_ready": true,
+    "public_release_allowed": false,
+    "aviation_cycle": "AIRAC 08/26",
+    "aviation_current_on_review_date": true,
+    "aviation_valid_through": "2026-09-02",
     "public_export_allowed": false,
     "public_registry_allowed": false
   }

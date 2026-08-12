@@ -2,9 +2,9 @@
 
 Bretagne v0.2 est la version de recherche active basée sur Bretagne v0.1 publiée et immuable (**135 mémoires RX**).
 
-## État Sprint 78
+## État Sprint 79
 
-Le candidat interne reste à **151 mémoires RX** : base v0.1=135 + **16 mémoires aviation AIRAC 08/26**. Les revalidations radioamateur du Sprint 76, ADRASEC publique du Sprint 77 et CROSS Ch64/Ch79 du Sprint 78 produisent chacune un **delta RF de 0**. Aucun export public v0.2 n'existe et le registre public reste sur Bretagne v0.1.
+Le candidat interne est désormais **figé à 151 mémoires RX** : base v0.1=135 + **16 mémoires aviation AIRAC 08/26**. Les revalidations radioamateur du Sprint 76, ADRASEC publique du Sprint 77 et CROSS Ch64/Ch79 du Sprint 78 produisent chacune un **delta RF de 0**. Le Sprint 79 clôt la revue de maturité à **10/10, 0 bloqueur, prépublication prête**. Aucun export public v0.2 n'existe et le registre public reste sur Bretagne v0.1.
 
 ### Aviation
 
@@ -45,8 +45,19 @@ Les données opérationnelles privées PPDR restent hors périmètre.
 
 Résultat : **151 mémoires RX, delta 0, 0 attribution locale promue**.
 
-## Backlog restant
+### Prépublication — Sprint 79
 
-Restent ouverts : fréquence de la fonction transpondeur F1ZUG / ADRASEC 35 non publiée, attribution locale CROSS Étel Ch64, attribution locale CROSS Corsen Ch79, ainsi que les futures revalidations de F5ZPV, F5ZZH et F5ZZC-4. La revalidation publique générale ADRASEC 22/29/35/56 est close à delta RF 0.
+`maturity-review.json`, `release-scope.json`, `review-checklist.json` et `publication-gates.json` figent le périmètre à **151 mémoires RX**.
+
+- revue : **10/10** ;
+- bloqueurs : **0** ;
+- audit reproductible : `tools/run_bretagne_v02_prepublication_audit.py --require-prepublication-ready` ;
+- publication : **non effectuée**.
+
+Le cycle AIRAC 08/26 est toujours courant au 12 août 2026. Les dossiers F1ZUG, mappings locaux CROSS et infrastructures amateur arrêtées/non résolues sont désormais explicitement reportés hors du scope figé et ne justifient aucun remplissage ou ajout RF.
+
+## Dossiers reportés après le scope v0.2
+
+Restent ouverts pour une version ou une revue future : fréquence de la fonction transpondeur F1ZUG / ADRASEC 35 non publiée, attribution locale CROSS Étel Ch64, attribution locale CROSS Corsen Ch79, ainsi que les futures revalidations de F5ZPV, F5ZZH et F5ZZC-4. Ils sont explicitement hors du périmètre v0.2 figé. La revalidation publique générale ADRASEC 22/29/35/56 est close à delta RF 0.
 
 Règles permanentes : ne jamais modifier la v0.1 publiée, ne jamais déduire une donnée non publiée, ne jamais dupliquer une fréquence déjà présente pour ajouter une simple attribution locale, faire primer le statut opérateur local pour l'état opérationnel courant et conserver toutes les sorties RadioPack en écoute seule.

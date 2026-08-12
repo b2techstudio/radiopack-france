@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.21.68 - 2026-08-12
+
+- **Sprint 79** : revue de maturité Bretagne v0.2 et gel du périmètre à **151 mémoires RX**.
+- Checklist de prépublication portée à **10/10**, **0 bloqueur**, `prepublication_ready=true` ; aucune publication effectuée.
+- AIRAC 08/26 recontrôlé comme cycle courant au 12 août 2026, valable jusqu'au 2 septembre 2026 inclus ; aucune comparaison XML champ par champ non effectuée n'est revendiquée.
+- F1ZUG/ADRASEC35, mappings locaux CROSS Ch64/Ch79 et F5ZPV/F5ZZH/F5ZZC-4 sont explicitement reportés hors du scope figé et classés non bloquants.
+- Ajout de `maturity-review.json`, `release-scope.json`, `review-checklist.json`, `publication-gates.json`, de l'audit v0.2 reproductible et du garde-fou Sprint 79.
+- Le CSV public et le registre restent sur Bretagne v0.1 ; la publication v0.2 nécessite un sprint séparé explicite.
+
 ## 0.21.67 - 2026-08-12
 
 - **Sprint 78** : revalidation des mappings locaux CROSS Étel Ch64 et Corsen Ch79 ; Bretagne v0.2 reste à **151 mémoires RX**, delta RF **0**.

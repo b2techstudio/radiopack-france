@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 78 / 0.21.67 — Bretagne v0.2 reste à 151 mémoires RX après revalidation CROSS Ch64/Ch79, delta RF 0 et aucun site local promu.**
+**État courant : Sprint 79 / 0.21.68 — Bretagne v0.2 est figée à 151 mémoires RX, revue 10/10, 0 bloqueur, prépublication prête mais non publique.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 78 / 0.21.67
+## État actuel — Sprint 79 / 0.21.68
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -17,7 +17,21 @@ Packs publics immuables :
 
 Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.2 est à **151 mémoires RX** : base publique v0.1=135 + 16 mémoires aviation AIRAC 08/26. Aucun CSV public Bretagne v0.2 n'existe et le registre public reste sur v0.1.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md` et `research/sprint-78-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md` et `research/sprint-79-summary.md`.
+
+## Sprint 79 — maturité et prépublication Bretagne v0.2
+
+Le périmètre v0.2 est désormais **figé à 151 mémoires RX**. La revue `research/bretagne-v0.2/maturity-review.json` et la checklist de publication concluent à **10/10 contrôles passés, 0 bloqueur et prépublication prête**.
+
+- les 16 mémoires aviation AIRAC 08/26 restent incluses ; le cycle est courant au 12 août 2026 et valable jusqu'au 2 septembre 2026 inclus ;
+- l'absence d'extraction XML directe reste une limite méthodologique documentée, pas une comparaison fictive ;
+- F1ZUG/ADRASEC35, les mappings locaux CROSS et F5ZPV/F5ZZH/F5ZZC-4 sont explicitement reportés hors du périmètre figé ;
+- ces reports n'ajoutent aucune RF et ne bloquent pas la v0.2 ;
+- `tools/run_bretagne_v02_prepublication_audit.py` reconstruit le candidat et vérifie RX-only, déduplication, aviation et absence de mutation publique.
+
+**Important :** `prepublication_ready=true` ne signifie pas publication. Aucun CSV public v0.2 ni bascule du registre n'est effectué au Sprint 79.
+
+Garde-fou : `tests/test_sprint79_bretagne_v02_maturity.py`.
 
 ## Sprint 78 — revalidation CROSS Bretagne v0.2
 
@@ -137,7 +151,7 @@ Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normand
 - `research/sprint-30-34-summary.md`
 - `research/sprint-35-39-summary.md`
 - `research/sprint-55-60-summary.md`
-- `research/sprint-61-summary.md` à `research/sprint-78-summary.md`
+- `research/sprint-61-summary.md` à `research/sprint-79-summary.md`
 
 ## Tests principaux
 
@@ -150,6 +164,7 @@ python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
 python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
+python tests\test_sprint79_bretagne_v02_maturity.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
@@ -166,6 +181,8 @@ python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
 python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
+python tools\run_bretagne_v02_prepublication_audit.py --require-prepublication-ready
+python tests\test_sprint79_bretagne_v02_maturity.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
 

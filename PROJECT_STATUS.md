@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **78**
-État logique : **0.21.67**
+Sprint courant : **79**
+État logique : **0.21.68**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-78-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-79-summary.md`.
 
 ## État public
 
@@ -16,6 +16,19 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.1 : **135 mémoires RX**, publiée et immuable.
 - Bretagne v0.2 : aucune publication ; le registre public reste sur v0.1.
+
+## Sprint 79 — scope v0.2 figé, prépublication prête
+
+Bretagne v0.2 est figée à **151 mémoires RX**. La revue de maturité est à **10/10**, avec **0 bloqueur** pour le périmètre explicitement retenu.
+
+- AIRAC 08/26 reste courant au 12 août 2026 et les 16 mémoires aviation sont maintenues dans le scope ;
+- F1ZUG/ADRASEC35, les mappings locaux Ch64/Ch79 et les infrastructures amateur arrêtées/non résolues sont reportés explicitement hors scope ;
+- aucun de ces reports ne crée une RF manquante dans les 151 mémoires figées ;
+- l'audit de prépublication reconstruit le candidat et interdit toute mutation publique prématurée.
+
+État : `prepublication_ready=true`, **publication toujours false**. Un sprint séparé reste obligatoire pour créer/figer le CSV public, son empreinte et la bascule du registre.
+
+Test : `tests/test_sprint79_bretagne_v02_maturity.py`. Audit : `tools/run_bretagne_v02_prepublication_audit.py --require-prepublication-ready`.
 
 ## Sprint 78 — CROSS Ch64 / Ch79, candidat toujours 151
 
@@ -59,15 +72,11 @@ Le candidat est passé de 135 à **151 mémoires RX** avec 16 mémoires aviation
 
 AIRAC 08/26 est traité dans `research/bretagne-v0.2/aviation-airac-08.json`. Les 16 mémoires sont en AM, **avec un pas de 8,33 kHz**, RX-only. Le dépôt ne revendique aucune correspondance champ par champ avec le XML courant tant que ses octets ne sont pas extraits.
 
-## Backlog Bretagne v0.2 restant
+## Dossiers reportés après le scope Bretagne v0.2
 
-- F1ZUG / ADRASEC 35 reste sans fréquence de transpondeur publiée ;
-- ADRASEC 29 est résolu à delta RF 0 sur APRS 144.800 MHz déjà national ;
-- F5ZPV, F5ZZH et F5ZZC-4 à revalider ultérieurement ;
-- mapping local CROSS Étel Ch64 ;
-- mapping local CROSS Corsen Ch79.
+Ces dossiers restent ouverts en recherche mais **ne bloquent plus le scope v0.2 figé** : F1ZUG / ADRASEC 35 sans fréquence de transpondeur publiée, F5ZPV/F5ZZH/F5ZZC-4 arrêtés ou non résolus, et mappings locaux CROSS Étel Ch64 / Corsen Ch79. ADRASEC 29 et F1ZBZ sont déjà résolus à delta RF 0.
 
-Ch64 et Ch79 existent déjà génériquement dans la base v0.1 : une attribution locale ne doit pas créer de doublon RF.
+Ch64 et Ch79 existent déjà génériquement dans la base v0.1 : une attribution locale future restera une métadonnée et ne devra pas créer de doublon RF.
 
 ## Normandie v0.5 — état conservé
 
@@ -113,6 +122,8 @@ python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
 python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
+python tools\run_bretagne_v02_prepublication_audit.py --require-prepublication-ready
+python tests\test_sprint79_bretagne_v02_maturity.py
 python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py
@@ -140,5 +151,6 @@ git status
 - une preuve de rôle ancienne ne valide pas une fréquence actuelle ;
 - une revue de direction ne crée pas de doublon RF ;
 - une promotion dans un candidat interne n'est jamais une publication ;
+- `prepublication_ready=true` n'autorise jamais à lui seul une publication ;
 - pas de remplissage artificiel ; maximum 200 mémoires ;
 - revue finale et changement explicite du registre public restent obligatoires avant publication.

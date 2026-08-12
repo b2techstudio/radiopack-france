@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "status": "review_complete_prepublication_ready_not_public",
+  "reviewed_on": "2026-08-12",
+  "pack": "Bretagne",
+  "version": "0.2",
+  "candidate_memory_count": 151,
+  "completed": 10,
+  "total": 10,
+  "blocker_count": 0,
+  "prepublication_ready": true,
+  "public_export_allowed": false,
+  "checks": [
+    {"id": "candidate_reproducible", "passed": true, "detail": "Builder reproduces exactly 151 RX memories from immutable v0.1 plus 16 aviation memories."},
+    {"id": "chirp_rx_only_contract", "passed": true, "detail": "Duplex off, offset zero, names <=10, no duplicate RF and no artificial fill."},
+    {"id": "published_base_immutability", "passed": true, "detail": "Bretagne v0.1 remains immutable at 135 memories and is not rewritten by the v0.2 builder."},
+    {"id": "aviation_current_cycle", "passed": true, "detail": "AIRAC 08/26 remains current on 2026-08-12 and is valid through 2026-09-02 inclusive."},
+    {"id": "aviation_methodology_boundary", "passed": true, "detail": "Latest effective primary AIP pages are used; no direct XML field-match claim is made without XML extraction."},
+    {"id": "adrasec_scope", "passed": true, "detail": "Public ADRASEC revalidation is closed at delta 0; unpublished operational frequencies remain excluded."},
+    {"id": "cross_scope", "passed": true, "detail": "Ch64/Ch79 remain valid generic RX pairs; unresolved local transmitter metadata is deferred without RF duplication."},
+    {"id": "amateur_scope", "passed": true, "detail": "F1ZBZ is resolved at delta 0; F5ZPV, F5ZZH and F5ZZC-4 remain excluded as stopped or unresolved."},
+    {"id": "scope_consistency", "passed": true, "detail": "All included memories have an accepted source path; every unresolved optional item is explicitly outside the frozen v0.2 scope."},
+    {"id": "public_immutability", "passed": true, "detail": "No public v0.2 CSV or registry switch is allowed before a separate explicit publication sprint."}
+  ]
+}

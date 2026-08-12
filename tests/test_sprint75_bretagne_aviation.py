@@ -13,6 +13,7 @@ V02_BUILDER = ROOT / "tools/build_bretagne_v02_internal_candidate.py"
 V01_BUILDER = ROOT / "tools/build_bretagne_internal_candidate.py"
 PUBLIC_V01 = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv"
 PUBLIC_V02 = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv"
+PUBLICATION_RECORD = ROOT / "research/bretagne-v0.2/publication-record.json"
 REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 
 
@@ -133,9 +134,16 @@ with tempfile.TemporaryDirectory(prefix="radiopack-bretagne-v02-") as td:
     assert all(row["Mode"] == "AM" and row["TStep"] == "8.33" for row in aviation_rows)
 
 assert PUBLIC_V01.is_file()
-assert not PUBLIC_V02.exists()
 registry = REGISTRY.read_text(encoding="utf-8")
-assert '/downloads/bretagne/radiopack-france-bretagne-v0.1.csv' in registry
-assert '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv' not in registry
+if PUBLICATION_RECORD.exists():
+    record = json.loads(PUBLICATION_RECORD.read_text(encoding="utf-8"))
+    assert record["status"] == "published_immutable"
+    assert record["version"] == "0.2" and record["memory_count"] == 151
+    assert PUBLIC_V02.is_file()
+    assert '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv' in registry
+else:
+    assert not PUBLIC_V02.exists()
+    assert '/downloads/bretagne/radiopack-france-bretagne-v0.1.csv' in registry
+    assert '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv' not in registry
 
-print("Sprint 75 Bretagne aviation: AIRAC 08/26 internal candidate adds 16 RX-only AM memories at 130-145, base v0.1 remains immutable, total 151, public untouched OK")
+print("Sprint 75 Bretagne aviation: AIRAC 08/26 evidence and 151-memory candidate remain auditable before or after explicit v0.2 publication OK")

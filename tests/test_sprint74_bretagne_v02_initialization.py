@@ -45,12 +45,23 @@ else:
 
 adrasec = items['ADRASEC_PUBLIC_DATA_REVALIDATION']
 assert adrasec['departments'] == [22, 29, 35, 56]
-assert adrasec['potential_memory_delta'] is None
+if adrasec.get('resolved_zero_delta'):
+    assert adrasec['potential_memory_delta'] == 0
+    assert adrasec['candidate_memory_delta'] == 0
+    assert adrasec['state'] == 'public_revalidation_completed_zero_rf_delta'
+else:
+    assert adrasec['potential_memory_delta'] is None
 assert adrasec['promoted'] is False
 
 f1zug = items['F1ZUG_ADRASEC35_ROLE_REVALIDATION']
 assert f1zug['must_not_infer_from_aprs'] is True
-assert f1zug['potential_memory_delta'] is None
+if 'aprs_frequency_mhz' in f1zug:
+    assert f1zug['aprs_frequency_mhz'] == 144.8
+    assert f1zug['aprs_frequency_already_present_nationally'] is True
+    assert f1zug['adrasec_transponder_frequency_mhz'] is None
+    assert f1zug['potential_memory_delta'] == 0
+else:
+    assert f1zug['potential_memory_delta'] is None
 assert f1zug['promoted'] is False
 
 for item_id in ('CROSS_ETEL_CH64_LOCAL_MAPPING', 'CROSS_CORSEN_CH79_LOCAL_MAPPING'):

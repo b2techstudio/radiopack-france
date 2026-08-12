@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "status": "research_backlog_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
@@ -74,27 +74,51 @@
     {
       "id": "CROSS_ETEL_CH64_LOCAL_MAPPING",
       "category": "maritime_metadata",
-      "state": "current_primary_local_site_mapping_unresolved",
+      "state": "revalidated_2026_08_12_primary_conflict_open_local_site_mapping_unresolved_zero_rf_delta",
       "generic_memory_already_present_in_published_base": true,
       "potential_new_rf_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted_local_site_mapping": false,
+      "evidence": "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
       "source_context": "research/bretagne-v0.1/etel-channel64-evidence.json",
+      "resolved_zero_delta_for_current_review": true,
+      "findings": {
+        "ministry_current_regional_channels63_and64_morbihan": true,
+        "cross_etel_current_etel_channel63_mapping": true,
+        "current_primary_brittany_channel64_site_confirmed": false,
+        "channel64_current_operation_at_named_brittany_site_proven": false,
+        "channel64_stopped_proven": false,
+        "primary_source_conflict_open": true
+      },
       "requirements": [
         "resolve the current primary-source conflict before adding a local transmitter attribution",
+        "require a current primary source explicitly naming a Brittany transmitter site for channel 64",
         "never duplicate the generic memory merely to add site metadata"
       ]
     },
     {
       "id": "CROSS_CORSEN_CH79_LOCAL_MAPPING",
       "category": "maritime_metadata",
-      "state": "current_primary_local_site_mapping_unresolved",
+      "state": "revalidated_2026_08_12_primary_site_mapping_still_unresolved_zero_rf_delta",
       "generic_memory_already_present_in_published_base": true,
       "potential_new_rf_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted_local_site_mapping": false,
+      "evidence": "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
       "source_context": "research/bretagne-v0.1/corsen-channel79-evidence.json",
+      "resolved_zero_delta_for_current_review": true,
+      "findings": {
+        "current_cross_network_confirmed": true,
+        "primary_current_channel79_transmitter_site_confirmed": false,
+        "secondary_current_clue_sites": ["Cap Frehel", "Bodic"],
+        "secondary_full_chain_sites": ["Cap Frehel", "Bodic", "Batz", "Stiff", "Pointe du Raz"],
+        "secondary_site_chain_promotable": false,
+        "guide_marine_2026_identified_but_not_extracted": true
+      },
       "requirements": [
         "require a current primary mapping before adding a transmitter-site attribution",
         "secondary convergence remains a research clue only",
+        "an unread current primary PDF is not negative evidence",
         "never duplicate the generic memory merely to add site metadata"
       ]
     },
@@ -138,6 +162,9 @@
     "similar_callsign_does_not_prove_same_service": true,
     "organisation_membership_does_not_publish_frequency": true,
     "historical_role_does_not_equal_current_role": true,
+    "regional_channel_statement_does_not_name_transmitter_site": true,
+    "current_cross_network_does_not_map_channel_to_station": true,
+    "unread_primary_pdf_is_not_negative_evidence": true,
     "public_export_allowed": false
   }
 }

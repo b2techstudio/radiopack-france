@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "status": "research_backlog_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 135,
+  "items": [
+    {
+      "id": "AVIATION_CURRENT_SOURCE_EXTRACT",
+      "category": "aviation",
+      "state": "current_exact_source_extract_required",
+      "current_cycle_at_initialization": "AIRAC 08/26",
+      "valid_from": "2026-08-06",
+      "valid_through": "2026-09-02",
+      "potential_memory_delta": null,
+      "promoted": false,
+      "source_context": "research/bretagne-v0.1/sia-airac-08-review.json",
+      "requirements": [
+        "extract and review the exact current SIA source before promoting any aviation entry",
+        "do not present an older exact value as current"
+      ]
+    },
+    {
+      "id": "ADRASEC_PUBLIC_DATA_REVALIDATION",
+      "category": "emergency_amateur_research",
+      "departments": [22, 29, 35, 56],
+      "state": "public_current_data_required",
+      "potential_memory_delta": null,
+      "promoted": false,
+      "source_context": "research/bretagne-v0.1/emergency-relays.json",
+      "requirements": [
+        "use only data that is explicitly public and currently verifiable",
+        "do not infer a missing value from an APRS entry, organisation membership or geography",
+        "exclude private PPDR operational data"
+      ]
+    },
+    {
+      "id": "F1ZUG_ADRASEC35_ROLE_REVALIDATION",
+      "category": "emergency_amateur_research",
+      "site": "Chatillon-en-Vendelais",
+      "state": "role_documented_specific_value_not_public",
+      "potential_memory_delta": null,
+      "promoted": false,
+      "source_context": "research/bretagne-v0.1/emergency-relays.json",
+      "must_not_infer_from_aprs": true
+    },
+    {
+      "id": "CROSS_ETEL_CH64_LOCAL_MAPPING",
+      "category": "maritime_metadata",
+      "state": "current_primary_local_site_mapping_unresolved",
+      "generic_memory_already_present_in_published_base": true,
+      "potential_new_rf_memory_delta": 0,
+      "promoted_local_site_mapping": false,
+      "source_context": "research/bretagne-v0.1/etel-channel64-evidence.json",
+      "requirements": [
+        "resolve the current primary-source conflict before adding a local transmitter attribution",
+        "never duplicate the generic memory merely to add site metadata"
+      ]
+    },
+    {
+      "id": "CROSS_CORSEN_CH79_LOCAL_MAPPING",
+      "category": "maritime_metadata",
+      "state": "current_primary_local_site_mapping_unresolved",
+      "generic_memory_already_present_in_published_base": true,
+      "potential_new_rf_memory_delta": 0,
+      "promoted_local_site_mapping": false,
+      "source_context": "research/bretagne-v0.1/corsen-channel79-evidence.json",
+      "requirements": [
+        "require a current primary mapping before adding a transmitter-site attribution",
+        "secondary convergence remains a research clue only",
+        "never duplicate the generic memory merely to add site metadata"
+      ]
+    },
+    {
+      "id": "AMATEUR_INFRASTRUCTURE_REVALIDATION",
+      "category": "radioamateur",
+      "state": "current_status_or_direction_review_required",
+      "potential_memory_delta": null,
+      "promoted": false,
+      "source_context": "research/bretagne-v0.1/emergency-relays.json",
+      "priority_ids": ["F5ZPV", "F5ZZH", "F1ZBZ", "F5ZZC-4"],
+      "requirements": [
+        "revalidate stopped infrastructure before considering it active",
+        "resolve ambiguous direction or paired-entry semantics before candidate construction",
+        "deduplicate common APRS coverage by RF value"
+      ]
+    }
+  ],
+  "rules": {
+    "deferred_item_is_not_validated": true,
+    "published_base_is_immutable": true,
+    "rx_only": true,
+    "same_rf_deduplicated": true,
+    "unpublished_data_must_not_be_inferred": true,
+    "private_ppdr_operational_data_excluded": true,
+    "secondary_clue_does_not_replace_required_primary_validation": true,
+    "current_local_metadata_does_not_create_duplicate_memory": true,
+    "public_export_allowed": false
+  }
+}

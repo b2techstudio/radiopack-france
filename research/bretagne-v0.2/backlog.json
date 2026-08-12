@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "research_backlog_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
@@ -88,15 +88,26 @@
     {
       "id": "AMATEUR_INFRASTRUCTURE_REVALIDATION",
       "category": "radioamateur",
-      "state": "current_status_or_direction_review_required",
-      "potential_memory_delta": null,
+      "state": "partially_revalidated_f1zbz_resolved_zero_delta_three_blocked",
+      "potential_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted": false,
+      "evidence": "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
       "source_context": "research/bretagne-v0.1/emergency-relays.json",
-      "priority_ids": ["F5ZPV", "F5ZZH", "F1ZBZ", "F5ZZC-4"],
+      "reviewed_ids": ["F5ZPV", "F5ZZH", "F1ZBZ", "F5ZZC-4"],
+      "resolved_zero_delta_ids": ["F1ZBZ"],
+      "priority_ids": ["F5ZPV", "F5ZZH", "F5ZZC-4"],
+      "findings": {
+        "F1ZBZ": "current REF multipath RF inventory already fully represented in the deduplicated Bretagne RF plan; no new RF memory required",
+        "F5ZPV": "local operator still reports temporarily stopped despite general directory active status; keep excluded",
+        "F5ZZH": "local operator and general directory both report stopped; keep excluded",
+        "F5ZZC-4": "ADRASEC35 APRS role evidence is stale for current frequency validation and must not be conflated with the separate stopped F5ZZC analog entry"
+      },
       "requirements": [
-        "revalidate stopped infrastructure before considering it active",
-        "resolve ambiguous direction or paired-entry semantics before candidate construction",
-        "deduplicate common APRS coverage by RF value"
+        "require local-operator restart evidence before reconsidering F5ZPV",
+        "require local-operator restart and site evidence before reconsidering F5ZZH",
+        "require a current service-specific source before assigning any frequency to F5ZZC-4",
+        "do not create duplicate memories for F1ZBZ paths whose RF values are already represented"
       ]
     }
   ],
@@ -110,6 +121,8 @@
     "secondary_clue_does_not_replace_required_primary_validation": true,
     "current_local_metadata_does_not_create_duplicate_memory": true,
     "internal_candidate_promotion_is_not_publication": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "similar_callsign_does_not_prove_same_service": true,
     "public_export_allowed": false
   }
 }

@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "status": "scope_freeze_recommended_prepublication_ready_not_public",
+  "reviewed_on": "2026-08-12",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "published_base_version": "0.1",
+  "published_base_memory_count": 135,
+  "candidate_memory_count": 151,
+  "candidate_new_memory_count": 16,
+  "scope_freeze_allowed": true,
+  "prepublication_ready": true,
+  "public_release_allowed": false,
+  "release_blockers": [],
+  "included_scope": {
+    "published_v0_1_base_memories": 135,
+    "aviation_airac08_memories": 16,
+    "aviation_cycle": "AIRAC 08/26",
+    "aviation_valid_from": "2026-08-06",
+    "aviation_valid_through": "2026-09-02",
+    "aviation_freshness_rechecked_on": "2026-08-12",
+    "aviation_current_on_review_date": true
+  },
+  "resolved_zero_delta": [
+    "ADRASEC_PUBLIC_DATA_REVALIDATION",
+    "F1ZBZ_DIRECTION_AND_RF_INVENTORY",
+    "CROSS_ETEL_CH64_CURRENT_REVIEW",
+    "CROSS_CORSEN_CH79_CURRENT_REVIEW"
+  ],
+  "deferred_non_blocking": [
+    {
+      "id": "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
+      "reason": "The APRS role is public but the ADRASEC35 transponder frequency is unpublished; no value is inferred."
+    },
+    {
+      "id": "CROSS_ETEL_CH64_LOCAL_SITE_METADATA",
+      "reason": "The generic Ch64 pair is already valid; the primary-source site conflict affects optional local metadata, not RF validity."
+    },
+    {
+      "id": "CROSS_CORSEN_CH79_LOCAL_SITE_METADATA",
+      "reason": "The generic Ch79 pair is already valid; current primary site mapping remains unavailable and is not claimed."
+    },
+    {
+      "id": "F5ZPV_F5ZZH_F5ZZC4_REVALIDATION",
+      "reason": "Stopped or unresolved amateur infrastructure is excluded from the frozen v0.2 scope and can be revisited later."
+    }
+  ],
+  "aviation_methodology_boundary": {
+    "current_sia_product_verified": true,
+    "source_title": "Données aéronautiques XML AIRAC 08/26 - CORRIGENDUM",
+    "source_url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
+    "current_xml_export_bytes_extracted": false,
+    "latest_effective_public_primary_aip_pages_used": true,
+    "direct_current_xml_field_match_claimed": false,
+    "xml_extraction_required_for_scope_freeze": false,
+    "reason": "The project may publish the reviewed frequencies using the documented AIRAC-current context plus latest effective primary AIP methodology, provided it does not claim a direct XML field match that was not performed."
+  },
+  "decision": {
+    "freeze_candidate_at": 151,
+    "new_rf_memory_delta_from_maturity_review": 0,
+    "prepublication_ready": true,
+    "publication_must_be_separate_explicit_sprint": true,
+    "public_registry_mutation_now": false,
+    "public_csv_mutation_now": false
+  },
+  "rules": {
+    "unresolved_optional_metadata_is_not_release_blocker_when_explicitly_deferred": true,
+    "unpublished_frequency_must_not_be_inferred": true,
+    "stopped_infrastructure_must_not_be_promoted": true,
+    "same_rf_must_not_be_duplicated_for_metadata": true,
+    "current_airac_freshness_required_for_included_aviation": true,
+    "direct_xml_match_must_not_be_claimed_without_xml_extraction": true,
+    "published_v0_1_is_immutable": true,
+    "rx_only": true
+  }
+}

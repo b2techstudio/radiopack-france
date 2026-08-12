@@ -27,6 +27,7 @@ jobs:
         shell: bash
         run: |
           sed -i 's/## État Sprint 79 — prépublication prête/## État Sprint 79/' tools/publish_bretagne_v02_sprint80.py
+          sed -i 's/if count != 1:/if count < 1:/' tools/publish_bretagne_v02_sprint80.py
 
       - name: Publish immutable Bretagne v0.2
         run: python tools/publish_bretagne_v02_sprint80.py

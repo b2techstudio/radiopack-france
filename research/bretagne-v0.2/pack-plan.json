@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "status": "research_internal_candidate_151_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
@@ -11,6 +11,7 @@
   "candidate_delta_file": "research/bretagne-v0.2/candidate-memory-delta.json",
   "amateur_revalidation_file": "research/bretagne-v0.2/amateur-infrastructure-revalidation.json",
   "adrasec_revalidation_file": "research/bretagne-v0.2/adrasec-public-revalidation.json",
+  "cross_revalidation_file": "research/bretagne-v0.2/cross-local-mapping-revalidation.json",
   "internal_candidate_builder": "tools/build_bretagne_v02_internal_candidate.py",
   "current_candidate_memory_count": 151,
   "current_new_memory_count": 16,
@@ -42,6 +43,23 @@
     "department56_current_public_activity_confirmed": true,
     "department56_service_specific_adrasec_frequency_promoted": false,
     "private_ppdr_operational_data_excluded": true
+  },
+  "latest_cross_revalidation": {
+    "checked_on": "2026-08-12",
+    "reviewed_ids": ["CROSS_ETEL_CH64_LOCAL_MAPPING", "CROSS_CORSEN_CH79_LOCAL_MAPPING"],
+    "candidate_memory_count_before": 151,
+    "candidate_memory_count_after": 151,
+    "candidate_memory_delta": 0,
+    "local_site_metadata_promoted_count": 0,
+    "channel64_generic_pair_already_present": true,
+    "channel79_generic_pair_already_present": true,
+    "etel_channel63_current_local_mapping_confirmed": true,
+    "etel_channel64_current_brittany_site_confirmed": false,
+    "etel_channel64_primary_source_conflict_open": true,
+    "corsen_current_network_confirmed": true,
+    "corsen_channel79_primary_current_transmitter_site_confirmed": false,
+    "corsen_secondary_site_chain_promoted": false,
+    "guide_marine_2026_identified_but_not_extracted": true
   },
   "public_export_allowed": false,
   "public_registry_allowed": false,
@@ -78,6 +96,11 @@
     "organisation_membership_does_not_publish_frequency": true,
     "historical_role_does_not_equal_current_role": true,
     "private_ppdr_operational_data_excluded": true,
+    "regional_channel_statement_does_not_name_transmitter_site": true,
+    "current_cross_network_does_not_map_channel_to_station": true,
+    "secondary_site_clue_is_not_primary_validation": true,
+    "unread_primary_pdf_is_not_negative_evidence": true,
+    "primary_source_conflict_requires_reconciliation": true,
     "no_artificial_fill": true
   }
 }

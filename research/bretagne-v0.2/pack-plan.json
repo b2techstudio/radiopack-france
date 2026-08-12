@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "status": "research_next_version_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 135,
+  "published_base_is_immutable": true,
+  "backlog_file": "research/bretagne-v0.2/backlog.json",
+  "current_candidate_memory_count": 135,
+  "current_new_memory_count": 0,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "inherited_generic_maritime_pairs": {
+    "channel64_present_in_published_base": true,
+    "channel79_present_in_published_base": true,
+    "local_site_metadata_creates_new_memory": false,
+    "new_rf_memory_delta": 0
+  },
+  "rules": {
+    "deferred_item_is_not_validated": true,
+    "published_base_must_not_be_modified": true,
+    "rx_only": true,
+    "same_rf_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "unpublished_data_must_not_be_inferred": true,
+    "current_source_extract_required_before_aviation_promotion": true,
+    "generic_memory_must_not_be_duplicated_for_local_site_metadata": true
+  }
+}

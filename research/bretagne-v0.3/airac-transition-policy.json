@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "status": "transition_policy_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.3",
+  "checked_on": "2026-08-12",
+  "current_cycle": {
+    "cycle": "AIRAC 08/26",
+    "effective_from": "2026-08-06",
+    "effective_until_inclusive": "2026-09-02",
+    "current_on_checked_date": true,
+    "source": "SIA France",
+    "source_title": "Données aéronautiques XML AIRAC 08/26 - CORRIGENDUM",
+    "current_xml_export_bytes_extracted_in_repository_workflow": false
+  },
+  "next_cycle": {
+    "cycle": "AIRAC 09/26",
+    "eurocontrol_cycle": "2609",
+    "effective_from": "2026-09-03",
+    "effective_until_inclusive": "2026-09-30",
+    "not_yet_current_on_checked_date": true,
+    "source": "EUROCONTROL Network Manager RAD AIRAC dates"
+  },
+  "policy": {
+    "published_v0_2_remains_immutable_after_airac08_expiry": true,
+    "v0_3_initial_candidate_may_reproduce_immutable_v0_2_exactly": true,
+    "aviation_change_requires_current_cycle_revalidation_before_candidate_promotion": true,
+    "publication_on_or_after_2026_09_03_requires_airac09_revalidation": true,
+    "earlier_sia_replacement_or_corrigendum_requires_freshness_recheck": true,
+    "latest_effective_primary_aip_required_for_frequency_validation": true,
+    "direct_xml_field_match_must_not_be_claimed_without_xml_extraction": true,
+    "notam_check_does_not_replace_airac_source_validation": true,
+    "rx_only": true
+  },
+  "sources": [
+    {
+      "authority": "SIA France",
+      "url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
+      "supports": "AIRAC 08/26 current validity through 2026-09-02 inclusive"
+    },
+    {
+      "authority": "EUROCONTROL Network Manager",
+      "url": "https://www.public.nm.eurocontrol.int/RAD/",
+      "supports": "AIRAC 2609 effective 2026-09-03 through 2026-09-30"
+    }
+  ]
+}

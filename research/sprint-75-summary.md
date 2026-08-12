@@ -27,7 +27,7 @@ Le périmètre reste celui déjà examiné avant la publication v0.1 :
 - Quimper Pluguffan (LFRQ) : 1 fréquence unique ;
 - aviation urgence 121.500 MHz : 1 mémoire générique.
 
-Total : **16 mémoires**, toutes en AM, pas 8.33 kHz, réception seule. Les doublons de service partageant la même fréquence sont fusionnés en une seule mémoire RF.
+Total : **16 mémoires**, toutes en AM, **avec un pas de 8,33 kHz**, en réception seule. Les doublons de service partageant la même fréquence sont fusionnés en une seule mémoire RF.
 
 Les positions 146 à 149 restent libres : aucun remplissage artificiel.
 

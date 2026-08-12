@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "status": "public_revalidation_completed_zero_rf_delta_not_public",
+  "checked_on": "2026-08-12",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "published_base_version": "0.1",
+  "published_base_memory_count": 135,
+  "candidate_memory_count_before_review": 151,
+  "candidate_memory_count_after_review": 151,
+  "candidate_memory_delta": 0,
+  "public_export_allowed": false,
+  "private_ppdr_operational_data_excluded": true,
+  "scope": {
+    "departments": [22, 29, 35, 56],
+    "purpose": "Revalider uniquement les données ADRASEC ou radioamateur explicitement publiques et actuelles sans rechercher ni inférer des fréquences opérationnelles non publiées.",
+    "operational_private_frequency_research_performed": false
+  },
+  "national_membership": {
+    "source": {
+      "title": "Arrêté du 9 janvier 2025 renouvelant l'agrément national de sécurité civile pour la FNRASEC",
+      "url": "https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000050970787",
+      "published": "2025-01-14"
+    },
+    "confirmed_members": ["ADRASEC 22", "ADRASEC 29", "ADRASEC 35", "ADRASEC 56"],
+    "frequency_data_present": false,
+    "rule": "L'appartenance à la FNRASEC confirme l'organisation mais ne publie aucune fréquence exploitable pour RadioPack."
+  },
+  "department_reviews": [
+    {
+      "department": 22,
+      "organisation": "ADRASEC 22",
+      "membership_current": true,
+      "public_current_adrasec_frequency_validated": false,
+      "candidate_memory_delta": 0,
+      "state": "membership_confirmed_no_current_public_service_specific_frequency",
+      "findings": [
+        "Le REF courant publie des infrastructures radioamateur et APRS dans les Côtes-d'Armor, mais aucune source actuelle consultée n'attribue explicitement une fréquence donnée à l'ADRASEC 22.",
+        "Une infrastructure située dans le département ne devient pas une infrastructure ADRASEC par simple proximité géographique."
+      ]
+    },
+    {
+      "department": 29,
+      "organisation": "ADRASEC 29",
+      "membership_current": true,
+      "public_current_adrasec_frequency_validated": true,
+      "validated_public_role_frequency": {
+        "frequency_mhz": 144.8,
+        "mode": "APRS",
+        "sites": [
+          {
+            "callsign": "F1ZBH-3",
+            "site": "Dinéault",
+            "ref_directory_callsign": "F1ZBH"
+          },
+          {
+            "callsign": "F1ZGQ-3",
+            "site": "Saint-Éloy",
+            "ref_directory_callsign": "F1ZGQ"
+          }
+        ],
+        "sources": [
+          {
+            "title": "REF - répertoire courant des relais, département 29",
+            "url": "https://www.r-e-f.org/",
+            "finding": "F1ZBH et F1ZGQ sont actifs en APRS sur 144.800 MHz."
+          },
+          {
+            "title": "APRS.fi - inventaire public courant",
+            "url": "https://aprs.fi/info/F1%2A",
+            "finding": "Les commentaires publics identifient F1ZBH-3 et F1ZGQ-3 comme ADRASEC-29."
+          }
+        ]
+      },
+      "already_present_in_national_pack": true,
+      "existing_national_frequency_mhz": 144.8,
+      "candidate_memory_delta": 0,
+      "state": "current_public_role_and_frequency_validated_already_deduplicated"
+    },
+    {
+      "department": 35,
+      "organisation": "ADRASEC 35",
+      "membership_current": true,
+      "public_current_adrasec_frequency_validated": false,
+      "candidate_memory_delta": 0,
+      "state": "public_roles_exist_but_no_current_distinct_adrasec_rf_promotable",
+      "findings": [
+        "Le REF courant confirme F1ZUG actif en APRS sur 144.800 MHz.",
+        "L'ARA35 documente en juin 2024 le site F1ZUG comme relais APRS et transpondeur pour le réseau ADRASEC 35, mais ne publie pas la fréquence du transpondeur ADRASEC.",
+        "La fréquence APRS 144.800 MHz ne doit jamais être réutilisée par déduction comme fréquence du transpondeur ADRASEC.",
+        "La page F5ZZC-4 décrit le réseau APRS avec un état temporel fin 2015 et ne constitue pas une validation actuelle de fréquence ADRASEC 35."
+      ],
+      "aprs_frequency_already_present_nationally": true,
+      "f1zug_aprs_frequency_mhz": 144.8,
+      "f1zug_adrasec_transponder_frequency_mhz": null,
+      "must_not_infer_transponder_frequency_from_aprs": true,
+      "sources": [
+        "https://www.r-e-f.org/",
+        "https://ara35.fr/category/aprs/",
+        "https://ara35.fr/frequences/digipeater-aprs-f1zug/",
+        "https://ara35.fr/frequences/digipeater-aprs/"
+      ]
+    },
+    {
+      "department": 56,
+      "organisation": "ADRASEC 56",
+      "membership_current": true,
+      "public_current_adrasec_frequency_validated": false,
+      "candidate_memory_delta": 0,
+      "state": "current_public_activity_confirmed_no_current_service_specific_frequency_promoted",
+      "findings": [
+        "Le site public ADRASEC 56 confirme l'activité départementale et son rattachement à la préfecture de Vannes, sans publier de fréquence opérationnelle.",
+        "APRS.fi publie actuellement des commentaires identifiant F1ZMU-3 comme DIGI SAINT-NOLFF ADRASEC 56 et F1BWT-9 comme station ADRASEC 56 ; ces commentaires prouvent un rôle public mais ne suffisent pas à attribuer une fréquence RF sans source de fréquence correspondante.",
+        "Le REF courant publie F1ZKU actif à Languidic sur 430.450 / 439.850 MHz en C4FM, mais la preuve retrouvée reliant explicitement F1ZKU à l'ADRASEC 56 date de 2017 ; ce lien historique n'est pas traité comme rôle ADRASEC courant.",
+        "Aucune fréquence opérationnelle privée n'est recherchée ni inférée."
+      ],
+      "sources": [
+        "https://www.adrasec56.fr/",
+        "https://aprs.fi/info/F1%2A",
+        "https://www.r-e-f.org/",
+        "https://www.f6kpq.org/articles.php?lng=fr&pg=330&prt=-2&prt=-3&prt=2&prt=3&tconfig=0"
+      ]
+    }
+  ],
+  "promotion_decision": {
+    "new_unique_rf_memory_count": 0,
+    "candidate_memory_count": 151,
+    "reason": "La seule fréquence ADRASEC publiquement recoupée avec un rôle actuel dans ce sprint est 144.800 MHz pour ADRASEC 29, déjà présente dans le bloc APRS national. Les autres rôles ne disposent pas d'une fréquence ADRASEC actuelle explicitement publiée ou restent séparés d'une fonction APRS déjà dédupliquée.",
+    "public_pack_mutation_allowed": false
+  },
+  "rules": {
+    "organisation_membership_does_not_publish_frequency": true,
+    "geography_does_not_prove_adrasec_role": true,
+    "aprs_role_does_not_imply_other_service_frequency": true,
+    "historical_role_does_not_equal_current_role": true,
+    "same_rf_frequency_deduplicated": true,
+    "unpublished_operational_frequency_must_not_be_inferred": true,
+    "private_ppdr_operational_data_excluded": true,
+    "rx_only": true
+  }
+}

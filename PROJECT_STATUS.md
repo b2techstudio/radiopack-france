@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **76**
-État logique : **0.21.65**
+Sprint courant : **77**
+État logique : **0.21.66**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-76-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-77-summary.md`.
 
 ## État public
 
@@ -16,6 +16,18 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.1 : **135 mémoires RX**, publiée et immuable.
 - Bretagne v0.2 : aucune publication ; le registre public reste sur v0.1.
+
+## Sprint 77 — ADRASEC public, candidat toujours 151
+
+La revalidation publique des ADRASEC 22, 29, 35 et 56 produit un **delta candidat 0**. Le candidat Bretagne v0.2 reste à **151 mémoires RX**.
+
+- ADRASEC 29 : F1ZBH-3 et F1ZGQ-3 sont recoupés publiquement sur APRS 144.800 MHz, déjà présent nationalement ;
+- ADRASEC 35 : F1ZUG APRS 144.800 MHz reste distinct de la fonction transpondeur ADRASEC 35 dont la fréquence n'est pas publiée ;
+- ADRASEC 56 : activité publique confirmée, aucune fréquence de service ADRASEC actuelle distincte promue ;
+- ADRASEC 22 : appartenance confirmée, aucune fréquence actuelle explicitement attribuée dans le périmètre public retenu ;
+- aucune fréquence opérationnelle privée ni donnée PPDR n'est recherchée ou inférée.
+
+Test : `tests/test_sprint77_bretagne_adrasec_public_revalidation.py`.
 
 ## Sprint 76 — Bretagne v0.2 reste à 151
 
@@ -38,8 +50,8 @@ AIRAC 08/26 est traité dans `research/bretagne-v0.2/aviation-airac-08.json`. Le
 
 ## Backlog Bretagne v0.2 restant
 
-- ADRASEC publiquement vérifiable pour 22 / 29 / 35 / 56 ;
-- F1ZUG / ADRASEC 35 sans inférer de fréquence depuis APRS ;
+- F1ZUG / ADRASEC 35 reste sans fréquence de transpondeur publiée ;
+- ADRASEC 29 est résolu à delta RF 0 sur APRS 144.800 MHz déjà national ;
 - F5ZPV, F5ZZH et F5ZZC-4 à revalider ultérieurement ;
 - mapping local CROSS Étel Ch64 ;
 - mapping local CROSS Corsen Ch79.
@@ -88,6 +100,7 @@ git pull --ff-only
 python tools\build_bretagne_v02_internal_candidate.py
 python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
+python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py

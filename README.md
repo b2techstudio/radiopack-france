@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 76 / 0.21.65 — Bretagne v0.2 reste à 151 mémoires RX après revalidation radioamateur, delta RF 0.**
+**État courant : Sprint 77 / 0.21.66 — Bretagne v0.2 reste à 151 mémoires RX après revalidation publique ADRASEC, delta RF 0.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 76 / 0.21.65
+## État actuel — Sprint 77 / 0.21.66
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -17,7 +17,20 @@ Packs publics immuables :
 
 Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.2 est à **151 mémoires RX** : base publique v0.1=135 + 16 mémoires aviation AIRAC 08/26. Aucun CSV public Bretagne v0.2 n'existe et le registre public reste sur v0.1.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md` et `research/sprint-76-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md` et `research/sprint-77-summary.md`.
+
+## Sprint 77 — revalidation publique ADRASEC Bretagne v0.2
+
+`research/bretagne-v0.2/adrasec-public-revalidation.json` revalide uniquement les données publiquement accessibles des ADRASEC 22, 29, 35 et 56. Le candidat reste à **151 mémoires RX**, avec un **delta RF de 0**.
+
+- **ADRASEC 29** : F1ZBH-3 et F1ZGQ-3 sont publiquement recoupés comme rôles ADRASEC-29 sur l'APRS 144.800 MHz ; cette RF est déjà présente dans le bloc APRS national, donc aucune duplication.
+- **ADRASEC 35** : F1ZUG reste publiquement identifié en APRS sur 144.800 MHz, tandis que la fréquence de sa fonction de transpondeur ADRASEC 35 n'est pas publiée. Elle n'est jamais déduite de l'APRS.
+- **ADRASEC 56** : l'activité départementale publique est confirmée, ainsi que des métadonnées APRS publiques, mais aucune fréquence de service ADRASEC actuelle distincte n'est promue. Une association historique de F1ZKU ne devient pas un rôle courant par inférence.
+- **ADRASEC 22** : appartenance FNRASEC confirmée, sans fréquence ADRASEC actuelle explicitement attribuée dans les sources publiques retenues.
+
+Garde-fous : appartenance associative ≠ fréquence publiée ; géographie ≠ rôle ADRASEC ; rôle historique ≠ rôle courant ; APRS ≠ fréquence d'un autre service ; données opérationnelles privées PPDR exclues.
+
+Test : `tests/test_sprint77_bretagne_adrasec_public_revalidation.py`.
 
 ## Sprint 76 — revalidation radioamateur Bretagne v0.2
 
@@ -113,7 +126,7 @@ Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normand
 - `research/sprint-30-34-summary.md`
 - `research/sprint-35-39-summary.md`
 - `research/sprint-55-60-summary.md`
-- `research/sprint-61-summary.md` à `research/sprint-76-summary.md`
+- `research/sprint-61-summary.md` à `research/sprint-77-summary.md`
 
 ## Tests principaux
 
@@ -124,6 +137,7 @@ python tests\test_normandie_v04_readiness.py
 python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
+python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_bretagne_public_release.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
@@ -138,6 +152,7 @@ git pull --ff-only
 python tools\build_bretagne_v02_internal_candidate.py
 python tests\test_sprint75_bretagne_aviation.py
 python tests\test_sprint76_bretagne_amateur_revalidation.py
+python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
 

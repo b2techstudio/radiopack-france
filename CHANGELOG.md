@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.21.66 - 2026-08-12
+
+- **Sprint 77** : revalidation publique ADRASEC Bretagne (22/29/35/56), candidat Bretagne v0.2 maintenu à **151 mémoires RX**, delta RF **0**.
+- ADRASEC 29 : F1ZBH-3 et F1ZGQ-3 recoupés publiquement sur APRS 144.800 MHz, déjà présent dans le bloc national ; aucune duplication.
+- ADRASEC 35 : F1ZUG APRS 144.800 MHz reste distinct du transpondeur ADRASEC 35 dont la fréquence n'est pas publiée.
+- ADRASEC 56 : activité publique confirmée sans fréquence de service ADRASEC actuelle distincte promue ; association historique de F1ZKU non transformée en rôle courant.
+- ADRASEC 22 : appartenance FNRASEC confirmée, sans fréquence actuelle explicitement attribuée dans le périmètre public retenu.
+- Données opérationnelles privées et PPDR explicitement exclues ; ajout du garde-fou Sprint 77 à la CI.
+
+## 0.21.65 - 2026-08-12
+
+- **Sprint 76** : revalidation des infrastructures radioamateur Bretagne v0.2, candidat maintenu à **151 mémoires RX**, delta RF **0**.
+- F1ZBZ résolu sans nouvelle RF car les cinq valeurs utiles sont déjà représentées ; F5ZPV/F5ZZH restent arrêtés selon l'opérateur local ; F5ZZC-4 reste sans fréquence actuelle validée.
+- Ajout de `amateur-infrastructure-revalidation.json` et du garde-fou Sprint 76.
+
+## 0.21.64 - 2026-08-12
+
+- **Sprint 75** : Bretagne v0.2 passe de 135 à **151 mémoires RX** avec **16 mémoires aviation** AIRAC 08/26 aux positions 130–145.
+- Rennes, Brest, Dinard, Quimper et 121.500 MHz urgence sont intégrés au candidat interne RX-only ; positions 146–149 laissées libres.
+- Aucun CSV public v0.2 ni changement de registre ; Bretagne v0.1 reste immuable à 135.
+
+## 0.21.63 - 2026-08-12
+
+- **Sprint 74** : initialisation de Bretagne v0.2 en recherche à partir de Bretagne v0.1 immuable = **135 mémoires RX**.
+- Six dossiers de backlog créés : aviation, ADRASEC public, F1ZUG/ADRASEC35, CROSS Étel Ch64, CROSS Corsen Ch79 et infrastructures radioamateur ambiguës/arrêtées.
+- Candidat initial 135, delta 0, aucune publication v0.2.
+
 ## 0.21.62 - 2026-08-12
 
 - **Sprint 73** : publication de **Bretagne v0.1 à 135 mémoires RX** et gel immuable de cette version.

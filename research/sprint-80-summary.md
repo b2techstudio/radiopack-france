@@ -26,6 +26,12 @@ La bascule du registre, de la page Bretagne, du générateur et de `website/src/
 
 ## Compatibilité historique
 
-Les garde-fous des Sprints 71, 73 et 79 restent exécutables après publication : ils vérifient toujours les états historiques v0.1 / prépublication v0.2 sans exiger qu'ils soient encore la version publique courante. `test_site_files.py` conserve également la présence du CSV v0.1 historique tout en validant la métadonnée publique v0.2 / 151.
+Les garde-fous Bretagne des Sprints 71 à 79 restent exécutables après publication. Les tests qui devaient historiquement prouver l'absence d'une v0.2 publique ont été rendus forward-compatible : ils continuent de valider leur état historique, puis reconnaissent la publication explicite du Sprint 80 sans affaiblir les contrôles de source, de déduplication ou d'immutabilité.
 
-Les tests de publication courants sont `tests/test_bretagne_v02_public_release.py` et `tests/test_sprint80_bretagne_v02_publication.py`, tous deux branchés dans la CI principale.
+La v0.1 reste vérifiée octet pour octet contre son candidat historique et demeure présente dans l'arbre public comme archive immuable. La v0.2 possède ses propres garde-fous `tests/test_bretagne_v02_public_release.py` et `tests/test_sprint80_bretagne_v02_publication.py`, tous deux branchés dans la CI principale.
+
+Le test générique du générateur web valide désormais Bretagne v0.2 / 151, y compris son aviation fixe incluse, tandis que le sélecteur aviation optionnel reste limité à Annecy–Alpes–Léman.
+
+## Validation de clôture
+
+Avant le commit d'archive final, la suite CI complète a été rejouée avec succès : tous les tests dépôt jusqu'au générateur web, les garde-fous Sprints 71–80 et le build Astro passent ensemble. Le commit de clôture demande en plus l'archive de référence exacte du HEAD final.

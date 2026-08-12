@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0",
+  "status": "primary_current_cross_local_mapping_revalidated_unresolved_zero_rf_delta_not_public",
+  "checked_on": "2026-08-12",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "published_base_version": "0.1",
+  "candidate_memory_count_before_review": 151,
+  "candidate_memory_count_after_review": 151,
+  "candidate_memory_delta": 0,
+  "public_export_allowed": false,
+  "reviews": [
+    {
+      "id": "CROSS_ETEL_CH64_LOCAL_MAPPING",
+      "cross": "CROSS Etel",
+      "channel": 64,
+      "paired_rx_mhz": [156.225, 160.825],
+      "generic_pair_already_present": true,
+      "new_rf_memory_delta": 0,
+      "local_site_mapping_promoted": false,
+      "state": "primary_current_regional_channel_statement_conflicts_with_local_operational_channel63_mapping_site_unresolved",
+      "primary_sources": [
+        {
+          "authority": "Ministère chargé de la mer",
+          "title": "Règles de sécurité pour les loisirs nautiques en mer",
+          "url": "https://www.mer.gouv.fr/regles-de-securite-pour-les-loisirs-nautiques-en-mer",
+          "page_updated": "2026-06-19",
+          "finding": "La page actuelle indique que les canaux 63 et 64 diffusent un bulletin côtier permanent notamment dans le Morbihan, sans nommer le site émetteur du canal 64."
+        },
+        {
+          "authority": "DIRM NAMO / CROSS Etel",
+          "title": "Le CROSS Etel",
+          "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-c-r-o-s-s-etel-a152.html",
+          "page_updated": "2025-11-24",
+          "finding": "La page actuelle nomme Etel et Chassiron sur le canal 63 pour la diffusion continue et ne nomme aucun site Bretagne sur le canal 64."
+        },
+        {
+          "authority": "DIRM NAMO / CROSS Etel",
+          "title": "Heures de diffusion des bulletins meteo par le CROSS Etel",
+          "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/IMG/pdf/Heures_de_diffusion_des_bulletins_meteo_par_le_CROSS_Etel-_cle537cc8.pdf",
+          "finding": "Le document lie Etel au canal 63 en diffusion continue et ne fournit pas de mapping local Bretagne canal 64.",
+          "pdf_text_extracted_by_web_parser": true,
+          "pdf_screenshot_attempted": true,
+          "pdf_screenshot_succeeded": false,
+          "pdf_screenshot_failure": "cache_miss"
+        }
+      ],
+      "assessment": {
+        "channel64_regional_current_statement_exists": true,
+        "etel_current_channel63_mapping_exists": true,
+        "channel64_brittany_transmitter_site_confirmed": false,
+        "channel64_current_operation_proven_at_named_brittany_site": false,
+        "channel64_stopped_proven": false,
+        "primary_source_conflict_open": true,
+        "promotion_allowed": false
+      }
+    },
+    {
+      "id": "CROSS_CORSEN_CH79_LOCAL_MAPPING",
+      "cross": "CROSS Corsen",
+      "channel": 79,
+      "paired_rx_mhz": [156.975, 161.575],
+      "generic_pair_already_present": true,
+      "new_rf_memory_delta": 0,
+      "local_site_mapping_promoted": false,
+      "state": "current_cross_network_confirmed_primary_channel79_transmitter_mapping_still_unresolved",
+      "primary_sources": [
+        {
+          "authority": "DIRM NAMO / CROSS Corsen",
+          "title": "Le CROSS Corsen",
+          "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
+          "finding": "La page actuelle confirme la diffusion des bulletins meteo a partir des stations VHF/MHF deployees sur le littoral, sans attribuer le canal 79 a un site emetteur precis."
+        },
+        {
+          "authority": "DIRM NAMO / CROSS Corsen",
+          "title": "CROSS Corsen : bilan 2025",
+          "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/cross-corsen-bilan-2025-a1709.html",
+          "published": "2026-03-02",
+          "finding": "La page primaire actuelle publie le bilan 2025 et son PDF officiel, mais le PDF de 14.6 Mio n'est pas extractible par l'outil web courant et n'est pas utilise pour attribuer un site canal 79.",
+          "pdf_content_extracted": false
+        },
+        {
+          "authority": "Meteo-France",
+          "title": "Les guides de Meteo-France - Guide Marine",
+          "url": "https://meteofrance.fr/actualite/publications/les-collections/les-guides-de-meteo-france",
+          "page_updated": "2026-08-05",
+          "finding": "La page actuelle indique que le Guide Marine contient horaires et frequences radio VHF. Le PDF 2026 est identifie mais son contenu n'est pas extractible dans ce workflow, donc aucune attribution de site n'en est deduite.",
+          "guide_2026_pdf_url": "https://meteofrance.fr/sites/default/files/files/editorial/Guide%20MARINE%202026.pdf",
+          "guide_pdf_content_extracted": false
+        }
+      ],
+      "secondary_clues": [
+        {
+          "source": "Club de Voile de la Baie d'Erquy",
+          "url": "https://cvberquy.org/erquy/meteo/avoirPrevisions.xml",
+          "reported_channel": 79,
+          "reported_sites": ["Cap Frehel", "Bodic"],
+          "current_primary_validation": false
+        },
+        {
+          "source": "Randonnée Kayak",
+          "url": "https://www.randokayak.com/comment-utiliser-une-vhf-en-kayak-de-mer/comment-page-1/",
+          "reported_channel": 79,
+          "reported_sites": ["Cap Frehel", "Bodic", "Batz", "Stiff", "Pointe du Raz"],
+          "current_primary_validation": false
+        }
+      ],
+      "assessment": {
+        "current_cross_network_confirmed": true,
+        "primary_current_channel79_transmitter_site_confirmed": false,
+        "secondary_site_chain_exists": true,
+        "secondary_site_chain_promotable": false,
+        "historical_channel79_context_promotable": false,
+        "promotion_allowed": false
+      }
+    }
+  ],
+  "promotion_decision": {
+    "new_unique_rf_memory_count": 0,
+    "candidate_memory_count": 151,
+    "local_site_metadata_promoted_count": 0,
+    "public_pack_mutation_allowed": false,
+    "reason": "Les deux paires RF sont deja presentes. Aucun mapping local Ch64/Ch79 n'est etabli par une source primaire actuelle suffisamment explicite ; aucune memoire ni attribution locale n'est donc ajoutee."
+  },
+  "rules": {
+    "generic_rf_pair_must_not_be_duplicated_for_site_metadata": true,
+    "regional_channel_statement_does_not_name_transmitter_site": true,
+    "current_cross_network_does_not_map_channel_to_station": true,
+    "secondary_site_clue_is_not_primary_validation": true,
+    "historical_channel_mapping_is_not_current_validation": true,
+    "unread_primary_pdf_is_not_negative_evidence": true,
+    "primary_source_conflict_requires_reconciliation": true,
+    "site_assignment_must_not_be_guessed": true,
+    "rx_only": true,
+    "public_export_allowed": false
+  }
+}

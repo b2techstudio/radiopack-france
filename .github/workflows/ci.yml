@@ -127,6 +127,9 @@ jobs:
       - name: Test Sprint 73 Bretagne publication
         run: python tests/test_sprint73_bretagne_publication.py
 
+      - name: Test Sprint 74 Bretagne v0.2 initialization
+        run: python tests/test_sprint74_bretagne_v02_initialization.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

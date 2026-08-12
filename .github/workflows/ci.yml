@@ -145,6 +145,12 @@ jobs:
       - name: Test Sprint 79 Bretagne v0.2 maturity and prepublication
         run: python tests/test_sprint79_bretagne_v02_maturity.py
 
+      - name: Test Bretagne v0.2 public release
+        run: python tests/test_bretagne_v02_public_release.py
+
+      - name: Test Sprint 80 Bretagne v0.2 publication
+        run: python tests/test_sprint80_bretagne_v02_publication.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0",
+  "status": "current_revalidation_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.2",
+  "checked_on": "2026-08-12",
+  "candidate_memory_count_before": 151,
+  "candidate_memory_count_after": 151,
+  "candidate_memory_delta": 0,
+  "public_export_allowed": false,
+  "sources": [
+    {
+      "id": "ARA35-F5ZPV",
+      "kind": "local_operator",
+      "title": "ARA35 - Relais RU19 UHF de Beaulieu",
+      "url": "https://ara35.fr/relais-ru19-uhf-de-beaulieu/",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "ARA35-F5ZZH",
+      "kind": "local_operator",
+      "title": "ARA35 - Relais VHF de Rennes",
+      "url": "https://ara35.fr/frequences/relais-phonie/relais-vhf-de-rennes/",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "ARA35-APRS",
+      "kind": "local_association_inventory",
+      "title": "ARA35 - APRS",
+      "url": "https://ara35.fr/frequences/digipeater-aprs/",
+      "accessed": "2026-08-12",
+      "freshness_note": "Page text itself describes the network as of end-2015; role evidence is retained but not treated as current frequency validation."
+    },
+    {
+      "id": "REF-35-CURRENT",
+      "kind": "national_directory",
+      "title": "REF - current repeater directory, Ille-et-Vilaine entries",
+      "url": "https://www.r-e-f.org/",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "REF-56-CURRENT",
+      "kind": "national_directory",
+      "title": "REF - current repeater directory, Morbihan entries",
+      "url": "https://www.r-e-f.org/",
+      "accessed": "2026-08-12"
+    },
+    {
+      "id": "BRETAGNE-RF-PLAN",
+      "kind": "repository_source_of_truth",
+      "path": "research/paired-rx-deduplicated-memory-plan.json"
+    }
+  ],
+  "items": [
+    {
+      "id": "F5ZPV",
+      "site": "Rennes Beaulieu / Cesson-Sevigne",
+      "operator_status": "temporarily_stopped",
+      "directory_status": "active",
+      "status_conflict": true,
+      "operator_status_overrides_directory": true,
+      "documented_pair_mhz": [430.475, 439.875],
+      "mode": "FM/C4FM",
+      "internal_candidate_promoted": false,
+      "candidate_memory_delta": 0,
+      "decision": "exclude_while_local_operator_reports_stopped",
+      "source_ids": ["ARA35-F5ZPV", "REF-35-CURRENT"]
+    },
+    {
+      "id": "F5ZZH",
+      "site": "Rennes Beaulieu / Cesson-Sevigne",
+      "operator_status": "temporarily_stopped_searching_new_site",
+      "directory_status": "stopped",
+      "status_conflict": false,
+      "documented_pair_mhz": [145.1875, 145.7875],
+      "internal_candidate_promoted": false,
+      "candidate_memory_delta": 0,
+      "decision": "exclude_until_local_operator_confirms_restart",
+      "source_ids": ["ARA35-F5ZZH", "REF-35-CURRENT"]
+    },
+    {
+      "id": "F1ZBZ",
+      "site": "Lorient",
+      "directory_status": "active_multi_path_transponder",
+      "documented_unique_rf_mhz": [145.025, 145.1375, 145.625, 145.7375, 431.2],
+      "existing_plan_coverage": {
+        "145.025": "ZBZ-VB",
+        "145.1375": "ZPE-IN merged role",
+        "145.625": "ZBZ-VA",
+        "145.7375": "ZPE-OUT merged role",
+        "431.2": "ZBZ-U"
+      },
+      "all_current_directory_rf_already_represented": true,
+      "direction_review_creates_new_rf_memory": false,
+      "internal_candidate_promoted_new_memory": false,
+      "candidate_memory_delta": 0,
+      "decision": "rf_inventory_resolved_no_new_memory_required",
+      "source_ids": ["REF-56-CURRENT", "BRETAGNE-RF-PLAN"]
+    },
+    {
+      "id": "F5ZZC-4",
+      "site": "Ker Lann / Bruz",
+      "role": "APRS digipeater managed by ADRASEC 35",
+      "role_evidence_status": "documented_by_ara35_but_stale_for_current_frequency_validation",
+      "current_aprs_frequency_validated": false,
+      "ref_f5zzc_analog_entry_is_same_service_proven": false,
+      "ref_f5zzc_analog_entry": {
+        "status": "stopped",
+        "frequency_mhz": 432.975,
+        "mode": "FM"
+      },
+      "must_not_conflate_f5zzc_with_f5zzc_dash4_aprs": true,
+      "internal_candidate_promoted": false,
+      "candidate_memory_delta": 0,
+      "decision": "keep_unresolved_until_current_service_specific_source",
+      "source_ids": ["ARA35-APRS", "REF-35-CURRENT"]
+    }
+  ],
+  "summary": {
+    "reviewed_item_count": 4,
+    "new_active_candidate_count": 0,
+    "resolved_zero_delta_item_count": 1,
+    "resolved_zero_delta_ids": ["F1ZBZ"],
+    "still_blocked_or_unresolved_ids": ["F5ZPV", "F5ZZH", "F5ZZC-4"],
+    "candidate_memory_delta": 0,
+    "candidate_memory_count": 151
+  },
+  "rules": {
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "stopped_infrastructure_not_promoted": true,
+    "directory_active_does_not_override_local_operator_stopped": true,
+    "same_rf_frequency_deduplicated": true,
+    "metadata_direction_review_does_not_create_duplicate_rf_memory": true,
+    "similar_callsign_does_not_prove_same_service": true,
+    "stale_role_evidence_does_not_validate_current_frequency": true,
+    "public_export_allowed": false
+  }
+}

@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **73**
-État logique : **0.21.62**
+Sprint courant : **74**
+État logique : **0.21.63**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md` et `research/sprint-73-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md`, `research/sprint-73-summary.md` et `research/sprint-74-summary.md`.
 
 ## État public
 
@@ -13,6 +13,15 @@ Ce fichier sert de point de reprise humain. L'état machine correspondant est da
 - **Annecy–Alpes–Léman v0.2** : 65 mémoires RX, variante 48 sans aviation, publiée et immuable.
 - **Bretagne v0.1** : **135 mémoires RX**, publiée et immuable.
 
+## Sprint 74 — initialisation Bretagne v0.2 à 135, delta 0
+
+- **Bretagne v0.2** devient la version de recherche active, basée sur **Bretagne v0.1 = 135 mémoires RX**, qui reste immuable.
+- Candidat initial : **135 mémoires**, **0 ajout**, aucun export public v0.2 et aucun changement du registre public.
+- `research/bretagne-v0.2/pack-plan.json` verrouille la base publique, le delta nul et l'interdiction de publication directe.
+- `research/bretagne-v0.2/backlog.json` reprend six dossiers : source aviation courante, données ADRASEC publiquement vérifiables, cas F1ZUG / ADRASEC 35, mapping local CROSS Étel Ch64, mapping local CROSS Corsen Ch79 et infrastructures radioamateur à revalider.
+- Ch64 et Ch79 sont déjà présents comme mémoires génériques dans la v0.1 ; une future attribution locale ne crée donc pas de nouvelle mémoire RF par simple ajout de métadonnée.
+- Les données non publiées ne sont jamais déduites ; les données privées PPDR restent exclues.
+- Test de garde-fou : `tests/test_sprint74_bretagne_v02_initialization.py` et étape CI dédiée.
 
 ## Sprint 73 — publication Bretagne v0.1 à 135
 
@@ -45,7 +54,7 @@ Ce fichier sert de point de reprise humain. L'état machine correspondant est da
 - Revue v0.4 : **9/9**, périmètre clos ; publication enregistrée dans `research/normandie-v0.4/publication-record.json`.
 - Normandie v0.5 : **initialisée en recherche**, base publique v0.4=142, aucun ajout encore promu.
 - Backlog v0.5 : R3/F1ZBX (+2 potentiels après 2 sessions RX), F5ZHA (+2 potentiels après source+terrain), F1ZOV (+1 potentiel après sortie de maintenance), F6ZES (delta inconnu tant que fréquence/mode ne sont pas prouvés).
-- Bretagne v0.1 reste recherche uniquement.
+- Bretagne v0.1 reste recherche uniquement dans cet état historique.
 
 ## Historique de préparation — Normandie v0.4
 
@@ -54,7 +63,6 @@ Candidat interne reproductible : **142 mémoires**, non public. Les trois portes
 Ajouts internes actuels : `50-ZHY-IN` 145.0875 MHz (175), `53-ZCE-IN` 145.1000 MHz (176), `50-ZBL-U` 431.2500 MHz (177).
 
 État historique avant la clôture Sprint 68 : **3/9 points complétés**, **6 blocages ouverts**, **0 ajout éligible**, preview **142 mémoires**. Cet état est conservé dans les sources historiques ; la clôture Sprint 68 l'a ensuite porté à 9/9 avec zéro blocage.
-
 
 ## Clôture de périmètre Normandie v0.4 — Sprint 68
 
@@ -98,19 +106,17 @@ Le guide ministériel 2026 a été extrait et contrôlé visuellement. Il confir
 - F5ZHA : l'indicateur vert de la fiche RepeaterBook 431.4125 ne supplante pas sa provenance `2017-02-17` / `Off-Air`; source autoritative actuelle toujours requise.
 - F6ZES : aucune fréquence/mode/état nouveau ; R3 : toujours 2 mémoires si promotion et 2 sessions de preuve.
 
-État inchangé : **142**, plafond **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**, non prêt pour publication.
+État historique de la recherche avant clôture v0.4 : **142**, plafond **147**, revue **3/9**, **6 blocages**, **0 ajout éligible**, non prêt pour publication.
 
 ### Inventaires techniques courants — Sprint 66
 
-`research/sprint-66-technical-inventory-boundaries.json` enregistre la nouvelle passe sans toucher au candidat.
+`research/sprint-66-technical-inventory-boundaries.json` enregistre la passe sans toucher au candidat.
 
 - F5ZHA : ARAM53 est identifiable comme association active, mais aucune publication technique locale actuelle exploitée ne valide la paire ; existence associative ≠ validation de fréquence.
 - F6ZES : fréquence/mode/état toujours absents ; delta candidat **0**.
 - CROSS Étel : l'offre DIRM `2026-2341297` confirme **17 stations radio** de Penmarc'h à Biarritz et un contexte MHF/VHF, mais aucun nom de station ni canal : Ch64 reste sans site.
 - CROSS Corsen : Stiff est revalidé comme infrastructure radio 2026 ; le marché `DGAMPA-SNC1-2025-03_STIFF` confirme le projet de rénovation mais aucun Ch79. Une source secondaire non datée restitue Fréhel/Bodic/Batz/Stiff/Raz sur Ch79, uniquement comme cible de recherche.
 - Guide Marine 2026 : nouvelle tentative `cache miss`, donc aucune inférence.
-
-État inchangé : **142**, plafond **147**, revue **3/9**, **6 blocages ouverts**, **0 ajout éligible**, non prêt pour publication.
 
 ### Recontrôle primaire courant — Sprint 65
 
@@ -226,6 +232,7 @@ python tests\test_bretagne_prepublication_review.py
 python tests\test_sprint72_bretagne_scope_closure.py
 python tests\test_bretagne_public_release.py
 python tests\test_sprint73_bretagne_publication.py
+python tests\test_sprint74_bretagne_v02_initialization.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py

@@ -25,6 +25,14 @@ jobs:
       - name: Finalize Sprint 81
         run: python tools/finalize_sprint81.py
 
+      - name: Restore workflow-controlled temporary files
+        shell: bash
+        run: |
+          git checkout HEAD -- .github/workflows/ci.yml
+          git checkout HEAD -- .github/workflows/finalize-sprint81.yml
+          git checkout HEAD -- .github/sprint81-finalize-trigger
+          git checkout HEAD -- tools/finalize_sprint81.py
+
       - name: Commit final state
         shell: bash
         run: |

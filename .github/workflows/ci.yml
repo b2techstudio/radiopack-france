@@ -240,7 +240,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: radiopack-reference-${{ github.sha }}
-          path: RadioPack-France-${GITHUB_SHA}.zip
+          path: RadioPack-France-${{ github.sha }}.zip
           if-no-files-found: error
           retention-days: 30
 

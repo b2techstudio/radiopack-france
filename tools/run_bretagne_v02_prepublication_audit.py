@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Audit frozen Bretagne v0.2 candidate; never writes public files."""
+"""Audit frozen/published Bretagne v0.2 candidate without mutating public files."""
 from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import subprocess
 import sys
@@ -30,6 +31,7 @@ def main() -> None:
     checklist = load_json(research / "review-checklist.json")
     gates = load_json(research / "publication-gates.json")
     aviation = load_json(research / "aviation-airac-08.json")
+    publication_record_path = research / "publication-record.json"
 
     errors: list[str] = []
 
@@ -53,10 +55,10 @@ def main() -> None:
         errors.append("unexpected aviation AIRAC cycle")
     if cycle["effective_from"] != "2026-08-06" or cycle["effective_until_inclusive"] != "2026-09-02":
         errors.append("unexpected aviation validity window")
-    if cycle["current_xml_export_bytes_extracted_in_repository_workflow"] is not False:
+    if aviation["methodology"]["current_xml_export_bytes_extracted"] is not False:
         errors.append("audit assumptions changed: XML extraction unexpectedly true")
-    if aviation["methodology"]["does_not_claim_current_xml_field_match_without_xml_extraction"] is not True:
-        errors.append("aviation methodology no longer guards unperformed XML field match")
+    if aviation["methodology"]["direct_current_xml_field_match_claimed"] is not False:
+        errors.append("unperformed direct XML field match is being claimed")
 
     with tempfile.TemporaryDirectory() as temp_dir:
         temp = Path(temp_dir)
@@ -74,6 +76,7 @@ def main() -> None:
         )
         csv_path = temp / "bretagne-v0.2-internal.csv"
         json_path = temp / "bretagne-v0.2-internal.json"
+        candidate_bytes = csv_path.read_bytes()
         with csv_path.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle))
         candidate = load_json(json_path)
@@ -105,11 +108,29 @@ def main() -> None:
             errors.append(f"aviation TX policy broken: {channel.get('name')}")
 
     public_v02 = root / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv"
-    if public_v02.exists():
-        errors.append("public Bretagne v0.2 CSV exists before publication sprint")
     registry = (root / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-    if "radiopack-france-bretagne-v0.2.csv" in registry:
-        errors.append("public registry already points to Bretagne v0.2")
+
+    if publication_record_path.exists():
+        record = load_json(publication_record_path)
+        if record.get("status") != "published_immutable" or record.get("version") != "0.2":
+            errors.append("Bretagne v0.2 publication record has unexpected status/version")
+        if record.get("memory_count") != 151:
+            errors.append("Bretagne v0.2 publication record memory count mismatch")
+        if not public_v02.is_file():
+            errors.append("published Bretagne v0.2 CSV is missing")
+        else:
+            public_bytes = public_v02.read_bytes()
+            if public_bytes != candidate_bytes:
+                errors.append("published Bretagne v0.2 CSV differs from frozen candidate")
+            if record.get("public_csv_sha256") != hashlib.sha256(public_bytes).hexdigest():
+                errors.append("published Bretagne v0.2 SHA-256 mismatch")
+        if "radiopack-france-bretagne-v0.2.csv" not in registry:
+            errors.append("public registry does not point to published Bretagne v0.2")
+    else:
+        if public_v02.exists():
+            errors.append("public Bretagne v0.2 CSV exists before publication record")
+        if "radiopack-france-bretagne-v0.2.csv" in registry:
+            errors.append("public registry already points to Bretagne v0.2")
 
     ready = not errors and all(
         item is True
@@ -121,14 +142,15 @@ def main() -> None:
         )
     )
     result = {
-        "schema_version": "1.0",
-        "status": "prepublication_audit_not_public",
+        "schema_version": "1.1",
+        "status": "prepublication_or_published_integrity_audit",
         "memory_count": 151,
         "review": "10/10",
         "blocker_count": len(errors),
         "errors": errors,
         "prepublication_ready": ready,
-        "public_export_allowed": False,
+        "published": publication_record_path.exists(),
+        "public_export_allowed_by_audit": False,
     }
     output = research / "generated/prepublication-audit"
     output.mkdir(parents=True, exist_ok=True)
@@ -137,9 +159,10 @@ def main() -> None:
         encoding="utf-8",
     )
     print(
-        "BRETAGNE V0.2 PREPUBLICATION AUDIT: "
+        "BRETAGNE V0.2 AUDIT: "
         f"integrity={'OK' if not errors else 'FAIL'} review=10/10 "
-        f"blockers={len(errors)} prepublication_ready={str(ready).lower()}"
+        f"blockers={len(errors)} prepublication_ready={str(ready).lower()} "
+        f"published={str(publication_record_path.exists()).lower()}"
     )
     if errors or (args.require_prepublication_ready and not ready):
         raise SystemExit(1)

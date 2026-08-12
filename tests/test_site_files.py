@@ -56,6 +56,19 @@ required_files = [
     "research/bretagne-v0.1/maritime-zones.json",
     "research/bretagne-v0.1/emergency-relays.json",
     "research/bretagne-v0.1/public-maritime-radio.json",
+    "research/bretagne-v0.1/publication-record.json",
+    "research/bretagne-v0.1/release-scope.json",
+    "research/bretagne-v0.1/review-checklist.json",
+    "research/sprint-73-summary.md",
+    "tools/build_bretagne_internal_candidate.py",
+    "tools/build_bretagne_review_snapshot.py",
+    "tools/run_bretagne_prepublication_audit.py",
+    "tests/test_bretagne_internal_candidate.py",
+    "tests/test_bretagne_prepublication_review.py",
+    "tests/test_bretagne_public_release.py",
+    "tests/test_sprint73_bretagne_publication.py",
+    "website/src/pages/regions/bretagne.astro",
+    "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv",
     "research/normandie-v0.4/README.md",
     "research/normandie-v0.4/pack-plan.json",
     "research/normandie-v0.4/emergency-relays.json",
@@ -120,6 +133,19 @@ for expected in [
     "build_normandie_v04_readiness_report.py",
     "build_normandie_v04_promotion_scenarios.py",
     "research/bretagne-v0.1/public-maritime-radio.json",
+    "research/bretagne-v0.1/publication-record.json",
+    "research/bretagne-v0.1/release-scope.json",
+    "research/bretagne-v0.1/review-checklist.json",
+    "research/sprint-73-summary.md",
+    "tools/build_bretagne_internal_candidate.py",
+    "tools/build_bretagne_review_snapshot.py",
+    "tools/run_bretagne_prepublication_audit.py",
+    "tests/test_bretagne_internal_candidate.py",
+    "tests/test_bretagne_prepublication_review.py",
+    "tests/test_bretagne_public_release.py",
+    "tests/test_sprint73_bretagne_publication.py",
+    "website/src/pages/regions/bretagne.astro",
+    "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv",
     "tests\\test_paired_rx_policy.py",
     "tests\\test_mortain_bretagne_radio_research.py",
     "tests\\test_normandie_v04_readiness.py",
@@ -140,9 +166,9 @@ assert "*.py[cod]" in gitignore
 options = json.loads((ROOT / "generator/options.json").read_text(encoding="utf-8"))
 assert options["schema_version"] == "3.0"
 assert options["status"] == "multi_region_public_generator"
-assert options["implementation"]["published_pack_count"] == 2
+assert options["implementation"]["published_pack_count"] == 3
 assert options["implementation"]["public_pack_registry"] == "website/src/lib/packRegistry.ts"
-assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie"}
+assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie", "bretagne"}
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 assert options["options"]["notam_check"]["blocks_generation"] is False
 
@@ -201,7 +227,7 @@ assert len(bretagne_sources["sources"]) == 11
 assert all(source["frequency_data_promoted"] is False for source in bretagne_sources["sources"])
 assert bretagne_sources["rules"]["maritime_cross_assignment_must_be_zone_specific"] is True
 assert bretagne_sources["rules"]["exact_current_srr_boundary_required_before_publication"] is True
-assert bretagne_gates["status"] == "prepublication_ready_135_explicit_publication_pending"
+assert bretagne_gates["status"] == "published_immutable_135"
 assert bretagne_gates["public_release_allowed"] is False
 assert len(bretagne_gates["gates"]) == 8
 bretagne_gate_map = {gate["id"]: gate for gate in bretagne_gates["gates"]}
@@ -399,27 +425,31 @@ assert review["expected_memory_count_without_aviation"] == 48
 assert len(review["rows"]) == 65
 
 regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
-assert len(regions) == 2
-assert {region["slug"] for region in regions} == {"annecy-haute-savoie", "normandie"}
+assert len(regions) == 3
+assert {region["slug"] for region in regions} == {"annecy-haute-savoie", "normandie", "bretagne"}
 assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 65
 assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 142
+assert next(region for region in regions if region["slug"] == "bretagne")["memoryCount"] == 135
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
     'id: "annecy-alpes-leman"',
     'id: "normandie"',
+    'id: "bretagne"',
     'version: "v0.2"',
     'version: "v0.4"',
     'memoryCount: 65',
     'memoryCount: 48',
     'memoryCount: 142',
+    'memoryCount: 135',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
-assert registry.count('downloadUrl: "') == 3
-assert 'id: "bretagne"' not in registry
+assert registry.count('downloadUrl: "') == 4
+assert 'id: "bretagne"' in registry
+assert 'version: "v0.1"' in registry
 assert 'version: "v0.3"' not in registry
-assert not (ROOT / "website/src/pages/regions/bretagne.astro").exists()
-assert not (ROOT / "website/public/downloads/bretagne").exists()
+assert (ROOT / "website/src/pages/regions/bretagne.astro").is_file()
+assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv").is_file()
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()

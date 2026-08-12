@@ -19,7 +19,7 @@ import regions from "../data/regions.json";
         </div>
         <div class="hero-stats">
           <div><strong>200</strong><span>mémoires disponibles par pack</span></div>
-          <div><strong>2</strong><span>packs régionaux disponibles</span></div>
+          <div><strong>3</strong><span>packs régionaux disponibles</span></div>
           <div><strong>65</strong><span>mémoires dans Annecy v0.2</span></div>
         </div>
       </div>
@@ -57,7 +57,7 @@ import regions from "../data/regions.json";
       <div class="region-list">
         <span class="eyebrow">Déploiement progressif</span>
         <h2>Choisis ta zone</h2>
-        <p class="lead">La Normandie v0.4 et Annecy–Alpes–Léman v0.2 sont maintenant disponibles en réception seule.</p>
+        <p class="lead">La Normandie v0.4, Annecy–Alpes–Léman v0.2 et la Bretagne v0.1 sont disponibles en réception seule.</p>
         {regions.map((region) => <RegionCard {...region} />)}
       </div>
     </div>
@@ -66,13 +66,14 @@ import regions from "../data/regions.json";
   <section class="section">
     <div class="container cta">
       <div>
-        <span class="eyebrow">Deux packs régionaux disponibles</span>
-        <h2>Normandie et Alpes–Léman prêtes à importer.</h2>
-        <p>Normandie v0.4 contient 142 mémoires RX-only. Annecy–Alpes–Léman v0.2 contient 65 mémoires, avec une variante de 48 mémoires sans aviation disponible depuis le générateur.</p>
+        <span class="eyebrow">Trois packs régionaux disponibles</span>
+        <h2>Normandie, Alpes–Léman et Bretagne prêtes à importer.</h2>
+        <p>Normandie v0.4 contient 142 mémoires RX-only. Annecy–Alpes–Léman v0.2 contient 65 mémoires, avec une variante de 48 sans aviation. Bretagne v0.1 contient 135 mémoires RX-only.</p>
       </div>
       <div class="cta-actions">
         <a class="button button-orange" href="/regions/normandie">Voir la Normandie →</a>
         <a class="button button-primary" href="/regions/annecy-haute-savoie">Voir Annecy v0.2 →</a>
+        <a class="button button-secondary" href="/regions/bretagne">Voir la Bretagne →</a>
       </div>
     </div>
   </section>

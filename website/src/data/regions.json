@@ -30,5 +30,21 @@
       "APRS / ISS / satellites"
     ],
     "available": true
+  },
+  {
+    "slug": "bretagne",
+    "name": "Bretagne",
+    "shortName": "Bretagne",
+    "status": "v0.1 disponible",
+    "accent": "blue",
+    "description": "Pack de 135 mémoires RX : PMR446, VHF marine, écoute radioamateur et fréquences régionales analogiques dédupliquées.",
+    "memoryCount": 135,
+    "categories": [
+      "PMR446 RX",
+      "VHF marine RX",
+      "Radioamateur RX",
+      "Ch64 / Ch79 RX"
+    ],
+    "available": true
   }
 ]

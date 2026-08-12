@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-12",
+  "pack": "Bretagne",
+  "version": "0.1",
+  "memory_count": 135,
+  "public_csv": "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv",
+  "public_csv_sha256": "105bee25cd7fe7eb59e8835baddcfc039dd8220826c3c883d95b8df5f9474c50",
+  "candidate_builder": "tools/build_bretagne_internal_candidate.py",
+  "release_scope": "research/bretagne-v0.1/release-scope.json",
+  "review_checklist": "research/bretagne-v0.1/review-checklist.json",
+  "published_version_is_immutable": true,
+  "deferred_to_v0_2": [
+    "AVIATION_CURRENT_SIA",
+    "ADRASEC_UNPUBLISHED_OPERATIONAL_FREQUENCIES",
+    "CROSS_LOCAL_TRANSMITTER_SITE_MAPPING",
+    "STOPPED_OR_UNRESOLVED_AMATEUR_INFRASTRUCTURE"
+  ],
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "unproven_candidates_absent": true,
+    "generic_ch64_ch79_do_not_claim_local_transmitter_site": true
+  }
+}

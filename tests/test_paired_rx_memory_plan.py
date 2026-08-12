@@ -160,7 +160,7 @@ assert plan["rules"]["stopped_or_unresolved_links_excluded_from_active_memory_li
 assert plan["rules"]["no_public_export"] is True
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 assert 'version: "v0.4"' in registry
 assert 'version: "v0.3"' not in registry
 

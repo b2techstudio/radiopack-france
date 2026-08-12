@@ -251,7 +251,7 @@ assert regions["annecy-alpes-leman-v0.3"]["paired_links"]
 assert regions["normandie-v0.4"]["paired_links"]
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 assert 'version: "v0.4"' in registry
 assert 'version: "v0.3"' not in registry
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()

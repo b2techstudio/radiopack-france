@@ -97,7 +97,7 @@ assert gates["emergency_relay_inventory"]["required_for_public_release"] is True
 assert gates["emergency_relay_inventory"]["status"] != "passed"
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 assert 'version: "v0.4"' in registry
 assert 'version: "v0.4"' in registry
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()

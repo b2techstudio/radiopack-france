@@ -1,18 +1,27 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **12 août 2026**
-Sprint courant : **72**
-État logique : **0.21.61**
+Sprint courant : **73**
+État logique : **0.21.62**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md` et `research/sprint-72-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md` et `research/sprint-73-summary.md`.
 
 ## État public
 
 - **Normandie v0.4** : **142 mémoires RX**, publiée et immuable.
 - **Normandie v0.3.1** : 139 mémoires RX, historique immuable.
 - **Annecy–Alpes–Léman v0.2** : 65 mémoires RX, variante 48 sans aviation, publiée et immuable.
-- **Bretagne v0.1** : recherche uniquement, aucune publication.
+- **Bretagne v0.1** : **135 mémoires RX**, publiée et immuable.
 
+
+## Sprint 73 — publication Bretagne v0.1 à 135
+
+- **Bretagne v0.1** est désormais publique avec **135 mémoires RX** et devient immuable.
+- Le CSV public est identique octet pour octet au candidat figé/revu au Sprint 72 ; `research/bretagne-v0.1/publication-record.json` enregistre son SHA-256.
+- Le registre public, le générateur, les pages régions/téléchargements/versions et le sitemap exposent désormais Bretagne v0.1.
+- Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) restent deux paires RX génériques ; aucun site local non prouvé n'est ajouté.
+- Aviation AIRAC courante, fréquences opérationnelles ADRASEC non publiées, mappings locaux CROSS et infrastructures amateur arrêtées/non résolues restent différés à **Bretagne v0.2**.
+- Les artefacts de prépublication Sprint 72 restent des preuves historiques ; leur statut n'est pas réécrit.
 
 ## Sprint 72 — Bretagne v0.1 prépublication prête à 135
 
@@ -28,7 +37,7 @@ Ce fichier sert de point de reprise humain. L'état machine correspondant est da
 - **Bretagne v0.1** dispose désormais d'un **candidat interne de 135 mémoires RX**, non public : 16 PMR446 + 90 VHF maritime + 6 écoutes amateur + 2 appels amateur + 21 mémoires régionales dédupliquées.
 - Les canaux **64** (156.225 / 160.825 MHz) et **79** (156.975 / 161.575 MHz) sont présents comme **deux mémoires RX génériques chacun**. Aucun site Étel/Corsen n'est attribué sans preuve primaire explicite.
 - Les positions aviation 130–149 restent réservées, avec **0 fréquence aviation promue** tant que l'extraction SIA actuelle n'est pas validée.
-- Bretagne reste absente du registre public et des téléchargements publics.
+- Historique Sprint 71 : Bretagne était encore absente du registre public et des téléchargements publics à ce stade.
 
 ## État final après Sprint 70
 
@@ -213,6 +222,10 @@ python tests\test_normandie_v04_public_release.py
 python tests\test_normandie_v05_initialization.py
 python tests\test_etel_network_research.py
 python tests\test_bretagne_research_scaffold.py
+python tests\test_bretagne_prepublication_review.py
+python tests\test_sprint72_bretagne_scope_closure.py
+python tests\test_bretagne_public_release.py
+python tests\test_sprint73_bretagne_publication.py
 python tests\test_emergency_relay_research.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py

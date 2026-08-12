@@ -1,9 +1,9 @@
 # RadioPack France
 
-**État courant : Sprint 72 / 0.21.61 — Bretagne v0.1 figée en prépublication à 135 mémoires RX, revue 8/8 et 0 blocage ; publication encore séparée.**
+**État courant : Sprint 73 / 0.21.62 — Bretagne v0.1 publiée et figée immuable à 135 mémoires RX.**
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 72 / 0.21.61
+## État actuel — Sprint 73 / 0.21.62
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -11,11 +11,12 @@ Packs publics immuables :
 
 - **Normandie v0.4** — 142 mémoires RX ;
 - Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
-- **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation.
+- **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation ;
+- **Bretagne v0.1** — 135 mémoires RX, publiée et immuable.
 
-Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion ; **Bretagne v0.1** est désormais figée en prépublication non publique à **135 mémoires RX**, revue **8/8**, **0 blocage** pour son périmètre v0.1. Annecy–Alpes–Léman v0.3 reste non publique.
+Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion ; **Bretagne v0.2** reste à initialiser pour les éléments différés de v0.1. Annecy–Alpes–Léman v0.3 reste non publique.
 
-Le générateur public propose Normandie v0.4 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md` et `research/sprint-72-summary.md`.
+Le générateur public propose Normandie v0.4, Bretagne v0.1 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md`, `research/sprint-72-summary.md` et `research/sprint-73-summary.md`.
 
 
 ## Normandie v0.4 — publication achevée
@@ -28,9 +29,35 @@ Fichiers de publication : `research/normandie-v0.4/publication-record.json` et `
 
 `research/normandie-v0.5/backlog.json` reprend R3/F1ZBX, F5ZHA, F1ZOV et F6ZES. Un report n'est jamais une validation. R3 conserve exactement deux mémoires potentielles (145.075 / 145.675 MHz) et exige deux sessions RX indépendantes ; F5ZHA conserve deux mémoires potentielles mais nécessite réconciliation autoritative + terrain ; F1ZOV attend la sortie de maintenance ; F6ZES reste sans fréquence/mode deviné. Le plafond potentiel connu, hors F6ZES, reste **147 mémoires**.
 
+## Bretagne v0.1 — publication Sprint 73
+
+Bretagne v0.1 est publiée avec **135 mémoires RX** et devient immuable. Le fichier public `website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv` correspond octet pour octet au candidat interne revu au Sprint 72 ; son SHA-256 est enregistré dans `research/bretagne-v0.1/publication-record.json`.
+
+Le périmètre public reste strictement celui validé : 16 PMR446, 90 voies VHF maritimes génériques, 6 écoutes radioamateur, 2 appels radioamateur et 21 mémoires régionales dédupliquées. Ch64 et Ch79 restent des paires RX génériques sans attribution locale de site non prouvée. Aviation courante, fréquences opérationnelles ADRASEC non publiées, mappings locaux CROSS et infrastructures amateur arrêtées/non résolues sont différés à **Bretagne v0.2** sans validation implicite.
+
+Les artefacts de revue du Sprint 72 restent historiques : leur statut de prépublication n'est pas réécrit après coup ; le passage public est enregistré séparément par le journal de publication Sprint 73.
+
+Fichiers et garde-fous Sprint 73 :
+
+```text
+research/bretagne-v0.1/release-scope.json
+research/bretagne-v0.1/review-checklist.json
+research/bretagne-v0.1/publication-record.json
+research/sprint-73-summary.md
+tools/build_bretagne_internal_candidate.py
+tools/build_bretagne_review_snapshot.py
+tools/run_bretagne_prepublication_audit.py
+tests/test_bretagne_internal_candidate.py
+tests/test_bretagne_prepublication_review.py
+tests/test_bretagne_public_release.py
+tests/test_sprint73_bretagne_publication.py
+website/src/pages/regions/bretagne.astro
+website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv
+```
+
 ## Bretagne v0.1 — prépublication Sprint 72
 
-Le périmètre v0.1 est figé à **135 mémoires RX**. La revue est **8/8**, avec **0 blocage** pour ce périmètre, mais aucun fichier public Bretagne n'est encore créé.
+Historique Sprint 72 : le périmètre v0.1 a été figé à **135 mémoires RX** avec une revue **8/8** et **0 blocage** avant l'étape de publication explicite du Sprint 73.
 
 L'aviation est reportée à v0.2 : le cycle SIA courant **AIRAC 08/26** (06/08/2026–02/09/2026) est identifié, mais l'export exact courant n'est pas extrait dans le workflow ; RadioPack France ne transforme donc pas des fréquences exactes plus anciennes en données prétendument courantes. Les fréquences opérationnelles ADRASEC non publiées, les mappings locaux CROSS et les infrastructures arrêtées/non résolues sont également différés.
 
@@ -38,7 +65,7 @@ Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) restent des paires 
 
 ## Bretagne v0.1 — candidat interne Sprint 71
 
-Le candidat interne Bretagne contient **135 mémoires RX** : 16 PMR446, 90 voies VHF maritimes génériques, 6 écoutes amateur, 2 appels amateur et 21 fréquences régionales uniques après déduplication. Les canaux 64 (156.225 / 160.825 MHz) et 79 (156.975 / 161.575 MHz) sont conservés en **deux mémoires RX chacun**, sans attribuer de site local non prouvé. Les positions 130–149 restent réservées à l'aviation en attente d'une extraction SIA actuelle validée. Ce candidat reste strictement non public.
+Le candidat interne Bretagne contient **135 mémoires RX** : 16 PMR446, 90 voies VHF maritimes génériques, 6 écoutes amateur, 2 appels amateur et 21 fréquences régionales uniques après déduplication. Les canaux 64 (156.225 / 160.825 MHz) et 79 (156.975 / 161.575 MHz) sont conservés en **deux mémoires RX chacun**, sans attribuer de site local non prouvé. Les positions 130–149 restent réservées à l'aviation en attente d'une extraction SIA actuelle validée. Ce candidat interne reste un artefact de construction/revue ; la publication v0.1 reprend désormais exactement ses 135 lignes, sans transformer le candidat en source publique mutable.
 
 ## Règles permanentes
 

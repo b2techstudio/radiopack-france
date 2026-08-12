@@ -127,6 +127,6 @@ public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-n
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
 assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 
 print("Sprint 66 technical inventory boundaries: Etel 17-station maintenance scope remains unnamed by channel, Corsen full secondary Ch79 chain stays non-primary, Stiff infrastructure does not assign Ch79, Normandie gates and public packs unchanged OK")

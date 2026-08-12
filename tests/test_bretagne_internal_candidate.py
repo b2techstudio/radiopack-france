@@ -24,7 +24,9 @@ with tempfile.TemporaryDirectory() as tmp:
         check=True,
     )
     candidate = json.loads((output / "bretagne-v0.1-internal.json").read_text(encoding="utf-8"))
-    with (output / "bretagne-v0.1-internal.csv").open(encoding="utf-8", newline="") as handle:
+    generated_csv = output / "bretagne-v0.1-internal.csv"
+    generated_bytes = generated_csv.read_bytes()
+    with generated_csv.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
 assert candidate["status"] == "internal_candidate_not_for_publication"
@@ -100,7 +102,9 @@ for freq in [156.175, 160.775, 156.225, 160.825, 156.975, 161.575, 157.025, 161.
     assert candidate_by_frequency[round(freq, 6)]["regional_roles"]
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
-assert 'id: "bretagne"' not in registry
-assert not (ROOT / "website/public/downloads/bretagne").exists()
+public = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv"
+assert 'id: "bretagne"' in registry
+assert public.is_file()
+assert public.read_bytes() == generated_bytes
 
-print("Bretagne v0.1 internal candidate: 135 RX-only memories, 90 generic marine + 21 regional unique after dedup, Ch64/Ch79 two memories each without invented site, public untouched OK")
+print("Bretagne v0.1 internal candidate: 135 RX-only memories reproduce the immutable public v0.1 exactly, Ch64/Ch79 two memories each without invented site OK")

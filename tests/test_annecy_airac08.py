@@ -128,7 +128,7 @@ implementation = generator_options["implementation"]
 assert implementation["generic_pack_library"] == "website/src/lib/chirpPack.ts"
 assert implementation["annecy_pack_library"] == "website/src/lib/annecyPack.ts"
 assert implementation["public_pack_registry"] == "website/src/lib/packRegistry.ts"
-assert implementation["published_pack_count"] == 2
+assert implementation["published_pack_count"] >= 2
 assert implementation["default_pack"] == "annecy-alpes-leman"
 assert implementation["public_ui_wired"] is True
 assert implementation["public_ui_download_locked"] is False

@@ -26,7 +26,19 @@ def main() -> None:
             if n not in names or float(names[n]['Frequency'])!=f: errors.append(f'missing {n}')
             elif any(site in names[n]['Comment'].lower() for site in ['etel','corsen','fréhel','stiff','bodic']): errors.append(f'unproven site claim in {n}')
     registry=(root/'website/src/lib/packRegistry.ts').read_text(encoding='utf-8').lower()
-    if 'id: "bretagne"' in registry or (root/'website/public/downloads/bretagne').exists(): errors.append('Bretagne public mutation detected')
+    record_path=r/'publication-record.json'
+    if record_path.exists():
+        record=json.loads(record_path.read_text(encoding='utf-8'))
+        public=root/record['public_csv']
+        with tempfile.TemporaryDirectory() as td:
+            temp=Path(td); subprocess.run([sys.executable,str(root/'tools/build_bretagne_internal_candidate.py'),'--root',str(root),'--output-dir',str(temp)],check=True,stdout=subprocess.DEVNULL)
+            candidate_bytes=(temp/'bretagne-v0.1-internal.csv').read_bytes()
+        if record.get('status')!='published_immutable' or not public.is_file() or public.read_bytes()!=candidate_bytes:
+            errors.append('immutable public Bretagne release does not match reviewed candidate')
+        if 'id: "bretagne"' not in registry:
+            errors.append('published Bretagne missing from public registry')
+    elif 'id: "bretagne"' in registry or (root/'website/public/downloads/bretagne').exists():
+        errors.append('Bretagne public mutation detected before publication record')
     ready=not errors and checklist['prepublication_ready'] is True and scope['prepublication_ready'] is True
     result={'schema_version':'1.0','status':'prepublication_audit_not_public','memory_count':135,'review':'8/8','blocker_count':len(errors),'errors':errors,'prepublication_ready':ready,'public_export_allowed':False}
     out=r/'generated/prepublication-audit'; out.mkdir(parents=True,exist_ok=True); (out/'bretagne-v01-prepublication-audit.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

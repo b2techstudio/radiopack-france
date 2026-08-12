@@ -8,6 +8,7 @@ EXPECTED = {
     DIST / "annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv": 65,
     DIST / "annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv": 48,
     DIST / "normandie/radiopack-france-normandie-v0.4.csv": 142,
+    DIST / "bretagne/radiopack-france-bretagne-v0.1.csv": 135,
 }
 
 for path, expected_count in EXPECTED.items():
@@ -24,4 +25,4 @@ for path, expected_count in EXPECTED.items():
     assert len({row["Location"] for row in rows}) == expected_count, f"Location dupliquée: {path.name}"
     assert len({row["Name"] for row in rows}) == expected_count, f"Nom dupliqué: {path.name}"
 
-print("Tests built public pack catalog: Annecy 65/48 + Normandie 142 OK")
+print("Tests built public pack catalog: Annecy 65/48 + Normandie 142 + Bretagne 135 OK")

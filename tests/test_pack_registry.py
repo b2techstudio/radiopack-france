@@ -6,8 +6,9 @@ REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 GENERATOR = ROOT / "website/src/pages/generateur.astro"
 REGIONS = ROOT / "website/src/data/regions.json"
 NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
+BRETAGNE = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv"
 
-for path in [REGISTRY, GENERATOR, REGIONS, NORMANDIE]:
+for path in [REGISTRY, GENERATOR, REGIONS, NORMANDIE, BRETAGNE]:
     assert path.is_file(), f"Fichier multi-régions manquant: {path.relative_to(ROOT)}"
 
 registry = REGISTRY.read_text(encoding="utf-8")
@@ -27,13 +28,18 @@ for expected in [
     'defaultVariant: "standard"',
     'memoryCount: 142',
     '/downloads/normandie/radiopack-france-normandie-v0.4.csv',
+    'id: "bretagne"',
+    'regionSlug: "bretagne"',
+    'version: "v0.1"',
+    'memoryCount: 135',
+    '/downloads/bretagne/radiopack-france-bretagne-v0.1.csv',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
     "export const getPublicPack",
     "export const getPublicVariant",
 ]:
     assert expected in registry, f"Contrat registre absent: {expected}"
 
-assert registry.count('downloadUrl: "') == 3
+assert registry.count('downloadUrl: "') == 4
 assert "annecy-haute-savoie-v0.1" not in registry
 
 page = GENERATOR.read_text(encoding="utf-8")
@@ -52,6 +58,7 @@ for expected in [
     "downloadLink.href = variant.downloadUrl",
     'downloadLink.setAttribute("download", variant.filename)',
     "Normandie · 142",
+    "Bretagne · 135",
     "Annecy · 65 / 48",
 ]:
     assert expected in page, f"Contrat générateur multi-régions absent: {expected}"
@@ -69,4 +76,4 @@ assert all(len(row["Name"]) <= 10 for row in rows)
 assert len({row["Location"] for row in rows}) == 142
 assert len({row["Name"] for row in rows}) == 142
 
-print("Tests RadioPack Sprint 23 public pack registry: Annecy 65/48 + Normandie 142 OK")
+print("Tests RadioPack public pack registry: Annecy 65/48 + Normandie 142 + Bretagne 135 OK")

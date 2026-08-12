@@ -67,7 +67,7 @@ assert sources["rules"]["seed_source_does_not_equal_validated_frequency"] is Tru
 assert sources["rules"]["maritime_cross_assignment_must_be_zone_specific"] is True
 assert sources["rules"]["exact_current_srr_boundary_required_before_publication"] is True
 
-assert gates["status"] == "prepublication_ready_135_explicit_publication_pending"
+assert gates["status"] == "published_immutable_135"
 assert gates["public_release_allowed"] is False
 assert len(gates["gates"]) == 8
 assert all(gate["required_for_public_release"] is True for gate in gates["gates"])
@@ -169,10 +169,10 @@ assert emergency["rules"]["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
 regions = (ROOT / "website/src/data/regions.json").read_text(encoding="utf-8").lower()
-assert 'id: "bretagne"' not in registry
-assert '"slug": "bretagne"' not in regions
-assert not (ROOT / "website/src/pages/regions/bretagne.astro").exists()
-assert not (ROOT / "website/public/downloads/bretagne").exists()
+assert 'id: "bretagne"' in registry
+assert '"slug": "bretagne"' in regions
+assert (ROOT / "website/src/pages/regions/bretagne.astro").is_file()
+assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv").is_file()
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 
 readme = (RESEARCH / "README.md").read_text(encoding="utf-8")

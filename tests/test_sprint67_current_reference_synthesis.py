@@ -117,6 +117,6 @@ public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-n
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
 assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 
 print("Sprint 67 current reference synthesis: 2026 ministry guide confirms channel level only, secondary Ch79 convergence stays non-primary, RepeaterBook display badge cannot override stale provenance, candidate/public packs unchanged OK")

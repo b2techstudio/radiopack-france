@@ -103,6 +103,6 @@ assert 'version: "v0.4"' in registry
 assert 'version: "v0.2"' in registry
 assert 'version: "v0.4"' in registry
 assert 'version: "v0.3"' not in registry
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 
 print("Tests RadioPack paired RX policy: native duplex/split links expose both RX directions, TX remains off/zero, shared RF frequencies stay deduplicated, published packs remain immutable OK")

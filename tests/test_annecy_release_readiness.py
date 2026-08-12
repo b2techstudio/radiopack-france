@@ -68,7 +68,7 @@ assert options["implementation"]["public_ui_wired"] is True
 assert options["implementation"]["public_download_created"] is True
 assert options["implementation"]["public_pack_registry"] == "website/src/lib/packRegistry.ts"
 assert options["implementation"]["default_pack"] == "annecy-alpes-leman"
-assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie"}
+assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie", "bretagne"}
 assert options["options"]["include_aviation"]["scope"] == ["annecy-alpes-leman"]
 assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
 

@@ -52,7 +52,7 @@ assert mortain["rules"]["candidate_not_mutated_by_scan"] is True
 assert mortain["rules"]["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 assert 'version: "0.4"' not in registry
 
 normandie_public = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"

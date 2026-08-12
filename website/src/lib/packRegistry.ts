@@ -59,6 +59,25 @@ export const publicPacks: PublicPack[] = [
     ],
   },
   {
+    id: "bretagne",
+    regionSlug: "bretagne",
+    name: "Bretagne",
+    version: "v0.1",
+    status: "Disponible",
+    description: "Pack régional Bretagne v0.1 de 135 mémoires RX, sans aviation dans ce périmètre initial.",
+    defaultVariant: "standard",
+    notamCheck: false,
+    variants: [
+      {
+        id: "standard",
+        label: "Pack complet",
+        memoryCount: 135,
+        filename: "radiopack-france-bretagne-v0.1.csv",
+        downloadUrl: "/downloads/bretagne/radiopack-france-bretagne-v0.1.csv",
+      },
+    ],
+  },
+  {
     id: "normandie",
     regionSlug: "normandie",
     name: "Normandie",

@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-12",
-  "current_sprint": 72,
-  "state_version": "0.21.61",
+  "current_sprint": 73,
+  "state_version": "0.21.62",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -19,15 +19,16 @@
       "immutable": true
     },
     "bretagne": {
-      "version": null,
-      "memory_count": 0,
-      "research_only": true
+      "version": "0.1",
+      "memory_count": 135,
+      "immutable": true,
+      "research_only": false
     }
   },
   "active_work": {
     "pack": "Bretagne",
     "target_version": "0.1",
-    "status": "prepublication_ready_135_not_public",
+    "status": "published_immutable_135",
     "public_export_allowed": false,
     "public_release_ready": false,
     "internal_candidate_memory_count": 135,
@@ -52,7 +53,11 @@
     "review_blocker_count": 0,
     "release_scope": "research/bretagne-v0.1/release-scope.json",
     "review_checklist": "research/bretagne-v0.1/review-checklist.json",
-    "sia_current_cycle_review": "research/bretagne-v0.1/sia-airac-08-review.json"
+    "sia_current_cycle_review": "research/bretagne-v0.1/sia-airac-08-review.json",
+    "published": true,
+    "published_version": "0.1",
+    "published_memory_count": 135,
+    "publication_record": "research/bretagne-v0.1/publication-record.json"
   },
   "review_handoff": {
     "review_snapshot_builder": "tools/build_normandie_v04_review_snapshot.py",
@@ -169,7 +174,9 @@
     "research/bretagne-v0.1/memory-plan.json",
     "research/bretagne-v0.1/release-scope.json",
     "research/bretagne-v0.1/review-checklist.json",
-    "research/bretagne-v0.1/sia-airac-08-review.json"
+    "research/bretagne-v0.1/sia-airac-08-review.json",
+    "research/bretagne-v0.1/publication-record.json",
+    "research/sprint-73-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -210,9 +217,17 @@
     "build_bretagne_review_snapshot": "python tools/build_bretagne_review_snapshot.py",
     "run_bretagne_prepublication_audit": "python tools/run_bretagne_prepublication_audit.py --require-prepublication-ready",
     "run_bretagne_prepublication_review_test": "python tests/test_bretagne_prepublication_review.py",
-    "run_sprint72_test": "python tests/test_sprint72_bretagne_scope_closure.py"
+    "run_sprint72_test": "python tests/test_sprint72_bretagne_scope_closure.py",
+    "run_bretagne_public_release_test": "python tests/test_bretagne_public_release.py",
+    "run_sprint73_test": "python tests/test_sprint73_bretagne_publication.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 73,
+      "state_version": "0.21.62",
+      "summary": "Bretagne v0.1 published and frozen immutable at 135 RX memories.",
+      "summary_file": "research/sprint-73-summary.md"
+    },
     {
       "sprint": 72,
       "state_version": "0.21.61",
@@ -322,7 +337,8 @@
     "current_airac_cycle_boundary_must_be_respected_for_aviation_promotion": true,
     "scope_deferral_is_not_negative_evidence": true,
     "unpublished_operational_frequency_must_not_be_inferred": true,
-    "prepublication_ready_does_not_equal_publication": true
+    "prepublication_ready_does_not_equal_publication": true,
+    "bretagne_v0_1_remains_immutable_after_publication": true
   },
   "completed_release": {
     "pack": "Normandie",

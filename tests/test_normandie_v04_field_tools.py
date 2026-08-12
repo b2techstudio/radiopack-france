@@ -151,8 +151,8 @@ assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_s
 assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_is_current_primary_validation"] is False
 
 status_text = STATUS_DOC.read_text(encoding="utf-8")
-assert "Sprint courant : **72**" in status_text
-assert "État logique : **0.21.61**" in status_text
+assert "Sprint courant : **73**" in status_text
+assert "État logique : **0.21.62**" in status_text
 assert "python tools\\run_normandie_v04_checks.py" in status_text
 assert "147 mémoires" in status_text
 assert "0 ajout éligible" in status_text

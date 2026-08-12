@@ -74,6 +74,6 @@ assert data["rules"]["tx_disabled_in_future_export"] is True
 assert data["rules"]["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 
 print("Tests Bretagne REF analog expansion: F5ZIU/F5ZIV/F5ZJR/F1ZMU active, F1ZBZ multi-path explicit, no coverage or ADRASEC inference, no public mutation OK")

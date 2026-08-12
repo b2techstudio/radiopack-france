@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.62 - 2026-08-12
+
+- **Sprint 73** : publication de **Bretagne v0.1 à 135 mémoires RX** et gel immuable de cette version.
+- Le CSV public correspond octet pour octet au candidat interne figé/revu au Sprint 72 ; SHA-256 enregistré dans `research/bretagne-v0.1/publication-record.json`.
+- Registre public, générateur, page Bretagne, téléchargements, versions, carte et sitemap mis à jour pour le troisième pack régional public.
+- Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) restent deux paires RX génériques, sans attribution locale de site non prouvée.
+- Aviation AIRAC courante, fréquences opérationnelles ADRASEC non publiées, mappings locaux CROSS et infrastructures amateur arrêtées/non résolues restent différés à Bretagne v0.2.
+- Les artefacts de prépublication Sprint 72 restent historiques ; la publication est enregistrée séparément et les garde-fous postpublication vérifient l'identité exacte du CSV.
+- Ajout des tests de publication Bretagne et du garde-fou Sprint 73 dans la CI.
+
 ## 0.21.61 - 2026-08-12
 
 - **Sprint 72** : clôture de périmètre Bretagne v0.1 à **135 mémoires RX** et passage en prépublication, toujours non publique.

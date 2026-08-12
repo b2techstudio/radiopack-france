@@ -1,6 +1,6 @@
 {
   "schema_version": "1.5",
-  "status": "prepublication_ready_135_explicit_publication_pending",
+  "status": "published_immutable_135",
   "created": "2026-08-09",
   "updated": "2026-08-12",
   "pack": {
@@ -54,9 +54,9 @@
     },
     {
       "id": "explicit_publication",
-      "status": "pending_explicit_publication_sprint",
+      "status": "passed_publication_completed_immutable",
       "required_for_public_release": true,
-      "description": "Prepublication is ready; public files/registry remain untouched until an explicit publication sprint."
+      "description": "Bretagne v0.1 publiée explicitement à 135 mémoires RX et désormais immuable."
     }
   ]
 }

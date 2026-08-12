@@ -12,6 +12,7 @@ PACK_REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 STANDARD_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
 NO_AIR_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"
 NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
+BRETAGNE = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv"
 
 for path in [
     PAGE,
@@ -24,6 +25,7 @@ for path in [
     STANDARD_ROUTE,
     NO_AIR_ROUTE,
     NORMANDIE,
+    BRETAGNE,
 ]:
     assert path.is_file(), f"Fichier générateur web manquant: {path.relative_to(ROOT)}"
 
@@ -49,6 +51,7 @@ for expected in [
     'id="download-csv"',
     "Générateur web · multi-régions",
     "Normandie · 142",
+    "Bretagne · 135",
     "Annecy · 65 / 48",
     "Contrôle NOTAM avant génération",
     "J'ai vérifié les NOTAM applicables",
@@ -85,17 +88,20 @@ for expected in [
     "export const publicPacks",
     'id: "annecy-alpes-leman"',
     'id: "normandie"',
+    'id: "bretagne"',
     'memoryCount: 65',
     'memoryCount: 48',
     'memoryCount: 142',
+    'memoryCount: 135',
     '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv',
     '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv',
     '/downloads/normandie/radiopack-france-normandie-v0.4.csv',
+    '/downloads/bretagne/radiopack-france-bretagne-v0.1.csv',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
 
-assert registry.count('downloadUrl: "') == 3
+assert registry.count('downloadUrl: "') == 4
 assert "annecy-haute-savoie-v0.1" not in registry
 
 generic = GENERIC_LIBRARY.read_text(encoding="utf-8")
@@ -153,7 +159,7 @@ assert options["status"] == "multi_region_public_generator"
 assert implementation["generic_pack_library"] == "website/src/lib/chirpPack.ts"
 assert implementation["annecy_pack_library"] == "website/src/lib/annecyPack.ts"
 assert implementation["public_pack_registry"] == "website/src/lib/packRegistry.ts"
-assert implementation["published_pack_count"] == 2
+assert implementation["published_pack_count"] == 3
 assert implementation["default_pack"] == "annecy-alpes-leman"
 assert implementation["public_ui_wired"] is True
 assert implementation["public_ui_download_locked"] is False
@@ -163,7 +169,7 @@ assert ui_contract["download_enabled"] is True
 assert ui_contract["download_strategy"] == "direct_validated_route"
 assert ui_contract["unsupported_options_hidden"] is True
 assert options["pack_selection"]["enabled"] is True
-assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie"}
+assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie", "bretagne"}
 assert options["options"]["include_aviation"]["scope"] == ["annecy-alpes-leman"]
 assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
 assert options["options"]["notam_check"]["blocks_generation"] is False

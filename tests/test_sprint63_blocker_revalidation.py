@@ -62,7 +62,7 @@ assert evidence["decisions"]["public_pack_mutated"] is False
 assert evidence["decisions"]["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 assert 'version: "0.4"' not in registry
 
 normandie_public = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"

@@ -78,6 +78,6 @@ assert rules["frequency_promoted_to_public_pack"] is False
 assert rules["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'id: "bretagne"' not in registry
+assert 'id: "bretagne"' in registry
 
 print("Tests CROSS Etel network research: 2026 maintenance view 17 stations and 2025 annual report 16 VHF + 2 MF kept as distinct counting dimensions; current ministry 63/64 Morbihan statement now explicitly conflicts with local CROSS page/schedule/annual-report evidence naming channel 63 but no channel 64 site, 0 public promotion OK")

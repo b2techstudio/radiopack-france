@@ -136,6 +136,9 @@ jobs:
       - name: Test Sprint 76 Bretagne amateur revalidation
         run: python tests/test_sprint76_bretagne_amateur_revalidation.py
 
+      - name: Test Sprint 77 Bretagne ADRASEC public revalidation
+        run: python tests/test_sprint77_bretagne_adrasec_public_revalidation.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

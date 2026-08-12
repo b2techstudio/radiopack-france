@@ -1,8 +1,8 @@
 {
-  "schema_version": "1.4",
-  "status": "internal_candidate_built_publication_still_blocked",
+  "schema_version": "1.5",
+  "status": "prepublication_ready_135_explicit_publication_pending",
   "created": "2026-08-09",
-  "updated": "2026-08-11",
+  "updated": "2026-08-12",
   "pack": {
     "name": "Bretagne",
     "slug": "bretagne",
@@ -12,51 +12,51 @@
   "gates": [
     {
       "id": "sources",
-      "status": "core_frequency_sources_validated_aviation_and_some_local_metadata_pending",
+      "status": "passed_for_frozen_135_scope",
       "required_for_public_release": true,
-      "description": "Blocs nationaux, VHF maritime générique et principaux relais analogiques de recherche suffisamment sourcés pour un candidat interne ; aviation Bretagne et certaines métadonnées locales restent à valider."
+      "description": "Core 135-memory source lineage accepted; current-cycle aviation is explicitly deferred to v0.2."
     },
     {
       "id": "maritime_zoning",
-      "status": "generic_channel_frequencies_validated_local_site_mapping_pending",
+      "status": "passed_generic_channels_local_site_metadata_deferred",
       "required_for_public_release": true,
-      "description": "Les fréquences VHF maritimes génériques sont validées et intégrables sans attribution de site ; les mappings locaux Ch64/Ch79 restent recherche uniquement et ne doivent pas être revendiqués."
+      "description": "Generic marine channel frequencies are reviewed; Ch64/Ch79 local transmitter-site mapping is not claimed and is deferred."
     },
     {
       "id": "emergency_relay_inventory",
-      "status": "adrasec_22_29_35_56_and_regional_relays_pending",
+      "status": "passed_scope_exclusion_unpublished_operational_frequencies",
       "required_for_public_release": true,
-      "description": "Inventorier les infrastructures ADRASEC et relais radioamateurs utiles par sous-zone, sans intégrer les réseaux opérationnels PPDR/PMR privés"
+      "description": "ADRASEC roles may remain research metadata; unpublished operational frequencies are excluded from v0.1."
     },
     {
       "id": "memory_plan",
-      "status": "passed_internal_candidate_135_not_public",
+      "status": "passed_internal_candidate_135_frozen",
       "required_for_public_release": true,
-      "description": "Plan mémoire interne construit à 135 mémoires, sans remplissage artificiel et avec déduplication RF."
+      "description": "Memory plan frozen at 135 RX memories with no artificial fill."
     },
     {
       "id": "data_validation",
-      "status": "partial_core_blocks_validated_aviation_pending",
+      "status": "passed_for_frozen_135_scope",
       "required_for_public_release": true,
-      "description": "Blocs nationaux et régional analogique de base contrôlés ; aviation et revue finale restent à compléter."
+      "description": "All 135 candidate memories pass structural and source-scope validation; aviation is outside v0.1 scope."
     },
     {
       "id": "dynamic_rechecks",
-      "status": "pending_scope_definition",
+      "status": "passed_current_scope_revalidated",
       "required_for_public_release": true,
-      "description": "Contrôles dynamiques applicables à définir puis revalider"
+      "description": "Sprint 71 current relay rechecks remain fresh and AIRAC 08/26 current-cycle boundary was reviewed on 2026-08-12."
     },
     {
       "id": "review_map",
-      "status": "pending",
+      "status": "passed_review_checklist_8_of_8",
       "required_for_public_release": true,
-      "description": "Carte de revue finale à créer et valider"
+      "description": "Release review checklist is complete at 8/8 with zero blockers for the frozen scope."
     },
     {
       "id": "explicit_publication",
-      "status": "blocked_until_all_previous_gates_pass",
+      "status": "pending_explicit_publication_sprint",
       "required_for_public_release": true,
-      "description": "Ajout au site et au registre public uniquement après revue et CI verte"
+      "description": "Prepublication is ready; public files/registry remain untouched until an explicit publication sprint."
     }
   ]
 }

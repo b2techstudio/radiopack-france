@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.61 - 2026-08-12
+
+- **Sprint 72** : clôture de périmètre Bretagne v0.1 à **135 mémoires RX** et passage en prépublication, toujours non publique.
+- Revue Bretagne portée à **8/8**, **0 blocage** pour le périmètre figé, audit prépublication reproductible et candidat inchangé à 135.
+- Le cycle SIA courant **AIRAC 08/26** (06/08/2026–02/09/2026) est enregistré comme frontière de fraîcheur ; l'aviation est reportée à v0.2 plutôt que de promouvoir des fréquences exactes d'un cycle antérieur.
+- Fréquences opérationnelles ADRASEC non publiées, mappings locaux CROSS Ch64/Ch79 et infrastructures arrêtées/non résolues sont différés sans inférence négative.
+- Ch64 et Ch79 restent présents génériquement en deux mémoires RX chacun ; aucun site émetteur local n'est revendiqué.
+- Ajout de `release-scope.json`, `review-checklist.json`, `sia-airac-08-review.json`, du snapshot/audit Bretagne et des garde-fous Sprint 72.
+- Aucun CSV public Bretagne, registre public ou route publique ajouté.
+
 ## 0.21.60 - 2026-08-11
 
 - **Sprint 71** : revalidation Normandie v0.5 sans promotion ; candidat maintenu à 142 mémoires.

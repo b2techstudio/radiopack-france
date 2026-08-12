@@ -183,8 +183,8 @@ bretagne_maritime = json.loads((ROOT / "research/bretagne-v0.1/maritime-zones.js
 bretagne_emergency = json.loads((ROOT / "research/bretagne-v0.1/emergency-relays.json").read_text(encoding="utf-8"))
 bretagne_public_maritime = json.loads((ROOT / "research/bretagne-v0.1/public-maritime-radio.json").read_text(encoding="utf-8"))
 
-assert bretagne_plan["schema_version"] == "1.2"
-assert bretagne_plan["status"] == "internal_candidate_in_progress_not_public"
+assert bretagne_plan["schema_version"] == "1.3"
+assert bretagne_plan["status"] == "prepublication_ready_135_not_public"
 assert bretagne_plan["paired_rx_policy"] == "research/paired-rx-policy.json"
 assert bretagne_plan["rules"]["native_duplex_or_split_both_directions_rx"] is True
 assert bretagne_plan["rules"]["paired_distinct_frequencies_use_separate_rx_memories"] is True
@@ -194,19 +194,21 @@ assert len(bretagne_plan["memory_plan"]["blocks"]) == 5
 assert bretagne_plan["publication"]["public_export_allowed"] is False
 assert bretagne_plan["publication"]["public_registry_allowed"] is False
 assert bretagne_plan["publication"]["public_routes_allowed"] is False
-assert bretagne_sources["status"] == "seed_sources_identified_maritime_zoning_in_progress_no_frequency_extraction"
-assert len(bretagne_sources["sources"]) == 10
+assert bretagne_plan["publication"]["review_completed"] is True
+assert bretagne_plan["publication"]["prepublication_ready"] is True
+assert bretagne_sources["status"] == "core_sources_reviewed_current_sia_cycle_boundary_recorded"
+assert len(bretagne_sources["sources"]) == 11
 assert all(source["frequency_data_promoted"] is False for source in bretagne_sources["sources"])
 assert bretagne_sources["rules"]["maritime_cross_assignment_must_be_zone_specific"] is True
 assert bretagne_sources["rules"]["exact_current_srr_boundary_required_before_publication"] is True
-assert bretagne_gates["status"] == "internal_candidate_built_publication_still_blocked"
+assert bretagne_gates["status"] == "prepublication_ready_135_explicit_publication_pending"
 assert bretagne_gates["public_release_allowed"] is False
 assert len(bretagne_gates["gates"]) == 8
 bretagne_gate_map = {gate["id"]: gate for gate in bretagne_gates["gates"]}
-assert bretagne_gate_map["memory_plan"]["status"] == "passed_internal_candidate_135_not_public"
-assert all(not gate["status"].startswith("passed_") for gate in bretagne_gates["gates"] if gate["id"] != "memory_plan")
-assert bretagne_gate_map["maritime_zoning"]["status"] == "generic_channel_frequencies_validated_local_site_mapping_pending"
-assert bretagne_gate_map["emergency_relay_inventory"]["status"] == "adrasec_22_29_35_56_and_regional_relays_pending"
+assert bretagne_gate_map["memory_plan"]["status"] == "passed_internal_candidate_135_frozen"
+assert all(gate["status"].startswith("passed_") for gate in bretagne_gates["gates"] if gate["id"] != "explicit_publication")
+assert bretagne_gate_map["maritime_zoning"]["status"] == "passed_generic_channels_local_site_metadata_deferred"
+assert bretagne_gate_map["emergency_relay_inventory"]["status"] == "passed_scope_exclusion_unpublished_operational_frequencies"
 assert bretagne_memory["expected_memory_count"] == 135
 assert len(bretagne_memory["blocks"]) == 6
 

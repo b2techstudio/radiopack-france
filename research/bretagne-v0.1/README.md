@@ -4,11 +4,13 @@ Cet espace initialise le troisième pack régional RadioPack France à partir du
 
 ## État actuel
 
-- statut : `internal_candidate_135_not_public` ;
-- **candidat interne : 135 mémoires RX**, sans publication ;
+- statut : `frozen_candidate_135_prepublication_ready_not_public` ;
+- **candidat figé : 135 mémoires RX**, revue 8/8, 0 blocage de prépublication, sans publication ;
 - composition : 16 PMR446 + 90 VHF maritime + 6 écoutes amateur + 2 appels amateur + 21 mémoires régionales dédupliquées ;
 - canaux 64 et 79 présents génériquement en deux mémoires RX chacun, sans attribution locale de site ;
-- aviation : 0 mémoire, positions 130–149 réservées en attente d'une extraction SIA actuelle ;
+- aviation : 0 mémoire en v0.1, positions 130–149 réservées et sujet reporté à v0.2 faute d'extraction exacte du cycle SIA courant AIRAC 08/26 ;
+- périmètre différé v0.2 : aviation courante, fréquences opérationnelles ADRASEC non publiées, mappings locaux CROSS Ch64/Ch79 et infrastructures arrêtées/non résolues ;
+- sources de revue : `release-scope.json`, `review-checklist.json`, `sia-airac-08-review.json` ;
 - aucun fichier public n'est créé ;
 - aucune entrée n'est ajoutée à `website/src/lib/packRegistry.ts` ;
 - aucune entrée n'est ajoutée à `website/src/data/regions.json`.

@@ -1,8 +1,8 @@
 {
-  "schema_version": "1.1",
-  "status": "internal_candidate_135_not_public",
+  "schema_version": "1.2",
+  "status": "frozen_candidate_135_prepublication_ready_not_public",
   "created": "2026-08-09",
-  "updated": "2026-08-11",
+  "updated": "2026-08-12",
   "pack": {
     "name": "Bretagne",
     "slug": "bretagne",
@@ -10,7 +10,7 @@
   },
   "expected_memory_count": 135,
   "internal_candidate": {
-    "status": "built_from_verified_national_blocks_and_guarded_regional_research",
+    "status": "frozen_reviewed_135_prepublication_ready_not_public",
     "expected_memory_count": 135,
     "public_export_allowed": false,
     "builder": "tools/build_bretagne_internal_candidate.py",
@@ -53,7 +53,7 @@
       "end": 149,
       "count": 0,
       "source": null,
-      "status": "reserved_pending_current_sia_extraction"
+      "status": "deferred_to_v0_2_current_airac_exact_export_not_extracted"
     },
     {
       "id": "amateur_calls",
@@ -76,7 +76,7 @@
     {
       "start": 130,
       "end": 149,
-      "purpose": "aviation_bretagne_pending_current_sia_validation"
+      "purpose": "aviation_bretagne_deferred_to_v0_2"
     }
   ],
   "rules": {
@@ -89,6 +89,8 @@
     "verified_distinct_pair_uses_two_rx_memories": true,
     "generic_marine_channel_frequency_does_not_require_local_transmitter_site_claim": true,
     "unverified_local_transmitter_site_must_not_appear_in_memory_comment": true,
-    "internal_candidate_is_not_public_release": true
+    "internal_candidate_is_not_public_release": true,
+    "frozen_v0_1_scope_memory_count": 135,
+    "aviation_deferred_to_v0_2_without_negative_inference": true
   }
 }

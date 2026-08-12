@@ -1,9 +1,9 @@
 # RadioPack France
 
-**État courant : Sprint 71 / 0.21.60 — Normandie v0.5 revalidée sans promotion ; Bretagne v0.1 dispose d’un candidat interne de 135 mémoires RX.**
+**État courant : Sprint 72 / 0.21.61 — Bretagne v0.1 figée en prépublication à 135 mémoires RX, revue 8/8 et 0 blocage ; publication encore séparée.**
 Codeplugs CHIRP régionaux, documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 71 / 0.21.60
+## État actuel — Sprint 72 / 0.21.61
 
 Repère de compatibilité documentaire conservé pour les garde-fous historiques : **État actuel — Sprint 39**.
 
@@ -13,9 +13,9 @@ Packs publics immuables :
 - Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
 - **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation.
 
-Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion au Sprint 71 ; **Bretagne v0.1** possède maintenant un candidat interne non public de **135 mémoires RX**. Annecy–Alpes–Léman v0.3 reste non publique.
+Recherche : **Normandie v0.5** reste à 142 mémoires avec 0 promotion ; **Bretagne v0.1** est désormais figée en prépublication non publique à **135 mémoires RX**, revue **8/8**, **0 blocage** pour son périmètre v0.1. Annecy–Alpes–Léman v0.3 reste non publique.
 
-Le générateur public propose Normandie v0.4 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md` et `research/sprint-71-summary.md`.
+Le générateur public propose Normandie v0.4 et Annecy–Alpes–Léman v0.2. Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-55-60-summary.md`, `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md` et `research/sprint-72-summary.md`.
 
 
 ## Normandie v0.4 — publication achevée
@@ -27,6 +27,14 @@ Fichiers de publication : `research/normandie-v0.4/publication-record.json` et `
 ## Normandie v0.5 — backlog initial
 
 `research/normandie-v0.5/backlog.json` reprend R3/F1ZBX, F5ZHA, F1ZOV et F6ZES. Un report n'est jamais une validation. R3 conserve exactement deux mémoires potentielles (145.075 / 145.675 MHz) et exige deux sessions RX indépendantes ; F5ZHA conserve deux mémoires potentielles mais nécessite réconciliation autoritative + terrain ; F1ZOV attend la sortie de maintenance ; F6ZES reste sans fréquence/mode deviné. Le plafond potentiel connu, hors F6ZES, reste **147 mémoires**.
+
+## Bretagne v0.1 — prépublication Sprint 72
+
+Le périmètre v0.1 est figé à **135 mémoires RX**. La revue est **8/8**, avec **0 blocage** pour ce périmètre, mais aucun fichier public Bretagne n'est encore créé.
+
+L'aviation est reportée à v0.2 : le cycle SIA courant **AIRAC 08/26** (06/08/2026–02/09/2026) est identifié, mais l'export exact courant n'est pas extrait dans le workflow ; RadioPack France ne transforme donc pas des fréquences exactes plus anciennes en données prétendument courantes. Les fréquences opérationnelles ADRASEC non publiées, les mappings locaux CROSS et les infrastructures arrêtées/non résolues sont également différés.
+
+Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) restent des paires génériques de **2 mémoires RX chacune**, sans attribution locale non prouvée. Sources de vérité de revue : `research/bretagne-v0.1/release-scope.json`, `review-checklist.json`, `sia-airac-08-review.json`.
 
 ## Bretagne v0.1 — candidat interne Sprint 71
 

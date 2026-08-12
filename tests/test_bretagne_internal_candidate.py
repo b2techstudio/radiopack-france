@@ -10,7 +10,7 @@ BUILDER = ROOT / "tools/build_bretagne_internal_candidate.py"
 PLAN = ROOT / "research/bretagne-v0.1/memory-plan.json"
 
 plan = json.loads(PLAN.read_text(encoding="utf-8"))
-assert plan["status"] == "internal_candidate_135_not_public"
+assert plan["status"] in {"internal_candidate_135_not_public", "frozen_candidate_135_prepublication_ready_not_public"}
 assert plan["expected_memory_count"] == 135
 assert plan["internal_candidate"]["regional_unique_memory_count"] == 21
 assert plan["internal_candidate"]["regional_source_memory_count_before_national_deduplication"] == 29

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "status": "scope_frozen_135_prepublication_not_public",
+  "sprint": 72,
+  "state_version": "0.21.61",
+  "frozen_on": "2026-08-12",
+  "pack": {
+    "name": "Bretagne",
+    "slug": "bretagne",
+    "target_version": "0.1"
+  },
+  "final_candidate_memory_count": 135,
+  "public_export_allowed": false,
+  "prepublication_ready": true,
+  "included": {
+    "pmr446": 16,
+    "generic_marine_vhf": 90,
+    "amateur_listening": 6,
+    "amateur_calls": 2,
+    "regional_analog_after_rf_deduplication": 21,
+    "channel64_pair_mhz": [
+      156.225,
+      160.825
+    ],
+    "channel79_pair_mhz": [
+      156.975,
+      161.575
+    ]
+  },
+  "deferred_to_v0_2": [
+    {
+      "id": "AVIATION_CURRENT_SIA",
+      "reason": "AIRAC 08/26 current-cycle dataset identified but exact current frequency export not extracted in this workflow",
+      "adds_to_v0_1": false
+    },
+    {
+      "id": "ADRASEC_UNPUBLISHED_OPERATIONAL_FREQUENCIES",
+      "reason": "roles may be documented but unpublished operational frequencies are never inferred",
+      "adds_to_v0_1": false
+    },
+    {
+      "id": "CROSS_LOCAL_TRANSMITTER_SITE_MAPPING",
+      "reason": "generic Ch64/Ch79 frequencies are valid without claiming an unproven local transmitter site",
+      "adds_to_v0_1": false
+    },
+    {
+      "id": "STOPPED_OR_UNRESOLVED_AMATEUR_INFRASTRUCTURE",
+      "reason": "stopped or unresolved infrastructure stays research-only until current revalidation",
+      "adds_to_v0_1": false
+    }
+  ],
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "max_memories": 200,
+    "max_name_length": 10,
+    "same_rf_frequency_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "no_artificial_fill": true,
+    "deferred_item_is_not_validated": true,
+    "scope_deferral_does_not_claim_absence_or_stoppage": true,
+    "published_versions_are_immutable": true,
+    "explicit_publication_is_separate_step": true
+  }
+}

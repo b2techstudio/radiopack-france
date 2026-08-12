@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "status": "review_complete_prepublication_ready_not_public",
+  "reviewed_on": "2026-08-12",
+  "pack": "Bretagne",
+  "version": "0.1",
+  "candidate_memory_count": 135,
+  "completed": 8,
+  "total": 8,
+  "blocker_count": 0,
+  "prepublication_ready": true,
+  "public_export_allowed": false,
+  "checks": [
+    {
+      "id": "candidate_reproducible",
+      "passed": true,
+      "detail": "Builder reproduces exactly 135 RX memories."
+    },
+    {
+      "id": "chirp_rx_only_contract",
+      "passed": true,
+      "detail": "Duplex off, offset zero, names <=10, no duplicate RF."
+    },
+    {
+      "id": "national_blocks",
+      "passed": true,
+      "detail": "Verified national PMR446/marine/amateur blocks retained without mutation."
+    },
+    {
+      "id": "regional_analog",
+      "passed": true,
+      "detail": "21 regional memories retained after RF deduplication from guarded research plan."
+    },
+    {
+      "id": "marine_scope",
+      "passed": true,
+      "detail": "Ch64 and Ch79 are generic two-memory RX pairs; no local site claim."
+    },
+    {
+      "id": "aviation_scope",
+      "passed": true,
+      "detail": "Current AIRAC cycle identified; aviation deferred instead of promoting stale exact frequencies."
+    },
+    {
+      "id": "sensitive_or_unpublished_scope",
+      "passed": true,
+      "detail": "Unpublished ADRASEC operational frequencies and unresolved/stopped infrastructure excluded."
+    },
+    {
+      "id": "public_immutability",
+      "passed": true,
+      "detail": "Bretagne remains absent from public registry/downloads until explicit publication sprint."
+    }
+  ]
+}

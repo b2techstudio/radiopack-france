@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "status": "current_sia_cycle_review_no_aviation_promotion",
+  "checked_on": "2026-08-12",
+  "current_cycle": {
+    "product": "Données aéronautiques XML AIRAC 08/26 - CORRIGENDUM",
+    "valid_from": "2026-08-06",
+    "valid_through": "2026-09-02",
+    "source_url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
+    "current_export_identified": true,
+    "exact_export_extracted_in_repository_workflow": false
+  },
+  "older_primary_aip_pages_reviewed": [
+    {
+      "icao": "LFRN",
+      "name": "Rennes Saint-Jacques",
+      "effective": "2026-06-11",
+      "source_url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRN-fr-FR.html",
+      "frequency_data_promoted_to_v0_1": false
+    },
+    {
+      "icao": "LFRB",
+      "name": "Brest Bretagne",
+      "effective": "2026-06-11",
+      "source_url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRB-fr-FR.html",
+      "frequency_data_promoted_to_v0_1": false
+    },
+    {
+      "icao": "LFRD",
+      "name": "Dinard Pleurtuit Saint-Malo",
+      "effective": "2026-06-11",
+      "source_url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRD-fr-FR.html",
+      "frequency_data_promoted_to_v0_1": false
+    },
+    {
+      "icao": "LFRQ",
+      "name": "Quimper Pluguffan",
+      "effective": "2026-05-14",
+      "source_url": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFRQ-fr-FR.html",
+      "frequency_data_promoted_to_v0_1": false
+    }
+  ],
+  "decision": {
+    "aviation_memory_count_v0_1": 0,
+    "reserved_locations": [
+      130,
+      149
+    ],
+    "defer_to_v0_2": true,
+    "older_primary_exact_frequencies_are_not_assumed_current_without_current_cycle_extraction": true,
+    "failed_or_unavailable_current_export_extraction_is_not_negative_evidence": true
+  }
+}

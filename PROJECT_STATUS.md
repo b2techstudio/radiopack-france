@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
-Dernière mise à jour : **11 août 2026**
-Sprint courant : **71**
-État logique : **0.21.60**
+Dernière mise à jour : **12 août 2026**
+Sprint courant : **72**
+État logique : **0.21.61**
 
-Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md` et `research/sprint-71-summary.md`.
+Ce fichier sert de point de reprise humain. L'état machine correspondant est dans `research/project-resume-state.json`. Le détail des Sprints 55 à 60 est dans `research/sprint-55-60-summary.md`, puis `research/sprint-61-summary.md`, `research/sprint-62-summary.md`, `research/sprint-63-summary.md`, `research/sprint-64-summary.md`, `research/sprint-65-summary.md`, `research/sprint-66-summary.md`, `research/sprint-67-summary.md`, `research/sprint-68-summary.md`, `research/sprint-69-summary.md`, `research/sprint-70-summary.md`, `research/sprint-71-summary.md` et `research/sprint-72-summary.md`.
 
 ## État public
 
@@ -13,6 +13,14 @@ Ce fichier sert de point de reprise humain. L'état machine correspondant est da
 - **Annecy–Alpes–Léman v0.2** : 65 mémoires RX, variante 48 sans aviation, publiée et immuable.
 - **Bretagne v0.1** : recherche uniquement, aucune publication.
 
+
+## Sprint 72 — Bretagne v0.1 prépublication prête à 135
+
+- **Bretagne v0.1** est figée à **135 mémoires RX**, revue **8/8**, avec **0 blocage** pour le périmètre v0.1.
+- L'aviation reste à **0 mémoire** dans v0.1 : le cycle SIA courant **AIRAC 08/26** est identifié comme valide du 06/08/2026 au 02/09/2026, mais l'export exact courant n'est pas extrait ; les fréquences exactes de pages AIP plus anciennes ne sont donc pas promues comme si elles étaient courantes.
+- Les fréquences opérationnelles ADRASEC non publiées, les affectations locales de sites CROSS Ch64/Ch79 et les infrastructures amateur arrêtées/non résolues sont reportées à **Bretagne v0.2** sans validation implicite.
+- Ch64 (156.225 / 160.825 MHz) et Ch79 (156.975 / 161.575 MHz) restent bien **deux mémoires RX génériques chacun**, sans site local inventé.
+- `research/bretagne-v0.1/release-scope.json`, `review-checklist.json` et `sia-airac-08-review.json` verrouillent la revue. La publication publique reste une étape explicite séparée.
 
 ## Sprint 71 — Normandie v0.5 revalidée / Bretagne v0.1 candidat interne
 

@@ -60,8 +60,15 @@ for item_id in ('CROSS_ETEL_CH64_LOCAL_MAPPING', 'CROSS_CORSEN_CH79_LOCAL_MAPPIN
     assert item['promoted_local_site_mapping'] is False
 
 amateur = items['AMATEUR_INFRASTRUCTURE_REVALIDATION']
-assert set(amateur['priority_ids']) == {'F5ZPV', 'F5ZZH', 'F1ZBZ', 'F5ZZC-4'}
-assert amateur['potential_memory_delta'] is None
+if 'reviewed_ids' in amateur:
+    assert set(amateur['reviewed_ids']) == {'F5ZPV', 'F5ZZH', 'F1ZBZ', 'F5ZZC-4'}
+    assert set(amateur['resolved_zero_delta_ids']) == {'F1ZBZ'}
+    assert set(amateur['priority_ids']) == {'F5ZPV', 'F5ZZH', 'F5ZZC-4'}
+    assert amateur['potential_memory_delta'] == 0
+    assert amateur['candidate_memory_delta'] == 0
+else:
+    assert set(amateur['priority_ids']) == {'F5ZPV', 'F5ZZH', 'F1ZBZ', 'F5ZZC-4'}
+    assert amateur['potential_memory_delta'] is None
 assert amateur['promoted'] is False
 
 assert BACKLOG['rules']['deferred_item_is_not_validated'] is True
@@ -71,4 +78,4 @@ assert BACKLOG['rules']['unpublished_data_must_not_be_inferred'] is True
 assert BACKLOG['rules']['private_ppdr_operational_data_excluded'] is True
 assert BACKLOG['rules']['public_export_allowed'] is False
 
-print('Sprint 74 Bretagne v0.2 initialization remains auditable from immutable public v0.1=135 while later internal candidate increments are allowed without public promotion OK')
+print('Sprint 74 Bretagne v0.2 initialization remains auditable from immutable public v0.1=135 while later internal candidate and backlog revalidations remain non-public OK')

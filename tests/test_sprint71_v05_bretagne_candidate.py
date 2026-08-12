@@ -61,8 +61,11 @@ assert e["rules"]["tx_disabled"] is True
 state = json.loads(STATE.read_text(encoding="utf-8"))
 assert state["current_sprint"] >= 71
 assert state["state_version"] >= "0.21.60"
-assert state["public_packs"]["bretagne"]["version"] == "0.1"
-assert state["public_packs"]["bretagne"]["memory_count"] == 135
+assert state["public_packs"]["bretagne"]["version"] in {"0.1", "0.2"}
+assert state["public_packs"]["bretagne"]["memory_count"] in {135, 151}
+if state["current_sprint"] >= 80:
+    assert state["public_packs"]["bretagne"]["version"] == "0.2"
+    assert state["public_packs"]["bretagne"]["memory_count"] == 151
 historical_v01 = state.get("completed_bretagne_v0_1_release")
 if historical_v01 is None:
     historical_v01 = state["active_work"]
@@ -73,4 +76,4 @@ else:
     assert historical_v01["immutable"] is True
 assert historical_v01.get("internal_candidate_memory_count", historical_v01.get("memory_count")) == 135
 
-print("Sprint 71: Normandie v0.5 revalidated with 0 promotion; Bretagne v0.1 internal candidate advanced to 135 RX-only memories, historical state remains auditable after v0.2 initialization OK")
+print("Sprint 71: Normandie v0.5 revalidated with 0 promotion; Bretagne v0.1 historical 135-memory candidate remains auditable after later Bretagne publications OK")

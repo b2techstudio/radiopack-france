@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "status": "research_backlog_not_public",
   "pack": "Bretagne",
   "target_version": "0.2",
@@ -38,13 +38,23 @@
       "id": "ADRASEC_PUBLIC_DATA_REVALIDATION",
       "category": "emergency_amateur_research",
       "departments": [22, 29, 35, 56],
-      "state": "public_current_data_required",
-      "potential_memory_delta": null,
+      "state": "public_revalidation_completed_zero_rf_delta",
+      "potential_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted": false,
+      "evidence": "research/bretagne-v0.2/adrasec-public-revalidation.json",
       "source_context": "research/bretagne-v0.1/emergency-relays.json",
+      "resolved_zero_delta": true,
+      "findings": {
+        "22": "current FNRASEC membership confirmed; no current public service-specific ADRASEC frequency attributed",
+        "29": "F1ZBH-3 and F1ZGQ-3 publicly identify ADRASEC-29 roles while current REF lists both APRS systems on 144.800 MHz; RF already present nationally",
+        "35": "F1ZUG APRS 144.800 MHz is public and current but its ADRASEC35 transponder frequency remains unpublished; F5ZZC-4 current frequency remains unvalidated",
+        "56": "current ADRASEC56 activity and public APRS roles are visible but no current service-specific ADRASEC frequency is promoted; historical F1ZKU association is not treated as current role"
+      },
       "requirements": [
         "use only data that is explicitly public and currently verifiable",
         "do not infer a missing value from an APRS entry, organisation membership or geography",
+        "do not convert a historical ADRASEC association into a current role without current evidence",
         "exclude private PPDR operational data"
       ]
     },
@@ -52,10 +62,13 @@
       "id": "F1ZUG_ADRASEC35_ROLE_REVALIDATION",
       "category": "emergency_amateur_research",
       "site": "Chatillon-en-Vendelais",
-      "state": "role_documented_specific_value_not_public",
-      "potential_memory_delta": null,
+      "state": "current_aprs_frequency_public_adrasec_transponder_frequency_still_unpublished",
+      "potential_memory_delta": 0,
       "promoted": false,
-      "source_context": "research/bretagne-v0.1/emergency-relays.json",
+      "source_context": "research/bretagne-v0.2/adrasec-public-revalidation.json",
+      "aprs_frequency_mhz": 144.8,
+      "aprs_frequency_already_present_nationally": true,
+      "adrasec_transponder_frequency_mhz": null,
       "must_not_infer_from_aprs": true
     },
     {
@@ -123,6 +136,8 @@
     "internal_candidate_promotion_is_not_publication": true,
     "local_operator_status_overrides_general_directory_for_current_state": true,
     "similar_callsign_does_not_prove_same_service": true,
+    "organisation_membership_does_not_publish_frequency": true,
+    "historical_role_does_not_equal_current_role": true,
     "public_export_allowed": false
   }
 }

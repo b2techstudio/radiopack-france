@@ -14,8 +14,11 @@ BUILDER = ROOT / "tools/build_annecy_prepublication.py"
 REVIEW_MAP = ROOT / "research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json"
 PUBLIC_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
 PACK_REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
+V03_RECORD = ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json"
+V03_FULL = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv"
+V03_NO_AIR = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv"
 
-for path in [CHECKER, PLAN, OPERATIONS, SATELLITES, OPTIONS, BUILDER, REVIEW_MAP, PUBLIC_ROUTE, PACK_REGISTRY]:
+for path in [CHECKER, PLAN, OPERATIONS, SATELLITES, OPTIONS, BUILDER, REVIEW_MAP, PUBLIC_ROUTE, PACK_REGISTRY, V03_RECORD, V03_FULL, V03_NO_AIR]:
     assert path.is_file(), f"Fichier readiness manquant: {path.relative_to(ROOT)}"
 
 spec = importlib.util.spec_from_file_location("annecy_readiness", CHECKER)
@@ -23,6 +26,7 @@ module = importlib.util.module_from_spec(spec)
 assert spec.loader is not None
 spec.loader.exec_module(module)
 
+# Historical v0.2 readiness remains replayable and auditable.
 result = module.evaluate(ROOT)
 assert result["ready_for_public_prepublication"] is True
 assert result["candidate_memory_count"] == 65
@@ -70,13 +74,29 @@ assert options["implementation"]["public_pack_registry"] == "website/src/lib/pac
 assert options["implementation"]["default_pack"] == "annecy-alpes-leman"
 assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie", "bretagne"}
 assert options["options"]["include_aviation"]["scope"] == ["annecy-alpes-leman"]
+assert options["options"]["include_aviation"]["annecy_memory_count_when_enabled"] == 76
+assert options["options"]["include_aviation"]["annecy_memory_count_when_disabled"] == 59
 assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
 
+# The current public registry now points to immutable v0.3, while the v0.2 route
+# above remains available as historical release evidence.
 registry = PACK_REGISTRY.read_text(encoding="utf-8")
 assert 'id: "annecy-alpes-leman"' in registry
-assert 'memoryCount: 65' in registry
-assert 'memoryCount: 48' in registry
-assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv' in registry
+assert 'version: "v0.3"' in registry
+assert 'memoryCount: 76' in registry
+assert 'memoryCount: 59' in registry
+assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv' in registry
+assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv' in registry
+
+record = json.loads(V03_RECORD.read_text(encoding="utf-8"))
+assert record["status"] == "published_immutable"
+assert record["version"] == "0.3"
+assert record["full_memory_count"] == 76
+assert record["without_aviation_memory_count"] == 59
+assert record["aviation_memory_count"] == 17
+assert record["new_unique_rf_memory_count"] == 11
+assert record["rules"]["immutable"] is True
+assert record["rules"]["rx_only"] is True
 
 completed = subprocess.run(
     [sys.executable, str(CHECKER), "--root", str(ROOT), "--json"],
@@ -88,4 +108,4 @@ cli_result = json.loads(completed.stdout)
 assert cli_result["ready_for_public_prepublication"] is True
 assert cli_result["blockers"] == []
 
-print("Tests Annecy–Alpes–Léman release readiness: PUBLISHED v0.2 + multi-region generator")
+print("Tests Annecy–Alpes–Léman release readiness: PUBLISHED v0.2 + multi-region generator; historical readiness replayed and current immutable v0.3 76/59 recognized OK")

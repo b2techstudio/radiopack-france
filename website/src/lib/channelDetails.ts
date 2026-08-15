@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 
 export type ChannelMemory = {
   location: number;
@@ -45,8 +45,8 @@ const parseCsvRow = (row: string): string[] => {
 };
 
 export const loadPublicPackMemories = (relativePublicPath: string): ChannelMemory[] => {
-  const csvUrl = new URL(`../../public/${relativePublicPath}`, import.meta.url);
-  const csv = readFileSync(fileURLToPath(csvUrl), "utf8").replace(/\r/g, "").trim();
+  const csvPath = resolve(process.cwd(), "public", relativePublicPath);
+  const csv = readFileSync(csvPath, "utf8").replace(/\r/g, "").trim();
   const [headerRow, ...rows] = csv.split("\n");
   const headers = parseCsvRow(headerRow);
   const indexOf = (name: string) => headers.indexOf(name);

@@ -1,0 +1,80 @@
+name: Finalize Annecy v0.3 Publication
+
+on:
+  push:
+    paths:
+      - ".github/annecy-v03-publication-trigger"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Build and stage Annecy v0.3 publication
+        run: python tools/finalize_annecy_v03_publication.py
+
+      - name: Preserve historical v0.2 route checks
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path("tests/test_web_generator.py")
+          text = path.read_text(encoding="utf-8")
+          text = text.replace(
+              'STANDARD_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts"',
+              'STANDARD_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"',
+          )
+          text = text.replace(
+              'NO_AIR_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv.ts"',
+              'NO_AIR_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"',
+          )
+          path.write_text(text, encoding="utf-8")
+
+      - name: Validate public release guards
+        run: |
+          python tests/test_sprint86_annecy_v03_paired_rx_expansion.py
+          python tests/test_sprint87_annecy_v03_prepublication.py
+          python tests/test_annecy_v03_public_release.py
+          python tests/test_pack_registry.py
+          python tests/test_web_generator.py
+          python tests/test_site_files.py
+
+      - name: Install website dependencies
+        working-directory: website
+        run: npm ci
+
+      - name: Build website with v0.3
+        working-directory: website
+        run: npm run build
+
+      - name: Validate built public CSVs
+        run: |
+          python tests/test_built_annecy_public_csv.py
+          python tests/test_built_public_pack_catalog.py
+
+      - name: Commit published Annecy v0.3
+        shell: bash
+        run: |
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git add -A
+          git commit -m "Sprint 88 publish Annecy Alpes Leman v0.3"
+          git push

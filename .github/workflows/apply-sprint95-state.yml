@@ -1,0 +1,31 @@
+name: Sprint 95 State Apply
+
+on:
+  push:
+    branches:
+      - annecy-v04-publication
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout publication branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+      - name: Synchronize state
+        run: python tools/finalize_sprint95_state.py
+      - name: Commit synchronized state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git add README.md PROJECT_STATUS.md CHANGELOG.md research/project-resume-state.json website/src/pages/generateur.astro research/sprint-93-summary.md research/sprint-94-summary.md research/sprint-95-summary.md
+          git commit -m "Sprint 95 synchronize publication state"
+          git push origin HEAD:annecy-v04-publication

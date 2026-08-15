@@ -76,4 +76,6 @@ Garde-fou : `tests/test_sprint86_annecy_v03_paired_rx_expansion.py`.
 
 ## Clôture
 
-Le commit final de Sprint 86 devra passer la CI complète et produire une archive de référence exacte via `[reference-archive]`. Cette clôture ne modifiera ni les fréquences candidates ni les packs publics.
+Le HEAD nettoyé `287408c5c6a40b99d1e81650e3c5499475a7b565` a passé la CI complète au run **915** : tests dépôt, garde-fou Sprint 86, build Astro et statut combiné sont tous en succès. Aucun fichier temporaire de finalisation ne reste dans le dépôt.
+
+Le présent commit de clôture porte le marqueur `[reference-archive]` et ne modifie que cette note de traçabilité. Il ne change ni le candidat 76/59, ni les fréquences, ni le registre, ni les packs publics. La CI de ce commit doit produire l'archive exacte du HEAD final.

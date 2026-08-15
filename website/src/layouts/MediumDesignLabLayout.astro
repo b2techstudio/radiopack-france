@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  concept: string;
+  themeColor?: string;
+}
+
+const { title, description, concept, themeColor = "#1c2530" } = Astro.props;
+
+const concepts = [
+  ["medium", "Vue palettes"],
+  ["slate-radio", "01 Slate Radio"],
+  ["steel-blue", "02 Steel Blue"],
+  ["graphite-violet", "03 Graphite Violet"],
+  ["radio-olive", "04 Radio Olive"],
+  ["midnight-blue-soft", "05 Midnight Blue Soft"],
+];
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title} — RadioPack Design Lab</title>
+  </head>
+  <body class={`medium-design-lab theme-${concept}`}>
+    <a class="medium-lab-skip" href="#medium-design-concept">Aller au concept</a>
+    <nav class="medium-lab-nav" aria-label="Navigation des palettes foncées modérées">
+      <a class="medium-lab-brand" href="/design-lab/medium/">
+        <img src="/brand/b2tech-logo.png" alt="" />
+        <span><strong>RADIOPACK</strong><small>MID LAB</small></span>
+      </a>
+      <div class="medium-lab-links">
+        {concepts.map(([slug, label]) => (
+          <a class={slug === concept ? "is-active" : ""} href={slug === "medium" ? "/design-lab/medium/" : `/design-lab/medium/${slug}/`}>{label}</a>
+        ))}
+      </div>
+      <div class="medium-lab-modes">
+        <a href="/design-lab/light/">Clairs ↗</a>
+        <a href="/design-lab/">Sombres ↗</a>
+      </div>
+    </nav>
+    <main id="medium-design-concept"><slot /></main>
+  </body>
+</html>
+
+<style is:global>
+  body.medium-design-lab { margin: 0; min-width: 320px; color: #eef4fa; background: #1c2530; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  body.medium-design-lab::before { display: none; }
+  .medium-design-lab *, .medium-design-lab *::before, .medium-design-lab *::after { box-sizing: border-box; }
+  .medium-design-lab a { color: inherit; text-decoration: none; }
+  .medium-lab-skip { position: fixed; z-index: 500; left: 14px; top: 14px; padding: 10px 14px; background: #f4f7fb; color: #111820 !important; border-radius: 8px; transform: translateY(-180%); }
+  .medium-lab-skip:focus { transform: translateY(0); }
+  .medium-lab-nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 70px; padding: 10px max(18px, calc((100vw - 1280px) / 2)); border-bottom: 1px solid rgba(255,255,255,.09); background: rgba(28,37,48,.92); backdrop-filter: blur(18px); }
+  .medium-lab-brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .medium-lab-brand img { width: 38px; height: 38px; object-fit: contain; }
+  .medium-lab-brand span { display: grid; line-height: 1; }
+  .medium-lab-brand strong { font-size: .78rem; letter-spacing: .14em; }
+  .medium-lab-brand small { margin-top: 5px; color: #9baaba; font-size: .57rem; letter-spacing: .22em; }
+  .medium-lab-links { display: flex; align-items: center; gap: 5px; overflow-x: auto; scrollbar-width: none; }
+  .medium-lab-links::-webkit-scrollbar { display: none; }
+  .medium-lab-links a { flex: 0 0 auto; padding: 8px 9px; border-radius: 8px; color: #a9b7c6; font-size: .69rem; font-weight: 800; letter-spacing: .03em; }
+  .medium-lab-links a:hover, .medium-lab-links a.is-active { color: white; background: rgba(255,255,255,.1); }
+  .medium-lab-modes { display: flex; gap: 6px; flex: 0 0 auto; }
+  .medium-lab-modes a { padding: 8px 10px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; color: #c9d4df !important; font-size: .66rem; font-weight: 850; }
+  @media (max-width: 1060px) { .medium-lab-nav { align-items: flex-start; flex-wrap: wrap; padding: 10px 14px; } .medium-lab-links { order: 3; width: 100%; padding-bottom: 2px; } }
+  @media (max-width: 560px) { .medium-lab-modes a:first-child { display: none; } }
+</style>

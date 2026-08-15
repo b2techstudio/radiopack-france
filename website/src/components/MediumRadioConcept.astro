@@ -1,0 +1,144 @@
+---
+import { publicPacks } from "../lib/packRegistry";
+
+interface Props {
+  name: string;
+  number: string;
+  description: string;
+  palette: {
+    bg: string;
+    surface: string;
+    card: string;
+    text: string;
+    muted: string;
+    accent: string;
+    accent2: string;
+    rx: string;
+    signal: string;
+  };
+}
+
+const { name, number, description, palette } = Astro.props;
+const order = ["normandie", "annecy-alpes-leman", "bretagne"];
+const packs = order
+  .map((id) => publicPacks.find((pack) => pack.id === id))
+  .filter((pack): pack is (typeof publicPacks)[number] => Boolean(pack))
+  .map((pack) => ({
+    ...pack,
+    count: pack.variants.find((variant) => variant.id === pack.defaultVariant)?.memoryCount ?? pack.variants[0]?.memoryCount ?? 0,
+  }));
+const total = packs.reduce((sum, pack) => sum + pack.count, 0);
+const styleVars = `--bg:${palette.bg};--surface:${palette.surface};--card:${palette.card};--text:${palette.text};--muted:${palette.muted};--accent:${palette.accent};--accent2:${palette.accent2};--rx:${palette.rx};--signal:${palette.signal}`;
+---
+<div class="medium-radio" style={styleVars}>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <div class="concept-id"><span>{number}</span><b>{name}</b></div>
+      <span class="eyebrow">RADIOPACK FRANCE · RADIOAMATEUR UI</span>
+      <h1>La radio,<br /><em>sans le noir total.</em></h1>
+      <p>{description}</p>
+      <div class="actions">
+        <a class="primary" href="/regions">Choisir un pack</a>
+        <a href="/generateur">Ouvrir le générateur</a>
+      </div>
+      <div class="palette" aria-label={`Palette ${name}`}>
+        {Object.values(palette).map((color) => <i style={`background:${color}`} title={color}></i>)}
+      </div>
+    </div>
+
+    <div class="radio-panel" aria-label="Interface radioamateur de démonstration">
+      <div class="panel-top"><span>RX CONSOLE / BANK 01</span><strong>● RX ONLY</strong></div>
+      <div class="vfo active"><div><small>VFO A · 2 M</small><b>145.500</b></div><span>FM<br />12.5 kHz</span></div>
+      <div class="vfo"><div><small>VFO B · 70 CM</small><b>433.500</b></div><span>FM<br />12.5 kHz</span></div>
+      <div class="meter"><span>S</span><div>{Array.from({ length: 14 }).map((_, i) => <i class={i < 9 ? "on" : ""}></i>)}</div><b>S9</b></div>
+      <div class="scope" aria-hidden="true">{Array.from({ length: 62 }).map((_, i) => <i style={`height:${12 + ((i * 23) % 68)}%`}></i>)}</div>
+      <div class="panel-bottom"><span>SQL 03</span><span>NFM</span><span>STEP 12.5</span><b>{total} MEM</b></div>
+    </div>
+  </section>
+
+  <section class="band-strip wrap">
+    <div><small>BAND</small><b>6 m</b><span>50 MHz</span></div>
+    <div><small>BAND</small><b>2 m</b><span>144–146</span></div>
+    <div><small>BAND</small><b>70 cm</b><span>430–440</span></div>
+    <div class="status"><small>PUBLIC PACKS</small><b>{packs.length}</b><span>{total} mémoires RX</span></div>
+  </section>
+
+  <section class="packs wrap">
+    <div class="section-head"><span>MEMORY BANKS</span><h2>Trois régions.<br />Une lecture radio.</h2></div>
+    <div class="pack-list">
+      {packs.map((pack, index) => (
+        <a class="pack" href={`/regions/${pack.regionSlug}`}>
+          <span class="bank">B{String(index + 1).padStart(2, "0")}</span>
+          <div><small>{pack.version} · PUBLIC RX</small><h3>{pack.name}</h3></div>
+          <strong>{pack.count}<small>MEM</small></strong>
+          <i>→</i>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="features wrap">
+    <article><span>01</span><h3>Repères radio</h3><p>Fréquences, bandes, modes et banques mémoire visibles immédiatement.</p></article>
+    <article><span>02</span><h3>Contraste doux</h3><p>Des surfaces clairement séparées sans tomber dans le noir profond.</p></article>
+    <article><span>03</span><h3>Accents utiles</h3><p>Bleu, violet, vert RX et couleur signal uniquement là où ils apportent une information.</p></article>
+  </section>
+</div>
+
+<style>
+  .medium-radio { min-height: 100vh; background: var(--bg); color: var(--text); transition: background .2s ease; }
+  .wrap { width: min(1180px, calc(100% - 36px)); margin-inline: auto; }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(38px,6vw,88px); align-items: center; min-height: 720px; padding-block: 76px; }
+  .concept-id { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
+  .concept-id span { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid color-mix(in srgb,var(--accent) 55%,transparent); border-radius: 50%; color: var(--accent); font-weight: 950; }
+  .concept-id b { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; }
+  .eyebrow, .section-head > span { color: var(--accent); font-size: .71rem; font-weight: 950; letter-spacing: .19em; }
+  h1 { margin: 19px 0 24px; font-size: clamp(4rem,7.6vw,7.4rem); line-height: .87; letter-spacing: -.07em; }
+  h1 em { color: var(--accent2); font-style: normal; }
+  .hero-copy > p { max-width: 620px; color: var(--muted); font-size: 1.08rem; line-height: 1.72; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .actions a { padding: 13px 17px; border: 1px solid color-mix(in srgb,var(--text) 20%,transparent); border-radius: 10px; font-size: .83rem; font-weight: 850; }
+  .actions .primary { color: var(--bg); background: var(--text); border-color: var(--text); }
+  .palette { display: flex; gap: 6px; margin-top: 32px; }
+  .palette i { width: 25px; height: 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); }
+  .radio-panel { overflow: hidden; border: 1px solid color-mix(in srgb,var(--text) 15%,transparent); border-radius: 20px; background: var(--surface); box-shadow: 0 30px 70px rgba(0,0,0,.18); }
+  .panel-top, .panel-bottom { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 14px 18px; background: color-mix(in srgb,var(--surface) 72%,black); color: var(--muted); font: 800 .65rem "SFMono-Regular",Consolas,monospace; letter-spacing: .1em; }
+  .panel-top strong { color: var(--rx); }
+  .vfo { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 22px; border-top: 1px solid color-mix(in srgb,var(--text) 10%,transparent); }
+  .vfo small { color: var(--muted); font: 850 .66rem "SFMono-Regular",Consolas,monospace; letter-spacing: .11em; }
+  .vfo b { display: block; margin-top: 5px; color: var(--text); font: 800 clamp(2.15rem,5vw,3.35rem) "SFMono-Regular",Consolas,monospace; letter-spacing: -.065em; }
+  .vfo.active b { color: var(--rx); text-shadow: 0 0 24px color-mix(in srgb,var(--rx) 18%,transparent); }
+  .vfo > span { color: var(--muted); font: 800 .68rem/1.5 "SFMono-Regular",Consolas,monospace; text-align: right; }
+  .meter { display: grid; grid-template-columns: 22px 1fr 30px; gap: 10px; align-items: center; padding: 17px 22px 7px; color: var(--muted); font: 800 .66rem "SFMono-Regular",Consolas,monospace; }
+  .meter > div { display: grid; grid-template-columns: repeat(14,1fr); gap: 3px; }
+  .meter i { height: 7px; border-radius: 2px; background: var(--card); }
+  .meter i.on { background: var(--signal); }
+  .scope { display: flex; align-items: end; gap: 2px; height: 118px; margin: 10px 22px 20px; padding: 10px; border: 1px solid color-mix(in srgb,var(--text) 10%,transparent); background: color-mix(in srgb,var(--surface) 82%,black); }
+  .scope i { flex: 1; min-width: 2px; background: linear-gradient(var(--accent),var(--accent2)); opacity: .84; }
+  .panel-bottom { justify-content: flex-start; }
+  .panel-bottom b { margin-left: auto; color: var(--signal); }
+  .band-strip { display: grid; grid-template-columns: repeat(4,1fr); border-block: 1px solid color-mix(in srgb,var(--text) 14%,transparent); }
+  .band-strip > div { padding: 25px 22px; border-right: 1px solid color-mix(in srgb,var(--text) 14%,transparent); }
+  .band-strip > div:last-child { border-right: 0; }
+  .band-strip small { display: block; color: var(--muted); font: 850 .64rem "SFMono-Regular",Consolas,monospace; letter-spacing: .1em; }
+  .band-strip b { display: block; margin: 14px 0 4px; font-size: 2rem; letter-spacing: -.05em; }
+  .band-strip span { color: var(--muted); font-size: .8rem; }
+  .band-strip .status b { color: var(--rx); }
+  .packs { padding-block: 108px 92px; }
+  .section-head h2 { margin: 10px 0 38px; font-size: clamp(2.7rem,5.4vw,5.2rem); line-height: .94; letter-spacing: -.06em; }
+  .pack-list { border-top: 1px solid color-mix(in srgb,var(--text) 14%,transparent); }
+  .pack { display: grid; grid-template-columns: 72px 1fr 110px 28px; gap: 18px; align-items: center; padding: 25px 10px; border-bottom: 1px solid color-mix(in srgb,var(--text) 14%,transparent); transition: background .18s ease,padding .18s ease; }
+  .pack:hover { padding-inline: 18px; background: var(--surface); }
+  .bank { color: var(--accent); font: 900 1rem "SFMono-Regular",Consolas,monospace; }
+  .pack small { color: var(--muted); font: 800 .64rem "SFMono-Regular",Consolas,monospace; letter-spacing: .08em; }
+  .pack h3 { margin: 5px 0 0; font-size: clamp(1.35rem,3vw,2.15rem); letter-spacing: -.04em; }
+  .pack > strong { color: var(--text); font-size: 2rem; }
+  .pack > strong small { margin-left: 5px; }
+  .pack > i { color: var(--signal); font-size: 1.45rem; font-style: normal; }
+  .features { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; padding-bottom: 120px; }
+  .features article { min-height: 220px; padding: 25px; border: 1px solid color-mix(in srgb,var(--text) 12%,transparent); border-radius: 16px; background: var(--card); }
+  .features article > span { color: var(--accent2); font: 900 .7rem "SFMono-Regular",Consolas,monospace; }
+  .features h3 { margin: 46px 0 10px; font-size: 1.35rem; }
+  .features p { margin: 0; color: var(--muted); line-height: 1.65; }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; min-height: auto; } .band-strip { grid-template-columns: 1fr 1fr; } .band-strip > div:nth-child(2) { border-right: 0; } .band-strip > div:nth-child(-n+2) { border-bottom: 1px solid color-mix(in srgb,var(--text) 14%,transparent); } .features { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .hero { padding-top: 54px; } .band-strip { grid-template-columns: 1fr; } .band-strip > div { border-right: 0; border-bottom: 1px solid color-mix(in srgb,var(--text) 14%,transparent) !important; } .band-strip > div:last-child { border-bottom: 0 !important; } .pack { grid-template-columns: 48px 1fr 28px; } .pack > strong { grid-column: 2; font-size: 1.4rem; } .pack > i { grid-column: 3; grid-row: 1 / 3; } }
+</style>

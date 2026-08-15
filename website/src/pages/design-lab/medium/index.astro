@@ -1,0 +1,52 @@
+---
+import MediumDesignLabLayout from "../../../layouts/MediumDesignLabLayout.astro";
+
+const palettes = [
+  { n: "01", slug: "slate-radio", name: "Slate Radio", tag: "Équilibré", desc: "Ardoise bleutée, surfaces bien séparées, cyan signal et violet B2Tech. Le compromis le plus naturel.", colors: ["#1C2530","#26313D","#303C49","#F2F6FA","#38BDF8","#9B7BFF","#7FE3A1","#FFAA5C"] },
+  { n: "02", slug: "steel-blue", name: "Steel Blue", tag: "Radio moderne", desc: "Plus bleu acier, plus froid et très lisible. Il évoque un équipement radio contemporain sans virer au cockpit noir.", colors: ["#202B36","#2A3947","#344656","#F5F8FA","#4DB8FF","#55E6D6","#8EDCA7","#FF9B58"] },
+  { n: "03", slug: "graphite-violet", name: "Graphite Violet", tag: "B2Tech", desc: "Graphite adouci avec violet et bleu. Plus identitaire B2Tech Studio, tout en restant confortable pour une longue lecture.", colors: ["#25242D","#302F3A","#3A3947","#F6F4FA","#A98BFF","#63B9FF","#83D6A0","#E686C8"] },
+  { n: "04", slug: "radio-olive", name: "Radio Olive", tag: "Terrain", desc: "Vert-gris radio, ambre et cyan. Une ambiance matériel terrain / shack, originale sans tomber dans le militaire.", colors: ["#252B29","#303937","#3A4642","#F2F5F1","#9BD36A","#55C7C1","#A8E37B","#EFB45E"] },
+  { n: "05", slug: "midnight-blue-soft", name: "Midnight Blue Soft", tag: "Spectaculaire", desc: "Bleu nuit éclairci, cyan et violet. Le plus visuel des cinq, mais nettement moins sombre que Clean Neon.", colors: ["#182538","#223249","#2B3D56","#F4F7FB","#4EA8FF","#9185FF","#65D7B1","#F4C95D"] },
+];
+---
+<MediumDesignLabLayout title="5 palettes foncées modérées" description="Comparatif de cinq palettes intermédiaires pour RadioPack France." concept="medium">
+  <section class="medium-hero">
+    <div class="wrap">
+      <span class="kicker">B2TECH STUDIO × RADIOPACK FRANCE</span>
+      <h1>Foncé, oui.<br /><em>Pas noir.</em></h1>
+      <p>La même interface radioamateur sur les cinq pages. Seules les couleurs changent, pour comparer objectivement le confort, le caractère et l’identité visuelle.</p>
+    </div>
+  </section>
+  <section class="palette-grid wrap">
+    {palettes.map((item) => (
+      <a class="palette-card" href={`/design-lab/medium/${item.slug}/`}>
+        <div class="card-top"><span>{item.n}</span><small>{item.tag}</small></div>
+        <h2>{item.name}</h2><p>{item.desc}</p>
+        <div class="swatches">{item.colors.map((color) => <i style={`background:${color}`} title={color}></i>)}</div>
+        <strong>Comparer cette palette <span>↗</span></strong>
+      </a>
+    ))}
+  </section>
+</MediumDesignLabLayout>
+<style>
+  .wrap { width: min(1180px, calc(100% - 36px)); margin-inline: auto; }
+  .medium-hero { padding: 96px 0 62px; background: radial-gradient(circle at 76% 22%, rgba(56,189,248,.12),transparent 30rem), radial-gradient(circle at 20% 18%,rgba(155,123,255,.1),transparent 28rem); }
+  .kicker { color: #63c9fa; font-size: .73rem; font-weight: 900; letter-spacing: .2em; }
+  h1 { margin: 22px 0; font-size: clamp(3.6rem,8vw,7.4rem); line-height: .9; letter-spacing: -.065em; }
+  h1 em { color: #9b7bff; font-style: normal; }
+  .medium-hero p { max-width: 760px; color: #aebccc; font-size: 1.08rem; line-height: 1.7; }
+  .palette-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; padding: 8px 0 80px; }
+  .palette-card { position: relative; min-height: 330px; padding: 30px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: #26313d; box-shadow: 0 16px 36px rgba(0,0,0,.12); transition: transform .2s ease,border-color .2s ease; }
+  .palette-card:hover { transform: translateY(-4px); border-color: rgba(99,201,250,.45); }
+  .palette-card:last-child { grid-column: 1 / -1; }
+  .card-top { display: flex; justify-content: space-between; align-items: center; }
+  .card-top span { color: #63c9fa; font-size: 2rem; font-weight: 950; }
+  .card-top small { padding: 6px 9px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; color: #b7c4d1; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+  h2 { margin: 43px 0 12px; font-size: clamp(1.9rem,4vw,3.1rem); letter-spacing: -.045em; }
+  .palette-card p { max-width: 590px; color: #aebccc; line-height: 1.65; }
+  .swatches { display: flex; gap: 7px; margin-top: 26px; }
+  .swatches i { width: 34px; height: 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.13); }
+  .palette-card > strong { position: absolute; left: 30px; bottom: 28px; font-size: .84rem; }
+  .palette-card > strong span { color: #63c9fa; }
+  @media (max-width:760px) { .palette-grid { grid-template-columns: 1fr; } .palette-card:last-child { grid-column: auto; } }
+</style>

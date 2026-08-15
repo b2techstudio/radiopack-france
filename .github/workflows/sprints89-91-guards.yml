@@ -18,12 +18,18 @@ concurrency:
 
 jobs:
   guards:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.13"
+
       - name: Test Sprint 89 Annecy v0.4 candidate
         run: python tests/test_sprint89_annecy_v04_candidate.py
       - name: Test Sprint 90 Normandie v0.5 source refresh

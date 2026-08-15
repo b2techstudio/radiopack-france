@@ -1,8 +1,17 @@
 # Bretagne v0.3 — recherche
 
-État : **Sprint 81 / 0.21.70 — initialisée depuis la Bretagne v0.2 publique immuable à 151 mémoires RX**.
+État : **Sprint 82 / 0.21.71 — six dossiers non-AIRAC revalidés, candidat toujours 151 mémoires RX, delta RF 0**.
 
 La v0.3 démarre sans nouvelle mémoire : le candidat interne initial reproduit exactement le CSV public v0.2. La v0.2 reste immuable et demeure la version publique courante.
+
+## Sprint 82 — revalidation publique ciblée
+
+`public-service-revalidation.json` recontrôle F1ZUG, F5ZZC-4, F5ZPV, F5ZZH et les mappings CROSS Étel Ch64 / Corsen Ch79. Aucun dossier ne produit de nouvelle RF : **delta 0**.
+
+- F1ZUG APRS 144.800 MHz reste déjà couvert nationalement ; le transpondeur ADRASEC35 reste sans fréquence publique ;
+- F5ZZC-4 reste non résolu faute de source actuelle de fréquence ;
+- F5ZPV et F5ZZH restent arrêtés selon l’opérateur local ;
+- Ch64 et Ch79 restent des paires génériques sans attribution locale non prouvée.
 
 ## Base
 

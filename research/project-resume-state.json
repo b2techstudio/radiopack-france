@@ -1,9 +1,9 @@
 {
   "schema_version": "1.2",
   "status": "project_resume_state",
-  "updated": "2026-08-12",
-  "current_sprint": 81,
-  "state_version": "0.21.70",
+  "updated": "2026-08-15",
+  "current_sprint": 82,
+  "state_version": "0.21.71",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -30,7 +30,7 @@
   "active_work": {
     "pack": "Bretagne",
     "target_version": "0.3",
-    "status": "initialized_from_immutable_public_v0_2_151_not_public",
+    "status": "public_revalidation_zero_rf_delta_151_not_public",
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_release_ready": false,
@@ -73,7 +73,20 @@
     ],
     "published": false,
     "scope_frozen": false,
-    "prepublication_ready": false
+    "prepublication_ready": false,
+    "public_service_revalidation": "research/bretagne-v0.3/public-service-revalidation.json",
+    "public_service_revalidation_checked_on": "2026-08-15",
+    "public_service_revalidation_reviewed_count": 6,
+    "public_service_revalidation_candidate_memory_delta": 0,
+    "public_service_revalidation_promoted_item_count": 0,
+    "f1zug_aprs_frequency_mhz": 144.8,
+    "f1zug_aprs_frequency_already_present_nationally": true,
+    "f1zug_adrasec35_transponder_frequency_published": false,
+    "f5zzc4_current_service_frequency_validated": false,
+    "f5zpv_local_operator_still_stopped": true,
+    "f5zzh_local_operator_still_stopped": true,
+    "etel_channel64_primary_source_conflict_open": true,
+    "corsen_channel79_primary_current_transmitter_site_confirmed": false
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -238,7 +251,9 @@
     "research/bretagne-v0.3/backlog.json",
     "research/bretagne-v0.3/airac-transition-policy.json",
     "research/bretagne-v0.3/README.md",
-    "research/sprint-81-summary.md"
+    "research/sprint-81-summary.md",
+    "research/bretagne-v0.3/public-service-revalidation.json",
+    "research/sprint-82-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -887,5 +902,23 @@
     "airac09_effective_through_inclusive": "2026-09-30",
     "carried_open_dossier_count": 6,
     "scheduled_transition_dossier_count": 1
+  },
+  "latest_sprint82_bretagne_v0_3_public_revalidation": {
+    "sprint": 82,
+    "state_version": "0.21.71",
+    "checked_on": "2026-08-15",
+    "reviewed_non_airac_item_count": 6,
+    "candidate_memory_count_before": 151,
+    "candidate_memory_count_after": 151,
+    "candidate_memory_delta": 0,
+    "promoted_item_count": 0,
+    "public_v0_3_exists": false,
+    "f1zug_aprs_frequency_mhz": 144.8,
+    "f1zug_transponder_frequency_published": false,
+    "f5zzc4_current_service_frequency_validated": false,
+    "f5zpv_local_operator_still_stopped": true,
+    "f5zzh_local_operator_still_stopped": true,
+    "etel_channel64_primary_conflict_open": true,
+    "corsen_channel79_primary_site_mapping_confirmed": false
   }
 }

@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 81 / 0.21.70 — Bretagne v0.3 est initialisée en recherche à 151 mémoires RX depuis la v0.2 publique immuable ; delta initial 0.**
+**État courant : Sprint 82 / 0.21.71 — Bretagne v0.3 reste à 151 mémoires RX après revalidation publique ciblée de six dossiers ; delta RF 0, aucune publication.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 81 / 0.21.70
+## État actuel — Sprint 82 / 0.21.71
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -16,9 +16,22 @@ Packs publics immuables :
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.3 démarre à **151 mémoires RX**, delta 0, comme copie interne exacte de la v0.2 publique immuable ; la prochaine transition aviation est AIRAC 09/26 au 3 septembre 2026.
+Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 : les six dossiers non-AIRAC ouverts ont été revalidés le 15 août 2026 sans promotion ; la prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md` et `research/sprint-81-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md` et `research/sprint-82-summary.md`.
+
+## Sprint 82 — revalidation publique ciblée Bretagne v0.3
+
+Les six dossiers non-AIRAC encore ouverts ont été recontrôlés le **15 août 2026**. Résultat : **151 → 151 mémoires RX, delta RF 0, zéro promotion**.
+
+- F1ZUG-4 reste publiquement documenté en APRS sur **144.800 MHz**, déjà présent nationalement ; la fréquence de son transpondeur ADRASEC35 n’est toujours pas publiée ;
+- F5ZZC-4 reste sans fréquence de service actuelle validée : l’ancienne attribution APRS/ADRASEC35 n’est pas transformée en preuve courante ;
+- F5ZPV est toujours déclaré temporairement arrêté par l’ARA35 malgré un annuaire général qui le marque actif ;
+- F5ZZH est toujours arrêté et en recherche de nouveau site ;
+- CROSS Étel : conflit primaire Ch64 toujours ouvert, Étel restant explicitement mappé sur Ch63 dans la page opérationnelle ;
+- CROSS Corsen : réseau VHF/MHF actuel confirmé sans mapping primaire Ch79 → site précis.
+
+Preuve : `research/bretagne-v0.3/public-service-revalidation.json`. Garde-fou : `tests/test_sprint82_bretagne_v03_public_revalidation.py`.
 
 ## Sprint 81 — initialisation Bretagne v0.3
 
@@ -179,7 +192,7 @@ Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normand
 - `research/sprint-30-34-summary.md`
 - `research/sprint-35-39-summary.md`
 - `research/sprint-55-60-summary.md`
-- `research/sprint-61-summary.md` à `research/sprint-81-summary.md`
+- `research/sprint-61-summary.md` à `research/sprint-82-summary.md`
 
 ## Tests principaux
 

@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
-Dernière mise à jour : **12 août 2026**
-Sprint courant : **81**
-État logique : **0.21.70**
+Dernière mise à jour : **15 août 2026**
+Sprint courant : **82**
+État logique : **0.21.71**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-81-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-82-summary.md`.
 
 ## État public
 
@@ -16,6 +16,19 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 82 — Bretagne v0.3 revalidée, delta 0
+
+Revalidation publique des six dossiers non-AIRAC encore ouverts : **candidat 151, delta RF 0, zéro promotion**.
+
+- F1ZUG : APRS 144.800 MHz confirmé et déjà présent ; fréquence du transpondeur ADRASEC35 toujours non publiée ;
+- F5ZZC-4 : aucune fréquence de service actuelle publiquement validée ; absence de trace récente ≠ preuve d’arrêt ;
+- F5ZPV : opérateur local toujours « temporairement arrêté », malgré le statut actif de l’annuaire général ;
+- F5ZZH : toujours arrêté, recherche de site en cours ;
+- Étel Ch64 : conflit primaire non résolu, aucune attribution locale ;
+- Corsen Ch79 : réseau actuel confirmé, aucun mapping primaire canal → station.
+
+Preuve : `research/bretagne-v0.3/public-service-revalidation.json`. Test : `tests/test_sprint82_bretagne_v03_public_revalidation.py`.
 
 ## Sprint 81 — Bretagne v0.3 initialisée à 151
 

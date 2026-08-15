@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.71 - 2026-08-15
+
+- **Sprint 82** : revalidation publique ciblée des six dossiers non-AIRAC ouverts de Bretagne v0.3 ; candidat maintenu à **151 mémoires RX**, delta RF **0**, aucune promotion.
+- F1ZUG APRS 144.800 MHz confirmé comme déjà couvert ; fréquence du transpondeur ADRASEC35 toujours non publiée. F5ZZC-4 reste sans fréquence actuelle validée.
+- F5ZPV et F5ZZH restent arrêtés selon l’ARA35 ; le statut local prime sur l’annuaire général.
+- CROSS Étel Ch64 et Corsen Ch79 restent sans attribution locale primaire exploitable ; les paires génériques déjà présentes ne sont pas dupliquées.
+- Ajout de `public-service-revalidation.json`, du garde-fou Sprint 82 et adaptation forward-compatible du test Sprint 81.
+
 ## 0.21.70 - 2026-08-12
 
 - **Sprint 81** : initialisation de Bretagne v0.3 à partir de la v0.2 publique immuable = **151 mémoires RX**.

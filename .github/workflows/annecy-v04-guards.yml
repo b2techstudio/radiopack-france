@@ -17,8 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  annecy-v04-prepublication:
-    name: Annecy v0.4 prepublication invariants
+  annecy-v04-release:
+    name: Annecy v0.4 release invariants
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -29,5 +29,7 @@ jobs:
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.13"
-      - name: Test Annecy v0.4 prepublication
+      - name: Test frozen Annecy v0.4 prepublication inputs
         run: python tests/test_sprint94_annecy_v04_prepublication.py
+      - name: Test immutable Annecy v0.4 public release
+        run: python tests/test_annecy_v04_public_release.py

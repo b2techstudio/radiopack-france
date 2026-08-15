@@ -54,7 +54,16 @@ for expected in [
 assert registry.count('downloadUrl: "') == 4
 
 page = GENERATOR.read_text(encoding="utf-8")
-for expected in ["Normandie · 142", "Bretagne · 151", "Annecy · 77 / 60", "publicPacks.find((pack) => pack.id === selectedId)"]:
+for expected in [
+    "77 mémoires",
+    "60 sans aviation",
+    "142 mémoires",
+    "151 mémoires",
+    'data-pack-shortcut="annecy-alpes-leman"',
+    'data-pack-shortcut="normandie"',
+    'data-pack-shortcut="bretagne"',
+    "publicPacks.find((pack) => pack.id === selectedId)",
+]:
     assert expected in page
 
 # Public catalog/status pages must source regional versions from the same registry.
@@ -125,4 +134,4 @@ assert len([row for row in bretagne_rows if row["Name"].startswith("DIN-")]) == 
 assert len([row for row in bretagne_rows if row["Name"].startswith("QUIM-")]) == 1
 assert len([row for row in bretagne_rows if row["Name"] == "AIR-EMERG"]) == 1
 
-print("Tests RadioPack public pack registry: current packs, registry-backed catalog and CSV-backed regional channel details OK")
+print("Tests RadioPack public pack registry: current packs, explicit generator memory labels, registry-backed catalog and CSV-backed regional channel details OK")

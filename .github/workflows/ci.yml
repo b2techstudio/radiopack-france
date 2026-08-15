@@ -112,6 +112,9 @@ jobs:
       - name: Test Sprint 83 Normandie v0.5 blocker revalidation
         run: python tests/test_sprint83_normandie_v05_revalidation.py
 
+      - name: Test Sprint 84 Normandie v0.5 field validation kit
+        run: python tests/test_sprint84_normandie_v05_field_validation_kit.py
+
       - name: Test Bretagne v0.1 internal candidate
         run: python tests/test_bretagne_internal_candidate.py
 

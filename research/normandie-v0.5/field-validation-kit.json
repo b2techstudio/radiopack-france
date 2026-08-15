@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.0",
+  "status": "field_validation_kit_not_public",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "sprint": 84,
+  "updated": "2026-08-15",
+  "purpose": "Regrouper dans un mini-pack CHIRP RX-only les sondes terrain encore utiles pour R3 F1ZBX et F5ZHA depuis Mortain-Bocage, avec un journal de sessions reproductible, sans modifier le candidat interne ni aucun pack public.",
+  "candidate_memory_count_before": 142,
+  "candidate_memory_count_after": 142,
+  "candidate_memory_delta": 0,
+  "public_export_allowed": false,
+  "memories": [
+    {
+      "location": 0,
+      "name": "R3-OUT",
+      "frequency_mhz": 145.675,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "target": "R3_MORTAIN_RX",
+      "role": "primary R3 output coverage probe",
+      "comment": "R3 Broceliande sortie 145.675 - validation RX Mortain - TX bloque"
+    },
+    {
+      "location": 1,
+      "name": "R3-IN",
+      "frequency_mhz": 145.075,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "target": "R3_MORTAIN_RX",
+      "role": "opportunistic paired input listening",
+      "comment": "R3 Broceliande entree 145.075 - ecoute opportuniste - TX bloque"
+    },
+    {
+      "location": 2,
+      "name": "ZHA-VHF",
+      "frequency_mhz": 145.4675,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "target": "F5ZHA_SOURCE_AND_COVERAGE",
+      "role": "current REF pair VHF side RX",
+      "comment": "F5ZHA Laval VHF 145.4675 - validation RX Mortain - TX bloque"
+    },
+    {
+      "location": 3,
+      "name": "ZHA-UHF",
+      "frequency_mhz": 432.575,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "target": "F5ZHA_SOURCE_AND_COVERAGE",
+      "role": "current REF pair UHF side RX",
+      "comment": "F5ZHA Laval UHF 432.575 - validation RX Mortain - TX bloque"
+    },
+    {
+      "location": 4,
+      "name": "ZHA-OLD",
+      "frequency_mhz": 431.4125,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "target": "F5ZHA_SOURCE_AND_COVERAGE",
+      "role": "legacy secondary conflict diagnostic only",
+      "diagnostic_only": true,
+      "comment": "F5ZHA ancienne valeur secondaire 431.4125 - diagnostic seulement"
+    },
+    {
+      "location": 5,
+      "name": "CTRL-ZHY",
+      "frequency_mhz": 145.6875,
+      "mode": "NFM",
+      "tstep_khz": 12.5,
+      "target": "CONTROL",
+      "role": "optional local receiver and antenna sanity control",
+      "diagnostic_only": true,
+      "comment": "F5ZHY sortie 145.6875 - controle recepteur facultatif - TX bloque"
+    }
+  ],
+  "session_log_columns": [
+    "session_id",
+    "target",
+    "date_local",
+    "time_local",
+    "location_description",
+    "receiver_model",
+    "antenna_description",
+    "frequency_mhz",
+    "signal_detected",
+    "identification_confidence",
+    "intelligibility_0_to_5",
+    "signal_strength_observation",
+    "notes"
+  ],
+  "gates": {
+    "R3_MORTAIN_RX": {
+      "primary_probe_mhz": 145.675,
+      "minimum_independent_sessions": 2,
+      "repeatable_identified_reception_required": true,
+      "single_weak_carrier_is_sufficient": false,
+      "input_probe_mhz": 145.075,
+      "input_probe_is_optional_for_coverage_gate": true,
+      "if_gate_clears_pair_memory_delta": 2
+    },
+    "F5ZHA_SOURCE_AND_COVERAGE": {
+      "current_pair_mhz": [145.4675, 432.575],
+      "legacy_conflict_probe_mhz": 431.4125,
+      "minimum_independent_sessions": 2,
+      "minimum_intelligibility_0_to_5": 3,
+      "accepted_identification_confidence": ["high", "unmistakable", "confirmed"],
+      "repeatable_identified_reception_required": true,
+      "legacy_probe_is_promotion_evidence": false,
+      "field_non_reception_is_negative_operational_evidence": false,
+      "if_gate_clears_pair_memory_delta": 2
+    }
+  },
+  "evidence_sources": {
+    "current_blocker_revalidation": "research/normandie-v0.5/current-blocker-revalidation.json",
+    "r3_protocol": "research/normandie-v0.4/r3-mortain-field-validation.json",
+    "r3_pack": "research/normandie-v0.4/r3-validation-pack.json",
+    "f5zha_protocol": "research/normandie-v0.4/f5zha-mortain-validation.json"
+  },
+  "rules": {
+    "standalone_diagnostic_pack_only": true,
+    "must_not_be_appended_to_internal_candidate_automatically": true,
+    "field_sessions_are_evidence_not_memories": true,
+    "web_research_cannot_satisfy_field_gate": true,
+    "geometry_is_not_reception_proof": true,
+    "legacy_conflict_probe_never_overrides_current_ref_pair": true,
+    "names_max_10_characters": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "tx_disabled": true,
+    "ctcss_rx_filter_enabled": false,
+    "published_v0_4_immutable": true,
+    "public_export_allowed": false
+  }
+}

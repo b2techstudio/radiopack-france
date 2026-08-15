@@ -205,6 +205,9 @@ jobs:
       - name: Test Annecy Alps Leman reviewed CSV map
         run: python tests/test_annecy_prepublication_review.py
 
+      - name: Test Sprint 86 Annecy v0.3 paired RX expansion
+        run: python tests/test_sprint86_annecy_v03_paired_rx_expansion.py
+
       - name: Test published web generator
         run: python tests/test_web_generator.py
 

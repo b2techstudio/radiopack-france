@@ -58,3 +58,7 @@ Décision : aucune attribution locale Ch79. La paire générique `156.975 / 161.
 Fichier de preuve : `research/bretagne-v0.3/public-service-revalidation.json`.
 
 Garde-fou : `tests/test_sprint82_bretagne_v03_public_revalidation.py`.
+
+## Clôture
+
+Le dépôt nettoyé a passé la CI complète avant la clôture de référence : garde-fou Sprint 82, contrôles historiques, générateur public et build Astro sont verts. Le commit de clôture ne modifie aucune donnée radio ni le candidat ; il sert uniquement à produire l'archive exacte du HEAD de référence.

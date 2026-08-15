@@ -145,23 +145,57 @@ const defaultVariant = defaultPack.variants.find((variant) => variant.id === def
     </div>
   </section>
 
-  <section class="section-tight">
-    <div class="container info-grid grid-3">
-      <article class="card info-card">
-        <span class="badge badge-green">Annecy · 77 / 60</span>
-        <h3>Pack configurable</h3>
-        <p>La variante aviation peut être incluse ou retirée sans modifier les autres blocs validés.</p>
-      </article>
-      <article class="card info-card">
-        <span class="badge badge-green">Normandie · 142</span>
-        <h3>Pack fixe publié</h3>
-        <p>Le générateur propose directement le CSV Normandie v0.4 déjà validé.</p>
-      </article>
-      <article class="card info-card">
-        <span class="badge badge-green">Bretagne · 151</span>
-        <h3>Pack fixe publié</h3>
-        <p>Le générateur propose directement le CSV Bretagne v0.2 validé, avec 16 mémoires aviation AIRAC 08/26.</p>
-      </article>
+  <section class="section-tight pack-shortcuts-section">
+    <div class="container">
+      <div class="shortcut-heading">
+        <span class="eyebrow">Raccourcis packs</span>
+        <h2>Que signifient ces nombres ?</h2>
+        <p>
+          Ils indiquent le <strong>nombre de mémoires présentes dans le CSV publié</strong>.
+          Clique sur une carte pour sélectionner immédiatement ce pack dans le générateur ci-dessus.
+        </p>
+      </div>
+
+      <div class="info-grid grid-3">
+        <article
+          class="card info-card pack-shortcut"
+          data-pack-shortcut="annecy-alpes-leman"
+          tabindex="0"
+          role="button"
+          aria-label="Sélectionner le pack Annecy–Alpes–Léman"
+        >
+          <span class="badge badge-green">Annecy · configurable</span>
+          <h3>77 mémoires <small>ou 60 sans aviation</small></h3>
+          <p>Le pack complet contient 77 mémoires. Désactiver l'aviation sélectionne la variante publique de 60 mémoires.</p>
+          <span class="shortcut-action" aria-hidden="true">Sélectionner ce pack ↑</span>
+        </article>
+
+        <article
+          class="card info-card pack-shortcut"
+          data-pack-shortcut="normandie"
+          tabindex="0"
+          role="button"
+          aria-label="Sélectionner le pack Normandie"
+        >
+          <span class="badge badge-green">Normandie · pack publié</span>
+          <h3>142 mémoires</h3>
+          <p>Le CSV public Normandie v0.4 contient 142 mémoires RX et est proposé tel quel.</p>
+          <span class="shortcut-action" aria-hidden="true">Sélectionner ce pack ↑</span>
+        </article>
+
+        <article
+          class="card info-card pack-shortcut"
+          data-pack-shortcut="bretagne"
+          tabindex="0"
+          role="button"
+          aria-label="Sélectionner le pack Bretagne"
+        >
+          <span class="badge badge-green">Bretagne · pack publié</span>
+          <h3>151 mémoires</h3>
+          <p>Le CSV public Bretagne v0.2 contient 151 mémoires RX, dont son bloc aviation publié.</p>
+          <span class="shortcut-action" aria-hidden="true">Sélectionner ce pack ↑</span>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -275,6 +309,7 @@ const defaultVariant = defaultPack.variants.find((variant) => variant.id === def
     confirmed?.addEventListener("change", renderSummary);
     renderSummary();
   </script>
+  <script src="../scripts/generator-pack-shortcuts.js"></script>
 </BaseLayout>
 
 <style>
@@ -297,20 +332,21 @@ const defaultVariant = defaultPack.variants.find((variant) => variant.id === def
   .form-heading > div { display: grid; gap: 10px; }
   .form-heading h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
   .status-pill { padding: .4rem .65rem; border-radius: 999px; font-size: .75rem; font-weight: 850; white-space: nowrap; }
-  .status-pill.published { background: rgba(16,164,122,.13); color: #087154; }
+  .status-pill.published { background: rgba(16,164,122,.13); color: #b7f7df; }
   fieldset { display: grid; gap: 12px; margin: 0; padding: 0; border: 0; }
   fieldset[hidden] { display: none; }
   legend { margin-bottom: 8px; font-size: .78rem; font-weight: 850; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
   .select-label { font-weight: 800; }
-  select { width: 100%; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 13px; background: #fff; color: inherit; font: inherit; }
-  .option-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(248,250,252,.78); cursor: pointer; }
+  select { width: 100%; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 13px; background: rgba(11,23,40,.58); color: inherit; font: inherit; }
+  select option { color: #152239; background: #f4f7fb; }
+  .option-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(11,23,40,.28); cursor: pointer; }
   .option-row > span { display: grid; gap: 4px; }
   .option-row small { color: var(--muted); font-size: .88rem; }
   .option-row input { width: 22px; height: 22px; accent-color: var(--purple); flex: 0 0 auto; }
-  .notam-confirm { display: grid; gap: 12px; margin-top: 2px; padding: 18px; border-radius: 16px; background: rgba(22,135,233,.07); border: 1px solid rgba(22,135,233,.14); }
+  .notam-confirm { display: grid; gap: 12px; margin-top: 2px; padding: 18px; border-radius: 16px; background: rgba(78,168,255,.09); border: 1px solid rgba(78,168,255,.18); }
   .notam-confirm[hidden] { display: none; }
   .notam-links { display: flex; flex-wrap: wrap; gap: 10px; }
-  .notam-links a { padding: .55rem .7rem; border-radius: 10px; background: rgba(255,255,255,.8); border: 1px solid var(--line); font-size: .82rem; font-weight: 800; }
+  .notam-links a { padding: .55rem .7rem; border-radius: 10px; background: rgba(11,23,40,.42); border: 1px solid var(--line); font-size: .82rem; font-weight: 800; }
   .notam-confirm-check { display: flex; gap: 10px; align-items: center; }
   .notam-confirm-check label { font-weight: 800; cursor: pointer; }
   .notam-confirm-check input { width: 19px; height: 19px; accent-color: var(--purple); cursor: pointer; }
@@ -326,11 +362,22 @@ const defaultVariant = defaultPack.variants.find((variant) => variant.id === def
   .summary-list strong { text-align: right; }
   .summary-list .file-row { align-items: flex-start; }
   .file-row strong { max-width: 220px; overflow-wrap: anywhere; font-size: .78rem; }
-  .summary-warning { padding: 14px; border-radius: 13px; background: rgba(240,154,32,.11); color: #6e460d; font-size: .9rem; }
+  .summary-warning { padding: 14px; border-radius: 13px; background: rgba(244,201,93,.12); color: #ffe39a; font-size: .9rem; }
   .summary-note { font-size: .88rem; }
-  .info-grid { padding-bottom: 34px; }
+  .pack-shortcuts-section { padding-bottom: 34px; }
+  .shortcut-heading { display: grid; gap: 10px; max-width: 780px; margin-bottom: 20px; }
+  .shortcut-heading h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  .shortcut-heading p { color: var(--muted); }
+  .shortcut-heading strong { color: var(--text); }
+  .info-grid { padding-bottom: 0; }
   .info-card { display: grid; gap: 12px; padding: 22px; }
+  .info-card h3 { display: grid; gap: 4px; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+  .info-card h3 small { color: var(--muted); font-size: .9rem; font-family: inherit; letter-spacing: 0; }
   .info-card p { color: var(--muted); }
+  .pack-shortcut { cursor: pointer; transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease; }
+  .pack-shortcut:hover { transform: translateY(-3px); border-color: rgba(78,168,255,.58); background: rgba(43,61,86,.92); box-shadow: 0 16px 38px rgba(3,10,24,.24); }
+  .pack-shortcut:focus-visible { outline: 3px solid rgba(78,168,255,.72); outline-offset: 3px; }
+  .shortcut-action { margin-top: 4px; color: var(--blue); font-size: .82rem; font-weight: 850; letter-spacing: .02em; }
   @media (max-width: 900px) { .hero-grid, .generator-grid { grid-template-columns: 1fr; } .summary-card { position: static; } }
   @media (max-width: 600px) { .generator-form, .summary-card { padding: 20px; } .form-heading { flex-direction: column; } .option-row { align-items: flex-start; } .option-row input { margin-top: 2px; } }
 </style>

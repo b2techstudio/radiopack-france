@@ -1,8 +1,14 @@
 # Normandie v0.5 — recherche
 
-État : **Sprint 83 / 0.21.72 — candidat interne 142 mémoires RX, delta 0 après revalidation des quatre dossiers différés**.
+État : **Sprint 84 / 0.21.73 — candidat interne 142 mémoires RX, delta 0 ; kit terrain R3/F5ZHA prêt sans publication**.
 
 Base publique immuable : **Normandie v0.4, 142 mémoires RX**. Le plafond potentiel connu reste **147 mémoires** hors F6ZES.
+
+## Sprint 84 — kit terrain R3 / F5ZHA
+
+Le fichier `field-validation-kit.json` regroupe six sondes RX-only et les gates associés. Le builder `tools/build_normandie_v05_field_validation_kit.py` génère un CSV CHIRP de diagnostic, un journal de sessions vide et un manifeste machine.
+
+Ce kit ne modifie pas le candidat : **142 → 142, delta 0**. Les sessions terrain sont des preuves, jamais des mémoires supplémentaires.
 
 ## Sprint 83 — revalidation actuelle
 

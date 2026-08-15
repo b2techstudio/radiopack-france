@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **83**
-État logique : **0.21.72**
+Sprint courant : **84**
+État logique : **0.21.73**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-83-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-84-summary.md`.
 
 ## État public
 
@@ -16,6 +16,18 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 84 — kit terrain Normandie v0.5
+
+Le candidat reste à **142 RX, delta 0**. Le travail de terrain R3/F5ZHA est désormais préparé sous forme d’un mini-pack CHIRP non public de **6 sondes** et d’un journal de sessions vide généré automatiquement.
+
+- R3 : `R3-OUT` 145.675 et `R3-IN` 145.075 ;
+- F5ZHA actuel : `ZHA-VHF` 145.4675 et `ZHA-UHF` 432.575 ;
+- diagnostic seulement : `ZHA-OLD` 431.4125 ;
+- contrôle facultatif : `CTRL-ZHY` 145.6875 ;
+- aucune promotion, aucun CSV public v0.5, aucun changement du registre.
+
+Kit : `research/normandie-v0.5/field-validation-kit.json`. Builder : `tools/build_normandie_v05_field_validation_kit.py`. Test : `tests/test_sprint84_normandie_v05_field_validation_kit.py`.
 
 ## Sprint 83 — Normandie v0.5 revalidée, delta 0
 

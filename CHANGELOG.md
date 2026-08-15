@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.21.73 - 2026-08-15
+
+- **Sprint 84** : préparation d’un kit terrain Normandie v0.5 pour R3 F1ZBX et F5ZHA ; candidat maintenu à **142 mémoires RX**, delta **0**.
+- Mini-pack CHIRP non public de **6 sondes** : R3 sortie/entrée, paire F5ZHA actuelle, ancienne valeur F5ZHA strictement diagnostique et contrôle F5ZHY facultatif.
+- Génération d’un modèle CSV de journal de sessions reproductible ; les sessions restent des preuves et ne créent aucune mémoire.
+- Ajout du builder `build_normandie_v05_field_validation_kit.py`, du manifeste `field-validation-kit.json` et du garde-fou Sprint 84 ; aucune publication v0.5.
+
 ## 0.21.72 - 2026-08-15
 
 - **Sprint 83** : revalidation actuelle des quatre dossiers différés de Normandie v0.5 ; candidat maintenu à **142 mémoires RX**, delta RF **0**, plafond potentiel **147** hors F6ZES.

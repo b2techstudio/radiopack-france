@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 83 / 0.21.72 — Normandie v0.5 reste à 142 mémoires RX après revalidation actuelle des quatre dossiers différés ; delta RF 0, plafond potentiel 147 hors F6ZES, aucune publication.**
+**État courant : Sprint 84 / 0.21.73 — Normandie v0.5 reste à 142 mémoires RX ; un kit terrain RX-only de 6 sondes prépare la validation R3/F5ZHA sans modifier le candidat ni publier v0.5.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 83 / 0.21.72
+## État actuel — Sprint 84 / 0.21.73
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -16,9 +16,21 @@ Packs publics immuables :
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : Normandie v0.5 reste à **142 mémoires RX**, delta 0, après revalidation le 15 août 2026 des quatre dossiers différés ; le plafond potentiel reste **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
+Recherche : Normandie v0.5 reste à **142 mémoires RX**, delta 0. Un mini-pack terrain de **6 sondes RX-only** est maintenant prêt pour produire des observations reproductibles sur R3 F1ZBX et F5ZHA depuis Mortain ; ces six sondes ne sont pas des mémoires candidates. Le plafond potentiel reste **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md` et `research/sprint-83-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md` et `research/sprint-84-summary.md`.
+
+## Sprint 84 — kit terrain Normandie v0.5
+
+Le candidat reste à **142 mémoires RX**. Un kit de validation non public regroupe désormais six sondes : `R3-OUT`, `R3-IN`, `ZHA-VHF`, `ZHA-UHF`, `ZHA-OLD` et `CTRL-ZHY`.
+
+- R3 : deux sessions RX indépendantes et identifiées sur 145.675 MHz restent nécessaires ;
+- F5ZHA : deux sessions indépendantes sur la paire actuelle 145.4675 / 432.575 MHz restent nécessaires, avec intelligibilité minimale 3/5 ;
+- 431.4125 MHz reste une sonde diagnostique historique et ne peut jamais promouvoir F5ZHA à elle seule ;
+- un modèle CSV de journal terrain est généré avec date, lieu, matériel, fréquence, identification, intelligibilité et notes ;
+- aucune mémoire publique ni candidate n’est ajoutée.
+
+Kit : `research/normandie-v0.5/field-validation-kit.json`. Builder : `tools/build_normandie_v05_field_validation_kit.py`. Garde-fou : `tests/test_sprint84_normandie_v05_field_validation_kit.py`.
 
 ## Sprint 83 — revalidation ciblée Normandie v0.5
 

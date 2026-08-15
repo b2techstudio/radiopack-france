@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 83,
-  "state_version": "0.21.72",
+  "current_sprint": 84,
+  "state_version": "0.21.73",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -30,7 +30,7 @@
   "active_work": {
     "pack": "Normandie",
     "target_version": "0.5",
-    "status": "current_blockers_revalidated_zero_delta_142_not_public",
+    "status": "field_validation_kit_prepared_zero_delta_142_not_public",
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_release_ready": false,
@@ -71,7 +71,13 @@
     "f6zes_operational_state_published": false,
     "published": false,
     "scope_frozen": false,
-    "prepublication_ready": false
+    "prepublication_ready": false,
+    "field_validation_kit": "research/normandie-v0.5/field-validation-kit.json",
+    "field_validation_kit_builder": "tools/build_normandie_v05_field_validation_kit.py",
+    "field_validation_kit_guard": "tests/test_sprint84_normandie_v05_field_validation_kit.py",
+    "field_validation_probe_memory_count": 6,
+    "field_validation_session_template_generated": true,
+    "field_validation_changes_candidate": false
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -240,7 +246,9 @@
     "research/bretagne-v0.3/public-service-revalidation.json",
     "research/sprint-82-summary.md",
     "research/normandie-v0.5/current-blocker-revalidation.json",
-    "research/sprint-83-summary.md"
+    "research/sprint-83-summary.md",
+    "research/normandie-v0.5/field-validation-kit.json",
+    "research/sprint-84-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -296,7 +304,9 @@
     "run_bretagne_v02_public_release_test": "python tests/test_bretagne_v02_public_release.py",
     "build_bretagne_v03_internal_candidate": "tools/build_bretagne_v03_internal_candidate.py",
     "build_normandie_v05_internal_candidate": "tools/build_normandie_v05_internal_candidate.py",
-    "test_sprint83_normandie_v05_revalidation": "tests/test_sprint83_normandie_v05_revalidation.py"
+    "test_sprint83_normandie_v05_revalidation": "tests/test_sprint83_normandie_v05_revalidation.py",
+    "build_normandie_v05_field_validation_kit": "tools/build_normandie_v05_field_validation_kit.py",
+    "test_sprint84_normandie_v05_field_validation_kit": "tests/test_sprint84_normandie_v05_field_validation_kit.py"
   },
   "recent_sprints": [
     {
@@ -923,5 +933,26 @@
     "f5zha_field_coverage_gate_open": true,
     "f1zov_maintenance_gate_open": true,
     "f6zes_frequency_mode_state_unresolved": true
+  },
+  "latest_sprint84_normandie_v0_5_field_kit": {
+    "sprint": 84,
+    "state_version": "0.21.73",
+    "prepared_on": "2026-08-15",
+    "candidate_memory_count": 142,
+    "candidate_memory_delta": 0,
+    "field_probe_memory_count": 6,
+    "probe_names": [
+      "R3-OUT",
+      "R3-IN",
+      "ZHA-VHF",
+      "ZHA-UHF",
+      "ZHA-OLD",
+      "CTRL-ZHY"
+    ],
+    "r3_minimum_independent_sessions": 2,
+    "f5zha_minimum_independent_sessions": 2,
+    "f5zha_minimum_intelligibility_0_to_5": 3,
+    "legacy_f5zha_probe_diagnostic_only": true,
+    "public_export_allowed": false
   }
 }

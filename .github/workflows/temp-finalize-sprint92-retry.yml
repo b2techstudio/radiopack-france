@@ -1,0 +1,50 @@
+name: Temporary Sprint 92 finalizer retry
+
+on:
+  push:
+    branches:
+      - security-audit-sprint92-close
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout closing branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: security-audit-sprint92-close
+          persist-credentials: true
+
+      - name: Reuse finalizer and normalize generated summary
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          workflow = Path('.github/workflows/temp-finalize-sprint92.yml').read_text(encoding='utf-8')
+          start = "          python - <<'PY'\n"
+          end = "\n          PY\n"
+          if start not in workflow or end not in workflow:
+              raise SystemExit('unable to locate embedded finalizer')
+          body = workflow.split(start, 1)[1].split(end, 1)[0]
+          code = '\n'.join(line[10:] if line.startswith('          ') else line for line in body.splitlines())
+          exec(compile(code, '<sprint92-finalizer>', 'exec'), {})
+
+          summary = Path('research/sprint-92-summary.md')
+          text = summary.read_text(encoding='utf-8')
+          summary.write_text('\n'.join(line.rstrip() for line in text.splitlines()) + '\n', encoding='utf-8')
+          PY
+
+      - name: Commit synchronized state
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md PROJECT_STATUS.md CHANGELOG.md research/project-resume-state.json research/security-audit-sprint92.md research/sprint-92-summary.md
+          git diff --cached --check
+          git commit -m "Sprint 92 synchronize security audit state"
+          git push origin HEAD:security-audit-sprint92-close

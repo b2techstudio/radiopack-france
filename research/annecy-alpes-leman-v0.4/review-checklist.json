@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "status": "prepublication_review_complete",
+  "pack": "Annecy–Alpes–Léman",
+  "version": "0.4",
+  "reviewed_on": "2026-08-15",
+  "expected_full_memory_count": 77,
+  "expected_without_aviation_memory_count": 60,
+  "expected_new_unique_rf_memory_count": 1,
+  "items": [
+    {"id":"BASE_IMMUTABLE","label":"Public v0.3 base retained without mutation","passed":true},
+    {"id":"CURRENT_SOURCE","label":"F1ZTH 50.5375 MHz has current public REF support","passed":true},
+    {"id":"UVK5_STOCK_RX","label":"Stock UV-K5 manufacturer documentation covers 50.5375 MHz receive","passed":true},
+    {"id":"CHIRP_STOCK_BAND","label":"Stock CHIRP UV-K5 driver permits memories in 50.0-76.0 MHz","passed":true},
+    {"id":"AIRAC_FRANCE_CURRENT","label":"Inherited French aviation block remains inside AIRAC 08/26","passed":true},
+    {"id":"AIRAC_SWISS_CURRENT","label":"Inherited Swiss aviation block remains under current 06 AUG 2026 AIP AIRAC amendment","passed":true},
+    {"id":"DEDUP_RF","label":"50.5375 MHz is new to v0.3 and all v0.4 RF memories remain unique","passed":true},
+    {"id":"CHIRP_NAMES","label":"All memory names remain unique and compatible with project limits","passed":true},
+    {"id":"RX_ONLY","label":"All generated memories use Duplex=off and Offset=0.000000","passed":true},
+    {"id":"NO_PRIVATE_RF","label":"No private professional, PPDR or unpublished ADRASEC operational frequency is included","passed":true},
+    {"id":"NO_FIELD_GATE","label":"The new RF requires no field-validation gate because publication is based on current public RF and device/driver compatibility evidence","passed":true},
+    {"id":"NO_ARTIFICIAL_FILL","label":"Memory total is evidence-driven and not padded","passed":true}
+  ],
+  "completed": 12,
+  "total": 12,
+  "blocker_count": 0,
+  "scope_frozen": true,
+  "prepublication_ready": true,
+  "publication_ready_after_deterministic_release_build": true,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "evidence": [
+    "research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json",
+    "research/annecy-alpes-leman-v0.4/current-source-revalidation.json",
+    "research/annecy-alpes-leman-v0.4/release-scope.json"
+  ]
+}

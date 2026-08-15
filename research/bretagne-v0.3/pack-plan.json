@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "status": "research_next_version_not_public",
+  "schema_version": "1.1",
+  "status": "research_next_version_not_public_sprint82_zero_rf_delta",
   "pack": "Bretagne",
   "target_version": "0.3",
   "based_on_published_version": "0.2",
@@ -11,6 +11,7 @@
   "published_base_record": "research/bretagne-v0.2/publication-record.json",
   "backlog_file": "research/bretagne-v0.3/backlog.json",
   "airac_transition_policy_file": "research/bretagne-v0.3/airac-transition-policy.json",
+  "public_service_revalidation_file": "research/bretagne-v0.3/public-service-revalidation.json",
   "internal_candidate_builder": "tools/build_bretagne_v03_internal_candidate.py",
   "current_candidate_memory_count": 151,
   "current_new_memory_count": 0,
@@ -22,6 +23,23 @@
     "candidate_is_exact_public_v0_2_base": true,
     "new_rf_promoted": false,
     "new_metadata_promoted": false
+  },
+  "latest_public_revalidation": {
+    "sprint": 82,
+    "checked_on": "2026-08-15",
+    "reviewed_non_airac_item_count": 6,
+    "candidate_memory_count_before": 151,
+    "candidate_memory_count_after": 151,
+    "candidate_memory_delta": 0,
+    "promoted_item_count": 0,
+    "f1zug_aprs_frequency_mhz": 144.8,
+    "f1zug_aprs_already_present_nationally": true,
+    "f1zug_transponder_frequency_published": false,
+    "f5zzc4_current_service_frequency_validated": false,
+    "f5zpv_local_operator_still_stopped": true,
+    "f5zzh_local_operator_still_stopped": true,
+    "etel_channel64_primary_conflict_open": true,
+    "corsen_channel79_primary_site_mapping_confirmed": false
   },
   "airac_baseline": {
     "inherited_cycle": "AIRAC 08/26",
@@ -62,6 +80,8 @@
     "stopped_infrastructure_not_promoted": true,
     "airac_transition_requires_explicit_freshness_review": true,
     "direct_xml_field_match_must_not_be_claimed_without_xml_extraction": true,
-    "internal_candidate_promotion_is_not_publication": true
+    "internal_candidate_promotion_is_not_publication": true,
+    "absence_from_public_live_index_does_not_prove_stopped": true,
+    "historical_role_does_not_validate_current_frequency": true
   }
 }

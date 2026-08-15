@@ -1,0 +1,179 @@
+---
+import LightDesignLabLayout from "../../../layouts/LightDesignLabLayout.astro";
+import { publicPacks } from "../../../lib/packRegistry";
+
+const preferredOrder = ["normandie", "annecy-alpes-leman", "bretagne"];
+const packs = preferredOrder
+  .map((id) => publicPacks.find((pack) => pack.id === id))
+  .filter((pack): pack is (typeof publicPacks)[number] => Boolean(pack))
+  .map((pack) => ({
+    ...pack,
+    count:
+      pack.variants.find((variant) => variant.id === pack.defaultVariant)?.memoryCount ??
+      pack.variants[0]?.memoryCount ??
+      0,
+  }));
+---
+<LightDesignLabLayout
+  title="Ham Shack"
+  description="Concept clair RadioPack France inspiré d’un shack radioamateur moderne."
+  concept="ham-shack"
+  themeColor="#f3f1e8"
+>
+  <div class="ham-page">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">RADIOPACK FRANCE / HAM SHACK</span>
+        <h1>Le shack,<br /><em>sans le bruit.</em></h1>
+        <p>Une interface pensée comme un poste radioamateur moderne : fréquences, bandes, mémoires et packs régionaux restent visibles au premier coup d’œil.</p>
+        <div class="hero-actions">
+          <a class="primary" href="/regions">Explorer les packs</a>
+          <a href="/generateur">Composer un codeplug</a>
+        </div>
+      </div>
+
+      <div class="rig" aria-label="Aperçu d’un poste radioamateur">
+        <div class="rig-top"><span>RADIOPACK / RX CONSOLE</span><b>RX ONLY</b></div>
+        <div class="vfos">
+          <div class="vfo active"><small>VFO A · 2 M</small><strong>145.500</strong><span>FM · 12.5 kHz</span></div>
+          <div class="vfo"><small>VFO B · 70 CM</small><strong>433.500</strong><span>FM · 12.5 kHz</span></div>
+        </div>
+        <div class="meter-row">
+          <span>S</span>
+          <div class="meter" aria-hidden="true">{Array.from({ length: 12 }).map((_, i) => <i class={i < 7 ? "on" : ""}></i>)}</div>
+          <strong>S7</strong>
+        </div>
+        <div class="spectrum" aria-hidden="true">
+          {Array.from({ length: 54 }).map((_, i) => <i style={`height:${16 + ((i * 19) % 56)}%`}></i>)}
+        </div>
+        <div class="rig-bottom">
+          <span>SQL 03</span><span>STEP 12.5</span><span>NFM</span><span>MEM</span><b>MONITOR</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="bands wrap" aria-label="Bandes radioamateur mises en avant">
+      <div><span>50 MHz</span><strong>6 m</strong><small>VHF basse</small></div>
+      <div><span>144–146</span><strong>2 m</strong><small>Relais · simplex</small></div>
+      <div><span>430–440</span><strong>70 cm</strong><small>Relais · local</small></div>
+      <div class="wide"><span>ORGANISATION</span><strong>Relais / Simplex / Balises</strong><small>Une lecture orientée usages radio plutôt que simple liste de fichiers.</small></div>
+    </section>
+
+    <section class="packs wrap">
+      <div class="section-head">
+        <div><span>MEMORY BANKS</span><h2>Packs régionaux</h2></div>
+        <p>Chaque région devient une banque mémoire clairement identifiable, avec version publique et nombre de canaux.</p>
+      </div>
+      <div class="bank-list">
+        {packs.map((pack, index) => (
+          <a class="bank" href={`/regions/${pack.regionSlug}`}>
+            <div class="bank-id"><span>BANK</span><strong>{String(index + 1).padStart(2, "0")}</strong></div>
+            <div class="bank-main"><small>{pack.version} · PUBLIC RX</small><h3>{pack.name}</h3></div>
+            <div class="bank-count"><strong>{pack.count}</strong><span>MEM</span></div>
+            <div class="bank-arrow">→</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="operator wrap">
+      <div class="operator-copy">
+        <span>OPERATOR VIEW</span>
+        <h2>Plus proche d’un carnet de trafic que d’un catalogue.</h2>
+        <p>La hiérarchie visuelle reprend les repères familiers du radioamateur : bande, fréquence, mode, banque mémoire et état RX. Les données restent celles des packs publics RadioPack.</p>
+      </div>
+      <div class="memory-table" role="presentation">
+        <div class="table-head"><span>CH</span><span>LABEL</span><span>BAND</span><span>MODE</span><span>STATE</span></div>
+        <div><b>001</b><strong>LOCAL CALL</strong><span>2 M</span><span>FM</span><em>RX</em></div>
+        <div><b>024</b><strong>REPEATER BANK</strong><span>2 M</span><span>FM</span><em>RX</em></div>
+        <div><b>071</b><strong>UHF LOCAL</strong><span>70 CM</span><span>FM</span><em>RX</em></div>
+        <div><b>112</b><strong>BEACON WATCH</strong><span>6 M</span><span>FM</span><em>RX</em></div>
+      </div>
+    </section>
+  </div>
+</LightDesignLabLayout>
+
+<style>
+  .ham-page { min-height: 100vh; background: #f3f1e8; color: #17201f; }
+  .wrap { width: min(1180px, calc(100% - 36px)); margin-inline: auto; }
+  .hero { display: grid; grid-template-columns: 1.02fr .98fr; gap: clamp(34px,6vw,82px); align-items: center; min-height: 720px; padding-block: 76px; }
+  .eyebrow, .section-head span, .operator-copy > span { color: #2c6a5b; font-size: .72rem; font-weight: 950; letter-spacing: .18em; }
+  h1 { margin: 22px 0 24px; font-size: clamp(4.1rem,8vw,7.7rem); line-height: .86; letter-spacing: -.07em; }
+  h1 em { color: #c6532f; font-style: normal; }
+  .hero-copy p { max-width: 630px; color: #58625f; font-size: 1.12rem; line-height: 1.7; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .hero-actions a { padding: 13px 17px; border: 1px solid #bfc2b6; border-radius: 8px; font-size: .84rem; font-weight: 850; }
+  .hero-actions .primary { color: #f7f8f4; background: #1c2b29; border-color: #1c2b29; }
+  .rig { overflow: hidden; border: 1px solid #273332; border-radius: 18px; background: #17201f; color: #d8e7dd; box-shadow: 0 28px 65px rgba(29,40,38,.18); }
+  .rig-top, .rig-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 17px; background: #111817; font-size: .66rem; letter-spacing: .12em; }
+  .rig-top b { color: #9fdc65; }
+  .vfos { display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid #31403e; }
+  .vfo { padding: 26px 22px 22px; border-right: 1px solid #31403e; }
+  .vfo:last-child { border-right: 0; }
+  .vfo small { display: block; color: #7d938d; font-weight: 900; letter-spacing: .12em; }
+  .vfo strong { display: block; margin: 8px 0 5px; color: #e8f4eb; font-family: "SFMono-Regular", Consolas, monospace; font-size: clamp(2rem,5vw,3.25rem); letter-spacing: -.07em; }
+  .vfo.active strong { color: #a8e965; text-shadow: 0 0 24px rgba(168,233,101,.15); }
+  .vfo span { color: #81958f; font-size: .72rem; }
+  .meter-row { display: grid; grid-template-columns: 24px 1fr 28px; align-items: center; gap: 10px; padding: 18px 20px 8px; color: #82948f; font: 700 .68rem "SFMono-Regular", Consolas, monospace; }
+  .meter { display: grid; grid-template-columns: repeat(12,1fr); gap: 4px; }
+  .meter i { height: 7px; background: #2b3735; border-radius: 1px; }
+  .meter i.on { background: #9fdc65; }
+  .spectrum { display: flex; align-items: end; gap: 3px; height: 115px; margin: 9px 20px 18px; padding: 10px; border: 1px solid #31403e; background: linear-gradient(180deg,#17201f,#111817); }
+  .spectrum i { flex: 1; min-width: 2px; background: linear-gradient(#a8e965,#347c68); opacity: .78; }
+  .rig-bottom { justify-content: flex-start; color: #83938f; }
+  .rig-bottom b { margin-left: auto; color: #e5ad55; }
+  .bands { display: grid; grid-template-columns: .72fr .72fr .72fr 1.84fr; border-block: 1px solid #c8c8bc; }
+  .bands > div { min-height: 160px; padding: 24px; border-right: 1px solid #c8c8bc; }
+  .bands > div:last-child { border-right: 0; }
+  .bands span { display: block; color: #8b8b80; font: 800 .68rem "SFMono-Regular",Consolas,monospace; letter-spacing: .08em; }
+  .bands strong { display: block; margin: 22px 0 6px; font-size: 2rem; letter-spacing: -.045em; }
+  .bands small { color: #6e746f; }
+  .bands .wide strong { font-size: 1.6rem; }
+  .packs { padding-block: 108px; }
+  .section-head { display: grid; grid-template-columns: 1fr .8fr; gap: 32px; align-items: end; margin-bottom: 38px; }
+  .section-head h2, .operator h2 { margin: 8px 0 0; font-size: clamp(2.6rem,5vw,4.8rem); line-height: .95; letter-spacing: -.06em; }
+  .section-head p { margin: 0; color: #69716e; line-height: 1.7; }
+  .bank-list { border-top: 1px solid #bfc1b8; }
+  .bank { display: grid; grid-template-columns: 90px 1fr 120px 40px; gap: 18px; align-items: center; padding: 24px 10px; border-bottom: 1px solid #bfc1b8; transition: background .18s ease,padding .18s ease; }
+  .bank:hover { padding-inline: 18px; background: rgba(255,255,255,.46); }
+  .bank-id { display: grid; }
+  .bank-id span, .bank-main small, .bank-count span { color: #858b86; font: 800 .65rem "SFMono-Regular",Consolas,monospace; letter-spacing: .08em; }
+  .bank-id strong { color: #c6532f; font: 800 1.15rem "SFMono-Regular",Consolas,monospace; }
+  .bank-main h3 { margin: 5px 0 0; font-size: clamp(1.35rem,3vw,2.2rem); letter-spacing: -.035em; }
+  .bank-count { display: flex; align-items: baseline; gap: 6px; }
+  .bank-count strong { font-size: 2rem; }
+  .bank-arrow { font-size: 1.5rem; }
+  .operator { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(34px,6vw,80px); padding: 86px 0 120px; border-top: 1px solid #c8c8bc; }
+  .operator h2 { font-size: clamp(2.2rem,4.5vw,4rem); }
+  .operator-copy p { max-width: 520px; color: #65706c; line-height: 1.75; }
+  .memory-table { align-self: start; border: 1px solid #c3c4b9; background: rgba(255,255,255,.38); font-family: "SFMono-Regular",Consolas,monospace; }
+  .memory-table > div { display: grid; grid-template-columns: 54px 1.5fr .6fr .5fr .5fr; gap: 12px; padding: 13px 15px; border-bottom: 1px solid #d0d1c8; align-items: center; }
+  .memory-table > div:last-child { border-bottom: 0; }
+  .memory-table .table-head { color: #858b86; background: #e8e6dc; font-size: .62rem; font-weight: 900; letter-spacing: .08em; }
+  .memory-table b { color: #9b5c41; }
+  .memory-table strong { font-size: .74rem; }
+  .memory-table span { color: #69726f; font-size: .7rem; }
+  .memory-table em { width: max-content; padding: 4px 7px; border-radius: 999px; color: #245c42; background: #dcebd9; font-size: .62rem; font-style: normal; font-weight: 900; }
+  @media (max-width: 900px) {
+    .hero, .operator { grid-template-columns: 1fr; min-height: auto; }
+    .bands { grid-template-columns: 1fr 1fr; }
+    .bands > div { border-bottom: 1px solid #c8c8bc; }
+    .bands > div:nth-child(2) { border-right: 0; }
+    .bands > div:nth-last-child(-n+2) { border-bottom: 0; }
+    .section-head { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 620px) {
+    .hero { padding-top: 56px; }
+    .vfos { grid-template-columns: 1fr; }
+    .vfo { border-right: 0; border-bottom: 1px solid #31403e; }
+    .vfo:last-child { border-bottom: 0; }
+    .bands { grid-template-columns: 1fr; }
+    .bands > div { border-right: 0; border-bottom: 1px solid #c8c8bc !important; }
+    .bands > div:last-child { border-bottom: 0 !important; }
+    .bank { grid-template-columns: 62px 1fr 34px; }
+    .bank-count { grid-column: 2; }
+    .bank-arrow { grid-column: 3; grid-row: 1 / span 2; }
+    .memory-table { overflow-x: auto; }
+    .memory-table > div { min-width: 560px; }
+  }
+</style>

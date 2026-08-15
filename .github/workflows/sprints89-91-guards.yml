@@ -1,0 +1,34 @@
+name: Sprints 89-91 Guards
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sprints89-91-guards-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Test Sprint 89 Annecy v0.4 candidate
+        run: python tests/test_sprint89_annecy_v04_candidate.py
+      - name: Test Sprint 90 Normandie v0.5 source refresh
+        run: python tests/test_sprint90_normandie_v05_source_refresh.py
+      - name: Test Sprint 91 Bretagne AIRAC09 handoff
+        run: python tests/test_sprint91_bretagne_airac09_handoff.py
+      - name: Test Sprints 89-91 state and docs integrity
+        run: python tests/test_sprints89_91_integrity.py

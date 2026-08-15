@@ -20,9 +20,7 @@
       <a href="/versions">État des packs</a>
       <a href="/a-propos">À propos</a>
       <a href="/sitemap.xml">Plan du site</a>
-      <a href="https://github.com/b2techstudio/radiopack-france" rel="external">
-        GitHub
-      </a>
+      <a href="https://github.com/b2techstudio/radiopack-france" rel="external">GitHub</a>
     </div>
   </div>
 
@@ -33,11 +31,23 @@
 
 <style>
   footer {
-    margin-top: 50px;
-    padding: 48px 0 26px;
-    background: #e5ebf3;
-    border-top: 1px solid rgba(58, 77, 104, .13);
-    color: #536174;
+    margin-top: 0;
+    padding: 52px 0 26px;
+    background:
+      radial-gradient(circle at 85% 0%, rgba(145,70,255,.08), transparent 24rem),
+      #05070b;
+    border-top: 1px solid #1a2330;
+    color: #718096;
+  }
+
+  footer::before {
+    content: "";
+    display: block;
+    width: min(1180px, calc(100% - 36px));
+    height: 1px;
+    margin: -52px auto 46px;
+    background: linear-gradient(90deg, #00b2ff, #9146ff 42%, transparent 82%);
+    opacity: .55;
   }
 
   .footer-grid {
@@ -47,58 +57,41 @@
     align-items: center;
   }
 
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .footer-brand img {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-  }
-
-  .footer-brand div {
-    display: grid;
-  }
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
+  .footer-brand img { width: 46px; height: 46px; object-fit: contain; }
+  .footer-brand div { display: grid; }
 
   .footer-brand strong {
-    color: #182230;
+    color: #f4f7fb;
     font-family: "Space Grotesk", sans-serif;
+    letter-spacing: -.025em;
   }
 
-  .footer-brand span {
-    font-size: .8rem;
-  }
-
-  .footer-grid p {
-    font-size: .9rem;
-  }
+  .footer-brand span { margin-top: 4px; color: #6e7c90; font-size: .76rem; }
+  .footer-grid p { color: #718096; font-size: .86rem; line-height: 1.7; }
 
   .footer-links {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 12px 14px;
-    font-size: .83rem;
-    font-weight: 750;
+    font-size: .78rem;
+    font-weight: 800;
   }
+
+  .footer-links a { color: #8997aa; transition: color .18s ease; }
+  .footer-links a:hover { color: #00b2ff; }
 
   .copyright {
     margin-top: 28px;
     padding-top: 18px;
-    border-top: 1px solid rgba(58, 77, 104, .12);
-    font-size: .78rem;
+    border-top: 1px solid #171f2b;
+    color: #566274;
+    font-size: .74rem;
   }
 
   @media (max-width: 800px) {
-    .footer-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .footer-links {
-      justify-content: flex-start;
-    }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-links { justify-content: flex-start; }
   }
 </style>

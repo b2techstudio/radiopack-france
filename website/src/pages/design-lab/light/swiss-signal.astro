@@ -1,0 +1,48 @@
+---
+import LightDesignLabLayout from "../../../layouts/LightDesignLabLayout.astro";
+import { publicPacks } from "../../../lib/packRegistry";
+const order = ["normandie", "annecy-alpes-leman", "bretagne"];
+const packs = order.map((id) => publicPacks.find((pack) => pack.id === id)).filter(Boolean).map((pack: any) => ({ ...pack, count: pack.variants.find((v: any) => v.id === pack.defaultVariant)?.memoryCount ?? pack.variants[0]?.memoryCount ?? 0 }));
+---
+<LightDesignLabLayout title="Swiss Signal" description="Concept clair Swiss Signal pour RadioPack France." concept="swiss-signal" themeColor="#f7f7f2">
+  <div class="page">
+    <section class="hero shell">
+      <div class="eyebrow">RADIOPACK FRANCE / 2026</div>
+      <div class="hero-grid">
+        <h1>RADIO<br /><span>PACK</span></h1>
+        <div class="intro"><b>01 — DIRECTION</b><p>Codeplugs CHIRP régionaux. Sources publiques. Réception seule. Une interface pensée comme une affiche d’information.</p><a href="/regions">EXPLORER LES PACKS →</a></div>
+      </div>
+    </section>
+    <section class="packs shell">
+      <div class="section-head"><span>PACKS PUBLICS</span><b>{packs.length} RÉGIONS</b></div>
+      {packs.map((pack: any, i) => <a class="row" href={`/regions/${pack.regionSlug}`}><span class="idx">0{i + 1}</span><h2>{pack.name}</h2><span class="meta">{pack.version}<br />PUBLIC RX</span><strong>{pack.count}</strong><i>→</i></a>)}
+    </section>
+    <section class="manifesto shell"><b>B2TECH STUDIO</b><h2>MOINS DE DÉCOR.<br /><span>PLUS DE SIGNAL.</span></h2><p>Une direction volontairement graphique, directe et très lisible. Les informations importantes deviennent la composition.</p></section>
+  </div>
+</LightDesignLabLayout>
+<style>
+  .page { background:#f7f7f2; color:#111318; min-height:100vh; font-family:Arial,Helvetica,sans-serif; }
+  .shell { width:min(1240px,calc(100% - 36px)); margin:auto; }
+  .hero { padding:72px 0 58px; border-bottom:2px solid #111318; }
+  .eyebrow { padding-bottom:16px; border-bottom:1px solid #111318; color:#1859f1; font-size:.72rem; font-weight:900; letter-spacing:.16em; }
+  .hero-grid { display:grid; grid-template-columns:1.55fr .65fr; gap:60px; align-items:end; padding-top:34px; }
+  h1 { margin:0; font-size:clamp(5rem,14vw,12rem); line-height:.72; letter-spacing:-.09em; font-weight:950; }
+  h1 span { color:#1859f1; }
+  .intro { padding-bottom:8px; }
+  .intro b,.section-head,.manifesto>b { font-size:.68rem; letter-spacing:.15em; }
+  .intro p { margin:22px 0 28px; font-size:1.04rem; line-height:1.55; }
+  .intro a { display:inline-block; padding:13px 16px; background:#ff3b30; color:white; font-size:.76rem; font-weight:900; }
+  .packs { padding:56px 0 70px; }
+  .section-head { display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid #111318; }
+  .row { display:grid; grid-template-columns:70px 1fr 150px 110px 40px; gap:20px; align-items:center; min-height:132px; border-bottom:1px solid #b9bbb6; }
+  .idx { color:#1859f1; font-weight:900; }
+  .row h2 { margin:0; font-size:clamp(1.7rem,4vw,3.7rem); letter-spacing:-.055em; }
+  .meta { font-size:.7rem; line-height:1.55; letter-spacing:.08em; }
+  .row strong { color:#1859f1; font-size:2.2rem; text-align:right; }
+  .row i { font-style:normal; font-size:1.5rem; }
+  .manifesto { display:grid; grid-template-columns:180px 1fr .7fr; gap:34px; padding:72px 0 96px; border-top:2px solid #111318; }
+  .manifesto h2 { margin:0; font-size:clamp(2.8rem,7vw,6.4rem); line-height:.92; letter-spacing:-.065em; }
+  .manifesto h2 span { color:#ff3b30; }
+  .manifesto p { margin:0; max-width:430px; line-height:1.7; }
+  @media(max-width:800px){.hero-grid,.manifesto{grid-template-columns:1fr}.row{grid-template-columns:45px 1fr 70px}.row .meta{display:none}.row strong{text-align:right}.row i{display:none}}
+</style>

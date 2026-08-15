@@ -1,0 +1,55 @@
+---
+import LightDesignLabLayout from "../../../layouts/LightDesignLabLayout.astro";
+
+const concepts = [
+  { n: "01", slug: "swiss-signal", name: "Swiss Signal", tag: "Net & éditorial", desc: "Grille suisse, blanc franc, bleu électrique et rouge signal. Très lisible, presque affiche de design.", colors: ["#F7F7F2", "#111318", "#1859F1", "#FF3B30"] },
+  { n: "02", slug: "paper-radio", name: "Paper Radio", tag: "Chaleureux", desc: "Un rendu papier premium : ivoire, encre, vert profond et orange brûlé. Plus humain, moins logiciel.", colors: ["#F4F0E6", "#1C201B", "#1F5C4A", "#D86A34"] },
+  { n: "03", slug: "soft-spectrum", name: "Soft Spectrum", tag: "Accessible", desc: "Dégradés pastel, grandes surfaces aérées et cartes souples. Une interface légère, moderne et accueillante.", colors: ["#F8FAFF", "#DCEBFF", "#8D78FF", "#3A7CF5"] },
+  { n: "04", slug: "civic-tech", name: "Civic Tech", tag: "Fiable & public", desc: "Une esthétique de service public numérique : blanc, marine, rouge discret, données structurées et forte confiance.", colors: ["#FFFFFF", "#091E42", "#1565C0", "#E53E3E"] },
+  { n: "05", slug: "polar-neon", name: "Polar Neon", tag: "Premium clair", desc: "Le cousin lumineux de Clean Neon : blanc glacé, lignes cyan/violet et typographie géante avec beaucoup d’espace.", colors: ["#F7FBFF", "#111827", "#00AEEF", "#8B5CF6"] },
+];
+---
+<LightDesignLabLayout title="5 propositions claires" description="Comparatif de cinq directions visuelles claires pour RadioPack France." concept="light">
+  <section class="light-hero">
+    <div class="wrap">
+      <span class="kicker">B2TECH STUDIO × RADIOPACK FRANCE</span>
+      <h1>Cinq thèmes clairs.<br /><em>Cinq caractères.</em></h1>
+      <p>Pas de simple inversion du thème sombre : chaque proposition change la composition, la densité, les couleurs et la manière de présenter les packs.</p>
+    </div>
+  </section>
+
+  <section class="concept-grid wrap">
+    {concepts.map((item) => (
+      <a class="concept-card" href={`/design-lab/light/${item.slug}/`}>
+        <div class="card-top"><span>{item.n}</span><small>{item.tag}</small></div>
+        <h2>{item.name}</h2>
+        <p>{item.desc}</p>
+        <div class="swatches" aria-label="Palette du concept">{item.colors.map((color) => <i style={`background:${color}`}></i>)}</div>
+        <strong>Ouvrir la maquette <span>↗</span></strong>
+      </a>
+    ))}
+  </section>
+</LightDesignLabLayout>
+
+<style>
+  .wrap { width: min(1180px, calc(100% - 36px)); margin-inline: auto; }
+  .light-hero { padding: 100px 0 64px; background: radial-gradient(circle at 75% 18%, rgba(71,125,255,.12), transparent 28rem), radial-gradient(circle at 18% 30%, rgba(139,92,246,.09), transparent 27rem); }
+  .kicker { color: #315efb; font-size: .74rem; font-weight: 900; letter-spacing: .2em; }
+  h1 { margin: 24px 0 22px; max-width: 980px; color: #11151d; font-size: clamp(3.4rem, 8vw, 7.2rem); line-height: .92; letter-spacing: -.065em; }
+  h1 em { color: #315efb; font-style: normal; }
+  .light-hero p { max-width: 760px; color: #657184; font-size: clamp(1rem,2vw,1.18rem); }
+  .concept-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; padding: 8px 0 78px; }
+  .concept-card { position: relative; min-height: 330px; padding: 30px; overflow: hidden; border: 1px solid #dde3eb; border-radius: 22px; background: rgba(255,255,255,.86); box-shadow: 0 12px 30px rgba(20,33,55,.045); transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+  .concept-card:hover { transform: translateY(-4px); border-color: #8eaae8; box-shadow: 0 20px 44px rgba(20,33,55,.08); }
+  .concept-card:last-child { grid-column: 1 / -1; }
+  .card-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .card-top span { color: #315efb; font-size: 2rem; font-weight: 950; }
+  .card-top small { padding: 6px 9px; border: 1px solid #dce4f4; border-radius: 999px; color: #56657a; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+  h2 { margin: 44px 0 14px; color: #151922; font-size: clamp(1.8rem,4vw,3.1rem); letter-spacing: -.04em; }
+  .concept-card p { max-width: 580px; color: #697588; }
+  .swatches { display: flex; gap: 8px; margin: 28px 0; }
+  .swatches i { width: 38px; height: 11px; border-radius: 999px; border: 1px solid rgba(17,24,39,.12); }
+  .concept-card > strong { position: absolute; left: 30px; bottom: 28px; color: #1c2330; font-size: .86rem; letter-spacing: .03em; }
+  .concept-card > strong span { color: #315efb; }
+  @media (max-width: 760px) { .light-hero { padding-top: 72px; } .concept-grid { grid-template-columns: 1fr; } .concept-card:last-child { grid-column: auto; } }
+</style>

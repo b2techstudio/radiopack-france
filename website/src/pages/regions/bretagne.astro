@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
+import { buildBretagneChannelGroups, loadPublicPackMemories } from "../../lib/channelDetails";
+
+const memories = loadPublicPackMemories("downloads/bretagne/radiopack-france-bretagne-v0.2.csv");
+const channelGroups = buildBretagneChannelGroups(memories);
 ---
 <BaseLayout title="Pack Bretagne v0.2 - RadioPack France" description="CSV CHIRP Bretagne v0.2 de 151 mémoires RX pour Quansheng UV-K5, dont 16 mémoires aviation AIRAC 08/26, en réception seule.">
   <section class="section"><div class="container page-grid">
@@ -10,11 +15,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <div class="button-row"><a class="button button-primary" href="/downloads/bretagne/radiopack-france-bretagne-v0.2.csv" download>Télécharger le CSV v0.2</a><a class="button button-secondary" href="/documentation">Procédure CHIRP</a></div>
       <div class="card legal"><strong>Réception seule sur les 151 mémoires</strong><p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. Le pack n'accorde aucun droit d'émission.</p></div>
       <div class="memory-map card"><h2>Périmètre v0.2</h2><div class="ranges"><span><b>135</b> socle Bretagne v0.1</span><span><b>16</b> aviation</span><span><b>AIRAC</b> 08/26</span><span><b>Rennes</b> 7</span><span><b>Brest</b> 5</span><span><b>Dinard</b> 2</span><span><b>Quimper</b> 1</span><span><b>Urgence</b> 121.500</span></div></div>
+
+      <ChannelGroupDetails
+        groups={channelGroups}
+        title="Tous les canaux du pack Bretagne"
+        intro="Clique sur Rennes, Brest, Dinard, Quimper ou n'importe quel autre groupe pour afficher les mémoires exactes, leurs fréquences, leur mode et leur libellé tels qu'ils figurent dans le CSV public v0.2."
+      />
+
       <div class="card legal"><strong>Fraîcheur aviation</strong><p>Le cycle AIRAC 08/26 a été recontrôlé le 12 août 2026 et est valable jusqu'au 2 septembre 2026 inclus. Le dépôt ne revendique pas de comparaison XML champ par champ non effectuée.</p></div>
     </div>
     <aside class="card status-card"><span class="badge badge-green">Disponible - v0.2</span><h3>151 mémoires sur 200</h3><div class="meter"><span></span></div><ul><li>RX-only</li><li>16 mémoires aviation AM, pas 8,33 kHz</li><li>Ch64 et Ch79 conservés en paires RX génériques</li><li>Aucune fréquence ADRASEC non publiée intégrée</li><li>Aucun site CROSS local non prouvé revendiqué</li></ul></aside>
   </div></section>
 </BaseLayout>
 <style>
-.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}.meter span{display:block;width:75.5%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#1687e9,#00a7bb,#6e3de8)}.legal,.memory-map{padding:22px}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.8);color:var(--muted);font-size:.82rem}.ranges b{color:#1687e9;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}}
+.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px;position:sticky;top:110px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:18px}.meter span{display:block;width:75.5%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#4ea8ff,#65d7b1,#9185ff)}.legal,.memory-map{padding:22px}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#8cc6ff}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(11,23,40,.28);color:var(--muted);font-size:.82rem}.ranges b{color:#4ea8ff;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}.status-card{position:static}}
 </style>

@@ -32,10 +32,17 @@ assert version_tuple >= (0, 21, 75)
 # invariants through the immutable public v0.3 record instead of requiring
 # Annecy to remain the globally active work item forever.
 public_annecy = state["public_packs"]["annecy_alpes_leman"]
-assert public_annecy["version"] == "0.3"
-assert public_annecy["memory_count"] == 76
-assert public_annecy["without_aviation_memory_count"] == 59
+assert public_annecy["version"] in {"0.3", "0.4"}
 assert public_annecy["immutable"] is True
+if public_annecy["version"] == "0.3":
+    assert public_annecy["memory_count"] == 76
+    assert public_annecy["without_aviation_memory_count"] == 59
+else:
+    assert public_annecy["memory_count"] == 77
+    assert public_annecy["without_aviation_memory_count"] == 60
+    assert public_annecy["previous_immutable_version"] == "0.3"
+    assert public_annecy["previous_memory_count"] == 76
+    assert public_annecy["previous_without_aviation_memory_count"] == 59
 assert V03_RECORD.is_file()
 record = json.loads(V03_RECORD.read_text(encoding="utf-8"))
 assert record["status"] == "published_immutable"
@@ -174,6 +181,6 @@ old_no_air_route = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiop
 assert old_full_route.is_file() and old_no_air_route.is_file()
 assert "buildAnnecyCsv(true)" in old_full_route.read_text(encoding="utf-8")
 assert "buildAnnecyCsv(false)" in old_no_air_route.read_text(encoding="utf-8")
-assert "radiopack-france-annecy-alpes-leman-v0.3.csv" in registry
+assert "radiopack-france-annecy-alpes-leman-v0.4.csv" in registry
 
 print("Sprint 86 Annecy v0.3 paired RX: historical 65 -> 76 (+11) remains immutable; later v0.4 research is separated and forward-compatible OK")

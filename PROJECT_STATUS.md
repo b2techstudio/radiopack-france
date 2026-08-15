@@ -1,21 +1,34 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **92**
-État logique : **0.21.81**
+Sprint courant : **95**
+État logique : **0.21.84**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-92-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-95-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
 
 ## État public
 
 - Normandie v0.4 : **142 mémoires RX**, publiée et immuable.
-- Annecy–Alpes–Léman v0.3 : **76 mémoires RX**, variante **59 sans aviation**, publiée et immuable.
+- Annecy–Alpes–Léman v0.4 : **77 mémoires RX**, variante **60 sans aviation**, publiée et immuable.
+- Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 95 — Annecy v0.4 publiée
+
+Annecy–Alpes–Léman v0.4 est **publiée et immuable à 77 RX / 60 sans aviation**, +1 RF `ZTH-6M` 50.5375 MHz depuis v0.3. Les SHA publics sont figés dans `research/annecy-alpes-leman-v0.4/publication-record.json`; v0.3 reste inchangée.
+
+## Sprint 94 — Annecy v0.4 prépublication
+
+Scope figé **77/60**, revue **12/12**, bloqueurs **0**. Sources actuelles et compatibilité stock UV-K5/CHIRP validées ; builder et garde-fou déterministes ajoutés avant toute publication.
+
+## Sprint 93 — sécurité live Cloudflare Pages
+
+Le contrôle HTTP live vérifie désormais l'origine réellement déployée `radiopack-france.pages.dev` indépendamment du domaine personnalisé. CSP, HSTS, X-Frame-Options, nosniff, COOP, Referrer-Policy et Permissions-Policy sont tous contrôlés. `radiopack.b2tech.studio` reste un état DNS séparé.
 
 ## Sprint 92 — audit de sécurité complet
 

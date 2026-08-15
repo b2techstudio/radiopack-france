@@ -1,0 +1,32 @@
+name: Annecy v0.3 Release Guards
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  annecy-v03:
+    name: Annecy v0.3 immutable release guards
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Test Sprint 87 Annecy v0.3 prepublication
+        run: python tests/test_sprint87_annecy_v03_prepublication.py
+
+      - name: Test Annecy v0.3 public release
+        run: python tests/test_annecy_v03_public_release.py

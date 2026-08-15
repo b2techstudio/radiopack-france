@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "research_backlog_not_public",
   "pack": "Normandie",
   "target_version": "0.5",
@@ -9,32 +9,28 @@
   "known_potential_ceiling_excluding_f6zes": 147,
   "last_revalidated_on": "2026-08-15",
   "current_blocker_revalidation": "research/normandie-v0.5/current-blocker-revalidation.json",
+  "field_validation_kit": "research/normandie-v0.5/field-validation-kit.json",
+  "field_validation_kit_builder": "tools/build_normandie_v05_field_validation_kit.py",
   "public_export_allowed": false,
   "items": [
     {
       "id": "R3_MORTAIN_RX",
       "station": "F1ZBX / R3 Broceliande",
-      "frequencies_mhz": [
-        145.075,
-        145.675
-      ],
+      "frequencies_mhz": [145.075, 145.675],
       "potential_memory_delta": 2,
       "state": "operator_current_field_evidence_still_required",
       "last_checked_on": "2026-08-15",
       "current_operator_status": "operational",
-      "requirements": [
-        "2 independent RX sessions from Mortain on identified output"
-      ],
+      "requirements": ["2 independent RX sessions from Mortain on identified output"],
       "sessions_are_evidence_not_memories": true,
+      "field_kit_probe_names": ["R3-OUT", "R3-IN"],
+      "field_kit_primary_probe_mhz": 145.675,
       "promoted": false
     },
     {
       "id": "F5ZHA_SOURCE_AND_COVERAGE",
       "station": "F5ZHA Laval",
-      "frequencies_mhz": [
-        145.4675,
-        432.575
-      ],
+      "frequencies_mhz": [145.4675, 432.575],
       "potential_memory_delta": 2,
       "state": "current_ref_pair_supported_secondary_stale_conflict_field_coverage_required",
       "last_checked_on": "2026-08-15",
@@ -43,18 +39,15 @@
       "conflicting_secondary_last_verified": "2017-02-17",
       "field_observations_can_close_source_conflict": false,
       "useful_mortain_coverage_verified": false,
+      "field_kit_probe_names": ["ZHA-VHF", "ZHA-UHF", "ZHA-OLD"],
+      "field_kit_legacy_probe_is_diagnostic_only": true,
       "promoted": false
     },
     {
       "id": "F1ZOV_OPERATIONAL_STATUS",
       "station": "F1ZOV Equeurdreville-Hainneville",
-      "frequencies_mhz": [
-        431.975
-      ],
-      "full_pair_mhz": [
-        430.375,
-        431.975
-      ],
+      "frequencies_mhz": [431.975],
+      "full_pair_mhz": [430.375, 431.975],
       "potential_memory_delta": 1,
       "state": "local_operator_maintenance_reconfirmed",
       "last_checked_on": "2026-08-15",
@@ -85,6 +78,8 @@
     "same_rf_deduplicated": true,
     "verified_distinct_pair_uses_two_rx_memories": true,
     "field_gate_cannot_be_satisfied_by_web_research": true,
+    "field_sessions_are_evidence_not_memories": true,
+    "diagnostic_probe_is_not_candidate_memory": true,
     "geometry_is_not_reception_proof": true,
     "local_operator_status_has_priority_for_current_operational_state": true,
     "secondary_stale_conflict_does_not_override_current_authoritative_pair": true,

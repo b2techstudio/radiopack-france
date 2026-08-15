@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
+import { buildStandardChannelGroups, loadPublicPackMemories } from "../../lib/channelDetails";
+
+const memories = loadPublicPackMemories("downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv");
+const channelGroups = buildStandardChannelGroups(memories);
 ---
 
 <BaseLayout
@@ -44,6 +49,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <article class="card"><span class="badge badge-green">17</span><h3>Aviation</h3><p>France/bassin genevois et Suisse, cycle courant lors de la publication.</p></article>
         </div>
 
+        <ChannelGroupDetails
+          groups={channelGroups}
+          title="Tous les canaux du pack Annecy–Alpes–Léman"
+          intro="Clique sur PMR446, APRS / espace / appels, Radioamateur / régional ou Aviation pour voir les mémoires exactes du CSV public v0.4."
+        />
+
         <div class="card conflict">
           <h2>Validation 50 MHz et exclusions</h2>
           <p>
@@ -86,15 +97,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .copy { display: grid; gap: 22px; }
   .copy h1 { font-size: clamp(3.2rem, 7vw, 5.6rem); }
   .release-note, .scope, .conflict { padding: 24px; }
-  .release-note { background: linear-gradient(120deg, rgba(16,164,122,.13), rgba(255,255,255,.84)); }
+  .release-note { background: linear-gradient(120deg, rgba(101,215,177,.10), rgba(34,50,73,.86)); }
   .release-note p, .scope p, .conflict p, .work-grid p, .status-copy { margin-top: 7px; color: var(--muted); }
-  .scope { background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(230,247,252,.82)); }
+  .scope { background: linear-gradient(145deg, rgba(43,61,86,.90), rgba(34,50,73,.82)); }
   .scope h2, .conflict h2 { margin-bottom: 16px; }
   .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .scope-grid > div { padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.68); }
+  .scope-grid > div { padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(11,23,40,.24); }
   .work-grid article { padding: 22px; }
   .work-grid h3 { margin: 14px 0 7px; }
-  .conflict { background: linear-gradient(120deg, rgba(110,61,232,.10), rgba(255,255,255,.84)); }
+  .conflict { background: linear-gradient(120deg, rgba(145,133,255,.10), rgba(34,50,73,.86)); }
   .status-card { position: sticky; top: 110px; padding: 28px; }
   .status-card h3 { margin: 18px 0 10px; }
   .status-card h4 { margin: 20px 0 8px; }
@@ -103,6 +114,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .memory-count { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
   .memory-count strong { font-family: "Space Grotesk", sans-serif; font-size: 4rem; line-height: .9; }
   .memory-count span { color: var(--muted); font-weight: 800; }
-  code { font-weight: 800; color: #007c8a; }
+  code { font-weight: 800; color: #8cc6ff; }
   @media (max-width: 800px) { .page-grid, .scope-grid { grid-template-columns: 1fr; } .status-card { position: static; } }
 </style>

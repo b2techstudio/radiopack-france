@@ -1,0 +1,226 @@
+---
+import type { ChannelGroup } from "../lib/channelDetails";
+
+interface Props {
+  groups: ChannelGroup[];
+  title?: string;
+  intro?: string;
+}
+
+const {
+  groups,
+  title = "Détail des canaux",
+  intro = "Clique sur un groupe pour afficher les mémoires exactes présentes dans le CSV public.",
+} = Astro.props;
+---
+
+<section class="card channel-details">
+  <div class="channel-details__head">
+    <span class="eyebrow">Contenu du CSV</span>
+    <h2>{title}</h2>
+    <p>{intro}</p>
+  </div>
+
+  <div class="channel-groups">
+    {groups.map((group) => (
+      <details class="channel-group" id={`channels-${group.id}`}>
+        <summary>
+          <span class="channel-group__label">{group.label}</span>
+          <span class="channel-group__meta">{group.memories.length} {group.memories.length > 1 ? "canaux" : "canal"}</span>
+        </summary>
+        <div class="channel-group__body">
+          <p>{group.description}</p>
+          <div class="channel-table-wrap">
+            <table class="channel-table">
+              <thead>
+                <tr>
+                  <th>Mémoire</th>
+                  <th>Nom</th>
+                  <th>Fréquence</th>
+                  <th>Mode</th>
+                  <th>Détail</th>
+                </tr>
+              </thead>
+              <tbody>
+                {group.memories.map((memory) => (
+                  <tr>
+                    <td>#{memory.location}</td>
+                    <td><code>{memory.name}</code></td>
+                    <td><strong>{Number(memory.frequency).toFixed(6)} MHz</strong></td>
+                    <td><span class="mode-pill">{memory.mode}</span></td>
+                    <td>{memory.comment}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .channel-details {
+    padding: 24px;
+    display: grid;
+    gap: 20px;
+  }
+
+  .channel-details__head {
+    display: grid;
+    gap: 8px;
+  }
+
+  .channel-details__head h2 {
+    margin: 0;
+  }
+
+  .channel-details__head p,
+  .channel-group__body > p {
+    color: var(--muted);
+  }
+
+  .channel-groups {
+    display: grid;
+    gap: 10px;
+  }
+
+  .channel-group {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(11, 23, 40, .26);
+    overflow: hidden;
+  }
+
+  .channel-group[open] {
+    background: rgba(25, 42, 65, .72);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .03);
+  }
+
+  .channel-group summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 18px;
+    font-weight: 900;
+    color: var(--text);
+  }
+
+  .channel-group summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .channel-group summary::after {
+    content: "+";
+    width: 30px;
+    height: 30px;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 30px;
+    border-radius: 50%;
+    color: var(--accent, #4ea8ff);
+    border: 1px solid currentColor;
+    transition: transform .18s ease;
+  }
+
+  .channel-group[open] summary::after {
+    content: "−";
+  }
+
+  .channel-group__label {
+    flex: 1;
+  }
+
+  .channel-group__meta {
+    color: #65d7b1;
+    font-size: .86rem;
+    white-space: nowrap;
+  }
+
+  .channel-group__body {
+    padding: 0 18px 18px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .channel-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+
+  .channel-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: .86rem;
+  }
+
+  .channel-table th,
+  .channel-table td {
+    padding: 11px 12px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .channel-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .channel-table th {
+    color: #9fb2cb;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    background: rgba(9, 19, 34, .48);
+  }
+
+  .channel-table td {
+    color: var(--muted);
+  }
+
+  .channel-table strong,
+  .channel-table code {
+    color: var(--text);
+  }
+
+  .mode-pill {
+    display: inline-flex;
+    align-items: center;
+    min-width: 42px;
+    justify-content: center;
+    padding: .22rem .42rem;
+    border-radius: 999px;
+    background: rgba(78, 168, 255, .12);
+    border: 1px solid rgba(78, 168, 255, .28);
+    color: #8cc6ff;
+    font-weight: 900;
+    font-size: .72rem;
+  }
+
+  @media (max-width: 640px) {
+    .channel-details {
+      padding: 18px;
+    }
+
+    .channel-group summary {
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 15px;
+    }
+
+    .channel-group__meta {
+      margin-left: 0;
+    }
+
+    .channel-group__body {
+      padding: 0 15px 15px;
+    }
+  }
+</style>

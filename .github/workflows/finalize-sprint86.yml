@@ -1,0 +1,40 @@
+name: Finalize Sprint 86
+
+on:
+  push:
+    paths:
+      - ".github/sprint86-finalize-trigger"
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Finalize Sprint 86
+        run: python tools/finalize_sprint86.py
+
+      - name: Validate Sprint 86 candidate
+        run: |
+          python tests/test_sprint86_annecy_v03_paired_rx_expansion.py
+          python tests/test_site_files.py
+
+      - name: Commit final state
+        shell: bash
+        run: |
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git add README.md PROJECT_STATUS.md CHANGELOG.md research/project-resume-state.json research/annecy-alpes-leman-v0.3/README.md research/annecy-alpes-leman-v0.3/pack-plan.json tests/test_site_files.py
+          git commit -m "Sprint 86 finalize Annecy v0.3 paired RX candidate"
+          git push

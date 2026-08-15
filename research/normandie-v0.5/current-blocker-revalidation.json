@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "status": "current_blocker_revalidation_zero_promotions_not_public",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "sprint": 83,
+  "checked_on": "2026-08-15",
+  "published_base_version": "0.4",
+  "published_base_memory_count": 142,
+  "candidate_memory_count_before": 142,
+  "candidate_memory_count_after": 142,
+  "candidate_memory_delta": 0,
+  "promoted_item_count": 0,
+  "known_potential_ceiling_excluding_f6zes": 147,
+  "public_export_allowed": false,
+  "findings": {
+    "R3_MORTAIN_RX": {
+      "station": "F1ZBX / R3 Broceliande",
+      "current_operator_status": "operational",
+      "current_pair_mhz": [145.075, 145.675],
+      "current_ctcss_hz": 71.9,
+      "operator_recent_maintenance_context_exists": true,
+      "field_reception_from_mortain_validated": false,
+      "minimum_independent_rx_sessions_required": 2,
+      "potential_memory_delta": 2,
+      "promoted": false,
+      "decision": "keep_blocked_until_two_independent_identified_rx_sessions_from_mortain"
+    },
+    "F5ZHA_SOURCE_AND_COVERAGE": {
+      "station": "F5ZHA Laval",
+      "current_ref_status": "active",
+      "current_ref_pair_mhz": [145.4675, 432.575],
+      "current_ref_function": "analog_transparent_crossband",
+      "second_current_list_supports_ref_pair": true,
+      "conflicting_repeaterbook_frequency_mhz": 431.4125,
+      "conflicting_repeaterbook_entry_last_verified": "2017-02-17",
+      "conflict_classification": "secondary_stale_conflict_does_not_override_current_ref_pair",
+      "authoritative_pair_for_diagnostics_mhz": [145.4675, 432.575],
+      "useful_mortain_coverage_verified": false,
+      "minimum_independent_rx_sessions_required": 2,
+      "potential_memory_delta": 2,
+      "promoted": false,
+      "decision": "retain_current_ref_pair_for_diagnostics_but_do_not_promote_without_useful_mortain_field_coverage"
+    },
+    "F1ZOV_OPERATIONAL_STATUS": {
+      "station": "F1ZOV Equeurdreville-Hainneville",
+      "local_operator_status": "maintenance",
+      "local_operator_pair_mhz": [430.375, 431.975],
+      "ref_directory_status": "active",
+      "local_operator_status_overrides_general_directory": true,
+      "potential_memory_delta": 1,
+      "promoted": false,
+      "decision": "keep_blocked_until_local_operator_no_longer_marks_maintenance"
+    },
+    "F6ZES_RESOLVED": {
+      "station": "F6ZES Sourdeval",
+      "current_ref_site_listing_confirmed": true,
+      "current_ref_responsible": "F1SMB",
+      "current_ref_locator": "IN98MR93XV",
+      "current_ref_altitude_m": 230,
+      "usable_frequency_published": false,
+      "mode_published": false,
+      "operational_state_published": false,
+      "potential_memory_delta": null,
+      "promoted": false,
+      "decision": "keep_unresolved_no_frequency_or_mode_may_be_guessed"
+    }
+  },
+  "sources": [
+    {
+      "id": "ARA35_R3_CURRENT",
+      "url": "https://ara35.fr/frequences/relais-phonie/r3/",
+      "authority": "local_operator",
+      "supports": "F1ZBX R3 operational; 145.075 input, 145.675 output, CTCSS 71.9 Hz"
+    },
+    {
+      "id": "ARA35_R3_ARCHIVE_CURRENT_INDEX",
+      "url": "https://ara35.fr/category/relais/",
+      "authority": "local_operator",
+      "supports": "R3 maintenance activity documented through October 2025"
+    },
+    {
+      "id": "REF_CURRENT_DIRECTORY_F5ZHA",
+      "url": "https://www.r-e-f.org/index.php?option=com_content&view=frontpage",
+      "authority": "national_amateur_radio_directory",
+      "supports": "F5ZHA active in Laval with bidirectional 145.4675 / 432.575 MHz analog transparent pair"
+    },
+    {
+      "id": "MANUEL_LA_RADIO_F5ZHA",
+      "url": "https://www.manuel.la-radio.eu/RM18/RM18H01A.HTM",
+      "authority": "secondary_current_repeater_list",
+      "supports": "F5ZHA Laval 145.4675 / 432.575 MHz"
+    },
+    {
+      "id": "REPEATERBOOK_F5ZHA_CONFLICT",
+      "url": "https://www.repeaterbook.com/row_repeaters/verify.php?state_id=FR&type=age",
+      "authority": "secondary_directory",
+      "supports": "431.4125 MHz conflict entry for F5ZHA with verification date 2017-02-17"
+    },
+    {
+      "id": "F6KFW_F1ZOV_CURRENT",
+      "url": "https://f6kfw.fr/",
+      "authority": "local_operator",
+      "supports": "F1ZOV marked En Maintenance; pair 430.375 / 431.975 MHz"
+    },
+    {
+      "id": "REF_CURRENT_DIRECTORY_MANCHE",
+      "url": "https://www.r-e-f.org/index.php?option=com_content&view=frontpage",
+      "authority": "national_amateur_radio_directory",
+      "supports": "F1ZOV directory active with 430.375 / 431.975 pair; F6ZES Sourdeval site listing without usable RF/mode/state"
+    }
+  ],
+  "rules": {
+    "local_operator_status_has_priority_for_current_operational_state": true,
+    "field_gate_cannot_be_satisfied_by_web_research": true,
+    "geometry_is_not_reception_proof": true,
+    "secondary_stale_conflict_does_not_override_current_authoritative_pair": true,
+    "field_non_reception_does_not_resolve_source_conflict": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "deferred_item_is_not_validated": true,
+    "published_v0_4_is_immutable": true,
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "public_export_allowed": false
+  }
+}

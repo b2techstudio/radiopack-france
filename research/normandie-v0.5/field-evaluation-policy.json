@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "status": "field_evaluation_policy_not_public",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "sprint": 85,
+  "updated": "2026-08-15",
+  "purpose": "Définir une évaluation reproductible des journaux terrain R3 F1ZBX et F5ZHA sans transformer automatiquement une observation en promotion ou publication.",
+  "input": {
+    "format": "CSV",
+    "schema_source": "research/normandie-v0.5/field-validation-kit.json#session_log_columns",
+    "independent_session_unit": "session_id",
+    "same_session_id_metadata_must_be_consistent": true,
+    "required_session_metadata": [
+      "session_id",
+      "target",
+      "date_local",
+      "time_local",
+      "location_description",
+      "receiver_model",
+      "antenna_description",
+      "frequency_mhz",
+      "signal_detected"
+    ],
+    "accepted_boolean_true": ["1", "true", "yes", "y", "oui", "o"],
+    "accepted_boolean_false": ["0", "false", "no", "n", "non"],
+    "malformed_rows_are_excluded_and_reported": true,
+    "missing_required_columns_is_fatal": true
+  },
+  "verdicts": {
+    "satisfied": "Le gate terrain est satisfait par au moins deux sessions indépendantes qualifiantes.",
+    "insufficient": "Au moins une observation pertinente est exploitable mais les critères du gate ne sont pas encore remplis.",
+    "indeterminate": "Aucune observation exploitable sur la ou les fréquences qui comptent pour ce gate n'est disponible."
+  },
+  "gates": {
+    "R3_MORTAIN_RX": {
+      "primary_frequency_mhz": 145.675,
+      "optional_input_frequency_mhz": 145.075,
+      "minimum_independent_sessions": 2,
+      "qualifying_detection_required": true,
+      "accepted_identification_confidence": ["high", "unmistakable", "confirmed"],
+      "high_confidence_requires_minimum_intelligibility_0_to_5": 3,
+      "unmistakable_or_confirmed_identification_can_qualify_below_intelligibility_3": true,
+      "optional_input_frequency_counts_for_gate": false,
+      "single_weak_carrier_is_sufficient": false,
+      "if_field_gate_satisfied_pair_memory_delta": 2
+    },
+    "F5ZHA_SOURCE_AND_COVERAGE": {
+      "current_pair_mhz": [145.4675, 432.575],
+      "legacy_conflict_probe_mhz": 431.4125,
+      "minimum_independent_sessions": 2,
+      "minimum_intelligibility_0_to_5": 3,
+      "accepted_identification_confidence": ["high", "unmistakable", "confirmed"],
+      "qualifying_session_may_be_on_either_current_pair_frequency": true,
+      "both_current_pair_sides_must_be_heard_to_satisfy_field_gate": false,
+      "legacy_probe_counts_for_gate": false,
+      "if_field_gate_satisfied_pair_memory_delta": 2
+    }
+  },
+  "output_rules": {
+    "field_gate_can_be_evaluated_automatically": true,
+    "promotion_ready_is_always_false": true,
+    "automatic_candidate_mutation_allowed": false,
+    "automatic_publication_allowed": false,
+    "field_non_reception_is_negative_operational_evidence": false,
+    "legacy_probe_can_close_source_conflict": false,
+    "human_source_review_still_required_after_satisfied_field_gate": true,
+    "published_v0_4_immutable": true
+  }
+}

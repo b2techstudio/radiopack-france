@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "status": "current_sources_revalidated_prepublication",
+  "pack": "Annecy–Alpes–Léman",
+  "target_version": "0.3",
+  "checked_on": "2026-08-15",
+  "candidate_memory_count": 76,
+  "candidate_without_aviation_memory_count": 59,
+  "candidate_new_unique_rf_memory_count": 11,
+  "publication_blocker_count": 0,
+  "sources": [
+    {
+      "id": "REF-CURRENT-2026-05-13",
+      "authority": "Réseau des Émetteurs Français (REF)",
+      "url": "https://www.r-e-f.org/index.php?Itemid=492&id=1279&option=com_content&view=article",
+      "current_dataset_updated": "2026-05-13",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "F1ZOH Crozet active 430.225 / 439.625 MHz",
+        "F6ZJD Nurieux active 145.6375 / 145.0375 MHz",
+        "F1ZCQ Echirolles active 145.650 / 145.050 MHz",
+        "F1ZCR Chamrousse active 431.925 / 430.325 MHz",
+        "F1ZDC Echirolles active 433.025 / 431.425 MHz",
+        "F1ZTH Bourgoin-Jallieu active including 50.5375 MHz"
+      ]
+    },
+    {
+      "id": "REF73-CURRENT-2026",
+      "authority": "REF73 - Radioamateurs de la Savoie",
+      "url": "https://ref73.webador.fr/trafic/relais",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "F1ZHG 145.2875 / 432.5125 MHz",
+        "F5ZGT 145.450 / 432.5125 MHz",
+        "F5ZLV 145.4125 / 432.650 MHz",
+        "F1ZJV 145.7875 / 145.1875 MHz",
+        "F1ZOH, F6ZJD, F1ZCQ, F1ZCR and F1ZDC paired-RX cross-check"
+      ]
+    },
+    {
+      "id": "REF74-CURRENT-2026",
+      "authority": "REF74 - Relais Haute-Savoie",
+      "url": "https://ref74.r-e-f.org/ref74/index.php/accueil",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "F1ZJV Pointe des Brasses analog 145.7875 MHz with -600 kHz shift",
+        "F1ZYT Semnoz analog 145.7875 MHz with -600 kHz shift",
+        "ADRASEC-priority role without publishing an UHF transponder frequency"
+      ]
+    },
+    {
+      "id": "AMSAT-LIVE-FM-2026-07-10",
+      "authority": "AMSAT",
+      "url": "https://www.amsat.org/live-fm-satellites/",
+      "source_updated": "2026-07-10",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "SO-50 uplink 145.850 MHz / downlink 436.795 MHz",
+        "AO-91 uplink 435.250 MHz / downlink 145.960 MHz with eclipse limitation",
+        "AO-123 FM uplink 145.850 MHz / downlink 435.400 MHz"
+      ]
+    },
+    {
+      "id": "HB9G-CURRENT-2026",
+      "authority": "HB9G - Section Genevoise de l'USKA",
+      "url": "https://www.hb9g.ch/info",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "HB9G VHF output 145.725 MHz shift -0.6 MHz status OK",
+        "HB9G UHF output 439.100 MHz shift -7.6 MHz status OK",
+        "HB9G UHF weekly section QSO currently uses 439.100 MHz"
+      ]
+    },
+    {
+      "id": "SIA-AIRAC-08-26-CURRENT",
+      "authority": "SIA / Direction générale de l'aviation civile",
+      "url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "AIRAC 08/26 is the current French cycle for the v0.3 publication date",
+        "the inherited 11-memory French aviation block remains within its validated current-cycle scope"
+      ]
+    },
+    {
+      "id": "SKYBRIEFING-AIRAC-2026-08-06",
+      "authority": "Skyguide / Skybriefing",
+      "url": "https://www.skybriefing.com/",
+      "current_airac_amdt": "2026-08-06",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "06 AUG 2026 is the current Swiss AIP AIRAC amendment"
+      ]
+    },
+    {
+      "id": "LSGL-OFFICIAL-CURRENT",
+      "authority": "Aéroport de Lausanne-La Blécherette",
+      "url": "https://flight.lausanne-airport.ch/pilotes/frequences.html",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "LSGL AD 123.205 MHz",
+        "LSGL APCH INFO 118.830 MHz"
+      ]
+    },
+    {
+      "id": "LSGS-OFFICIAL-CURRENT",
+      "authority": "Aéroport de Sion",
+      "url": "https://www.sionaeroport.ch/infos-pilotes/",
+      "checked_on": "2026-08-15",
+      "supports": [
+        "Sion Ground 121.705 MHz",
+        "Sion Tower 118.275 MHz",
+        "Sion ATIS 130.630 MHz",
+        "Sion Approach 126.825 MHz"
+      ]
+    }
+  ],
+  "approved_new_rf_mhz": [
+    145.85,
+    435.25,
+    439.625,
+    145.0375,
+    145.05,
+    430.325,
+    431.425,
+    145.1875,
+    145.7875,
+    145.125,
+    431.5
+  ],
+  "scope_exclusions": [
+    {
+      "id": "F1ZTH_50M_DEVICE_COMPATIBILITY",
+      "frequency_mhz": 50.5375,
+      "source_currently_publishes_rf": true,
+      "reason": "Current RF is public, but the project does not guarantee a stock/common UV-K5 firmware baseline that reliably stores and receives 50.5375 MHz for every user. Excluded from v0.3 rather than blocking publication."
+    },
+    {
+      "id": "F1ZJV_F1ZYT_ADRASEC_UHF_TRANSPONDER",
+      "frequency_mhz": null,
+      "reason": "Local public sources mention an UHF ADRASEC link/transponder but publish no usable frequency. No private or inferred operational frequency is permitted."
+    }
+  ],
+  "rules": {
+    "rx_only": true,
+    "same_rf_frequency_deduplicated": true,
+    "current_public_source_required_for_new_rf": true,
+    "current_airac_required_for_aviation_publication": true,
+    "satellite_status_rechecked_before_publication": true,
+    "unpublished_adrasec_frequency_must_not_be_inferred": true,
+    "private_professional_or_ppdr_frequencies_excluded": true,
+    "scope_exclusion_can_close_nonessential_blocker": true,
+    "published_v0_2_remains_immutable": true
+  }
+}

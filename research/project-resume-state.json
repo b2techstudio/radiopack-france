@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 91,
-  "state_version": "0.21.80",
+  "current_sprint": 92,
+  "state_version": "0.21.81",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -227,7 +227,11 @@
     "research/annecy-alpes-leman-v0.3/prepublication-reviewed-memory-map.json",
     "research/annecy-alpes-leman-v0.3/publication-record.json",
     "research/sprint-87-summary.md",
-    "research/sprint-88-summary.md"
+    "research/sprint-88-summary.md",
+    "research/security-audit-sprint92.md",
+    "research/sprint-92-summary.md",
+    ".github/workflows/security-audit.yml",
+    "tests/test_security_hardening.py"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -1026,5 +1030,35 @@
       "F6ZES"
     ],
     "evidence": "research/normandie-v0.5/sprint90-source-refresh.json"
+  },
+  "latest_sprint92_security_audit": {
+    "status": "security_audit_complete_build_hardened_live_dns_unresolved",
+    "report": "research/security-audit-sprint92.md",
+    "summary": "research/sprint-92-summary.md",
+    "high_severity_dependency_findings": 1,
+    "high_severity_dependency_findings_remediated": 1,
+    "nanoid_previous_version": "3.3.17",
+    "nanoid_remediated_version": "3.3.18",
+    "nanoid_advisory": "GHSA-2v37-7h3g-55p8",
+    "npm_audit_passed": true,
+    "pip_audit_passed": true,
+    "security_invariants_passed": true,
+    "functional_repository_tests_passed": 63,
+    "astro_build_passed": true,
+    "production_source_maps_found": false,
+    "csp_configured": true,
+    "hsts_configured": true,
+    "github_actions_sha_pinned": true,
+    "checkout_persist_credentials": false,
+    "ci_global_write_permissions": false,
+    "dependabot_version_updates_configured": true,
+    "dependabot_vulnerability_alerts_repo_setting_enabled": false,
+    "main_branch_protected": false,
+    "secret_scanning_status": "unconfirmed_connector_access_denied",
+    "code_scanning_status": "unconfirmed_connector_access_denied",
+    "live_site_hostname": "radiopack.b2tech.studio",
+    "live_site_dns_resolved_from_github_actions": false,
+    "live_http_security_headers_certified": false,
+    "public_radio_pack_mutation": false
   }
 }

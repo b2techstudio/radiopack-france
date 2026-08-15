@@ -1,0 +1,87 @@
+---
+import DesignLabLayout from "../../layouts/DesignLabLayout.astro";
+import { publicPacks } from "../../lib/packRegistry";
+const packs = publicPacks.map((pack) => ({
+  ...pack,
+  count: pack.variants.find((variant) => variant.id === pack.defaultVariant)?.memoryCount ?? pack.variants[0]?.memoryCount ?? 0,
+}));
+---
+<DesignLabLayout title="B2Tech Neon Core" description="Concept B2Tech Neon Core pour RadioPack France." concept="neon-core" themeColor="#050912">
+  <div class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="system-tag"><span></span>B2TECH RADIO SYSTEM / PUBLIC RX</div>
+        <h1><span>RADIOPACK</span><br />FRANCE</h1>
+        <p>Des codeplugs régionaux propres, vérifiés et prêts pour CHIRP. Une interface sombre, rapide et immédiatement reconnaissable comme un produit B2Tech Studio.</p>
+        <div class="actions">
+          <a class="btn primary" href="/regions">EXPLORER LES PACKS <b>↗</b></a>
+          <a class="btn ghost" href="/generateur">OUVRIR LE GÉNÉRATEUR</a>
+        </div>
+        <div class="live-row"><i></i><strong>3 PACKS PUBLICS</strong><span>RX ONLY</span><span>BUILD VERIFIED</span></div>
+      </div>
+      <div class="radio-stage" aria-hidden="true">
+        <div class="glow glow-a"></div><div class="glow glow-b"></div>
+        <div class="frequency-ring ring-one"></div><div class="frequency-ring ring-two"></div>
+        <div class="radio">
+          <div class="antenna"></div><div class="knob"></div>
+          <div class="screen"><small>RADIOPACK / RX</small><strong>145.500</strong><span>433.500 MHz</span><div class="meter">▂▄▅▇█</div></div>
+          <b>QUANSHENG</b>
+          <div class="keypad">{Array.from({length:12}).map((_,i)=><i>{i < 9 ? i+1 : i === 9 ? "*" : i === 10 ? 0 : "#"}</i>)}</div>
+        </div>
+        <div class="floating-chip chip-top">SECURE BUILD <b>●</b></div>
+        <div class="floating-chip chip-bottom">PUBLIC DATA / VERIFIED</div>
+      </div>
+    </section>
+
+    <section class="packs-section">
+      <div class="section-head"><span>01 / PACKS</span><h2>Choisis ta zone.</h2><p>Trois packs publics. Même logique : RX-only, documentés et versionnés.</p></div>
+      <div class="pack-grid">
+        {packs.map((pack, index) => (
+          <a class={`pack-card c${index}`} href={`/regions/${pack.regionSlug}`}>
+            <div class="top"><span>0{index+1}</span><i>● ONLINE</i></div>
+            <div><small>{pack.version.toUpperCase()}</small><h3>{pack.name}</h3></div>
+            <div class="metrics"><strong>{pack.count}</strong><span>MÉMOIRES<br />RX</span></div>
+            <div class="open">OUVRIR LE PACK <b>→</b></div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="signal-strip">
+      <div><small>PIPELINE</small><strong>Sources → Validation → Build → Publication</strong></div>
+      <div class="signal-bars" aria-hidden="true">{Array.from({length:28}).map((_,i)=><i style={`height:${18 + (i%7)*5}px`}></i>)}</div>
+      <div><small>MODE</small><strong>PUBLIC RX / CHIRP CSV</strong></div>
+    </section>
+  </div>
+</DesignLabLayout>
+
+<style>
+  .page-shell { min-height: 100vh; overflow: hidden; background: radial-gradient(circle at 80% 12%,rgba(145,70,255,.15),transparent 30rem),radial-gradient(circle at 15% 24%,rgba(0,178,255,.1),transparent 28rem),#050912; }
+  .page-shell::before { content:""; position:fixed; inset:70px 0 0; pointer-events:none; opacity:.35; background-image:linear-gradient(rgba(75,107,146,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(75,107,146,.08) 1px,transparent 1px); background-size:44px 44px; mask-image:linear-gradient(to bottom,black,transparent 80%); }
+  .hero,.packs-section,.signal-strip { position:relative; z-index:1; width:min(1280px,calc(100% - 40px)); margin-inline:auto; }
+  .hero { display:grid; grid-template-columns:1.02fr .98fr; gap:55px; align-items:center; min-height:760px; padding:72px 0; }
+  .system-tag { display:flex; align-items:center; gap:10px; color:#8fff00; font-size:.7rem; font-weight:900; letter-spacing:.2em; }
+  .system-tag span { width:8px;height:8px;border-radius:50%;background:#8fff00;box-shadow:0 0 20px #8fff00; }
+  h1 { margin:24px 0 26px; color:white; font-size:clamp(4rem,8.5vw,8rem); line-height:.82; letter-spacing:-.075em; font-weight:950; }
+  h1 span { color:transparent; background:linear-gradient(90deg,#00b2ff 0%,#9146ff 75%); background-clip:text;-webkit-background-clip:text; filter:drop-shadow(0 0 25px rgba(0,178,255,.12)); }
+  .hero-copy>p { max-width:650px; color:#9aa9bd; font-size:1.08rem; line-height:1.75; }
+  .actions { display:flex; flex-wrap:wrap; gap:11px; margin:34px 0 28px; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 20px; border:1px solid #23324a; border-radius:9px; font-size:.75rem; font-weight:900; letter-spacing:.08em; }
+  .btn.primary { color:#031019; background:#00b2ff; border-color:#00b2ff; box-shadow:0 0 28px rgba(0,178,255,.25); }
+  .btn.primary b { margin-left:22px; }.btn.ghost:hover{border-color:#9146ff;color:white}
+  .live-row { display:flex; flex-wrap:wrap; align-items:center; gap:13px; color:#6f8098; font-size:.66rem; letter-spacing:.08em; }
+  .live-row i { width:6px;height:6px;border-radius:50%;background:#8fff00;box-shadow:0 0 12px #8fff00; }.live-row strong{color:#dfe8f5}.live-row span{padding-left:13px;border-left:1px solid #263248}
+  .radio-stage { position:relative; min-height:620px; display:grid; place-items:center; }
+  .glow { position:absolute;border-radius:50%;filter:blur(34px); }.glow-a{width:340px;height:340px;background:rgba(0,178,255,.14)}.glow-b{width:240px;height:240px;right:7%;bottom:8%;background:rgba(145,70,255,.18)}
+  .frequency-ring { position:absolute;border:1px solid rgba(0,178,255,.25);border-radius:50%; }.ring-one{width:520px;height:520px}.ring-two{width:410px;height:570px;border-color:rgba(145,70,255,.24);transform:rotate(35deg)}
+  .radio { position:relative; z-index:3; width:260px; min-height:455px; padding:56px 21px 23px; border-radius:29px; border:6px solid #283342; background:linear-gradient(145deg,#1e2834,#080d14 67%); box-shadow:0 45px 90px rgba(0,0,0,.55),0 0 45px rgba(0,178,255,.08); transform:rotate(2deg); }
+  .antenna { position:absolute;left:43px;top:-120px;width:28px;height:150px;border-radius:16px 16px 6px 6px;background:linear-gradient(90deg,#0c1118,#3b4652,#090d12); }.knob{position:absolute;right:25px;top:-22px;width:52px;height:36px;border-radius:11px 11px 5px 5px;background:#202a36;border-top:6px solid #8fff00}
+  .screen { display:grid; gap:3px; min-height:140px; padding:15px; border-radius:10px; border:4px solid #070b10; background:linear-gradient(135deg,#b7eee9,#83c9c6); color:#0a3737; font-family:ui-monospace,monospace; box-shadow:inset 0 0 25px rgba(13,73,72,.25),0 0 25px rgba(0,229,255,.1); }.screen small{font-weight:900}.screen strong{font-size:2rem;letter-spacing:.04em}.screen span{font-size:1rem}.meter{justify-self:end;font-weight:900}
+  .radio>b{display:block;margin:18px 0 12px;text-align:center;color:#bfc9d7;letter-spacing:.11em;font-size:.75rem}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.keypad i{display:grid;place-items:center;aspect-ratio:1.35;border-radius:7px;background:#18222e;border:1px solid #2f3d4e;color:#dce5f0;font-style:normal;font-size:.72rem;font-weight:900}
+  .floating-chip { position:absolute; z-index:5; padding:10px 12px; border:1px solid #20344d; border-radius:8px; background:rgba(5,11,20,.84); color:#9db0c9; font-size:.64rem; font-weight:900; letter-spacing:.1em; backdrop-filter:blur(12px); }.chip-top{right:5%;top:22%}.chip-top b{color:#8fff00}.chip-bottom{left:2%;bottom:20%;border-color:rgba(145,70,255,.35)}
+  .packs-section { padding:70px 0 90px; }.section-head{display:grid;grid-template-columns:.32fr 1fr .75fr;gap:24px;align-items:end;margin-bottom:28px}.section-head>span{color:#00b2ff;font-size:.7rem;font-weight:900;letter-spacing:.17em}.section-head h2{color:white;font-size:clamp(2.5rem,5vw,4.4rem);letter-spacing:-.055em}.section-head p{color:#8090a7;font-size:.9rem}
+  .pack-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:13px; }.pack-card{display:flex;flex-direction:column;justify-content:space-between;min-height:390px;padding:24px;border:1px solid #1d2a3d;border-radius:16px;background:linear-gradient(145deg,#0d1521,#080d14);transition:.2s ease}.pack-card:hover{transform:translateY(-5px);border-color:var(--accent)}.pack-card.c0{--accent:#9146ff}.pack-card.c1{--accent:#00e5ff}.pack-card.c2{--accent:#00b2ff}.top{display:flex;justify-content:space-between}.top>span{color:#53667f;font-weight:900}.top i{color:#8fff00;font-style:normal;font-size:.62rem;font-weight:900;letter-spacing:.08em}.pack-card small{color:var(--accent);font-weight:900;letter-spacing:.14em}.pack-card h3{margin:8px 0;color:white;font-size:clamp(1.5rem,3vw,2.5rem);line-height:1;letter-spacing:-.04em}.metrics{display:flex;align-items:end;gap:12px}.metrics strong{color:white;font-size:4.2rem;line-height:.8;letter-spacing:-.08em}.metrics span{color:#718199;font-size:.62rem;font-weight:900;letter-spacing:.1em}.open{padding-top:18px;border-top:1px solid #1c293b;color:#94a5bb;font-size:.7rem;font-weight:900;letter-spacing:.08em}.open b{float:right;color:var(--accent)}
+  .signal-strip { display:grid;grid-template-columns:1fr 1.2fr .8fr;gap:30px;align-items:center;margin-bottom:70px;padding:25px;border:1px solid #1a2739;background:#080e17}.signal-strip>div:not(.signal-bars){display:grid;gap:5px}.signal-strip small{color:#5d7089;font-size:.62rem;font-weight:900;letter-spacing:.14em}.signal-strip strong{font-size:.78rem;letter-spacing:.04em}.signal-bars{display:flex;align-items:center;justify-content:center;gap:4px;height:45px}.signal-bars i{width:3px;background:linear-gradient(#8fff00,#00b2ff);border-radius:2px;opacity:.75}
+  @media(max-width:920px){.hero{grid-template-columns:1fr;padding-top:80px}.radio-stage{min-height:590px}.section-head{grid-template-columns:1fr}.pack-grid{grid-template-columns:1fr}.pack-card{min-height:280px}.signal-strip{grid-template-columns:1fr}.signal-bars{justify-content:flex-start}}
+  @media(max-width:560px){.hero,.packs-section,.signal-strip{width:min(100% - 24px,1280px)}.hero{min-height:auto}.radio-stage{min-height:520px;transform:scale(.9)}.floating-chip{display:none}.actions .btn{width:100%}.section-head{margin-bottom:18px}}
+</style>

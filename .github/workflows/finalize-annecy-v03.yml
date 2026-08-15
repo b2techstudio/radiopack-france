@@ -66,7 +66,7 @@ jobs:
           plan["memory_plan"]["status"] = "sprint86_internal_candidate_defined_not_public"
           plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-          # Sprint 86 remains a candidate-history test; after explicit publication only the public flags change.
+          # Sprint 86 remains a candidate-history test; after explicit publication only public flags change.
           s86 = Path("tests/test_sprint86_annecy_v03_paired_rx_expansion.py")
           text = s86.read_text(encoding="utf-8")
           old = '''assert active["public_export_allowed"] is False\nassert active["public_registry_allowed"] is False\nassert active["public_release_ready"] is False\n'''
@@ -79,7 +79,15 @@ jobs:
           new = '''if publication_record.exists():\n    assert plan["publication"]["public_export_allowed"] is True\n    assert plan["publication"]["public_registry_allowed"] is True\n    assert plan["publication"]["review_completed"] is True\nelse:\n    assert plan["publication"]["public_export_allowed"] is False\n    assert plan["publication"]["public_registry_allowed"] is False\n    assert plan["publication"]["review_completed"] is False\n'''
           if old not in text:
               raise RuntimeError("Sprint 86 plan publication anchor missing")
-          s86.write_text(text.replace(old, new, 1), encoding="utf-8")
+          text = text.replace(old, new, 1)
+
+          # The v0.2 historical routes are dynamic modules: verify behavior, not a filename literal.
+          bad = '''assert "radiopack-france-annecy-alpes-leman-v0.2.csv" in (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts").read_text(encoding="utf-8")\n'''
+          good = '''old_full_route = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"\nold_no_air_route = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"\nassert old_full_route.is_file() and old_no_air_route.is_file()\nassert "buildAnnecyCsv(true)" in old_full_route.read_text(encoding="utf-8")\nassert "buildAnnecyCsv(false)" in old_no_air_route.read_text(encoding="utf-8")\n'''
+          if bad not in text:
+              raise RuntimeError("Sprint 86 historical-route anchor missing")
+          text = text.replace(bad, good, 1)
+          s86.write_text(text, encoding="utf-8")
 
       - name: Validate public release guards
         run: |

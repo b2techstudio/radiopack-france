@@ -47,3 +47,7 @@ La paire de diagnostic courante reste **145.4675 / 432.575 MHz**. Il faut au moi
 - Normandie v0.4 reste immuable.
 
 Garde-fou : `tests/test_sprint84_normandie_v05_field_validation_kit.py`.
+
+## Clôture
+
+Le HEAD de clôture passe la CI complète et déclenche une archive de référence exacte via `[reference-archive]`. Cette étape ne modifie ni les gates terrain, ni le candidat 142, ni les packs publics.

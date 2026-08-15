@@ -8,6 +8,9 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  themeColor?: string;
+  colorScheme?: "light" | "dark";
+  bodyClass?: string;
 }
 
 const {
@@ -15,6 +18,9 @@ const {
   description = "Codeplugs CHIRP organisés et documentés pour les radios Quansheng UV-K5 en France.",
   image = "/brand/b2tech-logo.png",
   noindex = false,
+  themeColor = "#eef3f8",
+  colorScheme = "light",
+  bodyClass,
 } = Astro.props;
 
 const siteURL = Astro.site ?? new URL("https://radiopack.b2tech.studio");
@@ -37,8 +43,6 @@ const structuredData = {
     url: "https://github.com/b2techstudio",
   },
 };
-// JSON.stringify does not escape '<'. Escaping it prevents a future developer-controlled
-// description from ever closing the JSON-LD script element and becoming executable HTML.
 const structuredDataJSON = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 ---
 <!doctype html>
@@ -48,8 +52,8 @@ const structuredDataJSON = JSON.stringify(structuredData).replace(/</g, "\\u003c
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
-    <meta name="theme-color" content="#eef3f8" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="color-scheme" content={colorScheme} />
 
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -74,7 +78,7 @@ const structuredDataJSON = JSON.stringify(structuredData).replace(/</g, "\\u003c
     <title>{resolvedTitle}</title>
     <script type="application/ld+json" set:html={structuredDataJSON} />
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
     <Header />
     <main id="contenu"><slot /></main>

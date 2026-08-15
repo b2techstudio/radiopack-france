@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "status": "release_scope_frozen_prepublication",
+  "pack": "Annecy–Alpes–Léman",
+  "version": "0.3",
+  "frozen_on": "2026-08-15",
+  "based_on_public_version": "0.2",
+  "published_base_immutable": true,
+  "full_memory_count": 76,
+  "without_aviation_memory_count": 59,
+  "aviation_memory_count": 17,
+  "new_unique_rf_memory_count": 11,
+  "new_blocks": {
+    "satellite_split_uplinks": 2,
+    "paired_rx_france": 7,
+    "paired_rx_switzerland": 2
+  },
+  "approved_new_rf_mhz": [
+    145.85,
+    435.25,
+    439.625,
+    145.0375,
+    145.05,
+    430.325,
+    431.425,
+    145.1875,
+    145.7875,
+    145.125,
+    431.5
+  ],
+  "carry_forward_aviation": {
+    "france_memory_count": 11,
+    "switzerland_memory_count": 6,
+    "cycle_current_on_freeze_date": true,
+    "france_cycle": "AIRAC 08/26",
+    "france_effective_until_inclusive": "2026-09-02",
+    "switzerland_current_airac_amdt": "2026-08-06"
+  },
+  "excluded_from_v0_3": [
+    {
+      "id": "F1ZTH_50M_DEVICE_COMPATIBILITY",
+      "frequency_mhz": 50.5375,
+      "classification": "documented_scope_exclusion",
+      "blocks_publication": false
+    },
+    {
+      "id": "F1ZJV_F1ZYT_ADRASEC_UHF_TRANSPONDER",
+      "frequency_mhz": null,
+      "classification": "unpublished_sensitive_or_operational_frequency_not_inferred",
+      "blocks_publication": false
+    },
+    {
+      "id": "AVIATION_PREVIOUS_SCOPE_EXCLUSIONS",
+      "items": ["LFKA Albertville", "LFHM Megève", "LSGG Genève airport operational table"],
+      "classification": "carry_forward_out_of_scope_from_v0_2",
+      "note": "No unverified secondary frequency is introduced merely to enlarge v0.3.",
+      "blocks_publication": false
+    }
+  ],
+  "publication_gates": {
+    "source_revalidation_complete": true,
+    "satellite_current_status_checked": true,
+    "aviation_current_cycle_checked": true,
+    "deduplication_complete": true,
+    "rx_only_contract_complete": true,
+    "sensitive_frequency_policy_complete": true,
+    "scope_frozen": true,
+    "manual_release_review_required": true
+  },
+  "publication_blocker_count": 0,
+  "prepublication_ready": true,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "rules": {
+    "no_artificial_fill": true,
+    "same_rf_frequency_deduplicated": true,
+    "distinct_verified_pair_may_use_two_rx_memories": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "published_v0_2_immutable": true,
+    "excluded_item_is_not_promoted": true,
+    "scope_exclusion_is_documented_not_silent": true
+  }
+}

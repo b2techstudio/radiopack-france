@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "status": "current_sources_refreshed_zero_delta",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "checked_on": "2026-08-15",
+  "candidate_memory_count_before": 142,
+  "candidate_memory_count_after": 142,
+  "candidate_memory_delta": 0,
+  "promotion_count": 0,
+  "known_potential_ceiling_excluding_f6zes": 147,
+  "dossiers": [
+    {
+      "id": "R3_F1ZBX",
+      "status": "field_validation_required",
+      "web_research_can_close": false,
+      "required_next_evidence": "two independent identified Mortain-Bocage RX sessions on 145.675 MHz"
+    },
+    {
+      "id": "F5ZHA",
+      "status": "field_validation_required",
+      "web_research_can_close": false,
+      "required_next_evidence": "two independent identified Mortain-Bocage RX sessions on current 145.4675/432.575 MHz pair with intelligibility >=3/5"
+    },
+    {
+      "id": "F1ZOV",
+      "status": "operator_local_maintenance",
+      "local_operator_source": "https://f6kfw.fr/",
+      "general_directory_source": "https://www.r-e-f.org/index.php?option=com_content&view=",
+      "published_pair_mhz": [430.375, 431.975],
+      "decision": "no promotion while local operator reports maintenance",
+      "source_priority": "current local operator status overrides general directory"
+    },
+    {
+      "id": "F6ZES",
+      "status": "site_identity_only_frequency_mode_unresolved",
+      "directory_source": "https://www.r-e-f.org/index.php?option=com_content&view=",
+      "site": "Sourdeval",
+      "locator": "IN98MR93XV",
+      "frequency_mhz": null,
+      "mode": null,
+      "decision": "exclude from candidate and ceiling until usable public RF is published"
+    }
+  ],
+  "rules": {
+    "no_frequency_inference": true,
+    "field_gates_not_closed_by_web": true,
+    "local_operator_status_priority": true,
+    "public_v0_4_immutable": true,
+    "public_v0_5_created": false
+  }
+}

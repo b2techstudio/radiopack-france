@@ -1,0 +1,249 @@
+{
+  "schema_version": "1.0",
+  "status": "paired_rx_expansion_reviewed_sprint86_not_public",
+  "pack": "Annecy–Alpes–Léman",
+  "target_version": "0.3",
+  "checked_on": "2026-08-15",
+  "based_on": {
+    "version": "0.2",
+    "full_memory_count": 65,
+    "without_aviation_memory_count": 48,
+    "immutable": true,
+    "review_map": "research/annecy-alpes-leman-v0.2/prepublication-reviewed-memory-map.json"
+  },
+  "result": {
+    "candidate_full_memory_count": 76,
+    "candidate_without_aviation_memory_count": 59,
+    "candidate_new_unique_rf_memory_count": 11,
+    "potential_ceiling_if_f1zth_50m_clears": 77,
+    "public_export_allowed": false
+  },
+  "sources": [
+    {
+      "id": "REF-CURRENT-2026-05-13",
+      "authority": "REF - annuaire national des relais et balises",
+      "url": "https://www.r-e-f.org/index.php?option=com_content&view=article&id=1652&Itemid=741",
+      "role": "Paramètres analogiques actuels des relais 01, 38, 73 et 74, état source mis à jour le 13 mai 2026."
+    },
+    {
+      "id": "REF74-LOCAL-2026",
+      "authority": "REF74 - relais Haute-Savoie",
+      "url": "https://ref74.r-e-f.org/ref74/index.php/relais",
+      "role": "Source locale actuelle pour F1ZJV Pointe des Brasses et F1ZYT Semnoz, paire VHF analogique partagée et priorité ADRASEC."
+    },
+    {
+      "id": "AMSAT-LIVE-FM-2026-07-10",
+      "authority": "AMSAT - Live FM Satellites",
+      "url": "https://www.amsat.org/live-fm-satellites/",
+      "role": "Fréquences split actuelles SO-50, AO-91 et AO-123."
+    },
+    {
+      "id": "AMSAT-AO91-2025-04-27",
+      "authority": "AMSAT - AO-91 Fox-1B",
+      "url": "https://www.amsat.org/two-way-satellites/ao-91/",
+      "role": "Limitation opérationnelle AO-91 au fonctionnement en lumière solaire."
+    },
+    {
+      "id": "HB9G-CURRENT-2026",
+      "authority": "USKA Genève HB9G",
+      "url": "https://www.hb9g.ch/info",
+      "role": "Paramètres actuels des relais HB9G VHF 145.725/-0.6 MHz et UHF 439.100/-7.6 MHz."
+    }
+  ],
+  "candidate_additions": [
+    {
+      "location": 29,
+      "name": "SAT-UP145",
+      "frequency_mhz": 145.85,
+      "mode": "FM",
+      "step_khz": 5.0,
+      "role": "Montée RX partagée SO-50 / AO-123 selon politique paired RX",
+      "source_ids": ["AMSAT-LIVE-FM-2026-07-10"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "SO-50 / AO-123 montée 145.850 MHz partagée - écoute RX seule"
+    },
+    {
+      "location": 32,
+      "name": "SAT-UP435",
+      "frequency_mhz": 435.25,
+      "mode": "FM",
+      "step_khz": 5.0,
+      "role": "Montée RX AO-91 selon politique paired RX",
+      "source_ids": ["AMSAT-LIVE-FM-2026-07-10", "AMSAT-AO91-2025-04-27"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "AO-91 montée 435.250 MHz - satellite limité au soleil - RX seule"
+    },
+    {
+      "location": 59,
+      "name": "01-ZOH-IN",
+      "frequency_mhz": 439.625,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "F1ZOH Crozet - entrée du relais, sortie 430.225 déjà présente",
+      "source_ids": ["REF-CURRENT-2026-05-13"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "F1ZOH Crozet entrée 439.625; sortie 430.225 déjà présente - RX seule"
+    },
+    {
+      "location": 60,
+      "name": "01-ZJD-IN",
+      "frequency_mhz": 145.0375,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "F6ZJD Nurieux - entrée du relais, sortie 145.6375 déjà présente",
+      "source_ids": ["REF-CURRENT-2026-05-13"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "F6ZJD Nurieux entrée 145.0375; sortie 145.6375 déjà présente - RX seule"
+    },
+    {
+      "location": 61,
+      "name": "38-ZCQ-IN",
+      "frequency_mhz": 145.05,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "F1ZCQ Échirolles - entrée du relais, sortie 145.650 déjà présente",
+      "source_ids": ["REF-CURRENT-2026-05-13"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "F1ZCQ Échirolles entrée 145.050; sortie 145.650 déjà présente - RX seule"
+    },
+    {
+      "location": 62,
+      "name": "38-ZCR-IN",
+      "frequency_mhz": 430.325,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "F1ZCR Chamrousse - entrée du relais, sortie 431.925 déjà présente",
+      "source_ids": ["REF-CURRENT-2026-05-13"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "F1ZCR Chamrousse entrée 430.325; sortie 431.925 déjà présente - RX seule"
+    },
+    {
+      "location": 63,
+      "name": "38-ZDC-IN",
+      "frequency_mhz": 431.425,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "F1ZDC Échirolles - entrée du relais, sortie 433.025 déjà présente",
+      "source_ids": ["REF-CURRENT-2026-05-13"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "F1ZDC Échirolles entrée 431.425; sortie 433.025 déjà présente - RX seule"
+    },
+    {
+      "location": 64,
+      "name": "74-R7X-IN",
+      "frequency_mhz": 145.1875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "Entrée VHF partagée F1ZJV Pointe des Brasses / F1ZYT Semnoz",
+      "source_ids": ["REF-CURRENT-2026-05-13", "REF74-LOCAL-2026"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "F1ZJV / F1ZYT entrée VHF partagée 145.1875 - RX seule"
+    },
+    {
+      "location": 65,
+      "name": "74-R7X-OUT",
+      "frequency_mhz": 145.7875,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "Sortie VHF partagée F1ZJV Pointe des Brasses / F1ZYT Semnoz",
+      "source_ids": ["REF-CURRENT-2026-05-13", "REF74-LOCAL-2026"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "F1ZJV / F1ZYT sortie VHF partagée 145.7875 - RX seule"
+    },
+    {
+      "location": 92,
+      "name": "CH-HG-VIN",
+      "frequency_mhz": 145.125,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "HB9G VHF - entrée du relais, sortie 145.725 déjà présente",
+      "source_ids": ["HB9G-CURRENT-2026"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "HB9G VHF entrée 145.125; sortie 145.725 déjà présente - RX seule"
+    },
+    {
+      "location": 93,
+      "name": "CH-HG-UIN",
+      "frequency_mhz": 431.5,
+      "mode": "NFM",
+      "step_khz": 12.5,
+      "role": "HB9G UHF - entrée du relais, sortie 439.100 déjà présente",
+      "source_ids": ["HB9G-CURRENT-2026"],
+      "candidate_status": "promote_internal_candidate",
+      "comment": "HB9G UHF entrée 431.500; sortie 439.100 déjà présente - RX seule"
+    }
+  ],
+  "deduplicated_existing": [
+    {
+      "station": "F1ZPY / F1ZWY",
+      "reason": "F1ZPY entrée 439.550 MHz est déjà la sortie F1ZWY; F1ZWY entrée 430.150 MHz est déjà la sortie F1ZPY.",
+      "new_memory_delta": 0
+    },
+    {
+      "station": "F5ZDT",
+      "reason": "Les deux côtés 145.3875 / 432.650 MHz sont déjà présents dans la v0.2.",
+      "new_memory_delta": 0
+    },
+    {
+      "station": "F1ZFX / F1ZIC",
+      "reason": "Les côtés 145.475 / 432.550 et 144.950 / 432.550 MHz sont déjà présents, avec 432.550 dédupliquée.",
+      "new_memory_delta": 0
+    },
+    {
+      "station": "F1ZHE / F1ZHG / F5ZGT",
+      "reason": "145.2625, 145.2875, 145.450 et 432.5125 MHz sont déjà présents; la fréquence UHF partagée reste dédupliquée.",
+      "new_memory_delta": 0
+    },
+    {
+      "station": "F5ZLV",
+      "reason": "145.4125 / 432.650 MHz sont déjà présents.",
+      "new_memory_delta": 0
+    },
+    {
+      "station": "SO-50 / AO-123",
+      "reason": "Les deux satellites partagent 145.850 MHz en montée; une seule mémoire RX est ajoutée.",
+      "new_memory_delta_saved_by_deduplication": 1
+    }
+  ],
+  "deferred": [
+    {
+      "id": "F1ZTH_50M_DEVICE_COMPATIBILITY",
+      "station": "F1ZTH Bourgoin-Jallieu",
+      "frequency_mhz": 50.5375,
+      "source_currently_publishes_rf": true,
+      "potential_memory_delta": 1,
+      "state": "public_rf_verified_device_firmware_rx_compatibility_not_project_verified",
+      "promoted": false,
+      "requirements": [
+        "define a supported UV-K5 firmware/receiver capability baseline before adding a 50 MHz memory",
+        "validate that the chosen project baseline can receive and store 50.5375 MHz reliably",
+        "do not assume third-party firmware availability for every RadioPack user"
+      ]
+    },
+    {
+      "id": "F1ZJV_F1ZYT_ADRASEC_UHF_TRANSPONDER",
+      "stations": ["F1ZJV", "F1ZYT"],
+      "state": "local_source_mentions_uhf_adrasec_link_but_frequency_not_public",
+      "frequency_mhz": null,
+      "potential_memory_delta": null,
+      "promoted": false,
+      "requirements": [
+        "do not infer an UHF frequency from network relationships",
+        "do not seek or reconstruct private operational ADRASEC or PPDR frequencies",
+        "promote only if a current public operator source explicitly publishes a non-sensitive RF frequency"
+      ]
+    }
+  ],
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "published_v0_2_immutable": true,
+    "candidate_is_not_public": true,
+    "satellite_operational_status_must_be_rechecked_before_publication": true,
+    "unpublished_adrasec_frequency_must_not_be_inferred": true,
+    "private_professional_or_ppdr_emergency_frequencies_excluded": true,
+    "device_firmware_compatibility_required_before_50mhz_promotion": true
+  }
+}

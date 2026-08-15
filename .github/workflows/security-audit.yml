@@ -91,3 +91,51 @@ jobs:
           test -f dist/_redirects
           grep -F "Content-Security-Policy:" dist/_headers
           grep -F "Strict-Transport-Security: max-age=31536000" dist/_headers
+
+  live-site-security:
+    name: Live Cloudflare response security
+    if: ${{ github.event_name != 'pull_request' }}
+    needs:
+      - website-security
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Verify live HTTPS response and security headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://radiopack.b2tech.studio/"
+          headers="$(mktemp)"
+          body="$(mktemp)"
+          ok=0
+
+          for attempt in $(seq 1 18); do
+            : > "$headers"
+            : > "$body"
+            if curl --fail --silent --show-error --location \
+              --connect-timeout 10 --max-time 20 \
+              --dump-header "$headers" --output "$body" "$url"; then
+              if grep -Eiq '^content-security-policy: .*default-src .self.' "$headers" \
+                && grep -Eiq '^strict-transport-security: max-age=31536000' "$headers" \
+                && grep -Eiq '^x-frame-options: DENY' "$headers" \
+                && grep -Eiq '^x-content-type-options: nosniff' "$headers"; then
+                ok=1
+                break
+              fi
+            fi
+            echo "Live hardening not visible yet (attempt ${attempt}/18)"
+            sleep 10
+          done
+
+          if [[ "$ok" -ne 1 ]]; then
+            echo "Live site did not expose the required security headers" >&2
+            cat "$headers" >&2
+            exit 1
+          fi
+
+          grep -Eiq '^cross-origin-opener-policy: same-origin' "$headers"
+          grep -Eiq '^referrer-policy: strict-origin-when-cross-origin' "$headers"
+          grep -Eiq '^permissions-policy:' "$headers"
+          grep -Eiq '^content-type: text/html' "$headers"
+          test -s "$body"
+          echo "Live Cloudflare security headers verified"

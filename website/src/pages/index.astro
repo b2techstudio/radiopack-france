@@ -4,6 +4,19 @@ import FeatureCard from "../components/FeatureCard.astro";
 import RegionCard from "../components/RegionCard.astro";
 import FranceMap from "../components/FranceMap.astro";
 import regions from "../data/regions.json";
+import { publicPacks } from "../lib/packRegistry";
+
+const normandiePack = publicPacks.find((pack) => pack.id === "normandie")!;
+const annecyPack = publicPacks.find((pack) => pack.id === "annecy-alpes-leman")!;
+const bretagnePack = publicPacks.find((pack) => pack.id === "bretagne")!;
+
+const defaultCount = (pack: (typeof publicPacks)[number]) =>
+  pack.variants.find((variant) => variant.id === pack.defaultVariant)?.memoryCount ?? pack.variants[0]?.memoryCount ?? 0;
+
+const normandieCount = defaultCount(normandiePack);
+const annecyCount = defaultCount(annecyPack);
+const annecyNoAviationCount = annecyPack.variants.find((variant) => variant.id === "no-aviation")?.memoryCount ?? 0;
+const bretagneCount = defaultCount(bretagnePack);
 ---
 
 <BaseLayout>
@@ -19,8 +32,8 @@ import regions from "../data/regions.json";
         </div>
         <div class="hero-stats">
           <div><strong>200</strong><span>mémoires disponibles par pack</span></div>
-          <div><strong>3</strong><span>packs régionaux disponibles</span></div>
-          <div><strong>65</strong><span>mémoires dans Annecy v0.2</span></div>
+          <div><strong>{publicPacks.length}</strong><span>packs régionaux disponibles</span></div>
+          <div><strong>{annecyCount}</strong><span>mémoires dans Annecy {annecyPack.version}</span></div>
         </div>
       </div>
 
@@ -57,7 +70,7 @@ import regions from "../data/regions.json";
       <div class="region-list">
         <span class="eyebrow">Déploiement progressif</span>
         <h2>Choisis ta zone</h2>
-        <p class="lead">La Normandie v0.4, Annecy–Alpes–Léman v0.2 et la Bretagne v0.1 sont disponibles en réception seule.</p>
+        <p class="lead">La {normandiePack.name} {normandiePack.version}, {annecyPack.name} {annecyPack.version} et la {bretagnePack.name} {bretagnePack.version} sont disponibles en réception seule.</p>
         {regions.map((region) => <RegionCard {...region} />)}
       </div>
     </div>
@@ -68,12 +81,12 @@ import regions from "../data/regions.json";
       <div>
         <span class="eyebrow">Trois packs régionaux disponibles</span>
         <h2>Normandie, Alpes–Léman et Bretagne prêtes à importer.</h2>
-        <p>Normandie v0.4 contient 142 mémoires RX-only. Annecy–Alpes–Léman v0.2 contient 65 mémoires, avec une variante de 48 sans aviation. Bretagne v0.1 contient 135 mémoires RX-only.</p>
+        <p>{normandiePack.name} {normandiePack.version} contient {normandieCount} mémoires RX-only. {annecyPack.name} {annecyPack.version} contient {annecyCount} mémoires, avec une variante de {annecyNoAviationCount} sans aviation. {bretagnePack.name} {bretagnePack.version} contient {bretagneCount} mémoires RX-only.</p>
       </div>
       <div class="cta-actions">
-        <a class="button button-orange" href="/regions/normandie">Voir la Normandie →</a>
-        <a class="button button-primary" href="/regions/annecy-haute-savoie">Voir Annecy v0.2 →</a>
-        <a class="button button-secondary" href="/regions/bretagne">Voir la Bretagne →</a>
+        <a class="button button-orange" href={`/regions/${normandiePack.regionSlug}`}>Voir la Normandie →</a>
+        <a class="button button-primary" href={`/regions/${annecyPack.regionSlug}`}>Voir Annecy {annecyPack.version} →</a>
+        <a class="button button-secondary" href={`/regions/${bretagnePack.regionSlug}`}>Voir la Bretagne {bretagnePack.version} →</a>
       </div>
     </div>
   </section>

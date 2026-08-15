@@ -48,3 +48,7 @@ Le nouveau builder `tools/build_normandie_v05_internal_candidate.py` reconstruit
 Preuve : `research/normandie-v0.5/current-blocker-revalidation.json`.
 
 Garde-fou : `tests/test_sprint83_normandie_v05_revalidation.py`.
+
+## Clôture
+
+Le HEAD de clôture est soumis à la CI complète et à la génération d'une archive de référence exacte via le marqueur `[reference-archive]`. Cette clôture n'ajoute aucune mémoire et ne modifie aucun gate de promotion.

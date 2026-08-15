@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "status": "current_public_revalidation_zero_rf_delta_not_public",
+  "pack": "Bretagne",
+  "target_version": "0.3",
+  "sprint": 82,
+  "checked_on": "2026-08-15",
+  "candidate_memory_count_before": 151,
+  "candidate_memory_count_after": 151,
+  "candidate_memory_delta": 0,
+  "public_export_allowed": false,
+  "reviewed_ids": [
+    "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
+    "F5ZZC4_CURRENT_APRS_FREQUENCY",
+    "F5ZPV_RESTART_REVALIDATION",
+    "F5ZZH_RESTART_REVALIDATION",
+    "CROSS_ETEL_CH64_LOCAL_MAPPING",
+    "CROSS_CORSEN_CH79_LOCAL_MAPPING"
+  ],
+  "findings": {
+    "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY": {
+      "current_aprs_frequency_mhz": 144.8,
+      "current_aprs_frequency_publicly_documented": true,
+      "recent_aprs_activity_visible_in_public_index": true,
+      "aprs_frequency_already_present_nationally": true,
+      "adrasec35_transponder_role_publicly_mentioned": true,
+      "adrasec35_transponder_frequency_publicly_published": false,
+      "new_unique_rf_memory_count": 0,
+      "promoted": false,
+      "decision": "keep_transponder_frequency_unresolved_do_not_infer_from_aprs"
+    },
+    "F5ZZC4_CURRENT_APRS_FREQUENCY": {
+      "historical_ara35_aprs_role_exists": true,
+      "historical_site": "Ker Lann / Bruz",
+      "historical_role_source_is_current_frequency_validation": false,
+      "current_service_specific_frequency_validated": false,
+      "current_public_activity_confirmed": false,
+      "absence_of_recent_trace_is_proof_of_stop": false,
+      "must_not_conflate_with_f5zzc_analog": true,
+      "new_unique_rf_memory_count": 0,
+      "promoted": false,
+      "decision": "keep_unresolved_until_current_service_specific_public_source"
+    },
+    "F5ZPV_RESTART_REVALIDATION": {
+      "local_operator_current_page_reports_stopped": true,
+      "local_operator_text": "temporairement arrete",
+      "local_operator_expected_return_window": "ete 2026",
+      "general_directory_reports_active": true,
+      "local_operator_status_overrides_general_directory": true,
+      "restart_evidence_established": false,
+      "new_unique_rf_memory_count": 0,
+      "promoted": false,
+      "decision": "keep_excluded_until_local_operator_restart_evidence"
+    },
+    "F5ZZH_RESTART_REVALIDATION": {
+      "local_operator_current_page_reports_stopped": true,
+      "local_operator_searching_new_site": true,
+      "restart_evidence_established": false,
+      "current_site_for_restarted_service_validated": false,
+      "new_unique_rf_memory_count": 0,
+      "promoted": false,
+      "decision": "keep_excluded_until_restart_and_site_evidence"
+    },
+    "CROSS_ETEL_CH64_LOCAL_MAPPING": {
+      "generic_pair_mhz": [156.225, 160.825],
+      "generic_pair_already_present": true,
+      "ministry_current_regional_channels63_and64_morbihan": true,
+      "ministry_names_channel64_brittany_transmitter_site": false,
+      "cross_etel_current_etel_channel63_mapping": true,
+      "cross_etel_current_etel_channel64_mapping": false,
+      "primary_source_conflict_remains_open": true,
+      "new_unique_rf_memory_count": 0,
+      "promoted_local_site_mapping": false,
+      "decision": "retain_generic_pair_without_local_channel64_site_attribution"
+    },
+    "CROSS_CORSEN_CH79_LOCAL_MAPPING": {
+      "generic_pair_mhz": [156.975, 161.575],
+      "generic_pair_already_present": true,
+      "current_cross_vhf_mhf_network_confirmed": true,
+      "primary_current_channel79_transmitter_site_mapping_found": false,
+      "new_unique_rf_memory_count": 0,
+      "promoted_local_site_mapping": false,
+      "decision": "retain_generic_pair_without_local_channel79_site_attribution"
+    }
+  },
+  "sources": [
+    {
+      "id": "ARA35_F1ZUG",
+      "url": "https://ara35.fr/frequences/digipeater-aprs-f1zug/",
+      "role": "local_operator_public_frequency_source",
+      "supports": "F1ZUG-4 APRS on 144.800 MHz"
+    },
+    {
+      "id": "ARA35_APRS_ARCHIVE",
+      "url": "https://ara35.fr/category/aprs/",
+      "role": "local_operator_role_context",
+      "supports": "F1ZUG site described as APRS relay and ADRASEC35 transponder; no transponder frequency published"
+    },
+    {
+      "id": "APRSFI_PUBLIC_INDEX",
+      "url": "https://aprs.fi/info/F1%2A",
+      "role": "public_recent_activity_clue",
+      "supports": "F1ZUG-4 visible with recent age in retrieved APRS index snapshot"
+    },
+    {
+      "id": "ARA35_APRS_OVERVIEW",
+      "url": "https://ara35.fr/frequences/digipeater-aprs/",
+      "role": "historical_local_operator_context",
+      "supports": "historical F5ZZC-4 APRS/ADRASEC35 attribution at Ker Lann; page wording anchored to 2015 and not treated as current frequency validation"
+    },
+    {
+      "id": "ARA35_F5ZPV",
+      "url": "https://ara35.fr/relais-ru19-uhf-de-beaulieu/",
+      "role": "current_local_operator_status",
+      "supports": "F5ZPV temporarily stopped"
+    },
+    {
+      "id": "ARA35_F5ZZH",
+      "url": "https://ara35.fr/frequences/relais-phonie/relais-vhf-de-rennes/",
+      "role": "current_local_operator_status",
+      "supports": "F5ZZH temporarily stopped and searching a new site"
+    },
+    {
+      "id": "REF_DIRECTORY_35",
+      "url": "https://www.r-e-f.org/",
+      "role": "general_directory_cross_check",
+      "supports": "directory can disagree with local operator; F5ZPV listed active while local operator reports stopped"
+    },
+    {
+      "id": "MINISTRY_NAUTICAL_SAFETY_2026",
+      "url": "https://www.mer.gouv.fr/regles-de-securite-pour-les-loisirs-nautiques-en-mer",
+      "role": "current_primary_regional_channel_statement",
+      "supports": "channels 63 and 64 permanent coastal weather in Morbihan without naming a transmitter site"
+    },
+    {
+      "id": "DIRM_CROSS_ETEL",
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-c-r-o-s-s-etel-a152.html",
+      "role": "current_primary_operational_mapping",
+      "supports": "Etel station mapped to channel 63"
+    },
+    {
+      "id": "DIRM_CROSS_CORSEN",
+      "url": "https://www.dirm.nord-atlantique-manche-ouest.developpement-durable.gouv.fr/le-cross-corsen-a155.html",
+      "role": "current_primary_network_context",
+      "supports": "current coastal VHF/MHF network and weather dissemination, without a channel79-to-site mapping"
+    }
+  ],
+  "rules": {
+    "unpublished_service_frequency_must_not_be_inferred": true,
+    "aprs_frequency_does_not_prove_transponder_frequency": true,
+    "absence_from_public_live_index_does_not_prove_stopped": true,
+    "historical_role_does_not_validate_current_frequency": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "stopped_infrastructure_not_promoted": true,
+    "regional_channel_statement_does_not_name_transmitter_site": true,
+    "current_cross_network_does_not_map_channel_to_station": true,
+    "generic_rf_pair_not_duplicated_for_local_metadata": true,
+    "private_operational_ppdr_and_adrasec_data_excluded": true
+  }
+}

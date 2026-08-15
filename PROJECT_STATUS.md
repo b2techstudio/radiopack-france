@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **85**
-État logique : **0.21.74**
+Sprint courant : **86**
+État logique : **0.21.75**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-85-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-86-summary.md`.
 
 ## État public
 
@@ -16,6 +16,18 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 86 — Annecy–Alpes–Léman v0.3 paired RX
+
+Premier candidat v0.3 : **76 RX / 59 sans aviation**, à partir de la v0.2 publique immuable **65 / 48**. Delta : **+11 RF uniques**.
+
+- +2 montées satellites dédupliquées : 145.850 et 435.250 MHz ;
+- +7 RF paired RX France, dont la paire F1ZJV/F1ZYT partagée 145.1875 / 145.7875 MHz ;
+- +2 entrées HB9G : 145.125 et 431.500 MHz ;
+- F1ZTH 50.5375 MHz reste différé, plafond conditionnel 77 ;
+- aucun UHF ADRASEC non publié, aucune publication v0.3.
+
+Preuve : `research/annecy-alpes-leman-v0.3/paired-rx-expansion.json`. Builder : `tools/build_annecy_v03_internal_candidate.py`. Test : `tests/test_sprint86_annecy_v03_paired_rx_expansion.py`.
 
 ## Sprint 85 — évaluateur terrain Normandie v0.5
 

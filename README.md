@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 85 / 0.21.74 — Normandie v0.5 reste à 142 mémoires RX ; le journal terrain R3/F5ZHA peut maintenant être évalué automatiquement sans aucune promotion ni publication automatique.**
+**État courant : Sprint 86 / 0.21.75 — Annecy–Alpes–Léman v0.3 dispose d’un premier candidat interne à 76 mémoires RX (59 sans aviation), soit +11 RF uniques, sans publication.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 85 / 0.21.74
+## État actuel — Sprint 86 / 0.21.75
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -16,9 +16,24 @@ Packs publics immuables :
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : Normandie v0.5 reste à **142 mémoires RX**, delta 0. Le mini-pack terrain de **6 sondes RX-only** et son journal disposent maintenant d’un évaluateur reproductible qui classe R3 et F5ZHA en `satisfied`, `insufficient` ou `indeterminate` sans jamais modifier le candidat automatiquement. Le plafond potentiel reste **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
+Recherche : **Annecy–Alpes–Léman v0.3 = 76 mémoires RX / 59 sans aviation, +11 RF uniques**, premier candidat interne paired RX non public ; plafond conditionnel 77 si F1ZTH 50.5375 MHz franchit le gate de compatibilité UV-K5/firmware. Normandie v0.5 reste à **142 RX**, delta 0, en attente de terrain R3/F5ZHA et de nouvelles sources F1ZOV/F6ZES. Bretagne v0.3 reste à **151 RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md` et `research/sprint-85-summary.md`.
+Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
+
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md` et `research/sprint-86-summary.md`.
+
+## Sprint 86 — Annecy–Alpes–Léman v0.3 paired RX
+
+Premier candidat interne exact : **65 → 76 mémoires RX**, ou **48 → 59 sans aviation**, soit **+11 RF uniques**. La v0.2 publique reste immuable.
+
+- satellites : 145.850 MHz partagée SO-50/AO-123 et 435.250 MHz AO-91 ;
+- France : nouvelles entrées RX F1ZOH, F6ZJD, F1ZCQ, F1ZCR et F1ZDC ;
+- Haute-Savoie : paire publique F1ZJV/F1ZYT 145.1875 / 145.7875 MHz, dédupliquée entre les deux sites ;
+- Suisse : entrées HB9G 145.125 et 431.500 MHz ;
+- F1ZTH 50.5375 MHz reste un +1 conditionnel hors candidat tant que la compatibilité récepteur/firmware UV-K5 n’est pas définie ;
+- aucune fréquence UHF ADRASEC non publiée n’est inférée ; aucune route publique v0.3.
+
+Preuve : `research/annecy-alpes-leman-v0.3/paired-rx-expansion.json`. Builder : `tools/build_annecy_v03_internal_candidate.py`. Garde-fou : `tests/test_sprint86_annecy_v03_paired_rx_expansion.py`.
 
 ## Sprint 85 — évaluateur du journal terrain Normandie v0.5
 

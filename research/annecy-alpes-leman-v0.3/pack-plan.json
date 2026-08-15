@@ -20,9 +20,30 @@
     "same_rf_frequency_deduplicated": true
   },
   "memory_plan": {
-    "status": "not_defined",
-    "expected_memory_count": null,
-    "new_blocks": []
+    "status": "sprint86_internal_candidate_defined_not_public",
+    "published_base_memory_count": 65,
+    "published_base_memory_count_without_aviation": 48,
+    "expected_memory_count": 76,
+    "expected_memory_count_without_aviation": 59,
+    "new_unique_rf_memory_count": 11,
+    "potential_ceiling_if_f1zth_50m_clears": 77,
+    "new_blocks": [
+      {
+        "id": "satellite_split_uplinks",
+        "unique_rf_memory_count": 2
+      },
+      {
+        "id": "paired_rx_france",
+        "unique_rf_memory_count": 7
+      },
+      {
+        "id": "paired_rx_switzerland",
+        "unique_rf_memory_count": 2
+      }
+    ],
+    "deferred": [
+      "F1ZTH 50.5375 MHz pending project device/firmware RX compatibility baseline"
+    ]
   },
   "research_priorities": [
     "ADRASEC 74",
@@ -38,5 +59,17 @@
     "public_routes_allowed": false,
     "review_required": true,
     "review_completed": false
+  },
+  "updated": "2026-08-15",
+  "latest_revalidation": {
+    "sprint": 86,
+    "checked_on": "2026-08-15",
+    "evidence": "research/annecy-alpes-leman-v0.3/paired-rx-expansion.json",
+    "builder": "tools/build_annecy_v03_internal_candidate.py",
+    "candidate_full_memory_count": 76,
+    "candidate_without_aviation_memory_count": 59,
+    "new_unique_rf_memory_count": 11,
+    "potential_ceiling_if_f1zth_50m_clears": 77,
+    "public_export_allowed": false
   }
 }

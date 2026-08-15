@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.21.75 - 2026-08-15
+
+- **Sprint 86** : premier candidat interne Annecy–Alpes–Léman v0.3, **76 mémoires RX / 59 sans aviation**, soit **+11 RF uniques** depuis la v0.2 immuable 65/48.
+- Paired RX : ajout des montées satellites 145.850/435.250, de cinq entrées de relais France, de la paire VHF partagée F1ZJV/F1ZYT et des deux entrées HB9G.
+- Déduplication explicite des paires déjà entièrement représentées ; aucune duplication RF par site ou fonction.
+- F1ZTH 50.5375 MHz reste différé jusqu’à définition d’une base de compatibilité UV-K5/firmware ; plafond conditionnel **77**.
+- Aucune fréquence ADRASEC non publiée n’est inférée, aucune route/registre public v0.3 n’est créé.
+- Ajout de `paired-rx-expansion.json`, du builder v0.3 et du garde-fou Sprint 86.
+
 ## 0.21.74 - 2026-08-15
 
 - **Sprint 85** : ajout d’un évaluateur reproductible du journal terrain Normandie v0.5 ; candidat maintenu à **142 mémoires RX**, delta **0**.

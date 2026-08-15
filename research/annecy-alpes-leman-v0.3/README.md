@@ -1,49 +1,61 @@
 # Annecy–Alpes–Léman v0.3 — recherche
 
-Cette branche prépare une future évolution du pack Annecy–Alpes–Léman sans modifier la version publiée **v0.2**, qui reste figée à 65 mémoires / 48 sans aviation.
+État : **Sprint 86 / 0.21.75 — premier candidat interne à 76 mémoires RX, 59 sans aviation, +11 RF uniques, aucune publication**.
 
-## Politique paired RX
+La base publique **v0.2 reste immuable à 65 mémoires / 48 sans aviation**. Le candidat v0.3 applique désormais la politique paired RX aux liaisons split/duplex déjà sélectionnées et aux nouveaux cas publics validés.
 
-Annecy–Alpes–Léman v0.3 applique :
+## Candidat Sprint 86
 
-```text
-research/paired-rx-policy.json
+- base v0.2 complète : **65 RX** ;
+- base v0.2 sans aviation : **48 RX** ;
+- candidat v0.3 complet : **76 RX** ;
+- candidat v0.3 sans aviation : **59 RX** ;
+- delta : **+11 RF uniques** ;
+- plafond conditionnel : **77** si F1ZTH 50.5375 MHz franchit le gate de compatibilité UV-K5/firmware ;
+- `Duplex=off`, `Offset=0.000000`, aucune émission ;
+- aucune route ni entrée de registre v0.3.
+
+Preuve structurée : `paired-rx-expansion.json`. Builder : `tools/build_annecy_v03_internal_candidate.py`.
+
+## Satellites paired RX
+
+La v0.2 publique conserve les descentes historiques. La v0.3 ajoute **145.850 MHz** comme montée RX partagée SO-50/AO-123 et **435.250 MHz** comme montée RX AO-91. La fréquence 145.850 n’est mémorisée qu’une fois. Les descentes restent déjà présentes : SO-50 436.795, AO-91 145.960, AO-123 435.400 MHz.
+
+Le statut opérationnel AMSAT doit être recontrôlé avant toute publication v0.3.
+
+## Relais France
+
+Nouvelles entrées RX de relais dont les sorties étaient déjà sélectionnées :
+
+- F1ZOH Crozet : **439.625 MHz** ;
+- F6ZJD Nurieux : **145.0375 MHz** ;
+- F1ZCQ Échirolles : **145.050 MHz** ;
+- F1ZCR Chamrousse : **430.325 MHz** ;
+- F1ZDC Échirolles : **431.425 MHz**.
+
+F1ZPY/F1ZWY et les transpondeurs F5ZDT, F1ZFX, F1ZIC, F1ZHE, F1ZHG, F5ZGT et F5ZLV n’ajoutent aucune RF après déduplication : leurs deux côtés sont déjà représentés dans la base.
+
+## Haute-Savoie / ADRASEC public
+
+F1ZJV Pointe des Brasses et F1ZYT Semnoz partagent la paire analogique VHF publique **145.1875 / 145.7875 MHz**. Deux mémoires RF suffisent aux deux sites.
+
+La source locale mentionne un lien/transpondeur UHF ADRASEC mais n’en publie pas la fréquence : aucune fréquence UHF n’est inférée, recherchée dans des données privées ou ajoutée au candidat.
+
+## Suisse HB9G
+
+Les sorties HB9G 145.725 et 439.100 MHz étant déjà présentes, le paired RX ajoute leurs entrées **145.125 MHz** et **431.500 MHz**.
+
+## F1ZTH 50 MHz différé
+
+Le REF publie **50.5375 MHz** comme côté analogique supplémentaire de F1ZTH. Les deux autres côtés, 431.275 et 145.2125 MHz, sont déjà présents. La RF 50.5375 représente donc un potentiel +1, mais reste hors candidat tant que RadioPack n’a pas défini et vérifié une base de compatibilité récepteur/firmware UV-K5 permettant de la garantir aux utilisateurs. Aucun firmware tiers n’est supposé.
+
+## Génération
+
+```bash
+python tools/build_annecy_v03_internal_candidate.py --output-dir annecy-v03
+python tools/build_annecy_v03_internal_candidate.py --no-aviation --output-dir annecy-v03-no-air
 ```
 
-Toute liaison publique nativement duplex/split retenue devra permettre l'écoute de ses **deux fréquences vérifiées**. Les deux côtés seront des mémoires RX distinctes avec `Duplex=off` et `Offset=0.000000` ; aucune montée ne sera configurée comme fréquence TX.
+Le builder repart du candidat v0.2 validé, conserve ses lignes à l’identique et ajoute uniquement les 11 RF de `paired-rx-expansion.json`.
 
-Cela concerne les relais analogiques, les transpondeurs cross-band et les satellites split. Les fréquences RF identiques partagées par plusieurs fonctions restent dédupliquées.
-
-## Satellites — changement par rapport à v0.2
-
-La v0.2 publiée reste immuable et conserve son modèle historique « descente en mémoire, montée en métadonnée ».
-
-Pour la **v0.3**, après recontrôle du statut opérationnel des satellites avant publication, le plan paired RX prévoit :
-
-- `SO-50` — montée **145.850 MHz**, descente **436.795 MHz** ;
-- `AO-91` — montée **435.250 MHz**, descente **145.960 MHz** ;
-- `AO-123` — montée **145.850 MHz**, descente **435.400 MHz**.
-
-SO-50 et AO-123 partageant 145.850 MHz en montée, cette fréquence restera une seule mémoire RX avec les deux rôles en métadonnées. Les CTCSS d'activation/montée restent documentaires et ne réactivent jamais le TX.
-
-## Objectif du chantier secours / ADRASEC
-
-Le chantier réexamine les relais et transpondeurs radioamateurs utilisés ou prioritaires pour les ADRASEC dans les départements 74, 73, 38 et 01.
-
-Premiers cas :
-
-- `F1ZJV` — Pointe des Brasses — entrée **145.1875 MHz**, sortie **145.7875 MHz**, relais VHF analogique ADRASEC 74 ;
-- `F1ZYT` — Semnoz — même paire 145.1875 / 145.7875 MHz que F1ZJV ; une seule paire RF sera nécessaire pour les deux sites ;
-- `F1ZHG` — Fort du Mont — paire **145.2875 / 432.5125 MHz**, transpondeur ADRASEC 73 ;
-- `F5ZGT` — Cime Caron — paire **145.450 / 432.5125 MHz**, couverture Annecy–Léman encore à vérifier ;
-- autres relais ADRASEC 73/38/01 uniquement si leur couverture est réellement pertinente pour le bassin Annecy–Léman.
-
-Une même fréquence RF ne sera pas dupliquée uniquement pour représenter deux sites ou fonctions différents. Les sites et rôles ADRASEC restent en métadonnées lorsque nécessaire.
-
-Le plan de travail détaillé est centralisé dans :
-
-```text
-research/paired-rx-next-version-plan.json
-```
-
-Les réseaux professionnels privés de secours restent exclus. Aucune mémoire v0.3 n'est encore publiée : la sélection finale, la déduplication, les statuts opérationnels et la revue du futur CSV restent obligatoires.
+Règles permanentes : v0.2 immuable, RX-only, fréquence identique dédupliquée, données non publiées jamais inférées, réseaux professionnels privés/PPDR exclus, revue humaine obligatoire avant publication.

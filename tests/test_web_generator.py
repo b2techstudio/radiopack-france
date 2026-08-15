@@ -9,6 +9,7 @@ OPTIONS = ROOT / "generator/options.json"
 GENERIC_LIBRARY = ROOT / "website/src/lib/chirpPack.ts"
 ANNECY_LIBRARY = ROOT / "website/src/lib/annecyPack.ts"
 PACK_REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
+PACK_SHORTCUT_SCRIPT = ROOT / "website/src/scripts/generator-pack-shortcuts.js"
 STANDARD_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
 NO_AIR_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"
 NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
@@ -22,6 +23,7 @@ for path in [
     GENERIC_LIBRARY,
     ANNECY_LIBRARY,
     PACK_REGISTRY,
+    PACK_SHORTCUT_SCRIPT,
     STANDARD_ROUTE,
     NO_AIR_ROUTE,
     NORMANDIE,
@@ -50,9 +52,17 @@ for expected in [
     'id="file-summary"',
     'id="download-csv"',
     "Générateur web · multi-régions",
-    "Normandie · 142",
-    "Bretagne · 151",
-    "Annecy · 77 / 60",
+    "Que signifient ces nombres ?",
+    "nombre de mémoires présentes dans le CSV publié",
+    "77 mémoires",
+    "60 sans aviation",
+    "142 mémoires",
+    "151 mémoires",
+    'data-pack-shortcut="annecy-alpes-leman"',
+    'data-pack-shortcut="normandie"',
+    'data-pack-shortcut="bretagne"',
+    "Sélectionner ce pack ↑",
+    'src="../scripts/generator-pack-shortcuts.js"',
     "Contrôle NOTAM avant génération",
     "J'ai vérifié les NOTAM applicables",
     "SOFIA-Briefing · France",
@@ -75,6 +85,17 @@ for expected in [
     'notamSummary.textContent = "Demandé · non confirmé"',
 ]:
     assert expected in page, f"Logique générateur absente: {expected}"
+
+shortcut_script = PACK_SHORTCUT_SCRIPT.read_text(encoding="utf-8")
+for expected in [
+    'document.querySelectorAll("[data-pack-shortcut]")',
+    "shortcut.dataset.packShortcut",
+    "packSelect.value = packId",
+    'packSelect.dispatchEvent(new Event("change", { bubbles: true }))',
+    'generatorForm.scrollIntoView({ behavior: "smooth", block: "start" })',
+    'event.key !== "Enter" && event.key !== " "',
+]:
+    assert expected in shortcut_script, f"Raccourci pack absent: {expected}"
 
 assert "new Blob" not in page
 assert "URL.createObjectURL" not in page
@@ -177,4 +198,4 @@ assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
 assert options["options"]["notam_check"]["blocks_generation"] is False
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 
-print("Tests RadioPack Sprint 23 multi-region public generator: Bretagne v0.2 151 + Normandie 142 + Annecy v0.4 77/60 current, historical Annecy routes preserved OK")
+print("Tests RadioPack Sprint 23 multi-region public generator: explicit memory counts and selectable pack shortcuts OK")

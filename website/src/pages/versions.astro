@@ -1,44 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { publicPacks } from "../lib/packRegistry";
 
-const packs = [
-  {
-    name: "Normandie",
-    version: "0.4",
-    status: "Disponible",
-    available: true,
-    memories: 142,
-    verified: "11 août 2026",
-    href: "/regions/normandie",
-    download: "/downloads/normandie/radiopack-france-normandie-v0.4.csv",
-    tone: "purple",
-    details: "PMR446, VHF marine, APRS/ISS, aviation, appels et radioamateur analogique, avec 3 mémoires supplémentaires validées en v0.4.",
-  },
-  {
-    name: "Bretagne",
-    version: "0.1",
-    status: "Disponible",
-    available: true,
-    memories: 135,
-    verified: "12 août 2026",
-    href: "/regions/bretagne",
-    download: "/downloads/bretagne/radiopack-france-bretagne-v0.1.csv",
-    tone: "cyan",
-    details: "135 mémoires RX : PMR446, VHF marine, écoute radioamateur et 21 fréquences régionales dédupliquées ; aviation différée à v0.2.",
-  },
-  {
-    name: "Annecy–Alpes–Léman",
-    version: "0.2.0",
-    status: "Disponible",
-    available: true,
-    memories: 65,
-    verified: "8 août 2026",
-    href: "/regions/annecy-haute-savoie",
-    download: "/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv",
-    tone: "cyan",
-    details: "65 mémoires RX France–Suisse avec aviation validée ; variante 48 mémoires sans aviation via le générateur.",
-  },
-];
+const preferredOrder = ["normandie", "annecy-alpes-leman", "bretagne"];
+const packs = preferredOrder
+  .map((id) => publicPacks.find((pack) => pack.id === id))
+  .filter((pack): pack is (typeof publicPacks)[number] => Boolean(pack));
 
 const modules = [
   ["PMR446 analogique", "16", "v0.1.0"],
@@ -48,66 +15,109 @@ const modules = [
 ];
 ---
 
-<BaseLayout title="État des packs" description="Versions, disponibilité, nombre de mémoires et état de vérification des packs RadioPack France.">
-  <section class="section">
+<BaseLayout
+  title="État des packs"
+  description="Versions publiques, disponibilité, variantes et nombre de mémoires des packs RadioPack France."
+  themeColor="#182538"
+  colorScheme="dark"
+>
+  <section class="section versions-page">
     <div class="container">
       <span class="eyebrow">Suivi des publications</span>
-      <h1>État des packs</h1>
-      <p class="lead intro">Cette page distingue les packs publiés et leurs variantes. Tous les exports restent en réception seule.</p>
+      <div class="page-head">
+        <h1>État des packs</h1>
+        <p class="lead">Cette vue est construite directement depuis le registre public. Tous les exports présentés restent en réception seule.</p>
+      </div>
 
-      <div class="grid-2 pack-grid">
-        {packs.map((pack) => (
-          <article class:list={["pack-card", "card", pack.tone]}>
-            <div class="topline"><span class="badge badge-green">{pack.status}</span><strong>v{pack.version}</strong></div>
-            <h2>{pack.name}</h2>
-            <div class="memory-count"><strong>{pack.memories}</strong><span>mémoires RX sur 200</span></div>
-            <p>{pack.details}</p>
-            <dl>
-              <div><dt>Dernière vérification</dt><dd>{pack.verified}</dd></div>
-              <div><dt>Politique publique</dt><dd>Duplex=off</dd></div>
-            </dl>
-            <div class="button-row">
-              <a class="button button-secondary" href={pack.href}>Voir le pack</a>
-              {pack.download && <a class="button button-primary" href={pack.download} download>Télécharger le CSV</a>}
-            </div>
-          </article>
-        ))}
+      <div class="pack-list">
+        {packs.map((pack, index) => {
+          const defaultVariant = pack.variants.find((variant) => variant.id === pack.defaultVariant) ?? pack.variants[0];
+          return (
+            <article class="pack-card card">
+              <div class="bank">B{String(index + 1).padStart(2, "0")}</div>
+              <div class="pack-copy">
+                <div class="topline"><span class="badge badge-green">{pack.status}</span><strong>{pack.version}</strong></div>
+                <h2>{pack.name}</h2>
+                <p>{pack.description}</p>
+                <div class="variant-list">
+                  {pack.variants.map((variant) => (
+                    <div class="variant">
+                      <span>{variant.label}</span>
+                      <strong>{variant.memoryCount} mémoires</strong>
+                      <a href={variant.downloadUrl} download={variant.filename}>CSV →</a>
+                    </div>
+                  ))}
+                </div>
+                <div class="button-row">
+                  <a class="button button-secondary" href={`/regions/${pack.regionSlug}`}>Voir le pack</a>
+                  {defaultVariant && <a class="button button-primary" href={defaultVariant.downloadUrl} download={defaultVariant.filename}>Télécharger la variante par défaut</a>}
+                </div>
+              </div>
+              <div class="memory-count"><strong>{defaultVariant?.memoryCount ?? 0}</strong><span>MEM RX</span></div>
+            </article>
+          );
+        })}
       </div>
 
       <section class="modules card">
-        <div><span class="eyebrow">Modules nationaux</span><h2>Fichiers réutilisés dans les packs</h2><p>Ces blocs sont générés séparément puis placés dans les packs régionaux selon leur organisation de mémoires.</p></div>
+        <div>
+          <span class="eyebrow">Modules nationaux</span>
+          <h2>Blocs réutilisés dans les packs</h2>
+          <p>Ces fichiers sont générés séparément puis réutilisés dans les packs régionaux selon leur organisation de mémoires.</p>
+        </div>
         <div class="module-list">
-          {modules.map(([name, count, version]) => <div><strong>{name}</strong><span>{count} mémoires</span><small>{version}</small></div>)}
+          {modules.map(([name, count, version]) => (
+            <div><strong>{name}</strong><span>{count} mémoires</span><small>{version}</small></div>
+          ))}
         </div>
       </section>
 
-      <div class="card policy"><strong>Règle permanente du projet public</strong><p>Les CSV publiés par RadioPack France restent configurés en réception seule. L'ajout d'une fréquence ne constitue jamais une autorisation d'émettre.</p></div>
+      <div class="card policy">
+        <span class="policy-light"></span>
+        <div><strong>Règle permanente du projet public</strong><p>Les CSV publiés par RadioPack France restent configurés en réception seule. L'ajout d'une fréquence ne constitue jamais une autorisation d'émettre.</p></div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  h1 { margin: 18px 0; font-size: clamp(3rem, 7vw, 5.4rem); }
-  .intro { max-width: 850px; }
-  .pack-grid { margin-top: 34px; }
-  .pack-card { display: grid; gap: 18px; padding: 28px; overflow: hidden; }
-  .pack-card.purple { background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(242,231,255,.74)); }
-  .pack-card.cyan { background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(221,249,252,.82)); }
-  .topline { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
-  .topline > strong { color: #5f31cf; font-family: "Space Grotesk", sans-serif; }
-  .memory-count { display: flex; align-items: end; gap: 10px; }
-  .memory-count strong { font-family: "Space Grotesk", sans-serif; font-size: 3.2rem; line-height: .9; color: #182230; }
-  .memory-count span, .pack-card p, .modules p, .policy p { color: var(--muted); }
-  dl { display: grid; gap: 8px; margin: 0; }
-  dl > div { display: flex; justify-content: space-between; gap: 20px; padding: 10px 0; border-bottom: 1px solid var(--line); }
-  dt { color: var(--muted); }
-  dd { margin: 0; font-weight: 800; }
-  .modules { display: grid; grid-template-columns: .9fr 1.1fr; gap: 30px; margin-top: 30px; padding: 28px; }
-  .modules h2 { margin: 10px 0; }
+  .versions-page { padding-top: 72px; }
+  .page-head { display: grid; grid-template-columns: 1fr .7fr; gap: 34px; align-items: end; margin: 18px 0 54px; }
+  .page-head h1 { font-size: clamp(3.4rem, 8vw, 6.2rem); }
+  .page-head .lead { max-width: 620px; }
+  .pack-list { display: grid; gap: 16px; }
+  .pack-card { display: grid; grid-template-columns: 70px 1fr 150px; gap: 24px; padding: 28px; background: linear-gradient(145deg, rgba(43,61,86,.96), rgba(34,50,73,.91)); }
+  .bank { color: var(--blue); font: 900 1rem "SFMono-Regular", Consolas, monospace; }
+  .pack-copy { display: grid; gap: 16px; }
+  .topline { display: flex; align-items: center; gap: 12px; }
+  .topline > strong { color: var(--blue); font: 900 .8rem "SFMono-Regular", Consolas, monospace; letter-spacing: .08em; }
+  .pack-copy h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+  .pack-copy > p { color: var(--muted); max-width: 760px; }
+  .memory-count { display: grid; align-content: start; justify-items: end; }
+  .memory-count strong { font-family: "Space Grotesk", sans-serif; font-size: 3.7rem; line-height: .86; letter-spacing: -.07em; }
+  .memory-count span { margin-top: 8px; color: var(--orange); font: 900 .67rem "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; }
+  .variant-list { display: grid; border-top: 1px solid var(--line); }
+  .variant { display: grid; grid-template-columns: 1fr auto 54px; gap: 18px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .variant span { color: var(--muted); }
+  .variant strong { font-size: .84rem; }
+  .variant a { color: var(--blue); font-size: .76rem; font-weight: 900; text-align: right; }
+  .modules { display: grid; grid-template-columns: .9fr 1.1fr; gap: 30px; margin-top: 56px; padding: 28px; }
+  .modules h2 { margin: 12px 0; }
+  .modules p { color: var(--muted); }
   .module-list { display: grid; gap: 9px; }
-  .module-list > div { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.7); }
+  .module-list > div { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; }
   .module-list span, .module-list small { color: var(--muted); }
-  .policy { margin-top: 30px; padding: 22px; background: linear-gradient(120deg, rgba(240,154,32,.13), rgba(255,255,255,.82)); }
-  .policy p { margin-top: 6px; }
-  @media (max-width: 760px) { .modules { grid-template-columns: 1fr; } .module-list > div { grid-template-columns: 1fr auto; } .module-list small { grid-column: 1 / -1; } }
+  .policy { display: grid; grid-template-columns: 12px 1fr; gap: 16px; align-items: start; margin-top: 22px; padding: 22px; }
+  .policy-light { width: 9px; height: 9px; margin-top: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 18px rgba(101,215,177,.42); }
+  .policy p { margin-top: 6px; color: var(--muted); }
+  @media (max-width: 800px) {
+    .page-head, .pack-card, .modules { grid-template-columns: 1fr; }
+    .memory-count { justify-items: start; }
+  }
+  @media (max-width: 560px) {
+    .variant { grid-template-columns: 1fr auto; }
+    .variant a { grid-column: 1 / -1; text-align: left; }
+    .module-list > div { grid-template-columns: 1fr auto; }
+    .module-list small { grid-column: 1 / -1; }
+  }
 </style>

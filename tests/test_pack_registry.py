@@ -4,6 +4,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 GENERATOR = ROOT / "website/src/pages/generateur.astro"
+DOWNLOADS_PAGE = ROOT / "website/src/pages/telechargements.astro"
+VERSIONS_PAGE = ROOT / "website/src/pages/versions.astro"
 REGIONS = ROOT / "website/src/data/regions.json"
 ANNECY_FULL = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv"
 ANNECY_NO_AIR = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv"
@@ -14,6 +16,8 @@ BRETAGNE = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v
 for path in [
     REGISTRY,
     GENERATOR,
+    DOWNLOADS_PAGE,
+    VERSIONS_PAGE,
     REGIONS,
     ANNECY_FULL,
     ANNECY_NO_AIR,
@@ -43,6 +47,19 @@ page = GENERATOR.read_text(encoding="utf-8")
 for expected in ["Normandie · 142", "Bretagne · 151", "Annecy · 77 / 60", "publicPacks.find((pack) => pack.id === selectedId)"]:
     assert expected in page
 
+# Public catalog/status pages must source regional versions from the same registry.
+for catalog_page in [DOWNLOADS_PAGE, VERSIONS_PAGE]:
+    content = catalog_page.read_text(encoding="utf-8")
+    assert 'from "../lib/packRegistry"' in content
+    assert "publicPacks" in content
+    for stale in [
+        "radiopack-france-bretagne-v0.1.csv",
+        "radiopack-france-annecy-alpes-leman-v0.2.csv",
+        "65 / 200 mémoires",
+        "135 / 200 mémoires",
+    ]:
+        assert stale not in content, f"Métadonnée régionale obsolète dans {catalog_page.name}: {stale}"
+
 for path, expected_count in [
     (ANNECY_FULL, 77),
     (ANNECY_NO_AIR, 60),
@@ -58,4 +75,4 @@ for path, expected_count in [
     assert len({row["Location"] for row in rows}) == expected_count
     assert len({row["Name"] for row in rows}) == expected_count
 
-print("Tests RadioPack public pack registry: Annecy v0.4 77/60 current, v0.3 history, Normandie 142, Bretagne 151 OK")
+print("Tests RadioPack public pack registry: Annecy v0.4 77/60 current, v0.3 history, Normandie 142, Bretagne 151, catalog pages registry-backed OK")

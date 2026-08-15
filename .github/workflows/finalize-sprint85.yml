@@ -1,0 +1,35 @@
+name: Finalize Sprint 85
+
+on:
+  push:
+    paths:
+      - ".github/sprint85-finalize-trigger"
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Finalize Sprint 85
+        run: python tools/finalize_sprint85.py
+
+      - name: Commit final state
+        shell: bash
+        run: |
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git add README.md PROJECT_STATUS.md CHANGELOG.md research/project-resume-state.json research/normandie-v0.5/README.md tests/test_site_files.py
+          git commit -m "Sprint 85 finalize Normandie field evaluator"
+          git push

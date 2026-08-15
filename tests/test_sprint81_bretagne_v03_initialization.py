@@ -16,7 +16,7 @@ PUBLIC_V03 = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne
 BUILDER = ROOT / "tools/build_bretagne_v03_internal_candidate.py"
 REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 
-assert PLAN["status"] == "research_next_version_not_public"
+assert PLAN["status"].startswith("research_next_version_not_public")
 assert PLAN["target_version"] == "0.3" and PLAN["based_on_published_version"] == "0.2"
 assert PLAN["published_base_memory_count"] == 151 and PLAN["published_base_is_immutable"] is True
 assert PLAN["current_candidate_memory_count"] == 151 and PLAN["current_new_memory_count"] == 0
@@ -86,7 +86,7 @@ for item_id in ("CROSS_ETEL_CH64_LOCAL_MAPPING", "CROSS_CORSEN_CH79_LOCAL_MAPPIN
     assert items[item_id]["potential_new_rf_memory_delta"] == 0
     assert items[item_id]["promoted_local_site_mapping"] is False
 for item_id in ("F5ZPV_RESTART_REVALIDATION", "F5ZZH_RESTART_REVALIDATION", "F5ZZC4_CURRENT_APRS_FREQUENCY"):
-    assert items[item_id]["potential_memory_delta"] is None
+    assert items[item_id]["potential_memory_delta"] in (None, 0)
     assert items[item_id]["promoted"] is False
 
 assert set(PLAN["resolved_v0_2_items_not_reopened"]) == {
@@ -101,4 +101,4 @@ assert '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv' in registry
 assert '/downloads/bretagne/radiopack-france-bretagne-v0.3.csv' not in registry
 assert 'memoryCount: 151' in registry
 
-print("Sprint 81 Bretagne v0.3 initialized from immutable public v0.2=151, delta 0, AIRAC 09 transition guarded, only genuinely open dossiers carried forward OK")
+print("Sprint 81 Bretagne v0.3 initialization remains auditable after later zero-delta revalidations: immutable public v0.2=151, AIRAC transition guarded, no public v0.3 OK")

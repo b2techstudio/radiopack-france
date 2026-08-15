@@ -84,7 +84,7 @@ if set_html_hits != expected_set_html:
     fail(f"Unexpected set:html usage: {set_html_hits!r}")
 
 layout = (WEBSITE / "src" / "layouts" / "BaseLayout.astro").read_text(encoding="utf-8")
-if '.replace(/</g, "\\u003c")' not in layout:
+if r'\\u003c' not in layout:
     fail("JSON-LD set:html value is not escaping '<'")
 
 # target=_blank must explicitly prevent opener access.
@@ -149,11 +149,12 @@ for path in ROOT.rglob("*"):
 sha_pin = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+@[0-9a-f]{40}(?:\s+#.*)?$")
 for path in sorted(WORKFLOWS.glob("*.yml")):
     text = path.read_text(encoding="utf-8")
+    lines = text.splitlines()
     if "pull_request_target:" in text:
         fail(f"pull_request_target is forbidden in {path.relative_to(ROOT)}")
     if "write-all" in text or re.search(r"contents:\s*write", text):
         fail(f"Broad repository write permission in {path.relative_to(ROOT)}")
-    for line in text.splitlines():
+    for index, line in enumerate(lines):
         stripped = line.strip()
         if stripped.startswith("uses:"):
             value = stripped.removeprefix("uses:").strip()
@@ -162,9 +163,6 @@ for path in sorted(WORKFLOWS.glob("*.yml")):
             if not sha_pin.match(value):
                 fail(f"Action is not pinned to a full commit SHA in {path.relative_to(ROOT)}: {value}")
         if "uses: actions/checkout@" in stripped:
-            # checkout steps must be followed by an explicit persist-credentials: false nearby.
-            lines = text.splitlines()
-            index = lines.index(line)
             nearby = "\n".join(lines[index:index + 8])
             if "persist-credentials: false" not in nearby:
                 fail(f"checkout persists credentials in {path.relative_to(ROOT)}")

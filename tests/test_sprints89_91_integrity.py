@@ -25,8 +25,11 @@ for relative in required:
     assert path.stat().st_size > 20, f"Incomplete sprints89-91 file: {relative}"
 
 state = json.loads((ROOT / "research/project-resume-state.json").read_text(encoding="utf-8"))
-assert state["current_sprint"] == 91
-assert state["state_version"] == "0.21.80"
+# This is a historical integrity guard for Sprints 89-91. Later sprints may advance
+# the project head, but they must preserve the 89-91 decisions and public releases.
+assert state["current_sprint"] >= 91
+version_parts = tuple(int(part) for part in state["state_version"].split("."))
+assert version_parts >= (0, 21, 80)
 assert state["public_packs"]["annecy_alpes_leman"]["version"] == "0.3"
 assert state["public_packs"]["annecy_alpes_leman"]["memory_count"] == 76
 assert state["annecy_v0_4_research"]["candidate_memory_count"] == 77
@@ -40,15 +43,21 @@ assert state["active_work"]["airac_next_effective_from"] == "2026-09-03"
 assert state["active_work"]["publication_allowed_before_airac09_revalidation"] is False
 
 project = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
-assert "Sprint courant : **91**" in project
-assert "État logique : **0.21.80**" in project
+assert f'Sprint courant : **{state["current_sprint"]}**' in project
+assert f'État logique : **{state["state_version"]}**' in project
 assert "Annecy–Alpes–Léman v0.3 : **76 mémoires RX**" in project
 assert "Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation." not in project
+assert "## Sprint 91 —" in project
+assert "## Sprint 90 —" in project
+assert "## Sprint 89 —" in project
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
-assert "Sprint 91 / 0.21.80" in readme
+assert f'Sprint {state["current_sprint"]} / {state["state_version"]}' in readme
 assert "Annecy v0.4 = 77 RX / 60 sans aviation" in readme
 assert "Normandie v0.5 reste à **142 RX**" in readme
 assert "Bretagne v0.3 reste à **151 RX**" in readme
+assert "## Sprint 91 —" in readme
+assert "## Sprint 90 —" in readme
+assert "## Sprint 89 —" in readme
 
-print("Sprints 89-91 integrity: docs/state synchronized, public releases unchanged, future/field gates preserved OK")
+print("Sprints 89-91 integrity: historical decisions preserved across later project-state advances; public releases unchanged and future/field gates preserved OK")

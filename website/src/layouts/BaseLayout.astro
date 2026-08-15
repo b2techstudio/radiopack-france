@@ -37,6 +37,9 @@ const structuredData = {
     url: "https://github.com/b2techstudio",
   },
 };
+// JSON.stringify does not escape '<'. Escaping it prevents a future developer-controlled
+// description from ever closing the JSON-LD script element and becoming executable HTML.
+const structuredDataJSON = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 ---
 <!doctype html>
 <html lang="fr">
@@ -69,7 +72,7 @@ const structuredData = {
     <meta name="twitter:image" content={socialImageURL} />
 
     <title>{resolvedTitle}</title>
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script type="application/ld+json" set:html={structuredDataJSON} />
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>

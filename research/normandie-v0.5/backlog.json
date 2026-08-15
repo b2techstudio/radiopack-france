@@ -1,10 +1,14 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_backlog_not_public",
   "pack": "Normandie",
   "target_version": "0.5",
   "based_on_published_version": "0.4",
   "published_base_memory_count": 142,
+  "current_candidate_memory_count": 142,
+  "known_potential_ceiling_excluding_f6zes": 147,
+  "last_revalidated_on": "2026-08-15",
+  "current_blocker_revalidation": "research/normandie-v0.5/current-blocker-revalidation.json",
   "public_export_allowed": false,
   "items": [
     {
@@ -15,11 +19,14 @@
         145.675
       ],
       "potential_memory_delta": 2,
-      "state": "field_evidence_required",
+      "state": "operator_current_field_evidence_still_required",
+      "last_checked_on": "2026-08-15",
+      "current_operator_status": "operational",
       "requirements": [
         "2 independent RX sessions from Mortain on identified output"
       ],
-      "sessions_are_evidence_not_memories": true
+      "sessions_are_evidence_not_memories": true,
+      "promoted": false
     },
     {
       "id": "F5ZHA_SOURCE_AND_COVERAGE",
@@ -29,8 +36,14 @@
         432.575
       ],
       "potential_memory_delta": 2,
-      "state": "authoritative_source_reconciliation_and_field_evidence_required",
-      "field_observations_can_close_source_conflict": false
+      "state": "current_ref_pair_supported_secondary_stale_conflict_field_coverage_required",
+      "last_checked_on": "2026-08-15",
+      "current_ref_status": "active",
+      "conflicting_secondary_frequency_mhz": 431.4125,
+      "conflicting_secondary_last_verified": "2017-02-17",
+      "field_observations_can_close_source_conflict": false,
+      "useful_mortain_coverage_verified": false,
+      "promoted": false
     },
     {
       "id": "F1ZOV_OPERATIONAL_STATUS",
@@ -38,16 +51,30 @@
       "frequencies_mhz": [
         431.975
       ],
+      "full_pair_mhz": [
+        430.375,
+        431.975
+      ],
       "potential_memory_delta": 1,
-      "state": "operator_maintenance_revalidation_required"
+      "state": "local_operator_maintenance_reconfirmed",
+      "last_checked_on": "2026-08-15",
+      "ref_directory_status": "active",
+      "local_operator_status": "maintenance",
+      "promoted": false
     },
     {
       "id": "F6ZES_RESOLVED",
       "station": "F6ZES Sourdeval",
       "frequencies_mhz": [],
       "potential_memory_delta": null,
-      "state": "frequency_mode_operational_state_unresolved",
-      "must_not_guess": true
+      "state": "current_directory_site_only_frequency_mode_operational_state_unresolved",
+      "last_checked_on": "2026-08-15",
+      "site_listing_confirmed": true,
+      "usable_frequency_published": false,
+      "mode_published": false,
+      "operational_state_published": false,
+      "must_not_guess": true,
+      "promoted": false
     }
   ],
   "rules": {
@@ -56,6 +83,12 @@
     "chirp_duplex": "off",
     "chirp_offset": "0.000000",
     "same_rf_deduplicated": true,
-    "verified_distinct_pair_uses_two_rx_memories": true
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "field_gate_cannot_be_satisfied_by_web_research": true,
+    "geometry_is_not_reception_proof": true,
+    "local_operator_status_has_priority_for_current_operational_state": true,
+    "secondary_stale_conflict_does_not_override_current_authoritative_pair": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "published_base_is_immutable": true
   }
 }

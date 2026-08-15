@@ -97,12 +97,30 @@ chirp_pack = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
 assert '"off"' in chirp_pack
 assert '"0.000000"' in chirp_pack
 
-# Published packs remain frozen; the new paired RX behaviour targets only new versions.
+# Published packs remain immutable. Annecy v0.3 is now an explicit published example
+# of the paired-RX policy, so verify the immutable record and the public RX-only CSV.
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'version: "v0.4"' in registry
 assert 'version: "v0.2"' in registry
-assert 'version: "v0.4"' in registry
-assert 'version: "v0.3"' not in registry
+assert 'version: "v0.3"' in registry
+assert 'id: "annecy-alpes-leman"' in registry
 assert 'id: "bretagne"' in registry
 
-print("Tests RadioPack paired RX policy: native duplex/split links expose both RX directions, TX remains off/zero, shared RF frequencies stay deduplicated, published packs remain immutable OK")
+annecy_record = json.loads(
+    (ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json").read_text(encoding="utf-8")
+)
+assert annecy_record["status"] == "published_immutable"
+assert annecy_record["version"] == "0.3"
+assert annecy_record["full_memory_count"] == 76
+assert annecy_record["without_aviation_memory_count"] == 59
+assert annecy_record["rules"]["immutable"] is True
+assert annecy_record["rules"]["rx_only"] is True
+assert annecy_record["rules"]["same_rf_frequency_deduplicated"] is True
+
+annecy_public = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv"
+annecy_rows = list(csv.DictReader(io.StringIO(annecy_public.read_text(encoding="utf-8"))))
+assert len(annecy_rows) == 76
+assert len({row["Frequency"] for row in annecy_rows}) == 76
+assert all(row["Duplex"] == "off" and row["Offset"] == "0.000000" for row in annecy_rows)
+
+print("Tests RadioPack paired RX policy: native duplex/split links expose both RX directions, TX remains off/zero, shared RF frequencies stay deduplicated, published packs including Annecy v0.3 remain immutable OK")

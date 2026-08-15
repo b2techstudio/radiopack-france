@@ -154,6 +154,9 @@ jobs:
       - name: Test Sprint 81 Bretagne v0.3 initialization
         run: python tests/test_sprint81_bretagne_v03_initialization.py
 
+      - name: Test Sprint 82 Bretagne v0.3 public revalidation
+        run: python tests/test_sprint82_bretagne_v03_public_revalidation.py
+
       - name: Test CROSS Etel network research
         run: python tests/test_etel_network_research.py
 

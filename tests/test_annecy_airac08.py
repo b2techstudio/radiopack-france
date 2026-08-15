@@ -140,8 +140,8 @@ assert include_aviation["scope"] == ["annecy-alpes-leman"]
 assert include_aviation["type"] == "boolean"
 assert include_aviation["default"] is True
 assert include_aviation["affects_csv_content"] is True
-assert include_aviation["annecy_memory_count_when_enabled"] == 65
-assert include_aviation["annecy_memory_count_when_disabled"] == 48
+assert include_aviation["annecy_memory_count_when_enabled"] == 76
+assert include_aviation["annecy_memory_count_when_disabled"] == 59
 assert notam["scope"] == ["annecy-alpes-leman"]
 assert notam["default"] == "disabled"
 assert notam["affects_csv_content"] is False
@@ -153,4 +153,13 @@ assert generator_options["ui_contract"]["generation_allowed_when_notam_unconfirm
 assert generator_options["ui_contract"]["download_enabled"] is True
 assert generator_options["ui_contract"]["unsupported_options_hidden"] is True
 
-print("Tests Annecy–Alpes–Léman AIRAC 08 aviation + multi-region generator: OK")
+# AIRAC 08/26 research material remains the validated aviation basis inherited by v0.3;
+# publication is recorded separately and does not rewrite the historical research files.
+publication_record = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json").read_text(encoding="utf-8"))
+assert publication_record["status"] == "published_immutable"
+assert publication_record["version"] == "0.3"
+assert publication_record["aviation_memory_count"] == 17
+assert publication_record["full_memory_count"] == 76
+assert publication_record["without_aviation_memory_count"] == 59
+
+print("Tests Annecy–Alpes–Léman AIRAC 08 aviation + multi-region generator: AIRAC 08/26 historical basis intact, current public v0.3 counts 76/59 OK")

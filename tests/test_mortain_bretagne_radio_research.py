@@ -253,9 +253,16 @@ assert regions["normandie-v0.4"]["paired_links"]
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 assert 'version: "v0.4"' in registry
-assert 'version: "v0.3"' not in registry
+annecy_record = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json").read_text(encoding="utf-8"))
+assert annecy_record["status"] == "published_immutable"
+assert annecy_record["version"] == "0.3"
+assert annecy_record["full_memory_count"] == 76
+assert annecy_record["without_aviation_memory_count"] == 59
+assert annecy_record["rules"]["immutable"] is True
+assert 'version: "v0.3"' in registry
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
+assert (ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv").is_file()
 
-print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Bretagne duplex marine channels keep ship and coast RX sides with TX off, Corsen SRR Mont-Saint-Michel to Penmarch primary-verified while radio overlap stays pending, channel 79 still transmitter-unresolved, F5ZZH stopped/non-candidate, 0 public mutations OK")
+print("Tests RadioPack Sprint 29 Mortain + Bretagne radio research: Sourdeval unresolved safely, Etel emitters primary-verified, Bretagne duplex marine channels keep ship and coast RX sides with TX off, Corsen SRR Mont-Saint-Michel to Penmarch primary-verified while radio overlap stays pending, channel 79 still transmitter-unresolved, F5ZZH stopped/non-candidate, Annecy v0.3 immutable publication recognized, 0 unintended public mutations OK")

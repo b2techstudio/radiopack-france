@@ -11,7 +11,6 @@ on:
 
 permissions:
   contents: read
-  statuses: write
 
 concurrency:
   group: radiopack-ci-${{ github.ref }}
@@ -20,14 +19,16 @@ concurrency:
 jobs:
   data:
     name: CSV and repository tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.13"
 
@@ -213,7 +214,7 @@ jobs:
 
   website:
     name: Astro production build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     defaults:
       run:
@@ -221,15 +222,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.13"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: "22.12.0"
           cache: npm
@@ -253,18 +256,20 @@ jobs:
       - data
       - website
     if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[reference-archive]')) || github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
 
       - name: Create exact source archive
         shell: bash
         run: git archive --format=zip --output="RadioPack-France-${GITHUB_SHA}.zip" HEAD
 
       - name: Upload reference archive
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: radiopack-reference-${{ github.sha }}
           path: RadioPack-France-${{ github.sha }}.zip
@@ -277,7 +282,10 @@ jobs:
       - data
       - website
     if: ${{ always() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      statuses: write
 
     steps:
       - name: Publish combined CI status

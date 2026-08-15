@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "status": "release_scope_frozen_prepublication",
+  "pack": "Annecy–Alpes–Léman",
+  "version": "0.4",
+  "frozen_on": "2026-08-15",
+  "based_on_public_version": "0.3",
+  "published_base_immutable": true,
+  "full_memory_count": 77,
+  "without_aviation_memory_count": 60,
+  "aviation_memory_count": 17,
+  "new_unique_rf_memory_count": 1,
+  "approved_new_rf_mhz": [50.5375],
+  "new_blocks": {
+    "f1zth_6m_rx": 1
+  },
+  "carry_forward_aviation": {
+    "unchanged_from_v0_3": true,
+    "france_memory_count": 11,
+    "switzerland_memory_count": 6,
+    "france_cycle": "AIRAC 08/26",
+    "france_effective_until_inclusive": "2026-09-02",
+    "switzerland_current_airac_amdt": "2026-08-06",
+    "cycle_current_on_freeze_date": true
+  },
+  "excluded_from_v0_4": [
+    {
+      "id": "F1ZJV_F1ZYT_ADRASEC_UHF_TRANSPONDER",
+      "frequency_mhz": null,
+      "classification": "unpublished_sensitive_or_operational_frequency_not_inferred",
+      "blocks_publication": false
+    },
+    {
+      "id": "AVIATION_PREVIOUS_SCOPE_EXCLUSIONS",
+      "items": ["LFKA Albertville", "LFHM Megève", "LSGG Genève airport operational table"],
+      "classification": "carry_forward_out_of_scope_from_v0_3",
+      "blocks_publication": false
+    }
+  ],
+  "publication_gates": {
+    "source_revalidation_complete": true,
+    "stock_device_receive_compatibility_checked": true,
+    "stock_chirp_memory_band_checked": true,
+    "aviation_current_cycle_checked": true,
+    "deduplication_complete": true,
+    "rx_only_contract_complete": true,
+    "sensitive_frequency_policy_complete": true,
+    "scope_frozen": true,
+    "manual_release_review_required": true
+  },
+  "publication_blocker_count": 0,
+  "prepublication_ready": true,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "rules": {
+    "no_artificial_fill": true,
+    "same_rf_frequency_deduplicated": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "published_v0_3_immutable": true,
+    "unpublished_frequency_is_not_inferred": true
+  }
+}

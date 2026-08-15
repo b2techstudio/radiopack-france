@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "status": "current_sources_revalidated_prepublication",
+  "pack": "Annecy–Alpes–Léman",
+  "version": "0.4",
+  "reviewed_on": "2026-08-15",
+  "based_on_public_version": "0.3",
+  "base_full_memory_count": 76,
+  "base_without_aviation_memory_count": 59,
+  "candidate_full_memory_count": 77,
+  "candidate_without_aviation_memory_count": 60,
+  "new_unique_rf_memory_count": 1,
+  "approved_new_rf_mhz": [50.5375],
+  "f1zth": {
+    "callsign": "F1ZTH",
+    "site": "BOURGOIN-JALLIEU",
+    "state": "Actif",
+    "frequency_mhz": 50.5375,
+    "type": "analogique",
+    "function": "Transpar.",
+    "mode": "FM",
+    "ctcss_hz_context": 123.0,
+    "source": "https://www.r-e-f.org/index.php?Itemid=492&id=1279&option=com_content&view=article",
+    "source_directory_updated": "2026-05-13",
+    "checked_current": true
+  },
+  "device_compatibility": {
+    "stock_uvk5_manual": {
+      "source": "https://fccid.io/XBPUV-K5/User-Manual/User-manual-6401561.pdf",
+      "finding": "Manufacturer manual states 50-600 MHz receiving.",
+      "supports_50_5375_rx": true
+    },
+    "stock_chirp_driver": {
+      "repository": "kk7ds/chirp",
+      "commit": "cb7d5e2afbf6e0ecd6d4bc0be1710b3f5fac7a07",
+      "path": "chirp/drivers/uvk5.py",
+      "finding": "Stock BANDS begins with 50.0-76.0 MHz; modified-firmware BANDS_NOLIMITS is separate.",
+      "supports_50_5375_memory": true,
+      "modified_firmware_required": false
+    }
+  },
+  "carry_forward_aviation": {
+    "unchanged_from_v0_3": true,
+    "france": {
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_on_review_date": true,
+      "source": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html"
+    },
+    "switzerland": {
+      "current_aip_airac_amdt": "2026-08-06",
+      "current_on_review_date": true,
+      "source": "https://www.skybriefing.com/"
+    }
+  },
+  "policy_checks": {
+    "rx_only": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "private_professional_rf_excluded": true,
+    "ppdr_rf_excluded": true,
+    "unpublished_adrasec_frequency_inferred": false,
+    "field_validation_required_for_new_rf": false,
+    "published_v0_3_mutated": false
+  },
+  "publication_blocker_count": 0,
+  "prepublication_ready": true
+}

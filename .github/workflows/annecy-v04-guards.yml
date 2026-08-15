@@ -1,0 +1,33 @@
+name: Annecy v0.4 Guards
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: annecy-v04-guards-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  annecy-v04-prepublication:
+    name: Annecy v0.4 prepublication invariants
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+      - name: Test Annecy v0.4 prepublication
+        run: python tests/test_sprint94_annecy_v04_prepublication.py

@@ -38,10 +38,20 @@ assert normandie["rules"]["private_ppdr_operational_frequencies_excluded"] is Tr
 
 annecy_plan = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/pack-plan.json").read_text(encoding="utf-8"))
 annecy = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/emergency-relays.json").read_text(encoding="utf-8"))
-assert annecy_plan["status"] == "research_next_version_not_public"
+annecy_record_path = ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json"
+if annecy_record_path.exists():
+    annecy_record = json.loads(annecy_record_path.read_text(encoding="utf-8"))
+    assert annecy_plan["status"] == "published_immutable_v0_3"
+    assert annecy_plan["publication"]["public_export_allowed"] is True
+    assert annecy_plan["publication"]["public_registry_allowed"] is True
+    assert annecy_plan["publication"]["published"] is True
+    assert annecy_record["status"] == "published_immutable"
+    assert annecy_record["version"] == "0.3"
+else:
+    assert annecy_plan["status"] == "research_next_version_not_public"
+    assert annecy_plan["publication"]["public_export_allowed"] is False
 assert annecy_plan["based_on_published_version"] == "0.2"
 assert annecy_plan["published_base_is_immutable"] is True
-assert annecy_plan["publication"]["public_export_allowed"] is False
 a_candidates = {item["id"]: item for item in annecy["candidates"]}
 assert a_candidates["F1ZJV"]["output_mhz"] == 145.7875
 assert a_candidates["F1ZJV"]["rx_pack_candidate"] is True
@@ -49,6 +59,8 @@ assert a_candidates["F1ZYT"]["output_mhz"] == 145.7875
 assert a_candidates["F1ZYT"]["rx_pack_candidate"] is False
 assert a_candidates["F1ZHG"]["output_mhz"] == 145.2875
 assert a_candidates["F5ZGT"]["output_mhz"] == 145.4500
+# This emergency inventory is historical research evidence. Publication is recorded
+# separately and must not rewrite the original per-candidate research flags.
 assert all(item["frequency_promoted_to_public_pack"] is False for item in annecy["candidates"])
 assert annecy["rules"]["published_v0_2_must_not_change"] is True
 assert annecy["rules"]["same_output_frequency_must_not_be_duplicated_for_site_label_only"] is True
@@ -99,12 +111,14 @@ assert gates["emergency_relay_inventory"]["status"] != "passed"
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 assert 'version: "v0.4"' in registry
-assert 'version: "v0.4"' in registry
+assert 'version: "v0.3"' in registry
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
+# Annecy v0.3 is published as a static immutable CSV, not a dynamic .ts route.
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()
+assert (ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv").is_file()
 
 published_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 assert published_normandie.is_file()
 
-print("Tests RadioPack Sprint 29 emergency/ADRASEC research: Bretagne ADRASEC35 role split + Rennes F5ZPV/F5ZZH stopped status + Finistere analog candidates + Plouray APRS metadata + Mortain/Annecy frozen public packs, no public mutation OK")
+print("Tests RadioPack Sprint 29 emergency/ADRASEC research: historical emergency inventories remain auditable, Annecy v0.3 publication is recognized separately, private operational RF stays excluded, OK")

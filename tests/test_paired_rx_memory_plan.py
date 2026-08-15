@@ -161,12 +161,11 @@ assert plan["rules"]["no_public_export"] is True
 
 # This file is a historical research memory plan and remains non-public. Its Annecy
 # subset predates the final v0.3 release, so publication does not mutate these counts.
-# The current registry may nevertheless point to the separately reviewed immutable v0.3.
+# The current registry may advance independently; the immutable v0.3 record is verified below.
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 assert 'id: "annecy-alpes-leman"' in registry
 assert 'version: "v0.4"' in registry
-assert 'version: "v0.3"' in registry
 
 annecy_record = json.loads(
     (ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json").read_text(encoding="utf-8")

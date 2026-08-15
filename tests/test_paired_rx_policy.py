@@ -97,12 +97,11 @@ chirp_pack = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
 assert '"off"' in chirp_pack
 assert '"0.000000"' in chirp_pack
 
-# Published packs remain immutable. Annecy v0.3 is now an explicit published example
-# of the paired-RX policy, so verify the immutable record and the public RX-only CSV.
+# The current registry may advance, while historical releases remain immutable.
+# Annecy v0.3 remains an explicit historical example of the paired-RX policy.
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'version: "v0.4"' in registry
 assert 'version: "v0.2"' in registry
-assert 'version: "v0.3"' in registry
 assert 'id: "annecy-alpes-leman"' in registry
 assert 'id: "bretagne"' in registry
 
@@ -123,4 +122,4 @@ assert len(annecy_rows) == 76
 assert len({row["Frequency"] for row in annecy_rows}) == 76
 assert all(row["Duplex"] == "off" and row["Offset"] == "0.000000" for row in annecy_rows)
 
-print("Tests RadioPack paired RX policy: native duplex/split links expose both RX directions, TX remains off/zero, shared RF frequencies stay deduplicated, published packs including Annecy v0.3 remain immutable OK")
+print("Tests RadioPack paired RX policy: native duplex/split links expose both RX directions, TX remains off/zero, shared RF frequencies stay deduplicated, historical Annecy v0.3 remains immutable after later releases OK")

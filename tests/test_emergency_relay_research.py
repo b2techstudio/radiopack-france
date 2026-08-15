@@ -111,7 +111,6 @@ assert gates["emergency_relay_inventory"]["status"] != "passed"
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 assert 'version: "v0.4"' in registry
-assert 'version: "v0.3"' in registry
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 # Annecy v0.3 is published as a static immutable CSV, not a dynamic .ts route.

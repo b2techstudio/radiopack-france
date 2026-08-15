@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.21.84 - 2026-08-15
+
+- **Sprint 95** : publication immuable Annecy–Alpes–Léman v0.4 à **77 RX / 60 sans aviation**.
+- Ajout unique `ZTH-6M` 50.5375 MHz ; RX-only, déduplication maintenue, v0.3 préservée octet pour octet.
+- SHA-256 publics : `2557076fcb198b830cd3b5ba64d7ff894c8e0d6e90eafc0fa40b691a3c6a5d98` / `e31bfc6fce402af117b4f79caf6547b60a23c91ef36491e1351c74e96329aa6c`.
+
+## 0.21.83 - 2026-08-15
+
+- **Sprint 94** : prépublication Annecy v0.4 figée à **77/60**, revue **12/12**, zéro bloqueur, builder et garde-fou déterministes.
+
+## 0.21.82 - 2026-08-15
+
+- **Sprint 93** : vérification live du site Cloudflare Pages déployé ; en-têtes de sécurité HTTP validés. Le domaine personnalisé reste contrôlé séparément de l'origine Pages.
+
 ## 0.21.81 - 2026-08-15
 
 - **Sprint 92** : audit de sécurité complet du site Astro, des dépendances, des workflows GitHub Actions et des artefacts publics.

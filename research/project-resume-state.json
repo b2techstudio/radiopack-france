@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 92,
-  "state_version": "0.21.81",
+  "current_sprint": 95,
+  "state_version": "0.21.84",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -13,14 +13,14 @@
       "previous_memory_count": 139
     },
     "annecy_alpes_leman": {
-      "version": "0.3",
-      "memory_count": 76,
-      "without_aviation_memory_count": 59,
+      "version": "0.4",
+      "memory_count": 77,
+      "without_aviation_memory_count": 60,
       "immutable": true,
-      "previous_immutable_version": "0.2",
-      "previous_memory_count": 65,
-      "previous_without_aviation_memory_count": 48,
-      "publication_record": "research/annecy-alpes-leman-v0.3/publication-record.json"
+      "previous_immutable_version": "0.3",
+      "previous_memory_count": 76,
+      "previous_without_aviation_memory_count": 59,
+      "publication_record": "research/annecy-alpes-leman-v0.4/publication-record.json"
     },
     "bretagne": {
       "version": "0.2",
@@ -231,7 +231,16 @@
     "research/security-audit-sprint92.md",
     "research/sprint-92-summary.md",
     ".github/workflows/security-audit.yml",
-    "tests/test_security_hardening.py"
+    "tests/test_security_hardening.py",
+    "research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json",
+    "research/annecy-alpes-leman-v0.4/current-source-revalidation.json",
+    "research/annecy-alpes-leman-v0.4/release-scope.json",
+    "research/annecy-alpes-leman-v0.4/review-checklist.json",
+    "research/annecy-alpes-leman-v0.4/prepublication-reviewed-memory-map.json",
+    "research/annecy-alpes-leman-v0.4/publication-record.json",
+    "research/sprint-93-summary.md",
+    "research/sprint-94-summary.md",
+    "research/sprint-95-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -1060,5 +1069,28 @@
     "live_site_dns_resolved_from_github_actions": false,
     "live_http_security_headers_certified": false,
     "public_radio_pack_mutation": false
+  },
+  "security_closeout": {
+    "sprint": 93,
+    "live_pages_origin_audited": true,
+    "live_pages_origin": "https://radiopack-france.pages.dev/",
+    "custom_domain": "radiopack.b2tech.studio",
+    "custom_domain_dns_pending_on_2026_08_15": true,
+    "main_branch_protection_enabled": false
+  },
+  "completed_annecy_v0_4_release": {
+    "pack": "Annecy–Alpes–Léman",
+    "version": "0.4",
+    "full_memory_count": 77,
+    "without_aviation_memory_count": 60,
+    "aviation_memory_count": 17,
+    "new_unique_rf_memory_count": 1,
+    "added_frequency_mhz": 50.5375,
+    "full_sha256": "2557076fcb198b830cd3b5ba64d7ff894c8e0d6e90eafc0fa40b691a3c6a5d98",
+    "without_aviation_sha256": "e31bfc6fce402af117b4f79caf6547b60a23c91ef36491e1351c74e96329aa6c",
+    "publication_record": "research/annecy-alpes-leman-v0.4/publication-record.json",
+    "immutable": true,
+    "rx_only": true,
+    "published_on": "2026-08-15"
   }
 }

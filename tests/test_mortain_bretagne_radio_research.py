@@ -259,7 +259,6 @@ assert annecy_record["version"] == "0.3"
 assert annecy_record["full_memory_count"] == 76
 assert annecy_record["without_aviation_memory_count"] == 59
 assert annecy_record["rules"]["immutable"] is True
-assert 'version: "v0.3"' in registry
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()
 assert not (ROOT / "website/src/pages/downloads/normandie/radiopack-france-normandie-v0.4.csv.ts").exists()
 assert not (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv.ts").exists()

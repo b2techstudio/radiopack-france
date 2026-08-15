@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 92 / 0.21.81 — audit sécurité complet et durcissement fusionné ; dépendances auditées ; protections navigateur/CI automatisées ; DNS live radiopack.b2tech.studio non résolvable au contrôle externe.**
+**État courant : Sprint 95 / 0.21.84 — Annecy–Alpes–Léman v0.4 publiée et immuable à 77 RX / 60 sans aviation ; audit sécurité live Cloudflare Pages validé ; Bretagne v0.3 reste en attente AIRAC 09/26.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 92 / 0.21.81
+## État actuel — Sprint 95 / 0.21.84
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -12,15 +12,28 @@ Packs publics immuables :
 
 - **Normandie v0.4** — 142 mémoires RX ;
 - Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
-- **Annecy–Alpes–Léman v0.3** — 76 mémoires RX, variante 59 sans aviation, publiée et immuable ;
+- **Annecy–Alpes–Léman v0.4** — 77 mémoires RX, variante 60 sans aviation, publiée et immuable ;
+- Annecy–Alpes–Léman v0.3 — 76 / 59, historique immuable ;
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : **Annecy v0.4 = 77 RX / 60 sans aviation, +1 RF**, candidat déterministe non public après validation du 50 MHz stock UV-K5/CHIRP. Normandie v0.5 reste à **142 RX**, delta 0 : R3/F5ZHA exigent du terrain, F1ZOV/F6ZES restent en veille source. Bretagne v0.3 reste à **151 RX**, delta 0, avec handoff AIRAC 09/26 préparé pour le 3 septembre 2026.
+Recherche active : Normandie v0.5 reste à **142 RX**, delta 0 : R3/F5ZHA exigent du terrain, F1ZOV/F6ZES restent en veille source. Bretagne v0.3 reste à **151 RX**, delta 0, avec handoff AIRAC 09/26 préparé pour le 3 septembre 2026. Annecy v0.4 est sortie du backlog : elle est désormais publique et immuable.
 
 Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
 
 Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md` et `research/sprint-91-summary.md`, `research/sprint-92-summary.md` et `research/security-audit-sprint92.md`.
+
+## Sprint 95 — publication Annecy–Alpes–Léman v0.4
+
+La **v0.4 est publiée et immuable à 77 RX / 60 sans aviation**. Elle ajoute uniquement `ZTH-6M` 50.5375 MHz à la v0.3, conserve 17 mémoires aviation, reste RX-only et préserve les CSV v0.3 octet pour octet. Empreintes et preuve : `research/annecy-alpes-leman-v0.4/publication-record.json`.
+
+## Sprint 94 — prépublication Annecy–Alpes–Léman v0.4
+
+Scope figé **77/60**, checklist **12/12**, zéro bloqueur. Le builder déterministe reconstruit les deux CSV avec les SHA attendus et la garde v0.4 vérifie la compatibilité stock UV-K5/CHIRP, les sources publiques et l'absence de RF privée ou inférée.
+
+## Sprint 93 — clôture sécurité live
+
+L'origine déployée `radiopack-france.pages.dev` est contrôlée en HTTPS par la CI : CSP, HSTS, anti-framing, `nosniff`, COOP, Referrer-Policy et Permissions-Policy sont vérifiés. Le domaine personnalisé `radiopack.b2tech.studio` reste suivi séparément tant que son DNS n'est pas publié.
 
 ## Sprint 92 — audit et durcissement sécurité
 

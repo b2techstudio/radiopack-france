@@ -13,6 +13,7 @@ FULL = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-anne
 NO_AIR = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv"
 REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 PAGE = ROOT / "website/src/pages/regions/annecy-haute-savoie.astro"
+V04_RECORD = ROOT / "research/annecy-alpes-leman-v0.4/publication-record.json"
 OLD_FULL_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
 OLD_NO_AIR_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"
 
@@ -72,14 +73,27 @@ assert review["completed"] == review["total"] == 12
 assert review["blocker_count"] == 0
 
 registry = REGISTRY.read_text(encoding="utf-8")
-assert 'version: "v0.3"' in registry
-assert 'memoryCount: 76' in registry
-assert 'memoryCount: 59' in registry
-assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv' in registry
-assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv' in registry
-
 page = PAGE.read_text(encoding="utf-8")
-for expected in ["Disponible — v0.3", "76 mémoires avec aviation", "59 sans aviation", "F1ZTH", "50.5375"]:
-    assert expected in page
+if V04_RECORD.exists():
+    current = json.loads(V04_RECORD.read_text(encoding="utf-8"))
+    assert current["status"] == "published_immutable"
+    assert current["version"] == "0.4"
+    assert 'version: "v0.4"' in registry
+    assert 'memoryCount: 77' in registry
+    assert 'memoryCount: 60' in registry
+    assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv' in registry
+    assert "Disponible — v0.4" in page
+    assert "77 mémoires avec aviation" in page
+    assert "60 sans aviation" in page
+else:
+    assert 'version: "v0.3"' in registry
+    assert 'memoryCount: 76' in registry
+    assert 'memoryCount: 59' in registry
+    assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv' in registry
+    assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv' in registry
+    assert "Disponible — v0.3" in page
+    assert "76 mémoires avec aviation" in page
+    assert "59 sans aviation" in page
 
-print("Annecy–Alpes–Léman v0.3 public release: 76/59 immutable RX, +11 RF, hashes and registry OK")
+assert "F1ZTH" in page and "50.5375" in page
+print("Annecy–Alpes–Léman v0.3 public release: immutable 76/59 RX history preserved across later releases")

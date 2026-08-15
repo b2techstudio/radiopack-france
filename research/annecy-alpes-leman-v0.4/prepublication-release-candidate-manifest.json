@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "status": "release_candidate_built_not_public",
+  "pack": "Annecy–Alpes–Léman",
+  "version": "0.4",
+  "built_on": "2026-08-15",
+  "full_memory_count": 77,
+  "without_aviation_memory_count": 60,
+  "aviation_memory_count": 17,
+  "new_unique_rf_memory_count": 1,
+  "publication_blocker_count": 0,
+  "public_export_allowed": false,
+  "source_revalidation_status": "current_sources_revalidated_prepublication",
+  "review_status": "prepublication_review_complete",
+  "scope_status": "release_scope_frozen_prepublication",
+  "files": {
+    "full": {
+      "filename": "radiopack-france-annecy-alpes-leman-v0.4.csv",
+      "sha256": "2557076fcb198b830cd3b5ba64d7ff894c8e0d6e90eafc0fa40b691a3c6a5d98"
+    },
+    "without_aviation": {
+      "filename": "radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv",
+      "sha256": "e31bfc6fce402af117b4f79caf6547b60a23c91ef36491e1351c74e96329aa6c"
+    },
+    "review_map": {
+      "filename": "prepublication-reviewed-memory-map.json",
+      "sha256": "3b115b6d54361d7c4cfc31459ac689119ef5fc6d2fb683cb604c57378ea50dab"
+    }
+  },
+  "rules": {
+    "rx_only": true,
+    "same_rf_frequency_deduplicated": true,
+    "published_v0_3_immutable": true,
+    "f1zth_50m_approved": true,
+    "modified_firmware_required": false,
+    "unpublished_adrasec_frequency_inferred": false,
+    "automatic_publication_allowed": false
+  }
+}

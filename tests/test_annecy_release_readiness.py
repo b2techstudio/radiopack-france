@@ -78,15 +78,15 @@ assert options["options"]["include_aviation"]["annecy_memory_count_when_enabled"
 assert options["options"]["include_aviation"]["annecy_memory_count_when_disabled"] == 59
 assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
 
-# The current public registry now points to immutable v0.3, while the v0.2 route
-# above remains available as historical release evidence.
+# The current public registry may advance independently from the historical v0.2/v0.3
+# evidence replayed by this test. Annecy v0.4 is the current immutable release.
 registry = PACK_REGISTRY.read_text(encoding="utf-8")
 assert 'id: "annecy-alpes-leman"' in registry
-assert 'version: "v0.3"' in registry
-assert 'memoryCount: 76' in registry
-assert 'memoryCount: 59' in registry
-assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv' in registry
-assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv' in registry
+assert 'version: "v0.4"' in registry
+assert 'memoryCount: 77' in registry
+assert 'memoryCount: 60' in registry
+assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv' in registry
+assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv' in registry
 
 record = json.loads(V03_RECORD.read_text(encoding="utf-8"))
 assert record["status"] == "published_immutable"
@@ -108,4 +108,4 @@ cli_result = json.loads(completed.stdout)
 assert cli_result["ready_for_public_prepublication"] is True
 assert cli_result["blockers"] == []
 
-print("Tests Annecy–Alpes–Léman release readiness: PUBLISHED v0.2 + multi-region generator; historical readiness replayed and current immutable v0.3 76/59 recognized OK")
+print("Tests Annecy–Alpes–Léman release readiness: historical v0.2/v0.3 evidence replayed and current immutable v0.4 77/60 recognized OK")

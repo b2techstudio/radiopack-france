@@ -79,7 +79,7 @@ assert "memory.frequency" in component
 assert "memory.mode" in component
 assert "memory.comment" in component
 assert "readFileSync" in helper
-assert "../../public/" in helper
+assert 'resolve(process.cwd(), "public", relativePublicPath)' in helper
 assert "buildStandardChannelGroups" in helper
 assert "buildBretagneChannelGroups" in helper
 

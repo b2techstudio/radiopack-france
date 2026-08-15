@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "status": "research_next_version_not_public",
+  "status": "published_immutable_v0_3",
   "created": "2026-08-09",
   "pack": {
     "name": "Annecy–Alpes–Léman",
@@ -54,11 +54,15 @@
     "déduplication des fréquences identiques entre sites et fonctions"
   ],
   "publication": {
-    "public_export_allowed": false,
-    "public_registry_allowed": false,
-    "public_routes_allowed": false,
+    "public_export_allowed": true,
+    "public_registry_allowed": true,
+    "public_routes_allowed": true,
     "review_required": true,
-    "review_completed": false
+    "review_completed": true,
+    "scope_frozen": true,
+    "prepublication_ready": true,
+    "published": true,
+    "publication_record": "research/annecy-alpes-leman-v0.3/publication-record.json"
   },
   "updated": "2026-08-15",
   "latest_revalidation": {
@@ -71,5 +75,15 @@
     "new_unique_rf_memory_count": 11,
     "potential_ceiling_if_f1zth_50m_clears": 77,
     "public_export_allowed": false
+  },
+  "latest_publication": {
+    "sprint": 88,
+    "published_on": "2026-08-15",
+    "version": "0.3",
+    "full_memory_count": 76,
+    "without_aviation_memory_count": 59,
+    "new_unique_rf_memory_count": 11,
+    "full_sha256": "fa4095c0af9b4fa5758449e09c9a32eb5c7cc103e0d90b7c9da8e74c77796af7",
+    "without_aviation_sha256": "e639aff0d045e5a20db3b03fb6175b68452700b4b6ee2e1edf78e9510c2eb649"
   }
 }

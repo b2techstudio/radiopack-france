@@ -127,6 +127,18 @@ required_files = [
     "tools/build_annecy_v03_internal_candidate.py",
     "tests/test_sprint86_annecy_v03_paired_rx_expansion.py",
     "research/sprint-86-summary.md",
+    "research/annecy-alpes-leman-v0.3/current-source-revalidation.json",
+    "research/annecy-alpes-leman-v0.3/release-scope.json",
+    "research/annecy-alpes-leman-v0.3/review-checklist.json",
+    "research/annecy-alpes-leman-v0.3/prepublication-reviewed-memory-map.json",
+    "research/annecy-alpes-leman-v0.3/publication-record.json",
+    "tools/build_annecy_v03_release_candidate.py",
+    "tests/test_sprint87_annecy_v03_prepublication.py",
+    "tests/test_annecy_v03_public_release.py",
+    "research/sprint-87-summary.md",
+    "research/sprint-88-summary.md",
+    "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv",
+    "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv",
     "tests/test_normandie_v04_public_release.py",
     "tests/test_normandie_v05_initialization.py",
     "research/sprint-68-summary.md",
@@ -142,7 +154,7 @@ readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
     "État actuel — Sprint 39",
     "Normandie v0.4** — 142 mémoires RX",
-    "Annecy–Alpes–Léman v0.2** — 65 mémoires RX",
+    "Annecy–Alpes–Léman v0.3** — 76 mémoires RX",
     "Bretagne v0.1",
     "Bretagne v0.3",
     "Normandie v0.4",
@@ -432,12 +444,21 @@ assert mstations["F5ZTQ"]["rx_pack_candidate"] is False
 annecy_next = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/pack-plan.json").read_text(encoding="utf-8"))
 annecy_emergency = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/emergency-relays.json").read_text(encoding="utf-8"))
 assert annecy_next["schema_version"] == "1.1"
-assert annecy_next["status"] == "research_next_version_not_public"
+annecy_v03_record = ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json"
+if annecy_v03_record.exists():
+    assert annecy_next["status"] == "published_immutable_v0_3"
+else:
+    assert annecy_next["status"] == "research_next_version_not_public"
 assert annecy_next["based_on_published_version"] == "0.2"
 assert annecy_next["published_base_is_immutable"] is True
 assert annecy_next["paired_rx"]["satellite_uplink_and_downlink_both_rx"] is True
 assert annecy_next["paired_rx"]["analog_repeater_input_and_output_both_rx"] is True
-assert annecy_next["publication"]["public_export_allowed"] is False
+if annecy_v03_record.exists():
+    assert annecy_next["publication"]["public_export_allowed"] is True
+    assert annecy_next["publication"]["public_registry_allowed"] is True
+    assert annecy_next["publication"]["review_completed"] is True
+else:
+    assert annecy_next["publication"]["public_export_allowed"] is False
 arelays = {item["id"]: item for item in annecy_emergency["candidates"]}
 assert arelays["F1ZJV"]["output_mhz"] == 145.7875
 assert arelays["F1ZYT"]["output_mhz"] == 145.7875
@@ -458,7 +479,7 @@ assert len(review["rows"]) == 65
 regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
 assert len(regions) == 3
 assert {region["slug"] for region in regions} == {"annecy-haute-savoie", "normandie", "bretagne"}
-assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 65
+assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 76
 assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 142
 assert next(region for region in regions if region["slug"] == "bretagne")["memoryCount"] == 151
 
@@ -467,10 +488,11 @@ for expected in [
     'id: "annecy-alpes-leman"',
     'id: "normandie"',
     'id: "bretagne"',
+    'version: "v0.3"',
     'version: "v0.2"',
     'version: "v0.4"',
-    'memoryCount: 65',
-    'memoryCount: 48',
+    'memoryCount: 76',
+    'memoryCount: 59',
     'memoryCount: 142',
     'memoryCount: 151',
 ]:
@@ -478,7 +500,7 @@ for expected in [
 assert registry.count('downloadUrl: "') == 4
 assert 'id: "bretagne"' in registry
 assert 'version: "v0.2"' in registry
-assert 'version: "v0.3"' not in registry
+assert 'version: "v0.3"' in registry
 assert (ROOT / "website/src/pages/regions/bretagne.astro").is_file()
 assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv").is_file()
 assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv").is_file()

@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **86**
-État logique : **0.21.75**
+Sprint courant : **88**
+État logique : **0.21.77**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-86-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-88-summary.md`.
 
 ## État public
 
@@ -16,6 +16,14 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 88 — Annecy v0.3 publiée
+
+Annecy–Alpes–Léman v0.3 est **publiée et immuable à 76 RX / 59 sans aviation**, avec +11 RF uniques, revue 12/12 et zéro bloqueur. Le registre, la page régionale et le générateur utilisent désormais v0.3.
+
+## Sprint 87 — Annecy v0.3 prépublication
+
+Sources courantes, satellites et AIRAC revalidés ; scope figé 76/59 ; F1ZTH 50 MHz et UHF ADRASEC non publiée explicitement hors scope.
 
 ## Sprint 86 — Annecy–Alpes–Léman v0.3 paired RX
 

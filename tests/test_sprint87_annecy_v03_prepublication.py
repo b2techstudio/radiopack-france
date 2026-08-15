@@ -112,8 +112,11 @@ with tempfile.TemporaryDirectory(prefix="radiopack-annecy-v03-release-") as td:
     assert manifest["rules"]["f1zth_50m_excluded"] is True
     assert manifest["rules"]["unpublished_adrasec_frequency_inferred"] is False
 
-# Sprint 87 itself must not publish; explicit publication is a separate guarded step.
-assert not PUBLIC_FULL.exists()
-assert not PUBLIC_NO_AIR.exists()
+# Sprint 87 is prepublication-only; a later explicit publication may make these files exist.
+if PUBLIC_FULL.exists() or PUBLIC_NO_AIR.exists():
+    assert PUBLIC_FULL.is_file() and PUBLIC_NO_AIR.is_file()
+    record = json.loads((ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json").read_text(encoding="utf-8"))
+    assert record["status"] == "published_immutable"
+    assert record["full_memory_count"] == 76 and record["without_aviation_memory_count"] == 59
 
-print("Sprint 87 Annecy v0.3 prepublication: frozen 76/59, +11 RF, 12/12 review, blockers=0, no public mutation OK")
+print("Sprint 87 Annecy v0.3 prepublication: frozen 76/59, +11 RF, 12/12 review, blockers=0 OK")

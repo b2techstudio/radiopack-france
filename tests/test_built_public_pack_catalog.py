@@ -3,26 +3,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "website/dist/downloads"
-
 EXPECTED = {
-    DIST / "annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv": 65,
-    DIST / "annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv": 48,
+    DIST / "annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv": 76,
+    DIST / "annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv": 59,
     DIST / "normandie/radiopack-france-normandie-v0.4.csv": 142,
-    DIST / "bretagne/radiopack-france-bretagne-v0.1.csv": 135,
+    DIST / "bretagne/radiopack-france-bretagne-v0.2.csv": 151,
 }
-
 for path, expected_count in EXPECTED.items():
     assert path.is_file(), f"CSV public absent du build Astro: {path.relative_to(ROOT)}"
     with path.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-
-    assert len(rows) == expected_count, (
-        f"Nombre de mémoires incorrect pour {path.name}: {len(rows)} != {expected_count}"
-    )
-    assert all(row["Duplex"] == "off" for row in rows), f"Duplex non off: {path.name}"
-    assert all(row["Offset"] == "0.000000" for row in rows), f"Offset non nul: {path.name}"
-    assert all(len(row["Name"]) <= 10 for row in rows), f"Nom > 10 caractères: {path.name}"
-    assert len({row["Location"] for row in rows}) == expected_count, f"Location dupliquée: {path.name}"
-    assert len({row["Name"] for row in rows}) == expected_count, f"Nom dupliqué: {path.name}"
-
-print("Tests built public pack catalog: Annecy 65/48 + Normandie 142 + Bretagne 135 OK")
+    assert len(rows) == expected_count
+    assert all(row["Duplex"] == "off" and row["Offset"] == "0.000000" for row in rows)
+    assert all(len(row["Name"]) <= 10 for row in rows)
+    assert len({row["Location"] for row in rows}) == expected_count
+    assert len({row["Name"] for row in rows}) == expected_count
+print("Tests built public pack catalog: Annecy v0.3 76/59 + Normandie 142 + Bretagne v0.2 151 OK")

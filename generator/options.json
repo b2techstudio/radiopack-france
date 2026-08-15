@@ -1,7 +1,7 @@
 {
   "schema_version": "3.0",
   "status": "multi_region_public_generator",
-  "updated": "2026-08-12",
+  "updated": "2026-08-15",
   "purpose": "Définir le comportement du générateur public RadioPack multi-régions et ses options spécifiques par pack.",
   "implementation": {
     "generic_pack_library": "website/src/lib/chirpPack.ts",
@@ -21,9 +21,9 @@
       {
         "id": "annecy-alpes-leman",
         "name": "Annecy–Alpes–Léman",
-        "version": "v0.2",
-        "default_memory_count": 65,
-        "optional_memory_count": 48,
+        "version": "v0.3",
+        "default_memory_count": 76,
+        "optional_memory_count": 59,
         "options": [
           "include_aviation",
           "notam_check"
@@ -57,8 +57,8 @@
       "label": "Inclure les fréquences aviation",
       "affects_csv_content": true,
       "blocks_generation": false,
-      "annecy_memory_count_when_enabled": 65,
-      "annecy_memory_count_when_disabled": 48,
+      "annecy_memory_count_when_enabled": 76,
+      "annecy_memory_count_when_disabled": 59,
       "description": "Sélectionne la variante Annecy publique avec ou sans les blocs aviation validés, sans renuméroter les autres mémoires."
     },
     "notam_check": {

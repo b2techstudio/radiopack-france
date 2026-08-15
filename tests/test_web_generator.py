@@ -52,7 +52,7 @@ for expected in [
     "Générateur web · multi-régions",
     "Normandie · 142",
     "Bretagne · 151",
-    "Annecy · 65 / 48",
+    "Annecy · 76 / 59",
     "Contrôle NOTAM avant génération",
     "J'ai vérifié les NOTAM applicables",
     "SOFIA-Briefing · France",
@@ -89,12 +89,12 @@ for expected in [
     'id: "annecy-alpes-leman"',
     'id: "normandie"',
     'id: "bretagne"',
-    'memoryCount: 65',
-    'memoryCount: 48',
+    'memoryCount: 76',
+    'memoryCount: 59',
     'memoryCount: 142',
     'memoryCount: 151',
-    '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv',
-    '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv',
+    '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv',
+    '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv',
     '/downloads/normandie/radiopack-france-normandie-v0.4.csv',
     '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
@@ -177,4 +177,4 @@ assert options["options"]["notam_check"]["scope"] == ["annecy-alpes-leman"]
 assert options["options"]["notam_check"]["blocks_generation"] is False
 assert options["options"]["notam_check"]["affects_csv_content"] is False
 
-print("Tests RadioPack Sprint 23 multi-region public generator: Bretagne v0.2 151 + Normandie 142 + Annecy 65/48 OK")
+print("Tests RadioPack Sprint 23 multi-region public generator: Bretagne v0.2 151 + Normandie 142 + Annecy v0.3 76/59 OK")

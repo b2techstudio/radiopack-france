@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.21.77 - 2026-08-15
+
+- **Sprint 88** : publication immuable d'Annecy–Alpes–Léman v0.3 à **76 mémoires RX / 59 sans aviation**.
+- +11 RF uniques paired RX par rapport à v0.2 ; registre, générateur et page régionale basculés sur v0.3.
+- SHA-256 publics enregistrés dans `research/annecy-alpes-leman-v0.3/publication-record.json`.
+- F1ZTH 50.5375 MHz et l'UHF ADRASEC non publiée restent explicitement hors scope.
+
+## 0.21.76 - 2026-08-15
+
+- **Sprint 87** : prépublication Annecy v0.3 figée à 76/59, checklist 12/12, zéro bloqueur.
+- Revalidation des sources radioamateur, satellites AMSAT et cycles aviation courants ; builder de release déterministe ajouté.
+
 ## 0.21.75 - 2026-08-15
 
 - **Sprint 86** : premier candidat interne Annecy–Alpes–Léman v0.3, **76 mémoires RX / 59 sans aviation**, soit **+11 RF uniques** depuis la v0.2 immuable 65/48.

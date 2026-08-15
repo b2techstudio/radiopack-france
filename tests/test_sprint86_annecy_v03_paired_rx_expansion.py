@@ -35,9 +35,15 @@ assert active["internal_candidate_memory_count"] == 76
 assert active["internal_candidate_without_aviation_memory_count"] == 59
 assert active["internal_candidate_new_memory_count"] == 11
 assert active["known_potential_ceiling_if_f1zth_50m_clears"] == 77
-assert active["public_export_allowed"] is False
-assert active["public_registry_allowed"] is False
-assert active["public_release_ready"] is False
+publication_record = ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json"
+if publication_record.exists():
+    assert active["public_export_allowed"] is True
+    assert active["public_registry_allowed"] is True
+    assert active["public_release_ready"] is True
+else:
+    assert active["public_export_allowed"] is False
+    assert active["public_registry_allowed"] is False
+    assert active["public_release_ready"] is False
 
 expansion = json.loads(EXPANSION.read_text(encoding="utf-8"))
 assert expansion["status"] == "paired_rx_expansion_reviewed_sprint86_not_public"
@@ -114,9 +120,14 @@ assert plan["memory_plan"]["expected_memory_count"] == 76
 assert plan["memory_plan"]["expected_memory_count_without_aviation"] == 59
 assert plan["memory_plan"]["new_unique_rf_memory_count"] == 11
 assert plan["memory_plan"]["potential_ceiling_if_f1zth_50m_clears"] == 77
-assert plan["publication"]["public_export_allowed"] is False
-assert plan["publication"]["public_registry_allowed"] is False
-assert plan["publication"]["review_completed"] is False
+if publication_record.exists():
+    assert plan["publication"]["public_export_allowed"] is True
+    assert plan["publication"]["public_registry_allowed"] is True
+    assert plan["publication"]["review_completed"] is True
+else:
+    assert plan["publication"]["public_export_allowed"] is False
+    assert plan["publication"]["public_registry_allowed"] is False
+    assert plan["publication"]["review_completed"] is False
 
 
 def build(builder: Path, include_aviation: bool):
@@ -165,7 +176,15 @@ for include_aviation, expected_base_count, expected_v03_count in [(True, 65, 76)
         v03_temp.cleanup()
 
 registry = REGISTRY.read_text(encoding="utf-8")
-assert "radiopack-france-annecy-alpes-leman-v0.2.csv" in registry
-assert "radiopack-france-annecy-alpes-leman-v0.3.csv" not in registry
+old_full_route = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
+old_no_air_route = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"
+assert old_full_route.is_file() and old_no_air_route.is_file()
+assert "buildAnnecyCsv(true)" in old_full_route.read_text(encoding="utf-8")
+assert "buildAnnecyCsv(false)" in old_no_air_route.read_text(encoding="utf-8")
+publication_record = ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json"
+if publication_record.exists():
+    assert "radiopack-france-annecy-alpes-leman-v0.3.csv" in registry
+else:
+    assert "radiopack-france-annecy-alpes-leman-v0.3.csv" not in registry
 
 print("Sprint 86 Annecy v0.3 paired RX: 65 -> 76 (+11), no-aviation 48 -> 59, F1ZTH 50 MHz deferred, no public mutation OK")

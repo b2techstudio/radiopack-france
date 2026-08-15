@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 86 / 0.21.75 — Annecy–Alpes–Léman v0.3 dispose d’un premier candidat interne à 76 mémoires RX (59 sans aviation), soit +11 RF uniques, sans publication.**
+**État courant : Sprint 88 / 0.21.77 — Annecy–Alpes–Léman v0.3 est publiée et immuable à 76 mémoires RX (59 sans aviation), +11 RF uniques par rapport à v0.2.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 86 / 0.21.75
+## État actuel — Sprint 88 / 0.21.77
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -12,7 +12,7 @@ Packs publics immuables :
 
 - **Normandie v0.4** — 142 mémoires RX ;
 - Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
-- **Annecy–Alpes–Léman v0.2** — 65 mémoires RX, variante 48 sans aviation ;
+- **Annecy–Alpes–Léman v0.3** — 76 mémoires RX, variante 59 sans aviation, publiée et immuable ;
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
@@ -21,6 +21,14 @@ Recherche : **Annecy–Alpes–Léman v0.3 = 76 mémoires RX / 59 sans aviation,
 Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
 
 Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md` et `research/sprint-86-summary.md`.
+
+## Sprint 88 — publication Annecy–Alpes–Léman v0.3
+
+La **v0.3 est publiée et immuable à 76 RX / 59 sans aviation**. Elle ajoute 11 RF uniques paired RX, reste RX-only, déduplique les fréquences identiques et conserve F1ZTH 50.5375 MHz ainsi que l'UHF ADRASEC non publiée hors scope. SHA-256 et preuve : `research/annecy-alpes-leman-v0.3/publication-record.json`.
+
+## Sprint 87 — prépublication Annecy–Alpes–Léman v0.3
+
+Scope figé **76/59**, checklist **12/12**, bloqueurs **0**, sources radioamateur/satellites/AIRAC revalidées avant publication.
 
 ## Sprint 86 — Annecy–Alpes–Léman v0.3 paired RX
 

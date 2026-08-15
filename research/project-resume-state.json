@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 86,
-  "state_version": "0.21.75",
+  "current_sprint": 88,
+  "state_version": "0.21.77",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -13,10 +13,14 @@
       "previous_memory_count": 139
     },
     "annecy_alpes_leman": {
-      "version": "0.2",
-      "memory_count": 65,
-      "without_aviation_memory_count": 48,
-      "immutable": true
+      "version": "0.3",
+      "memory_count": 76,
+      "without_aviation_memory_count": 59,
+      "immutable": true,
+      "previous_immutable_version": "0.2",
+      "previous_memory_count": 65,
+      "previous_without_aviation_memory_count": 48,
+      "publication_record": "research/annecy-alpes-leman-v0.3/publication-record.json"
     },
     "bretagne": {
       "version": "0.2",
@@ -30,32 +34,41 @@
   "active_work": {
     "pack": "Annecy–Alpes–Léman",
     "target_version": "0.3",
-    "status": "paired_rx_internal_candidate_76_new11_not_public",
+    "status": "published_immutable_v0_3_complete",
     "published_base_version": "0.2",
     "published_base_memory_count": 65,
     "published_base_without_aviation_memory_count": 48,
     "published_base_is_immutable": true,
+    "public_version": "0.3",
+    "public_memory_count": 76,
+    "public_without_aviation_memory_count": 59,
+    "new_unique_rf_memory_count": 11,
+    "aviation_memory_count": 17,
+    "review_completed": true,
+    "review_completed_count": 12,
+    "review_total_count": 12,
+    "publication_blocker_count": 0,
+    "scope_frozen": true,
+    "prepublication_ready": true,
+    "public_export_allowed": true,
+    "public_registry_allowed": true,
+    "public_routes_allowed": true,
+    "public_release_ready": true,
+    "published": true,
+    "full_sha256": "fa4095c0af9b4fa5758449e09c9a32eb5c7cc103e0d90b7c9da8e74c77796af7",
+    "without_aviation_sha256": "e639aff0d045e5a20db3b03fb6175b68452700b4b6ee2e1edf78e9510c2eb649",
+    "publication_record": "research/annecy-alpes-leman-v0.3/publication-record.json",
+    "release_scope": "research/annecy-alpes-leman-v0.3/release-scope.json",
+    "review_checklist": "research/annecy-alpes-leman-v0.3/review-checklist.json",
+    "current_source_revalidation": "research/annecy-alpes-leman-v0.3/current-source-revalidation.json",
+    "f1zth_50m_frequency_mhz": 50.5375,
+    "f1zth_50m_promoted": false,
+    "f1zth_50m_scope_excluded": true,
+    "unpublished_adrasec_frequency_inferred": false,
     "internal_candidate_memory_count": 76,
     "internal_candidate_without_aviation_memory_count": 59,
     "internal_candidate_new_memory_count": 11,
-    "known_potential_ceiling_if_f1zth_50m_clears": 77,
-    "paired_rx_expansion": "research/annecy-alpes-leman-v0.3/paired-rx-expansion.json",
-    "pack_plan": "research/annecy-alpes-leman-v0.3/pack-plan.json",
-    "internal_candidate_builder": "tools/build_annecy_v03_internal_candidate.py",
-    "sprint_guard": "tests/test_sprint86_annecy_v03_paired_rx_expansion.py",
-    "new_satellite_uplink_unique_rf_count": 2,
-    "new_france_paired_rx_unique_rf_count": 7,
-    "new_switzerland_paired_rx_unique_rf_count": 2,
-    "f1zth_50m_frequency_mhz": 50.5375,
-    "f1zth_50m_promoted": false,
-    "f1zth_50m_gate": "device_firmware_rx_compatibility_not_project_verified",
-    "unpublished_adrasec_frequency_inferred": false,
-    "public_export_allowed": false,
-    "public_registry_allowed": false,
-    "public_routes_allowed": false,
-    "public_release_ready": false,
-    "published": false,
-    "review_completed": false
+    "known_potential_ceiling_if_f1zth_50m_clears": 77
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -231,7 +244,14 @@
     "research/sprint-85-summary.md",
     "research/annecy-alpes-leman-v0.3/paired-rx-expansion.json",
     "research/annecy-alpes-leman-v0.3/pack-plan.json",
-    "research/sprint-86-summary.md"
+    "research/sprint-86-summary.md",
+    "research/annecy-alpes-leman-v0.3/current-source-revalidation.json",
+    "research/annecy-alpes-leman-v0.3/release-scope.json",
+    "research/annecy-alpes-leman-v0.3/review-checklist.json",
+    "research/annecy-alpes-leman-v0.3/prepublication-reviewed-memory-map.json",
+    "research/annecy-alpes-leman-v0.3/publication-record.json",
+    "research/sprint-87-summary.md",
+    "research/sprint-88-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -979,5 +999,26 @@
     "potential_ceiling_if_f1zth_50m_clears": 77,
     "f1zth_50m_promoted": false,
     "public_export_allowed": false
+  },
+  "latest_sprint87_annecy_v0_3_prepublication": {
+    "sprint": 87,
+    "state_version": "0.21.76",
+    "review": "12/12",
+    "blocker_count": 0,
+    "full_memory_count": 76,
+    "without_aviation_memory_count": 59,
+    "scope_frozen": true
+  },
+  "latest_sprint88_annecy_v0_3_publication": {
+    "sprint": 88,
+    "state_version": "0.21.77",
+    "published_on": "2026-08-15",
+    "version": "0.3",
+    "full_memory_count": 76,
+    "without_aviation_memory_count": 59,
+    "new_unique_rf_memory_count": 11,
+    "full_sha256": "fa4095c0af9b4fa5758449e09c9a32eb5c7cc103e0d90b7c9da8e74c77796af7",
+    "without_aviation_sha256": "e639aff0d045e5a20db3b03fb6175b68452700b4b6ee2e1edf78e9510c2eb649",
+    "immutable": true
   }
 }

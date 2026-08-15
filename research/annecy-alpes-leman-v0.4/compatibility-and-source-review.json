@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "status": "ready_for_candidate",
+  "pack": "Annecy–Alpes–Léman",
+  "target_version": "0.4",
+  "checked_on": "2026-08-15",
+  "based_on_public_version": "0.3",
+  "base_full_memory_count": 76,
+  "base_without_aviation_memory_count": 59,
+  "proposed_full_memory_count": 77,
+  "proposed_without_aviation_memory_count": 60,
+  "new_unique_rf_memory_count": 1,
+  "candidate_frequency_mhz": 50.5375,
+  "candidate_name": "ZTH-6M",
+  "candidate_mode": "FM",
+  "candidate_step_khz": 12.5,
+  "candidate_role": "F1ZTH Bourgoin-Jallieu 6 m output, RX only",
+  "sources": [
+    {
+      "id": "REF-F1ZTH-CURRENT",
+      "authority": "Réseau des Émetteurs Français (REF)",
+      "url": "https://www.r-e-f.org/index.php?Itemid=492&id=1279&option=com_content&view=article",
+      "supports": "F1ZTH Bourgoin-Jallieu active; 50.5375 MHz is an analog FM transparent output, CTCSS 123.0 Hz context"
+    },
+    {
+      "id": "QUANSHENG-FCC-MANUAL-6401561",
+      "authority": "Quansheng Electronics / FCC exhibit",
+      "url": "https://fccid.io/XBPUV-K5/User-Manual/User-manual-6401561.pdf",
+      "supports": "Stock UV-K5 manual states 50–600 MHz receiving"
+    },
+    {
+      "id": "CHIRP-UVK5-STOCK-BANDS",
+      "authority": "CHIRP upstream UV-K5 driver",
+      "url": "https://github.com/kk7ds/chirp/blob/cb7d5e2afbf6e0ecd6d4bc0be1710b3f5fac7a07/chirp/drivers/uvk5.py",
+      "supports": "Stock UV-K5 BANDS includes 50.0–76.0 MHz; modified-firmware range is represented separately"
+    }
+  ],
+  "decision": {
+    "stock_uvk5_receive_baseline_cleared": true,
+    "chirp_stock_driver_memory_band_cleared": true,
+    "current_public_rf_source_cleared": true,
+    "promotion_to_v0_4_candidate_allowed": true,
+    "field_validation_required": false,
+    "private_or_unpublished_frequency_used": false
+  },
+  "rules": {
+    "rx_only": true,
+    "duplex": "off",
+    "offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "published_v0_3_remains_immutable": true,
+    "unpublished_adrasec_frequency_inferred": false
+  }
+}

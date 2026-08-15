@@ -16,3 +16,18 @@ Le registre public, le générateur et la page régionale pointent vers v0.3. La
 Exclusions explicites : F1ZTH 50.5375 MHz tant que la baseline UV-K5/firmware 50 MHz n'est pas garantie ; aucune fréquence UHF ADRASEC non publiée n'est inférée.
 
 La publication est RX-only, dédupliquée et sans remplissage artificiel. `publication-record.json` est la preuve immuable des deux CSV publics.
+
+## Clôture
+
+HEAD propre avant clôture : `3309697d85d5f2e9aa4127d6319ae80f2ed74ed5`.
+
+Validation avant clôture :
+
+- RadioPack CI run 951 / `31887800292` : success ;
+- 63 contrôles dépôt : success ;
+- Astro production build : success ;
+- catalogue buildé Annecy v0.3 76/59 : success ;
+- Annecy v0.3 Release Guards run 15 / `31887800294` : success ;
+- workflow archive du HEAD propre : skipped comme prévu.
+
+Tous les workflows, triggers et helpers temporaires de publication/prépublication ont été supprimés. Le commit de clôture n'ajoute que cette traçabilité et le marqueur `[reference-archive]` ; aucune donnée radio, aucun CSV public, aucun registre ni règle de publication n'est modifié.

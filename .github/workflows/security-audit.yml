@@ -92,31 +92,24 @@ jobs:
           grep -F "Content-Security-Policy:" dist/_headers
           grep -F "Strict-Transport-Security: max-age=31536000" dist/_headers
 
-  live-site-security:
-    name: Live Cloudflare response security
+  live-pages-security:
+    name: Live Cloudflare Pages response security
     if: ${{ github.event_name != 'pull_request' }}
     needs:
       - website-security
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Verify live HTTPS response and security headers when DNS exists
+      - name: Verify deployed Pages origin security headers
         shell: bash
         run: |
           set -euo pipefail
-          host="radiopack.b2tech.studio"
-          url="https://${host}/"
-
-          if ! getent ahosts "$host" >/dev/null 2>&1; then
-            echo "::warning title=Live security check deferred::${host} does not resolve from the public GitHub runner. Repository/build security checks remain enforced; live HTTP headers cannot be certified until DNS is published."
-            exit 0
-          fi
-
+          url="https://radiopack-france.pages.dev/"
           headers="$(mktemp)"
           body="$(mktemp)"
           ok=0
 
-          for attempt in $(seq 1 12); do
+          for attempt in $(seq 1 18); do
             : > "$headers"
             : > "$body"
             if curl --fail --silent --show-error --location \
@@ -130,12 +123,12 @@ jobs:
                 break
               fi
             fi
-            echo "Live hardening not visible yet (attempt ${attempt}/12)"
+            echo "Live Pages hardening not visible yet (attempt ${attempt}/18)"
             sleep 10
           done
 
           if [[ "$ok" -ne 1 ]]; then
-            echo "Live site resolves but does not expose the required security headers" >&2
+            echo "Deployed Pages origin did not expose the required security headers" >&2
             cat "$headers" >&2
             exit 1
           fi
@@ -145,4 +138,31 @@ jobs:
           grep -Eiq '^permissions-policy:' "$headers"
           grep -Eiq '^content-type: text/html' "$headers"
           test -s "$body"
-          echo "Live Cloudflare security headers verified"
+          echo "Live Cloudflare Pages security headers verified"
+
+  custom-domain-state:
+    name: Custom domain DNS state
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Report custom-domain reachability
+        shell: bash
+        run: |
+          set -euo pipefail
+          host="radiopack.b2tech.studio"
+          url="https://${host}/"
+
+          if ! getent ahosts "$host" >/dev/null 2>&1; then
+            echo "::warning title=Custom domain DNS pending::${host} does not currently resolve publicly. The deployed Pages origin is audited independently."
+            exit 0
+          fi
+
+          headers="$(mktemp)"
+          curl --fail --silent --show-error --location --connect-timeout 10 --max-time 20 \
+            --dump-header "$headers" --output /dev/null "$url"
+          grep -Eiq '^content-security-policy: .*default-src .self.' "$headers"
+          grep -Eiq '^strict-transport-security: max-age=31536000' "$headers"
+          grep -Eiq '^x-frame-options: DENY' "$headers"
+          grep -Eiq '^x-content-type-options: nosniff' "$headers"
+          echo "Custom domain resolves and exposes the required security headers"

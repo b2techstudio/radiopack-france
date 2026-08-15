@@ -1,0 +1,54 @@
+---
+import DesignLabLayout from "../../layouts/DesignLabLayout.astro";
+import { publicPacks } from "../../lib/packRegistry";
+const packs = publicPacks.map((pack)=>({...pack,count:pack.variants.find((v)=>v.id===pack.defaultVariant)?.memoryCount ?? pack.variants[0]?.memoryCount ?? 0}));
+---
+<DesignLabLayout title="Industrial Signal" description="Concept industriel et technique pour RadioPack France." concept="industrial-signal" themeColor="#0A0D10">
+  <div class="industrial-page">
+    <section class="hero wrap">
+      <div class="topline"><span>RPF / PUBLIC RADIO DATA SYSTEM</span><span>FRANCE / 2026</span></div>
+      <div class="hero-grid">
+        <div class="hero-title">
+          <small>PRODUCT 04 / INDUSTRIAL SIGNAL</small>
+          <h1>RADIO<br />PACK<span>.</span></h1>
+        </div>
+        <div class="hero-info">
+          <div class="status"><i></i><span>SYSTEM STATUS</span><strong>OPERATIONAL</strong></div>
+          <p>Une direction brute, lisible et technique : signalétique, grandes données, bordures nettes et hiérarchie sans effets inutiles.</p>
+          <a href="/generateur">BUILD A PACK <b>→</b></a>
+        </div>
+      </div>
+      <div class="ticker"><span>RX ONLY</span><i></i><span>PUBLIC SOURCES</span><i></i><span>CHIRP CSV</span><i></i><span>IMMUTABLE RELEASES</span><i></i><span>CI VERIFIED</span></div>
+    </section>
+
+    <section class="numbers wrap">
+      {packs.map((pack,index)=>(
+        <a class="number-row" href={`/regions/${pack.regionSlug}`}>
+          <div class="index">0{index+1}</div>
+          <div class="region"><small>{pack.version.toUpperCase()} / REGION</small><strong>{pack.name}</strong></div>
+          <div class="big-number">{pack.count}</div>
+          <div class="meta"><span>MEMORIES</span><strong>RX</strong></div>
+          <div class="open">↗</div>
+        </a>
+      ))}
+    </section>
+
+    <section class="spec-grid wrap">
+      <div class="spec intro"><small>02 / SYSTEM</small><h2>Pas de décoration.<br />Que du signal utile.</h2></div>
+      <div class="spec"><span>A</span><h3>SOURCES</h3><p>Données publiques vérifiées et documentées avant promotion.</p></div>
+      <div class="spec"><span>B</span><h3>POLICY</h3><p>Transmission désactivée dans les packs publics. Réception uniquement.</p></div>
+      <div class="spec"><span>C</span><h3>OUTPUT</h3><p>CSV CHIRP reproductibles, versionnés et testés en CI.</p></div>
+      <div class="spec action"><span>D</span><h3>GENERATOR</h3><a href="/generateur">OPEN TOOL →</a></div>
+    </section>
+
+    <section class="footer-plate wrap"><span>RADIOPACK FRANCE</span><span>B2TECH STUDIO</span><span>PUBLIC BUILD / RX ONLY</span></section>
+  </div>
+</DesignLabLayout>
+
+<style>
+  .industrial-page{min-height:100vh;background:#0a0d10;color:#d9e0e8;font-family:Arial,Helvetica,sans-serif}.wrap{width:min(1280px,calc(100% - 36px));margin-inline:auto}.hero{padding:48px 0 0}.topline{display:flex;justify-content:space-between;padding:12px 0;border-block:1px solid #303840;color:#7f8a96;font:700 .63rem/1 ui-monospace,monospace;letter-spacing:.14em}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1px;background:#313940;border-bottom:1px solid #313940}.hero-title,.hero-info{background:#0a0d10}.hero-title{padding:70px 0 54px}.hero-title small{color:#ff9d00;font:800 .67rem/1 ui-monospace,monospace;letter-spacing:.16em}.hero-title h1{margin:32px 0 0;color:#edf1f5;font-size:clamp(5rem,12vw,11rem);line-height:.72;letter-spacing:-.095em;font-weight:950}.hero-title h1 span{color:#ff9d00}.hero-info{display:flex;flex-direction:column;justify-content:flex-end;padding:45px}.status{display:grid;grid-template-columns:10px 1fr;gap:7px 12px;align-items:center;margin-bottom:auto}.status i{grid-row:1/span 2;width:8px;height:8px;background:#8fff00;box-shadow:0 0 10px rgba(143,255,0,.6)}.status span{color:#6f7983;font:700 .57rem ui-monospace,monospace;letter-spacing:.12em}.status strong{font:800 .82rem ui-monospace,monospace}.hero-info p{max-width:470px;margin:90px 0 28px;color:#8c97a2;line-height:1.7}.hero-info a{align-self:flex-start;padding:13px 18px;background:#ff9d00;color:#111;font:900 .7rem ui-monospace,monospace;letter-spacing:.08em}.hero-info b{margin-left:28px}.ticker{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0;border-bottom:1px solid #303840;color:#8e98a3;font:800 .6rem ui-monospace,monospace;letter-spacing:.12em;overflow:hidden}.ticker i{flex:1;height:1px;background:#2c343b}
+  .numbers{padding:80px 0}.number-row{display:grid;grid-template-columns:80px 1.2fr .7fr 150px 50px;gap:20px;align-items:center;min-height:160px;border-top:1px solid #303840;transition:.16s ease}.number-row:last-child{border-bottom:1px solid #303840}.number-row:hover{background:#10151a}.index{color:#5d6873;font:700 .7rem ui-monospace,monospace}.region{display:grid;gap:9px}.region small{color:#ff9d00;font:800 .58rem ui-monospace,monospace;letter-spacing:.14em}.region strong{font-size:clamp(1.6rem,3.7vw,3.4rem);line-height:.92;letter-spacing:-.05em}.big-number{color:#f1f4f6;font-size:clamp(4rem,8vw,7.5rem);font-weight:950;line-height:.75;letter-spacing:-.08em}.meta{display:grid;gap:10px}.meta span{color:#69747f;font:700 .58rem ui-monospace,monospace;letter-spacing:.1em}.meta strong{color:#00aeef;font:900 1.2rem ui-monospace,monospace}.open{justify-self:end;color:#ff9d00;font-size:1.7rem}
+  .spec-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #303840;border-left:1px solid #303840;margin-bottom:70px}.spec{min-height:250px;padding:25px;border-right:1px solid #303840;border-bottom:1px solid #303840}.spec.intro{grid-column:span 2;background:#d9e0e8;color:#0a0d10}.spec small{font:800 .6rem ui-monospace,monospace;letter-spacing:.14em}.spec h2{margin:38px 0 0;font-size:clamp(2rem,4vw,3.6rem);line-height:.92;letter-spacing:-.055em}.spec>span{color:#ff9d00;font:900 1.4rem ui-monospace,monospace}.spec h3{margin:58px 0 14px;color:#e7ecf0;font:900 1rem ui-monospace,monospace;letter-spacing:.08em}.spec p{color:#808b95;font-size:.82rem;line-height:1.6}.spec.action{background:#ff9d00;color:#0a0d10}.spec.action span,.spec.action h3{color:#0a0d10}.spec.action a{display:inline-block;margin-top:35px;border-bottom:2px solid #0a0d10;font:900 .75rem ui-monospace,monospace}.footer-plate{display:flex;justify-content:space-between;gap:20px;padding:18px 0 45px;color:#626d77;font:800 .56rem ui-monospace,monospace;letter-spacing:.15em}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-info{min-height:330px;padding:28px}.number-row{grid-template-columns:50px 1fr auto 35px}.number-row .big-number{grid-column:2}.number-row .meta{grid-column:3;grid-row:1/span 2}.number-row .open{grid-column:4;grid-row:1/span 2}.spec-grid{grid-template-columns:1fr 1fr}.spec.intro{grid-column:span 2}}
+  @media(max-width:580px){.topline span:last-child{display:none}.hero-title{padding-top:54px}.hero-info p{margin-top:55px}.ticker{justify-content:flex-start}.ticker i{min-width:25px}.number-row{min-height:140px;gap:8px}.region strong{font-size:1.4rem}.big-number{font-size:3.7rem}.spec-grid{grid-template-columns:1fr}.spec.intro{grid-column:auto}.footer-plate{flex-direction:column}}
+</style>

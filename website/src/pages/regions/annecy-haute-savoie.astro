@@ -3,27 +3,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Annecy–Alpes–Léman v0.3 — RadioPack France"
-  description="Pack RX-only Annecy–Alpes–Léman v0.3 : 76 mémoires France–Suisse, avec variante 59 mémoires sans aviation."
+  title="Annecy–Alpes–Léman v0.4 — RadioPack France"
+  description="Pack RX-only Annecy–Alpes–Léman v0.4 : 77 mémoires France–Suisse, avec variante 60 mémoires sans aviation."
 >
   <section class="section">
     <div class="container page-grid">
       <div class="copy">
-        <span class="eyebrow">Disponible — v0.3</span>
+        <span class="eyebrow">Disponible — v0.4</span>
         <h1>Annecy–Alpes–<br /><span class="gradient-text">Léman</span></h1>
         <p class="lead">
-          La v0.3 publie 76 mémoires RX et applique la politique paired RX aux satellites split,
-          relais analogiques et transpondeurs sélectionnés, sans dupliquer une même fréquence RF.
+          La v0.4 publie 77 mémoires RX. Elle conserve le périmètre validé de la v0.3 et ajoute
+          F1ZTH sur 50.5375 MHz après validation de la source publique et de la compatibilité UV-K5 / CHIRP stock.
         </p>
 
         <div class="button-row">
-          <a class="button button-primary" href="/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv" download>Télécharger le CSV v0.3</a>
+          <a class="button button-primary" href="/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv" download>Télécharger le CSV v0.4</a>
           <a class="button button-orange" href="/generateur">Personnaliser le pack</a>
           <a class="button button-secondary" href="/documentation">Méthode et sécurité</a>
         </div>
 
         <div class="card release-note">
-          <strong>76 mémoires avec aviation · 59 sans aviation</strong>
+          <strong>77 mémoires avec aviation · 60 sans aviation</strong>
           <p>La variante sans aviation retire uniquement les 17 mémoires aviation. Toutes les mémoires restent RX-only avec <code>Duplex=off</code> et <code>Offset=0.000000</code>.</p>
         </div>
 
@@ -32,7 +32,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <div class="scope-grid">
             <div><span class="badge">National</span><p>16 PMR446 et le socle APRS / ISS / appels.</p></div>
             <div><span class="badge badge-green">Espace</span><p>13 mémoires APRS, ISS, satellites FM et montées split RX dédupliquées.</p></div>
-            <div><span class="badge badge-orange">Radioamateur</span><p>30 mémoires France/Suisse, dont les deux côtés RX des relais et transpondeurs retenus.</p></div>
+            <div><span class="badge badge-orange">Radioamateur</span><p>31 mémoires France/Suisse, dont F1ZTH 50 MHz et les deux côtés RX des relais et transpondeurs retenus.</p></div>
             <div><span class="badge">Aviation</span><p>17 mémoires AIRAC courantes au 15 août 2026.</p></div>
           </div>
         </div>
@@ -40,30 +40,31 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <div class="work-grid grid-2">
           <article class="card"><span class="badge badge-green">16</span><h3>PMR446</h3><p>Les 16 canaux analogiques en écoute RX.</p></article>
           <article class="card"><span class="badge">13</span><h3>APRS / espace / appels</h3><p>APRS/ISS, satellites FM et montées split RX.</p></article>
-          <article class="card"><span class="badge badge-orange">30</span><h3>Radioamateur</h3><p>France et Suisse avec paired RX et déduplication.</p></article>
+          <article class="card"><span class="badge badge-orange">31</span><h3>Radioamateur</h3><p>France et Suisse avec paired RX, déduplication et réception 50 MHz validée.</p></article>
           <article class="card"><span class="badge badge-green">17</span><h3>Aviation</h3><p>France/bassin genevois et Suisse, cycle courant lors de la publication.</p></article>
         </div>
 
         <div class="card conflict">
-          <h2>Exclusions documentées</h2>
+          <h2>Validation 50 MHz et exclusions</h2>
           <p>
-            F1ZTH 50.5375 MHz reste hors v0.3 car RadioPack ne garantit pas encore une baseline UV-K5/firmware commune pour le 50 MHz.
-            La liaison UHF ADRASEC évoquée pour F1ZJV/F1ZYT n'est pas ajoutée : aucune fréquence publique exploitable n'est publiée et aucune donnée opérationnelle privée n'est inférée.
-            Les omissions aviation déjà documentées de la v0.2 ne sont pas comblées par des sources secondaires non validées.
+            F1ZTH 50.5375 MHz est ajouté en v0.4 : le REF le publie actif, la documentation constructeur couvre la réception 50–600 MHz et le pilote CHIRP UV-K5 stock accepte la bande 50–76 MHz sans firmware modifié.
+            La liaison UHF ADRASEC évoquée pour F1ZJV/F1ZYT reste exclue : aucune fréquence publique exploitable n'est publiée et aucune donnée opérationnelle privée n'est inférée.
+            Les omissions aviation déjà documentées restent hors périmètre tant qu'une source primaire courante ne justifie pas leur ajout.
           </p>
         </div>
       </div>
 
       <aside class="card status-card">
         <span class="badge badge-green">Publié</span>
-        <h3>Version v0.3</h3>
-        <div class="memory-count"><strong>76</strong><span>mémoires RX</span></div>
-        <p class="status-copy">Revue 12/12, zéro bloqueur, +11 RF uniques par rapport à la v0.2. Variante 59 mémoires sans aviation.</p>
+        <h3>Version v0.4</h3>
+        <div class="memory-count"><strong>77</strong><span>mémoires RX</span></div>
+        <p class="status-copy">Revue 12/12, zéro bloqueur, +1 RF unique par rapport à la v0.3. Variante 60 mémoires sans aviation.</p>
         <hr />
         <h4>Contrôles</h4>
         <ul>
-          <li>Sources radioamateur courantes : validées</li>
-          <li>Satellites AMSAT : recontrôlés</li>
+          <li>F1ZTH / REF courant : validé</li>
+          <li>Réception UV-K5 stock 50 MHz : validée</li>
+          <li>Pilote CHIRP stock 50–76 MHz : validé</li>
           <li>AIRAC France/Suisse : courant à la publication</li>
           <li>Déduplication RF : validée</li>
         </ul>

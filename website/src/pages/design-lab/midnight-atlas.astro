@@ -1,0 +1,70 @@
+---
+import DesignLabLayout from "../../layouts/DesignLabLayout.astro";
+import { publicPacks } from "../../lib/packRegistry";
+const byId = Object.fromEntries(publicPacks.map((pack)=>[pack.id,pack]));
+const packData = [
+  { id:"normandie", x:39, y:28, accent:"#9146ff", code:"NOR" },
+  { id:"bretagne", x:22, y:39, accent:"#00b2ff", code:"BRE" },
+  { id:"annecy-alpes-leman", x:70, y:66, accent:"#00e5ff", code:"AAL" },
+].map((item)=>({ ...item, pack:byId[item.id], count:byId[item.id].variants.find((v)=>v.id===byId[item.id].defaultVariant)?.memoryCount ?? byId[item.id].variants[0]?.memoryCount ?? 0 }));
+---
+<DesignLabLayout title="Midnight Radio Atlas" description="Concept cartographique nocturne pour RadioPack France." concept="midnight-atlas" themeColor="#060A14">
+  <div class="atlas-page">
+    <section class="atlas-hero wrap">
+      <div class="atlas-copy">
+        <span class="atlas-kicker">RADIOPACK / TERRITOIRES CONNECTÉS</span>
+        <h1>La France<br />sur <em>écoute.</em></h1>
+        <p>Une expérience centrée sur le territoire : les zones disponibles s’illuminent, les packs deviennent des points d’entrée, et la cartographie remplace l’empilement de cartes génériques.</p>
+        <div class="atlas-actions"><a href="/regions">Explorer les territoires <b>→</b></a><a href="/generateur">Générateur</a></div>
+        <div class="legend"><span><i class="p"></i>Pack disponible</span><span><i class="c"></i>Fréquences publiques</span><span><i class="r"></i>RX uniquement</span></div>
+      </div>
+      <div class="map-stage">
+        <div class="map-label top">FRANCE / RADIO LAYER</div>
+        <svg viewBox="0 0 700 700" role="img" aria-label="Carte stylisée de France avec Bretagne, Normandie et Alpes-Léman illuminées">
+          <defs>
+            <linearGradient id="land" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0c1b34"/><stop offset="1" stop-color="#08101d"/></linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g class="rings"><circle cx="350" cy="350" r="280"/><circle cx="350" cy="350" r="210"/><circle cx="350" cy="350" r="140"/></g>
+          <path class="france" d="M337 83 L455 112 L546 190 L558 308 L518 410 L571 487 L498 602 L380 623 L286 579 L219 619 L174 526 L109 445 L139 348 L104 264 L179 194 L234 105 Z"/>
+          <g class="contours"><path d="M162 250 C260 200 380 205 532 260"/><path d="M128 356 C245 310 406 310 545 355"/><path d="M145 462 C275 416 425 430 536 470"/><path d="M210 150 C245 260 250 430 220 560"/><path d="M345 105 C325 250 330 445 365 610"/><path d="M470 145 C430 295 450 430 500 545"/></g>
+          <g class="route-lines"><path d="M258 244 L165 330 L486 462"/><path d="M258 244 L486 462"/><circle cx="258" cy="244" r="5"/><circle cx="165" cy="330" r="5"/><circle cx="486" cy="462" r="5"/></g>
+          <g class="nodes" filter="url(#glow)"><circle class="n-purple" cx="258" cy="244" r="11"/><circle class="n-blue" cx="165" cy="330" r="11"/><circle class="n-cyan" cx="486" cy="462" r="11"/></g>
+          <g class="node-labels"><text x="276" y="239">NORMANDIE</text><text x="183" y="350">BRETAGNE</text><text x="503" y="482">ALPES / LÉMAN</text></g>
+        </svg>
+        <div class="map-label bottom">03 ZONES ACTIVES · PUBLIC RX</div>
+      </div>
+    </section>
+
+    <section class="territories wrap">
+      <div class="territory-head"><span>COUCHES ACTIVES</span><h2>Trois territoires.<br />Trois signaux.</h2></div>
+      <div class="territory-list">
+        {packData.map((item,index)=>(
+          <a href={`/regions/${item.pack.regionSlug}`} class="territory" style={`--accent:${item.accent}`}>
+            <span class="num">0{index+1}</span>
+            <div class="identity"><small>{item.code} / {item.pack.version}</small><strong>{item.pack.name}</strong></div>
+            <div class="count"><strong>{item.count}</strong><span>MÉMOIRES RX</span></div>
+            <div class="signal"><i></i><i></i><i></i><i></i><i></i></div>
+            <b class="arrow">↗</b>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="atlas-footer wrap">
+      <div><small>BASE DE DONNÉES</small><strong>Publique, vérifiée, versionnée.</strong></div>
+      <div><small>GÉNÉRATION</small><strong>Composer un pack à partir des territoires.</strong></div>
+      <a href="/generateur">OUVRIR LE GÉNÉRATEUR <b>→</b></a>
+    </section>
+  </div>
+</DesignLabLayout>
+
+<style>
+  .atlas-page{min-height:100vh;overflow:hidden;background:radial-gradient(circle at 69% 30%,rgba(13,58,104,.34),transparent 35rem),radial-gradient(circle at 18% 17%,rgba(145,70,255,.09),transparent 30rem),#060a14;color:#edf5ff}.wrap{width:min(1260px,calc(100% - 38px));margin-inline:auto}
+  .atlas-hero{display:grid;grid-template-columns:.82fr 1.18fr;gap:32px;align-items:center;min-height:760px;padding:65px 0 45px}.atlas-copy{position:relative;z-index:3}.atlas-kicker{color:#00b2ff;font-size:.68rem;font-weight:900;letter-spacing:.22em}.atlas-copy h1{margin:27px 0 25px;color:white;font-size:clamp(4rem,8vw,7.8rem);line-height:.86;letter-spacing:-.075em}.atlas-copy h1 em{font-style:normal;color:transparent;background:linear-gradient(90deg,#00b2ff,#9146ff);background-clip:text;-webkit-background-clip:text}.atlas-copy>p{max-width:560px;color:#8396b2;line-height:1.8}.atlas-actions{display:flex;gap:10px;flex-wrap:wrap;margin:31px 0}.atlas-actions a{padding:13px 16px;border:1px solid #253550;border-radius:999px;color:#c8d6e9;font-size:.75rem;font-weight:850}.atlas-actions a:first-child{background:#edf5ff;color:#07101e;border-color:#edf5ff}.atlas-actions b{margin-left:18px}.legend{display:flex;flex-wrap:wrap;gap:16px;color:#687b96;font-size:.63rem;font-weight:800;letter-spacing:.05em}.legend span{display:flex;align-items:center;gap:7px}.legend i{width:7px;height:7px;border-radius:50%}.legend .p{background:#9146ff}.legend .c{background:#00b2ff}.legend .r{background:#00e5ff}
+  .map-stage{position:relative;min-height:650px;display:grid;place-items:center}.map-stage::before{content:"";position:absolute;inset:8%;border:1px solid rgba(0,178,255,.12);border-radius:50%;box-shadow:0 0 90px rgba(0,178,255,.06)}.map-stage svg{position:relative;z-index:2;width:min(100%,700px);filter:drop-shadow(0 30px 60px rgba(0,0,0,.5))}.france{fill:url(#land);stroke:#244263;stroke-width:2}.rings circle{fill:none;stroke:#163251;stroke-width:1;stroke-dasharray:4 8}.contours path{fill:none;stroke:#17304b;stroke-width:1.3;opacity:.65}.route-lines path{fill:none;stroke:#24516c;stroke-width:1.4;stroke-dasharray:5 7}.route-lines circle{fill:#315f78}.nodes .n-purple{fill:#9146ff}.nodes .n-blue{fill:#00b2ff}.nodes .n-cyan{fill:#00e5ff}.node-labels text{fill:#b8cbe2;font-size:13px;font-weight:800;letter-spacing:1.8px}.map-label{position:absolute;z-index:4;padding:8px 11px;border:1px solid #193450;background:rgba(6,13,25,.82);color:#6687a9;font-size:.57rem;font-weight:900;letter-spacing:.14em}.map-label.top{right:5%;top:10%}.map-label.bottom{left:8%;bottom:12%}
+  .territories{padding:70px 0 85px}.territory-head{display:grid;grid-template-columns:.3fr 1fr;gap:30px;align-items:start;margin-bottom:30px}.territory-head>span{padding-top:10px;color:#587796;font-size:.65rem;font-weight:900;letter-spacing:.18em}.territory-head h2{color:white;font-size:clamp(2.8rem,5vw,4.8rem);letter-spacing:-.06em}.territory-list{border-top:1px solid #1b2f49}.territory{display:grid;grid-template-columns:70px 1.4fr .7fr .65fr 40px;gap:18px;align-items:center;min-height:125px;border-bottom:1px solid #1b2f49;transition:.18s ease}.territory:hover{padding-inline:12px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 7%,transparent),transparent);border-color:var(--accent)}.territory .num{color:#435c79;font-size:.75rem;font-weight:900}.identity{display:grid;gap:7px}.identity small{color:var(--accent);font-size:.62rem;font-weight:900;letter-spacing:.16em}.identity strong{color:#eaf3ff;font-size:clamp(1.3rem,3vw,2.2rem);letter-spacing:-.035em}.count{display:flex;align-items:end;gap:10px}.count strong{color:white;font-size:2.7rem;line-height:.9}.count span{color:#607795;font-size:.56rem;font-weight:900}.signal{display:flex;align-items:end;gap:4px;height:28px}.signal i{width:4px;background:var(--accent);border-radius:2px}.signal i:nth-child(1){height:25%}.signal i:nth-child(2){height:45%}.signal i:nth-child(3){height:65%}.signal i:nth-child(4){height:85%}.signal i:nth-child(5){height:100%;box-shadow:0 0 10px var(--accent)}.arrow{justify-self:end;color:var(--accent);font-size:1.4rem}
+  .atlas-footer{display:grid;grid-template-columns:1fr 1fr auto;gap:30px;align-items:center;margin-bottom:70px;padding:26px;border:1px solid #1b304b;background:#09111e}.atlas-footer div{display:grid;gap:5px}.atlas-footer small{color:#526b88;font-size:.58rem;font-weight:900;letter-spacing:.12em}.atlas-footer strong{font-size:.8rem;color:#b9c9dd}.atlas-footer>a{padding:13px 16px;border-radius:999px;background:#00b2ff;color:#04101c;font-size:.67rem;font-weight:900;letter-spacing:.08em}.atlas-footer b{margin-left:16px}
+  @media(max-width:930px){.atlas-hero{grid-template-columns:1fr;min-height:auto;padding-top:80px}.map-stage{min-height:560px}.territory{grid-template-columns:50px 1fr auto 35px}.territory .count{grid-column:2}.territory .signal{display:none}.territory .arrow{grid-column:4;grid-row:1 / span 2}.territory-head{grid-template-columns:1fr}.atlas-footer{grid-template-columns:1fr}}
+  @media(max-width:560px){.map-stage{min-height:430px}.map-label{display:none}.territory{gap:9px}.identity strong{font-size:1.25rem}.count strong{font-size:2rem}.atlas-copy h1{font-size:clamp(3.8rem,18vw,5.5rem)}}
+</style>

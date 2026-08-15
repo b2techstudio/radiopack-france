@@ -62,3 +62,7 @@ Le contrôle `CTRL-ZHY` est rapporté pour diagnostic du matériel mais ne compt
 Le garde-fou `tests/test_sprint85_normandie_v05_field_evaluator.py` couvre les cas `satisfied`, `insufficient` et `indeterminate`, les sessions dupliquées, les métadonnées incohérentes, les non-réceptions, la sonde historique F5ZHA, le contrôle local et les CSV incomplets.
 
 Effet sur le pack : **142 → 142, delta 0, aucune publication**.
+
+## Clôture
+
+Le HEAD de clôture ne modifie que cette note de traçabilité. La CI complète doit rester verte sur ce SHA exact et le marqueur `[reference-archive]` déclenche l'archive source de référence.

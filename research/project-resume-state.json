@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 84,
-  "state_version": "0.21.73",
+  "current_sprint": 85,
+  "state_version": "0.21.74",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -30,7 +30,7 @@
   "active_work": {
     "pack": "Normandie",
     "target_version": "0.5",
-    "status": "field_validation_kit_prepared_zero_delta_142_not_public",
+    "status": "field_session_evaluator_ready_zero_delta_142_not_public",
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_release_ready": false,
@@ -77,7 +77,22 @@
     "field_validation_kit_guard": "tests/test_sprint84_normandie_v05_field_validation_kit.py",
     "field_validation_probe_memory_count": 6,
     "field_validation_session_template_generated": true,
-    "field_validation_changes_candidate": false
+    "field_validation_changes_candidate": false,
+    "field_evaluation_policy": "research/normandie-v0.5/field-evaluation-policy.json",
+    "field_evaluator": "tools/evaluate_normandie_v05_field_sessions.py",
+    "field_evaluator_guard": "tests/test_sprint85_normandie_v05_field_evaluator.py",
+    "field_evaluator_verdicts": [
+      "satisfied",
+      "insufficient",
+      "indeterminate"
+    ],
+    "field_evaluator_independence_unit": "session_id",
+    "field_evaluator_minimum_independent_sessions_per_gate": 2,
+    "field_evaluator_legacy_f5zha_probe_counts_for_gate": false,
+    "field_evaluator_non_reception_is_operational_negative_evidence": false,
+    "field_evaluator_automatic_candidate_mutation_allowed": false,
+    "field_evaluator_automatic_publication_allowed": false,
+    "field_evaluator_promotion_ready": false
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -248,7 +263,9 @@
     "research/normandie-v0.5/current-blocker-revalidation.json",
     "research/sprint-83-summary.md",
     "research/normandie-v0.5/field-validation-kit.json",
-    "research/sprint-84-summary.md"
+    "research/sprint-84-summary.md",
+    "research/normandie-v0.5/field-evaluation-policy.json",
+    "research/sprint-85-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -306,7 +323,9 @@
     "build_normandie_v05_internal_candidate": "tools/build_normandie_v05_internal_candidate.py",
     "test_sprint83_normandie_v05_revalidation": "tests/test_sprint83_normandie_v05_revalidation.py",
     "build_normandie_v05_field_validation_kit": "tools/build_normandie_v05_field_validation_kit.py",
-    "test_sprint84_normandie_v05_field_validation_kit": "tests/test_sprint84_normandie_v05_field_validation_kit.py"
+    "test_sprint84_normandie_v05_field_validation_kit": "tests/test_sprint84_normandie_v05_field_validation_kit.py",
+    "evaluate_normandie_v05_field_sessions": "tools/evaluate_normandie_v05_field_sessions.py",
+    "test_sprint85_normandie_v05_field_evaluator": "tests/test_sprint85_normandie_v05_field_evaluator.py"
   },
   "recent_sprints": [
     {
@@ -954,5 +973,32 @@
     "f5zha_minimum_intelligibility_0_to_5": 3,
     "legacy_f5zha_probe_diagnostic_only": true,
     "public_export_allowed": false
+  },
+  "latest_sprint85_normandie_v0_5_field_evaluator": {
+    "sprint": 85,
+    "state_version": "0.21.74",
+    "updated": "2026-08-15",
+    "candidate_memory_count_before": 142,
+    "candidate_memory_count_after": 142,
+    "candidate_memory_delta": 0,
+    "verdicts": [
+      "satisfied",
+      "insufficient",
+      "indeterminate"
+    ],
+    "independent_session_unit": "session_id",
+    "minimum_independent_sessions_per_gate": 2,
+    "r3_primary_frequency_mhz": 145.675,
+    "r3_optional_input_counts_for_gate": false,
+    "f5zha_current_pair_mhz": [
+      145.4675,
+      432.575
+    ],
+    "f5zha_legacy_probe_mhz": 431.4125,
+    "f5zha_legacy_probe_counts_for_gate": false,
+    "non_reception_is_operational_negative_evidence": false,
+    "automatic_candidate_mutation_allowed": false,
+    "automatic_publication_allowed": false,
+    "promotion_ready": false
   }
 }

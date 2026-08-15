@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 84 / 0.21.73 — Normandie v0.5 reste à 142 mémoires RX ; un kit terrain RX-only de 6 sondes prépare la validation R3/F5ZHA sans modifier le candidat ni publier v0.5.**
+**État courant : Sprint 85 / 0.21.74 — Normandie v0.5 reste à 142 mémoires RX ; le journal terrain R3/F5ZHA peut maintenant être évalué automatiquement sans aucune promotion ni publication automatique.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 84 / 0.21.73
+## État actuel — Sprint 85 / 0.21.74
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -16,9 +16,23 @@ Packs publics immuables :
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : Normandie v0.5 reste à **142 mémoires RX**, delta 0. Un mini-pack terrain de **6 sondes RX-only** est maintenant prêt pour produire des observations reproductibles sur R3 F1ZBX et F5ZHA depuis Mortain ; ces six sondes ne sont pas des mémoires candidates. Le plafond potentiel reste **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
+Recherche : Normandie v0.5 reste à **142 mémoires RX**, delta 0. Le mini-pack terrain de **6 sondes RX-only** et son journal disposent maintenant d’un évaluateur reproductible qui classe R3 et F5ZHA en `satisfied`, `insufficient` ou `indeterminate` sans jamais modifier le candidat automatiquement. Le plafond potentiel reste **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md` et `research/sprint-84-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md` et `research/sprint-85-summary.md`.
+
+## Sprint 85 — évaluateur du journal terrain Normandie v0.5
+
+Le candidat reste à **142 mémoires RX, delta 0**. Le journal CSV du Sprint 84 peut maintenant être évalué par `tools/evaluate_normandie_v05_field_sessions.py`.
+
+- verdicts : `satisfied`, `insufficient`, `indeterminate` ;
+- l’indépendance est comptée par `session_id` : plusieurs lignes d’une même session ne deviennent jamais plusieurs preuves ;
+- R3 : seule la sortie **145.675 MHz** compte, avec deux sessions indépendantes identifiées ; l’entrée 145.075 MHz reste facultative ;
+- F5ZHA : deux sessions indépendantes qualifiantes sur **145.4675 ou 432.575 MHz**, confiance reconnue et intelligibilité ≥ 3/5 ; les deux côtés n’ont pas besoin d’être entendus pour le seul gate terrain ;
+- **431.4125 MHz** et `CTRL-ZHY` restent diagnostiques et ne comptent jamais pour un gate ;
+- une non-réception n’est jamais interprétée comme preuve d’arrêt ;
+- même avec un gate `satisfied`, `promotion_ready=false`, aucune mutation du candidat et aucune publication automatique.
+
+Politique : `research/normandie-v0.5/field-evaluation-policy.json`. Évaluateur : `tools/evaluate_normandie_v05_field_sessions.py`. Garde-fou : `tests/test_sprint85_normandie_v05_field_evaluator.py`.
 
 ## Sprint 84 — kit terrain Normandie v0.5
 

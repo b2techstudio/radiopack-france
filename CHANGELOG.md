@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.74 - 2026-08-15
+
+- **Sprint 85** : ajout d’un évaluateur reproductible du journal terrain Normandie v0.5 ; candidat maintenu à **142 mémoires RX**, delta **0**.
+- Verdicts `satisfied` / `insufficient` / `indeterminate`, indépendance par `session_id`, lignes invalides et sessions incohérentes signalées.
+- R3 : 145.675 MHz compte pour le gate ; F5ZHA : 145.4675 / 432.575 MHz comptent, 431.4125 MHz reste diagnostic uniquement.
+- Une non-réception ne vaut jamais preuve d’arrêt et aucun verdict ne déclenche une promotion, une mutation du candidat ou une publication automatique.
+- Ajout de `field-evaluation-policy.json`, `evaluate_normandie_v05_field_sessions.py` et du garde-fou Sprint 85.
+
 ## 0.21.73 - 2026-08-15
 
 - **Sprint 84** : préparation d’un kit terrain Normandie v0.5 pour R3 F1ZBX et F5ZHA ; candidat maintenu à **142 mémoires RX**, delta **0**.

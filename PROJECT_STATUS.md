@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **84**
-État logique : **0.21.73**
+Sprint courant : **85**
+État logique : **0.21.74**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-84-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-85-summary.md`.
 
 ## État public
 
@@ -16,6 +16,19 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 85 — évaluateur terrain Normandie v0.5
+
+Le candidat reste à **142 RX, delta 0**. L’évaluateur du journal terrain classe désormais séparément les gates R3 et F5ZHA en `satisfied`, `insufficient` ou `indeterminate`.
+
+- deux sessions indépendantes sont nécessaires pour chaque gate ;
+- `session_id` est l’unité d’indépendance ;
+- R3 145.675 MHz compte, 145.075 MHz reste facultative ;
+- F5ZHA 145.4675 / 432.575 MHz compte ; 431.4125 MHz reste diagnostic seulement ;
+- non-réception ≠ arrêt du relais ;
+- verdict terrain ≠ promotion : aucune modification ou publication automatique.
+
+Politique : `research/normandie-v0.5/field-evaluation-policy.json`. Outil : `tools/evaluate_normandie_v05_field_sessions.py`. Test : `tests/test_sprint85_normandie_v05_field_evaluator.py`.
 
 ## Sprint 84 — kit terrain Normandie v0.5
 

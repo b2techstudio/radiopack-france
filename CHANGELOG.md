@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.21.80 - 2026-08-15
+
+- **Sprint 91** : handoff Bretagne v0.3 AIRAC 09/26 préparé ; candidat **151 RX, delta 0**, aucune anticipation avant le 3 septembre.
+
+## 0.21.79 - 2026-08-15
+
+- **Sprint 90** : refresh Normandie v0.5 ; candidat **142 RX, delta 0**, R3/F5ZHA terrain uniquement, F1ZOV maintenance locale, F6ZES RF/mode non résolus.
+
+## 0.21.78 - 2026-08-15
+
+- **Sprint 89** : compatibilité stock UV-K5/CHIRP 50 MHz validée ; candidat Annecy v0.4 non public **77 RX / 60 sans aviation**, +1 RF `ZTH-6M` 50.5375 MHz.
+- SHA candidats : `2557076fcb198b830cd3b5ba64d7ff894c8e0d6e90eafc0fa40b691a3c6a5d98` / `e31bfc6fce402af117b4f79caf6547b60a23c91ef36491e1351c74e96329aa6c`.
+
 ## 0.21.77 - 2026-08-15
 
 - **Sprint 88** : publication immuable d'Annecy–Alpes–Léman v0.3 à **76 mémoires RX / 59 sans aviation**.

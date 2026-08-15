@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 88 / 0.21.77 — Annecy–Alpes–Léman v0.3 est publiée et immuable à 76 mémoires RX (59 sans aviation), +11 RF uniques par rapport à v0.2.**
+**État courant : Sprint 91 / 0.21.80 — Annecy v0.4 candidat 77/60 non public ; Normandie v0.5 142/delta 0 bloquée terrain ; Bretagne v0.3 151/delta 0 en attente AIRAC 09/26.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 88 / 0.21.77
+## État actuel — Sprint 91 / 0.21.80
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -16,11 +16,23 @@ Packs publics immuables :
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : **Annecy–Alpes–Léman v0.3 = 76 mémoires RX / 59 sans aviation, +11 RF uniques**, premier candidat interne paired RX non public ; plafond conditionnel 77 si F1ZTH 50.5375 MHz franchit le gate de compatibilité UV-K5/firmware. Normandie v0.5 reste à **142 RX**, delta 0, en attente de terrain R3/F5ZHA et de nouvelles sources F1ZOV/F6ZES. Bretagne v0.3 reste à **151 RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
+Recherche : **Annecy v0.4 = 77 RX / 60 sans aviation, +1 RF**, candidat déterministe non public après validation du 50 MHz stock UV-K5/CHIRP. Normandie v0.5 reste à **142 RX**, delta 0 : R3/F5ZHA exigent du terrain, F1ZOV/F6ZES restent en veille source. Bretagne v0.3 reste à **151 RX**, delta 0, avec handoff AIRAC 09/26 préparé pour le 3 septembre 2026.
 
 Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md` et `research/sprint-86-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md` et `research/sprint-91-summary.md`.
+
+## Sprint 91 — Bretagne AIRAC 09/26 handoff
+
+Handoff reproductible prêt pour le 3 septembre 2026 ; v0.3 reste à **151 RX, delta 0**, sans publication anticipée.
+
+## Sprint 90 — Normandie v0.5 refresh
+
+Candidat **142 RX, delta 0**. R3/F1ZBX et F5ZHA sont des gates terrain ; F1ZOV reste en maintenance locale et F6ZES sans RF/mode public exploitable.
+
+## Sprint 89 — Annecy v0.4 candidat
+
+Le manuel UV-K5 constructeur/FCC et le pilote CHIRP stock couvrent 50.5375 MHz. Le candidat non public passe à **77 RX / 60 sans aviation** avec `ZTH-6M`, tandis que la v0.3 reste immuable.
 
 ## Sprint 88 — publication Annecy–Alpes–Léman v0.3
 

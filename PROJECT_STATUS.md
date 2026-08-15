@@ -1,21 +1,33 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **88**
-État logique : **0.21.77**
+Sprint courant : **91**
+État logique : **0.21.80**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-88-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-91-summary.md`.
 
 ## État public
 
 - Normandie v0.4 : **142 mémoires RX**, publiée et immuable.
-- Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
+- Annecy–Alpes–Léman v0.3 : **76 mémoires RX**, variante **59 sans aviation**, publiée et immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 91 — Bretagne v0.3 AIRAC09 handoff
+
+AIRAC 08/26 reste courant jusqu'au 2 septembre 2026 inclus. Le handoff 09/26 est préparé pour le 3 septembre ; candidat **151 RX, delta 0**, aucune publication anticipée.
+
+## Sprint 90 — Normandie v0.5 source refresh
+
+Candidat **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ; F1ZOV reste en maintenance locale ; F6ZES reste sans RF/mode public exploitable.
+
+## Sprint 89 — Annecy v0.4 candidat
+
+Le gate de compatibilité 50 MHz est levé. Candidat déterministe non public **77 RX / 60 sans aviation**, avec `ZTH-6M` 50.5375 MHz. La v0.3 publique reste immuable.
 
 ## Sprint 88 — Annecy v0.3 publiée
 

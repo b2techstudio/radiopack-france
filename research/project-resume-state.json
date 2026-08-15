@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 88,
-  "state_version": "0.21.77",
+  "current_sprint": 91,
+  "state_version": "0.21.80",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -32,43 +32,19 @@
     }
   },
   "active_work": {
-    "pack": "Annecy–Alpes–Léman",
+    "pack": "Bretagne",
     "target_version": "0.3",
-    "status": "published_immutable_v0_3_complete",
-    "published_base_version": "0.2",
-    "published_base_memory_count": 65,
-    "published_base_without_aviation_memory_count": 48,
-    "published_base_is_immutable": true,
-    "public_version": "0.3",
-    "public_memory_count": 76,
-    "public_without_aviation_memory_count": 59,
-    "new_unique_rf_memory_count": 11,
-    "aviation_memory_count": 17,
-    "review_completed": true,
-    "review_completed_count": 12,
-    "review_total_count": 12,
-    "publication_blocker_count": 0,
-    "scope_frozen": true,
-    "prepublication_ready": true,
-    "public_export_allowed": true,
-    "public_registry_allowed": true,
-    "public_routes_allowed": true,
-    "public_release_ready": true,
-    "published": true,
-    "full_sha256": "fa4095c0af9b4fa5758449e09c9a32eb5c7cc103e0d90b7c9da8e74c77796af7",
-    "without_aviation_sha256": "e639aff0d045e5a20db3b03fb6175b68452700b4b6ee2e1edf78e9510c2eb649",
-    "publication_record": "research/annecy-alpes-leman-v0.3/publication-record.json",
-    "release_scope": "research/annecy-alpes-leman-v0.3/release-scope.json",
-    "review_checklist": "research/annecy-alpes-leman-v0.3/review-checklist.json",
-    "current_source_revalidation": "research/annecy-alpes-leman-v0.3/current-source-revalidation.json",
-    "f1zth_50m_frequency_mhz": 50.5375,
-    "f1zth_50m_promoted": false,
-    "f1zth_50m_scope_excluded": true,
-    "unpublished_adrasec_frequency_inferred": false,
-    "internal_candidate_memory_count": 76,
-    "internal_candidate_without_aviation_memory_count": 59,
-    "internal_candidate_new_memory_count": 11,
-    "known_potential_ceiling_if_f1zth_50m_clears": 77
+    "status": "airac09_future_handoff_prepared_waiting_effective_date",
+    "public_base_version": "0.2",
+    "public_base_memory_count": 151,
+    "candidate_memory_count": 151,
+    "candidate_memory_delta": 0,
+    "airac_current": "08/26",
+    "airac_current_until_inclusive": "2026-09-02",
+    "airac_next_required": "09/26",
+    "airac_next_effective_from": "2026-09-03",
+    "publication_allowed_before_airac09_revalidation": false,
+    "handoff": "research/bretagne-v0.3/airac09-handoff.json"
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -1020,5 +996,35 @@
     "full_sha256": "fa4095c0af9b4fa5758449e09c9a32eb5c7cc103e0d90b7c9da8e74c77796af7",
     "without_aviation_sha256": "e639aff0d045e5a20db3b03fb6175b68452700b4b6ee2e1edf78e9510c2eb649",
     "immutable": true
+  },
+  "annecy_v0_4_research": {
+    "status": "deterministic_candidate_ready_not_public",
+    "based_on_public_version": "0.3",
+    "public_version_remains": "0.3",
+    "candidate_memory_count": 77,
+    "candidate_without_aviation_memory_count": 60,
+    "candidate_memory_delta": 1,
+    "added_frequency_mhz": 50.5375,
+    "added_memory_name": "ZTH-6M",
+    "full_candidate_sha256": "2557076fcb198b830cd3b5ba64d7ff894c8e0d6e90eafc0fa40b691a3c6a5d98",
+    "without_aviation_candidate_sha256": "e31bfc6fce402af117b4f79caf6547b60a23c91ef36491e1351c74e96329aa6c",
+    "compatibility_review": "research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json",
+    "builder": "tools/build_annecy_v04_candidate.py",
+    "published": false
+  },
+  "normandie_v0_5_latest_refresh": {
+    "status": "current_sources_refreshed_zero_delta_field_blocked",
+    "candidate_memory_count": 142,
+    "candidate_memory_delta": 0,
+    "known_potential_ceiling_excluding_f6zes": 147,
+    "field_required": [
+      "R3_F1ZBX",
+      "F5ZHA"
+    ],
+    "source_watch": [
+      "F1ZOV",
+      "F6ZES"
+    ],
+    "evidence": "research/normandie-v0.5/sprint90-source-refresh.json"
   }
 }

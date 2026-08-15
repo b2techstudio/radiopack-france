@@ -1,135 +1,308 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import FeatureCard from "../components/FeatureCard.astro";
-import RegionCard from "../components/RegionCard.astro";
-import FranceMap from "../components/FranceMap.astro";
-import regions from "../data/regions.json";
 import { publicPacks } from "../lib/packRegistry";
 
-const normandiePack = publicPacks.find((pack) => pack.id === "normandie")!;
-const annecyPack = publicPacks.find((pack) => pack.id === "annecy-alpes-leman")!;
-const bretagnePack = publicPacks.find((pack) => pack.id === "bretagne")!;
-
-const defaultCount = (pack: (typeof publicPacks)[number]) =>
-  pack.variants.find((variant) => variant.id === pack.defaultVariant)?.memoryCount ?? pack.variants[0]?.memoryCount ?? 0;
-
-const normandieCount = defaultCount(normandiePack);
-const annecyCount = defaultCount(annecyPack);
-const annecyNoAviationCount = annecyPack.variants.find((variant) => variant.id === "no-aviation")?.memoryCount ?? 0;
-const bretagneCount = defaultCount(bretagnePack);
+const preferredOrder = ["normandie", "annecy-alpes-leman", "bretagne"];
+const packs = preferredOrder
+  .map((id) => publicPacks.find((pack) => pack.id === id))
+  .filter((pack): pack is (typeof publicPacks)[number] => Boolean(pack))
+  .map((pack) => ({
+    ...pack,
+    count:
+      pack.variants.find((variant) => variant.id === pack.defaultVariant)?.memoryCount ??
+      pack.variants[0]?.memoryCount ??
+      0,
+  }));
 ---
 
-<BaseLayout>
-  <section class="hero section-tight">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow">Projet open source B2Tech Studio</span>
-        <h1><span class="gradient-text">RadioPack</span><br />France</h1>
-        <p class="lead">Des codeplugs CHIRP régionaux, propres et documentés pour les radios Quansheng UV-K5 — sans listes obscures ni réglages incohérents.</p>
-        <div class="button-row">
-          <a class="button button-primary" href="/regions">Choisir une région <span>→</span></a>
-          <a class="button button-secondary" href="/generateur">Ouvrir le générateur</a>
+<BaseLayout
+  title="RadioPack France — Codeplugs CHIRP régionaux"
+  description="Des codeplugs CHIRP régionaux, publics, vérifiés et distribués en réception seule pour les radios Quansheng UV-K5."
+  themeColor="#05070b"
+  colorScheme="dark"
+  bodyClass="home-clean-neon"
+>
+  <div class="clean-page">
+    <section class="hero wrap">
+      <div class="micro">RADIOPACK FRANCE <span>·</span> BY B2TECH STUDIO</div>
+      <h1>Des codeplugs.<br /><span>Propres. Vérifiés.</span><br />Prêts à charger.</h1>
+      <div class="hero-bottom">
+        <p>
+          Des packs CHIRP régionaux construits à partir de sources publiques vérifiables,
+          versionnés et distribués en réception seule pour les radios Quansheng UV-K5.
+        </p>
+        <div class="actions">
+          <a class="primary" href="/regions">Voir les packs <b>↗</b></a>
+          <a href="/generateur">Générateur</a>
         </div>
-        <div class="hero-stats">
-          <div><strong>200</strong><span>mémoires disponibles par pack</span></div>
-          <div><strong>{publicPacks.length}</strong><span>packs régionaux disponibles</span></div>
-          <div><strong>{annecyCount}</strong><span>mémoires dans Annecy {annecyPack.version}</span></div>
-        </div>
       </div>
+      <div class="neon-line"></div>
+    </section>
 
-      <div class="hero-visual">
-        <div class="brand-panel"><img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" /><div><span>B2Tech Studio</span><strong>Code. Crée. Innove.</strong></div></div>
-        <div class="radio-card">
-          <div class="antenna"></div><div class="radio-top"></div>
-          <div class="screen"><small>F4HWN - VFO</small><strong>145.500</strong><span>433.500</span><div class="signal">▂▄▆█</div></div>
-          <div class="radio-brand">QUANSHENG</div>
-          <div class="keys">{Array.from({ length: 12 }).map((_, i) => <span>{i < 9 ? i + 1 : i === 9 ? "*" : i === 10 ? "0" : "#"}</span>)}</div>
-        </div>
-        <div class="orbit orbit-purple"></div><div class="orbit orbit-orange"></div>
-      </div>
-    </div>
-  </section>
+    <section class="pack-list wrap" aria-labelledby="packs-title">
+      <div class="section-label" id="packs-title">PACKS DISPONIBLES</div>
+      {packs.map((pack, index) => (
+        <a class="pack-row" href={`/regions/${pack.regionSlug}`}>
+          <div class="row-index">0{index + 1}</div>
+          <div class="row-title">
+            <small>{pack.version} · PUBLIC RX</small>
+            <h2>{pack.name}</h2>
+          </div>
+          <div class="row-count"><strong>{pack.count}</strong><span>mémoires</span></div>
+          <div class="row-arrow" aria-hidden="true">→</div>
+        </a>
+      ))}
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-heading">
-        <div><span class="eyebrow">Une base claire</span><h2>Ce que RadioPack apporte</h2></div>
-        <p class="lead">Une seule source de données pour générer les fichiers régionaux, la documentation et les pages du site.</p>
+    <section class="statement wrap">
+      <div class="statement-kicker">POURQUOI RADIOPACK</div>
+      <div class="statement-copy">
+        <h2>Une base radio qui reste <em>simple à comprendre.</em></h2>
+        <p>
+          Les sources sont documentées. Les versions publiques restent immuables. Les packs
+          sont en réception seule. Les données sont organisées pour rester lisibles, utiles et reproductibles.
+        </p>
       </div>
-      <div class="grid-3">
-        <FeatureCard icon="✓" title="Prêt à importer" description="Des CSV structurés pour CHIRP, avec noms courts et paramètres cohérents." tone="purple" />
-        <FeatureCard icon="⌁" title="Ancré dans les régions" description="Relais, aviation publique, marine et canaux utiles organisés localement." tone="blue" />
-        <FeatureCard icon="↻" title="Maintenable" description="Des données centralisées, versionnées sur GitHub et faciles à mettre à jour." tone="orange" />
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section region-section" id="regions">
-    <div class="container region-grid">
-      <FranceMap />
-      <div class="region-list">
-        <span class="eyebrow">Déploiement progressif</span>
-        <h2>Choisis ta zone</h2>
-        <p class="lead">La {normandiePack.name} {normandiePack.version}, {annecyPack.name} {annecyPack.version} et la {bretagnePack.name} {bretagnePack.version} sont disponibles en réception seule.</p>
-        {regions.map((region) => <RegionCard {...region} />)}
-      </div>
-    </div>
-  </section>
+    <section class="principles wrap" aria-label="Principes RadioPack France">
+      <div><span>01</span><strong>Public</strong><p>Uniquement des informations publiques et vérifiables.</p></div>
+      <div><span>02</span><strong>RX only</strong><p>Transmission désactivée dans les packs distribués.</p></div>
+      <div><span>03</span><strong>Versionné</strong><p>Chaque publication reste identifiable et reproductible.</p></div>
+      <div><span>04</span><strong>Simple</strong><p>Choisir une région, télécharger un pack ou composer son fichier.</p></div>
+    </section>
 
-  <section class="section">
-    <div class="container cta">
+    <section class="cta wrap">
       <div>
-        <span class="eyebrow">Trois packs régionaux disponibles</span>
-        <h2>Normandie, Alpes–Léman et Bretagne prêtes à importer.</h2>
-        <p>{normandiePack.name} {normandiePack.version} contient {normandieCount} mémoires RX-only. {annecyPack.name} {annecyPack.version} contient {annecyCount} mémoires, avec une variante de {annecyNoAviationCount} sans aviation. {bretagnePack.name} {bretagnePack.version} contient {bretagneCount} mémoires RX-only.</p>
+        <small>RADIOPACK / GENERATOR</small>
+        <h2>Compose ton pack.<br />Garde seulement l’utile.</h2>
       </div>
-      <div class="cta-actions">
-        <a class="button button-orange" href={`/regions/${normandiePack.regionSlug}`}>Voir la Normandie →</a>
-        <a class="button button-primary" href={`/regions/${annecyPack.regionSlug}`}>Voir Annecy {annecyPack.version} →</a>
-        <a class="button button-secondary" href={`/regions/${bretagnePack.regionSlug}`}>Voir la Bretagne {bretagnePack.version} →</a>
-      </div>
-    </div>
-  </section>
+      <a href="/generateur">Ouvrir le générateur <span>↗</span></a>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .hero { padding-top: 58px; }
-  .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; gap: 55px; align-items: center; min-height: 690px; }
-  .hero-copy { display: grid; gap: 25px; }
-  .hero-copy h1 { max-width: 720px; }
-  .hero-stats { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 10px; }
-  .hero-stats > div { display: grid; min-width: 145px; padding: 14px 16px; border-radius: 15px; background: rgba(255,255,255,.68); border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
-  .hero-stats strong { font-family: "Space Grotesk", sans-serif; font-size: 1.25rem; color: #5f31cf; }
-  .hero-stats span { color: var(--muted); font-size: .75rem; }
-  .hero-visual { position: relative; min-height: 620px; display: grid; place-items: center; border-radius: 34px; background: linear-gradient(145deg, #e4ecf8 0%, #f9fbff 54%, #fff1db 100%); border: 1px solid rgba(62,82,112,.16); box-shadow: var(--shadow); overflow: hidden; }
-  .hero-visual::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 18%, rgba(110,61,232,.20), transparent 31%), radial-gradient(circle at 87% 83%, rgba(240,154,32,.23), transparent 33%); }
-  .brand-panel { position: absolute; z-index: 4; left: 22px; top: 22px; display: flex; gap: 10px; align-items: center; padding: 10px 13px; border-radius: 14px; background: rgba(255,255,255,.82); border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
-  .brand-panel img { width: 42px; height: 42px; object-fit: contain; }
-  .brand-panel div { display: grid; line-height: 1.1; }
-  .brand-panel span { font-weight: 800; font-size: .83rem; }
-  .brand-panel strong { margin-top: 4px; color: var(--purple); font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; }
-  .radio-card { position: relative; z-index: 3; width: 270px; min-height: 480px; padding: 50px 22px 24px; border-radius: 35px; background: linear-gradient(145deg, #222d3b, #101821); border: 7px solid #2d3948; box-shadow: 0 32px 62px rgba(27,36,54,.28), inset 0 0 0 2px rgba(255,255,255,.08); transform: rotate(2deg); }
-  .antenna { position: absolute; left: 45px; top: -118px; width: 30px; height: 142px; border-radius: 16px 16px 7px 7px; background: linear-gradient(90deg,#131a22,#3b4653,#111820); box-shadow: 0 10px 20px rgba(27,36,54,.18); }
-  .radio-top { position: absolute; right: 29px; top: -20px; width: 55px; height: 34px; border-radius: 13px 13px 6px 6px; background: linear-gradient(90deg,#333d48,#111820); border-top: 7px solid var(--orange); }
-  .screen { display: grid; gap: 3px; min-height: 145px; padding: 16px; border-radius: 13px; background: linear-gradient(145deg,#d6f0e9,#b6d7d1); border: 5px solid #111821; box-shadow: inset 0 0 22px rgba(41,85,74,.22); color: #173830; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .screen small { font-weight: 800; }
-  .screen strong { margin-top: 4px; font-size: 2rem; letter-spacing: .03em; }
-  .screen span { font-size: 1.15rem; }
-  .signal { justify-self: end; font-weight: 900; }
-  .radio-brand { padding: 20px 0 13px; color: #d6dde7; text-align: center; font-family: "Space Grotesk", sans-serif; font-weight: 800; letter-spacing: .04em; }
-  .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .keys span { display: grid; place-items: center; aspect-ratio: 1.35; border-radius: 8px; color: #dbe4ee; background: linear-gradient(145deg,#34404d,#1b2530); border: 1px solid rgba(255,255,255,.08); font-size: .8rem; font-weight: 800; }
-  .orbit { position: absolute; border: 2px solid; border-radius: 50%; opacity: .28; }
-  .orbit-purple { width: 470px; height: 470px; border-color: var(--purple); transform: rotate(22deg); }
-  .orbit-orange { width: 390px; height: 540px; border-color: var(--orange); transform: rotate(-34deg); }
-  .region-section { background: linear-gradient(180deg, rgba(230,237,247,.62), rgba(247,250,253,.32)); border-block: 1px solid rgba(60,80,108,.09); }
-  .region-grid { display: grid; grid-template-columns: 1.06fr .94fr; gap: 30px; align-items: start; }
-  .region-list { display: grid; gap: 18px; }
-  .region-list > .lead { margin-bottom: 8px; }
-  .cta { display: flex; align-items: center; justify-content: space-between; gap: 35px; padding: 36px; border-radius: 28px; background: linear-gradient(125deg, rgba(110,61,232,.12), rgba(22,135,233,.10), rgba(240,154,32,.15)); border: 1px solid rgba(71,78,129,.15); box-shadow: var(--shadow); }
-  .cta > div:first-child { display: grid; gap: 12px; max-width: 720px; }
-  .cta p { color: var(--muted); }
-  .cta-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-  @media (max-width: 980px) { .hero-grid, .region-grid { grid-template-columns: 1fr; } .hero-visual { min-height: 590px; } }
-  @media (max-width: 650px) { .hero-grid { min-height: auto; } .hero-visual { min-height: 510px; } .radio-card { width: 225px; min-height: 420px; transform: scale(.9); } .cta { align-items: stretch; flex-direction: column; } .cta-actions { justify-content: flex-start; } }
+  .clean-page {
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 72% 4%, rgba(145, 70, 255, .12), transparent 31rem),
+      radial-gradient(circle at 16% 26%, rgba(0, 178, 255, .08), transparent 28rem),
+      #05070b;
+    color: #f7f9fc;
+  }
+
+  .wrap {
+    width: min(1240px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  .hero { padding: 105px 0 50px; }
+
+  .micro,
+  .section-label {
+    color: #7d8b9d;
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .2em;
+  }
+
+  .micro span { margin: 0 10px; color: #00b2ff; }
+
+  .hero h1 {
+    margin: 36px 0 50px;
+    max-width: 1140px;
+    color: white;
+    font-size: clamp(4.1rem, 9.5vw, 9.2rem);
+    line-height: .86;
+    letter-spacing: -.085em;
+    font-weight: 900;
+  }
+
+  .hero h1 span {
+    color: transparent;
+    background: linear-gradient(90deg, #f7f9fc 0%, #00b2ff 42%, #9146ff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 50px;
+    align-items: end;
+  }
+
+  .hero-bottom p {
+    max-width: 650px;
+    color: #8d99aa;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .actions a {
+    padding: 13px 18px;
+    border: 1px solid #253042;
+    border-radius: 999px;
+    color: #dbe3ee;
+    font-size: .76rem;
+    font-weight: 850;
+    transition: border-color .2s ease, transform .2s ease, background .2s ease;
+  }
+
+  .actions a:hover { transform: translateY(-2px); border-color: #4a5e7a; }
+  .actions .primary { border-color: #f7f9fc; background: #f7f9fc; color: #070a0f; }
+  .actions b { margin-left: 18px; }
+
+  .neon-line {
+    height: 1px;
+    margin-top: 70px;
+    background: linear-gradient(90deg, #00b2ff 0%, #9146ff 38%, #1e2734 70%, transparent);
+    box-shadow: -120px 0 28px rgba(0, 178, 255, .18);
+  }
+
+  .pack-list { padding: 55px 0 100px; }
+  .section-label { margin-bottom: 28px; }
+
+  .pack-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 180px 55px;
+    gap: 24px;
+    align-items: center;
+    min-height: 165px;
+    border-bottom: 1px solid #1c2531;
+    transition: .2s ease;
+  }
+
+  .pack-row:first-of-type { border-top: 1px solid #1c2531; }
+
+  .pack-row:hover {
+    padding-inline: 16px;
+    background: linear-gradient(90deg, rgba(0, 178, 255, .035), rgba(145, 70, 255, .025), transparent);
+  }
+
+  .row-index { color: #4d5a6c; font-size: .7rem; font-weight: 900; }
+
+  .row-title small {
+    display: block;
+    margin-bottom: 10px;
+    color: #00b2ff;
+    font-size: .63rem;
+    font-weight: 900;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  .row-title h2 {
+    color: #f4f7fb;
+    font-size: clamp(1.9rem, 4vw, 3.9rem);
+    line-height: .92;
+    letter-spacing: -.06em;
+    font-weight: 850;
+  }
+
+  .row-count { display: flex; align-items: end; gap: 9px; }
+  .row-count strong { color: white; font-size: 3.5rem; line-height: .78; letter-spacing: -.07em; }
+  .row-count span { color: #667386; font-size: .7rem; }
+  .row-arrow { justify-self: end; color: #9146ff; font-size: 1.6rem; }
+
+  .statement {
+    display: grid;
+    grid-template-columns: .3fr 1fr;
+    gap: 50px;
+    padding: 20px 0 100px;
+  }
+
+  .statement-kicker {
+    padding-top: 10px;
+    color: #657388;
+    font-size: .65rem;
+    font-weight: 900;
+    letter-spacing: .17em;
+  }
+
+  .statement-copy h2 {
+    max-width: 900px;
+    color: white;
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: .92;
+    letter-spacing: -.07em;
+  }
+
+  .statement-copy h2 em { color: #9146ff; font-style: normal; }
+  .statement-copy p { max-width: 690px; margin-top: 30px; color: #8794a7; line-height: 1.8; }
+
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 110px;
+    border-top: 1px solid #1c2531;
+    border-left: 1px solid #1c2531;
+  }
+
+  .principles > div {
+    min-height: 250px;
+    padding: 25px;
+    border-right: 1px solid #1c2531;
+    border-bottom: 1px solid #1c2531;
+  }
+
+  .principles span { color: #00b2ff; font-size: .66rem; font-weight: 900; }
+  .principles strong { display: block; margin: 75px 0 14px; color: #f4f7fb; font-size: 1.5rem; letter-spacing: -.03em; }
+  .principles p { color: #718096; font-size: .8rem; line-height: 1.6; }
+
+  .cta {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 80px;
+    padding: 45px;
+    border: 1px solid #202b3b;
+    border-radius: 28px;
+    background: linear-gradient(120deg, #0d1420, #0a1019);
+    box-shadow: inset 0 0 70px rgba(0, 178, 255, .03);
+  }
+
+  .cta small { color: #8fff00; font-size: .62rem; font-weight: 900; letter-spacing: .17em; }
+  .cta h2 { margin-top: 18px; color: white; font-size: clamp(2.1rem, 4.5vw, 4rem); line-height: .95; letter-spacing: -.055em; }
+
+  .cta > a {
+    flex: 0 0 auto;
+    padding: 14px 19px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #00b2ff, #9146ff);
+    color: white;
+    font-size: .75rem;
+    font-weight: 900;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .cta > a:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(0, 178, 255, .16); }
+  .cta > a span { margin-left: 24px; }
+
+  @media (max-width: 850px) {
+    .hero-bottom { grid-template-columns: 1fr; }
+    .pack-row { grid-template-columns: 50px 1fr 45px; }
+    .row-count { grid-column: 2; }
+    .row-arrow { grid-column: 3; grid-row: 1 / span 2; }
+    .statement { grid-template-columns: 1fr; }
+    .principles { grid-template-columns: 1fr 1fr; }
+    .cta { align-items: flex-start; flex-direction: column; }
+  }
+
+  @media (max-width: 560px) {
+    .wrap { width: min(100% - 24px, 1240px); }
+    .hero { padding-top: 75px; }
+    .hero h1 { font-size: clamp(3.5rem, 18vw, 5.2rem); }
+    .pack-row { min-height: 145px; gap: 10px; }
+    .row-count strong { font-size: 2.7rem; }
+    .principles { grid-template-columns: 1fr; }
+    .principles > div { min-height: 200px; }
+    .principles strong { margin-top: 50px; }
+    .cta { padding: 28px; }
+  }
 </style>

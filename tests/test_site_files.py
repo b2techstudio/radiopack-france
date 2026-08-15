@@ -483,7 +483,7 @@ assert len(review["rows"]) == 65
 regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
 assert len(regions) == 3
 assert {region["slug"] for region in regions} == {"annecy-haute-savoie", "normandie", "bretagne"}
-assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 76
+assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 77
 assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 142
 assert next(region for region in regions if region["slug"] == "bretagne")["memoryCount"] == 151
 
@@ -492,11 +492,10 @@ for expected in [
     'id: "annecy-alpes-leman"',
     'id: "normandie"',
     'id: "bretagne"',
-    'version: "v0.3"',
     'version: "v0.2"',
     'version: "v0.4"',
-    'memoryCount: 76',
-    'memoryCount: 59',
+    'memoryCount: 77',
+    'memoryCount: 60',
     'memoryCount: 142',
     'memoryCount: 151',
 ]:
@@ -504,7 +503,8 @@ for expected in [
 assert registry.count('downloadUrl: "') == 4
 assert 'id: "bretagne"' in registry
 assert 'version: "v0.2"' in registry
-assert 'version: "v0.3"' in registry
+assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv' in registry
+assert '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv' in registry
 assert (ROOT / "website/src/pages/regions/bretagne.astro").is_file()
 assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv").is_file()
 assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv").is_file()

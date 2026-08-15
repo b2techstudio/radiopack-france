@@ -121,4 +121,4 @@ assert (ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-ann
 published_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 assert published_normandie.is_file()
 
-print("Tests RadioPack Sprint 29 emergency/ADRASEC research: historical emergency inventories remain auditable, Annecy v0.3 publication is recognized separately, private operational RF stays excluded, OK")
+print("Tests RadioPack Sprint 29 emergency/ADRASEC research: historical emergency research no public mutation OK; Annecy v0.3 publication is recognized separately; private operational RF stays excluded, OK")

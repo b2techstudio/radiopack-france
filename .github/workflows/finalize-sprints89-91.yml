@@ -1,0 +1,43 @@
+name: Finalize Sprints 89-91
+
+on:
+  push:
+    paths:
+      - .github/sprints89-91-finalize-trigger
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Finalize state and docs
+        run: python tools/finalize_sprints89_91.py
+      - name: Test Sprint 89
+        run: python tests/test_sprint89_annecy_v04_candidate.py
+      - name: Test Sprint 90
+        run: python tests/test_sprint90_normandie_v05_source_refresh.py
+      - name: Test Sprint 91
+        run: python tests/test_sprint91_bretagne_airac09_handoff.py
+      - name: Regression guards
+        run: |
+          python tests/test_site_files.py
+          python tests/test_pack_registry.py
+          python tests/test_sprint85_normandie_v05_field_evaluator.py
+          python tests/test_sprint82_bretagne_v03_public_revalidation.py
+      - name: Commit finalized state
+        run: |
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git add README.md PROJECT_STATUS.md CHANGELOG.md research/project-resume-state.json research/sprint-89-summary.md research/sprint-90-summary.md research/sprint-91-summary.md
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
+            git commit -m "Sprints 89-91 finalize current work state"
+            git push
+          fi

@@ -115,6 +115,9 @@ jobs:
       - name: Test Sprint 84 Normandie v0.5 field validation kit
         run: python tests/test_sprint84_normandie_v05_field_validation_kit.py
 
+      - name: Test Sprint 85 Normandie v0.5 field evaluator
+        run: python tests/test_sprint85_normandie_v05_field_evaluator.py
+
       - name: Test Bretagne v0.1 internal candidate
         run: python tests/test_bretagne_internal_candidate.py
 

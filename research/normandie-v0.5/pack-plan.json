@@ -1,14 +1,22 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "research_next_version_not_public",
   "pack": "Normandie",
   "target_version": "0.5",
   "based_on_published_version": "0.4",
   "published_base_memory_count": 142,
   "published_base_is_immutable": true,
+  "published_base_sha256": "3da26f18cefbf7ec1dfb6a991101d07f6a8ce9fb921015a7202870fc9b9db66d",
+  "published_base_record": "research/normandie-v0.4/publication-record.json",
   "backlog_file": "research/normandie-v0.5/backlog.json",
+  "current_blocker_revalidation": "research/normandie-v0.5/current-blocker-revalidation.json",
+  "internal_candidate_builder": "tools/build_normandie_v05_internal_candidate.py",
   "current_candidate_memory_count": 142,
   "current_new_memory_count": 0,
+  "known_potential_ceiling_excluding_f6zes": 147,
+  "last_revalidated_on": "2026-08-15",
+  "last_revalidation_promoted_item_count": 0,
+  "last_revalidation_memory_delta": 0,
   "public_export_allowed": false,
   "public_registry_allowed": false,
   "rules": {
@@ -17,6 +25,12 @@
     "chirp_duplex": "off",
     "chirp_offset": "0.000000",
     "same_rf_deduplicated": true,
-    "verified_distinct_pair_uses_two_rx_memories": true
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "published_v0_4_must_not_be_modified": true,
+    "field_gate_cannot_be_satisfied_by_web_research": true,
+    "local_operator_status_has_priority_for_current_operational_state": true,
+    "secondary_stale_conflict_does_not_override_current_authoritative_pair": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "internal_candidate_promotion_is_not_publication": true
   }
 }

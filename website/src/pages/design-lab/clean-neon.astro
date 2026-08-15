@@ -1,0 +1,56 @@
+---
+import DesignLabLayout from "../../layouts/DesignLabLayout.astro";
+import { publicPacks } from "../../lib/packRegistry";
+const packs = publicPacks.map((pack)=>({...pack,count:pack.variants.find((v)=>v.id===pack.defaultVariant)?.memoryCount ?? pack.variants[0]?.memoryCount ?? 0}));
+---
+<DesignLabLayout title="B2Tech Clean Neon" description="Concept minimal premium B2Tech pour RadioPack France." concept="clean-neon" themeColor="#05070B">
+  <div class="clean-page">
+    <section class="hero wrap">
+      <div class="micro">RADIOPACK FRANCE <span>·</span> BY B2TECH STUDIO</div>
+      <h1>Des codeplugs.<br /><span>Propres. Vérifiés.</span><br />Prêts à charger.</h1>
+      <div class="hero-bottom">
+        <p>Une direction premium et très lisible : moins de cartes, plus d’espace, une typographie forte et quelques accents néon pour signer l’identité B2Tech.</p>
+        <div class="actions"><a class="primary" href="/regions">Voir les packs <b>↗</b></a><a href="/generateur">Générateur</a></div>
+      </div>
+      <div class="neon-line"></div>
+    </section>
+
+    <section class="pack-list wrap">
+      {packs.map((pack,index)=>(
+        <a class="pack-row" href={`/regions/${pack.regionSlug}`}>
+          <div class="row-index">0{index+1}</div>
+          <div class="row-title"><small>{pack.version} · PUBLIC RX</small><h2>{pack.name}</h2></div>
+          <div class="row-count"><strong>{pack.count}</strong><span>mémoires</span></div>
+          <div class="row-arrow">→</div>
+        </a>
+      ))}
+    </section>
+
+    <section class="statement wrap">
+      <div class="statement-kicker">POURQUOI RADIOPACK</div>
+      <div class="statement-copy"><h2>Une base radio qui reste <em>simple à comprendre.</em></h2><p>Les sources sont documentées. Les versions publiques restent immuables. Les packs sont en réception seule. Et le site évite de transformer ces principes en jargon inutile.</p></div>
+    </section>
+
+    <section class="principles wrap">
+      <div><span>01</span><strong>Public</strong><p>Uniquement des informations publiques et vérifiables.</p></div>
+      <div><span>02</span><strong>RX only</strong><p>Transmission désactivée dans les packs distribués.</p></div>
+      <div><span>03</span><strong>Versionné</strong><p>Chaque publication reste identifiable et reproductible.</p></div>
+      <div><span>04</span><strong>Simple</strong><p>Importer, choisir une région, ou générer un fichier.</p></div>
+    </section>
+
+    <section class="cta wrap">
+      <div><small>RADIOPACK / GENERATOR</small><h2>Compose ton pack.<br />Garde seulement l’utile.</h2></div>
+      <a href="/generateur">Ouvrir le générateur <span>↗</span></a>
+    </section>
+  </div>
+</DesignLabLayout>
+
+<style>
+  .clean-page{min-height:100vh;overflow:hidden;background:radial-gradient(circle at 72% 4%,rgba(145,70,255,.12),transparent 31rem),radial-gradient(circle at 16% 26%,rgba(0,178,255,.08),transparent 28rem),#05070b;color:#f7f9fc}.wrap{width:min(1240px,calc(100% - 40px));margin-inline:auto}.hero{padding:105px 0 50px}.micro{color:#7d8b9d;font-size:.68rem;font-weight:900;letter-spacing:.2em}.micro span{color:#00b2ff;margin:0 10px}.hero h1{margin:36px 0 50px;max-width:1140px;color:white;font-size:clamp(4.1rem,9.5vw,9.2rem);line-height:.86;letter-spacing:-.085em;font-weight:900}.hero h1 span{color:transparent;background:linear-gradient(90deg,#f7f9fc 0%,#00b2ff 42%,#9146ff 100%);background-clip:text;-webkit-background-clip:text}.hero-bottom{display:grid;grid-template-columns:1fr auto;gap:50px;align-items:end}.hero-bottom p{max-width:620px;color:#8d99aa;font-size:1rem;line-height:1.8}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions a{padding:13px 18px;border:1px solid #253042;border-radius:999px;color:#dbe3ee;font-size:.76rem;font-weight:850}.actions .primary{background:#f7f9fc;color:#070a0f;border-color:#f7f9fc}.actions b{margin-left:18px}.neon-line{height:1px;margin-top:70px;background:linear-gradient(90deg,#00b2ff 0%,#9146ff 38%,#1e2734 70%,transparent);box-shadow:-120px 0 28px rgba(0,178,255,.18)}
+  .pack-list{padding:55px 0 100px}.pack-row{display:grid;grid-template-columns:80px 1fr 180px 55px;gap:24px;align-items:center;min-height:165px;border-bottom:1px solid #1c2531;transition:.2s ease}.pack-row:first-child{border-top:1px solid #1c2531}.pack-row:hover{padding-inline:16px;background:linear-gradient(90deg,rgba(0,178,255,.035),rgba(145,70,255,.025),transparent)}.row-index{color:#4d5a6c;font-size:.7rem;font-weight:900}.row-title small{display:block;margin-bottom:10px;color:#00b2ff;font-size:.63rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.row-title h2{color:#f4f7fb;font-size:clamp(1.9rem,4vw,3.9rem);line-height:.92;letter-spacing:-.06em;font-weight:850}.row-count{display:flex;align-items:end;gap:9px}.row-count strong{color:white;font-size:3.5rem;line-height:.78;letter-spacing:-.07em}.row-count span{color:#667386;font-size:.7rem}.row-arrow{justify-self:end;color:#9146ff;font-size:1.6rem}
+  .statement{display:grid;grid-template-columns:.3fr 1fr;gap:50px;padding:20px 0 100px}.statement-kicker{padding-top:10px;color:#657388;font-size:.65rem;font-weight:900;letter-spacing:.17em}.statement-copy h2{max-width:900px;color:white;font-size:clamp(3rem,6vw,6rem);line-height:.92;letter-spacing:-.07em}.statement-copy h2 em{font-style:normal;color:#9146ff}.statement-copy p{max-width:690px;margin-top:30px;color:#8794a7;line-height:1.8}
+  .principles{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #1c2531;border-left:1px solid #1c2531;margin-bottom:110px}.principles>div{min-height:250px;padding:25px;border-right:1px solid #1c2531;border-bottom:1px solid #1c2531}.principles span{color:#00b2ff;font-size:.66rem;font-weight:900}.principles strong{display:block;margin:75px 0 14px;color:#f4f7fb;font-size:1.5rem;letter-spacing:-.03em}.principles p{color:#718096;font-size:.8rem;line-height:1.6}
+  .cta{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:80px;padding:45px;border-radius:28px;background:linear-gradient(120deg,#0d1420,#0a1019);border:1px solid #202b3b;box-shadow:inset 0 0 70px rgba(0,178,255,.03)}.cta small{color:#8fff00;font-size:.62rem;font-weight:900;letter-spacing:.17em}.cta h2{margin-top:18px;color:white;font-size:clamp(2.1rem,4.5vw,4rem);line-height:.95;letter-spacing:-.055em}.cta>a{flex:0 0 auto;padding:14px 19px;border-radius:999px;background:linear-gradient(90deg,#00b2ff,#9146ff);color:white;font-size:.75rem;font-weight:900}.cta>a span{margin-left:24px}
+  @media(max-width:850px){.hero-bottom{grid-template-columns:1fr}.pack-row{grid-template-columns:50px 1fr 45px}.row-count{grid-column:2}.row-arrow{grid-column:3;grid-row:1/span 2}.statement{grid-template-columns:1fr}.principles{grid-template-columns:1fr 1fr}.cta{align-items:flex-start;flex-direction:column}}
+  @media(max-width:560px){.wrap{width:min(100% - 24px,1240px)}.hero{padding-top:75px}.hero h1{font-size:clamp(3.5rem,18vw,5.2rem)}.pack-row{min-height:145px;gap:10px}.row-count strong{font-size:2.7rem}.principles{grid-template-columns:1fr}.principles>div{min-height:200px}.principles strong{margin-top:50px}.cta{padding:28px}}
+</style>

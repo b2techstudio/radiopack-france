@@ -1,0 +1,104 @@
+---
+import DesignLabLayout from "../../layouts/DesignLabLayout.astro";
+
+const concepts = [
+  {
+    n: "01",
+    slug: "neon-core",
+    name: "B2Tech Neon Core",
+    tag: "Le plus B2Tech",
+    desc: "Noir profond, néons bleu/violet/vert, radio mise en scène et cartes produits très visuelles.",
+    colors: ["#050912", "#00B2FF", "#9146FF", "#8FFF00"],
+  },
+  {
+    n: "02",
+    slug: "command-center",
+    name: "Radio Command Center",
+    tag: "Le plus radio",
+    desc: "Une station de contrôle moderne : fréquences, statuts RX, spectre, modules et informations opérationnelles.",
+    colors: ["#03070B", "#00E5FF", "#8FFF00", "#233140"],
+  },
+  {
+    n: "03",
+    slug: "midnight-atlas",
+    name: "Midnight Radio Atlas",
+    tag: "Le plus identitaire",
+    desc: "Une carte de France nocturne devient le cœur de l’expérience, avec régions disponibles illuminées.",
+    colors: ["#060A14", "#0D1B35", "#00B2FF", "#9146FF"],
+  },
+  {
+    n: "04",
+    slug: "industrial-signal",
+    name: "Industrial Signal",
+    tag: "Le plus technique",
+    desc: "Graphite, signalétique, gros chiffres et grilles de documentation : brutaliste, précis et professionnel.",
+    colors: ["#0A0D10", "#D9E0E8", "#FF9D00", "#00AEEF"],
+  },
+  {
+    n: "05",
+    slug: "clean-neon",
+    name: "B2Tech Clean Neon",
+    tag: "Le plus premium",
+    desc: "Beaucoup d’espace, typographie géante, peu de cartes et juste assez de néon pour signer la marque.",
+    colors: ["#05070B", "#F7F9FC", "#00B2FF", "#9146FF"],
+  },
+];
+---
+<DesignLabLayout
+  title="5 propositions de design"
+  description="Comparatif de cinq directions visuelles pour RadioPack France."
+  concept="lab"
+>
+  <section class="lab-hero">
+    <div class="wrap">
+      <span class="kicker">B2TECH STUDIO × RADIOPACK FRANCE</span>
+      <h1>Cinq directions.<br /><em>Une vraie identité.</em></h1>
+      <p>Chaque proposition est une maquette navigable responsive, basée sur les vraies données RadioPack. Rien ici n’est indexé par les moteurs de recherche.</p>
+    </div>
+  </section>
+
+  <section class="concept-grid wrap">
+    {concepts.map((item) => (
+      <a class="concept-card" href={`/design-lab/${item.slug}/`}>
+        <div class="card-top"><span>{item.n}</span><small>{item.tag}</small></div>
+        <h2>{item.name}</h2>
+        <p>{item.desc}</p>
+        <div class="swatches" aria-label="Palette du concept">
+          {item.colors.map((color) => <i style={`background:${color}`}></i>)}
+        </div>
+        <strong>Ouvrir la maquette <span>↗</span></strong>
+      </a>
+    ))}
+  </section>
+
+  <section class="decision wrap">
+    <span>OBJECTIF</span>
+    <p>Tu peux comparer les cinq pages sur ordinateur et téléphone. Une fois ton choix fait, on reprend la direction retenue pour remplacer l’interface publique complète : accueil, régions, générateur et documentation.</p>
+  </section>
+</DesignLabLayout>
+
+<style>
+  .wrap { width: min(1180px, calc(100% - 36px)); margin-inline: auto; }
+  .lab-hero { padding: 110px 0 70px; background: radial-gradient(circle at 70% 15%, rgba(145,70,255,.22), transparent 31rem), radial-gradient(circle at 18% 25%, rgba(0,178,255,.16), transparent 28rem); }
+  .kicker { color: #8fff00; font-size: .76rem; font-weight: 900; letter-spacing: .22em; }
+  h1 { margin: 24px 0 22px; max-width: 950px; color: white; font-size: clamp(3.4rem, 8vw, 7.4rem); line-height: .91; letter-spacing: -.065em; }
+  h1 em { color: transparent; font-style: normal; background: linear-gradient(90deg,#00b2ff,#9146ff); background-clip: text; -webkit-background-clip: text; }
+  .lab-hero p { max-width: 710px; color: #91a1b8; font-size: clamp(1rem,2vw,1.2rem); }
+  .concept-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; padding: 12px 0 80px; }
+  .concept-card { position: relative; min-height: 330px; padding: 30px; overflow: hidden; border: 1px solid #1e2a3d; border-radius: 22px; background: linear-gradient(145deg,rgba(15,23,37,.96),rgba(7,12,21,.96)); transition: transform .2s ease,border-color .2s ease; }
+  .concept-card:hover { transform: translateY(-4px); border-color: #00b2ff; }
+  .concept-card:last-child { grid-column: 1 / -1; }
+  .card-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .card-top span { color: #00b2ff; font-size: 2rem; font-weight: 900; }
+  .card-top small { padding: 6px 9px; border: 1px solid rgba(143,255,0,.25); border-radius: 999px; color: #8fff00; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+  h2 { margin: 44px 0 14px; color: white; font-size: clamp(1.8rem,4vw,3.1rem); letter-spacing: -.04em; }
+  .concept-card p { max-width: 580px; color: #91a1b8; }
+  .swatches { display: flex; gap: 8px; margin: 28px 0; }
+  .swatches i { width: 36px; height: 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); }
+  .concept-card > strong { position: absolute; left: 30px; bottom: 28px; color: white; font-size: .86rem; letter-spacing: .04em; }
+  .concept-card > strong span { color: #00b2ff; }
+  .decision { margin-bottom: 80px; padding: 28px; border-left: 3px solid #9146ff; background: #0b111c; }
+  .decision span { color: #9146ff; font-size: .7rem; font-weight: 900; letter-spacing: .18em; }
+  .decision p { margin-top: 10px; max-width: 900px; color: #aeb9c9; }
+  @media (max-width: 760px) { .lab-hero { padding-top: 74px; } .concept-grid { grid-template-columns: 1fr; } .concept-card:last-child { grid-column: auto; } }
+</style>

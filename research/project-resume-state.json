@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 82,
-  "state_version": "0.21.71",
+  "current_sprint": 83,
+  "state_version": "0.21.72",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -28,65 +28,50 @@
     }
   },
   "active_work": {
-    "pack": "Bretagne",
-    "target_version": "0.3",
-    "status": "public_revalidation_zero_rf_delta_151_not_public",
+    "pack": "Normandie",
+    "target_version": "0.5",
+    "status": "current_blockers_revalidated_zero_delta_142_not_public",
     "public_export_allowed": false,
     "public_registry_allowed": false,
     "public_release_ready": false,
-    "published_base_version": "0.2",
-    "published_base_memory_count": 151,
+    "published_base_version": "0.4",
+    "published_base_memory_count": 142,
     "published_base_is_immutable": true,
-    "published_base_sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4",
-    "internal_candidate_memory_count": 151,
+    "published_base_sha256": "3da26f18cefbf7ec1dfb6a991101d07f6a8ce9fb921015a7202870fc9b9db66d",
+    "internal_candidate_memory_count": 142,
     "internal_candidate_new_memory_count": 0,
-    "internal_candidate_builder": "tools/build_bretagne_v03_internal_candidate.py",
-    "pack_plan": "research/bretagne-v0.3/pack-plan.json",
-    "backlog": "research/bretagne-v0.3/backlog.json",
-    "airac_transition_policy": "research/bretagne-v0.3/airac-transition-policy.json",
-    "backlog_item_count": 7,
+    "known_potential_ceiling_excluding_f6zes": 147,
+    "internal_candidate_builder": "tools/build_normandie_v05_internal_candidate.py",
+    "pack_plan": "research/normandie-v0.5/pack-plan.json",
+    "backlog": "research/normandie-v0.5/backlog.json",
+    "current_blocker_revalidation": "research/normandie-v0.5/current-blocker-revalidation.json",
+    "backlog_item_count": 4,
     "backlog_ids": [
-      "AIRAC_09_BRETAGNE_REVALIDATION",
-      "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
-      "CROSS_ETEL_CH64_LOCAL_MAPPING",
-      "CROSS_CORSEN_CH79_LOCAL_MAPPING",
-      "F5ZPV_RESTART_REVALIDATION",
-      "F5ZZH_RESTART_REVALIDATION",
-      "F5ZZC4_CURRENT_APRS_FREQUENCY"
+      "R3_MORTAIN_RX",
+      "F5ZHA_SOURCE_AND_COVERAGE",
+      "F1ZOV_OPERATIONAL_STATUS",
+      "F6ZES_RESOLVED"
     ],
-    "current_sia_cycle": "AIRAC 08/26",
-    "current_sia_valid_through": "2026-09-02",
-    "next_airac_cycle": "AIRAC 09/26",
-    "next_airac_valid_from": "2026-09-03",
-    "next_airac_valid_through": "2026-09-30",
-    "post_transition_aviation_revalidation_required": true,
-    "current_sia_xml_export_bytes_extracted": false,
-    "current_xml_field_match_claimed": false,
-    "channel64_generic_pair_in_published_base": true,
-    "channel79_generic_pair_in_published_base": true,
-    "channel64_local_site_claimed": false,
-    "channel79_local_site_claimed": false,
-    "private_ppdr_operational_data_excluded": true,
-    "resolved_v0_2_items_not_reopened": [
-      "ADRASEC_PUBLIC_DATA_REVALIDATION",
-      "F1ZBZ_RF_DIRECTION_REVIEW"
+    "last_revalidated_on": "2026-08-15",
+    "last_revalidation_memory_delta": 0,
+    "last_revalidation_promoted_item_count": 0,
+    "r3_current_operator_status": "operational",
+    "r3_field_reception_from_mortain_validated": false,
+    "r3_minimum_independent_rx_sessions_required": 2,
+    "f5zha_current_ref_pair_mhz": [
+      145.4675,
+      432.575
     ],
+    "f5zha_secondary_stale_conflict_frequency_mhz": 431.4125,
+    "f5zha_useful_mortain_coverage_verified": false,
+    "f1zov_local_operator_status": "maintenance",
+    "f1zov_ref_directory_status": "active",
+    "f6zes_usable_frequency_published": false,
+    "f6zes_mode_published": false,
+    "f6zes_operational_state_published": false,
     "published": false,
     "scope_frozen": false,
-    "prepublication_ready": false,
-    "public_service_revalidation": "research/bretagne-v0.3/public-service-revalidation.json",
-    "public_service_revalidation_checked_on": "2026-08-15",
-    "public_service_revalidation_reviewed_count": 6,
-    "public_service_revalidation_candidate_memory_delta": 0,
-    "public_service_revalidation_promoted_item_count": 0,
-    "f1zug_aprs_frequency_mhz": 144.8,
-    "f1zug_aprs_frequency_already_present_nationally": true,
-    "f1zug_adrasec35_transponder_frequency_published": false,
-    "f5zzc4_current_service_frequency_validated": false,
-    "f5zpv_local_operator_still_stopped": true,
-    "f5zzh_local_operator_still_stopped": true,
-    "etel_channel64_primary_source_conflict_open": true,
-    "corsen_channel79_primary_current_transmitter_site_confirmed": false
+    "prepublication_ready": false
   },
   "completed_bretagne_v0_1_release": {
     "pack": "Bretagne",
@@ -253,7 +238,9 @@
     "research/bretagne-v0.3/README.md",
     "research/sprint-81-summary.md",
     "research/bretagne-v0.3/public-service-revalidation.json",
-    "research/sprint-82-summary.md"
+    "research/sprint-82-summary.md",
+    "research/normandie-v0.5/current-blocker-revalidation.json",
+    "research/sprint-83-summary.md"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -307,7 +294,9 @@
     "run_sprint79_test": "python tests/test_sprint79_bretagne_v02_maturity.py",
     "run_sprint80_test": "python tests/test_sprint80_bretagne_v02_publication.py",
     "run_bretagne_v02_public_release_test": "python tests/test_bretagne_v02_public_release.py",
-    "build_bretagne_v03_internal_candidate": "tools/build_bretagne_v03_internal_candidate.py"
+    "build_bretagne_v03_internal_candidate": "tools/build_bretagne_v03_internal_candidate.py",
+    "build_normandie_v05_internal_candidate": "tools/build_normandie_v05_internal_candidate.py",
+    "test_sprint83_normandie_v05_revalidation": "tests/test_sprint83_normandie_v05_revalidation.py"
   },
   "recent_sprints": [
     {
@@ -920,5 +909,19 @@
     "f5zzh_local_operator_still_stopped": true,
     "etel_channel64_primary_conflict_open": true,
     "corsen_channel79_primary_site_mapping_confirmed": false
+  },
+  "latest_sprint83_normandie_v0_5_revalidation": {
+    "sprint": 83,
+    "state_version": "0.21.72",
+    "checked_on": "2026-08-15",
+    "candidate_memory_count_before": 142,
+    "candidate_memory_count_after": 142,
+    "candidate_memory_delta": 0,
+    "promoted_item_count": 0,
+    "known_potential_ceiling_excluding_f6zes": 147,
+    "r3_field_gate_open": true,
+    "f5zha_field_coverage_gate_open": true,
+    "f1zov_maintenance_gate_open": true,
+    "f6zes_frequency_mode_state_unresolved": true
   }
 }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.72 - 2026-08-15
+
+- **Sprint 83** : revalidation actuelle des quatre dossiers différés de Normandie v0.5 ; candidat maintenu à **142 mémoires RX**, delta RF **0**, plafond potentiel **147** hors F6ZES.
+- R3 F1ZBX opérationnel et paire `145.075 / 145.675 MHz` reconfirmés, mais gate terrain Mortain toujours ouvert.
+- F5ZHA : paire REF `145.4675 / 432.575 MHz` renforcée ; conflit RepeaterBook `431.4125 MHz` daté 2017 conservé comme conflit secondaire ancien ; couverture Mortain toujours requise.
+- F1ZOV reste en maintenance chez l’opérateur local ; F6ZES reste sans fréquence/mode/état exploitables.
+- Ajout du builder interne v0.5, de `current-blocker-revalidation.json` et du garde-fou Sprint 83 ; aucune publication v0.5.
+
 ## 0.21.71 - 2026-08-15
 
 - **Sprint 82** : revalidation publique ciblée des six dossiers non-AIRAC ouverts de Bretagne v0.3 ; candidat maintenu à **151 mémoires RX**, delta RF **0**, aucune promotion.

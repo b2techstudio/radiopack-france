@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 82 / 0.21.71 — Bretagne v0.3 reste à 151 mémoires RX après revalidation publique ciblée de six dossiers ; delta RF 0, aucune publication.**
+**État courant : Sprint 83 / 0.21.72 — Normandie v0.5 reste à 142 mémoires RX après revalidation actuelle des quatre dossiers différés ; delta RF 0, plafond potentiel 147 hors F6ZES, aucune publication.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 82 / 0.21.71
+## État actuel — Sprint 83 / 0.21.72
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -16,9 +16,20 @@ Packs publics immuables :
 - **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche : Normandie v0.5 reste à 142 mémoires, avec un plafond potentiel connu de **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 : les six dossiers non-AIRAC ouverts ont été revalidés le 15 août 2026 sans promotion ; la prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
+Recherche : Normandie v0.5 reste à **142 mémoires RX**, delta 0, après revalidation le 15 août 2026 des quatre dossiers différés ; le plafond potentiel reste **147 mémoires** hors F6ZES. Bretagne v0.3 reste à **151 mémoires RX**, delta 0 ; sa prochaine transition aviation reste AIRAC 09/26 au 3 septembre 2026.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md` et `research/sprint-82-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md` et `research/sprint-83-summary.md`.
+
+## Sprint 83 — revalidation ciblée Normandie v0.5
+
+Les quatre dossiers différés de Normandie v0.5 ont été recontrôlés le **15 août 2026**. Résultat : **142 → 142 mémoires RX, delta RF 0, zéro promotion**. Le plafond potentiel reste **147** hors F6ZES.
+
+- **R3 F1ZBX** : opérateur actuel confirmé, paire `145.075 / 145.675 MHz`, mais deux sessions RX indépendantes depuis Mortain restent obligatoires ;
+- **F5ZHA Laval** : le REF courant et une seconde liste convergent sur `145.4675 / 432.575 MHz`; RepeaterBook conserve `431.4125 MHz` avec une vérification 2017, classée conflit secondaire ancien ; la couverture Mortain reste non démontrée ;
+- **F1ZOV** : toujours `En Maintenance` chez F6KFW malgré le REF actif ; le statut opérateur local prime ;
+- **F6ZES Sourdeval** : site toujours listé mais sans fréquence, mode ni état opérationnel exploitables ; rien n’est deviné.
+
+Builder : `tools/build_normandie_v05_internal_candidate.py`. Preuve : `research/normandie-v0.5/current-blocker-revalidation.json`. Garde-fou : `tests/test_sprint83_normandie_v05_revalidation.py`.
 
 ## Sprint 82 — revalidation publique ciblée Bretagne v0.3
 
@@ -192,7 +203,7 @@ Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normand
 - `research/sprint-30-34-summary.md`
 - `research/sprint-35-39-summary.md`
 - `research/sprint-55-60-summary.md`
-- `research/sprint-61-summary.md` à `research/sprint-82-summary.md`
+- `research/sprint-61-summary.md` à `research/sprint-83-summary.md`
 
 ## Tests principaux
 

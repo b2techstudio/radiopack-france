@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **82**
-État logique : **0.21.71**
+Sprint courant : **83**
+État logique : **0.21.72**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-82-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-83-summary.md`.
 
 ## État public
 
@@ -16,6 +16,17 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.2 : 65 mémoires RX, variante 48 sans aviation.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 83 — Normandie v0.5 revalidée, delta 0
+
+Revalidation actuelle des quatre dossiers différés : **candidat 142, delta RF 0, zéro promotion**, plafond potentiel **147** hors F6ZES.
+
+- R3 F1ZBX : paramètres opérateur actuels confirmés, gate terrain Mortain toujours ouvert ;
+- F5ZHA : paire REF `145.4675 / 432.575 MHz` renforcée, conflit RepeaterBook 2017 classé secondaire ancien, couverture terrain toujours requise ;
+- F1ZOV : maintenance locale reconfirmée, donc pas de promotion malgré le REF actif ;
+- F6ZES : site confirmé sans fréquence/mode/état utilisables ; aucune hypothèse.
+
+Builder : `tools/build_normandie_v05_internal_candidate.py`. Preuve : `research/normandie-v0.5/current-blocker-revalidation.json`. Test : `tests/test_sprint83_normandie_v05_revalidation.py`.
 
 ## Sprint 82 — Bretagne v0.3 revalidée, delta 0
 

@@ -1,0 +1,48 @@
+name: Annecy v0.4 Publication File Build
+
+on:
+  push:
+    branches:
+      - annecy-v04-publication
+
+permissions:
+  contents: write
+
+jobs:
+  build-files:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout publication branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+      - name: Build frozen v0.4 files
+        run: python tools/build_annecy_v04_release_candidate.py --output-dir /tmp/annecy-v04
+      - name: Stage generated publication inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p website/public/downloads/annecy-alpes-leman
+          mkdir -p research/annecy-alpes-leman-v0.4
+          cp /tmp/annecy-v04/radiopack-france-annecy-alpes-leman-v0.4.csv website/public/downloads/annecy-alpes-leman/
+          cp /tmp/annecy-v04/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv website/public/downloads/annecy-alpes-leman/
+          cp /tmp/annecy-v04/prepublication-reviewed-memory-map.json research/annecy-alpes-leman-v0.4/
+          cp /tmp/annecy-v04/release-candidate-manifest.json research/annecy-alpes-leman-v0.4/prepublication-release-candidate-manifest.json
+      - name: Commit deterministic files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "B2tech Studio"
+          git config user.email "b2techstudio@gmail.com"
+          git add website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv
+          git add website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv
+          git add research/annecy-alpes-leman-v0.4/prepublication-reviewed-memory-map.json
+          git add research/annecy-alpes-leman-v0.4/prepublication-release-candidate-manifest.json
+          if git diff --cached --quiet; then
+            echo "Publication inputs already match the deterministic build"
+            exit 0
+          fi
+          git commit -m "Build deterministic Annecy v0.4 publication inputs"
+          git push origin HEAD:annecy-v04-publication

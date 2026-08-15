@@ -51,7 +51,7 @@ jobs:
           )
           path.write_text(text, encoding="utf-8")
 
-          # Keep the Sprint 86 candidate fields in the final machine state for historical guards.
+          # Keep Sprint 86 candidate provenance in the final state and plan.
           state_path = Path("research/project-resume-state.json")
           state = json.loads(state_path.read_text(encoding="utf-8"))
           active = state["active_work"]
@@ -60,6 +60,11 @@ jobs:
           active["internal_candidate_new_memory_count"] = 11
           active["known_potential_ceiling_if_f1zth_50m_clears"] = 77
           state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          plan_path = Path("research/annecy-alpes-leman-v0.3/pack-plan.json")
+          plan = json.loads(plan_path.read_text(encoding="utf-8"))
+          plan["memory_plan"]["status"] = "sprint86_internal_candidate_defined_not_public"
+          plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
           # Sprint 86 remains a candidate-history test; after explicit publication only the public flags change.
           s86 = Path("tests/test_sprint86_annecy_v03_paired_rx_expansion.py")

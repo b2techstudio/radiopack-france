@@ -1,11 +1,21 @@
 {
-  "schema_version": "1.0",
-  "status": "research_backlog_not_public",
+  "schema_version": "1.1",
+  "status": "research_backlog_not_public_sprint82_zero_rf_delta",
   "pack": "Bretagne",
   "target_version": "0.3",
   "based_on_published_version": "0.2",
   "published_base_memory_count": 151,
   "public_export_allowed": false,
+  "latest_public_revalidation": {
+    "sprint": 82,
+    "checked_on": "2026-08-15",
+    "evidence": "research/bretagne-v0.3/public-service-revalidation.json",
+    "reviewed_non_airac_item_count": 6,
+    "candidate_memory_count_before": 151,
+    "candidate_memory_count_after": 151,
+    "candidate_memory_delta": 0,
+    "promoted_item_count": 0
+  },
   "items": [
     {
       "id": "AIRAC_09_BRETAGNE_REVALIDATION",
@@ -27,13 +37,16 @@
     {
       "id": "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY",
       "category": "emergency_amateur_research",
-      "state": "public_frequency_unpublished_watch_only",
+      "state": "revalidated_2026_08_15_aprs_current_transponder_frequency_unpublished_zero_rf_delta",
       "aprs_frequency_mhz": 144.8,
       "aprs_frequency_already_present_nationally": true,
+      "recent_aprs_activity_visible_in_public_index": true,
       "adrasec_transponder_frequency_mhz": null,
-      "potential_memory_delta": null,
+      "potential_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted": false,
       "private_operational_research_allowed": false,
+      "evidence": "research/bretagne-v0.3/public-service-revalidation.json",
       "requirements": [
         "accept only a current explicitly public service-specific source",
         "do not infer transponder frequency from APRS",
@@ -43,11 +56,13 @@
     {
       "id": "CROSS_ETEL_CH64_LOCAL_MAPPING",
       "category": "maritime_metadata",
-      "state": "optional_local_metadata_unresolved",
+      "state": "revalidated_2026_08_15_primary_conflict_open_optional_metadata_zero_rf_delta",
       "generic_pair_mhz": [156.225, 160.825],
       "generic_memory_already_present_in_published_base": true,
       "potential_new_rf_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted_local_site_mapping": false,
+      "evidence": "research/bretagne-v0.3/public-service-revalidation.json",
       "requirements": [
         "require a current primary source explicitly mapping channel 64 to a Brittany transmitter site",
         "resolve the existing primary-source conflict before attribution",
@@ -57,11 +72,13 @@
     {
       "id": "CROSS_CORSEN_CH79_LOCAL_MAPPING",
       "category": "maritime_metadata",
-      "state": "optional_local_metadata_unresolved",
+      "state": "revalidated_2026_08_15_primary_site_mapping_unresolved_optional_metadata_zero_rf_delta",
       "generic_pair_mhz": [156.975, 161.575],
       "generic_memory_already_present_in_published_base": true,
       "potential_new_rf_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted_local_site_mapping": false,
+      "evidence": "research/bretagne-v0.3/public-service-revalidation.json",
       "requirements": [
         "require a current primary source explicitly mapping channel 79 to a Brittany transmitter site",
         "secondary site-chain convergence remains a clue only",
@@ -71,10 +88,14 @@
     {
       "id": "F5ZPV_RESTART_REVALIDATION",
       "category": "radioamateur",
-      "state": "stopped_by_local_operator_reconsider_only_after_restart_evidence",
+      "state": "revalidated_2026_08_15_local_operator_still_stopped_zero_rf_delta",
       "last_documented_pair_mhz": [430.475, 439.875],
-      "potential_memory_delta": null,
+      "general_directory_reports_active": true,
+      "local_operator_reports_stopped": true,
+      "potential_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted": false,
+      "evidence": "research/bretagne-v0.3/public-service-revalidation.json",
       "requirements": [
         "require current local-operator restart evidence",
         "revalidate frequencies and deduplication only after restart is established",
@@ -84,10 +105,14 @@
     {
       "id": "F5ZZH_RESTART_REVALIDATION",
       "category": "radioamateur",
-      "state": "stopped_reconsider_only_after_restart_and_site_evidence",
+      "state": "revalidated_2026_08_15_local_operator_still_stopped_searching_site_zero_rf_delta",
       "last_documented_pair_mhz": [145.1875, 145.7875],
-      "potential_memory_delta": null,
+      "local_operator_reports_stopped": true,
+      "local_operator_searching_new_site": true,
+      "potential_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted": false,
+      "evidence": "research/bretagne-v0.3/public-service-revalidation.json",
       "requirements": [
         "require current restart evidence from the local operator or equally authoritative source",
         "require current site and frequency validation",
@@ -97,14 +122,20 @@
     {
       "id": "F5ZZC4_CURRENT_APRS_FREQUENCY",
       "category": "radioamateur_emergency_metadata",
-      "state": "current_service_specific_frequency_unresolved",
-      "potential_memory_delta": null,
+      "state": "revalidated_2026_08_15_historical_role_only_current_frequency_unresolved_zero_rf_delta",
+      "historical_ara35_aprs_role_exists": true,
+      "historical_role_is_current_frequency_validation": false,
+      "current_service_specific_frequency_validated": false,
+      "potential_memory_delta": 0,
+      "candidate_memory_delta": 0,
       "promoted": false,
       "must_not_conflate_with_f5zzc_analog": true,
+      "evidence": "research/bretagne-v0.3/public-service-revalidation.json",
       "requirements": [
         "require a current service-specific public source for F5ZZC-4",
         "do not reuse the separate stopped F5ZZC analog frequency",
-        "deduplicate against national APRS 144.800 MHz if that frequency is later explicitly validated"
+        "deduplicate against national APRS 144.800 MHz if that frequency is later explicitly validated",
+        "do not treat absence from a public live index as proof that the station is stopped"
       ]
     }
   ],
@@ -121,6 +152,8 @@
     "local_metadata_does_not_create_duplicate_memory": true,
     "stopped_infrastructure_not_promoted": true,
     "local_operator_status_overrides_general_directory_for_current_state": true,
-    "airac_transition_is_a_freshness_gate_not_an_automatic_frequency_delta": true
+    "airac_transition_is_a_freshness_gate_not_an_automatic_frequency_delta": true,
+    "absence_from_public_live_index_does_not_prove_stopped": true,
+    "historical_role_does_not_validate_current_frequency": true
   }
 }

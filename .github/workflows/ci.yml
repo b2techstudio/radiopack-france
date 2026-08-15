@@ -109,6 +109,9 @@ jobs:
       - name: Test Sprint 70 Normandie v0.5 initialization
         run: python tests/test_normandie_v05_initialization.py
 
+      - name: Test Sprint 83 Normandie v0.5 blocker revalidation
+        run: python tests/test_sprint83_normandie_v05_revalidation.py
+
       - name: Test Bretagne v0.1 internal candidate
         run: python tests/test_bretagne_internal_candidate.py
 

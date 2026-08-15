@@ -67,9 +67,19 @@ def main() -> None:
         assert len(memory_map["rows"]) == 77
 
     public_dir = ROOT / "website/public/downloads/annecy-alpes-leman"
-    assert not (public_dir / "radiopack-france-annecy-alpes-leman-v0.4.csv").exists()
-    assert not (public_dir / "radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv").exists()
-    print("Sprint 94 Annecy v0.4 prepublication: 77/60 RX, deterministic SHAs, blockers=0, public=false")
+    public_full = public_dir / "radiopack-france-annecy-alpes-leman-v0.4.csv"
+    public_no_air = public_dir / "radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv"
+    publication = ROOT / "research/annecy-alpes-leman-v0.4/publication-record.json"
+    if publication.exists():
+        record = json.loads(publication.read_text(encoding="utf-8"))
+        assert record["status"] == "published_immutable"
+        assert public_full.exists() and public_no_air.exists()
+        assert sha(public_full) == FULL_SHA
+        assert sha(public_no_air) == NO_AIR_SHA
+        print("Sprint 94 Annecy v0.4 frozen prepublication remains reproducible after immutable publication")
+    else:
+        assert not public_full.exists() and not public_no_air.exists()
+        print("Sprint 94 Annecy v0.4 prepublication: 77/60 RX, deterministic SHAs, blockers=0, public=false")
 
 
 if __name__ == "__main__":

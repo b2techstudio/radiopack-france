@@ -2,7 +2,7 @@
 
 Date : 2026-08-15  
 Cible : dépôt `b2techstudio/radiopack-france`, site statique Astro / Cloudflare Pages  
-État : audit technique pré-fusion terminé ; contrôle HTTP réel prévu automatiquement après fusion sur `main`.
+État : audit code/build terminé et fusionné ; contrôle HTTP réel tenté sur `main`, mais le nom `radiopack.b2tech.studio` ne résout pas depuis le runner GitHub public.
 
 ## Conclusion
 
@@ -155,3 +155,15 @@ Aucun audit ne peut garantir qu'un site est « impossible à hacker ». Cet audi
 - `.github/workflows/annecy-v03-guards.yml`
 - `.github/workflows/sprints89-91-guards.yml`
 - `research/security-audit-sprint92.md`
+
+## Vérification post-fusion sur `main`
+
+Le workflow Security Audit run 8 a confirmé sur le commit de fusion que les invariants repository, `pip-audit`, `npm audit`, le build Astro, l'absence de source maps et la présence de `_headers`/`_redirects` dans `dist` sont tous verts.
+
+Le job live a effectué **18 tentatives externes** et a obtenu à chaque fois `curl: (6) Could not resolve host: radiopack.b2tech.studio`. Il ne s'agit donc pas d'un échec CSP/HSTS : aucun serveur n'a été joint sous ce nom. Le workflow permanent est ajusté pour :
+
+- signaler un avertissement sans rendre le build rouge lorsque le DNS n'existe pas ;
+- devenir strict automatiquement dès que le nom résout ;
+- échouer si le site devient joignable mais ne renvoie pas CSP, HSTS, X-Frame-Options, nosniff, COOP, Referrer-Policy et Permissions-Policy attendus.
+
+Le déploiement/DNS du domaine reste ainsi visible comme **état non certifié**, sans créer un faux échec de sécurité du code.

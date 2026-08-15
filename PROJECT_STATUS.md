@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **91**
-État logique : **0.21.80**
+Sprint courant : **92**
+État logique : **0.21.81**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-91-summary.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-92-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
 
 ## État public
 
@@ -16,6 +16,12 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.3 : **76 mémoires RX**, variante **59 sans aviation**, publiée et immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 92 — audit de sécurité complet
+
+Le dépôt et le site statique ont été audités et durcis. `nanoid 3.3.17` (alerte haute `GHSA-2v37-7h3g-55p8`) a été remplacé dans le lockfile par `3.3.18`. `npm audit --audit-level=low`, `pip-audit`, les invariants XSS/secrets/redirections, les **63 tests fonctionnels** et le build Astro passent. CSP, HSTS, COOP et autres en-têtes sont présents dans le build ; GitHub Actions utilise désormais des SHA immuables et des permissions réduites. Le contrôle HTTP externe a aussi établi que `radiopack.b2tech.studio` ne résout pas depuis GitHub Actions : aucun header live ne peut être certifié tant que le DNS n'est pas publié.
+
+Risques de configuration restant hors code : `main` non protégée, Dependabot vulnerability alerts désactivé, état Secret scanning / Code scanning non observable via l'intégration actuelle.
 
 ## Sprint 91 — Bretagne v0.3 AIRAC09 handoff
 

@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 91 / 0.21.80 — Annecy v0.4 candidat 77/60 non public ; Normandie v0.5 142/delta 0 bloquée terrain ; Bretagne v0.3 151/delta 0 en attente AIRAC 09/26.**
+**État courant : Sprint 92 / 0.21.81 — audit sécurité complet et durcissement fusionné ; dépendances auditées ; protections navigateur/CI automatisées ; DNS live radiopack.b2tech.studio non résolvable au contrôle externe.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 91 / 0.21.80
+## État actuel — Sprint 92 / 0.21.81
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -20,7 +20,11 @@ Recherche : **Annecy v0.4 = 77 RX / 60 sans aviation, +1 RF**, candidat détermi
 
 Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md` et `research/sprint-91-summary.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md` et `research/sprint-91-summary.md`, `research/sprint-92-summary.md` et `research/security-audit-sprint92.md`.
+
+## Sprint 92 — audit et durcissement sécurité
+
+Audit complet du site statique, des dépendances et de la chaîne CI/CD. Une alerte haute `nanoid 3.3.17` (`GHSA-2v37-7h3g-55p8`) a été corrigée vers `3.3.18`. `npm audit`, `pip-audit`, les 63 tests fonctionnels et le build Astro sont verts. CSP/HSTS et autres en-têtes de sécurité ont été ajoutés, les actions GitHub sont épinglées par SHA et le token CI est en moindre privilège. Le domaine `radiopack.b2tech.studio` ne résout pas depuis le runner public au moment du contrôle, donc l'audit HTTP live reste différé jusqu'à publication du DNS. Rapport : `research/security-audit-sprint92.md`.
 
 ## Sprint 91 — Bretagne AIRAC 09/26 handoff
 

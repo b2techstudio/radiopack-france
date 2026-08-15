@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.21.81 - 2026-08-15
+
+- **Sprint 92** : audit de sécurité complet du site Astro, des dépendances, des workflows GitHub Actions et des artefacts publics.
+- Correction de l'alerte haute `nanoid 3.3.17` / `GHSA-2v37-7h3g-55p8` vers `3.3.18`; `npm audit --audit-level=low` et `pip-audit` passent.
+- Ajout CSP/HSTS/COOP et durcissement JSON-LD, détection de sinks DOM-XSS/secrets/open redirects, vérification d'absence de source maps.
+- GitHub Actions épinglées par SHA, checkout sans credentials persistants, `statuses: write` limité au job de publication du statut.
+- Ajout d'un workflow Security Audit permanent et d'une configuration Dependabot hebdomadaire.
+- Test live : `radiopack.b2tech.studio` ne résout pas depuis un runner GitHub public ; contrôle des headers live différé tant que le DNS n'est pas publié.
+- Aucun CSV public ni contenu RF modifié.
+
 ## 0.21.80 - 2026-08-15
 
 - **Sprint 91** : handoff Bretagne v0.3 AIRAC 09/26 préparé ; candidat **151 RX, delta 0**, aucune anticipation avant le 3 septembre.

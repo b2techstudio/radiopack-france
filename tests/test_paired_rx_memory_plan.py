@@ -159,9 +159,22 @@ assert plan["rules"]["linked_system_roles_must_not_create_duplicate_rf_memories"
 assert plan["rules"]["stopped_or_unresolved_links_excluded_from_active_memory_list"] is True
 assert plan["rules"]["no_public_export"] is True
 
+# This file is a historical research memory plan and remains non-public. Its Annecy
+# subset predates the final v0.3 release, so publication does not mutate these counts.
+# The current registry may nevertheless point to the separately reviewed immutable v0.3.
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
+assert 'id: "annecy-alpes-leman"' in registry
 assert 'version: "v0.4"' in registry
-assert 'version: "v0.3"' not in registry
+assert 'version: "v0.3"' in registry
 
-print("Tests RadioPack paired RX deduplicated memory research plan: Normandie 12, Annecy 10, Bretagne 29 unique RX frequencies, R3/R71 four-frequency linked system deduplicated and R3 at 119.3 km from Mortain inside the operator 150 km usage radius geometrically without claiming reception, TX-off contract and no public mutation OK")
+annecy_record = json.loads(
+    (ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json").read_text(encoding="utf-8")
+)
+assert annecy_record["status"] == "published_immutable"
+assert annecy_record["version"] == "0.3"
+assert annecy_record["new_unique_rf_memory_count"] == 11
+assert annecy_record["rules"]["same_rf_frequency_deduplicated"] is True
+assert annecy_record["rules"]["immutable"] is True
+
+print("Tests RadioPack paired RX deduplicated memory research plan: historical research counts remain stable while published Annecy v0.3 is separately immutable and paired-RX compliant; Normandie 12, Annecy research 10, Bretagne 29 unique RX frequencies, TX-off contract OK")

@@ -38,7 +38,6 @@ jobs:
           import json
           from pathlib import Path
 
-          # The old v0.2 dynamic routes remain historical and must stay tested.
           path = Path("tests/test_web_generator.py")
           text = path.read_text(encoding="utf-8")
           text = text.replace(
@@ -51,7 +50,6 @@ jobs:
           )
           path.write_text(text, encoding="utf-8")
 
-          # Keep Sprint 86 candidate provenance in the final state and plan.
           state_path = Path("research/project-resume-state.json")
           state = json.loads(state_path.read_text(encoding="utf-8"))
           active = state["active_work"]
@@ -66,7 +64,6 @@ jobs:
           plan["memory_plan"]["status"] = "sprint86_internal_candidate_defined_not_public"
           plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-          # Region catalog must move with the public registry.
           regions_path = Path("website/src/data/regions.json")
           regions = json.loads(regions_path.read_text(encoding="utf-8"))
           annecy_region = next(item for item in regions if item["slug"] == "annecy-haute-savoie")
@@ -75,7 +72,6 @@ jobs:
           annecy_region["memoryCount"] = 76
           regions_path.write_text(json.dumps(regions, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-          # Sprint 86 remains a candidate-history test; after explicit publication only public flags change.
           s86 = Path("tests/test_sprint86_annecy_v03_paired_rx_expansion.py")
           text = s86.read_text(encoding="utf-8")
           old = '''assert active["public_export_allowed"] is False\nassert active["public_registry_allowed"] is False\nassert active["public_release_ready"] is False\n'''
@@ -97,7 +93,6 @@ jobs:
           text = text.replace(bad, good, 1)
           s86.write_text(text, encoding="utf-8")
 
-          # Generic site guard follows publication-record.json while preserving historical v0.2 files.
           site = Path("tests/test_site_files.py")
           text = site.read_text(encoding="utf-8")
           text = text.replace(
@@ -150,6 +145,10 @@ jobs:
         run: |
           git config user.name "B2tech Studio"
           git config user.email "b2techstudio@gmail.com"
+          # GitHub Actions tokens cannot update workflow files. The permanent CI
+          # guard is added separately through the GitHub connector after this
+          # already-validated publication commit lands.
+          git restore --source=HEAD -- .github/workflows/ci.yml
           git add -A
           git commit -m "Sprint 88 publish Annecy Alpes Leman v0.3"
           git push

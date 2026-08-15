@@ -122,4 +122,4 @@ assert len(annecy_rows) == 76
 assert len({row["Frequency"] for row in annecy_rows}) == 76
 assert all(row["Duplex"] == "off" and row["Offset"] == "0.000000" for row in annecy_rows)
 
-print("Tests RadioPack paired RX policy: paired directions stay RX-only/deduplicated and historical Annecy v0.3 remains immutable after later releases OK")
+print("Tests RadioPack paired RX policy: native duplex/split links expose both RX directions, TX remains off/zero, shared RF frequencies stay deduplicated, historical Annecy v0.3 remains immutable after later releases OK")

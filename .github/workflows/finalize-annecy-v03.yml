@@ -66,6 +66,15 @@ jobs:
           plan["memory_plan"]["status"] = "sprint86_internal_candidate_defined_not_public"
           plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+          # Region catalog must move with the public registry.
+          regions_path = Path("website/src/data/regions.json")
+          regions = json.loads(regions_path.read_text(encoding="utf-8"))
+          annecy_region = next(item for item in regions if item["slug"] == "annecy-haute-savoie")
+          annecy_region["status"] = "v0.3 disponible"
+          annecy_region["description"] = "Pack RX de 76 mémoires pour les Alpes du Nord et le bassin lémanique, avec variante 59 mémoires sans aviation."
+          annecy_region["memoryCount"] = 76
+          regions_path.write_text(json.dumps(regions, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
           # Sprint 86 remains a candidate-history test; after explicit publication only public flags change.
           s86 = Path("tests/test_sprint86_annecy_v03_paired_rx_expansion.py")
           text = s86.read_text(encoding="utf-8")
@@ -81,13 +90,38 @@ jobs:
               raise RuntimeError("Sprint 86 plan publication anchor missing")
           text = text.replace(old, new, 1)
 
-          # The v0.2 historical routes are dynamic modules: verify behavior, not a filename literal.
           bad = '''assert "radiopack-france-annecy-alpes-leman-v0.2.csv" in (ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts").read_text(encoding="utf-8")\n'''
           good = '''old_full_route = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"\nold_no_air_route = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"\nassert old_full_route.is_file() and old_no_air_route.is_file()\nassert "buildAnnecyCsv(true)" in old_full_route.read_text(encoding="utf-8")\nassert "buildAnnecyCsv(false)" in old_no_air_route.read_text(encoding="utf-8")\n'''
           if bad not in text:
               raise RuntimeError("Sprint 86 historical-route anchor missing")
           text = text.replace(bad, good, 1)
           s86.write_text(text, encoding="utf-8")
+
+          # Generic site guard follows publication-record.json while preserving historical v0.2 files.
+          site = Path("tests/test_site_files.py")
+          text = site.read_text(encoding="utf-8")
+          text = text.replace(
+              'assert annecy_next["status"] == "research_next_version_not_public"',
+              'annecy_v03_record = ROOT / "research/annecy-alpes-leman-v0.3/publication-record.json"\nif annecy_v03_record.exists():\n    assert annecy_next["status"] == "published_immutable_v0_3"\nelse:\n    assert annecy_next["status"] == "research_next_version_not_public"',
+              1,
+          )
+          text = text.replace(
+              'assert annecy_next["publication"]["public_export_allowed"] is False',
+              'if annecy_v03_record.exists():\n    assert annecy_next["publication"]["public_export_allowed"] is True\n    assert annecy_next["publication"]["public_registry_allowed"] is True\n    assert annecy_next["publication"]["review_completed"] is True\nelse:\n    assert annecy_next["publication"]["public_export_allowed"] is False',
+              1,
+          )
+          text = text.replace(
+              'assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 65',
+              'assert next(region for region in regions if region["slug"] == "annecy-haute-savoie")["memoryCount"] == 76',
+              1,
+          )
+          text = text.replace("    'version: \"v0.2\"',\n    'version: \"v0.4\"',\n    'memoryCount: 65',\n    'memoryCount: 48',", "    'version: \"v0.3\"',\n    'version: \"v0.2\"',\n    'version: \"v0.4\"',\n    'memoryCount: 76',\n    'memoryCount: 59',", 1)
+          text = text.replace(
+              "assert 'version: \"v0.3\"' not in registry",
+              "assert 'version: \"v0.3\"' in registry",
+              1,
+          )
+          site.write_text(text, encoding="utf-8")
 
       - name: Validate public release guards
         run: |

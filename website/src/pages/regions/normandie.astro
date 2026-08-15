@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
+import { buildStandardChannelGroups, loadPublicPackMemories } from "../../lib/channelDetails";
+
+const memories = loadPublicPackMemories("downloads/normandie/radiopack-france-normandie-v0.4.csv");
+const channelGroups = buildStandardChannelGroups(memories);
 ---
 <BaseLayout title="Pack Normandie v0.4 - RadioPack France" description="CSV CHIRP Normandie v0.4 de 142 mémoires pour Quansheng UV-K5, en réception seule.">
   <section class="section"><div class="container page-grid">
@@ -13,10 +18,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </div>
       <div class="card legal"><strong>Réception seule sur les 142 mémoires</strong><p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. Le pack n'accorde aucun droit d'émission.</p></div>
       <div class="memory-map card"><h2>Évolution v0.4</h2><div class="ranges"><span><b>Base</b> 139 mémoires v0.3.1 conservées</span><span><b>175</b> 50-ZHY-IN · 145.0875</span><span><b>176</b> 53-ZCE-IN · 145.1000</span><span><b>177</b> 50-ZBL-U · 431.2500</span></div></div>
+
+      <ChannelGroupDetails
+        groups={channelGroups}
+        title="Tous les canaux du pack Normandie"
+        intro="Clique sur un groupe pour afficher chaque mémoire réellement présente dans le CSV public v0.4 avec sa fréquence, son mode et son libellé."
+      />
     </div>
     <aside class="card status-card"><span class="badge badge-green">Disponible - v0.4</span><h3>142 mémoires sur 200</h3><div class="meter"><span></span></div><ul><li>RX-only</li><li>3 ajouts validés depuis v0.3.1</li><li>R3, F5ZHA, F1ZOV et F6ZES reportés à v0.5</li><li>Aucune fréquence incertaine ajoutée</li></ul></aside>
   </div></section>
 </BaseLayout>
 <style>
-.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:#dfe7f1;overflow:hidden;margin-bottom:18px}.meter span{display:block;width:71%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6e3de8,#1687e9,#f09a20)}.legal,.memory-map{padding:22px}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#5f31cf}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.8);color:var(--muted);font-size:.82rem}.ranges b{color:#5f31cf;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}}
+.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px;position:sticky;top:110px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:18px}.meter span{display:block;width:71%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9185ff,#4ea8ff,#f4c95d)}.legal,.memory-map{padding:22px}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#b9b1ff}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(11,23,40,.28);color:var(--muted);font-size:.82rem}.ranges b{color:#9185ff;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}.status-card{position:static}}
 </style>

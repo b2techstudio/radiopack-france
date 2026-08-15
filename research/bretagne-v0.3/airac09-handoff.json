@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "status": "airac09_future_handoff_prepared",
+  "pack": "Bretagne",
+  "target_version": "0.3",
+  "prepared_on": "2026-08-15",
+  "current_cycle": {
+    "id": "AIRAC 08/26",
+    "effective_from": "2026-08-06",
+    "effective_until_inclusive": "2026-09-02",
+    "source": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html"
+  },
+  "next_required_cycle": {
+    "id": "AIRAC 09/26",
+    "effective_from": "2026-09-03",
+    "must_not_be_treated_as_current_before": "2026-09-03"
+  },
+  "candidate_memory_count": 151,
+  "candidate_memory_delta": 0,
+  "public_base_version": "0.2",
+  "public_base_memory_count": 151,
+  "publication_allowed_before_airac09_revalidation": false,
+  "runbook_on_or_after_2026_09_03": [
+    "fetch the current SIA AIRAC 09/26 primary source",
+    "revalidate every Bretagne aviation memory against the current cycle without guessing missing data",
+    "re-run the non-AIRAC open dossiers only if new public evidence exists",
+    "rebuild the internal v0.3 candidate deterministically",
+    "if any aviation RF changed, update only with primary/current evidence and preserve RX-only semantics",
+    "run deduplication, source review and prepublication gates before any publication",
+    "never publish from a future-cycle assumption or from unavailable XML contents"
+  ],
+  "open_non_airac_dossiers": [
+    "F1ZUG_ADRASEC35_TRANSPONDER_FREQUENCY_UNPUBLISHED",
+    "F5ZZC_4_CURRENT_SERVICE_FREQUENCY_UNRESOLVED",
+    "F5ZPV_LOCAL_OPERATOR_STOPPED",
+    "F5ZZH_STOPPED_SEARCHING_SITE",
+    "CROSS_ETEL_CH64_LOCAL_MAPPING_UNRESOLVED",
+    "CROSS_CORSEN_CH79_PRIMARY_MAPPING_UNRESOLVED"
+  ],
+  "rules": {
+    "future_airac_not_current_evidence": true,
+    "public_v0_2_immutable": true,
+    "public_v0_3_created": false,
+    "private_or_unpublished_rf_inferred": false
+  }
+}

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.21.85 - 2026-08-15
+
+- **Sprint 96** : adoption de **Midnight Blue Soft** comme design de production, avec interface radioamateur épurée et socle public harmonisé.
+- `telechargements.astro` et `versions.astro` sont désormais alimentés par `publicPacks` pour éviter les versions et compteurs régionaux obsolètes.
+- Extension de `tests/test_pack_registry.py` pour bloquer explicitement le retour des anciennes références Bretagne v0.1 / Annecy v0.2.
+- Aucun CSV public, aucune fréquence ni mémoire RF modifiés.
+
 ## 0.21.84 - 2026-08-15
 
 - **Sprint 95** : publication immuable Annecy–Alpes–Léman v0.4 à **77 RX / 60 sans aviation**.

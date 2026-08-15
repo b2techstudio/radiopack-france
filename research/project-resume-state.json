@@ -2,8 +2,8 @@
   "schema_version": "1.2",
   "status": "project_resume_state",
   "updated": "2026-08-15",
-  "current_sprint": 95,
-  "state_version": "0.21.84",
+  "current_sprint": 96,
+  "state_version": "0.21.85",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -240,7 +240,14 @@
     "research/annecy-alpes-leman-v0.4/publication-record.json",
     "research/sprint-93-summary.md",
     "research/sprint-94-summary.md",
-    "research/sprint-95-summary.md"
+    "research/sprint-95-summary.md",
+    "research/sprint-96-summary.md",
+    "website/src/pages/index.astro",
+    "website/src/styles/global.css",
+    "website/src/lib/packRegistry.ts",
+    "website/src/pages/telechargements.astro",
+    "website/src/pages/versions.astro",
+    "tests/test_pack_registry.py"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -303,6 +310,12 @@
     "test_sprint85_normandie_v05_field_evaluator": "tests/test_sprint85_normandie_v05_field_evaluator.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 96,
+      "state_version": "0.21.85",
+      "summary": "Midnight Blue Soft adopted across the public-site foundation; Downloads and Versions are registry-backed with deterministic stale-metadata guards; no RF or public CSV mutation.",
+      "summary_file": "research/sprint-96-summary.md"
+    },
     {
       "sprint": 80,
       "state_version": "0.21.69",
@@ -1092,5 +1105,29 @@
     "immutable": true,
     "rx_only": true,
     "published_on": "2026-08-15"
+  },
+  "latest_sprint96_site_design": {
+    "sprint": 96,
+    "state_version": "0.21.85",
+    "completed_on": "2026-08-15",
+    "status": "midnight_blue_soft_production_theme_and_registry_sync_complete",
+    "design": "Midnight Blue Soft",
+    "palette": {
+      "background": "#182538",
+      "surface": "#223249",
+      "card": "#2B3D56",
+      "text": "#F4F7FB",
+      "blue": "#4EA8FF",
+      "violet": "#9185FF",
+      "rx_green": "#65D7B1",
+      "signal_yellow": "#F4C95D"
+    },
+    "radioamateur_ui": true,
+    "downloads_registry_backed": true,
+    "versions_registry_backed": true,
+    "stale_public_pack_metadata_guard": "tests/test_pack_registry.py",
+    "production_origin": "https://radiopack-france.pages.dev/",
+    "public_pack_mutation": false,
+    "rf_data_mutation": false
   }
 }

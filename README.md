@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 95 / 0.21.84 — Annecy–Alpes–Léman v0.4 publiée et immuable à 77 RX / 60 sans aviation ; audit sécurité live Cloudflare Pages validé ; Bretagne v0.3 reste en attente AIRAC 09/26.**
+**État courant : Sprint 96 / 0.21.85 — design public Midnight Blue Soft déployé ; Téléchargements et État des packs synchronisés sur le registre public ; packs RF inchangés ; Bretagne v0.3 reste en attente AIRAC 09/26.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 95 / 0.21.84
+## État actuel — Sprint 96 / 0.21.85
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -22,6 +22,10 @@ Recherche active : Normandie v0.5 reste à **142 RX**, delta 0 : R3/F5ZHA exigen
 Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
 
 Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md` et `research/sprint-91-summary.md`, `research/sprint-92-summary.md` et `research/security-audit-sprint92.md`.
+
+## Sprint 96 — Midnight Blue Soft et cohérence du site public
+
+Le design **Midnight Blue Soft** est adopté en production avec une interface radioamateur épurée. Le socle public utilise désormais la palette bleu nuit intermédiaire retenue. Les pages **Téléchargements** et **État des packs** sont branchées sur `publicPacks`, et le test du registre interdit le retour des anciennes références Bretagne v0.1 / Annecy v0.2. **Aucun CSV public ni contenu RF n’a été modifié.** Résumé : `research/sprint-96-summary.md`.
 
 ## Sprint 95 — publication Annecy–Alpes–Léman v0.4
 

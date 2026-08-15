@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **15 août 2026**
-Sprint courant : **95**
-État logique : **0.21.84**
+Sprint courant : **96**
+État logique : **0.21.85**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-95-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
+L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-96-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
 
 ## État public
 
@@ -17,6 +17,10 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 96 — Midnight Blue Soft et synchronisation du site
+
+La direction **Midnight Blue Soft** est désormais appliquée au socle public, avec une identité radioamateur épurée. `telechargements.astro` et `versions.astro` utilisent le registre `publicPacks` pour les versions, variantes, compteurs et liens ; `tests/test_pack_registry.py` garde cette synchronisation. Les packs publics restent **Normandie v0.4 142 RX, Annecy v0.4 77/60, Bretagne v0.2 151**, sans aucune mutation RF ou CSV.
 
 ## Sprint 95 — Annecy v0.4 publiée
 

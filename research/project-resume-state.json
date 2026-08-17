@@ -1,9 +1,9 @@
 {
   "schema_version": "1.2",
   "status": "project_resume_state",
-  "updated": "2026-08-15",
-  "current_sprint": 96,
-  "state_version": "0.21.85",
+  "updated": "2026-08-17",
+  "current_sprint": 97,
+  "state_version": "0.21.86",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -247,7 +247,17 @@
     "website/src/lib/packRegistry.ts",
     "website/src/pages/telechargements.astro",
     "website/src/pages/versions.astro",
-    "tests/test_pack_registry.py"
+    "tests/test_pack_registry.py",
+    "research/sprint-97-summary.md",
+    "research/sprint-97-post96-ui-state.json",
+    "website/src/components/ChannelGroupDetails.astro",
+    "website/src/lib/channelDetails.ts",
+    "website/src/scripts/generator-pack-shortcuts.js",
+    "website/src/pages/generateur.astro",
+    "website/src/pages/regions/normandie.astro",
+    "website/src/pages/regions/bretagne.astro",
+    "website/src/pages/regions/annecy-haute-savoie.astro",
+    "tests/test_sprint97_state_sync.py"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -307,9 +317,16 @@
     "build_normandie_v05_field_validation_kit": "tools/build_normandie_v05_field_validation_kit.py",
     "test_sprint84_normandie_v05_field_validation_kit": "tests/test_sprint84_normandie_v05_field_validation_kit.py",
     "evaluate_normandie_v05_field_sessions": "tools/evaluate_normandie_v05_field_sessions.py",
-    "test_sprint85_normandie_v05_field_evaluator": "tests/test_sprint85_normandie_v05_field_evaluator.py"
+    "test_sprint85_normandie_v05_field_evaluator": "tests/test_sprint85_normandie_v05_field_evaluator.py",
+    "test_sprint97_state_sync": "python tests/test_sprint97_state_sync.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 97,
+      "state_version": "0.21.86",
+      "summary": "Post-Sprint 96 UX refinements consolidated into the official state: CSV-backed regional channel details, keyboard-accessible generator pack shortcuts and explicit published memory counts; no RF or public CSV mutation.",
+      "summary_file": "research/sprint-97-summary.md"
+    },
     {
       "sprint": 96,
       "state_version": "0.21.85",
@@ -1128,6 +1145,25 @@
     "stale_public_pack_metadata_guard": "tests/test_pack_registry.py",
     "production_origin": "https://radiopack-france.pages.dev/",
     "public_pack_mutation": false,
+    "rf_data_mutation": false
+  },
+  "latest_sprint97_state_consolidation": {
+    "sprint": 97,
+    "state_version": "0.21.86",
+    "completed_on": "2026-08-17",
+    "status": "post_sprint96_ui_state_consolidated_official",
+    "base_head_before_state_sync": "28ec3844ad0bd48aef74e4eafee5a1f59ee93390",
+    "regional_channel_details_csv_backed": true,
+    "channel_details_component": "website/src/components/ChannelGroupDetails.astro",
+    "channel_details_helper": "website/src/lib/channelDetails.ts",
+    "generator_pack_shortcuts_keyboard_accessible": true,
+    "generator_shortcut_script": "website/src/scripts/generator-pack-shortcuts.js",
+    "generator_memory_counts_are_published_csv_counts": true,
+    "public_registry_source_of_truth": "website/src/lib/packRegistry.ts",
+    "state_delta": "research/sprint-97-post96-ui-state.json",
+    "summary": "research/sprint-97-summary.md",
+    "state_sync_guard": "tests/test_sprint97_state_sync.py",
+    "public_csv_mutation": false,
     "rf_data_mutation": false
   }
 }

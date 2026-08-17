@@ -212,6 +212,9 @@ jobs:
       - name: Test published web generator
         run: python tests/test_web_generator.py
 
+      - name: Test Sprint 97 state synchronization
+        run: python tests/test_sprint97_state_sync.py
+
   website:
     name: Astro production build
     runs-on: ubuntu-24.04

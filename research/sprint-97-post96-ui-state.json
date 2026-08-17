@@ -1,13 +1,14 @@
 {
   "schema_version": "1.0",
-  "status": "post_sprint96_state_consolidation",
+  "status": "sprint97_draft_post_sprint96_state_consolidation",
   "updated": "2026-08-17",
-  "sprint": 97,
-  "state_version": "0.21.86",
+  "proposed_sprint": 97,
+  "proposed_state_version": "0.21.86",
+  "official_current_sprint": 96,
+  "official_current_state_version": "0.21.85",
   "base_head": "28ec3844ad0bd48aef74e4eafee5a1f59ee93390",
   "historical_full_state": "research/project-resume-state.json",
-  "historical_full_state_sprint": 96,
-  "historical_full_state_version": "0.21.85",
+  "is_official_state_replacement": false,
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -75,6 +76,13 @@
     "private_ppdr_operational_data_excluded": true,
     "no_artificial_fill": true
   },
+  "closeout_requires_atomic_sync": [
+    "README.md",
+    "PROJECT_STATUS.md",
+    "CHANGELOG.md",
+    "research/project-resume-state.json",
+    "documentation_integrity_guards"
+  ],
   "resume_order": [
     "PROJECT_STATUS.md",
     "research/project-resume-state.json",

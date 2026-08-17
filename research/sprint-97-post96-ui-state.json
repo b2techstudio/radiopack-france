@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "status": "post_sprint96_state_consolidation",
+  "updated": "2026-08-17",
+  "sprint": 97,
+  "state_version": "0.21.86",
+  "base_head": "28ec3844ad0bd48aef74e4eafee5a1f59ee93390",
+  "historical_full_state": "research/project-resume-state.json",
+  "historical_full_state_sprint": 96,
+  "historical_full_state_version": "0.21.85",
+  "public_packs": {
+    "normandie": {
+      "version": "0.4",
+      "memory_count": 142,
+      "immutable": true
+    },
+    "annecy_alpes_leman": {
+      "version": "0.4",
+      "memory_count": 77,
+      "without_aviation_memory_count": 60,
+      "immutable": true
+    },
+    "bretagne": {
+      "version": "0.2",
+      "memory_count": 151,
+      "immutable": true
+    }
+  },
+  "post_sprint96_ui": {
+    "regional_channel_details_csv_backed": true,
+    "regional_pages": [
+      "website/src/pages/regions/normandie.astro",
+      "website/src/pages/regions/bretagne.astro",
+      "website/src/pages/regions/annecy-haute-savoie.astro"
+    ],
+    "channel_details_component": "website/src/components/ChannelGroupDetails.astro",
+    "channel_details_helper": "website/src/lib/channelDetails.ts",
+    "generator_pack_shortcuts": true,
+    "generator_pack_shortcuts_keyboard_accessible": true,
+    "generator_shortcut_script": "website/src/scripts/generator-pack-shortcuts.js",
+    "generator_memory_counts_are_published_csv_counts": true,
+    "registry_remains_public_metadata_source_of_truth": true,
+    "registry": "website/src/lib/packRegistry.ts",
+    "guard": "tests/test_pack_registry.py",
+    "web_generator_guard": "tests/test_web_generator.py"
+  },
+  "active_work": {
+    "bretagne_v0_3": {
+      "candidate_memory_count": 151,
+      "candidate_memory_delta": 0,
+      "airac_next_required": "09/26",
+      "airac_next_effective_from": "2026-09-03",
+      "publication_allowed_before_airac09_revalidation": false
+    },
+    "normandie_v0_5": {
+      "candidate_memory_count": 142,
+      "candidate_memory_delta": 0,
+      "known_potential_ceiling_excluding_f6zes": 147,
+      "field_gates_open": [
+        "R3_F1ZBX",
+        "F5ZHA"
+      ],
+      "source_watch": [
+        "F1ZOV",
+        "F6ZES"
+      ]
+    }
+  },
+  "invariants": {
+    "public_csv_mutation": false,
+    "rf_data_mutation": false,
+    "published_versions_are_immutable": true,
+    "all_exported_memories_tx_disabled": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "private_ppdr_operational_data_excluded": true,
+    "no_artificial_fill": true
+  },
+  "resume_order": [
+    "PROJECT_STATUS.md",
+    "research/project-resume-state.json",
+    "research/sprint-97-post96-ui-state.json",
+    "research/sprint-97-summary.md"
+  ]
+}

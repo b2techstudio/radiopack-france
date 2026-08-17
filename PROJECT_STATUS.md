@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
-Dernière mise à jour : **15 août 2026**
-Sprint courant : **96**
-État logique : **0.21.85**
+Dernière mise à jour : **17 août 2026**
+Sprint courant : **97**
+État logique : **0.21.86**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-96-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
+L'état machine historique complet reste `research/project-resume-state.json` au niveau Sprint 96 / 0.21.85. Le delta de reprise courant est `research/sprint-97-post96-ui-state.json`. Résumé courant : `research/sprint-97-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
 
 ## État public
 
@@ -17,6 +17,20 @@ L'état machine correspondant est `research/project-resume-state.json`. Résumé
 - Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+
+## Sprint 97 — consolidation de l'état post-Sprint 96
+
+Le véritable HEAD de reprise inclut plusieurs raffinements UX ajoutés après la synchronisation documentaire du Sprint 96. Ils sont désormais formalisés sans modifier les packs RF :
+
+- les pages Normandie, Bretagne et Annecy–Alpes–Léman affichent des groupes de canaux repliables alimentés directement depuis les CSV publics ;
+- le générateur propose des raccourcis de sélection accessibles au clavier pour les trois packs ;
+- les compteurs 77/60, 142 et 151 sont explicitement définis comme le nombre de mémoires présentes dans les CSV publiés ;
+- `publicPacks` reste la source de vérité des versions, variantes, compteurs et URLs ;
+- aucun CSV public, aucune fréquence, aucune mémoire RF et aucune règle d'émission ne sont modifiés.
+
+Bretagne v0.3 reste à **151 RX, delta 0**, en attente de la revalidation AIRAC 09/26 à partir du **3 septembre 2026**. Normandie v0.5 reste à **142 RX, delta 0** avec ses gates terrain/source inchangés.
+
+Delta machine : `research/sprint-97-post96-ui-state.json`. Résumé : `research/sprint-97-summary.md`.
 
 ## Sprint 96 — Midnight Blue Soft et synchronisation du site
 
@@ -151,7 +165,7 @@ Tests : `tests/test_bretagne_v02_public_release.py` et `tests/test_sprint80_bret
 Bretagne v0.2 est figée à **151 mémoires RX**. La revue de maturité est à **10/10**, avec **0 bloqueur** pour le périmètre explicitement retenu.
 
 - AIRAC 08/26 reste courant au 12 août 2026 et les 16 mémoires aviation sont maintenues dans le scope ;
-- F1ZUG/ADRASEC35, les mappings locaux Ch64/Ch79 et les infrastructures amateur arrêtées/non résolues sont reportés explicitement hors scope ;
+- F1ZUG/ADRASEC35, les mappings locaux Ch64/Ch79 et les infrastructures amateur arrêtées/non résolues sont reportés explicitement hors du scope figé et classés non bloquants ;
 - aucun de ces reports ne crée une RF manquante dans les 151 mémoires figées ;
 - l'audit de prépublication reconstruit le candidat et interdit toute mutation publique prématurée.
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.86 - 2026-08-17
+
+- **Sprint 97** : consolidation officielle des raffinements UX post-Sprint 96 et synchronisation de l'état courant sur **97 / 0.21.86**.
+- Les pages régionales affichent des groupes de canaux repliables alimentés directement depuis les CSV publics ; le générateur ajoute des raccourcis pack accessibles au clavier et explicite les compteurs 77/60, 142 et 151 comme nombres de mémoires publiées.
+- Synchronisation de `README.md`, `PROJECT_STATUS.md`, `CHANGELOG.md`, `research/project-resume-state.json`, `research/sprint-97-summary.md` et `research/sprint-97-post96-ui-state.json`.
+- Ajout de `tests/test_sprint97_state_sync.py` à `RadioPack CI` pour verrouiller la cohérence du sprint/version et les invariants publics.
+- Aucun CSV public, aucune fréquence ni mémoire RF modifiés.
+
 ## 0.21.85 - 2026-08-15
 
 - **Sprint 96** : adoption de **Midnight Blue Soft** comme design de production, avec interface radioamateur épurée et socle public harmonisé.

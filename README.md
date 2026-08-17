@@ -1,10 +1,10 @@
 # RadioPack France
 
-**État courant : Sprint 96 / 0.21.85 — design public Midnight Blue Soft déployé ; Téléchargements et État des packs synchronisés sur le registre public ; packs RF inchangés ; Bretagne v0.3 reste en attente AIRAC 09/26.**
+**État courant : Sprint 97 / 0.21.86 — état UX post-Sprint 96 consolidé ; détails de canaux régionaux alimentés par les CSV publics ; raccourcis du générateur accessibles au clavier ; packs RF inchangés ; Bretagne v0.3 reste en attente AIRAC 09/26.**
 
 Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
 
-## État actuel — Sprint 96 / 0.21.85
+## État actuel — Sprint 97 / 0.21.86
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -21,7 +21,13 @@ Recherche active : Normandie v0.5 reste à **142 RX**, delta 0 : R3/F5ZHA exigen
 
 Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
 
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md` et `research/sprint-91-summary.md`, `research/sprint-92-summary.md` et `research/security-audit-sprint92.md`.
+Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-97-summary.md`, `research/sprint-97-post96-ui-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md`, `research/sprint-91-summary.md`, `research/sprint-92-summary.md` et `research/security-audit-sprint92.md`.
+
+## Sprint 97 — consolidation de l’état post-Sprint 96
+
+Le Sprint 97 synchronise officiellement le dépôt sur les raffinements UX ajoutés après le Sprint 96. Les pages régionales Normandie, Bretagne et Annecy–Alpes–Léman exposent désormais des groupes de canaux repliables construits directement depuis les CSV publics. Le générateur propose des raccourcis de sélection accessibles au clavier et explicite **77 / 60, 142 et 151** comme nombres de mémoires des CSV publiés. `publicPacks` reste la source de vérité des métadonnées publiques. **Aucun CSV public, aucune fréquence ni mémoire RF n’a été modifié.**
+
+La clôture synchronise `README.md`, `PROJECT_STATUS.md`, `CHANGELOG.md` et `research/project-resume-state.json` sur **97 / 0.21.86**. Le garde `tests/test_sprint97_state_sync.py` vérifie désormais cette cohérence en CI. Résumé : `research/sprint-97-summary.md`. État structuré complémentaire : `research/sprint-97-post96-ui-state.json`.
 
 ## Sprint 96 — Midnight Blue Soft et cohérence du site public
 
@@ -307,6 +313,7 @@ python tools\build_bretagne_v03_internal_candidate.py
 python tests\test_sprint81_bretagne_v03_initialization.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+python tests\test_sprint97_state_sync.py
 ```
 
 ## Synchronisation locale
@@ -326,6 +333,7 @@ python tests\test_bretagne_v02_public_release.py
 python tests\test_sprint80_bretagne_v02_publication.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+python tests\test_sprint97_state_sync.py
 
 cd website
 npm ci

@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **17 août 2026**
-Sprint courant : **97**
-État logique : **0.21.86**
+Sprint courant : **96**
+État logique : **0.21.85**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine historique complet reste `research/project-resume-state.json` au niveau Sprint 96 / 0.21.85. Le delta de reprise courant est `research/sprint-97-post96-ui-state.json`. Résumé courant : `research/sprint-97-summary.md`. Audit détaillé : `research/security-audit-sprint92.md`.
+L'état machine officiel correspondant est `research/project-resume-state.json`. La préparation du Sprint 97 est documentée dans `research/sprint-97-post96-ui-state.json` et `research/sprint-97-summary.md` sans faire avancer prématurément l'état courant. Audit détaillé : `research/security-audit-sprint92.md`.
 
 ## État public
 
@@ -18,9 +18,9 @@ L'état machine historique complet reste `research/project-resume-state.json` au
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
 
-## Sprint 97 — consolidation de l'état post-Sprint 96
+## Sprint 97 — préparation de consolidation post-Sprint 96, non clôturée
 
-Le véritable HEAD de reprise inclut plusieurs raffinements UX ajoutés après la synchronisation documentaire du Sprint 96. Ils sont désormais formalisés sans modifier les packs RF :
+Le véritable HEAD de reprise inclut plusieurs raffinements UX ajoutés après la synchronisation documentaire du Sprint 96. Ils sont désormais inventoriés dans un delta de préparation, mais **le sprint courant reste officiellement 96 / 0.21.85** tant que README, CHANGELOG, état machine et garde-fous ne sont pas synchronisés ensemble.
 
 - les pages Normandie, Bretagne et Annecy–Alpes–Léman affichent des groupes de canaux repliables alimentés directement depuis les CSV publics ;
 - le générateur propose des raccourcis de sélection accessibles au clavier pour les trois packs ;
@@ -30,7 +30,7 @@ Le véritable HEAD de reprise inclut plusieurs raffinements UX ajoutés après l
 
 Bretagne v0.3 reste à **151 RX, delta 0**, en attente de la revalidation AIRAC 09/26 à partir du **3 septembre 2026**. Normandie v0.5 reste à **142 RX, delta 0** avec ses gates terrain/source inchangés.
 
-Delta machine : `research/sprint-97-post96-ui-state.json`. Résumé : `research/sprint-97-summary.md`.
+Delta de préparation : `research/sprint-97-post96-ui-state.json`. Résumé : `research/sprint-97-summary.md`.
 
 ## Sprint 96 — Midnight Blue Soft et synchronisation du site
 

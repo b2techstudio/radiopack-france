@@ -1,11 +1,12 @@
-# Sprint 97 — consolidation de l’état post-Sprint 96
+# Sprint 97 — préparation de la consolidation post-Sprint 96
 
 Date : **17 août 2026**  
-État logique : **0.21.86**
+État logique proposé : **0.21.86**  
+Statut : **préparation non clôturée**
 
 ## Objectif
 
-Formaliser le véritable point de reprise du dépôt après les derniers raffinements UX ajoutés au-dessus du Sprint 96, sans modifier les packs radio publiés ni les recherches RF en cours.
+Formaliser le véritable état du dépôt après les derniers raffinements UX ajoutés au-dessus du Sprint 96, sans faire avancer prématurément le sprint courant tant que `README.md`, `PROJECT_STATUS.md` et `research/project-resume-state.json` ne sont pas synchronisés ensemble.
 
 Le HEAD de référence de départ est `28ec3844ad0bd48aef74e4eafee5a1f59ee93390`.
 
@@ -22,13 +23,13 @@ Le HEAD de référence de départ est `28ec3844ad0bd48aef74e4eafee5a1f59ee93390`
 - Normandie publique : **v0.4 / 142 RX**, immuable.
 - Annecy–Alpes–Léman publique : **v0.4 / 77 RX**, variante **60 RX sans aviation**, immuable.
 - Bretagne publique : **v0.2 / 151 RX**, immuable.
-- Aucun CSV public, aucune fréquence, aucune mémoire RF et aucune règle d’émission ne sont modifiés par ce sprint.
+- Aucun CSV public, aucune fréquence, aucune mémoire RF et aucune règle d’émission ne sont modifiés par cette préparation.
 - Bretagne v0.3 reste à **151 RX, delta 0**, avec revalidation AIRAC 09/26 obligatoire à partir du **3 septembre 2026** avant toute publication.
 - Normandie v0.5 reste à **142 RX, delta 0** ; R3/F1ZBX et F5ZHA restent dépendants du terrain, F1ZOV reste en veille de statut opérateur et F6ZES reste sans RF/mode public exploitable.
 
 ## Reprise machine
 
-L’état historique complet reste conservé dans `research/project-resume-state.json` au niveau Sprint 96 / 0.21.85. Le delta correspondant à ce Sprint 97 est enregistré dans `research/sprint-97-post96-ui-state.json` afin de ne pas réécrire ou réduire le gros état machine historique.
+L’état officiel complet reste conservé dans `research/project-resume-state.json` au niveau **Sprint 96 / 0.21.85**. Le fichier `research/sprint-97-post96-ui-state.json` est un **delta de préparation**, pas un remplacement de l’état machine officiel.
 
 Pour reprendre le projet, lire dans cet ordre :
 
@@ -37,12 +38,25 @@ Pour reprendre le projet, lire dans cet ordre :
 3. `research/sprint-97-post96-ui-state.json` ;
 4. `research/sprint-97-summary.md`.
 
+## Condition de clôture du Sprint 97
+
+Le Sprint 97 ne devient courant qu’après synchronisation atomique de :
+
+- `README.md` ;
+- `PROJECT_STATUS.md` ;
+- `CHANGELOG.md` ;
+- `research/project-resume-state.json` ;
+- les garde-fous de documentation concernés.
+
+Les tests historiques exigent volontairement que l’état courant annoncé par `PROJECT_STATUS.md` corresponde à `project-resume-state.json`.
+
 ## Validation attendue
 
 Les garde-fous existants restent la référence :
 
 - `tests/test_pack_registry.py` pour le registre public, les détails de canaux CSV-backed et les libellés du générateur ;
 - `tests/test_web_generator.py` pour la logique du générateur multi-régions ;
+- `tests/test_sprints89_91_integrity.py` pour la cohérence du sprint courant et des décisions historiques ;
 - build Astro et CI complète avant fusion.
 
-Le Sprint 97 est volontairement un sprint de **consolidation documentaire et d’état** : il formalise le HEAD réel sans ouvrir de nouveau chantier RF avant que les gates externes soient franchis.
+Cette préparation n’ouvre aucun nouveau chantier RF avant que les gates externes soient franchis.

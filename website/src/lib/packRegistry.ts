@@ -96,42 +96,45 @@ const legacyPublicPacks: PublicPack[] = [
 ];
 
 const metropolitanMetadata = [
-  { id: "hauts-de-france", name: "Hauts-de-France", memoryCount: 144, marine: true, aviation: 14 },
-  { id: "ile-de-france", name: "Île-de-France", memoryCount: 58, marine: false, aviation: 18 },
-  { id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19 },
-  { id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 42, marine: false, aviation: 6 },
-  { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 130, marine: true, aviation: 10 },
-  { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 37, marine: false, aviation: 7 },
-  { id: "nouvelle-aquitaine", name: "Nouvelle-Aquitaine", memoryCount: 151, marine: true, aviation: 13 },
-  { id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 62, marine: false, aviation: 18 },
-  { id: "occitanie", name: "Occitanie", memoryCount: 156, marine: true, aviation: 20 },
-  { id: "provence-alpes-cote-d-azur", name: "Provence-Alpes-Côte d’Azur", memoryCount: 159, marine: true, aviation: 25 },
-  { id: "corse", name: "Corse", memoryCount: 137, marine: true, aviation: 19 },
+  { id: "hauts-de-france", name: "Hauts-de-France", memoryCount: 144, marine: true, aviation: 14, version: "v0.2" },
+  { id: "ile-de-france", name: "Île-de-France", memoryCount: 58, marine: false, aviation: 18, version: "v0.2" },
+  { id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19, version: "v0.2" },
+  { id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 42, marine: false, aviation: 6, version: "v0.2" },
+  { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 130, marine: true, aviation: 10, version: "v0.2" },
+  { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 54, marine: false, aviation: 14, version: "v0.3" },
+  { id: "nouvelle-aquitaine", name: "Nouvelle-Aquitaine", memoryCount: 151, marine: true, aviation: 13, version: "v0.2" },
+  { id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 62, marine: false, aviation: 18, version: "v0.2" },
+  { id: "occitanie", name: "Occitanie", memoryCount: 156, marine: true, aviation: 20, version: "v0.2" },
+  { id: "provence-alpes-cote-d-azur", name: "Provence-Alpes-Côte d’Azur", memoryCount: 159, marine: true, aviation: 25, version: "v0.2" },
+  { id: "corse", name: "Corse", memoryCount: 137, marine: true, aviation: 19, version: "v0.2" },
 ] as const;
 
 const metropolitanPublicPacks: PublicPack[] = metropolitanMetadata.map((item) => {
-  const filename = `radiopack-france-${item.id}-v0.2.csv`;
+  const filename = `radiopack-france-${item.id}-${item.version}.csv`;
+  const radioScope = item.id === "bourgogne-franche-comte"
+    ? "relais FM 2 m/70 cm et transpondeurs crossband paired RX"
+    : "relais FM 2 m paired RX";
   const scope = [
     "PMR446",
     "appels",
     "APRS/ISS",
     `${item.aviation} mémoires aviation SIA`,
-    "relais FM 2 m paired RX",
+    radioScope,
     ...(item.marine ? ["module VHF marine"] : []),
   ].join(", ");
   return {
     id: item.id,
     regionSlug: item.id,
     name: item.name,
-    version: "v0.2",
+    version: item.version,
     status: "Disponible",
-    description: `Pack régional enrichi v0.2 de ${item.memoryCount} mémoires RX : ${scope}.`,
+    description: `Pack régional enrichi ${item.version} de ${item.memoryCount} mémoires RX : ${scope}.`,
     defaultVariant: "standard",
     notamCheck: item.aviation > 0,
     variants: [
       {
         id: "standard",
-        label: "Pack enrichi v0.2",
+        label: `Pack enrichi ${item.version}`,
         memoryCount: item.memoryCount,
         filename,
         downloadUrl: `/downloads/${item.id}/${filename}`,

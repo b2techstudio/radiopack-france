@@ -1,0 +1,259 @@
+{
+  "schema_version": "1.0",
+  "status": "published_v0.2",
+  "pack": "Nouvelle-Aquitaine",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 42,
+  "published_base_is_immutable": true,
+  "current_memory_count": 151,
+  "blocks": {
+    "pmr446": {
+      "memory_count": 16,
+      "locations": [
+        0,
+        15
+      ]
+    },
+    "amateur_calls": {
+      "memory_count": 2,
+      "locations": [
+        20,
+        21
+      ]
+    },
+    "aprs_iss": {
+      "memory_count": 6,
+      "locations": [
+        30,
+        35
+      ]
+    },
+    "aviation": {
+      "memory_count": 13,
+      "start_location": 40,
+      "channels": [
+        {
+          "name": "AIR-EMERG",
+          "frequency_mhz": 121.5,
+          "area": "France / aviation",
+          "service": "EMERGENCY",
+          "icao": null
+        },
+        {
+          "name": "BOD-FIS",
+          "frequency_mhz": 120.575,
+          "area": "Bordeaux",
+          "service": "FIS",
+          "icao": "LFBD"
+        },
+        {
+          "name": "BOD-APP1",
+          "frequency_mhz": 119.275,
+          "area": "Bordeaux",
+          "service": "APP",
+          "icao": "LFBD"
+        },
+        {
+          "name": "BOD-APP2",
+          "frequency_mhz": 129.875,
+          "area": "Bordeaux",
+          "service": "APP",
+          "icao": "LFBD"
+        },
+        {
+          "name": "BOD-APP3",
+          "frequency_mhz": 121.2,
+          "area": "Bordeaux",
+          "service": "APP",
+          "icao": "LFBD"
+        },
+        {
+          "name": "BOD-GND",
+          "frequency_mhz": 121.9,
+          "area": "Bordeaux",
+          "service": "GND",
+          "icao": "LFBD"
+        },
+        {
+          "name": "BOD-TWR",
+          "frequency_mhz": 118.3,
+          "area": "Bordeaux",
+          "service": "TWR",
+          "icao": "LFBD"
+        },
+        {
+          "name": "BOD-ATIS",
+          "frequency_mhz": 131.155,
+          "area": "Bordeaux",
+          "service": "ATIS",
+          "icao": "LFBD"
+        },
+        {
+          "name": "BIQ-FIS",
+          "frequency_mhz": 119.175,
+          "area": "Biarritz",
+          "service": "FIS",
+          "icao": "LFBZ"
+        },
+        {
+          "name": "BIQ-APP",
+          "frequency_mhz": 125.6,
+          "area": "Biarritz",
+          "service": "APP",
+          "icao": "LFBZ"
+        },
+        {
+          "name": "BIQ-GND",
+          "frequency_mhz": 121.95,
+          "area": "Biarritz",
+          "service": "GND",
+          "icao": "LFBZ"
+        },
+        {
+          "name": "BIQ-TWR",
+          "frequency_mhz": 118.7,
+          "area": "Biarritz",
+          "service": "TWR",
+          "icao": "LFBZ"
+        },
+        {
+          "name": "BIQ-ATIS",
+          "frequency_mhz": 128.23,
+          "area": "Biarritz",
+          "service": "ATIS",
+          "icao": "LFBZ"
+        }
+      ],
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_sia_product_verified": true,
+      "direct_current_xml_field_extraction_claimed": false,
+      "aerodromes": [
+        "LFBD",
+        "LFBZ"
+      ]
+    },
+    "regional_2m": {
+      "selected_repeater_count": 12,
+      "rx_memory_count": 24,
+      "start_location": 70,
+      "repeaters": [
+        {
+          "call": "F5ZQF",
+          "site": "Guéret",
+          "output_mhz": 145.6,
+          "input_mhz": 145.0
+        },
+        {
+          "call": "F5ZVE",
+          "site": "Sainte-Fortunade",
+          "output_mhz": 145.6125,
+          "input_mhz": 145.0125
+        },
+        {
+          "call": "F5ZFX",
+          "site": "Domme",
+          "output_mhz": 145.625,
+          "input_mhz": 145.025
+        },
+        {
+          "call": "F5ZGM",
+          "site": "Limoges",
+          "output_mhz": 145.65,
+          "input_mhz": 145.05
+        },
+        {
+          "call": "F1ZWT",
+          "site": "Périgueux",
+          "output_mhz": 145.6625,
+          "input_mhz": 145.0625
+        },
+        {
+          "call": "F5ZCK",
+          "site": "Poitiers",
+          "output_mhz": 145.6875,
+          "input_mhz": 145.0875
+        },
+        {
+          "call": "F6ZCV",
+          "site": "Arette",
+          "output_mhz": 145.7,
+          "input_mhz": 145.1
+        },
+        {
+          "call": "F1ZMB",
+          "site": "Saint-Pierre-d’Oléron",
+          "output_mhz": 145.7125,
+          "input_mhz": 145.1125
+        },
+        {
+          "call": "F1ZCW",
+          "site": "Bordeaux",
+          "output_mhz": 145.725,
+          "input_mhz": 145.125
+        },
+        {
+          "call": "F1ZUI",
+          "site": "Irouléguy / Mont Jara",
+          "output_mhz": 145.7375,
+          "input_mhz": 145.1375
+        },
+        {
+          "call": "F5ZZK",
+          "site": "Parthenay",
+          "output_mhz": 145.7625,
+          "input_mhz": 145.1625
+        },
+        {
+          "call": "F5ZUL",
+          "site": "Labenne",
+          "output_mhz": 145.775,
+          "input_mhz": 145.175
+        }
+      ]
+    },
+    "marine": {
+      "included": true,
+      "memory_count": 90,
+      "locations": [
+        100,
+        189
+      ],
+      "dataset": "data/national/marine-vhf-rx.json"
+    }
+  },
+  "sources": {
+    "aviation": [
+      "SIA AIRAC 08/26 current product",
+      "SIA eAIP AD 2.18 public pages for scoped aerodromes"
+    ],
+    "radioamateur": [
+      "RepeaterBook France",
+      "F5AIB/REF roster",
+      "REF band plan"
+    ],
+    "marine": [
+      "data/national/marine-vhf-rx.json"
+    ],
+    "reviewed_on": "2026-08-19"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unverified_frequency_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v01_download_must_remain_buildable": true
+  },
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  }
+}

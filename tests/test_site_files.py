@@ -3,8 +3,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# High-level repository contract. Detailed historical RF rules remain covered by
-# their dedicated sprint tests in CI; this guard follows the current public site.
 required_files = [
     "README.md",
     "PROJECT_STATUS.md",
@@ -33,16 +31,15 @@ required_files = [
     "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv",
     "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv",
     "research/metropolitan-regions-v0.1-release.md",
+    "research/metropolitan-regions-v0.2-enrichment.md",
     "research/paired-rx-policy.json",
     "research/project-resume-state.json",
 ]
-
 for relative in required_files:
     path = ROOT / relative
     assert path.is_file(), f"Fichier manquant: {relative}"
     assert path.stat().st_size > 20, f"Fichier vide ou incomplet: {relative}"
 
-# Existing immutable public versions must remain present.
 for relative in [
     "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv",
     "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv",
@@ -55,19 +52,10 @@ regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding
 assert len(regions) == 14
 region_slugs = {region["slug"] for region in regions}
 expected_admin = {
-    "normandie",
-    "bretagne",
-    "hauts-de-france",
-    "ile-de-france",
-    "grand-est",
-    "centre-val-de-loire",
-    "pays-de-la-loire",
-    "bourgogne-franche-comte",
-    "nouvelle-aquitaine",
-    "auvergne-rhone-alpes",
-    "occitanie",
-    "provence-alpes-cote-d-azur",
-    "corse",
+    "normandie", "bretagne", "hauts-de-france", "ile-de-france", "grand-est",
+    "centre-val-de-loire", "pays-de-la-loire", "bourgogne-franche-comte",
+    "nouvelle-aquitaine", "auvergne-rhone-alpes", "occitanie",
+    "provence-alpes-cote-d-azur", "corse",
 }
 assert expected_admin.issubset(region_slugs)
 assert "annecy-haute-savoie" in region_slugs
@@ -76,71 +64,76 @@ assert next(region for region in regions if region["slug"] == "annecy-haute-savo
 assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 142
 assert next(region for region in regions if region["slug"] == "bretagne")["memoryCount"] == 151
 
-expected_v01_counts = {
-    "hauts-de-france": 36,
-    "ile-de-france": 34,
-    "grand-est": 36,
-    "centre-val-de-loire": 32,
-    "pays-de-la-loire": 30,
-    "bourgogne-franche-comte": 30,
-    "nouvelle-aquitaine": 42,
-    "auvergne-rhone-alpes": 38,
-    "occitanie": 44,
-    "provence-alpes-cote-d-azur": 42,
-    "corse": 28,
+expected_v02 = {
+    "hauts-de-france": (144, True),
+    "ile-de-france": (58, False),
+    "grand-est": (59, False),
+    "centre-val-de-loire": (42, False),
+    "pays-de-la-loire": (130, True),
+    "bourgogne-franche-comte": (37, False),
+    "nouvelle-aquitaine": (151, True),
+    "auvergne-rhone-alpes": (62, False),
+    "occitanie": (156, True),
+    "provence-alpes-cote-d-azur": (159, True),
+    "corse": (137, True),
 }
-for slug, count in expected_v01_counts.items():
+for slug, (count, marine) in expected_v02.items():
     region = next(item for item in regions if item["slug"] == slug)
     assert region["memoryCount"] == count, (slug, region["memoryCount"], count)
-    assert region["status"] == "v0.1 disponible"
+    assert region["status"] == "v0.2 disponible"
+    categories = region["categories"]
+    assert "Aviation RX" in categories
+    assert ("VHF marine RX" in categories) is marine
+    plan = json.loads((ROOT / f"research/{slug}-v0.2/pack-plan.json").read_text(encoding="utf-8"))
+    assert plan["status"] == "published_v0.2"
+    assert plan["current_memory_count"] == count
+    assert plan["based_on_published_version"] == "0.1"
+    assert plan["published_base_is_immutable"] is True
+    assert plan["rules"]["rx_only"] is True
+    assert plan["rules"]["no_artificial_fill"] is True
+    assert plan["rules"]["private_ppdr_operational_data_excluded"] is True
+    assert plan["blocks"]["marine"]["included"] is marine
+    assert plan["blocks"]["aviation"]["memory_count"] > 0
+    assert (ROOT / f"research/{slug}-v0.2/README.md").is_file()
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
-    'id: "annecy-alpes-leman"',
-    'id: "normandie"',
-    'id: "bretagne"',
-    'memoryCount: 77',
-    'memoryCount: 60',
-    'memoryCount: 142',
-    'memoryCount: 151',
-    'const metropolitanMetadata = [',
-    'version: "v0.1"',
+    'id: "annecy-alpes-leman"', 'id: "normandie"', 'id: "bretagne"',
+    'memoryCount: 77', 'memoryCount: 60', 'memoryCount: 142', 'memoryCount: 151',
+    'const metropolitanMetadata = [', 'version: "v0.2"',
     'downloadUrl: `/downloads/${item.id}/${filename}`',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
-for slug in expected_v01_counts:
-    assert f'id: "{slug}"' in registry, f"Pack v0.1 absent du registre: {slug}"
+for slug in expected_v02:
+    assert f'id: "{slug}"' in registry, f"Pack v0.2 absent du registre: {slug}"
 
 metro = (ROOT / "website/src/lib/metropolitanPack.ts").read_text(encoding="utf-8")
 for expected in [
+    "export const metropolitanV01PackDefinitions",
     "export const metropolitanPackDefinitions",
-    "buildMetropolitanPack",
+    "buildMetropolitanPackV01",
+    "buildMetropolitanPackV02",
     "buildMetropolitanPackCsv",
     "validatePlacedChannels(placed)",
     'loadChannels("data/national/pmr446.json")',
     'loadChannels("data/national/amateur-calls-rx.json")',
     'loadChannels("data/national/amateur-listening-rx.json")',
+    'loadChannels("data/national/marine-vhf-rx.json")',
     'block: "REGIONAL_2M"',
     "repeater.output - 0.6",
     "https://www.repeaterbook.com/",
     "https://f5aib.net/",
     "https://www.r-e-f.org/",
+    "https://www.sia.aviation-civile.gouv.fr/",
     "2026-08-19",
 ]:
-    assert expected in metro, f"Contrat métropolitain absent: {expected}"
-for slug in expected_v01_counts:
-    assert f'id: "{slug}"' in metro, f"Définition RF v0.1 absente: {slug}"
+    assert expected in metro, f"Contrat métropolitain v0.2 absent: {expected}"
+for slug in expected_v02:
+    assert metro.count(f'id: "{slug}"') >= 1, f"Définition RF absente: {slug}"
 
 chirp_pack = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
-for expected in [
-    "validatePlacedChannels",
-    "Pack trop grand",
-    "Nom trop long",
-    "Fréquence dupliquée",
-    '"off"',
-    '"0.000000"',
-]:
+for expected in ["validatePlacedChannels", "Pack trop grand", "Nom trop long", "Fréquence dupliquée", '"off"', '"0.000000"']:
     assert expected in chirp_pack, f"Garde CHIRP absent: {expected}"
 
 for page_name in ["index.astro", "generateur.astro", "telechargements.astro", "versions.astro"]:
@@ -160,28 +153,22 @@ assert 'data-pack-shortcut={pack.id}' in generator
 download_route = (ROOT / "website/src/pages/downloads/[slug]/[file].csv.ts").read_text(encoding="utf-8")
 assert "getStaticPaths" in download_route
 assert "metropolitanPackDefinitions" in download_route
+assert "metropolitanV01PackDefinitions" in download_route
 assert "buildMetropolitanPackCsv" in download_route
+assert "version: pack.version" in download_route
 assert '"Content-Type": "text/csv; charset=utf-8"' in download_route
 
 region_route = (ROOT / "website/src/pages/regions/[slug].astro").read_text(encoding="utf-8")
-assert "getStaticPaths" in region_route
-assert "metropolitanPackDefinitions" in region_route
-assert "buildMetropolitanPack" in region_route
-assert "ChannelGroupDetails" in region_route
-assert "Duplex=off" in region_route
+for expected in ["getStaticPaths", "metropolitanPackDefinitions", "buildMetropolitanPack", "ChannelGroupDetails", "Duplex=off", "AIRAC 08/26", "VHF marine", "v0.1 historique"]:
+    assert expected in region_route
 
-release = (ROOT / "research/metropolitan-regions-v0.1-release.md").read_text(encoding="utf-8")
-for expected in [
-    "13/13",
-    "onze régions administratives métropolitaines",
-    "paired RX",
-    "Duplex=off",
-    "Offset=0.000000",
-    "non exhaustive",
-    "RepeaterBook",
-    "F5AIB/REF",
-]:
-    assert expected in release, f"Documentation release métropolitaine incomplète: {expected}"
+release_v01 = (ROOT / "research/metropolitan-regions-v0.1-release.md").read_text(encoding="utf-8")
+for expected in ["13/13", "onze régions administratives métropolitaines", "paired RX", "Duplex=off", "Offset=0.000000", "non exhaustive", "RepeaterBook", "F5AIB/REF"]:
+    assert expected in release_v01, f"Documentation historique v0.1 incomplète: {expected}"
+
+release_v02 = (ROOT / "research/metropolitan-regions-v0.2-enrichment.md").read_text(encoding="utf-8")
+for expected in ["onze packs", "v0.2 enrichie", "AIRAC 08/26", "VHF marine", "paired RX", "v0.1 restent", "UHF", "PPDR", "pack-plan.json"]:
+    assert expected in release_v02, f"Documentation v0.2 incomplète: {expected}"
 
 paired_policy = json.loads((ROOT / "research/paired-rx-policy.json").read_text(encoding="utf-8"))
 assert paired_policy["status"] == "active_project_policy"
@@ -193,16 +180,11 @@ assert paired_policy["deduplication"]["same_rf_frequency_kept_once_per_pack"] is
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "**État courant : Sprint 97 / 0.21.86",
-    "## État actuel — Sprint 97 / 0.21.86",
-    "Normandie v0.4** — 142 mémoires RX",
-    "Annecy–Alpes–Léman v0.4** — 77 mémoires RX",
-    "Bretagne v0.2** — 151 mémoires RX",
-    "research/paired-rx-policy.json",
-    "Duplex=off",
-    "Offset=0.000000",
+    "**État courant : Sprint 97 / 0.21.86", "## État actuel — Sprint 97 / 0.21.86",
+    "Normandie v0.4** — 142 mémoires RX", "Annecy–Alpes–Léman v0.4** — 77 mémoires RX",
+    "Bretagne v0.2** — 151 mémoires RX", "research/paired-rx-policy.json", "Duplex=off", "Offset=0.000000",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README historique incomplet: {expected}"
 
-print("Tests RadioPack repository/site: 13/13 metropolitan admin regions + Annecy specialized, registry-backed UI, deterministic v0.1 RX-only routes and historical guards OK")
+print("Tests RadioPack repository/site: 13/13 metropolitan admin regions, 11 enriched v0.2 packs, historical v0.1 routes, aviation/marine/paired-RX guards and mature packs OK")

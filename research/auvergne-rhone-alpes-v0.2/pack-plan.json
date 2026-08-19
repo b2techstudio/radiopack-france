@@ -1,0 +1,279 @@
+{
+  "schema_version": "1.0",
+  "status": "published_v0.2",
+  "pack": "Auvergne-Rhône-Alpes",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 38,
+  "published_base_is_immutable": true,
+  "current_memory_count": 62,
+  "blocks": {
+    "pmr446": {
+      "memory_count": 16,
+      "locations": [
+        0,
+        15
+      ]
+    },
+    "amateur_calls": {
+      "memory_count": 2,
+      "locations": [
+        20,
+        21
+      ]
+    },
+    "aprs_iss": {
+      "memory_count": 6,
+      "locations": [
+        30,
+        35
+      ]
+    },
+    "aviation": {
+      "memory_count": 18,
+      "start_location": 40,
+      "channels": [
+        {
+          "name": "AIR-EMERG",
+          "frequency_mhz": 121.5,
+          "area": "France / aviation",
+          "service": "EMERGENCY",
+          "icao": null
+        },
+        {
+          "name": "LYS-FIS1",
+          "frequency_mhz": 135.2,
+          "area": "Lyon",
+          "service": "FIS",
+          "icao": "LFLL"
+        },
+        {
+          "name": "LYS-FIS2",
+          "frequency_mhz": 135.53,
+          "area": "Lyon",
+          "service": "FIS",
+          "icao": "LFLL"
+        },
+        {
+          "name": "LYS-APP1",
+          "frequency_mhz": 120.23,
+          "area": "Lyon",
+          "service": "APP",
+          "icao": "LFLL"
+        },
+        {
+          "name": "LYS-APP2",
+          "frequency_mhz": 131.315,
+          "area": "Lyon",
+          "service": "APP",
+          "icao": "LFLL"
+        },
+        {
+          "name": "LYS-APP3",
+          "frequency_mhz": 136.075,
+          "area": "Lyon",
+          "service": "APP",
+          "icao": "LFLL"
+        },
+        {
+          "name": "LYS-DEL",
+          "frequency_mhz": 121.655,
+          "area": "Lyon",
+          "service": "DEL",
+          "icao": "LFLL"
+        },
+        {
+          "name": "LYS-GND",
+          "frequency_mhz": 121.83,
+          "area": "Lyon",
+          "service": "GND",
+          "icao": "LFLL"
+        },
+        {
+          "name": "CFE-FIS",
+          "frequency_mhz": 119.375,
+          "area": "Clermont-Ferrand",
+          "service": "FIS",
+          "icao": "LFLC"
+        },
+        {
+          "name": "CFE-APP",
+          "frequency_mhz": 120.675,
+          "area": "Clermont-Ferrand",
+          "service": "APP",
+          "icao": "LFLC"
+        },
+        {
+          "name": "CFE-GND",
+          "frequency_mhz": 121.95,
+          "area": "Clermont-Ferrand",
+          "service": "GND",
+          "icao": "LFLC"
+        },
+        {
+          "name": "CFE-TWR",
+          "frequency_mhz": 118.625,
+          "area": "Clermont-Ferrand",
+          "service": "TWR",
+          "icao": "LFLC"
+        },
+        {
+          "name": "CFE-ATIS",
+          "frequency_mhz": 136.405,
+          "area": "Clermont-Ferrand",
+          "service": "ATIS",
+          "icao": "LFLC"
+        },
+        {
+          "name": "CMF-FIS",
+          "frequency_mhz": 123.7,
+          "area": "Chambéry",
+          "service": "FIS/APP",
+          "icao": "LFLB"
+        },
+        {
+          "name": "CMF-APP",
+          "frequency_mhz": 121.205,
+          "area": "Chambéry",
+          "service": "APP",
+          "icao": "LFLB"
+        },
+        {
+          "name": "CMF-TWR",
+          "frequency_mhz": 118.3,
+          "area": "Chambéry",
+          "service": "TWR",
+          "icao": "LFLB"
+        },
+        {
+          "name": "CMF-ATIS",
+          "frequency_mhz": 127.1,
+          "area": "Chambéry",
+          "service": "ATIS",
+          "icao": "LFLB"
+        },
+        {
+          "name": "NCY-AFIS",
+          "frequency_mhz": 118.2,
+          "area": "Annecy",
+          "service": "AFIS",
+          "icao": "LFLP"
+        }
+      ],
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_sia_product_verified": true,
+      "direct_current_xml_field_extraction_claimed": false,
+      "aerodromes": [
+        "LFLB",
+        "LFLC",
+        "LFLL",
+        "LFLP"
+      ]
+    },
+    "regional_2m": {
+      "selected_repeater_count": 10,
+      "rx_memory_count": 20,
+      "start_location": 70,
+      "repeaters": [
+        {
+          "call": "F1ZFG",
+          "site": "Lyon",
+          "output_mhz": 145.6,
+          "input_mhz": 145.0
+        },
+        {
+          "call": "F1ZBA",
+          "site": "Aubenas",
+          "output_mhz": 145.625,
+          "input_mhz": 145.025
+        },
+        {
+          "call": "F1ZJD",
+          "site": "Nurieux",
+          "output_mhz": 145.6375,
+          "input_mhz": 145.0375
+        },
+        {
+          "call": "F1ZCQ",
+          "site": "Grenoble",
+          "output_mhz": 145.65,
+          "input_mhz": 145.05
+        },
+        {
+          "call": "F1ZFD",
+          "site": "Le Puy-en-Velay",
+          "output_mhz": 145.6625,
+          "input_mhz": 145.0625
+        },
+        {
+          "call": "F5ZDK",
+          "site": "Aurillac",
+          "output_mhz": 145.675,
+          "input_mhz": 145.075
+        },
+        {
+          "call": "F5ZFH",
+          "site": "Lyon",
+          "output_mhz": 145.6875,
+          "input_mhz": 145.0875
+        },
+        {
+          "call": "F1ZTL",
+          "site": "Les Estables",
+          "output_mhz": 145.7375,
+          "input_mhz": 145.1375
+        },
+        {
+          "call": "F1ZBS",
+          "site": "Clermont-Ferrand",
+          "output_mhz": 145.7625,
+          "input_mhz": 145.1625
+        },
+        {
+          "call": "F1ZJV",
+          "site": "Viuz-en-Sallaz",
+          "output_mhz": 145.7875,
+          "input_mhz": 145.1875
+        }
+      ]
+    },
+    "marine": {
+      "included": false,
+      "memory_count": 0,
+      "locations": null,
+      "dataset": null
+    }
+  },
+  "sources": {
+    "aviation": [
+      "SIA AIRAC 08/26 current product",
+      "SIA eAIP AD 2.18 public pages for scoped aerodromes"
+    ],
+    "radioamateur": [
+      "RepeaterBook France",
+      "F5AIB/REF roster",
+      "REF band plan"
+    ],
+    "marine": [],
+    "reviewed_on": "2026-08-19"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unverified_frequency_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v01_download_must_remain_buildable": true
+  },
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  }
+}

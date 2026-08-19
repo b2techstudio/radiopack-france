@@ -33,11 +33,7 @@ const legacyPublicPacks: PublicPack[] = [
     status: "Disponible",
     description: "Pack Alpes du Nord / bassin lémanique v0.4 avec 77 mémoires RX, dont F1ZTH 50 MHz, et variante sans aviation.",
     defaultVariant: "full",
-    aviationToggle: {
-      includedVariant: "full",
-      excludedVariant: "no-aviation",
-      memoryCount: 17,
-    },
+    aviationToggle: { includedVariant: "full", excludedVariant: "no-aviation", memoryCount: 17 },
     notamCheck: true,
     variants: [
       {
@@ -100,38 +96,46 @@ const legacyPublicPacks: PublicPack[] = [
 ];
 
 const metropolitanMetadata = [
-  { id: "hauts-de-france", name: "Hauts-de-France", memoryCount: 36 },
-  { id: "ile-de-france", name: "Île-de-France", memoryCount: 34 },
-  { id: "grand-est", name: "Grand Est", memoryCount: 36 },
-  { id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 32 },
-  { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 30 },
-  { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 30 },
-  { id: "nouvelle-aquitaine", name: "Nouvelle-Aquitaine", memoryCount: 42 },
-  { id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 38 },
-  { id: "occitanie", name: "Occitanie", memoryCount: 44 },
-  { id: "provence-alpes-cote-d-azur", name: "Provence-Alpes-Côte d’Azur", memoryCount: 42 },
-  { id: "corse", name: "Corse", memoryCount: 28 },
+  { id: "hauts-de-france", name: "Hauts-de-France", memoryCount: 144, marine: true, aviation: 14 },
+  { id: "ile-de-france", name: "Île-de-France", memoryCount: 58, marine: false, aviation: 18 },
+  { id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19 },
+  { id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 42, marine: false, aviation: 6 },
+  { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 130, marine: true, aviation: 10 },
+  { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 37, marine: false, aviation: 7 },
+  { id: "nouvelle-aquitaine", name: "Nouvelle-Aquitaine", memoryCount: 151, marine: true, aviation: 13 },
+  { id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 62, marine: false, aviation: 18 },
+  { id: "occitanie", name: "Occitanie", memoryCount: 156, marine: true, aviation: 20 },
+  { id: "provence-alpes-cote-d-azur", name: "Provence-Alpes-Côte d’Azur", memoryCount: 159, marine: true, aviation: 25 },
+  { id: "corse", name: "Corse", memoryCount: 137, marine: true, aviation: 19 },
 ] as const;
 
 const metropolitanPublicPacks: PublicPack[] = metropolitanMetadata.map((item) => {
-  const filename = `radiopack-france-${item.id}-v0.1.csv`;
+  const filename = `radiopack-france-${item.id}-v0.2.csv`;
+  const scope = [
+    "PMR446",
+    "appels",
+    "APRS/ISS",
+    `${item.aviation} mémoires aviation SIA`,
+    "relais FM 2 m paired RX",
+    ...(item.marine ? ["module VHF marine"] : []),
+  ].join(", ");
   return {
     id: item.id,
     regionSlug: item.id,
     name: item.name,
-    version: "v0.1",
+    version: "v0.2",
     status: "Disponible",
-    description: `Socle régional v0.1 de ${item.memoryCount} mémoires RX : PMR446, appels, APRS/ISS et sélection FM 2 m paired RX. Périmètre volontairement non exhaustif, sans aviation.`,
+    description: `Pack régional enrichi v0.2 de ${item.memoryCount} mémoires RX : ${scope}.`,
     defaultVariant: "standard",
-    notamCheck: false,
+    notamCheck: item.aviation > 0,
     variants: [
       {
         id: "standard",
-        label: "Pack v0.1",
+        label: "Pack enrichi v0.2",
         memoryCount: item.memoryCount,
         filename,
         downloadUrl: `/downloads/${item.id}/${filename}`,
-        aviationIncluded: false,
+        aviationIncluded: true,
       },
     ],
   };
@@ -146,8 +150,5 @@ export const publicPacks: PublicPack[] = [
 
 export const defaultPublicPackId = "annecy-alpes-leman";
 
-export const getPublicPack = (packId: string) =>
-  publicPacks.find((pack) => pack.id === packId);
-
-export const getPublicVariant = (pack: PublicPack, variantId: string) =>
-  pack.variants.find((variant) => variant.id === variantId);
+export const getPublicPack = (packId: string) => publicPacks.find((pack) => pack.id === packId);
+export const getPublicVariant = (pack: PublicPack, variantId: string) => pack.variants.find((variant) => variant.id === variantId);

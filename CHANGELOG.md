@@ -8,6 +8,16 @@
 - Ajout de `tests/test_sprint97_state_sync.py` à `RadioPack CI` pour verrouiller la cohérence du sprint/version et les invariants publics.
 - Aucun CSV public, aucune fréquence ni mémoire RF modifiés.
 
+## Publication post-Sprint 97 - 2026-08-19
+
+- Enrichissement des onze packs métropolitains v0.1 vers des **v0.2** sans mutation des versions historiques.
+- Ajout d'une sélection aviation AM revue sur les pages publiques SIA eAIP AD 2.18 dans le contexte AIRAC 08/26.
+- Intégration du module national VHF marine de 90 mémoires aux six régions littorales concernées.
+- Extension/revalidation des sélections de relais FM 2 m en paired RX, toujours `Duplex=off` / `Offset=0.000000`.
+- Audit correctif SIA final : correction des canaux Lille, du libellé Le Bourget et de la sélection Grand Est, avec élimination du doublon 121.805 MHz détecté par le validateur.
+- Ajout des dossiers `research/<region>-v0.2/` et conservation des URL CSV v0.1 historiques.
+- Publication post-Sprint : l'état logique officiel reste **97 / 0.21.86**.
+
 ## 0.21.85 - 2026-08-15
 
 - **Sprint 96** : adoption de **Midnight Blue Soft** comme design de production, avec interface radioamateur épurée et socle public harmonisé.

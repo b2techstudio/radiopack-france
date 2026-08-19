@@ -5,6 +5,7 @@ import { buildStandardChannelGroups, type ChannelMemory } from "../../lib/channe
 import {
   buildMetropolitanPack,
   metropolitanPackDefinitions,
+  metropolitanSourceNotes,
   type MetropolitanPackDefinition,
 } from "../../lib/metropolitanPack";
 
@@ -16,7 +17,7 @@ export function getStaticPaths() {
 }
 
 const { pack } = Astro.props as { pack: MetropolitanPackDefinition };
-const placed = buildMetropolitanPack(pack.id);
+const placed = buildMetropolitanPack(pack.id, pack.version);
 const memories: ChannelMemory[] = placed.map(({ location, channel }) => ({
   location,
   name: channel.name,
@@ -29,6 +30,8 @@ const channelGroups = buildStandardChannelGroups(memories);
 const downloadUrl = `/downloads/${pack.id}/${pack.filename}`;
 const selectedRelayCount = pack.repeaters.length;
 const regionalChannelCount = selectedRelayCount * 2;
+const aviationCount = pack.aviation.length;
+const marineCount = pack.includeMarine ? 90 : 0;
 ---
 <BaseLayout
   title={`Pack ${pack.name} ${pack.version} - RadioPack France`}
@@ -37,12 +40,12 @@ const regionalChannelCount = selectedRelayCount * 2;
   <section class="section">
     <div class="container page-grid">
       <div class="copy">
-        <span class="eyebrow">Pack régional · {pack.version}</span>
+        <span class="eyebrow">Pack régional enrichi · {pack.version}</span>
         <h1>{pack.name}</h1>
         <p class="lead">
-          Une première version publique volontairement bornée : socle national RX et sélection actuelle
-          de {selectedRelayCount} relais FM 2 m régionaux. Chaque paire vérifiée est représentée par deux
-          mémoires de réception, sans transformer le pack en liste exhaustive.
+          Une version régionale enrichie sur le modèle des packs matures : socle national RX, aviation SIA
+          revue dans le contexte AIRAC courant, sélection de relais FM 2 m en paired RX{pack.includeMarine ? ", et module VHF marine complet" : ""}.
+          Le contenu reste borné aux données publiques suffisamment vérifiables et utiles à l'écoute.
         </p>
         <div class="button-row">
           <a class="button button-primary" href={downloadUrl} download={pack.filename}>Télécharger le CSV {pack.version}</a>
@@ -51,24 +54,30 @@ const regionalChannelCount = selectedRelayCount * 2;
 
         <div class="card legal">
           <strong>Réception seule sur les {pack.memoryCount} mémoires</strong>
-          <p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. La présence d'une fréquence n'accorde aucun droit d'émission.</p>
+          <p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. Les fréquences documentées n'accordent aucun droit d'émission.</p>
         </div>
 
         <div class="memory-map card">
-          <h2>Périmètre v0.1</h2>
+          <h2>Périmètre {pack.version}</h2>
           <div class="ranges">
-            <span><b>0–15</b> PMR446 · 16 mémoires</span>
+            <span><b>0–15</b> PMR446 · 16</span>
             <span><b>20–21</b> Appels radioamateur · 2</span>
             <span><b>30–35</b> APRS / ISS · 6</span>
-            <span><b>50+</b> Relais FM 2 m paired RX · {regionalChannelCount}</span>
+            <span><b>40+</b> Aviation AM · {aviationCount}</span>
+            <span><b>70+</b> Relais FM 2 m paired RX · {regionalChannelCount}</span>
+            {pack.includeMarine && <span><b>100–189</b> VHF marine · {marineCount}</span>}
           </div>
-          <p class="scope-note">Aviation, UHF et autres services régionaux restent hors périmètre tant qu'une revue dédiée n'est pas terminée. La VHF marine reste disponible comme module national séparé.</p>
+          <p class="scope-note">
+            Aviation : contexte SIA AIRAC 08/26 recoupé avec les pages eAIP publiques effectives ; aucune extraction XML champ par champ n'est revendiquée.
+            {pack.includeMarine ? " Le littoral justifie l'intégration du module VHF marine national." : " Le module VHF marine reste séparé pour cette région intérieure."}
+          </p>
+          <p class="scope-note">UHF, numérique et services privés restent hors publication tant qu'une revue dédiée n'a pas validé chaque fréquence et son intérêt d'écoute.</p>
         </div>
 
         <ChannelGroupDetails
           groups={channelGroups}
           title={`Tous les canaux du pack ${pack.name}`}
-          intro={`Chaque mémoire affichée ci-dessous correspond au CSV public ${pack.version}. Les entrées et sorties des relais sélectionnés restent toutes deux en réception seule.`}
+          intro={`Chaque mémoire affichée ci-dessous correspond au CSV public ${pack.version}. Les paires retenues restent représentées dans les deux sens uniquement en réception.`}
         />
       </div>
 
@@ -78,15 +87,18 @@ const regionalChannelCount = selectedRelayCount * 2;
         <div class="meter"><span style={`width:${Math.round((pack.memoryCount / 200) * 100)}%`}></span></div>
         <ul>
           <li>RX-only</li>
+          <li>{aviationCount} mémoires aviation AM</li>
           <li>{selectedRelayCount} relais FM 2 m sélectionnés</li>
           <li>paired RX : sortie + entrée vérifiée</li>
-          <li>périmètre v0.1 non exhaustif</li>
+          {pack.includeMarine && <li>90 mémoires VHF marine</li>}
+          <li>v0.1 historique conservée</li>
         </ul>
+        <p class="source-note">Revue sources : {metropolitanSourceNotes.checkedOn}</p>
       </aside>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.3rem,7vw,6rem)}.status-card{padding:28px;position:sticky;top:110px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:18px}.meter span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#65d7b1,#4ea8ff,#9185ff)}.legal,.memory-map{padding:22px}.legal p,.scope-note{margin-top:8px;color:var(--muted)}code{font-weight:800;color:#b9b1ff}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(11,23,40,.28);color:var(--muted);font-size:.82rem}.ranges b{color:#9185ff;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}.status-card{position:static}}
+.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.3rem,7vw,6rem)}.status-card{padding:28px;position:sticky;top:110px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:18px}.meter span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#65d7b1,#4ea8ff,#9185ff)}.legal,.memory-map{padding:22px}.legal p,.scope-note,.source-note{margin-top:8px;color:var(--muted)}code{font-weight:800;color:#b9b1ff}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(11,23,40,.28);color:var(--muted);font-size:.82rem}.ranges b{color:#9185ff;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}.status-card{position:static}}
 </style>

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-19",
+  "publication_sprint": 98,
+  "state_version": "0.21.87",
+  "pack": "Corse",
+  "version": "0.2",
+  "memory_count": 137,
+  "previous_public_version": "0.1",
+  "previous_public_memory_count": 28,
+  "public_route": "/downloads/corse/radiopack-france-corse-v0.2.csv",
+  "public_csv_sha256": "0cf92ac1ed0e39793d7257d7c71f43d4e6019d79806456f0aee961b4cc333a70",
+  "hash_basis": "fresh Astro production build from PR #19 before Sprint 98 state freeze",
+  "generator": "website/src/lib/metropolitanPack.ts",
+  "download_route": "website/src/pages/downloads/[slug]/[file].csv.ts",
+  "pack_plan": "research/corse-v0.2/pack-plan.json",
+  "release_scope": "research/corse-v0.2/release-scope.json",
+  "review_checklist": "research/corse-v0.2/review-checklist.json",
+  "publication_gates": "research/corse-v0.2/publication-gates.json",
+  "common_primary_source_audit": "research/metropolitan-v0.2-primary-source-audit.md",
+  "aviation": {
+    "memory_count": 19,
+    "cycle": "AIRAC 08/26",
+    "valid_from": "2026-08-06",
+    "valid_through_inclusive": "2026-09-02",
+    "reviewed_on": "2026-08-19",
+    "direct_xml_field_match_claimed": false
+  },
+  "marine_memory_count": 90,
+  "published_version_is_immutable": true,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "no_artificial_fill": true,
+    "private_ppdr_operational_data_excluded": true
+  }
+}

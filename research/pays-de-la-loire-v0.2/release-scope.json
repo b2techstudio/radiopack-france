@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "status": "frozen_public_scope",
+  "frozen_on": "2026-08-19",
+  "publication_sprint": 98,
+  "state_version": "0.21.87",
+  "pack": "Pays de la Loire",
+  "version": "0.2",
+  "memory_count": 130,
+  "previous_public_version": "0.1",
+  "previous_public_memory_count": 30,
+  "included_blocks": {
+    "pmr446": 16,
+    "amateur_calls": 2,
+    "aprs_iss": 6,
+    "aviation": 10,
+    "regional_2m": 6,
+    "marine": 90
+  },
+  "aviation_cycle": "AIRAC 08/26",
+  "aviation_valid_through_inclusive": "2026-09-02",
+  "pack_plan": "research/pays-de-la-loire-v0.2/pack-plan.json",
+  "common_primary_source_audit": "research/metropolitan-v0.2-primary-source-audit.md",
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "historical_v0_1_retained": true,
+    "future_rf_change_requires_new_version": true
+  }
+}

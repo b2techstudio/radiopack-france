@@ -1,9 +1,9 @@
 {
   "schema_version": "1.2",
   "status": "project_resume_state",
-  "updated": "2026-08-17",
-  "current_sprint": 97,
-  "state_version": "0.21.86",
+  "updated": "2026-08-19",
+  "current_sprint": 98,
+  "state_version": "0.21.87",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -29,6 +29,105 @@
       "research_only": false,
       "previous_immutable_version": "0.1",
       "previous_memory_count": 135
+    },
+    "hauts_de_france": {
+      "version": "0.2",
+      "memory_count": 144,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 36,
+      "publication_record": "research/hauts-de-france-v0.2/publication-record.json",
+      "public_csv_sha256": "881f830ed81a0c55506830f1c767bc2a2a0a674e0677fc971c8f40f6646ca96c"
+    },
+    "ile_de_france": {
+      "version": "0.2",
+      "memory_count": 58,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 34,
+      "publication_record": "research/ile-de-france-v0.2/publication-record.json",
+      "public_csv_sha256": "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d"
+    },
+    "grand_est": {
+      "version": "0.2",
+      "memory_count": 59,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 36,
+      "publication_record": "research/grand-est-v0.2/publication-record.json",
+      "public_csv_sha256": "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1"
+    },
+    "centre_val_de_loire": {
+      "version": "0.2",
+      "memory_count": 42,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 32,
+      "publication_record": "research/centre-val-de-loire-v0.2/publication-record.json",
+      "public_csv_sha256": "68e164763834e69dcd85dd9b1b67777e42922134be33d5e25738f4df71f2bb29"
+    },
+    "pays_de_la_loire": {
+      "version": "0.2",
+      "memory_count": 130,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 30,
+      "publication_record": "research/pays-de-la-loire-v0.2/publication-record.json",
+      "public_csv_sha256": "b737a2e2849c73ed4dd97a4288d6ad862433948e0d4d7eaaa580648547b7d501"
+    },
+    "bourgogne_franche_comte": {
+      "version": "0.2",
+      "memory_count": 37,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 30,
+      "publication_record": "research/bourgogne-franche-comte-v0.2/publication-record.json",
+      "public_csv_sha256": "828af205aa07fe6685e3ad395ec2f0f56222fcfb5bb2f7b8f6a0bd4082714c0a"
+    },
+    "nouvelle_aquitaine": {
+      "version": "0.2",
+      "memory_count": 151,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 42,
+      "publication_record": "research/nouvelle-aquitaine-v0.2/publication-record.json",
+      "public_csv_sha256": "619f13f7c8b6cb2529f4f0320268a055c95edc3e7333acefa795010c6e50a8e2"
+    },
+    "auvergne_rhone_alpes": {
+      "version": "0.2",
+      "memory_count": 62,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 38,
+      "publication_record": "research/auvergne-rhone-alpes-v0.2/publication-record.json",
+      "public_csv_sha256": "60b4f96467419db40e9f3f33076057f4e093853c81d9e3315b8fe7f0459daa53"
+    },
+    "occitanie": {
+      "version": "0.2",
+      "memory_count": 156,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 44,
+      "publication_record": "research/occitanie-v0.2/publication-record.json",
+      "public_csv_sha256": "30f08222923cf49525d0d5f8c0f4d169cb5cd80ecc2713eee1dc5ac4d2e3b8f4"
+    },
+    "provence_alpes_cote_d_azur": {
+      "version": "0.2",
+      "memory_count": 159,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 42,
+      "publication_record": "research/provence-alpes-cote-d-azur-v0.2/publication-record.json",
+      "public_csv_sha256": "0b4deb7acb334c6aa5f4d8c6127a670c84709c79619176754b3a813491bcb273"
+    },
+    "corse": {
+      "version": "0.2",
+      "memory_count": 137,
+      "immutable": true,
+      "previous_immutable_version": "0.1",
+      "previous_memory_count": 28,
+      "publication_record": "research/corse-v0.2/publication-record.json",
+      "public_csv_sha256": "0cf92ac1ed0e39793d7257d7c71f43d4e6019d79806456f0aee961b4cc333a70"
     }
   },
   "active_work": {
@@ -257,7 +356,67 @@
     "website/src/pages/regions/normandie.astro",
     "website/src/pages/regions/bretagne.astro",
     "website/src/pages/regions/annecy-haute-savoie.astro",
-    "tests/test_sprint97_state_sync.py"
+    "tests/test_sprint97_state_sync.py",
+    "research/sprint-98-summary.md",
+    "research/sprint-98-metropolitan-publication-manifest.json",
+    "research/metropolitan-v0.2-primary-source-audit.md",
+    "tools/check_metropolitan_v02_publication_records.py",
+    "tests/test_sprint98_state_sync.py",
+    "research/hauts-de-france-v0.2/pack-plan.json",
+    "research/hauts-de-france-v0.2/release-scope.json",
+    "research/hauts-de-france-v0.2/review-checklist.json",
+    "research/hauts-de-france-v0.2/publication-gates.json",
+    "research/hauts-de-france-v0.2/publication-record.json",
+    "research/ile-de-france-v0.2/pack-plan.json",
+    "research/ile-de-france-v0.2/release-scope.json",
+    "research/ile-de-france-v0.2/review-checklist.json",
+    "research/ile-de-france-v0.2/publication-gates.json",
+    "research/ile-de-france-v0.2/publication-record.json",
+    "research/grand-est-v0.2/pack-plan.json",
+    "research/grand-est-v0.2/release-scope.json",
+    "research/grand-est-v0.2/review-checklist.json",
+    "research/grand-est-v0.2/publication-gates.json",
+    "research/grand-est-v0.2/publication-record.json",
+    "research/centre-val-de-loire-v0.2/pack-plan.json",
+    "research/centre-val-de-loire-v0.2/release-scope.json",
+    "research/centre-val-de-loire-v0.2/review-checklist.json",
+    "research/centre-val-de-loire-v0.2/publication-gates.json",
+    "research/centre-val-de-loire-v0.2/publication-record.json",
+    "research/pays-de-la-loire-v0.2/pack-plan.json",
+    "research/pays-de-la-loire-v0.2/release-scope.json",
+    "research/pays-de-la-loire-v0.2/review-checklist.json",
+    "research/pays-de-la-loire-v0.2/publication-gates.json",
+    "research/pays-de-la-loire-v0.2/publication-record.json",
+    "research/bourgogne-franche-comte-v0.2/pack-plan.json",
+    "research/bourgogne-franche-comte-v0.2/release-scope.json",
+    "research/bourgogne-franche-comte-v0.2/review-checklist.json",
+    "research/bourgogne-franche-comte-v0.2/publication-gates.json",
+    "research/bourgogne-franche-comte-v0.2/publication-record.json",
+    "research/nouvelle-aquitaine-v0.2/pack-plan.json",
+    "research/nouvelle-aquitaine-v0.2/release-scope.json",
+    "research/nouvelle-aquitaine-v0.2/review-checklist.json",
+    "research/nouvelle-aquitaine-v0.2/publication-gates.json",
+    "research/nouvelle-aquitaine-v0.2/publication-record.json",
+    "research/auvergne-rhone-alpes-v0.2/pack-plan.json",
+    "research/auvergne-rhone-alpes-v0.2/release-scope.json",
+    "research/auvergne-rhone-alpes-v0.2/review-checklist.json",
+    "research/auvergne-rhone-alpes-v0.2/publication-gates.json",
+    "research/auvergne-rhone-alpes-v0.2/publication-record.json",
+    "research/occitanie-v0.2/pack-plan.json",
+    "research/occitanie-v0.2/release-scope.json",
+    "research/occitanie-v0.2/review-checklist.json",
+    "research/occitanie-v0.2/publication-gates.json",
+    "research/occitanie-v0.2/publication-record.json",
+    "research/provence-alpes-cote-d-azur-v0.2/pack-plan.json",
+    "research/provence-alpes-cote-d-azur-v0.2/release-scope.json",
+    "research/provence-alpes-cote-d-azur-v0.2/review-checklist.json",
+    "research/provence-alpes-cote-d-azur-v0.2/publication-gates.json",
+    "research/provence-alpes-cote-d-azur-v0.2/publication-record.json",
+    "research/corse-v0.2/pack-plan.json",
+    "research/corse-v0.2/release-scope.json",
+    "research/corse-v0.2/review-checklist.json",
+    "research/corse-v0.2/publication-gates.json",
+    "research/corse-v0.2/publication-record.json"
   ],
   "field_tools": {
     "build_r3_validation_pack": "python tools/build_normandie_v04_r3_validation_pack.py",
@@ -318,9 +477,17 @@
     "test_sprint84_normandie_v05_field_validation_kit": "tests/test_sprint84_normandie_v05_field_validation_kit.py",
     "evaluate_normandie_v05_field_sessions": "tools/evaluate_normandie_v05_field_sessions.py",
     "test_sprint85_normandie_v05_field_evaluator": "tests/test_sprint85_normandie_v05_field_evaluator.py",
-    "test_sprint97_state_sync": "python tests/test_sprint97_state_sync.py"
+    "test_sprint97_state_sync": "python tests/test_sprint97_state_sync.py",
+    "check_metropolitan_v02_publication_records": "python tools/check_metropolitan_v02_publication_records.py --dist website/dist",
+    "test_sprint98_state_sync": "python tests/test_sprint98_state_sync.py"
   },
   "recent_sprints": [
+    {
+      "sprint": 98,
+      "state_version": "0.21.87",
+      "summary": "Eleven metropolitan v0.2 publications consolidated with immutable records, fresh-build SHA-256 manifests, release scopes, review checklists and CI guards; no RF or CSV mutation.",
+      "summary_file": "research/sprint-98-summary.md"
+    },
     {
       "sprint": 97,
       "state_version": "0.21.86",
@@ -1165,5 +1332,23 @@
     "state_sync_guard": "tests/test_sprint97_state_sync.py",
     "public_csv_mutation": false,
     "rf_data_mutation": false
+  },
+  "latest_sprint98_metropolitan_consolidation": {
+    "sprint": 98,
+    "state_version": "0.21.87",
+    "completed_on": "2026-08-19",
+    "status": "eleven_metropolitan_v02_publications_consolidated_official",
+    "region_count": 11,
+    "manifest": "research/sprint-98-metropolitan-publication-manifest.json",
+    "summary": "research/sprint-98-summary.md",
+    "state_sync_guard": "tests/test_sprint98_state_sync.py",
+    "built_csv_guard": "tools/check_metropolitan_v02_publication_records.py",
+    "historical_v0_1_retained": true,
+    "publication_records_complete": true,
+    "release_scopes_complete": true,
+    "review_checklists_complete": true,
+    "publication_gates_complete": true,
+    "rf_data_mutation": false,
+    "public_csv_mutation": false
   }
 }

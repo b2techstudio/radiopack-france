@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.21.87 - 2026-08-19
+
+- **Sprint 98** : consolidation officielle des onze packs métropolitains v0.2 publiés le 19 août 2026.
+- Ajout pour chaque région d'un `publication-record.json`, d'un `release-scope.json`, d'un `review-checklist.json` 10/10 et d'un `publication-gates.json` sans bloqueur.
+- SHA-256 des onze CSV calculés sur un build Astro frais et regroupés dans `research/sprint-98-metropolitan-publication-manifest.json`.
+- Synchronisation de `README.md`, `PROJECT_STATUS.md` et `research/project-resume-state.json` sur **98 / 0.21.87**.
+- Ajout de `tests/test_sprint98_state_sync.py` et de `tools/check_metropolitan_v02_publication_records.py` aux garde-fous CI.
+- Aucune fréquence, aucune mémoire RF ni aucun contenu CSV public modifié par le Sprint 98 ; les v0.1 historiques restent générables et les v0.2 deviennent explicitement immuables.
+
 ## 0.21.86 - 2026-08-17
 
 - **Sprint 97** : consolidation officielle des raffinements UX post-Sprint 96 et synchronisation de l'état courant sur **97 / 0.21.86**.

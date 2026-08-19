@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "status": "review_complete",
+  "reviewed_on": "2026-08-19",
+  "publication_sprint": 98,
+  "state_version": "0.21.87",
+  "pack": "Centre-Val de Loire",
+  "version": "0.2",
+  "completed": 10,
+  "total": 10,
+  "blocker_count": 0,
+  "items": [
+    {
+      "id": "historical_v0_1_retained",
+      "completed": true,
+      "note": "La v0.1 historique reste générable et n'est pas réécrite."
+    },
+    {
+      "id": "deterministic_pack_plan",
+      "completed": true,
+      "note": "Le pack-plan v0.2 fixe les blocs, compteurs et sources."
+    },
+    {
+      "id": "rx_only_contract",
+      "completed": true,
+      "note": "Toutes les mémoires sont exportées avec Duplex=off et Offset=0.000000."
+    },
+    {
+      "id": "memory_limit",
+      "completed": true,
+      "note": "Le pack respecte la limite de 200 mémoires."
+    },
+    {
+      "id": "rf_deduplication",
+      "completed": true,
+      "note": "La déduplication RF est active."
+    },
+    {
+      "id": "aviation_primary_review",
+      "completed": true,
+      "note": "La sélection aviation est bornée et revue sur les pages publiques SIA eAIP AD 2.18 dans le contexte AIRAC 08/26."
+    },
+    {
+      "id": "amateur_public_sources",
+      "completed": true,
+      "note": "La sélection FM 2 m repose sur des sources radioamateur publiques recoupées."
+    },
+    {
+      "id": "marine_scope_bounded",
+      "completed": true,
+      "note": "Aucun bloc marine n'est ajouté à cette région non littorale."
+    },
+    {
+      "id": "sensitive_data_excluded",
+      "completed": true,
+      "note": "Les données privées, PPDR ou non publiquement vérifiables sont exclues."
+    },
+    {
+      "id": "fresh_build_hash_recorded",
+      "completed": true,
+      "note": "Le CSV généré par le build Astro est figé par SHA-256."
+    }
+  ]
+}

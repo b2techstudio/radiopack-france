@@ -2,7 +2,7 @@
 
 **Couverture publique au 19 août 2026 : les 13 régions administratives de France métropolitaine disposent désormais d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 97 / 0.21.86 — socle officiel conservé ; publication post-Sprint 97 des onze packs régionaux désormais enrichis en v0.2, avec couverture métropolitaine 13/13.**
+**État courant : Sprint 98 / 0.21.87 — consolidation officielle des onze packs métropolitains v0.2, avec couverture 13/13, publication records, scopes figés et SHA-256 issus d'un build Astro frais.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -82,9 +82,9 @@ Les onze régions ajoutées lors de la couverture 13/13 ont été enrichies sans
 
 Cette publication reste postérieure au Sprint 97 et ne modifie pas l'état logique officiel **97 / 0.21.86**.
 
-## État actuel — Sprint 97 / 0.21.86
+## État actuel — Sprint 98 / 0.21.87
 
-Le **Sprint 97 / 0.21.86** reste le dernier état logique officiel synchronisé dans `PROJECT_STATUS.md`, `CHANGELOG.md` et `research/project-resume-state.json`. La couverture métropolitaine du 19 août 2026 constitue une publication post-Sprint 97 et ne réécrit pas rétrospectivement cet état historique.
+Le **Sprint 98 / 0.21.87** est l'état logique officiel synchronisé dans `PROJECT_STATUS.md`, `CHANGELOG.md` et `research/project-resume-state.json`. Il consolide la publication métropolitaine v0.2 sans modifier les fréquences ni le contenu des CSV publics.
 
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
@@ -95,6 +95,12 @@ Versions historiques toujours conservées :
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
 Recherche active antérieure conservée : Normandie v0.5 reste à **142 RX** avec un plafond potentiel connu de **147 mémoires** hors F6ZES ; Bretagne v0.3 reste à **151 RX** en attente de la revalidation AIRAC 09/26 prévue à partir du 3 septembre 2026.
+
+## Sprint 98 — consolidation des onze v0.2
+
+Les onze packs métropolitains v0.2 disposent désormais chacun d'un scope figé, d'une checklist 10/10, de gates de publication satisfaits et d'un `publication-record.json` contenant le SHA-256 du CSV issu d'un build Astro frais. Le manifeste commun est `research/sprint-98-metropolitan-publication-manifest.json` et le résumé est `research/sprint-98-summary.md`.
+
+Le Sprint 98 ne change aucune mémoire RF : il rend la publication du 19 août reproductible et verrouille l'immuabilité des v0.2. Les v0.1 restent historiques et générables.
 
 ## Sprint 97 — consolidation de l’état post-Sprint 96
 

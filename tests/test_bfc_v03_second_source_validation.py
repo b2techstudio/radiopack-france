@@ -31,22 +31,23 @@ assert pass2["result"]["remaining_unpromoted_station_count"] == 5
 assert {item["call"] for item in pass2["validated_this_pass"]} == {"F1ZCA", "F5ZXZ"}
 assert {item["id"].split("_")[0] for item in pass2["still_blocked_after_pass2"]} == {"F5ZNS", "F5ZFE", "F5ZKM", "F5ZMS", "F5ZTJ"}
 
-# Current candidate may grow through other reviewed blocks, but the radio contribution stays 5 stations / 10 RX.
-assert plan["current_candidate_memory_count"] == 53
-assert plan["current_new_memory_count"] == 16
+# Current candidate grew through the separate aviation review; the radio contribution stays 5 stations / 10 RX.
+assert plan["current_candidate_memory_count"] == 54
+assert plan["current_new_memory_count"] == 17
 assert plan["promoted_internal_station_count"] == 5
 assert plan["promoted_internal_memory_count"] == 10
 assert plan["remaining_unpromoted_lead_station_count"] == 5
 assert plan["radioamateur_research"]["promoted_internal_station_count"] == 5
 assert plan["radioamateur_research"]["promoted_internal_memory_count"] == 10
+assert plan["radioamateur_research"]["scope_closed_with_deferred_leads"] is True
 assert plan["public_export_allowed"] is False
 assert plan["public_registry_allowed"] is False
 
-assert candidate["status"] == "internal_candidate_not_for_publication"
+assert candidate["status"] == "release_candidate_prepublication"
 assert candidate["published_base_memory_count"] == 37
 assert candidate["published_base_sha256"] == record["public_csv_sha256"]
-assert candidate["memory_count"] == 53
-assert candidate["new_memory_count"] == 16
+assert candidate["memory_count"] == 54
+assert candidate["new_memory_count"] == 17
 assert candidate["radioamateur_expansion"]["station_count"] == 5
 assert candidate["radioamateur_expansion"]["memory_count"] == 10
 assert candidate["public_export_allowed"] is False
@@ -72,8 +73,11 @@ for call in ["F1ZCA", "F5ZXZ"]:
     assert states[call] == "cleared_for_internal_candidate_second_source_pass2"
 for call in ["F5ZNS", "F5ZFE", "F5ZKM", "F5ZMS", "F5ZTJ"]:
     assert "cleared_for_internal_candidate" not in states[call]
+    assert states[call].startswith("deferred_v0_3_")
 assert backlog["radioamateur_candidate_memory_delta"] == 10
 assert backlog["promoted_internal_station_count"] == 5
 assert backlog["remaining_unpromoted_station_count"] == 5
+assert backlog["release_decision"]["scope_closed"] is True
+assert backlog["release_decision"]["deferred_leads_block_release"] is False
 
-print("BFC v0.3 radio validation preserved: 5 stations / 10 RX across 2 passes; current candidate 53 after separate aviation expansion; public v0.2 immutable OK")
+print("BFC v0.3 radio validation preserved: 5 stations / 10 RX across 2 passes; release candidate 54 after aviation expansion; 5 radio leads deferred; v0.2 immutable OK")

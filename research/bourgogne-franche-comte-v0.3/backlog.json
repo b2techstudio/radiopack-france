@@ -13,6 +13,7 @@
   "lead_station_count": 10,
   "promoted_internal_station_count": 5,
   "remaining_unpromoted_station_count": 5,
+  "potential_memory_delta_if_every_lead_clears_and_remains_unique": 20,
   "potential_memory_delta_if_every_radio_lead_clears_and_remains_unique": 20,
   "items": [
     {

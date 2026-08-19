@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "status": "current_public_directory_audit_zero_promotion",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.3",
+  "checked_on": "2026-08-19",
+  "source": {
+    "name": "REF — Liste des relais",
+    "url": "https://www.r-e-f.org/index.php?Itemid=492&id=1279&option=com_content&view=article",
+    "source_basis": "Annuaire ANFR des stations répétitrices complété par des informations publiées ou transmises au REF",
+    "displayed_last_update": "2026-05-13"
+  },
+  "departments_reviewed": [21, 25, 39, 58, 70, 71, 89, 90],
+  "published_v0_2_repeaters_rechecked": [
+    {
+      "call": "F1ZDK",
+      "department": 71,
+      "site": "Mont-Saint-Vincent",
+      "frequencies_mhz": [145.75, 145.15],
+      "state": "Actif",
+      "result": "current_ref_confirms_public_rf_pair"
+    },
+    {
+      "call": "F5ZBP",
+      "department": 39,
+      "site": "Saint-Thiébaud",
+      "frequencies_mhz": [145.775, 145.175],
+      "state": "Actif",
+      "result": "current_ref_confirms_public_rf_pair_site_label_differs_from_public_friendly_label"
+    },
+    {
+      "call": "F1ZCT",
+      "department": 89,
+      "site": "Chitry",
+      "frequencies_mhz": [145.7875, 145.1875],
+      "state": "Actif",
+      "result": "current_ref_confirms_public_rf_pair"
+    }
+  ],
+  "new_analog_leads": [
+    {"call":"F5ZIQ","department":25,"site":"Besançon","frequencies_mhz":[145.45,432.55],"state":"Actif","mode":"FM","function":"Transpond."},
+    {"call":"F1ZCA","department":39,"site":"Saint-Thiébaud","frequencies_mhz":[430.3,431.9],"state":"Actif","mode":"FM","function":"repeater"},
+    {"call":"F5ZNS","department":39,"site":"Rochefort-sur-Nenon","frequencies_mhz":[430.65,144.65],"state":"Actif","mode":"FM","function":"Transpar."},
+    {"call":"F5ZVA","department":58,"site":"Villapourçon","frequencies_mhz":[431.25,145.25],"state":"Actif","mode":"FM","function":"Transpond."},
+    {"call":"F5ZXZ","department":58,"site":"Cosne-Cours-sur-Loire","frequencies_mhz":[431.1,145.2125],"state":"Actif","mode":"FM","function":"Transpond."},
+    {"call":"F5ZFE","department":71,"site":"Baron","frequencies_mhz":[433.2,431.6],"state":"Actif","mode":"FM","function":"repeater"},
+    {"call":"F5ZKM","department":71,"site":"Montmelard","frequencies_mhz":[145.575,432.575],"state":"Actif","mode":"FM","function":"Transpond."},
+    {"call":"F5ZMS","department":71,"site":"Sainte-Foy","frequencies_mhz":[431.2375,145.2375],"state":"Actif","mode":"FM","function":"Transpond."},
+    {"call":"F5ZTJ","department":71,"site":"Baron","frequencies_mhz":[432.925,431.325],"state":"Actif","mode":"FM","function":"repeater"},
+    {"call":"F5ZFQ","department":90,"site":"Belfort","frequencies_mhz":[145.2625,430.125],"state":"Actif","mode":"FM","function":"Transpar."}
+  ],
+  "excluded_or_deferred_examples": [
+    {"call":"F1ZIK","department":39,"site":"Saint-Maur","state":"Temp","reason":"temporary status"},
+    {"department":21,"reason":"current listed repeaters in scope are digital-only; no analog lead promoted"},
+    {"department":70,"reason":"no explicit current active analog FM pair selected from the reviewed listing"}
+  ],
+  "decision": {
+    "new_rf_promoted": false,
+    "candidate_memory_delta": 0,
+    "reason": "The current REF directory establishes useful public leads, but each new pair remains research-only until a current independent second source or operator/local association confirmation is recorded.",
+    "maximum_lead_memory_delta_before_deduplication": 20
+  }
+}

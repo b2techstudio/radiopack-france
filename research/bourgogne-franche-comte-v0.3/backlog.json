@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "status": "research_backlog_unpromoted",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.3",
+  "checked_on": "2026-08-19",
+  "published_base_memory_count": 37,
+  "candidate_memory_count": 37,
+  "candidate_memory_delta": 0,
+  "lead_station_count": 10,
+  "potential_memory_delta_if_every_lead_clears_and_remains_unique": 20,
+  "items": [
+    {
+      "id": "F5ZIQ_BESANCON_ANALOG_CROSSBAND",
+      "department": 25,
+      "call": "F5ZIQ",
+      "site": "Besançon",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [145.45, 432.55],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F1ZCA_SAINT_THIEBAUD_UHF",
+      "department": 39,
+      "call": "F1ZCA",
+      "site": "Saint-Thiébaud",
+      "kind": "analog_70cm_repeater",
+      "frequencies_mhz": [430.3, 431.9],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZNS_ROCHEFORT_SUR_NENON_CROSSBAND",
+      "department": 39,
+      "call": "F5ZNS",
+      "site": "Rochefort-sur-Nenon",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [430.65, 144.65],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZVA_VILLAPOURCON_CROSSBAND",
+      "department": 58,
+      "call": "F5ZVA",
+      "site": "Villapourçon",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [431.25, 145.25],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZXZ_COSNE_COURS_SUR_LOIRE_CROSSBAND",
+      "department": 58,
+      "call": "F5ZXZ",
+      "site": "Cosne-Cours-sur-Loire",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [431.1, 145.2125],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZFE_BARON_UHF",
+      "department": 71,
+      "call": "F5ZFE",
+      "site": "Baron",
+      "kind": "analog_70cm_repeater",
+      "frequencies_mhz": [433.2, 431.6],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZKM_MONTMELARD_CROSSBAND",
+      "department": 71,
+      "call": "F5ZKM",
+      "site": "Montmelard",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [145.575, 432.575],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZMS_SAINTE_FOY_CROSSBAND",
+      "department": 71,
+      "call": "F5ZMS",
+      "site": "Sainte-Foy",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [431.2375, 145.2375],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZTJ_BARON_UHF",
+      "department": 71,
+      "call": "F5ZTJ",
+      "site": "Baron",
+      "kind": "analog_70cm_repeater",
+      "frequencies_mhz": [432.925, 431.325],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    },
+    {
+      "id": "F5ZFQ_BELFORT_CROSSBAND",
+      "department": 90,
+      "call": "F5ZFQ",
+      "site": "Belfort",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [145.2625, 430.125],
+      "ref_status": "Actif",
+      "memory_delta_if_cleared": 2,
+      "state": "current_ref_active_second_source_required"
+    }
+  ],
+  "not_promoted": [
+    {
+      "call": "F1ZIK",
+      "site": "Saint-Maur",
+      "reason": "REF state Temp; temporary infrastructure is not promoted"
+    },
+    {
+      "scope": "digital-only repeaters",
+      "reason": "No blind digital promotion into an analog listening pack"
+    },
+    {
+      "scope": "stations without an explicit current active state",
+      "reason": "Missing current status is not treated as active evidence"
+    }
+  ]
+}

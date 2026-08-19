@@ -1,297 +1,154 @@
 # RadioPack France
 
-**État courant : Sprint 97 / 0.21.86 — état UX post-Sprint 96 consolidé ; détails de canaux régionaux alimentés par les CSV publics ; raccourcis du générateur accessibles au clavier ; packs RF inchangés ; Bretagne v0.3 reste en attente AIRAC 09/26.**
+**Couverture publique au 19 août 2026 : les 13 régions administratives de France métropolitaine disposent désormais d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-Codeplugs CHIRP régionaux documentés et générés à partir de données publiques vérifiables pour les radios Quansheng UV-K5.
+**État courant : Sprint 97 / 0.21.86 — socle officiel conservé ; publication post-Sprint 97 de onze packs régionaux v0.1 et mise à jour du site public vers une couverture métropolitaine 13/13.**
+
+RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
+
+## Couverture métropolitaine complète — 19 août 2026
+
+La couverture administrative métropolitaine est maintenant **13/13**. Normandie et Bretagne conservent leurs versions publiques matures ; les onze autres régions démarrent avec une **v0.1 volontairement non exhaustive**. Annecy–Alpes–Léman reste un pack territorial spécialisé en complément.
+
+Packs publics actuels :
+
+- **Normandie v0.4** — 142 mémoires RX ;
+- **Bretagne v0.2** — 151 mémoires RX ;
+- **Hauts-de-France v0.1** — 36 mémoires RX ;
+- **Île-de-France v0.1** — 34 mémoires RX ;
+- **Grand Est v0.1** — 36 mémoires RX ;
+- **Centre-Val de Loire v0.1** — 32 mémoires RX ;
+- **Pays de la Loire v0.1** — 30 mémoires RX ;
+- **Bourgogne-Franche-Comté v0.1** — 30 mémoires RX ;
+- **Nouvelle-Aquitaine v0.1** — 42 mémoires RX ;
+- **Auvergne-Rhône-Alpes v0.1** — 38 mémoires RX ;
+- **Occitanie v0.1** — 44 mémoires RX ;
+- **Provence-Alpes-Côte d’Azur v0.1** — 42 mémoires RX ;
+- **Corse v0.1** — 28 mémoires RX ;
+- **Annecy–Alpes–Léman v0.4** — 77 mémoires RX, variante 60 sans aviation.
+
+Les variantes par défaut représentent **762 mémoires RX cumulées** dans le catalogue public. Ce total est un indicateur de catalogue : chaque fichier reste indépendant et respecte la limite de la radio.
+
+### Périmètre des onze nouvelles v0.1
+
+Chaque nouveau socle régional utilise :
+
+- 16 mémoires PMR446 RX ;
+- 2 appels radioamateur RX ;
+- 6 mémoires APRS / ISS RX ;
+- une sélection régionale, publique et recoupée de relais FM 2 m ;
+- pour chaque paire split retenue, une mémoire RX de sortie et une mémoire RX d'entrée vérifiée ;
+- aucune aviation, aucun UHF/numérique et aucune extension maritime régionale dans cette première v0.1.
+
+La VHF marine reste disponible comme module national séparé. Les extensions futures passent par une nouvelle revue et une nouvelle version ; une v0.1 n'est pas présentée comme un inventaire exhaustif de la région.
+
+La synthèse et les sources de cette publication sont documentées dans `research/metropolitan-regions-v0.1-release.md`. La source déterministe des onze nouvelles versions est `website/src/lib/metropolitanPack.ts`, tandis que `website/src/lib/packRegistry.ts` reste la source de vérité du catalogue public.
+
+## Contrat RX-only et paired RX
+
+Règles permanentes :
+
+- RX uniquement : `Duplex=off`, `Offset=0.000000` ;
+- maximum 200 mémoires par CSV ;
+- aucun remplissage artificiel ;
+- versions publiées immuables ;
+- `research/paired-rx-policy.json` : une paire split/duplex vérifiée de deux fréquences distinctes utilise deux mémoires RX ;
+- une fréquence, un mode ou une attribution locale non résolus ne sont jamais devinés ;
+- les données privées, PPDR, chiffrées ou non publiquement vérifiables restent exclues ;
+- la présence d'une fréquence dans un fichier n'accorde jamais un droit d'émission.
+
+Les CSV générés par `website/src/lib/chirpPack.ts` appliquent systématiquement le contrat public RX-only. Les nouvelles routes régionales utilisent le même validateur de noms, emplacements, fréquences, doublons et limite mémoire.
+
+## Sources des nouvelles régions
+
+La sélection FM 2 m des nouvelles v0.1 a été revue le 19 août 2026 à partir de sources publiques complémentaires :
+
+- plan de bande 144–146 MHz du REF ;
+- annuaire France RepeaterBook pour les fréquences et sites actuellement publiés ;
+- roster français F5AIB/REF comme seconde vérification des relais et indicatifs ;
+- Open Data ANFR comme contexte institutionnel sur les installations radio.
+
+Le dépôt ne transforme pas une présence dans un annuaire en garantie absolue de disponibilité terrain. Les v0.1 restent des bases d'écoute publiques et traçables ; les évolutions nécessitent une nouvelle validation.
+
+## Site public
+
+Le site Astro expose désormais le même registre sur toutes les vues principales :
+
+- `/regions` — 14 cartes publiques, dont les 13 régions administratives métropolitaines ;
+- `/regions/<slug>` — pages détaillées des onze nouvelles v0.1 générées depuis la définition déterministe ;
+- `/generateur` — sélection de tous les packs publics ;
+- `/telechargements` — tous les CSV régionaux et les modules nationaux ;
+- `/versions` — état et nombre de mémoires de chaque version ;
+- `/sitemap.xml` — toutes les pages régionales publiées.
+
+Les onze nouvelles URL CSV sont générées au build par `website/src/pages/downloads/[slug]/[file].csv.ts`. Les versions historiques Normandie, Bretagne et Annecy restent des artefacts publics immuables.
 
 ## État actuel — Sprint 97 / 0.21.86
 
+Le **Sprint 97 / 0.21.86** reste le dernier état logique officiel synchronisé dans `PROJECT_STATUS.md`, `CHANGELOG.md` et `research/project-resume-state.json`. La couverture métropolitaine du 19 août 2026 constitue une publication post-Sprint 97 et ne réécrit pas rétrospectivement cet état historique.
+
 Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
 
-Packs publics immuables :
+Versions historiques toujours conservées :
 
-- **Normandie v0.4** — 142 mémoires RX ;
 - Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
-- **Annecy–Alpes–Léman v0.4** — 77 mémoires RX, variante 60 sans aviation, publiée et immuable ;
 - Annecy–Alpes–Léman v0.3 — 76 / 59, historique immuable ;
-- **Bretagne v0.2** — 151 mémoires RX, publiée et immuable ;
 - Bretagne v0.1 — 135 mémoires RX, historique immuable.
 
-Recherche active : Normandie v0.5 reste à **142 RX**, delta 0 : R3/F5ZHA exigent du terrain, F1ZOV/F6ZES restent en veille source. Bretagne v0.3 reste à **151 RX**, delta 0, avec handoff AIRAC 09/26 préparé pour le 3 septembre 2026. Annecy v0.4 est sortie du backlog : elle est désormais publique et immuable.
-
-Repère Normandie v0.5 : le plafond potentiel reste **147 mémoires** hors F6ZES ; le candidat reste à 142 tant que les gates terrain et sources ne sont pas franchis.
-
-Point de reprise : `PROJECT_STATUS.md`, `research/project-resume-state.json`, `research/sprint-97-summary.md`, `research/sprint-97-post96-ui-state.json`, `research/sprint-75-summary.md`, `research/sprint-76-summary.md`, `research/sprint-77-summary.md`, `research/sprint-78-summary.md`, `research/sprint-79-summary.md`, `research/sprint-80-summary.md`, `research/sprint-81-summary.md`, `research/sprint-82-summary.md`, `research/sprint-83-summary.md`, `research/sprint-84-summary.md`, `research/sprint-85-summary.md`, `research/sprint-86-summary.md`, `research/sprint-89-summary.md`, `research/sprint-90-summary.md`, `research/sprint-91-summary.md`, `research/sprint-92-summary.md` et `research/security-audit-sprint92.md`.
+Recherche active antérieure conservée : Normandie v0.5 reste à **142 RX** avec un plafond potentiel connu de **147 mémoires** hors F6ZES ; Bretagne v0.3 reste à **151 RX** en attente de la revalidation AIRAC 09/26 prévue à partir du 3 septembre 2026.
 
 ## Sprint 97 — consolidation de l’état post-Sprint 96
 
-Le Sprint 97 synchronise officiellement le dépôt sur les raffinements UX ajoutés après le Sprint 96. Les pages régionales Normandie, Bretagne et Annecy–Alpes–Léman exposent désormais des groupes de canaux repliables construits directement depuis les CSV publics. Le générateur propose des raccourcis de sélection accessibles au clavier et explicite **77 / 60, 142 et 151** comme nombres de mémoires des CSV publiés. `publicPacks` reste la source de vérité des métadonnées publiques. **Aucun CSV public, aucune fréquence ni mémoire RF n’a été modifié.**
+Le Sprint 97 a consolidé les raffinements UX ajoutés après le Sprint 96 : détails de canaux régionaux construits depuis les CSV publics, raccourcis du générateur accessibles au clavier et synchronisation officielle du dépôt sur **97 / 0.21.86**.
 
-La clôture synchronise `README.md`, `PROJECT_STATUS.md`, `CHANGELOG.md` et `research/project-resume-state.json` sur **97 / 0.21.86**. Le garde `tests/test_sprint97_state_sync.py` vérifie désormais cette cohérence en CI. Résumé : `research/sprint-97-summary.md`. État structuré complémentaire : `research/sprint-97-post96-ui-state.json`.
+Références : `research/sprint-97-summary.md` et `research/sprint-97-post96-ui-state.json`.
 
-## Sprint 96 — Midnight Blue Soft et cohérence du site public
+## Repères historiques importants
 
-Le design **Midnight Blue Soft** est adopté en production avec une interface radioamateur épurée. Le socle public utilise désormais la palette bleu nuit intermédiaire retenue. Les pages **Téléchargements** et **État des packs** sont branchées sur `publicPacks`, et le test du registre interdit le retour des anciennes références Bretagne v0.1 / Annecy v0.2. **Aucun CSV public ni contenu RF n’a été modifié.** Résumé : `research/sprint-96-summary.md`.
+### Normandie v0.4 / v0.5 — Mortain-Bocage / Sud-Manche
 
-## Sprint 95 — publication Annecy–Alpes–Léman v0.4
+Le suivi historique couvre notamment F5ZHY, F6ZES, F6ZCE, F1ZBX, F5ZHA et F1ZOV. La source de synthèse est `research/normandie-v0.4/mortain-bocage-coverage.json`. Le principe `sourdeval_must_not_be_guessed: true` reste un garde-fou permanent. Les outils `build_normandie_v04_readiness_report.py` et `build_normandie_v04_promotion_scenarios.py` restent disponibles.
 
-La **v0.4 est publiée et immuable à 77 RX / 60 sans aviation**. Elle ajoute uniquement `ZTH-6M` 50.5375 MHz à la v0.3, conserve 17 mémoires aviation, reste RX-only et préserve les CSV v0.3 octet pour octet. Empreintes et preuve : `research/annecy-alpes-leman-v0.4/publication-record.json`.
+Le dossier F5ZHA conserve son historique de validation dans `research/normandie-v0.4/f5zha-mortain-validation.json`. Une observation terrain est une preuve de revue, jamais une autorisation automatique de publication.
 
-## Sprint 94 — prépublication Annecy–Alpes–Léman v0.4
+### Bretagne
 
-Scope figé **77/60**, checklist **12/12**, zéro bloqueur. Le builder déterministe reconstruit les deux CSV avec les SHA attendus et la garde v0.4 vérifie la compatibilité stock UV-K5/CHIRP, les sources publiques et l'absence de RF privée ou inférée.
+La v0.2 publique reste immuable à 151 RX et la v0.1 historique reste conservée. Les principaux dossiers de preuve restent :
 
-## Sprint 93 — clôture sécurité live
+- `research/bretagne-v0.1/public-maritime-radio.json` ;
+- `research/bretagne-v0.1/publication-record.json` ;
+- `research/bretagne-v0.1/release-scope.json` ;
+- `research/bretagne-v0.1/review-checklist.json` ;
+- `research/sprint-73-summary.md` ;
+- `tools/build_bretagne_internal_candidate.py` ;
+- `tools/build_bretagne_review_snapshot.py` ;
+- `tools/run_bretagne_prepublication_audit.py` ;
+- `tests/test_bretagne_internal_candidate.py` ;
+- `tests/test_bretagne_prepublication_review.py` ;
+- `tests/test_bretagne_public_release.py` ;
+- `tests/test_sprint73_bretagne_publication.py` ;
+- `website/src/pages/regions/bretagne.astro` ;
+- `website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv`.
 
-L'origine déployée `radiopack-france.pages.dev` est contrôlée en HTTPS par la CI : CSP, HSTS, anti-framing, `nosniff`, COOP, Referrer-Policy et Permissions-Policy sont vérifiés. Le domaine personnalisé `radiopack.b2tech.studio` reste suivi séparément tant que son DNS n'est pas publié.
+Ch64 et Ch79 restent historiquement traités comme paires RX génériques lorsque l'attribution locale n'est pas prouvée ; une attribution future ne doit pas dupliquer une RF déjà présente.
 
-## Sprint 92 — audit et durcissement sécurité
+### Annecy–Alpes–Léman
 
-Audit complet du site statique, des dépendances et de la chaîne CI/CD. Une alerte haute `nanoid 3.3.17` (`GHSA-2v37-7h3g-55p8`) a été corrigée vers `3.3.18`. `npm audit`, `pip-audit`, les 63 tests fonctionnels et le build Astro sont verts. CSP/HSTS et autres en-têtes de sécurité ont été ajoutés, les actions GitHub sont épinglées par SHA et le token CI est en moindre privilège. Le domaine `radiopack.b2tech.studio` ne résout pas depuis le runner public au moment du contrôle, donc l'audit HTTP live reste différé jusqu'à publication du DNS. Rapport : `research/security-audit-sprint92.md`.
+La v0.4 publique reste immuable à 77 RX / 60 sans aviation. Les travaux paired RX et la publication des versions v0.3/v0.4 restent documentés sous `research/annecy-alpes-leman-v0.3/` et `research/annecy-alpes-leman-v0.4/`.
 
-## Sprint 91 — Bretagne AIRAC 09/26 handoff
+## Workflow régional
 
-Handoff reproductible prêt pour le 3 septembre 2026 ; v0.3 reste à **151 RX, delta 0**, sans publication anticipée.
+Le processus est décrit dans `REGIONAL-PACK-WORKFLOW.md` :
 
-## Sprint 90 — Normandie v0.5 refresh
+1. collecter uniquement des sources publiques ;
+2. enregistrer preuves, conflits et exclusions ;
+3. ne promouvoir que les données qui franchissent les gates de revue ;
+4. construire le pack de façon déterministe ;
+5. valider RX-only, taille, noms et déduplication ;
+6. publier sous une nouvelle version immuable ;
+7. mettre à jour registre, site, tests et documentation.
 
-Candidat **142 RX, delta 0**. R3/F1ZBX et F5ZHA sont des gates terrain ; F1ZOV reste en maintenance locale et F6ZES sans RF/mode public exploitable.
-
-## Sprint 89 — Annecy v0.4 candidat
-
-Le manuel UV-K5 constructeur/FCC et le pilote CHIRP stock couvrent 50.5375 MHz. Le candidat non public passe à **77 RX / 60 sans aviation** avec `ZTH-6M`, tandis que la v0.3 reste immuable.
-
-## Sprint 88 — publication Annecy–Alpes–Léman v0.3
-
-La **v0.3 est publiée et immuable à 76 RX / 59 sans aviation**. Elle ajoute 11 RF uniques paired RX, reste RX-only, déduplique les fréquences identiques et conserve F1ZTH 50.5375 MHz ainsi que l'UHF ADRASEC non publiée hors scope. SHA-256 et preuve : `research/annecy-alpes-leman-v0.3/publication-record.json`.
-
-## Sprint 87 — prépublication Annecy–Alpes–Léman v0.3
-
-Scope figé **76/59**, checklist **12/12**, bloqueurs **0**, sources radioamateur/satellites/AIRAC revalidées avant publication.
-
-## Sprint 86 — Annecy–Alpes–Léman v0.3 paired RX
-
-Premier candidat interne exact : **65 → 76 mémoires RX**, ou **48 → 59 sans aviation**, soit **+11 RF uniques**. La v0.2 publique reste immuable.
-
-- satellites : 145.850 MHz partagée SO-50/AO-123 et 435.250 MHz AO-91 ;
-- France : nouvelles entrées RX F1ZOH, F6ZJD, F1ZCQ, F1ZCR et F1ZDC ;
-- Haute-Savoie : paire publique F1ZJV/F1ZYT 145.1875 / 145.7875 MHz, dédupliquée entre les deux sites ;
-- Suisse : entrées HB9G 145.125 et 431.500 MHz ;
-- F1ZTH 50.5375 MHz reste un +1 conditionnel hors candidat tant que la compatibilité récepteur/firmware UV-K5 n’est pas définie ;
-- aucune fréquence UHF ADRASEC non publiée n’est inférée ; aucune route publique v0.3.
-
-Preuve : `research/annecy-alpes-leman-v0.3/paired-rx-expansion.json`. Builder : `tools/build_annecy_v03_internal_candidate.py`. Garde-fou : `tests/test_sprint86_annecy_v03_paired_rx_expansion.py`.
-
-## Sprint 85 — évaluateur du journal terrain Normandie v0.5
-
-Le candidat reste à **142 mémoires RX, delta 0**. Le journal CSV du Sprint 84 peut maintenant être évalué par `tools/evaluate_normandie_v05_field_sessions.py`.
-
-- verdicts : `satisfied`, `insufficient`, `indeterminate` ;
-- l’indépendance est comptée par `session_id` : plusieurs lignes d’une même session ne deviennent jamais plusieurs preuves ;
-- R3 : seule la sortie **145.675 MHz** compte, avec deux sessions indépendantes identifiées ; l’entrée 145.075 MHz reste facultative ;
-- F5ZHA : deux sessions indépendantes qualifiantes sur **145.4675 ou 432.575 MHz**, confiance reconnue et intelligibilité ≥ 3/5 ; les deux côtés n’ont pas besoin d’être entendus pour le seul gate terrain ;
-- **431.4125 MHz** et `CTRL-ZHY` restent diagnostiques et ne comptent jamais pour un gate ;
-- une non-réception n’est jamais interprétée comme preuve d’arrêt ;
-- même avec un gate `satisfied`, `promotion_ready=false`, aucune mutation du candidat et aucune publication automatique.
-
-Politique : `research/normandie-v0.5/field-evaluation-policy.json`. Évaluateur : `tools/evaluate_normandie_v05_field_sessions.py`. Garde-fou : `tests/test_sprint85_normandie_v05_field_evaluator.py`.
-
-## Sprint 84 — kit terrain Normandie v0.5
-
-Le candidat reste à **142 mémoires RX**. Un kit de validation non public regroupe désormais six sondes : `R3-OUT`, `R3-IN`, `ZHA-VHF`, `ZHA-UHF`, `ZHA-OLD` et `CTRL-ZHY`.
-
-- R3 : deux sessions RX indépendantes et identifiées sur 145.675 MHz restent nécessaires ;
-- F5ZHA : deux sessions indépendantes sur la paire actuelle 145.4675 / 432.575 MHz restent nécessaires, avec intelligibilité minimale 3/5 ;
-- 431.4125 MHz reste une sonde diagnostique historique et ne peut jamais promouvoir F5ZHA à elle seule ;
-- un modèle CSV de journal terrain est généré avec date, lieu, matériel, fréquence, identification, intelligibilité et notes ;
-- aucune mémoire publique ni candidate n’est ajoutée.
-
-Kit : `research/normandie-v0.5/field-validation-kit.json`. Builder : `tools/build_normandie_v05_field_validation_kit.py`. Garde-fou : `tests/test_sprint84_normandie_v05_field_validation_kit.py`.
-
-## Sprint 83 — revalidation ciblée Normandie v0.5
-
-Les quatre dossiers différés de Normandie v0.5 ont été recontrôlés le **15 août 2026**. Résultat : **142 → 142 mémoires RX, delta RF 0, zéro promotion**. Le plafond potentiel reste **147** hors F6ZES.
-
-- **R3 F1ZBX** : opérateur actuel confirmé, paire `145.075 / 145.675 MHz`, mais deux sessions RX indépendantes depuis Mortain restent obligatoires ;
-- **F5ZHA Laval** : le REF courant et une seconde liste convergent sur `145.4675 / 432.575 MHz`; RepeaterBook conserve `431.4125 MHz` avec une vérification 2017, classée conflit secondaire ancien ; la couverture Mortain reste non démontrée ;
-- **F1ZOV** : toujours `En Maintenance` chez F6KFW malgré le REF actif ; le statut opérateur local prime ;
-- **F6ZES Sourdeval** : site toujours listé mais sans fréquence, mode ni état opérationnel exploitables ; rien n’est deviné.
-
-Builder : `tools/build_normandie_v05_internal_candidate.py`. Preuve : `research/normandie-v0.5/current-blocker-revalidation.json`. Garde-fou : `tests/test_sprint83_normandie_v05_revalidation.py`.
-
-## Sprint 82 — revalidation publique ciblée Bretagne v0.3
-
-Les six dossiers non-AIRAC encore ouverts ont été recontrôlés le **15 août 2026**. Résultat : **151 → 151 mémoires RX, delta RF 0, zéro promotion**.
-
-- F1ZUG-4 reste publiquement documenté en APRS sur **144.800 MHz**, déjà présent nationalement ; la fréquence de son transpondeur ADRASEC35 n’est toujours pas publiée ;
-- F5ZZC-4 reste sans fréquence de service actuelle validée : l’ancienne attribution APRS/ADRASEC35 n’est pas transformée en preuve courante ;
-- F5ZPV est toujours déclaré temporairement arrêté par l’ARA35 malgré un annuaire général qui le marque actif ;
-- F5ZZH est toujours arrêté et en recherche de nouveau site ;
-- CROSS Étel : conflit primaire Ch64 toujours ouvert, Étel restant explicitement mappé sur Ch63 dans la page opérationnelle ;
-- CROSS Corsen : réseau VHF/MHF actuel confirmé sans mapping primaire Ch79 → site précis.
-
-Preuve : `research/bretagne-v0.3/public-service-revalidation.json`. Garde-fou : `tests/test_sprint82_bretagne_v03_public_revalidation.py`.
-
-## Sprint 81 — initialisation Bretagne v0.3
-
-Bretagne v0.3 est initialisée en recherche depuis la **v0.2 publique immuable à 151 mémoires RX**. Le candidat interne initial reproduit exactement le CSV v0.2 : **151 → 151, delta 0**, sans CSV public v0.3 ni changement de registre.
-
-- base SHA-256 : `73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4` ;
-- builder : `tools/build_bretagne_v03_internal_candidate.py` ;
-- backlog limité aux dossiers réellement ouverts : AIRAC 09/26, F1ZUG public uniquement, CROSS Ch64/Ch79, F5ZPV, F5ZZH et F5ZZC-4 ;
-- ADRASEC général déjà résolu à delta 0 et F1ZBZ déjà représenté ne sont pas rouverts sans nouvelle preuve ;
-- AIRAC 08/26 reste la base aviation courante jusqu’au 2 septembre 2026 inclus ; toute publication v0.3 à partir du 3 septembre exige une revalidation AIRAC 09/26.
-
-Garde-fou : `tests/test_sprint81_bretagne_v03_initialization.py`.
-
-## Sprint 80 — publication Bretagne v0.2
-
-Bretagne v0.2 est publiée et immuable à **151 mémoires RX**. Le CSV public correspond exactement au candidat gelé au Sprint 79 et son SHA-256 est enregistré dans `research/bretagne-v0.2/publication-record.json`.
-
-- 135 mémoires héritées de la v0.1 immuable + **16 aviation AIRAC 08/26** ;
-- cycle SIA recontrôlé le 12 août 2026, valable jusqu'au **2 septembre 2026 inclus** ;
-- RX-only, zéro doublon RF, aucun remplissage artificiel ;
-- aucune fréquence ADRASEC non publiée ni attribution locale CROSS non prouvée ;
-- la v0.1 reste disponible dans l'historique du dépôt mais le registre courant pointe vers v0.2.
-
-CSV : `website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv`  
-SHA-256 : `73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4`
-
-Garde-fous : `tests/test_bretagne_v02_public_release.py` et `tests/test_sprint80_bretagne_v02_publication.py`.
-
-## Sprint 79 — maturité et prépublication Bretagne v0.2
-
-Le périmètre v0.2 est désormais **figé à 151 mémoires RX**. La revue `research/bretagne-v0.2/maturity-review.json` et la checklist de publication concluent à **10/10 contrôles passés, 0 bloqueur et prépublication prête**.
-
-- les 16 mémoires aviation AIRAC 08/26 restent incluses ; le cycle est courant au 12 août 2026 et valable jusqu'au 2 septembre 2026 inclus ;
-- l'absence d'extraction XML directe reste une limite méthodologique documentée, pas une comparaison fictive ;
-- F1ZUG/ADRASEC35, les mappings locaux CROSS et F5ZPV/F5ZZH/F5ZZC-4 sont explicitement reportés hors du périmètre figé ;
-- ces reports n'ajoutent aucune RF et ne bloquent pas la v0.2 ;
-- `tools/run_bretagne_v02_prepublication_audit.py` reconstruit le candidat et vérifie RX-only, déduplication, aviation et absence de mutation publique.
-
-**Important :** `prepublication_ready=true` ne signifie pas publication. Aucun CSV public v0.2 ni bascule du registre n'est effectué au Sprint 79.
-
-Garde-fou : `tests/test_sprint79_bretagne_v02_maturity.py`.
-
-## Sprint 78 — revalidation CROSS Bretagne v0.2
-
-`research/bretagne-v0.2/cross-local-mapping-revalidation.json` revalide les mappings locaux **CROSS Étel Ch64** et **CROSS Corsen Ch79** sans ajouter de mémoire ni promouvoir d'attribution locale.
-
-- **Étel Ch64** : le ministère conserve une affirmation régionale 63/64 dans le Morbihan, tandis que la documentation opérationnelle actuelle du CROSS Étel mappe explicitement Étel sur Ch63. Le conflit primaire reste ouvert ; aucun site Ch64 n'est deviné.
-- **Corsen Ch79** : le réseau VHF/MHF actuel est confirmé mais aucune source primaire actuelle exploitée ne mappe Ch79 vers Cap Fréhel, Bodic, Batz, Stiff ou Pointe du Raz. Les pistes secondaires restent des indices uniquement.
-- Le **Guide Marine 2026** est identifié comme référence primaire pertinente mais son PDF n'est pas extractible dans le workflow courant ; aucune conclusion n'est tirée de cette indisponibilité.
-- Les paires Ch64 `156.225 / 160.825 MHz` et Ch79 `156.975 / 161.575 MHz` sont déjà présentes génériquement : **delta RF 0**, candidat toujours **151**.
-
-Garde-fou : `tests/test_sprint78_bretagne_cross_mapping_revalidation.py`.
-
-## Sprint 77 — revalidation publique ADRASEC Bretagne v0.2
-
-`research/bretagne-v0.2/adrasec-public-revalidation.json` revalide uniquement les données publiquement accessibles des ADRASEC 22, 29, 35 et 56. Le candidat reste à **151 mémoires RX**, avec un **delta RF de 0**.
-
-- **ADRASEC 29** : F1ZBH-3 et F1ZGQ-3 sont publiquement recoupés comme rôles ADRASEC-29 sur l'APRS 144.800 MHz ; cette RF est déjà présente dans le bloc APRS national, donc aucune duplication.
-- **ADRASEC 35** : F1ZUG reste publiquement identifié en APRS sur 144.800 MHz, tandis que la fréquence de sa fonction de transpondeur ADRASEC 35 n'est pas publiée. Elle n'est jamais déduite de l'APRS.
-- **ADRASEC 56** : l'activité départementale publique est confirmée, ainsi que des métadonnées APRS publiques, mais aucune fréquence de service ADRASEC actuelle distincte n'est promue. Une association historique de F1ZKU ne devient pas un rôle courant par inférence.
-- **ADRASEC 22** : appartenance FNRASEC confirmée, sans fréquence ADRASEC actuelle explicitement attribuée dans les sources publiques retenues.
-
-Garde-fous : appartenance associative ≠ fréquence publiée ; géographie ≠ rôle ADRASEC ; rôle historique ≠ rôle courant ; APRS ≠ fréquence d'un autre service ; données opérationnelles privées PPDR exclues.
-
-Test : `tests/test_sprint77_bretagne_adrasec_public_revalidation.py`.
-
-## Sprint 76 — revalidation radioamateur Bretagne v0.2
-
-Le dossier `research/bretagne-v0.2/amateur-infrastructure-revalidation.json` revalide F5ZPV, F5ZZH, F1ZBZ et F5ZZC-4 sans ajouter de mémoire.
-
-- **F1ZBZ Lorient** : les cinq valeurs RF du système multipath sont déjà toutes représentées dans `research/paired-rx-deduplicated-memory-plan.json`. La revue de direction est donc résolue à **delta 0**.
-- **F5ZPV** : conflit de statut entre l'annuaire général et l'ARA35 ; le statut opérateur local reste prioritaire et indique toujours le relais temporairement arrêté. Pas de promotion.
-- **F5ZZH** : toujours arrêté et à la recherche d'un nouveau site. Pas de promotion.
-- **F5ZZC-4** : rôle APRS/ADRASEC35 conservé comme contexte, mais aucune fréquence actuelle n'est validée. L'entrée distincte F5ZZC analogique ne doit pas être assimilée automatiquement à F5ZZC-4.
-
-Résultat : candidat **151**, delta radioamateur **0**, public inchangé.
-
-Garde-fou : `tests/test_sprint76_bretagne_amateur_revalidation.py`.
-
-## Sprint 75 — aviation Bretagne v0.2
-
-Le candidat interne est passé de 135 à **151 mémoires RX** avec 16 mémoires aviation aux positions 130–145. Les positions 146–149 restent libres : aucun remplissage artificiel.
-
-Le contexte courant est **AIRAC 08/26**, du 6 août au 2 septembre 2026 inclus. La méthode suit le précédent Annecy–Alpes–Léman : produit AIRAC courant vérifié + dernière page AIP primaire publique effective pour le service. Le dépôt ne prétend pas avoir extrait les octets de l'XML courant ni avoir effectué une comparaison champ par champ avec cet XML.
-
-Périmètre : Rennes Saint-Jacques (7 fréquences uniques), Brest Bretagne (5), Dinard Pleurtuit Saint-Malo (2), Quimper Pluguffan (1) et aviation urgence 121.500 MHz (1). Toutes les mémoires sont en AM, **avec un pas de 8,33 kHz**, RX-only.
-
-Fichiers principaux :
-
-```text
-research/bretagne-v0.2/aviation-airac-08.json
-research/bretagne-v0.2/candidate-memory-delta.json
-research/bretagne-v0.2/pack-plan.json
-research/bretagne-v0.2/backlog.json
-tools/build_bretagne_v02_internal_candidate.py
-tests/test_sprint75_bretagne_aviation.py
-```
-
-## Bretagne v0.1 — version publique immuable
-
-Bretagne v0.1 reste publiée avec 135 mémoires RX. Le CSV public correspond au candidat revu avant publication et reste immuable.
-
-Sources et garde-fous historiques :
-
-```text
-research/bretagne-v0.1/public-maritime-radio.json
-research/bretagne-v0.1/publication-record.json
-research/bretagne-v0.1/release-scope.json
-research/bretagne-v0.1/review-checklist.json
-research/sprint-73-summary.md
-tools/build_bretagne_internal_candidate.py
-tools/build_bretagne_review_snapshot.py
-tools/run_bretagne_prepublication_audit.py
-tests/test_bretagne_internal_candidate.py
-tests/test_bretagne_prepublication_review.py
-tests/test_bretagne_public_release.py
-tests/test_sprint73_bretagne_publication.py
-website/src/pages/regions/bretagne.astro
-website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv
-```
-
-Ch64 et Ch79 restent des paires RX génériques sans attribution locale de site non prouvée. Une future attribution locale ne crée pas de doublon RF.
-
-## Normandie v0.4 / v0.5 — Mortain-Bocage / Sud-Manche
-
-Le périmètre de suivi couvre notamment **F5ZHY**, **F6ZES**, **F6ZCE**, **F1ZBX**, **F5ZHA** et **F1ZOV**.
-
-Source principale : `research/normandie-v0.4/mortain-bocage-coverage.json`.
-
-- R3 / F1ZBX : une paire vérifiée représente 2 mémoires RX ; les sessions terrain sont des preuves, pas des mémoires.
-- F5ZHA : conflit documentaire toujours à réconcilier ; protocole `research/normandie-v0.4/f5zha-mortain-validation.json`.
-- F1ZOV : statut opérateur local prioritaire.
-- F6ZES : fréquence et mode toujours non résolus ; `sourdeval_must_not_be_guessed: true`.
-
-Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normandie_v04_promotion_scenarios.py`.
-
-## Règles permanentes
-
-- RX uniquement : `Duplex=off`, `Offset=0.000000`.
-- Pas de remplissage artificiel ; maximum 200 mémoires.
-- Versions publiées immuables.
-- `research/paired-rx-policy.json` : une paire split/duplex vérifiée de deux fréquences distinctes utilise deux mémoires RX.
-- Une fréquence ou un mode non résolu n'est jamais deviné.
-- Le statut opérateur local prime sur un annuaire général pour l'état opérationnel courant.
-- Une observation terrain ne ferme pas un conflit de source.
-- Une infrastructure radio actuelle ne permet pas d'attribuer automatiquement un canal.
-- Une source secondaire ne remplace pas une validation primaire lorsqu'elle est exigée.
-- Une preuve de rôle ancienne ne valide pas une fréquence actuelle.
-- Des indicatifs proches ne prouvent pas qu'il s'agit du même service.
-- Une revue de direction ou une métadonnée locale ne crée pas de doublon d'une RF déjà présente.
-- Les données privées PPDR restent exclues.
-- Une promotion dans un candidat interne n'est jamais une publication.
-- Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint.
-
-## Historique utile
-
-- `SPRINT-29-MORTAIN-BRETAGNE-RADIO-RESEARCH.md`
-- `research/sprint-30-34-summary.md`
-- `research/sprint-35-39-summary.md`
-- `research/sprint-55-60-summary.md`
-- `research/sprint-61-summary.md` à `research/sprint-83-summary.md`
+Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint.
 
 ## Tests principaux
 
@@ -299,22 +156,19 @@ Outils historiques : `build_normandie_v04_readiness_report.py` et `build_normand
 python tests\test_paired_rx_policy.py
 python tests\test_mortain_bretagne_radio_research.py
 python tests\test_normandie_v04_readiness.py
-python tests\test_sprint74_bretagne_v02_initialization.py
-python tests\test_sprint75_bretagne_aviation.py
-python tests\test_sprint76_bretagne_amateur_revalidation.py
-python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
-python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
-python tests\test_sprint79_bretagne_v02_maturity.py
 python tests\test_bretagne_v02_public_release.py
-python tests\test_sprint80_bretagne_v02_publication.py
-python tests\test_sprint81_bretagne_v03_initialization.py
-python tests\test_bretagne_public_release.py
-python tools\build_bretagne_v03_internal_candidate.py
-python tests\test_sprint81_bretagne_v03_initialization.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+python tests\test_web_generator.py
 python tests\test_sprint97_state_sync.py
+
+cd website
+npm ci
+npm run build
+cd ..
 ```
+
+Le build Astro génère aussi les onze nouveaux CSV métropolitains et les tests du catalogue construit vérifient les artefacts publics.
 
 ## Synchronisation locale
 
@@ -322,17 +176,9 @@ python tests\test_sprint97_state_sync.py
 cd "C:\Users\cross\Documents\CODE\PROJETS\RadioPack-France"
 git pull --ff-only
 
-python tools\build_bretagne_v02_internal_candidate.py
-python tests\test_sprint75_bretagne_aviation.py
-python tests\test_sprint76_bretagne_amateur_revalidation.py
-python tests\test_sprint77_bretagne_adrasec_public_revalidation.py
-python tests\test_sprint78_bretagne_cross_mapping_revalidation.py
-python tools\run_bretagne_v02_prepublication_audit.py --require-prepublication-ready
-python tests\test_sprint79_bretagne_v02_maturity.py
-python tests\test_bretagne_v02_public_release.py
-python tests\test_sprint80_bretagne_v02_publication.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+python tests\test_web_generator.py
 python tests\test_sprint97_state_sync.py
 
 cd website

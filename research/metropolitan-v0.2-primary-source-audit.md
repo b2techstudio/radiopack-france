@@ -8,7 +8,7 @@ La sélection aviation est revue sur les pages publiques SIA eAIP AD 2.18, dans 
 
 Un second passage primaire a corrigé trois points avant publication :
 
-- **Hauts-de-France / LFQQ Lille** : réalignement des canaux publiés sur l'eAIP courant, notamment 126.480 / 129.360 / 132.540 MHz pour l'information, 121.855 MHz sol, 118.555 MHz tour et 119.330 MHz ATIS ;
+- **Hauts-de-France / LFQQ Lille** : réalignement des canaux publiés sur l'eAIP courant, avec 126.480 / 129.360 MHz retenues pour l'information, 120.275 MHz approche, 121.855 MHz sol, 118.555 MHz tour et 119.330 MHz ATIS. La fréquence FIS 132.540 MHz est documentée dans l'eAIP mais reste volontairement hors de la sélection bornée afin de conserver les 14 mémoires aviation prévues ;
 - **Île-de-France / LFPB Le Bourget** : 123.835 MHz est libellée FIS et non APP ;
 - **Grand Est** : la sélection a été reconstruite depuis LFST, LFSB, LFJL et LFSN. Bâle-Mulhouse sol est 121.605 MHz ; le doublon 121.805 MHz détecté par le validateur a donc été supprimé par correction de la donnée, jamais par affaiblissement du garde-fou.
 

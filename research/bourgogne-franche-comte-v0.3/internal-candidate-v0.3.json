@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "status": "internal_candidate_not_for_publication",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.3",
+  "updated": "2026-08-19",
+  "published_base_version": "0.2",
+  "published_base_memory_count": 37,
+  "published_base_sha256": "828af205aa07fe6685e3ad395ec2f0f56222fcfb5bb2f7b8f6a0bd4082714c0a",
+  "memory_count": 43,
+  "new_memory_count": 6,
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "evidence_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json",
+  "promoted_stations": [
+    {
+      "call": "F5ZIQ",
+      "site": "Besançon",
+      "kind": "analog_crossband_transponder",
+      "rx_frequencies_mhz": [145.45, 432.55],
+      "memory_count": 2
+    },
+    {
+      "call": "F5ZVA",
+      "site": "Villapourçon / Château-Chinon area",
+      "kind": "analog_crossband_transponder",
+      "rx_frequencies_mhz": [145.25, 431.25],
+      "memory_count": 2
+    },
+    {
+      "call": "F5ZFQ",
+      "site": "Ballon d’Alsace / Territoire de Belfort",
+      "kind": "analog_crossband_transponder",
+      "rx_frequencies_mhz": [145.2625, 430.125],
+      "memory_count": 2
+    }
+  ],
+  "new_rx_memories": [
+    {"name":"F5ZIQ-V","frequency_mhz":145.45,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Besancon crossband RX"},
+    {"name":"F5ZIQ-U","frequency_mhz":432.55,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Besancon crossband RX"},
+    {"name":"F5ZVA-V","frequency_mhz":145.25,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Chateau-Chinon crossband RX"},
+    {"name":"F5ZVA-U","frequency_mhz":431.25,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Chateau-Chinon crossband RX"},
+    {"name":"F5ZFQ-V","frequency_mhz":145.2625,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Ballon Alsace crossband RX"},
+    {"name":"F5ZFQ-U","frequency_mhz":430.125,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Ballon Alsace crossband RX"}
+  ],
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "published_v0_2_immutable": true,
+    "no_artificial_fill": true,
+    "public_pack_mutation_allowed": false
+  }
+}

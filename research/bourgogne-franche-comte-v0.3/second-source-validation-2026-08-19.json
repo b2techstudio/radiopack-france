@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "status": "second_source_validation_pass_1",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.3",
+  "checked_on": "2026-08-19",
+  "policy": {
+    "ref_current_active_is_directory_lead_only": true,
+    "promotion_requires_current_independent_operational_or_operator_evidence": true,
+    "stale_configuration_page_alone_is_not_current_state_evidence": true,
+    "conflicting_frequency_or_site_evidence_blocks_promotion": true,
+    "internal_candidate_promotion_is_not_publication": true
+  },
+  "validated_for_internal_candidate": [
+    {
+      "id": "F5ZIQ_BESANCON_ANALOG_CROSSBAND",
+      "call": "F5ZIQ",
+      "site": "Besançon",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [145.45, 432.55],
+      "memory_delta": 2,
+      "ref_evidence": "REF current public roster: Actif, analogique, Transpond. FM, 145.450/432.550 MHz",
+      "independent_evidence": "Current APRS station beacon observed through public APRS feed identifies F5ZIQ and advertises ADRASEC_25 145.450/432.550 with tone 79.7 Hz",
+      "decision": "promote_to_internal_candidate"
+    },
+    {
+      "id": "F5ZVA_VILLAPOURCON_CROSSBAND",
+      "call": "F5ZVA",
+      "site": "Villapourçon / Château-Chinon area",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [431.25, 145.25],
+      "memory_delta": 2,
+      "ref_evidence": "REF current public roster: Actif analog crossband pair retained as research lead",
+      "independent_evidence": "Current APRS station beacon observed through public APRS feed identifies F5ZVA and advertises 145.250<=>431.250 Chateau Chinon",
+      "decision": "promote_to_internal_candidate"
+    },
+    {
+      "id": "F5ZFQ_BELFORT_CROSSBAND",
+      "call": "F5ZFQ",
+      "site": "Ballon d’Alsace / Territoire de Belfort",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [145.2625, 430.125],
+      "memory_delta": 2,
+      "ref_evidence": "REF current public roster: Actif, analogique transparent FM, 145.2625/430.125 MHz",
+      "independent_evidence": "ADRASEC 90/70 operator page states F5ZFQ runs 24h/24, is open to radio amateurs and documents 145.2625 / 430.125 MHz",
+      "decision": "promote_to_internal_candidate"
+    }
+  ],
+  "not_yet_validated": [
+    {
+      "id": "F1ZCA_SAINT_THIEBAUD_UHF",
+      "reason": "No current independent operator/association confirmation captured in this pass"
+    },
+    {
+      "id": "F5ZNS_ROCHEFORT_SUR_NENON_CROSSBAND",
+      "reason": "Independent frequency listing found, but no sufficiently current operator/association state confirmation captured"
+    },
+    {
+      "id": "F5ZXZ_COSNE_COURS_SUR_LOIRE_CROSSBAND",
+      "reason": "Older association listing conflicts with the current lead on site/frequency details; keep blocked until operator-level clarification"
+    },
+    {
+      "id": "F5ZFE_BARON_UHF",
+      "reason": "Search results expose a same-callsign historical entry at another site; current Baron pair needs operator-level confirmation before promotion"
+    },
+    {
+      "id": "F5ZKM_MONTMELARD_CROSSBAND",
+      "reason": "Independent frequency listing exists, but current operator/association confirmation is still missing"
+    },
+    {
+      "id": "F5ZMS_SAINTE_FOY_CROSSBAND",
+      "reason": "Operator-maintenance material documents the pair, but the latest dated maintenance evidence found is 2021; current REF state alone is not treated as a second source"
+    },
+    {
+      "id": "F5ZTJ_BARON_UHF",
+      "reason": "A regional association list corroborates the pair, but this pass keeps the lead blocked pending a clearer current operator confirmation because legacy listings show multiple Baron UHF configurations"
+    }
+  ],
+  "result": {
+    "validated_station_count": 3,
+    "validated_memory_delta": 6,
+    "published_base_memory_count": 37,
+    "internal_candidate_memory_count": 43,
+    "public_export_allowed": false,
+    "public_registry_allowed": false
+  },
+  "source_urls": [
+    "https://www.r-e-f.org/index.php?Itemid=492&id=1279&option=com_content&view=article",
+    "https://aprs.wireland.org/views/latest.php?sid=1186886",
+    "https://aprs.mx/views/latest.php?sid=1517642",
+    "https://adrasec90-70.fr/relais/",
+    "https://www.leradioscope.fr/blog/623-entretien-des-relais-radioamateurs",
+    "https://www.leradioscope.fr/9-pages?start=50",
+    "https://adra01.r-e-f.org/relais/f5ztj.htm",
+    "https://adra01.r-e-f.org/p13-les-relais-rha.htm"
+  ]
+}

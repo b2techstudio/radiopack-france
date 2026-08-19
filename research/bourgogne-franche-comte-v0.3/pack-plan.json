@@ -22,6 +22,11 @@
   "current_candidate_matches_public_v0_2": false,
   "public_export_allowed": false,
   "public_registry_allowed": false,
+  "research_lead_station_count": 10,
+  "research_lead_max_memory_delta_before_deduplication": 20,
+  "promoted_internal_station_count": 5,
+  "promoted_internal_memory_count": 10,
+  "remaining_unpromoted_lead_station_count": 5,
   "radioamateur_research": {
     "lead_station_count": 10,
     "lead_max_memory_delta_before_deduplication": 20,

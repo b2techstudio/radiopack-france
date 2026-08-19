@@ -8,7 +8,7 @@ RadioPack France publie les onze régions administratives métropolitaines qui n
 - 2 appels radioamateur RX ;
 - 6 mémoires APRS / ISS RX ;
 - sélection régionale volontairement bornée de relais FM 2 m publics et recoupés ;
-- pour les paires retenues, deux mémoires de réception sont générées : sortie puis entrée à -600 kHz, dans la plage 2 m prévue par le plan de bande ;
+- politique **paired RX** : pour les paires retenues, deux mémoires de réception sont générées, sortie puis entrée à -600 kHz, dans la plage 2 m prévue par le plan de bande ;
 - toutes les lignes publiques restent `Duplex=off` / `Offset=0.000000` ;
 - aviation, UHF, numérique et extensions maritimes régionales restent hors de cette première v0.1 ;
 - aucune donnée privée, de sécurité ou non publiquement vérifiable.

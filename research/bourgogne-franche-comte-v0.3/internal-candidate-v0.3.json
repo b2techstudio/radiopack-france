@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "status": "internal_candidate_not_for_publication",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
@@ -7,14 +7,27 @@
   "published_base_version": "0.2",
   "published_base_memory_count": 37,
   "published_base_sha256": "828af205aa07fe6685e3ad395ec2f0f56222fcfb5bb2f7b8f6a0bd4082714c0a",
-  "memory_count": 47,
-  "new_memory_count": 10,
+  "memory_count": 53,
+  "new_memory_count": 16,
   "public_export_allowed": false,
   "public_registry_allowed": false,
   "evidence_files": [
     "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json",
-    "research/bourgogne-franche-comte-v0.3/second-source-validation-pass2-2026-08-19.json"
+    "research/bourgogne-franche-comte-v0.3/second-source-validation-pass2-2026-08-19.json",
+    "research/bourgogne-franche-comte-v0.3/aviation-airac08-2026-08-19.json"
   ],
+  "radioamateur_expansion": {
+    "station_count": 5,
+    "memory_count": 10,
+    "remaining_blocked_station_count": 5
+  },
+  "aviation_expansion": {
+    "cycle": "AIRAC 08/26",
+    "memory_count": 6,
+    "validated_aerodromes": ["LFQM", "LFLN"],
+    "deferred_frequency_leads": ["LFLH", "LFLM"],
+    "airac09_revalidation_required_for_publication_on_or_after_2026_09_03": true
+  },
   "promoted_stations": [
     {
       "call": "F5ZIQ",
@@ -67,7 +80,13 @@
     {"name":"F1ZCA-A","frequency_mhz":430.3,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Mont Poupet RU12 paired RX"},
     {"name":"F1ZCA-B","frequency_mhz":431.9,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Mont Poupet RU12 paired RX"},
     {"name":"F5ZXZ-V","frequency_mhz":145.2125,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Cosne-sur-Loire crossband RX"},
-    {"name":"F5ZXZ-U","frequency_mhz":431.1,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Cosne-sur-Loire crossband RX"}
+    {"name":"F5ZXZ-U","frequency_mhz":431.1,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Cosne-sur-Loire crossband RX"},
+    {"name":"VEZE-AFIS","frequency_mhz":122.205,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Besancon La Veze AFIS RX"},
+    {"name":"SY-APP1","frequency_mhz":119.505,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan APP auxiliary RX"},
+    {"name":"SY-APP2","frequency_mhz":123.405,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan APP RX"},
+    {"name":"SY-GND","frequency_mhz":121.805,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan Ground RX"},
+    {"name":"SY-TWR","frequency_mhz":122.3,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan Tower RX"},
+    {"name":"SY-ATIS","frequency_mhz":132.48,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan ATIS RX"}
   ],
   "rules": {
     "rx_only": true,
@@ -77,6 +96,8 @@
     "same_rf_frequency_deduplicated": true,
     "published_v0_2_immutable": true,
     "no_artificial_fill": true,
-    "public_pack_mutation_allowed": false
+    "public_pack_mutation_allowed": false,
+    "aviation_mode": "AM",
+    "frequency_lead_without_current_primary_confirmation_not_promoted": true
   }
 }

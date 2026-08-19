@@ -42,77 +42,77 @@
         },
         {
           "name": "SXB-FIS1",
-          "frequency_mhz": 120.7,
+          "frequency_mhz": 119.58,
           "area": "Strasbourg",
           "service": "FIS",
           "icao": "LFST"
         },
         {
           "name": "SXB-FIS2",
-          "frequency_mhz": 124.75,
+          "frequency_mhz": 132.215,
           "area": "Strasbourg",
           "service": "FIS",
           "icao": "LFST"
         },
         {
-          "name": "SXB-APP1",
-          "frequency_mhz": 119.45,
+          "name": "SXB-FIS3",
+          "frequency_mhz": 136.135,
+          "area": "Strasbourg",
+          "service": "FIS",
+          "icao": "LFST"
+        },
+        {
+          "name": "SXB-APP",
+          "frequency_mhz": 118.185,
           "area": "Strasbourg",
           "service": "APP",
           "icao": "LFST"
         },
         {
-          "name": "SXB-APP2",
-          "frequency_mhz": 120.575,
-          "area": "Strasbourg",
-          "service": "APP",
-          "icao": "LFST"
+          "name": "MLH-FIS1",
+          "frequency_mhz": 129.25,
+          "area": "Bâle-Mulhouse",
+          "service": "FIS",
+          "icao": "LFSB"
         },
         {
-          "name": "SXB-GND",
-          "frequency_mhz": 121.805,
-          "area": "Strasbourg",
-          "service": "GND",
-          "icao": "LFST"
+          "name": "MLH-FIS2",
+          "frequency_mhz": 130.9,
+          "area": "Bâle-Mulhouse",
+          "service": "FIS",
+          "icao": "LFSB"
         },
         {
-          "name": "SXB-TWR",
-          "frequency_mhz": 119.25,
-          "area": "Strasbourg",
-          "service": "TWR",
-          "icao": "LFST"
-        },
-        {
-          "name": "SXB-ATIS",
-          "frequency_mhz": 126.875,
-          "area": "Strasbourg",
-          "service": "ATIS",
-          "icao": "LFST"
-        },
-        {
-          "name": "MLH-FIS",
-          "frequency_mhz": 135.85,
+          "name": "MLH-FIS3",
+          "frequency_mhz": 134.68,
           "area": "Bâle-Mulhouse",
           "service": "FIS",
           "icao": "LFSB"
         },
         {
           "name": "MLH-APP1",
-          "frequency_mhz": 119.35,
+          "frequency_mhz": 125.16,
           "area": "Bâle-Mulhouse",
           "service": "APP",
           "icao": "LFSB"
         },
         {
           "name": "MLH-APP2",
-          "frequency_mhz": 124.925,
+          "frequency_mhz": 127.285,
           "area": "Bâle-Mulhouse",
           "service": "APP",
           "icao": "LFSB"
         },
         {
+          "name": "MLH-DEL",
+          "frequency_mhz": 121.955,
+          "area": "Bâle-Mulhouse",
+          "service": "DEL",
+          "icao": "LFSB"
+        },
+        {
           "name": "MLH-GND",
-          "frequency_mhz": 121.805,
+          "frequency_mhz": 121.605,
           "area": "Bâle-Mulhouse",
           "service": "GND",
           "icao": "LFSB"
@@ -133,35 +133,35 @@
         },
         {
           "name": "ETZ-APP",
-          "frequency_mhz": 119.7,
+          "frequency_mhz": 119.125,
           "area": "Metz-Nancy",
           "service": "APP",
           "icao": "LFJL"
         },
         {
           "name": "ETZ-GND",
-          "frequency_mhz": 121.825,
+          "frequency_mhz": 121.705,
           "area": "Metz-Nancy",
           "service": "GND",
           "icao": "LFJL"
         },
         {
           "name": "ETZ-TWR",
-          "frequency_mhz": 118.775,
+          "frequency_mhz": 122.075,
           "area": "Metz-Nancy",
           "service": "TWR",
           "icao": "LFJL"
         },
         {
           "name": "ETZ-ATIS",
-          "frequency_mhz": 128.725,
+          "frequency_mhz": 136.58,
           "area": "Metz-Nancy",
           "service": "ATIS",
           "icao": "LFJL"
         },
         {
           "name": "ENC-INFO",
-          "frequency_mhz": 119.6,
+          "frequency_mhz": 119.605,
           "area": "Nancy-Essey",
           "service": "AFIS",
           "icao": "LFSN"
@@ -173,11 +173,12 @@
       "current_sia_product_verified": true,
       "direct_current_xml_field_extraction_claimed": false,
       "aerodromes": [
-        "LFJL",
+        "LFST",
         "LFSB",
-        "LFSN",
-        "LFST"
-      ]
+        "LFJL",
+        "LFSN"
+      ],
+      "source_review_note": "Primary SIA eAIP AD 2.18 values rechecked on 2026-08-19; duplicated or stale labels were corrected before publication."
     },
     "regional_2m": {
       "selected_repeater_count": 8,

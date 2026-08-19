@@ -18,6 +18,12 @@ L'état machine officiel correspondant est `research/project-resume-state.json`.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
 
+## Publication post-Sprint 97 — enrichissement métropolitain v0.2
+
+Les onze régions métropolitaines ajoutées après le Sprint 97 sont désormais publiées en v0.2 enrichie, leurs v0.1 restant historiques et générables. Comptes courants : Hauts-de-France 144, Île-de-France 58, Grand Est 59, Centre-Val de Loire 42, Pays de la Loire 130, Bourgogne-Franche-Comté 37, Nouvelle-Aquitaine 151, Auvergne-Rhône-Alpes 62, Occitanie 156, Provence-Alpes-Côte d'Azur 159 et Corse 137 mémoires RX.
+
+Les v0.2 ajoutent une aviation AM SIA revue, conservent les relais FM 2 m en paired RX et intègrent le module VHF marine aux six régions littorales concernées. UHF/numérique et réseaux privés ou PPDR restent hors scope sans revue dédiée. Le contrat `Duplex=off` / `Offset=0.000000` reste inchangé. Cette publication ne change pas l'état logique officiel **97 / 0.21.86**.
+
 ## Sprint 97 — consolidation de l'état post-Sprint 96
 
 Les raffinements UX ajoutés après la synchronisation documentaire du Sprint 96 sont maintenant intégrés à l'état officiel **97 / 0.21.86**.

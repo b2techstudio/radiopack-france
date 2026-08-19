@@ -30,7 +30,7 @@
       ]
     },
     "aviation": {
-      "memory_count": 14,
+      "memory_count": 15,
       "start_location": 40,
       "channels": [
         {
@@ -41,43 +41,50 @@
           "icao": null
         },
         {
-          "name": "LIL-INFO",
-          "frequency_mhz": 126.475,
+          "name": "LIL-FIS1",
+          "frequency_mhz": 126.48,
           "area": "Lille",
           "service": "FIS",
           "icao": "LFQQ"
         },
         {
-          "name": "LIL-APP1",
+          "name": "LIL-FIS2",
+          "frequency_mhz": 129.36,
+          "area": "Lille",
+          "service": "FIS",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LIL-FIS3",
+          "frequency_mhz": 132.54,
+          "area": "Lille",
+          "service": "FIS",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LIL-APP",
           "frequency_mhz": 120.275,
           "area": "Lille",
           "service": "APP",
           "icao": "LFQQ"
         },
         {
-          "name": "LIL-APP2",
-          "frequency_mhz": 134.825,
-          "area": "Lille",
-          "service": "APP",
-          "icao": "LFQQ"
-        },
-        {
           "name": "LIL-GND",
-          "frequency_mhz": 121.65,
+          "frequency_mhz": 121.855,
           "area": "Lille",
           "service": "GND",
           "icao": "LFQQ"
         },
         {
           "name": "LIL-TWR",
-          "frequency_mhz": 118.55,
+          "frequency_mhz": 118.555,
           "area": "Lille",
           "service": "TWR",
           "icao": "LFQQ"
         },
         {
           "name": "LIL-ATIS",
-          "frequency_mhz": 127.075,
+          "frequency_mhz": 119.33,
           "area": "Lille",
           "service": "ATIS",
           "icao": "LFQQ"
@@ -141,7 +148,8 @@
         "LFOB",
         "LFAT",
         "LFQQ"
-      ]
+      ],
+      "source_review_note": "Primary SIA eAIP AD 2.18 values rechecked on 2026-08-19; duplicated or stale labels were corrected before publication."
     },
     "regional_2m": {
       "selected_repeater_count": 8,

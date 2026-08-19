@@ -125,10 +125,10 @@
           "icao": "LFPO"
         },
         {
-          "name": "LBG-APP",
+          "name": "LBG-FIS",
           "frequency_mhz": 123.835,
           "area": "Le Bourget",
-          "service": "APP",
+          "service": "FIS",
           "icao": "LFPB"
         },
         {
@@ -169,7 +169,8 @@
         "LFPB",
         "LFPG",
         "LFPO"
-      ]
+      ],
+      "source_review_note": "Le Bourget 123.835 MHz relabelled FIS from current SIA eAIP AD 2.18 review on 2026-08-19."
     },
     "regional_2m": {
       "selected_repeater_count": 8,

@@ -1,5 +1,15 @@
 # Changelog
 
+## Publication post-Sprint 97 - 2026-08-19
+
+- Enrichissement des onze packs métropolitains v0.1 vers des **v0.2** sans mutation des versions historiques.
+- Ajout d'une sélection aviation AM revue sur les pages publiques SIA eAIP AD 2.18 dans le contexte AIRAC 08/26.
+- Intégration du module national VHF marine de 90 mémoires aux six régions littorales concernées.
+- Extension/revalidation des sélections de relais FM 2 m en paired RX, toujours `Duplex=off` / `Offset=0.000000`.
+- Audit correctif SIA final : correction des canaux Lille, du libellé Le Bourget et de la sélection Grand Est, avec élimination du doublon 121.805 MHz détecté par le validateur.
+- Ajout des dossiers `research/<region>-v0.2/` et conservation des URL CSV v0.1 historiques.
+- Publication post-Sprint : l'état logique officiel reste **97 / 0.21.86**.
+
 ## 0.21.86 - 2026-08-17
 
 - **Sprint 97** : consolidation officielle des raffinements UX post-Sprint 96 et synchronisation de l'état courant sur **97 / 0.21.86**.

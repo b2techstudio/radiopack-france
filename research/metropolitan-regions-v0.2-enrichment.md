@@ -62,3 +62,8 @@ Le dataset national `data/national/marine-vhf-rx.json` est intégré tel quel au
 - services aviation supplémentaires : ajoutés seulement lors d'une revue SIA dédiée et versionnée.
 
 Chaque dossier `research/<region>-v0.2/` contient un `README.md` et un `pack-plan.json` machine-readable afin que la prochaine évolution reparte d'un état documenté plutôt que d'une liste opaque.
+
+## Contrôle correctif SIA avant publication
+
+Un second passage sur les pages primaires SIA eAIP AD 2.18 a été effectué avant publication. Il a corrigé les canaux de Lille dans Hauts-de-France, le rôle de 123.835 MHz au Bourget, et la sélection Grand Est. Le validateur de déduplication a notamment bloqué un doublon 121.805 MHz : la sélection Bâle-Mulhouse a été réalignée sur les valeurs SIA actuelles, dont 121.605 MHz pour le sol. Aucune désactivation du garde-fou n'a été utilisée.
+

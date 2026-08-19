@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   initialization:
-    name: BFC v0.3 research invariants
+    name: BFC v0.3 research and release invariants
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -35,3 +35,17 @@ jobs:
         run: python tests/test_bfc_v03_second_source_validation.py
       - name: Test Bourgogne-Franche-Comte v0.3 AIRAC 08 aviation
         run: python tests/test_bfc_v03_aviation_airac08.py
+      - name: Test Bourgogne-Franche-Comte v0.3 prepublication
+        run: python tests/test_bfc_v03_prepublication.py
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Install website dependencies
+        run: cd website && npm ci
+      - name: Build Astro website
+        run: cd website && npm run build
+      - name: Validate built Bourgogne-Franche-Comte v0.3 CSV and print SHA-256
+        run: python tests/test_bfc_v03_built_csv.py --dist website/dist

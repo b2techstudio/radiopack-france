@@ -1,51 +1,16 @@
 [
-  {
-    "slug": "normandie",
-    "name": "Normandie",
-    "shortName": "Normandie",
-    "status": "v0.4 disponible",
-    "accent": "purple",
-    "description": "Pack de 142 mémoires RX : PMR446, marine, aviation, APRS/ISS, appels et radioamateur analogique vérifié.",
-    "memoryCount": 142,
-    "categories": [
-      "PMR446 RX",
-      "VHF marine RX",
-      "Radioamateur RX",
-      "Aviation RX"
-    ],
-    "available": true
-  },
-  {
-    "slug": "annecy-haute-savoie",
-    "name": "Annecy–Alpes–Léman",
-    "shortName": "Annecy–Alpes–Léman",
-    "status": "v0.4 disponible",
-    "accent": "cyan",
-    "description": "Pack RX de 77 mémoires pour les Alpes du Nord et le bassin lémanique, avec variante 60 mémoires sans aviation.",
-    "memoryCount": 77,
-    "categories": [
-      "France & Suisse",
-      "Radioamateur analogique",
-      "Aviation RX",
-      "APRS / ISS / satellites"
-    ],
-    "available": true
-  },
-  {
-    "slug": "bretagne",
-    "name": "Bretagne",
-    "shortName": "Bretagne",
-    "status": "v0.2 disponible",
-    "accent": "blue",
-    "description": "Pack de 151 mémoires RX : socle Bretagne v0.1 complété par 16 mémoires aviation AIRAC 08/26, toujours en réception seule.",
-    "memoryCount": 151,
-    "categories": [
-      "PMR446 RX",
-      "VHF marine RX",
-      "Radioamateur RX",
-      "Aviation RX",
-      "Ch64 / Ch79 RX"
-    ],
-    "available": true
-  }
+  {"slug":"normandie","name":"Normandie","shortName":"Normandie","status":"v0.4 disponible","accent":"purple","description":"Pack de 142 mémoires RX : PMR446, marine, aviation, APRS/ISS, appels et radioamateur analogique vérifié.","memoryCount":142,"categories":["PMR446 RX","VHF marine RX","Radioamateur RX","Aviation RX"],"available":true},
+  {"slug":"annecy-haute-savoie","name":"Annecy–Alpes–Léman","shortName":"Annecy–Alpes–Léman","status":"v0.4 disponible","accent":"cyan","description":"Pack RX de 77 mémoires pour les Alpes du Nord et le bassin lémanique, avec variante 60 mémoires sans aviation.","memoryCount":77,"categories":["France & Suisse","Radioamateur analogique","Aviation RX","APRS / ISS / satellites"],"available":true},
+  {"slug":"bretagne","name":"Bretagne","shortName":"Bretagne","status":"v0.2 disponible","accent":"blue","description":"Pack de 151 mémoires RX : socle Bretagne v0.1 complété par 16 mémoires aviation AIRAC 08/26, toujours en réception seule.","memoryCount":151,"categories":["PMR446 RX","VHF marine RX","Radioamateur RX","Aviation RX","Ch64 / Ch79 RX"],"available":true},
+  {"slug":"hauts-de-france","name":"Hauts-de-France","shortName":"Hauts-de-France","status":"v0.1 disponible","accent":"purple","description":"Socle v0.1 de 36 mémoires RX : PMR446, appels, APRS/ISS et 6 relais FM 2 m en paired RX.","memoryCount":36,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"ile-de-france","name":"Île-de-France","shortName":"Île-de-France","status":"v0.1 disponible","accent":"cyan","description":"Socle v0.1 de 34 mémoires RX : PMR446, appels, APRS/ISS et 5 relais FM 2 m en paired RX.","memoryCount":34,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"grand-est","name":"Grand Est","shortName":"Grand Est","status":"v0.1 disponible","accent":"purple","description":"Socle v0.1 de 36 mémoires RX : PMR446, appels, APRS/ISS et 6 relais FM 2 m en paired RX.","memoryCount":36,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"centre-val-de-loire","name":"Centre-Val de Loire","shortName":"Centre-Val de Loire","status":"v0.1 disponible","accent":"cyan","description":"Socle v0.1 de 32 mémoires RX : PMR446, appels, APRS/ISS et 4 relais FM 2 m en paired RX.","memoryCount":32,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"pays-de-la-loire","name":"Pays de la Loire","shortName":"Pays de la Loire","status":"v0.1 disponible","accent":"purple","description":"Socle v0.1 de 30 mémoires RX : PMR446, appels, APRS/ISS et 3 relais FM 2 m en paired RX.","memoryCount":30,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"bourgogne-franche-comte","name":"Bourgogne-Franche-Comté","shortName":"Bourgogne-Franche-Comté","status":"v0.1 disponible","accent":"cyan","description":"Socle v0.1 de 30 mémoires RX : PMR446, appels, APRS/ISS et 3 relais FM 2 m en paired RX.","memoryCount":30,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"nouvelle-aquitaine","name":"Nouvelle-Aquitaine","shortName":"Nouvelle-Aquitaine","status":"v0.1 disponible","accent":"purple","description":"Socle v0.1 de 42 mémoires RX : PMR446, appels, APRS/ISS et 9 relais FM 2 m en paired RX.","memoryCount":42,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"auvergne-rhone-alpes","name":"Auvergne-Rhône-Alpes","shortName":"Auvergne-Rhône-Alpes","status":"v0.1 disponible","accent":"cyan","description":"Socle v0.1 de 38 mémoires RX : PMR446, appels, APRS/ISS et 7 relais FM 2 m en paired RX.","memoryCount":38,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"occitanie","name":"Occitanie","shortName":"Occitanie","status":"v0.1 disponible","accent":"purple","description":"Socle v0.1 de 44 mémoires RX : PMR446, appels, APRS/ISS et 10 relais FM 2 m en paired RX.","memoryCount":44,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"provence-alpes-cote-d-azur","name":"Provence-Alpes-Côte d’Azur","shortName":"Provence-Alpes-Côte d’Azur","status":"v0.1 disponible","accent":"cyan","description":"Socle v0.1 de 42 mémoires RX : PMR446, appels, APRS/ISS et 9 relais FM 2 m en paired RX.","memoryCount":42,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true},
+  {"slug":"corse","name":"Corse","shortName":"Corse","status":"v0.1 disponible","accent":"purple","description":"Socle v0.1 de 28 mémoires RX : PMR446, appels, APRS/ISS et 2 relais FM 2 m en paired RX.","memoryCount":28,"categories":["PMR446 RX","Radioamateur RX","APRS / ISS","Relais FM 2 m"],"available":true}
 ]

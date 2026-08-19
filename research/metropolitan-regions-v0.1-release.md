@@ -37,4 +37,4 @@ Les références et la date de contrôle sont enregistrées directement dans `we
 
 ## Non-exhaustivité
 
-Ces v0.1 constituent une base publique utile et traçable. Elles ne prétendent pas recenser tous les relais ou tous les services d’une région. Toute extension de contenu doit passer par une nouvelle revue et une nouvelle version publique.
+Cette première couverture est volontairement **non exhaustive**. Ces v0.1 constituent une base publique utile et traçable ; elles ne prétendent pas recenser tous les relais ou tous les services d’une région. Toute extension de contenu doit passer par une nouvelle revue et une nouvelle version publique.

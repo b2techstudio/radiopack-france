@@ -15,7 +15,7 @@ const isActive = (href: string) =>
 <header class="site-header">
   <div class="container nav-shell">
     <a class="brand" href="/" aria-label="RadioPack France — Accueil">
-      <img src="/brand/b2tech-logo.png" alt="Logo B2Tech Studio" />
+      <img src="/brand/radiopack-logo.svg" alt="Logo RadioPack France" />
       <span>
         <strong>RadioPack</strong>
         <small>France · B2Tech Studio</small>
@@ -83,8 +83,18 @@ const isActive = (href: string) =>
 
   .nav-shell { display: flex; align-items: center; gap: 24px; min-height: 62px; }
 
-  .brand { display: flex; align-items: center; gap: 11px; margin-right: auto; }
-  .brand img { width: 46px; height: 46px; object-fit: contain; border-radius: 12px; box-shadow: 0 0 28px rgba(145,133,255,.13); }
+  .brand { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .brand img {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(78,168,255,.16));
+    transition: transform .22s ease, filter .22s ease;
+  }
+  .brand:hover img {
+    transform: translateY(-1px) scale(1.035);
+    filter: drop-shadow(0 0 18px rgba(78,168,255,.26));
+  }
   .brand span { display: grid; line-height: 1.05; }
 
   .brand strong {
@@ -158,7 +168,7 @@ const isActive = (href: string) =>
   @media (max-width: 620px) {
     .nav-shell { gap: 9px; }
     .brand small { display: none; }
-    .brand img { width: 42px; height: 42px; }
+    .brand img { width: 46px; height: 46px; }
     .header-cta { padding-inline: .78rem; font-size: 0; }
     .header-cta::after { content: "CSV"; font-size: .75rem; }
   }

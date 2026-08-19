@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "status": "airac08_aviation_internal_candidate_expansion_not_public",
+  "schema_version": "1.1",
+  "status": "airac08_aviation_release_candidate_expansion",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
   "checked_on": "2026-08-19",
@@ -80,33 +80,43 @@
       "icao": "LFLN",
       "area": "Saint-Yan",
       "evidence": "SIA AIP AD 2 LFLN.18 lists SAINT YAN ATIS on 132.480 MHz."
+    },
+    {
+      "name": "CHAL-INFO",
+      "frequency_mhz": 118.605,
+      "mode": "AM",
+      "service": "AFIS/A-A",
+      "icao": "LFLH",
+      "area": "Chalon-Champforgeuil",
+      "evidence": "SIA AIP AD 2 LFLH.18 lists CHALON Information AFIS on 118.605 MHz and the same frequency for A/A when ATS is absent."
     }
   ],
   "deferred_frequency_leads": [
-    {
-      "name": "CHAL-AFIS",
-      "icao": "LFLH",
-      "frequency_mhz": 118.605,
-      "area": "Chalon-Champforgeuil",
-      "reason": "The current airport operator confirms an active AFIS service, but this pass did not capture sufficiently current primary-source evidence for the exact frequency. Keep as a lead only."
-    },
     {
       "name": "MACON-AA",
       "icao": "LFLM",
       "frequency_mhz": 119.005,
       "area": "Mâcon-Charnay",
-      "reason": "A current frequency lead exists, but this pass did not capture sufficiently current primary SIA/operator evidence for the exact frequency. Keep as a lead only."
+      "reason": "The frequency is corroborated by current public secondary aerodrome data, but this release pass did not capture sufficiently current primary SIA/operator evidence for the exact frequency. Keep deferred rather than lowering the evidence threshold."
     }
   ],
   "result": {
-    "new_aviation_memory_count": 6,
+    "new_aviation_memory_count": 7,
     "published_base_memory_count": 37,
     "radioamateur_internal_delta_before_this_pass": 10,
     "candidate_memory_count_before_this_pass": 47,
-    "candidate_memory_count_after_this_pass": 53,
-    "total_internal_delta_from_public_v0_2": 16,
+    "candidate_memory_count_after_this_pass": 54,
+    "total_internal_delta_from_public_v0_2": 17,
     "public_export_allowed": false,
     "public_registry_allowed": false
+  },
+  "publication_review": {
+    "sup_aip_public_list_reviewed_on": "2026-08-19",
+    "sup_aip_frequency_conflict_found": false,
+    "notam_source": "SOFIA-Briefing",
+    "notam_search_results_embedded_in_repository": false,
+    "operational_use_warning_required": true,
+    "note": "RadioPack France is a receive-only listening pack, not an operational flight-information product. Users must consult current SIA/SOFIA information before aviation use."
   },
   "rules": {
     "rx_only": true,
@@ -123,8 +133,11 @@
   "source_urls": [
     "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
     "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFLN-fr-FR.html",
+    "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFLH-fr-FR.html",
     "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-1.3-fr-FR.html",
+    "https://www.sia.aviation-civile.gouv.fr/documents/supaip/aip/id/6",
+    "https://sofia-briefing.aviation-civile.gouv.fr/sofia/pages/notamsearchaero.html",
     "https://www.aeroclub-besancon.fr/",
-    "https://chalon.aeroport.fr/domaines-application/infos-pilote/"
+    "https://www.aeroport.fr/les-aeroports-de-l-uaf/macon-charnay"
   ]
 }

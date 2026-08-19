@@ -1,16 +1,18 @@
 {
-  "schema_version": "1.2",
-  "status": "internal_candidate_not_for_publication",
+  "schema_version": "1.4",
+  "status": "published_immutable",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
   "updated": "2026-08-19",
   "published_base_version": "0.2",
   "published_base_memory_count": 37,
   "published_base_sha256": "828af205aa07fe6685e3ad395ec2f0f56222fcfb5bb2f7b8f6a0bd4082714c0a",
-  "memory_count": 53,
-  "new_memory_count": 16,
-  "public_export_allowed": false,
-  "public_registry_allowed": false,
+  "memory_count": 54,
+  "new_memory_count": 17,
+  "public_export_allowed": true,
+  "public_registry_allowed": true,
+  "publication_record": "research/bourgogne-franche-comte-v0.3/publication-record.json",
+  "public_csv_sha256": "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5",
   "evidence_files": [
     "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json",
     "research/bourgogne-franche-comte-v0.3/second-source-validation-pass2-2026-08-19.json",
@@ -23,52 +25,17 @@
   },
   "aviation_expansion": {
     "cycle": "AIRAC 08/26",
-    "memory_count": 6,
-    "validated_aerodromes": ["LFQM", "LFLN"],
-    "deferred_frequency_leads": ["LFLH", "LFLM"],
+    "memory_count": 7,
+    "validated_aerodromes": ["LFQM", "LFLN", "LFLH"],
+    "deferred_frequency_leads": ["LFLM"],
     "airac09_revalidation_required_for_publication_on_or_after_2026_09_03": true
   },
   "promoted_stations": [
-    {
-      "call": "F5ZIQ",
-      "site": "Besançon",
-      "kind": "analog_crossband_transponder",
-      "rx_frequencies_mhz": [145.45, 432.55],
-      "memory_count": 2,
-      "validation_pass": 1
-    },
-    {
-      "call": "F5ZVA",
-      "site": "Villapourçon / Château-Chinon area",
-      "kind": "analog_crossband_transponder",
-      "rx_frequencies_mhz": [145.25, 431.25],
-      "memory_count": 2,
-      "validation_pass": 1
-    },
-    {
-      "call": "F5ZFQ",
-      "site": "Ballon d’Alsace / Territoire de Belfort",
-      "kind": "analog_crossband_transponder",
-      "rx_frequencies_mhz": [145.2625, 430.125],
-      "memory_count": 2,
-      "validation_pass": 1
-    },
-    {
-      "call": "F1ZCA",
-      "site": "Saint-Thiébaud / Mont Poupet",
-      "kind": "analog_70cm_repeater",
-      "rx_frequencies_mhz": [430.3, 431.9],
-      "memory_count": 2,
-      "validation_pass": 2
-    },
-    {
-      "call": "F5ZXZ",
-      "site": "Cosne-Cours-sur-Loire",
-      "kind": "analog_crossband_transponder",
-      "rx_frequencies_mhz": [145.2125, 431.1],
-      "memory_count": 2,
-      "validation_pass": 2
-    }
+    {"call":"F5ZIQ","site":"Besançon","kind":"analog_crossband_transponder","rx_frequencies_mhz":[145.45,432.55],"memory_count":2,"validation_pass":1},
+    {"call":"F5ZVA","site":"Villapourçon / Château-Chinon area","kind":"analog_crossband_transponder","rx_frequencies_mhz":[145.25,431.25],"memory_count":2,"validation_pass":1},
+    {"call":"F5ZFQ","site":"Ballon d’Alsace / Territoire de Belfort","kind":"analog_crossband_transponder","rx_frequencies_mhz":[145.2625,430.125],"memory_count":2,"validation_pass":1},
+    {"call":"F1ZCA","site":"Saint-Thiébaud / Mont Poupet","kind":"analog_70cm_repeater","rx_frequencies_mhz":[430.3,431.9],"memory_count":2,"validation_pass":2},
+    {"call":"F5ZXZ","site":"Cosne-Cours-sur-Loire","kind":"analog_crossband_transponder","rx_frequencies_mhz":[145.2125,431.1],"memory_count":2,"validation_pass":2}
   ],
   "new_rx_memories": [
     {"name":"F5ZIQ-V","frequency_mhz":145.45,"mode":"FM","duplex":"off","offset":"0.000000","comment":"Besancon crossband RX"},
@@ -86,8 +53,14 @@
     {"name":"SY-APP2","frequency_mhz":123.405,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan APP RX"},
     {"name":"SY-GND","frequency_mhz":121.805,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan Ground RX"},
     {"name":"SY-TWR","frequency_mhz":122.3,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan Tower RX"},
-    {"name":"SY-ATIS","frequency_mhz":132.48,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan ATIS RX"}
+    {"name":"SY-ATIS","frequency_mhz":132.48,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan ATIS RX"},
+    {"name":"CHAL-INFO","frequency_mhz":118.605,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Chalon Champforgeuil AFIS/A-A RX"}
   ],
+  "deferred_for_future_version": {
+    "radioamateur_calls": ["F5ZNS", "F5ZFE", "F5ZKM", "F5ZMS", "F5ZTJ"],
+    "aviation": ["LFLM 119.005 MHz"],
+    "reason": "Evidence threshold not met without ambiguity; the release is intentionally non-exhaustive and does not use artificial fill."
+  },
   "rules": {
     "rx_only": true,
     "chirp_duplex": "off",

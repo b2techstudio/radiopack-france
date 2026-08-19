@@ -1,14 +1,14 @@
 {
-  "schema_version": "1.3",
-  "status": "research_backlog_partially_promoted_internal_only_with_aviation_expansion",
+  "schema_version": "1.4",
+  "status": "release_scope_closed_with_deferred_radio_leads",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
   "checked_on": "2026-08-19",
   "published_base_memory_count": 37,
-  "candidate_memory_count": 53,
-  "candidate_memory_delta": 16,
+  "candidate_memory_count": 54,
+  "candidate_memory_delta": 17,
   "radioamateur_candidate_memory_delta": 10,
-  "aviation_candidate_memory_delta": 6,
+  "aviation_candidate_memory_delta": 7,
   "aviation_evidence_file": "research/bourgogne-franche-comte-v0.3/aviation-airac08-2026-08-19.json",
   "lead_station_count": 10,
   "promoted_internal_station_count": 5,
@@ -49,7 +49,7 @@
       "frequencies_mhz": [430.65, 144.65],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "independent_frequency_listing_found_current_operator_state_still_required"
+      "state": "deferred_v0_3_current_operator_state_still_required"
     },
     {
       "id": "F5ZVA_VILLAPOURCON_CROSSBAND",
@@ -84,7 +84,7 @@
       "frequencies_mhz": [433.2, 431.6],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "blocked_same_callsign_legacy_conflict_current_operator_confirmation_required"
+      "state": "deferred_v0_3_legacy_callsign_conflict_operator_confirmation_required"
     },
     {
       "id": "F5ZKM_MONTMELARD_CROSSBAND",
@@ -95,7 +95,7 @@
       "frequencies_mhz": [145.575, 432.575],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "independent_frequency_listing_found_current_operator_state_still_required"
+      "state": "deferred_v0_3_current_operator_state_still_required"
     },
     {
       "id": "F5ZMS_SAINTE_FOY_CROSSBAND",
@@ -106,7 +106,7 @@
       "frequencies_mhz": [431.2375, 145.2375],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "operator_configuration_documented_but_current_state_second_source_still_required"
+      "state": "deferred_v0_3_operator_configuration_is_historical_current_second_source_required"
     },
     {
       "id": "F5ZTJ_BARON_UHF",
@@ -117,7 +117,7 @@
       "frequencies_mhz": [432.925, 431.325],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "regional_operator_pair_corrobated_but_fresh_current_state_confirmation_still_required"
+      "state": "deferred_v0_3_conflicting_current_and_legacy_configurations_require_operator_clarification"
     },
     {
       "id": "F5ZFQ_BELFORT_CROSSBAND",
@@ -132,6 +132,11 @@
       "evidence_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json"
     }
   ],
+  "release_decision": {
+    "scope_closed": true,
+    "deferred_leads_block_release": false,
+    "reason": "The pack is intentionally non-exhaustive. Unresolved leads remain excluded rather than weakening the evidence policy or filling memories artificially."
+  },
   "not_promoted": [
     {
       "call": "F1ZIK",

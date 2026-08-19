@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-19",
+  "publication_sprint": 99,
+  "state_version": "0.21.88",
+  "pack": "Bourgogne-Franche-Comté",
+  "version": "0.3",
+  "memory_count": 54,
+  "previous_public_version": "0.2",
+  "previous_public_memory_count": 37,
+  "public_route": "/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv",
+  "public_csv_sha256": "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5",
+  "hash_basis": "Fresh Astro production build from PR #24 after BFC v0.3 release scope closure; tests/test_bfc_v03_built_csv.py validated 54 RX rows and printed the SHA-256.",
+  "generator": "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv.ts",
+  "download_route": "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv.ts",
+  "pack_plan": "research/bourgogne-franche-comte-v0.3/pack-plan.json",
+  "release_scope": "research/bourgogne-franche-comte-v0.3/release-scope.json",
+  "review_checklist": "research/bourgogne-franche-comte-v0.3/review-checklist.json",
+  "publication_gates": "research/bourgogne-franche-comte-v0.3/publication-gates.json",
+  "radioamateur": {
+    "new_station_count": 5,
+    "new_memory_count": 10,
+    "deferred_calls": ["F5ZNS", "F5ZFE", "F5ZKM", "F5ZMS", "F5ZTJ"]
+  },
+  "aviation": {
+    "memory_count": 14,
+    "new_memory_count": 7,
+    "cycle": "AIRAC 08/26",
+    "valid_from": "2026-08-06",
+    "valid_through_inclusive": "2026-09-02",
+    "reviewed_on": "2026-08-19",
+    "validated_new_aerodromes": ["LFQM", "LFLN", "LFLH"],
+    "deferred": ["LFLM 119.005 MHz"],
+    "direct_xml_field_match_claimed": false,
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
+  },
+  "marine_memory_count": 0,
+  "published_version_is_immutable": true,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "no_artificial_fill": true,
+    "private_ppdr_operational_data_excluded": true,
+    "release_is_non_exhaustive": true
+  }
+}

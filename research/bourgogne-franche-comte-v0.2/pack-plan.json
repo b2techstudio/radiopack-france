@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "status": "published_v0.2",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 30,
+  "published_base_is_immutable": true,
+  "current_memory_count": 37,
+  "blocks": {
+    "pmr446": {
+      "memory_count": 16,
+      "locations": [
+        0,
+        15
+      ]
+    },
+    "amateur_calls": {
+      "memory_count": 2,
+      "locations": [
+        20,
+        21
+      ]
+    },
+    "aprs_iss": {
+      "memory_count": 6,
+      "locations": [
+        30,
+        35
+      ]
+    },
+    "aviation": {
+      "memory_count": 7,
+      "start_location": 40,
+      "channels": [
+        {
+          "name": "AIR-EMERG",
+          "frequency_mhz": 121.5,
+          "area": "France / aviation",
+          "service": "EMERGENCY",
+          "icao": null
+        },
+        {
+          "name": "DLE-AFIS",
+          "frequency_mhz": 130.775,
+          "area": "Dole-Tavaux",
+          "service": "TWR/AFIS",
+          "icao": "LFGJ"
+        },
+        {
+          "name": "DLE-ATIS",
+          "frequency_mhz": 121.605,
+          "area": "Dole-Tavaux",
+          "service": "ATIS",
+          "icao": "LFGJ"
+        },
+        {
+          "name": "DIJ-AFIS",
+          "frequency_mhz": 118.33,
+          "area": "Dijon",
+          "service": "AFIS",
+          "icao": "LFSD"
+        },
+        {
+          "name": "NVS-AFIS",
+          "frequency_mhz": 120.605,
+          "area": "Nevers",
+          "service": "AFIS",
+          "icao": "LFQG"
+        },
+        {
+          "name": "AUF-AFIS",
+          "frequency_mhz": 129.805,
+          "area": "Auxerre",
+          "service": "AFIS",
+          "icao": "LFLA"
+        },
+        {
+          "name": "MONT-AFIS",
+          "frequency_mhz": 132.03,
+          "area": "Montbéliard",
+          "service": "AFIS",
+          "icao": "LFSM"
+        }
+      ],
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_sia_product_verified": true,
+      "direct_current_xml_field_extraction_claimed": false,
+      "aerodromes": [
+        "LFGJ",
+        "LFLA",
+        "LFQG",
+        "LFSD",
+        "LFSM"
+      ]
+    },
+    "regional_2m": {
+      "selected_repeater_count": 3,
+      "rx_memory_count": 6,
+      "start_location": 70,
+      "repeaters": [
+        {
+          "call": "F1ZDK",
+          "site": "Montceau",
+          "output_mhz": 145.75,
+          "input_mhz": 145.15
+        },
+        {
+          "call": "F5ZBP",
+          "site": "Salins / Mont Poupet",
+          "output_mhz": 145.775,
+          "input_mhz": 145.175
+        },
+        {
+          "call": "F1ZCT",
+          "site": "Chitry",
+          "output_mhz": 145.7875,
+          "input_mhz": 145.1875
+        }
+      ]
+    },
+    "marine": {
+      "included": false,
+      "memory_count": 0,
+      "locations": null,
+      "dataset": null
+    }
+  },
+  "sources": {
+    "aviation": [
+      "SIA AIRAC 08/26 current product",
+      "SIA eAIP AD 2.18 public pages for scoped aerodromes"
+    ],
+    "radioamateur": [
+      "RepeaterBook France",
+      "F5AIB/REF roster",
+      "REF band plan"
+    ],
+    "marine": [],
+    "reviewed_on": "2026-08-19"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unverified_frequency_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v01_download_must_remain_buildable": true
+  },
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  }
+}

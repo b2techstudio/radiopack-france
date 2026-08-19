@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0",
+  "status": "published_v0.2",
+  "pack": "Corse",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 28,
+  "published_base_is_immutable": true,
+  "current_memory_count": 137,
+  "blocks": {
+    "pmr446": {
+      "memory_count": 16,
+      "locations": [
+        0,
+        15
+      ]
+    },
+    "amateur_calls": {
+      "memory_count": 2,
+      "locations": [
+        20,
+        21
+      ]
+    },
+    "aprs_iss": {
+      "memory_count": 6,
+      "locations": [
+        30,
+        35
+      ]
+    },
+    "aviation": {
+      "memory_count": 19,
+      "start_location": 40,
+      "channels": [
+        {
+          "name": "AIR-EMERG",
+          "frequency_mhz": 121.5,
+          "area": "France / aviation",
+          "service": "EMERGENCY",
+          "icao": null
+        },
+        {
+          "name": "BIA-FIS1",
+          "frequency_mhz": 124.725,
+          "area": "Bastia",
+          "service": "FIS",
+          "icao": "LFKB"
+        },
+        {
+          "name": "BIA-FIS2",
+          "frequency_mhz": 135.135,
+          "area": "Bastia",
+          "service": "FIS",
+          "icao": "LFKB"
+        },
+        {
+          "name": "BIA-APP1",
+          "frequency_mhz": 123.825,
+          "area": "Bastia",
+          "service": "APP",
+          "icao": "LFKB"
+        },
+        {
+          "name": "BIA-APP2",
+          "frequency_mhz": 127.255,
+          "area": "Bastia",
+          "service": "APP",
+          "icao": "LFKB"
+        },
+        {
+          "name": "BIA-GND",
+          "frequency_mhz": 121.83,
+          "area": "Bastia",
+          "service": "GND",
+          "icao": "LFKB"
+        },
+        {
+          "name": "BIA-TWR",
+          "frequency_mhz": 118.0,
+          "area": "Bastia",
+          "service": "TWR",
+          "icao": "LFKB"
+        },
+        {
+          "name": "BIA-ATIS",
+          "frequency_mhz": 125.93,
+          "area": "Bastia",
+          "service": "ATIS",
+          "icao": "LFKB"
+        },
+        {
+          "name": "AJA-FIS",
+          "frequency_mhz": 119.825,
+          "area": "Ajaccio",
+          "service": "FIS",
+          "icao": "LFKJ"
+        },
+        {
+          "name": "AJA-APP1",
+          "frequency_mhz": 121.05,
+          "area": "Ajaccio",
+          "service": "APP",
+          "icao": "LFKJ"
+        },
+        {
+          "name": "AJA-APP2",
+          "frequency_mhz": 127.78,
+          "area": "Ajaccio",
+          "service": "APP",
+          "icao": "LFKJ"
+        },
+        {
+          "name": "AJA-GND",
+          "frequency_mhz": 121.705,
+          "area": "Ajaccio",
+          "service": "GND",
+          "icao": "LFKJ"
+        },
+        {
+          "name": "AJA-TWR",
+          "frequency_mhz": 118.075,
+          "area": "Ajaccio",
+          "service": "TWR",
+          "icao": "LFKJ"
+        },
+        {
+          "name": "AJA-ATIS",
+          "frequency_mhz": 126.93,
+          "area": "Ajaccio",
+          "service": "ATIS",
+          "icao": "LFKJ"
+        },
+        {
+          "name": "FSC-GND",
+          "frequency_mhz": 121.805,
+          "area": "Figari",
+          "service": "GND",
+          "icao": "LFKF"
+        },
+        {
+          "name": "FSC-TWR",
+          "frequency_mhz": 120.3,
+          "area": "Figari",
+          "service": "TWR",
+          "icao": "LFKF"
+        },
+        {
+          "name": "FSC-ATIS",
+          "frequency_mhz": 118.73,
+          "area": "Figari",
+          "service": "ATIS",
+          "icao": "LFKF"
+        },
+        {
+          "name": "CLY-TWR",
+          "frequency_mhz": 123.2,
+          "area": "Calvi",
+          "service": "TWR",
+          "icao": "LFKC"
+        },
+        {
+          "name": "CLY-ATIS",
+          "frequency_mhz": 131.18,
+          "area": "Calvi",
+          "service": "ATIS",
+          "icao": "LFKC"
+        }
+      ],
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_sia_product_verified": true,
+      "direct_current_xml_field_extraction_claimed": false,
+      "aerodromes": [
+        "LFKB",
+        "LFKC",
+        "LFKF",
+        "LFKJ"
+      ]
+    },
+    "regional_2m": {
+      "selected_repeater_count": 2,
+      "rx_memory_count": 4,
+      "start_location": 70,
+      "repeaters": [
+        {
+          "call": "TK5ZCF",
+          "site": "Alata",
+          "output_mhz": 145.6375,
+          "input_mhz": 145.0375
+        },
+        {
+          "call": "TK5ZPS",
+          "site": "Bastia",
+          "output_mhz": 145.7375,
+          "input_mhz": 145.1375
+        }
+      ]
+    },
+    "marine": {
+      "included": true,
+      "memory_count": 90,
+      "locations": [
+        100,
+        189
+      ],
+      "dataset": "data/national/marine-vhf-rx.json"
+    }
+  },
+  "sources": {
+    "aviation": [
+      "SIA AIRAC 08/26 current product",
+      "SIA eAIP AD 2.18 public pages for scoped aerodromes"
+    ],
+    "radioamateur": [
+      "RepeaterBook France",
+      "F5AIB/REF roster",
+      "REF band plan"
+    ],
+    "marine": [
+      "data/national/marine-vhf-rx.json"
+    ],
+    "reviewed_on": "2026-08-19"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unverified_frequency_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v01_download_must_remain_buildable": true
+  },
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  }
+}

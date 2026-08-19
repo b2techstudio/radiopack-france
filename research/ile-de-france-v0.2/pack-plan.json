@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "status": "published_v0.2",
+  "pack": "Île-de-France",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 34,
+  "published_base_is_immutable": true,
+  "current_memory_count": 58,
+  "blocks": {
+    "pmr446": {
+      "memory_count": 16,
+      "locations": [
+        0,
+        15
+      ]
+    },
+    "amateur_calls": {
+      "memory_count": 2,
+      "locations": [
+        20,
+        21
+      ]
+    },
+    "aprs_iss": {
+      "memory_count": 6,
+      "locations": [
+        30,
+        35
+      ]
+    },
+    "aviation": {
+      "memory_count": 18,
+      "start_location": 40,
+      "channels": [
+        {
+          "name": "AIR-EMERG",
+          "frequency_mhz": 121.5,
+          "area": "France / aviation",
+          "service": "EMERGENCY",
+          "icao": null
+        },
+        {
+          "name": "CDG-APP1",
+          "frequency_mhz": 118.155,
+          "area": "Paris CDG",
+          "service": "APP",
+          "icao": "LFPG"
+        },
+        {
+          "name": "CDG-APP2",
+          "frequency_mhz": 119.855,
+          "area": "Paris CDG",
+          "service": "APP",
+          "icao": "LFPG"
+        },
+        {
+          "name": "CDG-APP3",
+          "frequency_mhz": 121.155,
+          "area": "Paris CDG",
+          "service": "APP",
+          "icao": "LFPG"
+        },
+        {
+          "name": "CDG-APP4",
+          "frequency_mhz": 124.355,
+          "area": "Paris CDG",
+          "service": "APP",
+          "icao": "LFPG"
+        },
+        {
+          "name": "ORY-APP1",
+          "frequency_mhz": 118.855,
+          "area": "Paris Orly",
+          "service": "APP",
+          "icao": "LFPO"
+        },
+        {
+          "name": "ORY-APP2",
+          "frequency_mhz": 124.45,
+          "area": "Paris Orly",
+          "service": "APP",
+          "icao": "LFPO"
+        },
+        {
+          "name": "ORY-APP3",
+          "frequency_mhz": 127.75,
+          "area": "Paris Orly",
+          "service": "APP",
+          "icao": "LFPO"
+        },
+        {
+          "name": "ORY-GND1",
+          "frequency_mhz": 121.555,
+          "area": "Paris Orly",
+          "service": "GND",
+          "icao": "LFPO"
+        },
+        {
+          "name": "ORY-GND2",
+          "frequency_mhz": 121.705,
+          "area": "Paris Orly",
+          "service": "GND",
+          "icao": "LFPO"
+        },
+        {
+          "name": "ORY-TWR",
+          "frequency_mhz": 118.7,
+          "area": "Paris Orly",
+          "service": "TWR",
+          "icao": "LFPO"
+        },
+        {
+          "name": "ORY-ATIS",
+          "frequency_mhz": 126.505,
+          "area": "Paris Orly",
+          "service": "ATIS",
+          "icao": "LFPO"
+        },
+        {
+          "name": "ORY-INFO",
+          "frequency_mhz": 131.355,
+          "area": "Paris Orly",
+          "service": "INFO",
+          "icao": "LFPO"
+        },
+        {
+          "name": "LBG-APP",
+          "frequency_mhz": 123.835,
+          "area": "Le Bourget",
+          "service": "APP",
+          "icao": "LFPB"
+        },
+        {
+          "name": "LBG-GND1",
+          "frequency_mhz": 121.955,
+          "area": "Le Bourget",
+          "service": "GND",
+          "icao": "LFPB"
+        },
+        {
+          "name": "LBG-GND2",
+          "frequency_mhz": 121.905,
+          "area": "Le Bourget",
+          "service": "GND",
+          "icao": "LFPB"
+        },
+        {
+          "name": "LBG-TWR",
+          "frequency_mhz": 118.93,
+          "area": "Le Bourget",
+          "service": "TWR",
+          "icao": "LFPB"
+        },
+        {
+          "name": "LBG-ATIS",
+          "frequency_mhz": 120.005,
+          "area": "Le Bourget",
+          "service": "ATIS",
+          "icao": "LFPB"
+        }
+      ],
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_sia_product_verified": true,
+      "direct_current_xml_field_extraction_claimed": false,
+      "aerodromes": [
+        "LFPB",
+        "LFPG",
+        "LFPO"
+      ]
+    },
+    "regional_2m": {
+      "selected_repeater_count": 8,
+      "rx_memory_count": 16,
+      "start_location": 70,
+      "repeaters": [
+        {
+          "call": "F5ZAD",
+          "site": "Clamart",
+          "output_mhz": 145.6,
+          "input_mhz": 145.0
+        },
+        {
+          "call": "F5ZNG",
+          "site": "Provins",
+          "output_mhz": 145.625,
+          "input_mhz": 145.025
+        },
+        {
+          "call": "F5ZNN",
+          "site": "Coulommiers",
+          "output_mhz": 145.65,
+          "input_mhz": 145.05
+        },
+        {
+          "call": "F1ZSY",
+          "site": "Paris",
+          "output_mhz": 145.7,
+          "input_mhz": 145.1
+        },
+        {
+          "call": "F1ZUX",
+          "site": "Achères",
+          "output_mhz": 145.7125,
+          "input_mhz": 145.1125
+        },
+        {
+          "call": "F5ZMH",
+          "site": "Linas",
+          "output_mhz": 145.7375,
+          "input_mhz": 145.1375
+        },
+        {
+          "call": "F5ZEQ",
+          "site": "Sartrouville",
+          "output_mhz": 145.75,
+          "input_mhz": 145.15
+        },
+        {
+          "call": "F1ZHK",
+          "site": "Nangis",
+          "output_mhz": 145.7625,
+          "input_mhz": 145.1625
+        }
+      ]
+    },
+    "marine": {
+      "included": false,
+      "memory_count": 0,
+      "locations": null,
+      "dataset": null
+    }
+  },
+  "sources": {
+    "aviation": [
+      "SIA AIRAC 08/26 current product",
+      "SIA eAIP AD 2.18 public pages for scoped aerodromes"
+    ],
+    "radioamateur": [
+      "RepeaterBook France",
+      "F5AIB/REF roster",
+      "REF band plan"
+    ],
+    "marine": [],
+    "reviewed_on": "2026-08-19"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unverified_frequency_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v01_download_must_remain_buildable": true
+  },
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0",
+  "status": "published_v0.2",
+  "pack": "Hauts-de-France",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 36,
+  "published_base_is_immutable": true,
+  "current_memory_count": 144,
+  "blocks": {
+    "pmr446": {
+      "memory_count": 16,
+      "locations": [
+        0,
+        15
+      ]
+    },
+    "amateur_calls": {
+      "memory_count": 2,
+      "locations": [
+        20,
+        21
+      ]
+    },
+    "aprs_iss": {
+      "memory_count": 6,
+      "locations": [
+        30,
+        35
+      ]
+    },
+    "aviation": {
+      "memory_count": 14,
+      "start_location": 40,
+      "channels": [
+        {
+          "name": "AIR-EMERG",
+          "frequency_mhz": 121.5,
+          "area": "France / aviation",
+          "service": "EMERGENCY",
+          "icao": null
+        },
+        {
+          "name": "LIL-INFO",
+          "frequency_mhz": 126.475,
+          "area": "Lille",
+          "service": "FIS",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LIL-APP1",
+          "frequency_mhz": 120.275,
+          "area": "Lille",
+          "service": "APP",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LIL-APP2",
+          "frequency_mhz": 134.825,
+          "area": "Lille",
+          "service": "APP",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LIL-GND",
+          "frequency_mhz": 121.65,
+          "area": "Lille",
+          "service": "GND",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LIL-TWR",
+          "frequency_mhz": 118.55,
+          "area": "Lille",
+          "service": "TWR",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LIL-ATIS",
+          "frequency_mhz": 127.075,
+          "area": "Lille",
+          "service": "ATIS",
+          "icao": "LFQQ"
+        },
+        {
+          "name": "LTQ-GND",
+          "frequency_mhz": 121.755,
+          "area": "Le Touquet",
+          "service": "GND",
+          "icao": "LFAT"
+        },
+        {
+          "name": "LTQ-TWR",
+          "frequency_mhz": 118.45,
+          "area": "Le Touquet",
+          "service": "TWR",
+          "icao": "LFAT"
+        },
+        {
+          "name": "LTQ-ATIS",
+          "frequency_mhz": 123.13,
+          "area": "Le Touquet",
+          "service": "ATIS",
+          "icao": "LFAT"
+        },
+        {
+          "name": "BVS-FIS",
+          "frequency_mhz": 119.8,
+          "area": "Beauvais",
+          "service": "FIS",
+          "icao": "LFOB"
+        },
+        {
+          "name": "BVS-APP",
+          "frequency_mhz": 121.4,
+          "area": "Beauvais",
+          "service": "APP/TWR",
+          "icao": "LFOB"
+        },
+        {
+          "name": "BVS-AUX",
+          "frequency_mhz": 123.985,
+          "area": "Beauvais",
+          "service": "APP/TWR",
+          "icao": "LFOB"
+        },
+        {
+          "name": "BVS-ATIS",
+          "frequency_mhz": 118.38,
+          "area": "Beauvais",
+          "service": "ATIS",
+          "icao": "LFOB"
+        }
+      ],
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_sia_product_verified": true,
+      "direct_current_xml_field_extraction_claimed": false,
+      "aerodromes": [
+        "LFOB",
+        "LFAT",
+        "LFQQ"
+      ]
+    },
+    "regional_2m": {
+      "selected_repeater_count": 8,
+      "rx_memory_count": 16,
+      "start_location": 70,
+      "repeaters": [
+        {
+          "call": "F1ZKY",
+          "site": "Capelle-la-Grande",
+          "output_mhz": 145.6125,
+          "input_mhz": 145.0125
+        },
+        {
+          "call": "F1ZFS",
+          "site": "Saint-Gobain",
+          "output_mhz": 145.675,
+          "input_mhz": 145.075
+        },
+        {
+          "call": "F1ZFM",
+          "site": "Bouvigny-Boyeffles",
+          "output_mhz": 145.6875,
+          "input_mhz": 145.0875
+        },
+        {
+          "call": "F5ZTP",
+          "site": "Abbeville",
+          "output_mhz": 145.7125,
+          "input_mhz": 145.1125
+        },
+        {
+          "call": "F5ZAG",
+          "site": "Raismes",
+          "output_mhz": 145.725,
+          "input_mhz": 145.125
+        },
+        {
+          "call": "F5ZBH",
+          "site": "Pozières",
+          "output_mhz": 145.75,
+          "input_mhz": 145.15
+        },
+        {
+          "call": "F1ZTK",
+          "site": "Lille",
+          "output_mhz": 145.7625,
+          "input_mhz": 145.1625
+        },
+        {
+          "call": "F1ZGY",
+          "site": "Valenciennes",
+          "output_mhz": 145.7875,
+          "input_mhz": 145.1875
+        }
+      ]
+    },
+    "marine": {
+      "included": true,
+      "memory_count": 90,
+      "locations": [
+        100,
+        189
+      ],
+      "dataset": "data/national/marine-vhf-rx.json"
+    }
+  },
+  "sources": {
+    "aviation": [
+      "SIA AIRAC 08/26 current product",
+      "SIA eAIP AD 2.18 public pages for scoped aerodromes"
+    ],
+    "radioamateur": [
+      "RepeaterBook France",
+      "F5AIB/REF roster",
+      "REF band plan"
+    ],
+    "marine": [
+      "data/national/marine-vhf-rx.json"
+    ],
+    "reviewed_on": "2026-08-19"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unverified_frequency_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v01_download_must_remain_buildable": true
+  },
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  }
+}

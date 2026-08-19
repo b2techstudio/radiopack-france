@@ -1,0 +1,333 @@
+{
+  "schema_version": "1.0",
+  "status": "published_v0.2",
+  "pack": "Provence-Alpes-Côte d’Azur",
+  "target_version": "0.2",
+  "based_on_published_version": "0.1",
+  "published_base_memory_count": 42,
+  "published_base_is_immutable": true,
+  "current_memory_count": 159,
+  "blocks": {
+    "pmr446": {
+      "memory_count": 16,
+      "locations": [
+        0,
+        15
+      ]
+    },
+    "amateur_calls": {
+      "memory_count": 2,
+      "locations": [
+        20,
+        21
+      ]
+    },
+    "aprs_iss": {
+      "memory_count": 6,
+      "locations": [
+        30,
+        35
+      ]
+    },
+    "aviation": {
+      "memory_count": 25,
+      "start_location": 40,
+      "channels": [
+        {
+          "name": "AIR-EMERG",
+          "frequency_mhz": 121.5,
+          "area": "France / aviation",
+          "service": "EMERGENCY",
+          "icao": null
+        },
+        {
+          "name": "NCE-FIS1",
+          "frequency_mhz": 120.85,
+          "area": "Nice",
+          "service": "FIS",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-FIS2",
+          "frequency_mhz": 122.925,
+          "area": "Nice",
+          "service": "FIS",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-FIS3",
+          "frequency_mhz": 124.425,
+          "area": "Nice",
+          "service": "FIS",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-APP1",
+          "frequency_mhz": 120.16,
+          "area": "Nice",
+          "service": "APP",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-APP2",
+          "frequency_mhz": 120.655,
+          "area": "Nice",
+          "service": "APP",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-APP3",
+          "frequency_mhz": 124.18,
+          "area": "Nice",
+          "service": "APP",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-APP4",
+          "frequency_mhz": 128.205,
+          "area": "Nice",
+          "service": "APP",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-GND",
+          "frequency_mhz": 121.705,
+          "area": "Nice",
+          "service": "GND",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-TWR",
+          "frequency_mhz": 118.7,
+          "area": "Nice",
+          "service": "TWR",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-ATIS1",
+          "frequency_mhz": 129.605,
+          "area": "Nice",
+          "service": "ATIS",
+          "icao": "LFMN"
+        },
+        {
+          "name": "NCE-ATIS2",
+          "frequency_mhz": 136.58,
+          "area": "Nice",
+          "service": "ATIS",
+          "icao": "LFMN"
+        },
+        {
+          "name": "MRS-FIS1",
+          "frequency_mhz": 124.35,
+          "area": "Marseille",
+          "service": "FIS",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-FIS2",
+          "frequency_mhz": 126.26,
+          "area": "Marseille",
+          "service": "FIS",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-FIS3",
+          "frequency_mhz": 131.23,
+          "area": "Marseille",
+          "service": "FIS",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-FIS4",
+          "frequency_mhz": 132.3,
+          "area": "Marseille",
+          "service": "FIS",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-FIS5",
+          "frequency_mhz": 132.95,
+          "area": "Marseille",
+          "service": "FIS",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-APP",
+          "frequency_mhz": 120.205,
+          "area": "Marseille",
+          "service": "APP",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-GND",
+          "frequency_mhz": 121.905,
+          "area": "Marseille",
+          "service": "GND",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-TWR",
+          "frequency_mhz": 133.1,
+          "area": "Marseille",
+          "service": "TWR",
+          "icao": "LFML"
+        },
+        {
+          "name": "MRS-ATIS",
+          "frequency_mhz": 125.355,
+          "area": "Marseille",
+          "service": "ATIS",
+          "icao": "LFML"
+        },
+        {
+          "name": "TLN-TWR",
+          "frequency_mhz": 126.325,
+          "area": "Toulon-Hyères",
+          "service": "TWR",
+          "icao": "LFTH"
+        },
+        {
+          "name": "AVN-GND",
+          "frequency_mhz": 121.755,
+          "area": "Avignon",
+          "service": "GND",
+          "icao": "LFMV"
+        },
+        {
+          "name": "AVN-TWR",
+          "frequency_mhz": 122.6,
+          "area": "Avignon",
+          "service": "TWR",
+          "icao": "LFMV"
+        },
+        {
+          "name": "AVN-ATIS",
+          "frequency_mhz": 120.83,
+          "area": "Avignon",
+          "service": "ATIS",
+          "icao": "LFMV"
+        }
+      ],
+      "cycle": "AIRAC 08/26",
+      "effective_from": "2026-08-06",
+      "effective_until_inclusive": "2026-09-02",
+      "current_sia_product_verified": true,
+      "direct_current_xml_field_extraction_claimed": false,
+      "aerodromes": [
+        "LFML",
+        "LFMN",
+        "LFMV",
+        "LFTH"
+      ]
+    },
+    "regional_2m": {
+      "selected_repeater_count": 10,
+      "rx_memory_count": 20,
+      "start_location": 70,
+      "repeaters": [
+        {
+          "call": "F5ZOL",
+          "site": "Pierrefeu",
+          "output_mhz": 145.6,
+          "input_mhz": 145.0
+        },
+        {
+          "call": "F5ZOO",
+          "site": "Sainte-Maxime",
+          "output_mhz": 145.625,
+          "input_mhz": 145.025
+        },
+        {
+          "call": "F1ZVB",
+          "site": "Suzette",
+          "output_mhz": 145.65,
+          "input_mhz": 145.05
+        },
+        {
+          "call": "F5ZAY",
+          "site": "Nice",
+          "output_mhz": 145.675,
+          "input_mhz": 145.075
+        },
+        {
+          "call": "F1ZHI",
+          "site": "Ampus",
+          "output_mhz": 145.6875,
+          "input_mhz": 145.0875
+        },
+        {
+          "call": "F1ZVH",
+          "site": "Digne",
+          "output_mhz": 145.7,
+          "input_mhz": 145.1
+        },
+        {
+          "call": "F5ZVD",
+          "site": "Solliès-Toucas",
+          "output_mhz": 145.725,
+          "input_mhz": 145.125
+        },
+        {
+          "call": "F5ZAX",
+          "site": "Nice",
+          "output_mhz": 145.75,
+          "input_mhz": 145.15
+        },
+        {
+          "call": "F5ZTH",
+          "site": "Marseille",
+          "output_mhz": 145.775,
+          "input_mhz": 145.175
+        },
+        {
+          "call": "F5ZAI",
+          "site": "Briançon",
+          "output_mhz": 145.7875,
+          "input_mhz": 145.1875
+        }
+      ]
+    },
+    "marine": {
+      "included": true,
+      "memory_count": 90,
+      "locations": [
+        100,
+        189
+      ],
+      "dataset": "data/national/marine-vhf-rx.json"
+    }
+  },
+  "sources": {
+    "aviation": [
+      "SIA AIRAC 08/26 current product",
+      "SIA eAIP AD 2.18 public pages for scoped aerodromes"
+    ],
+    "radioamateur": [
+      "RepeaterBook France",
+      "F5AIB/REF roster",
+      "REF band plan"
+    ],
+    "marine": [
+      "data/national/marine-vhf-rx.json"
+    ],
+    "reviewed_on": "2026-08-19"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unverified_frequency_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v01_download_must_remain_buildable": true
+  },
+  "deferred": {
+    "uhf_analog_repeaters": "deferred pending per-link current validation and target-radio usefulness review",
+    "digital_repeaters_and_hotspots": "deferred; no blind promotion into an analog listening pack",
+    "additional_aviation": "future AIRAC review only",
+    "private_or_operational_security_networks": "excluded"
+  }
+}

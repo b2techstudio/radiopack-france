@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "status": "completed",
+  "pack": "Bourgogne-Franche-Comté",
+  "version": "0.3",
+  "reviewed_on": "2026-08-19",
+  "item_count": 10,
+  "reviewed_count": 10,
+  "items": [
+    {"id":"immutable_base","reviewed":true,"note":"Published v0.2 remains immutable and is used only as the release base."},
+    {"id":"memory_count","reviewed":true,"note":"Release candidate contains exactly 54 RX memories, +17 from v0.2."},
+    {"id":"rx_only_contract","reviewed":true,"note":"All memories remain receive-only with Duplex=off and Offset=0.000000."},
+    {"id":"deduplication","reviewed":true,"note":"Names, CHIRP locations and RF frequencies are unique."},
+    {"id":"radioamateur_evidence","reviewed":true,"note":"Five new analog stations / ten paired-RX memories have current corroborating evidence."},
+    {"id":"aviation_evidence","reviewed":true,"note":"Seven new AM aviation memories are supported by current SIA/AIP or current aerodrome evidence in AIRAC 08/26 context."},
+    {"id":"chalon_primary_source","reviewed":true,"note":"LFLH Chalon Information 118.605 MHz is supported by SIA AIP AD 2 LFLH.18."},
+    {"id":"deferred_leads","reviewed":true,"note":"Five radioamateur leads and LFLM 119.005 remain excluded because the evidence threshold was not met cleanly."},
+    {"id":"no_artificial_fill","reviewed":true,"note":"No unverified memory was added to increase the pack size."},
+    {"id":"website_release_sync","reviewed":true,"note":"Dedicated v0.3 endpoint, registry and region metadata are synchronized for 54 memories."}
+  ]
+}

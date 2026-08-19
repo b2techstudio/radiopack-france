@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "status": "second_source_validation_pass_2",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.3",
+  "checked_on": "2026-08-19",
+  "policy": {
+    "ref_current_active_is_directory_lead_only": true,
+    "promotion_requires_current_independent_operational_or_operator_evidence": true,
+    "live_station_telemetry_can_resolve_stale_legacy_conflict_when_callsign_and_pair_match": true,
+    "stale_configuration_page_alone_is_not_current_state_evidence": true,
+    "conflicting_frequency_or_site_evidence_blocks_promotion_until_resolved": true,
+    "internal_candidate_promotion_is_not_publication": true
+  },
+  "validated_this_pass": [
+    {
+      "id": "F1ZCA_SAINT_THIEBAUD_UHF",
+      "call": "F1ZCA",
+      "site": "Saint-Thiébaud / Mont Poupet",
+      "kind": "analog_70cm_repeater",
+      "frequencies_mhz": [430.3, 431.9],
+      "memory_delta": 2,
+      "ref_evidence": "REF current public roster lists F1ZCA active analog FM on 430.300 / 431.900 MHz.",
+      "independent_evidence": "REF-39 local association page directly documents the RU12 repeater as 431.900 / 430.300 MHz, states that it was built by the local team, and reports its return to service after the site fire.",
+      "decision": "promote_to_internal_candidate_second_source_pass2"
+    },
+    {
+      "id": "F5ZXZ_COSNE_COURS_SUR_LOIRE_CROSSBAND",
+      "call": "F5ZXZ",
+      "site": "Cosne-Cours-sur-Loire",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [431.1, 145.2125],
+      "memory_delta": 2,
+      "ref_evidence": "REF current public roster lists F5ZXZ active on the retained analog crossband pair.",
+      "independent_evidence": "A current public APRS latest-heard station record for F5ZXZ advertises 145.2125<=>431.100 and Cosne sur Loire, matching the current REF lead and resolving the older conflicting legacy listing for the internal candidate.",
+      "decision": "promote_to_internal_candidate_second_source_pass2"
+    }
+  ],
+  "still_blocked_after_pass2": [
+    {
+      "id": "F5ZNS_ROCHEFORT_SUR_NENON_CROSSBAND",
+      "reason": "Current REF confirms active 144.650 / 430.650 MHz and an independent frequency table agrees, but no sufficiently current operator or local-association operational confirmation was captured."
+    },
+    {
+      "id": "F5ZFE_BARON_UHF",
+      "reason": "Current REF lists F5ZFE active at Baron on 433.200 / 431.600 MHz, but legacy material uses the same callsign at a different site and older regional pages describe a transfer/renaming relationship with F5ZTJ. Operator-level clarification remains required."
+    },
+    {
+      "id": "F5ZKM_MONTMELARD_CROSSBAND",
+      "reason": "Current REF lists F5ZKM active on 145.575 / 432.575 MHz and an independent frequency table agrees, but no sufficiently current operator/local-association state confirmation was found."
+    },
+    {
+      "id": "F5ZMS_SAINTE_FOY_CROSSBAND",
+      "reason": "Current REF lists F5ZMS active and multiple independent directories/configuration pages agree on 145.2375 / 431.2375 MHz, but the operator-maintenance evidence located is historical rather than a fresh current-state confirmation."
+    },
+    {
+      "id": "F5ZTJ_BARON_UHF",
+      "reason": "Current REF lists F5ZTJ active on 432.925 / 431.325 MHz and the regional operator page documents that RU234 pair as a coupled channel; however, the page is undated/legacy and the APRS corroboration found is roughly a year old, so current operator confirmation is still required."
+    }
+  ],
+  "result": {
+    "validated_station_count_this_pass": 2,
+    "validated_memory_delta_this_pass": 4,
+    "cumulative_validated_station_count": 5,
+    "cumulative_validated_memory_delta": 10,
+    "published_base_memory_count": 37,
+    "internal_candidate_memory_count": 47,
+    "remaining_unpromoted_station_count": 5,
+    "public_export_allowed": false,
+    "public_registry_allowed": false
+  },
+  "source_urls": [
+    "https://www.r-e-f.org/index.php?Itemid=492&id=1279&option=com_content&view=article",
+    "https://ref39.r-e-f.org/mapage/index.html",
+    "https://www.aprs.mx/views/latest.php?sid=2075238",
+    "https://www.manuel.la-radio.eu/RM18/RM18H01A.HTM",
+    "https://adra01.r-e-f.org/relais/f5zms.htm",
+    "https://adra01.r-e-f.org/relais/f5ztj.htm",
+    "https://adra01.r-e-f.org/p13-les-relais-rha.htm",
+    "https://aprs.fi/info/?call=F5Z%2A"
+  ]
+}

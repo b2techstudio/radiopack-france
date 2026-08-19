@@ -8,6 +8,7 @@ scope = json.loads((BASE / "release-scope.json").read_text(encoding="utf-8"))
 checklist = json.loads((BASE / "review-checklist.json").read_text(encoding="utf-8"))
 gates = json.loads((BASE / "publication-gates.json").read_text(encoding="utf-8"))
 candidate = json.loads((BASE / "internal-candidate-v0.3.json").read_text(encoding="utf-8"))
+record03 = json.loads((BASE / "publication-record.json").read_text(encoding="utf-8"))
 record02 = json.loads((ROOT / "research/bourgogne-franche-comte-v0.2/publication-record.json").read_text(encoding="utf-8"))
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
@@ -37,13 +38,27 @@ assert checklist["item_count"] == 10
 assert checklist["reviewed_count"] == 10
 assert all(item["reviewed"] is True for item in checklist["items"])
 
-assert gates["status"] == "ready_for_publication"
+assert gates["status"] == "published_zero_blockers"
 assert gates["blocker_count"] == 0
 assert all(item["pass"] is True for item in gates["checks"])
 
-assert candidate["status"] == "release_candidate_prepublication"
+expected_sha = "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5"
+assert record03["status"] == "published_immutable"
+assert record03["version"] == "0.3"
+assert record03["memory_count"] == 54
+assert record03["previous_public_version"] == "0.2"
+assert record03["previous_public_memory_count"] == 37
+assert record03["public_csv_sha256"] == expected_sha
+assert record03["published_version_is_immutable"] is True
+assert record03["publication_sprint"] == 99
+assert record03["state_version"] == "0.21.88"
+
+assert candidate["status"] == "published_immutable"
 assert candidate["memory_count"] == 54
 assert candidate["new_memory_count"] == 17
+assert candidate["public_export_allowed"] is True
+assert candidate["public_registry_allowed"] is True
+assert candidate["public_csv_sha256"] == expected_sha
 new_rows = candidate["new_rx_memories"]
 assert len(new_rows) == 17
 assert len([row for row in new_rows if row["mode"] == "FM"]) == 10
@@ -65,4 +80,4 @@ assert region["status"] == "v0.3 disponible"
 assert region["memoryCount"] == 54
 assert region["available"] is True
 
-print("BFC v0.3 prepublication: scope/checklist/gates complete, 54 RX release candidate, website endpoint and metadata synchronized, OK")
+print("BFC v0.3 publication guard: 54 RX immutable release, hash frozen, gates zero, website endpoint and metadata synchronized, OK")

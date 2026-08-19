@@ -2,10 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { publicPacks } from "../lib/packRegistry";
 
-const preferredOrder = ["normandie", "annecy-alpes-leman", "bretagne"];
-const packs = preferredOrder
-  .map((id) => publicPacks.find((pack) => pack.id === id))
-  .filter((pack): pack is (typeof publicPacks)[number] => Boolean(pack));
+const packs = publicPacks;
+const metropolitanCount = packs.filter((pack) => pack.id !== "annecy-alpes-leman").length;
 
 const modules = [
   ["PMR446 analogique", "16", "v0.1.0"],
@@ -25,7 +23,10 @@ const modules = [
     <div class="container">
       <span class="eyebrow">Suivi des publications</span>
       <div class="page-head">
-        <h1>État des packs</h1>
+        <div>
+          <h1>État des packs</h1>
+          <p class="coverage"><strong>{metropolitanCount}/13</strong> régions administratives métropolitaines couvertes · {packs.length} packs publics avec Annecy–Alpes–Léman.</p>
+        </div>
         <p class="lead">Cette vue est construite directement depuis le registre public. Tous les exports présentés restent en réception seule.</p>
       </div>
 
@@ -63,7 +64,7 @@ const modules = [
         <div>
           <span class="eyebrow">Modules nationaux</span>
           <h2>Blocs réutilisés dans les packs</h2>
-          <p>Ces fichiers sont générés séparément puis réutilisés dans les packs régionaux selon leur organisation de mémoires.</p>
+          <p>Les nouvelles v0.1 métropolitaines utilisent PMR446, appels radioamateur et APRS/ISS, complétés par une sélection régionale de relais FM 2 m. La VHF marine reste disponible séparément.</p>
         </div>
         <div class="module-list">
           {modules.map(([name, count, version]) => (
@@ -85,6 +86,8 @@ const modules = [
   .page-head { display: grid; grid-template-columns: 1fr .7fr; gap: 34px; align-items: end; margin: 18px 0 54px; }
   .page-head h1 { font-size: clamp(3.4rem, 8vw, 6.2rem); }
   .page-head .lead { max-width: 620px; }
+  .coverage { margin-top: 16px; color: var(--muted); }
+  .coverage strong { color: var(--green); font-family: "Space Grotesk", sans-serif; font-size: 1.35rem; }
   .pack-list { display: grid; gap: 16px; }
   .pack-card { display: grid; grid-template-columns: 70px 1fr 150px; gap: 24px; padding: 28px; background: linear-gradient(145deg, rgba(43,61,86,.96), rgba(34,50,73,.91)); }
   .bank { color: var(--blue); font: 900 1rem "SFMono-Regular", Consolas, monospace; }

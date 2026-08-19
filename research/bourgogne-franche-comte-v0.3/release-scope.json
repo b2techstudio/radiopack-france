@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "status": "scope_closed",
+  "region": "bourgogne-franche-comte",
+  "pack": "Bourgogne-Franche-Comté",
+  "version": "0.3",
+  "based_on_version": "0.2",
+  "memory_count": 54,
+  "new_memory_count": 17,
+  "radioamateur_new_memory_count": 10,
+  "aviation_new_memory_count": 7,
+  "aviation_total_memory_count": 14,
+  "airac_cycle": "AIRAC 08/26",
+  "airac_valid_through_inclusive": "2026-09-02",
+  "next_airac": "AIRAC 09/26",
+  "next_airac_effective_from": "2026-09-03",
+  "public_filename": "radiopack-france-bourgogne-franche-comte-v0.3.csv",
+  "public_download_path": "/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv",
+  "release_is_non_exhaustive": true,
+  "rx_only": true,
+  "deferred": {
+    "radioamateur_calls": ["F5ZNS", "F5ZFE", "F5ZKM", "F5ZMS", "F5ZTJ"],
+    "aviation": ["LFLM 119.005 MHz"]
+  },
+  "historical_v0_2_immutable": true,
+  "evidence_files": [
+    "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json",
+    "research/bourgogne-franche-comte-v0.3/second-source-validation-pass2-2026-08-19.json",
+    "research/bourgogne-franche-comte-v0.3/aviation-airac08-2026-08-19.json"
+  ]
+}

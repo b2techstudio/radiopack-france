@@ -134,10 +134,10 @@
     "slug": "bourgogne-franche-comte",
     "name": "Bourgogne-Franche-Comté",
     "shortName": "Bourgogne-Franche-Comté",
-    "status": "v0.2 disponible",
+    "status": "v0.3 disponible",
     "accent": "cyan",
-    "description": "Pack enrichi v0.2 de 37 mémoires RX : aviation, APRS/ISS et relais FM 2 m paired RX.",
-    "memoryCount": 37,
+    "description": "Pack enrichi v0.3 de 54 mémoires RX : aviation AIRAC 08/26, APRS/ISS, relais FM 2 m/70 cm et transpondeurs crossband analogiques vérifiés.",
+    "memoryCount": 54,
     "categories": [
       "PMR446 RX",
       "Radioamateur RX",

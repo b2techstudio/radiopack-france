@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.2",
-  "status": "research_second_source_pass2_internal_candidate_47_not_public",
+  "schema_version": "1.3",
+  "status": "research_airac08_aviation_expansion_internal_candidate_53_not_public",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
   "initialized_on": "2026-08-19",
@@ -14,10 +14,11 @@
   "current_ref_audit_file": "research/bourgogne-franche-comte-v0.3/current-ref-audit.json",
   "second_source_validation_pass1_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json",
   "second_source_validation_pass2_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-pass2-2026-08-19.json",
+  "aviation_validation_file": "research/bourgogne-franche-comte-v0.3/aviation-airac08-2026-08-19.json",
   "internal_candidate_file": "research/bourgogne-franche-comte-v0.3/internal-candidate-v0.3.json",
   "latest_validation_pass": 2,
-  "current_candidate_memory_count": 47,
-  "current_new_memory_count": 10,
+  "current_candidate_memory_count": 53,
+  "current_new_memory_count": 16,
   "current_candidate_matches_public_v0_2": false,
   "public_export_allowed": false,
   "public_registry_allowed": false,
@@ -26,11 +27,31 @@
   "promoted_internal_station_count": 5,
   "promoted_internal_memory_count": 10,
   "remaining_unpromoted_lead_station_count": 5,
-  "research_leads_are_partially_promoted": true,
+  "radioamateur_research": {
+    "lead_station_count": 10,
+    "lead_max_memory_delta_before_deduplication": 20,
+    "promoted_internal_station_count": 5,
+    "promoted_internal_memory_count": 10,
+    "remaining_unpromoted_lead_station_count": 5,
+    "partially_promoted": true
+  },
+  "aviation_research": {
+    "published_v0_2_aviation_memory_count": 7,
+    "current_cycle": "AIRAC 08/26",
+    "current_cycle_effective_until_inclusive": "2026-09-02",
+    "new_internal_memory_count": 6,
+    "validated_new_aerodromes": ["LFQM", "LFLN"],
+    "deferred_frequency_leads": ["LFLH", "LFLM"],
+    "next_cycle": "AIRAC 09/26",
+    "next_cycle_effective_from": "2026-09-03",
+    "revalidation_required_before_publication_on_or_after_next_cycle": true
+  },
   "scope": {
-    "priority": "publicly documented active analog FM infrastructure useful for UV-K5 receive-only listening",
+    "priority": "publicly documented useful receive-only channels with current evidence",
     "include_conventional_vhf_uhf_repeaters": true,
     "include_crossband_analog_transponders": true,
+    "include_regional_public_aviation": true,
+    "aviation_services": ["EMERGENCY", "APP", "TWR", "GND", "AFIS", "A-A", "ATIS"],
     "digital_only_repeaters": "deferred",
     "temporary_or_stopped_infrastructure": "excluded_from_candidate",
     "private_ppdr_operational_data": "excluded"
@@ -51,6 +72,10 @@
     "digital_only_not_blindly_promoted_into_analog_pack": true,
     "future_promotion_is_internal_candidate_not_publication": true,
     "conflicting_secondary_evidence_blocks_promotion_until_resolved": true,
-    "historical_configuration_alone_is_not_current_state_confirmation": true
+    "historical_configuration_alone_is_not_current_state_confirmation": true,
+    "aviation_mode": "AM",
+    "aviation_frequency_lead_requires_current_primary_confirmation_before_promotion": true,
+    "airac09_revalidation_required_for_publication_on_or_after_2026_09_03": true,
+    "notam_and_sup_aip_review_required_at_publication": true
   }
 }

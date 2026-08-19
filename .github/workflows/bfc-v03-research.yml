@@ -33,3 +33,5 @@ jobs:
         run: python tests/test_bourgogne_franche_comte_v03_initialization.py
       - name: Test Bourgogne-Franche-Comte v0.3 second-source candidate
         run: python tests/test_bfc_v03_second_source_validation.py
+      - name: Test Bourgogne-Franche-Comte v0.3 AIRAC 08 aviation
+        run: python tests/test_bfc_v03_aviation_airac08.py

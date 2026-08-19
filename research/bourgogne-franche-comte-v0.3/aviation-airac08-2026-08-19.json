@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "status": "airac08_aviation_internal_candidate_expansion_not_public",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.3",
+  "checked_on": "2026-08-19",
+  "airac_context": {
+    "cycle": "AIRAC 08/26",
+    "effective_from": "2026-08-06",
+    "effective_until_inclusive": "2026-09-02",
+    "next_cycle": "AIRAC 09/26",
+    "next_cycle_effective_from": "2026-09-03",
+    "current_cycle_product_seen_on_sia": true,
+    "direct_airac08_xml_field_extraction_claimed": false,
+    "method": "AIRAC 08/26 current-cycle context verified on the SIA product page. New frequencies are promoted only when supported by accessible SIA AIP material or a current local aerodrome/operator source; no direct AIRAC 08/26 XML field extraction is claimed."
+  },
+  "published_v0_2_aviation_baseline": {
+    "memory_count": 7,
+    "channels": [
+      {"name":"AIR-EMERG","frequency_mhz":121.5,"service":"EMERGENCY","area":"France / aviation"},
+      {"name":"DLE-AFIS","frequency_mhz":130.775,"service":"TWR/AFIS/A-A","icao":"LFGJ","area":"Dole-Tavaux"},
+      {"name":"DLE-ATIS","frequency_mhz":121.605,"service":"ATIS","icao":"LFGJ","area":"Dole-Tavaux"},
+      {"name":"DIJ-AFIS","frequency_mhz":118.33,"service":"AFIS/A-A","icao":"LFSD","area":"Dijon-Longvic"},
+      {"name":"NVS-AFIS","frequency_mhz":120.605,"service":"AFIS/A-A","icao":"LFQG","area":"Nevers-Fourchambault"},
+      {"name":"AUF-AFIS","frequency_mhz":129.805,"service":"AFIS/A-A","icao":"LFLA","area":"Auxerre-Branches"},
+      {"name":"MONT-AFIS","frequency_mhz":132.03,"service":"AFIS/A-A","icao":"LFSM","area":"Montbéliard-Courcelles"}
+    ]
+  },
+  "validated_new_aviation_memories": [
+    {
+      "name": "VEZE-AFIS",
+      "frequency_mhz": 122.205,
+      "mode": "AM",
+      "service": "AFIS/A-A",
+      "icao": "LFQM",
+      "area": "Besançon-La Vèze",
+      "evidence": "Current local aerodrome/aeroclub page states that the control tower with AFIS uses 122.205 MHz; SIA AD 1.3 identifies LFQM as Besançon-La Vèze."
+    },
+    {
+      "name": "SY-APP1",
+      "frequency_mhz": 119.505,
+      "mode": "AM",
+      "service": "APP",
+      "icao": "LFLN",
+      "area": "Saint-Yan",
+      "evidence": "SIA AIP AD 2 LFLN.18 lists SAINT YAN Approach on 119.505 MHz as an auxiliary frequency."
+    },
+    {
+      "name": "SY-APP2",
+      "frequency_mhz": 123.405,
+      "mode": "AM",
+      "service": "APP",
+      "icao": "LFLN",
+      "area": "Saint-Yan",
+      "evidence": "SIA AIP AD 2 LFLN.18 lists SAINT YAN Approach on 123.405 MHz."
+    },
+    {
+      "name": "SY-GND",
+      "frequency_mhz": 121.805,
+      "mode": "AM",
+      "service": "GND",
+      "icao": "LFLN",
+      "area": "Saint-Yan",
+      "evidence": "SIA AIP AD 2 LFLN.18 lists SAINT YAN Ground on 121.805 MHz."
+    },
+    {
+      "name": "SY-TWR",
+      "frequency_mhz": 122.3,
+      "mode": "AM",
+      "service": "TWR",
+      "icao": "LFLN",
+      "area": "Saint-Yan",
+      "evidence": "SIA AIP AD 2 LFLN.18 lists SAINT YAN Tower on 122.300 MHz."
+    },
+    {
+      "name": "SY-ATIS",
+      "frequency_mhz": 132.48,
+      "mode": "AM",
+      "service": "ATIS",
+      "icao": "LFLN",
+      "area": "Saint-Yan",
+      "evidence": "SIA AIP AD 2 LFLN.18 lists SAINT YAN ATIS on 132.480 MHz."
+    }
+  ],
+  "deferred_frequency_leads": [
+    {
+      "name": "CHAL-AFIS",
+      "icao": "LFLH",
+      "frequency_mhz": 118.605,
+      "area": "Chalon-Champforgeuil",
+      "reason": "The current airport operator confirms an active AFIS service, but this pass did not capture sufficiently current primary-source evidence for the exact frequency. Keep as a lead only."
+    },
+    {
+      "name": "MACON-AA",
+      "icao": "LFLM",
+      "frequency_mhz": 119.005,
+      "area": "Mâcon-Charnay",
+      "reason": "A current frequency lead exists, but this pass did not capture sufficiently current primary SIA/operator evidence for the exact frequency. Keep as a lead only."
+    }
+  ],
+  "result": {
+    "new_aviation_memory_count": 6,
+    "published_base_memory_count": 37,
+    "radioamateur_internal_delta_before_this_pass": 10,
+    "candidate_memory_count_before_this_pass": 47,
+    "candidate_memory_count_after_this_pass": 53,
+    "total_internal_delta_from_public_v0_2": 16,
+    "public_export_allowed": false,
+    "public_registry_allowed": false
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "aviation_mode": "AM",
+    "same_rf_frequency_deduplicated": true,
+    "no_artificial_fill": true,
+    "published_v0_2_immutable": true,
+    "airac09_revalidation_required_for_publication_on_or_after_2026_09_03": true,
+    "notam_and_sup_aip_must_be_checked_at_publication_time": true,
+    "frequency_lead_without_current_primary_confirmation_not_promoted": true
+  },
+  "source_urls": [
+    "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia/donnees-aeronautiques-xml-airac-08-26.html",
+    "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-2.LFLN-fr-FR.html",
+    "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_11_JUN_2026/FRANCE/AIRAC-2026-06-11/html/eAIP/FR-AD-1.3-fr-FR.html",
+    "https://www.aeroclub-besancon.fr/",
+    "https://chalon.aeroport.fr/domaines-application/infos-pilote/"
+  ]
+}

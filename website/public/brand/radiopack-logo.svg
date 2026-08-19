@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">RadioPack France</title>
+  <desc id="desc">Emblème RadioPack France avec carte tricolore de la France, pylône radio et ondes.</desc>
+  <defs>
+    <clipPath id="france">
+      <path d="M61 19 75 25 81 33 96 38 100 50 94 61 98 74 88 84 76 88 69 101 56 97 47 89 34 91 29 80 19 72 24 60 20 49 31 41 35 30 49 27Z"/>
+    </clipPath>
+    <linearGradient id="ring" x1="15" y1="16" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f7fbff"/>
+      <stop offset=".48" stop-color="#dbe9f7"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="43" y1="18" x2="91" y2="18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4ea8ff"/>
+      <stop offset="1" stop-color="#61d5f1"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="64" cy="64" r="59" fill="#0c1729"/>
+  <path d="M15 88A54 54 0 1 1 113 88" fill="none" stroke="url(#ring)" stroke-width="4.2" stroke-linecap="round" opacity=".96"/>
+
+  <g clip-path="url(#france)">
+    <rect x="16" y="16" width="39" height="90" fill="#1576e9"/>
+    <rect x="55" y="16" width="19" height="90" fill="#f7fbff"/>
+    <rect x="74" y="16" width="38" height="90" fill="#ef3340"/>
+    <path d="M17 79 102 36v20L20 93Z" fill="#ffffff" opacity=".08"/>
+  </g>
+
+  <g fill="none" stroke="#07101e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 40 49 87h30Z" fill="#0b1524" fill-opacity=".9"/>
+    <path d="M64 40v47M57 59h14M53 71h22M49 87l30-28M79 87 49 59" stroke-width="3.2"/>
+  </g>
+  <circle cx="64" cy="38" r="5.5" fill="#f7fbff" stroke="#0b1524" stroke-width="3"/>
+
+  <g fill="none" stroke="url(#wave)" stroke-width="4" stroke-linecap="round" filter="url(#glow)">
+    <path d="M53 31a16 16 0 0 1 0-22"/>
+    <path d="M45 36a26 26 0 0 1 0-32"/>
+    <path d="M75 31a16 16 0 0 0 0-22"/>
+    <path d="M83 36a26 26 0 0 0 0-32"/>
+  </g>
+
+  <g transform="translate(31 106)">
+    <rect width="21" height="4" rx="2" fill="#1576e9"/>
+    <rect x="22" width="21" height="4" rx="2" fill="#f7fbff"/>
+    <rect x="44" width="21" height="4" rx="2" fill="#ef3340"/>
+  </g>
+</svg>

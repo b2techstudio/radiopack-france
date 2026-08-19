@@ -30,7 +30,7 @@
       ]
     },
     "aviation": {
-      "memory_count": 15,
+      "memory_count": 14,
       "start_location": 40,
       "channels": [
         {
@@ -50,13 +50,6 @@
         {
           "name": "LIL-FIS2",
           "frequency_mhz": 129.36,
-          "area": "Lille",
-          "service": "FIS",
-          "icao": "LFQQ"
-        },
-        {
-          "name": "LIL-FIS3",
-          "frequency_mhz": 132.54,
           "area": "Lille",
           "service": "FIS",
           "icao": "LFQQ"
@@ -149,7 +142,8 @@
         "LFAT",
         "LFQQ"
       ],
-      "source_review_note": "Primary SIA eAIP AD 2.18 values rechecked on 2026-08-19; duplicated or stale labels were corrected before publication."
+      "source_review_note": "Primary SIA eAIP AD 2.18 values rechecked on 2026-08-19; duplicated or stale labels were corrected before publication.",
+      "bounded_selection_note": "132.540 MHz is current SIA FIS evidence but intentionally left outside this bounded 14-memory aviation selection; no artificial fill."
     },
     "regional_2m": {
       "selected_repeater_count": 8,

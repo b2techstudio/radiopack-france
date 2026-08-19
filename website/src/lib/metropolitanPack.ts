@@ -160,7 +160,6 @@ export const metropolitanPackDefinitions: MetropolitanPackDefinition[] = [
       { name: "AIR-EMERG", frequency: 121.5, area: "France / aviation", service: "EMERGENCY" },
       { name: "LIL-FIS1", frequency: 126.48, area: "Lille", service: "FIS", icao: "LFQQ" },
       { name: "LIL-FIS2", frequency: 129.36, area: "Lille", service: "FIS", icao: "LFQQ" },
-      { name: "LIL-FIS3", frequency: 132.54, area: "Lille", service: "FIS", icao: "LFQQ" },
       { name: "LIL-APP", frequency: 120.275, area: "Lille", service: "APP", icao: "LFQQ" },
       { name: "LIL-GND", frequency: 121.855, area: "Lille", service: "GND", icao: "LFQQ" },
       { name: "LIL-TWR", frequency: 118.555, area: "Lille", service: "TWR", icao: "LFQQ" },

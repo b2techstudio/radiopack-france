@@ -215,6 +215,9 @@ jobs:
       - name: Test Sprint 97 state synchronization
         run: python tests/test_sprint97_state_sync.py
 
+      - name: Test Sprint 98 state synchronization
+        run: python tests/test_sprint98_state_sync.py
+
   website:
     name: Astro production build
     runs-on: ubuntu-24.04
@@ -252,6 +255,9 @@ jobs:
 
       - name: Test built public pack catalog
         run: cd .. && python tests/test_built_public_pack_catalog.py
+
+      - name: Verify metropolitan v0.2 publication records
+        run: cd .. && python tools/check_metropolitan_v02_publication_records.py --dist website/dist
 
   reference-archive:
     name: Build opt-in reference archive

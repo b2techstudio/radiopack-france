@@ -1,10 +1,12 @@
 {
-  "schema_version": "1.0",
-  "status": "ready_for_publication",
+  "schema_version": "1.1",
+  "status": "published_zero_blockers",
   "pack": "Bourgogne-Franche-Comté",
   "version": "0.3",
   "checked_on": "2026-08-19",
+  "published_on": "2026-08-19",
   "blocker_count": 0,
+  "public_csv_sha256": "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5",
   "checks": [
     {"id":"scope_closed","pass":true},
     {"id":"review_checklist_complete","pass":true},
@@ -15,12 +17,13 @@
     {"id":"historical_v0_2_immutable","pass":true},
     {"id":"radioamateur_evidence_threshold","pass":true},
     {"id":"aviation_airac08_review","pass":true},
-    {"id":"website_registry_sync","pass":true}
+    {"id":"website_registry_sync","pass":true},
+    {"id":"built_csv_sha256_frozen","pass":true}
   ],
   "warnings": [
     "Five radioamateur research leads remain deferred to a later version.",
     "Mâcon-Charnay LFLM 119.005 MHz remains deferred pending sufficiently current primary evidence.",
-    "Any publication on or after 2026-09-03 requires AIRAC 09/26 revalidation plus NOTAM/SUP AIP review.",
+    "The published AIRAC 08/26 aviation snapshot must be revalidated before any later pack revision on or after 2026-09-03.",
     "RadioPack France is a receive-only listening pack and is not an operational aviation information source."
   ]
 }

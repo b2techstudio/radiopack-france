@@ -1,14 +1,14 @@
 {
-  "schema_version": "1.2",
-  "status": "internal_candidate_not_for_publication",
+  "schema_version": "1.3",
+  "status": "release_candidate_prepublication",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
   "updated": "2026-08-19",
   "published_base_version": "0.2",
   "published_base_memory_count": 37,
   "published_base_sha256": "828af205aa07fe6685e3ad395ec2f0f56222fcfb5bb2f7b8f6a0bd4082714c0a",
-  "memory_count": 53,
-  "new_memory_count": 16,
+  "memory_count": 54,
+  "new_memory_count": 17,
   "public_export_allowed": false,
   "public_registry_allowed": false,
   "evidence_files": [
@@ -23,9 +23,9 @@
   },
   "aviation_expansion": {
     "cycle": "AIRAC 08/26",
-    "memory_count": 6,
-    "validated_aerodromes": ["LFQM", "LFLN"],
-    "deferred_frequency_leads": ["LFLH", "LFLM"],
+    "memory_count": 7,
+    "validated_aerodromes": ["LFQM", "LFLN", "LFLH"],
+    "deferred_frequency_leads": ["LFLM"],
     "airac09_revalidation_required_for_publication_on_or_after_2026_09_03": true
   },
   "promoted_stations": [
@@ -86,8 +86,14 @@
     {"name":"SY-APP2","frequency_mhz":123.405,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan APP RX"},
     {"name":"SY-GND","frequency_mhz":121.805,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan Ground RX"},
     {"name":"SY-TWR","frequency_mhz":122.3,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan Tower RX"},
-    {"name":"SY-ATIS","frequency_mhz":132.48,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan ATIS RX"}
+    {"name":"SY-ATIS","frequency_mhz":132.48,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Saint-Yan ATIS RX"},
+    {"name":"CHAL-INFO","frequency_mhz":118.605,"mode":"AM","duplex":"off","offset":"0.000000","comment":"Chalon Champforgeuil AFIS/A-A RX"}
   ],
+  "deferred_for_future_version": {
+    "radioamateur_calls": ["F5ZNS", "F5ZFE", "F5ZKM", "F5ZMS", "F5ZTJ"],
+    "aviation": ["LFLM 119.005 MHz"],
+    "reason": "Evidence threshold not met without ambiguity; the release is intentionally non-exhaustive and does not use artificial fill."
+  },
   "rules": {
     "rx_only": true,
     "chirp_duplex": "off",

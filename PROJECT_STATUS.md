@@ -1,14 +1,14 @@
 # RadioPack France — point de reprise
 
-Dernière mise à jour : **17 août 2026**
-Sprint courant : **97**
-État logique : **0.21.86**
+Dernière mise à jour : **19 août 2026**
+Sprint courant : **98**
+État logique : **0.21.87**
 
 Repères de compatibilité historique conservés pour les garde-fous antérieurs : Sprint courant : **73** ; État logique : **0.21.62**.
 
 Compatibilité historique Normandie : revue v0.4 est **9/9** ; blocages de prépublication sont à **0** ; publication enregistrée.
 
-L'état machine officiel correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-97-summary.md`. Détail structuré de consolidation : `research/sprint-97-post96-ui-state.json`. Audit détaillé : `research/security-audit-sprint92.md`.
+L'état machine officiel correspondant est `research/project-resume-state.json`. Résumé courant : `research/sprint-98-summary.md`. Manifeste métropolitain : `research/sprint-98-metropolitan-publication-manifest.json`. Audit détaillé : `research/security-audit-sprint92.md`.
 
 ## État public
 
@@ -17,12 +17,23 @@ L'état machine officiel correspondant est `research/project-resume-state.json`.
 - Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Bretagne v0.1 : **135 mémoires RX**, publication historique immuable.
+- Hauts-de-France v0.2 : **144 mémoires RX**, publiée et immuable.
+- Île-de-France v0.2 : **58 mémoires RX**, publiée et immuable.
+- Grand Est v0.2 : **59 mémoires RX**, publiée et immuable.
+- Centre-Val de Loire v0.2 : **42 mémoires RX**, publiée et immuable.
+- Pays de la Loire v0.2 : **130 mémoires RX**, publiée et immuable.
+- Bourgogne-Franche-Comté v0.2 : **37 mémoires RX**, publiée et immuable.
+- Nouvelle-Aquitaine v0.2 : **151 mémoires RX**, publiée et immuable.
+- Auvergne-Rhône-Alpes v0.2 : **62 mémoires RX**, publiée et immuable.
+- Occitanie v0.2 : **156 mémoires RX**, publiée et immuable.
+- Provence-Alpes-Côte d’Azur v0.2 : **159 mémoires RX**, publiée et immuable.
+- Corse v0.2 : **137 mémoires RX**, publiée et immuable.
 
-## Publication post-Sprint 97 — enrichissement métropolitain v0.2
+## Sprint 98 — consolidation officielle de l'enrichissement métropolitain v0.2
 
 Les onze régions métropolitaines ajoutées après le Sprint 97 sont désormais publiées en v0.2 enrichie, leurs v0.1 restant historiques et générables. Comptes courants : Hauts-de-France 144, Île-de-France 58, Grand Est 59, Centre-Val de Loire 42, Pays de la Loire 130, Bourgogne-Franche-Comté 37, Nouvelle-Aquitaine 151, Auvergne-Rhône-Alpes 62, Occitanie 156, Provence-Alpes-Côte d'Azur 159 et Corse 137 mémoires RX.
 
-Les v0.2 ajoutent une aviation AM SIA revue, conservent les relais FM 2 m en paired RX et intègrent le module VHF marine aux six régions littorales concernées. UHF/numérique et réseaux privés ou PPDR restent hors scope sans revue dédiée. Le contrat `Duplex=off` / `Offset=0.000000` reste inchangé. Cette publication ne change pas l'état logique officiel **97 / 0.21.86**.
+Les v0.2 ajoutent une aviation AM SIA revue, conservent les relais FM 2 m en paired RX et intègrent le module VHF marine aux six régions littorales concernées. UHF/numérique et réseaux privés ou PPDR restent hors scope sans revue dédiée. Le contrat `Duplex=off` / `Offset=0.000000` reste inchangé. Cette publication est désormais intégrée à l'état logique officiel **98 / 0.21.87**. Chaque v0.2 possède un `publication-record.json`, un scope figé, une checklist 10/10, des gates satisfaits et un SHA-256 calculé sur un build Astro frais. Le Sprint 98 lui-même ne modifie aucune mémoire RF ni aucun CSV public.
 
 ## Sprint 97 — consolidation de l'état post-Sprint 96
 

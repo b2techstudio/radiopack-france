@@ -180,11 +180,11 @@ assert paired_policy["deduplication"]["same_rf_frequency_kept_once_per_pack"] is
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "**État courant : Sprint 97 / 0.21.86", "## État actuel — Sprint 97 / 0.21.86",
+    "**État courant : Sprint 98 / 0.21.87", "## État actuel — Sprint 98 / 0.21.87", "## Sprint 97 —",
     "Normandie v0.4** — 142 mémoires RX", "Annecy–Alpes–Léman v0.4** — 77 mémoires RX",
     "Bretagne v0.2** — 151 mémoires RX", "research/paired-rx-policy.json", "Duplex=off", "Offset=0.000000",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README historique incomplet: {expected}"
 
-print("Tests RadioPack repository/site: 13/13 metropolitan admin regions, 11 enriched v0.2 packs, historical v0.1 routes, aviation/marine/paired-RX guards and mature packs OK")
+print("Tests RadioPack repository/site: 13/13 metropolitan admin regions, 11 enriched v0.2 packs, historical v0.1 routes, aviation/marine/paired-RX guards and official Sprint 98 state OK")

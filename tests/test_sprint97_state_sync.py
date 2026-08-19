@@ -24,23 +24,18 @@ changelog = CHANGELOG.read_text(encoding="utf-8")
 summary = SPRINT_SUMMARY.read_text(encoding="utf-8")
 ci = CI.read_text(encoding="utf-8")
 
-assert state["updated"] == "2026-08-17"
-assert state["current_sprint"] == 97
-assert state["state_version"] == "0.21.86"
+assert state["updated"] >= "2026-08-17"
+assert state["current_sprint"] >= 97
 
-assert "**État courant : Sprint 97 / 0.21.86" in readme
-assert "## État actuel — Sprint 97 / 0.21.86" in readme
 assert "## Sprint 97 —" in readme
 assert "research/sprint-97-summary.md" in readme
 assert "research/sprint-97-post96-ui-state.json" in readme
 
-assert "Sprint courant : **97**" in project
-assert "État logique : **0.21.86**" in project
 assert "## Sprint 97 —" in project
 assert "research/sprint-97-summary.md" in project
 assert "research/sprint-97-post96-ui-state.json" in project
 
-assert changelog.startswith("# Changelog\n\n## 0.21.86 - 2026-08-17")
+assert "## 0.21.86 - 2026-08-17" in changelog
 assert "**Sprint 97**" in changelog.split("## 0.21.85", 1)[0]
 
 assert summary.startswith("# Sprint 97 —")
@@ -102,11 +97,9 @@ for required in [
 ]:
     assert required in sources, f"Sprint 97 source of truth missing: {required}"
 
-assert state["recent_sprints"][0]["sprint"] == 97
-assert state["recent_sprints"][0]["state_version"] == "0.21.86"
-assert state["recent_sprints"][0]["summary_file"] == "research/sprint-97-summary.md"
+assert any(x.get("sprint") == 97 and x.get("state_version") == "0.21.86" for x in state["recent_sprints"])
 
 assert "- name: Test Sprint 97 state synchronization" in ci
 assert "run: python tests/test_sprint97_state_sync.py" in ci
 
-print("Sprint 97 state sync: README, status, changelog, machine state, UX consolidation and CI guard aligned at 97 / 0.21.86 OK")
+print("Sprint 97 historical state remains auditable after later official states OK")

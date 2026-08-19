@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "status": "publication_gates_satisfied",
+  "checked_on": "2026-08-19",
+  "publication_sprint": 98,
+  "state_version": "0.21.87",
+  "pack": "Provence-Alpes-Côte d’Azur",
+  "version": "0.2",
+  "memory_count": 159,
+  "release_scope_frozen": true,
+  "review_completed": 10,
+  "review_total": 10,
+  "blocker_count": 0,
+  "rx_only": true,
+  "rf_deduplication_required": true,
+  "fresh_build_sha256_recorded": true,
+  "historical_v0_1_route_retained": true,
+  "aviation_freshness_valid_through_inclusive": "2026-09-02",
+  "public_release_allowed": true,
+  "published_version_is_immutable": true,
+  "future_change_requires_new_version": true,
+  "blockers": []
+}

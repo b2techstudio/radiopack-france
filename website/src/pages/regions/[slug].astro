@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
+import { buildStandardChannelGroups, type ChannelMemory } from "../../lib/channelDetails";
+import {
+  buildMetropolitanPack,
+  metropolitanPackDefinitions,
+  type MetropolitanPackDefinition,
+} from "../../lib/metropolitanPack";
+
+export function getStaticPaths() {
+  return metropolitanPackDefinitions.map((pack) => ({
+    params: { slug: pack.regionSlug },
+    props: { pack },
+  }));
+}
+
+const { pack } = Astro.props as { pack: MetropolitanPackDefinition };
+const placed = buildMetropolitanPack(pack.id);
+const memories: ChannelMemory[] = placed.map(({ location, channel }) => ({
+  location,
+  name: channel.name,
+  frequency: channel.frequency_mhz.toFixed(6),
+  mode: channel.mode,
+  step: channel.step_khz.toFixed(2),
+  comment: channel.comment,
+}));
+const channelGroups = buildStandardChannelGroups(memories);
+const downloadUrl = `/downloads/${pack.id}/${pack.filename}`;
+const selectedRelayCount = pack.repeaters.length;
+const regionalChannelCount = selectedRelayCount * 2;
+---
+<BaseLayout
+  title={`Pack ${pack.name} ${pack.version} - RadioPack France`}
+  description={`CSV CHIRP ${pack.name} ${pack.version} de ${pack.memoryCount} mémoires RX-only pour Quansheng UV-K5.`}
+>
+  <section class="section">
+    <div class="container page-grid">
+      <div class="copy">
+        <span class="eyebrow">Pack régional · {pack.version}</span>
+        <h1>{pack.name}</h1>
+        <p class="lead">
+          Une première version publique volontairement bornée : socle national RX et sélection actuelle
+          de {selectedRelayCount} relais FM 2 m régionaux. Chaque paire vérifiée est représentée par deux
+          mémoires de réception, sans transformer le pack en liste exhaustive.
+        </p>
+        <div class="button-row">
+          <a class="button button-primary" href={downloadUrl} download={pack.filename}>Télécharger le CSV {pack.version}</a>
+          <a class="button button-secondary" href="/documentation">Procédure CHIRP</a>
+        </div>
+
+        <div class="card legal">
+          <strong>Réception seule sur les {pack.memoryCount} mémoires</strong>
+          <p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. La présence d'une fréquence n'accorde aucun droit d'émission.</p>
+        </div>
+
+        <div class="memory-map card">
+          <h2>Périmètre v0.1</h2>
+          <div class="ranges">
+            <span><b>0–15</b> PMR446 · 16 mémoires</span>
+            <span><b>20–21</b> Appels radioamateur · 2</span>
+            <span><b>30–35</b> APRS / ISS · 6</span>
+            <span><b>50+</b> Relais FM 2 m paired RX · {regionalChannelCount}</span>
+          </div>
+          <p class="scope-note">Aviation, UHF et autres services régionaux restent hors périmètre tant qu'une revue dédiée n'est pas terminée. La VHF marine reste disponible comme module national séparé.</p>
+        </div>
+
+        <ChannelGroupDetails
+          groups={channelGroups}
+          title={`Tous les canaux du pack ${pack.name}`}
+          intro={`Chaque mémoire affichée ci-dessous correspond au CSV public ${pack.version}. Les entrées et sorties des relais sélectionnés restent toutes deux en réception seule.`}
+        />
+      </div>
+
+      <aside class="card status-card">
+        <span class="badge badge-green">Disponible · {pack.version}</span>
+        <h3>{pack.memoryCount} mémoires sur 200</h3>
+        <div class="meter"><span style={`width:${Math.round((pack.memoryCount / 200) * 100)}%`}></span></div>
+        <ul>
+          <li>RX-only</li>
+          <li>{selectedRelayCount} relais FM 2 m sélectionnés</li>
+          <li>paired RX : sortie + entrée vérifiée</li>
+          <li>périmètre v0.1 non exhaustif</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.3rem,7vw,6rem)}.status-card{padding:28px;position:sticky;top:110px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:18px}.meter span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#65d7b1,#4ea8ff,#9185ff)}.legal,.memory-map{padding:22px}.legal p,.scope-note{margin-top:8px;color:var(--muted)}code{font-weight:800;color:#b9b1ff}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(11,23,40,.28);color:var(--muted);font-size:.82rem}.ranges b{color:#9185ff;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}.status-card{position:static}}
+</style>

@@ -24,7 +24,7 @@ export type PublicPack = {
   variants: PublicPackVariant[];
 };
 
-export const publicPacks: PublicPack[] = [
+const legacyPublicPacks: PublicPack[] = [
   {
     id: "annecy-alpes-leman",
     regionSlug: "annecy-haute-savoie",
@@ -97,6 +97,51 @@ export const publicPacks: PublicPack[] = [
       },
     ],
   },
+];
+
+const metropolitanMetadata = [
+  { id: "hauts-de-france", name: "Hauts-de-France", memoryCount: 36 },
+  { id: "ile-de-france", name: "Île-de-France", memoryCount: 34 },
+  { id: "grand-est", name: "Grand Est", memoryCount: 36 },
+  { id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 32 },
+  { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 30 },
+  { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 30 },
+  { id: "nouvelle-aquitaine", name: "Nouvelle-Aquitaine", memoryCount: 42 },
+  { id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 38 },
+  { id: "occitanie", name: "Occitanie", memoryCount: 44 },
+  { id: "provence-alpes-cote-d-azur", name: "Provence-Alpes-Côte d’Azur", memoryCount: 42 },
+  { id: "corse", name: "Corse", memoryCount: 28 },
+] as const;
+
+const metropolitanPublicPacks: PublicPack[] = metropolitanMetadata.map((item) => {
+  const filename = `radiopack-france-${item.id}-v0.1.csv`;
+  return {
+    id: item.id,
+    regionSlug: item.id,
+    name: item.name,
+    version: "v0.1",
+    status: "Disponible",
+    description: `Socle régional v0.1 de ${item.memoryCount} mémoires RX : PMR446, appels, APRS/ISS et sélection FM 2 m paired RX. Périmètre volontairement non exhaustif, sans aviation.`,
+    defaultVariant: "standard",
+    notamCheck: false,
+    variants: [
+      {
+        id: "standard",
+        label: "Pack v0.1",
+        memoryCount: item.memoryCount,
+        filename,
+        downloadUrl: `/downloads/${item.id}/${filename}`,
+        aviationIncluded: false,
+      },
+    ],
+  };
+});
+
+export const publicPacks: PublicPack[] = [
+  legacyPublicPacks[0],
+  legacyPublicPacks[2],
+  legacyPublicPacks[1],
+  ...metropolitanPublicPacks,
 ];
 
 export const defaultPublicPackId = "annecy-alpes-leman";

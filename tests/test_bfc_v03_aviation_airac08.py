@@ -24,9 +24,7 @@ assert len(aviation["published_v0_2_aviation_baseline"]["channels"]) == 7
 
 promoted = aviation["validated_new_aviation_memories"]
 assert len(promoted) == 7
-assert {item["name"] for item in promoted} == {
-    "VEZE-AFIS", "SY-APP1", "SY-APP2", "SY-GND", "SY-TWR", "SY-ATIS", "CHAL-INFO"
-}
+assert {item["name"] for item in promoted} == {"VEZE-AFIS", "SY-APP1", "SY-APP2", "SY-GND", "SY-TWR", "SY-ATIS", "CHAL-INFO"}
 expected = {122.205, 119.505, 123.405, 121.805, 122.3, 132.48, 118.605}
 assert {float(item["frequency_mhz"]) for item in promoted} == expected
 assert all(item["mode"] == "AM" for item in promoted)
@@ -42,9 +40,8 @@ assert result["candidate_memory_count_before_this_pass"] == 47
 assert result["new_aviation_memory_count"] == 7
 assert result["candidate_memory_count_after_this_pass"] == 54
 assert result["total_internal_delta_from_public_v0_2"] == 17
-assert result["public_export_allowed"] is False
-assert result["public_registry_allowed"] is False
 
+assert plan["status"] == "published_immutable_54"
 assert plan["current_candidate_memory_count"] == 54
 assert plan["current_new_memory_count"] == 17
 assert plan["aviation_research"]["new_internal_memory_count"] == 7
@@ -52,12 +49,15 @@ assert plan["aviation_research"]["validated_new_aerodromes"] == ["LFQM", "LFLN",
 assert plan["aviation_research"]["deferred_frequency_leads"] == ["LFLM"]
 assert plan["rules"]["airac09_revalidation_required_for_publication_on_or_after_2026_09_03"] is True
 assert plan["rules"]["notam_and_sup_aip_review_required_at_publication"] is True
+assert plan["public_export_allowed"] is True
+assert plan["public_registry_allowed"] is True
 
 assert backlog["candidate_memory_count"] == 54
 assert backlog["candidate_memory_delta"] == 17
 assert backlog["radioamateur_candidate_memory_delta"] == 10
 assert backlog["aviation_candidate_memory_delta"] == 7
 
+assert candidate["status"] == "published_immutable"
 assert candidate["memory_count"] == 54
 assert candidate["new_memory_count"] == 17
 assert candidate["aviation_expansion"]["memory_count"] == 7
@@ -72,7 +72,7 @@ all_new_freqs = [round(float(row["frequency_mhz"]), 6) for row in candidate["new
 assert len(all_new_freqs) == 17
 assert len(set(all_new_freqs)) == 17
 assert len({row["name"] for row in candidate["new_rx_memories"]}) == 17
-assert candidate["public_export_allowed"] is False
-assert candidate["public_registry_allowed"] is False
+assert candidate["public_export_allowed"] is True
+assert candidate["public_registry_allowed"] is True
 
-print("BFC v0.3 aviation AIRAC 08: +7 AM RX (LFQM/LFLN/LFLH), candidate 54; LFLM deferred; AIRAC 09 publication revalidation gate active, OK")
+print("BFC v0.3 aviation publication guard: +7 AM RX (LFQM/LFLN/LFLH), published pack 54; LFLM deferred; AIRAC 09 future revalidation gate active, OK")

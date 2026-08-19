@@ -1,13 +1,15 @@
 {
-  "schema_version": "1.0",
-  "status": "research_backlog_unpromoted",
+  "schema_version": "1.1",
+  "status": "research_backlog_partially_promoted_internal_only",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
   "checked_on": "2026-08-19",
   "published_base_memory_count": 37,
-  "candidate_memory_count": 37,
-  "candidate_memory_delta": 0,
+  "candidate_memory_count": 43,
+  "candidate_memory_delta": 6,
   "lead_station_count": 10,
+  "promoted_internal_station_count": 3,
+  "remaining_unpromoted_station_count": 7,
   "potential_memory_delta_if_every_lead_clears_and_remains_unique": 20,
   "items": [
     {
@@ -19,7 +21,8 @@
       "frequencies_mhz": [145.45, 432.55],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "cleared_for_internal_candidate_second_source_pass1",
+      "evidence_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json"
     },
     {
       "id": "F1ZCA_SAINT_THIEBAUD_UHF",
@@ -30,7 +33,7 @@
       "frequencies_mhz": [430.3, 431.9],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "current_ref_active_second_source_still_required"
     },
     {
       "id": "F5ZNS_ROCHEFORT_SUR_NENON_CROSSBAND",
@@ -41,7 +44,7 @@
       "frequencies_mhz": [430.65, 144.65],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "independent_frequency_listing_found_current_operator_state_still_required"
     },
     {
       "id": "F5ZVA_VILLAPOURCON_CROSSBAND",
@@ -52,7 +55,8 @@
       "frequencies_mhz": [431.25, 145.25],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "cleared_for_internal_candidate_second_source_pass1",
+      "evidence_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json"
     },
     {
       "id": "F5ZXZ_COSNE_COURS_SUR_LOIRE_CROSSBAND",
@@ -63,7 +67,7 @@
       "frequencies_mhz": [431.1, 145.2125],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "blocked_conflicting_legacy_site_or_frequency_evidence_operator_clarification_required"
     },
     {
       "id": "F5ZFE_BARON_UHF",
@@ -74,7 +78,7 @@
       "frequencies_mhz": [433.2, 431.6],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "blocked_same_callsign_legacy_conflict_current_operator_confirmation_required"
     },
     {
       "id": "F5ZKM_MONTMELARD_CROSSBAND",
@@ -85,7 +89,7 @@
       "frequencies_mhz": [145.575, 432.575],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "independent_frequency_listing_found_current_operator_state_still_required"
     },
     {
       "id": "F5ZMS_SAINTE_FOY_CROSSBAND",
@@ -96,7 +100,7 @@
       "frequencies_mhz": [431.2375, 145.2375],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "operator_configuration_documented_but_current_state_second_source_still_required"
     },
     {
       "id": "F5ZTJ_BARON_UHF",
@@ -107,18 +111,19 @@
       "frequencies_mhz": [432.925, 431.325],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "regional_list_corrobates_pair_operator_confirmation_still_required"
     },
     {
       "id": "F5ZFQ_BELFORT_CROSSBAND",
       "department": 90,
       "call": "F5ZFQ",
-      "site": "Belfort",
+      "site": "Belfort / Ballon d’Alsace",
       "kind": "analog_crossband_transponder",
       "frequencies_mhz": [145.2625, 430.125],
       "ref_status": "Actif",
       "memory_delta_if_cleared": 2,
-      "state": "current_ref_active_second_source_required"
+      "state": "cleared_for_internal_candidate_second_source_pass1",
+      "evidence_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json"
     }
   ],
   "not_promoted": [

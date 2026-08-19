@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.1",
-  "status": "research_second_source_pass1_internal_candidate_43_not_public",
+  "schema_version": "1.2",
+  "status": "research_second_source_pass2_internal_candidate_47_not_public",
   "pack": "Bourgogne-Franche-Comté",
   "target_version": "0.3",
   "initialized_on": "2026-08-19",
@@ -12,18 +12,20 @@
   "published_base_sha256": "828af205aa07fe6685e3ad395ec2f0f56222fcfb5bb2f7b8f6a0bd4082714c0a",
   "backlog_file": "research/bourgogne-franche-comte-v0.3/backlog.json",
   "current_ref_audit_file": "research/bourgogne-franche-comte-v0.3/current-ref-audit.json",
-  "second_source_validation_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json",
+  "second_source_validation_pass1_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-2026-08-19.json",
+  "second_source_validation_pass2_file": "research/bourgogne-franche-comte-v0.3/second-source-validation-pass2-2026-08-19.json",
   "internal_candidate_file": "research/bourgogne-franche-comte-v0.3/internal-candidate-v0.3.json",
-  "current_candidate_memory_count": 43,
-  "current_new_memory_count": 6,
+  "latest_validation_pass": 2,
+  "current_candidate_memory_count": 47,
+  "current_new_memory_count": 10,
   "current_candidate_matches_public_v0_2": false,
   "public_export_allowed": false,
   "public_registry_allowed": false,
   "research_lead_station_count": 10,
   "research_lead_max_memory_delta_before_deduplication": 20,
-  "promoted_internal_station_count": 3,
-  "promoted_internal_memory_count": 6,
-  "remaining_unpromoted_lead_station_count": 7,
+  "promoted_internal_station_count": 5,
+  "promoted_internal_memory_count": 10,
+  "remaining_unpromoted_lead_station_count": 5,
   "research_leads_are_partially_promoted": true,
   "scope": {
     "priority": "publicly documented active analog FM infrastructure useful for UV-K5 receive-only listening",
@@ -48,6 +50,7 @@
     "stopped_status_not_promoted": true,
     "digital_only_not_blindly_promoted_into_analog_pack": true,
     "future_promotion_is_internal_candidate_not_publication": true,
-    "conflicting_secondary_evidence_blocks_promotion": true
+    "conflicting_secondary_evidence_blocks_promotion_until_resolved": true,
+    "historical_configuration_alone_is_not_current_state_confirmation": true
   }
 }

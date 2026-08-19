@@ -13,6 +13,8 @@ record02 = json.loads((ROOT / "research/bourgogne-franche-comte-v0.2/publication
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
 route = ROOT / "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv.ts"
+builder = ROOT / "website/src/lib/bfcPack.ts"
+region_page = ROOT / "website/src/pages/regions/[slug].astro"
 
 assert record02["version"] == "0.2"
 assert record02["memory_count"] == 37
@@ -69,10 +71,16 @@ assert len({round(float(row["frequency_mhz"]), 6) for row in new_rows}) == 17
 assert any(row["name"] == "CHAL-INFO" and float(row["frequency_mhz"]) == 118.605 for row in new_rows)
 
 assert route.is_file()
+assert builder.is_file()
 route_text = route.read_text(encoding="utf-8")
-assert 'buildMetropolitanPack("bourgogne-franche-comte", "v0.2")' in route_text
-assert 'name: "CHAL-INFO"' in route_text
-assert 'frequency_mhz: 118.605' in route_text
+builder_text = builder.read_text(encoding="utf-8")
+region_page_text = region_page.read_text(encoding="utf-8")
+assert 'buildBfcV03Pack' in route_text
+assert 'buildBfcV03Pack' in region_page_text
+assert 'buildMetropolitanPack("bourgogne-franche-comte", "v0.2")' in builder_text
+assert 'name: "CHAL-INFO"' in builder_text
+assert 'frequency_mhz: 118.605' in builder_text
+assert 'bfcV03MemoryCount = 54' in builder_text
 
 assert '{ id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 54, marine: false, aviation: 14, version: "v0.3" }' in registry
 region = next(item for item in regions if item["slug"] == "bourgogne-franche-comte")
@@ -80,4 +88,4 @@ assert region["status"] == "v0.3 disponible"
 assert region["memoryCount"] == 54
 assert region["available"] is True
 
-print("BFC v0.3 publication guard: 54 RX immutable release, hash frozen, gates zero, website endpoint and metadata synchronized, OK")
+print("BFC v0.3 publication guard: 54 RX immutable release, hash frozen, shared builder/route/region metadata synchronized, OK")

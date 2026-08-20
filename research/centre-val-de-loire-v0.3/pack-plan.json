@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "release_candidate_prepublication",
+  "status": "published_immutable",
   "pack": "Centre-Val de Loire",
   "target_version": "0.3",
   "updated_on": "2026-08-20",
@@ -11,6 +11,8 @@
   "published_base_sha256": "68e164763834e69dcd85dd9b1b67777e42922134be33d5e25738f4df71f2bb29",
   "current_candidate_memory_count": 51,
   "current_net_memory_delta": 9,
+  "public_csv_sha256": "0882c84133576fae7f6b3cba64efc32e915355c254e533ed9850eb0edf2ebaae",
+  "publication_record": "research/centre-val-de-loire-v0.3/publication-record.json",
   "blocks": {
     "national": {"memory_count":24},
     "aviation": {"memory_count":7,"cycle":"AIRAC 08/26"},
@@ -21,8 +23,8 @@
   "release_scope_file": "research/centre-val-de-loire-v0.3/release-scope.json",
   "review_checklist_file": "research/centre-val-de-loire-v0.3/review-checklist.json",
   "publication_gates_file": "research/centre-val-de-loire-v0.3/publication-gates.json",
-  "public_export_allowed": false,
-  "public_registry_allowed": false,
+  "public_export_allowed": true,
+  "public_registry_allowed": true,
   "rules": {
     "rx_only": true,
     "chirp_duplex": "off",

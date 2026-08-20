@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "status": "completed",
+  "pack": "Centre-Val de Loire",
+  "version": "0.3",
+  "reviewed_on": "2026-08-20",
+  "item_count": 10,
+  "reviewed_count": 10,
+  "items": [
+    {"id":"v02_immutable","reviewed":true},
+    {"id":"radio_current_state_review","reviewed":true},
+    {"id":"paired_rx_frequency_review","reviewed":true},
+    {"id":"source_conflicts_deferred","reviewed":true},
+    {"id":"stopped_f5zqy_removed_from_new_version","reviewed":true},
+    {"id":"airac08_context_current","reviewed":true},
+    {"id":"lflx_125_880_correction","reviewed":true},
+    {"id":"lfoz_122_405_addition","reviewed":true},
+    {"id":"rx_only_and_deduplication","reviewed":true},
+    {"id":"website_and_csv_route_sync","reviewed":true}
+  ]
+}

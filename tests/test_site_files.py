@@ -14,6 +14,7 @@ required_files = [
     "website/src/lib/annecyPack.ts",
     "website/src/lib/metropolitanPack.ts",
     "website/src/lib/bfcPack.ts",
+    "website/src/lib/centrePack.ts",
     "website/src/lib/packRegistry.ts",
     "website/src/data/regions.json",
     "website/src/pages/index.astro",
@@ -21,6 +22,7 @@ required_files = [
     "website/src/pages/regions/[slug].astro",
     "website/src/pages/downloads/[slug]/[file].csv.ts",
     "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv.ts",
+    "website/src/pages/downloads/centre-val-de-loire/radiopack-france-centre-val-de-loire-v0.3.csv.ts",
     "website/src/pages/generateur.astro",
     "website/src/pages/telechargements.astro",
     "website/src/pages/versions.astro",
@@ -67,7 +69,7 @@ assert next(region for region in regions if region["slug"] == "annecy-haute-savo
 assert next(region for region in regions if region["slug"] == "normandie")["memoryCount"] == 142
 assert next(region for region in regions if region["slug"] == "bretagne")["memoryCount"] == 151
 
-# The Sprint-98 v0.2 files remain immutable historical bases. BFC has since advanced publicly to v0.3.
+# Sprint-98 v0.2 files remain immutable historical bases; BFC and Centre have since advanced to v0.3.
 historical_v02 = {
     "hauts-de-france": (144, True),
     "ile-de-france": (58, False),
@@ -85,7 +87,7 @@ current_public = {
     "hauts-de-france": (144, "v0.2"),
     "ile-de-france": (58, "v0.2"),
     "grand-est": (59, "v0.2"),
-    "centre-val-de-loire": (42, "v0.2"),
+    "centre-val-de-loire": (51, "v0.3"),
     "pays-de-la-loire": (130, "v0.2"),
     "bourgogne-franche-comte": (54, "v0.3"),
     "nouvelle-aquitaine": (151, "v0.2"),
@@ -128,6 +130,7 @@ for expected in [
     'memoryCount: 77', 'memoryCount: 60', 'memoryCount: 142', 'memoryCount: 151',
     'const metropolitanMetadata = [', 'version: "v0.2"',
     '{ id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 54, marine: false, aviation: 14, version: "v0.3" }',
+    '{ id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 51, marine: false, aviation: 7, version: "v0.3" }',
     'downloadUrl: `/downloads/${item.id}/${filename}`',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
 ]:
@@ -163,6 +166,10 @@ bfc_builder = (ROOT / "website/src/lib/bfcPack.ts").read_text(encoding="utf-8")
 for expected in ["buildBfcV03Pack", "bfcV03MemoryCount = 54", 'name: "CHAL-INFO"', "frequency_mhz: 118.605"]:
     assert expected in bfc_builder, f"Builder BFC v0.3 incomplet: {expected}"
 
+centre_builder = (ROOT / "website/src/lib/centrePack.ts").read_text(encoding="utf-8")
+for expected in ["buildCentreV03Pack", "centreV03MemoryCount = 51", 'name: "CHR-TWR1"', "frequency_mhz: 125.88", 'name: "SDH-AFIS"', "frequency_mhz: 122.405"]:
+    assert expected in centre_builder, f"Builder Centre v0.3 incomplet: {expected}"
+
 chirp_pack = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
 for expected in ["validatePlacedChannels", "Pack trop grand", "Nom trop long", "Fréquence dupliquée", '"off"', '"0.000000"']:
     assert expected in chirp_pack, f"Garde CHIRP absent: {expected}"
@@ -190,7 +197,7 @@ assert "version: pack.version" in download_route
 assert '"Content-Type": "text/csv; charset=utf-8"' in download_route
 
 region_route = (ROOT / "website/src/pages/regions/[slug].astro").read_text(encoding="utf-8")
-for expected in ["getStaticPaths", "metropolitanPackDefinitions", "buildMetropolitanPack", "buildBfcV03Pack", "getPublicPack", "ChannelGroupDetails", "Duplex=off", "AIRAC 08/26", "VHF marine"]:
+for expected in ["getStaticPaths", "metropolitanPackDefinitions", "buildMetropolitanPack", "buildBfcV03Pack", "buildCentreV03Pack", "getPublicPack", "ChannelGroupDetails", "Duplex=off", "AIRAC 08/26", "VHF marine"]:
     assert expected in region_route
 
 release_v01 = (ROOT / "research/metropolitan-regions-v0.1-release.md").read_text(encoding="utf-8")
@@ -218,4 +225,4 @@ for expected in [
 ]:
     assert expected in readme, f"README historique incomplet: {expected}"
 
-print("Tests RadioPack repository/site: 13/13 metropolitan admin regions, 10 current v0.2 packs plus BFC v0.3=54, historical v0.1/v0.2 preserved, aviation/marine/paired-RX guards OK")
+print("Tests RadioPack repository/site: 13/13 metropolitan admin regions, BFC v0.3=54 and Centre v0.3=51, historical v0.1/v0.2 preserved, aviation/marine/paired-RX guards OK")

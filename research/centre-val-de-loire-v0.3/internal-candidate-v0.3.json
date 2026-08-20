@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "pack": "Centre-Val de Loire",
+  "version": "0.3",
+  "updated": "2026-08-20",
+  "published_base_version": "0.2",
+  "published_base_memory_count": 42,
+  "memory_count": 51,
+  "net_memory_delta": 9,
+  "national_memory_count": 24,
+  "aviation_memory_count": 7,
+  "radioamateur_memory_count": 20,
+  "public_export_allowed": true,
+  "public_registry_allowed": true,
+  "public_csv_sha256": "0882c84133576fae7f6b3cba64efc32e915355c254e533ed9850eb0edf2ebaae",
+  "publication_record": "research/centre-val-de-loire-v0.3/publication-record.json",
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "published_v0_2_immutable": true,
+    "no_artificial_fill": true
+  }
+}

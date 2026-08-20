@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-08-20",
+  "pack": "Centre-Val de Loire",
+  "version": "0.3",
+  "items": [
+    {"call":"F5ZNX","state":"deferred_mode_conflict","reason":"REF current=C4FM; secondary listing exposes FM/Fusion"},
+    {"call":"F5ZQY","state":"excluded_current_stop","reason":"current stop/off-air evidence"},
+    {"call":"F1ZBW","state":"deferred_operational_conflict","reason":"current-source state conflict"},
+    {"call":"F1ZVS","state":"deferred_pair_unresolved","reason":"exact current paired input not sufficiently resolved"},
+    {"call":"F1ZFQ","state":"deferred_test_state","reason":"REF state Test"},
+    {"call":"F5ZUQ","state":"deferred_operational_conflict","reason":"REF active versus local outage evidence"}
+  ],
+  "no_artificial_fill": true
+}

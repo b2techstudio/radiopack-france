@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "status": "published_zero_blockers",
+  "pack": "Centre-Val de Loire",
+  "version": "0.3",
+  "checked_on": "2026-08-20",
+  "blocker_count": 0,
+  "public_csv_sha256": "0882c84133576fae7f6b3cba64efc32e915355c254e533ed9850eb0edf2ebaae",
+  "checks": [
+    {"id":"scope_closed","pass":true},
+    {"id":"review_checklist_complete","pass":true},
+    {"id":"memory_count_51","pass":true},
+    {"id":"rx_only","pass":true},
+    {"id":"no_duplicate_rf","pass":true},
+    {"id":"no_artificial_fill","pass":true},
+    {"id":"historical_v0_2_immutable","pass":true},
+    {"id":"radio_source_conflicts_deferred","pass":true},
+    {"id":"aviation_airac08_review","pass":true},
+    {"id":"website_registry_sync","pass":true}
+  ],
+  "warnings": [
+    "F5ZNX remains deferred because the current REF mode classification conflicts with a secondary FM/Fusion listing.",
+    "F5ZQY is not carried into v0.3 because current evidence reports it stopped/off-air.",
+    "F1ZBW, F1ZVS, F1ZFQ and F5ZUQ remain deferred rather than guessed or force-filled.",
+    "Any aviation revision on or after 2026-09-03 requires AIRAC 09/26 revalidation plus NOTAM/SUP AIP review."
+  ]
+}

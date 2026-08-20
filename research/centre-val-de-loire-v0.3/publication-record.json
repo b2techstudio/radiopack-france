@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-20",
+  "publication_sprint": 100,
+  "state_version": "0.21.89",
+  "pack": "Centre-Val de Loire",
+  "version": "0.3",
+  "memory_count": 51,
+  "previous_public_version": "0.2",
+  "previous_public_memory_count": 42,
+  "public_route": "/downloads/centre-val-de-loire/radiopack-france-centre-val-de-loire-v0.3.csv",
+  "public_csv_sha256": "0882c84133576fae7f6b3cba64efc32e915355c254e533ed9850eb0edf2ebaae",
+  "hash_basis": "Fresh Astro production build from PR #25; tests/test_centre_v03_built_csv.py validated 51 unique RX rows and printed the SHA-256.",
+  "generator": "website/src/lib/centrePack.ts",
+  "download_route": "website/src/pages/downloads/centre-val-de-loire/radiopack-france-centre-val-de-loire-v0.3.csv.ts",
+  "pack_plan": "research/centre-val-de-loire-v0.3/pack-plan.json",
+  "release_scope": "research/centre-val-de-loire-v0.3/release-scope.json",
+  "review_checklist": "research/centre-val-de-loire-v0.3/review-checklist.json",
+  "publication_gates": "research/centre-val-de-loire-v0.3/publication-gates.json",
+  "radioamateur": {
+    "memory_count": 20,
+    "station_count": 10,
+    "kept_from_v0_2_station_count": 4,
+    "new_station_count": 6,
+    "new_memory_count": 12,
+    "not_carried_forward_from_v0_2": ["F5ZQY", "F5ZNX"],
+    "deferred_calls": ["F5ZNX", "F1ZBW", "F1ZVS", "F1ZFQ", "F5ZUQ"]
+  },
+  "aviation": {
+    "memory_count": 7,
+    "cycle": "AIRAC 08/26",
+    "valid_from": "2026-08-06",
+    "valid_through_inclusive": "2026-09-02",
+    "reviewed_on": "2026-08-20",
+    "corrected_frequency": {"icao":"LFLX","old_mhz":125.875,"new_mhz":125.88},
+    "added_memory": {"icao":"LFOZ","frequency_mhz":122.405},
+    "direct_xml_field_match_claimed": false,
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
+  },
+  "marine_memory_count": 0,
+  "published_version_is_immutable": true,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "no_artificial_fill": true,
+    "source_conflict_blocks_promotion": true,
+    "private_ppdr_operational_data_excluded": true,
+    "release_is_non_exhaustive": true
+  }
+}

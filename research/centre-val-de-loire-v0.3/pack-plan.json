@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "status": "release_candidate_prepublication",
+  "pack": "Centre-Val de Loire",
+  "target_version": "0.3",
+  "updated_on": "2026-08-20",
+  "based_on_published_version": "0.2",
+  "published_base_memory_count": 42,
+  "published_base_is_immutable": true,
+  "published_base_record": "research/centre-val-de-loire-v0.2/publication-record.json",
+  "published_base_sha256": "68e164763834e69dcd85dd9b1b67777e42922134be33d5e25738f4df71f2bb29",
+  "current_candidate_memory_count": 51,
+  "current_net_memory_delta": 9,
+  "blocks": {
+    "national": {"memory_count":24},
+    "aviation": {"memory_count":7,"cycle":"AIRAC 08/26"},
+    "radioamateur_analog": {"memory_count":20,"station_count":10}
+  },
+  "radio_validation_file": "research/centre-val-de-loire-v0.3/radio-validation-2026-08-20.json",
+  "aviation_validation_file": "research/centre-val-de-loire-v0.3/aviation-airac08-2026-08-20.json",
+  "release_scope_file": "research/centre-val-de-loire-v0.3/release-scope.json",
+  "review_checklist_file": "research/centre-val-de-loire-v0.3/review-checklist.json",
+  "publication_gates_file": "research/centre-val-de-loire-v0.3/publication-gates.json",
+  "public_export_allowed": false,
+  "public_registry_allowed": false,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_verified_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "published_v0_2_must_not_be_modified": true,
+    "no_artificial_fill": true,
+    "source_conflict_blocks_promotion": true,
+    "stopped_infrastructure_not_carried_forward": true,
+    "private_ppdr_operational_data_excluded": true,
+    "airac09_revalidation_required_for_publication_on_or_after_2026_09_03": true
+  }
+}

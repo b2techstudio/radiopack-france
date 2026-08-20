@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "status": "scope_closed",
+  "pack": "Centre-Val de Loire",
+  "version": "0.3",
+  "closed_on": "2026-08-20",
+  "memory_count": 51,
+  "net_memory_delta_vs_v0_2": 9,
+  "national_memory_count": 24,
+  "aviation_memory_count": 7,
+  "radioamateur_memory_count": 20,
+  "radioamateur_station_count": 10,
+  "new_radioamateur_station_count": 6,
+  "new_radioamateur_memory_count": 12,
+  "v0_2_radio_memories_not_carried_forward": 4,
+  "historical_v0_2_immutable": true,
+  "airac_cycle": "AIRAC 08/26",
+  "release_is_non_exhaustive": true,
+  "rx_only": true,
+  "deferred": {
+    "radioamateur_calls": ["F5ZNX", "F1ZBW", "F1ZVS", "F1ZFQ", "F5ZUQ"],
+    "excluded_stopped": ["F5ZQY"]
+  },
+  "rules": {
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx": true,
+    "same_rf_frequency_deduplicated": true,
+    "no_artificial_fill": true,
+    "private_ppdr_operational_data_excluded": true,
+    "unresolved_mode_or_status_not_promoted": true
+  }
+}

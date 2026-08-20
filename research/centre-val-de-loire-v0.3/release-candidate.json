@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "status": "ready_for_ci_hash",
+  "pack": "Centre-Val de Loire",
+  "version": "0.3",
+  "memory_count": 51,
+  "checked_on": "2026-08-20",
+  "builder": "website/src/lib/centrePack.ts",
+  "download_route": "website/src/pages/downloads/centre-val-de-loire/radiopack-france-centre-val-de-loire-v0.3.csv.ts",
+  "built_csv_test": "tests/test_centre_v03_built_csv.py",
+  "sha256": null
+}

@@ -7,12 +7,7 @@
     "accent": "purple",
     "description": "Pack de 142 mémoires RX : PMR446, marine, aviation, APRS/ISS, appels et radioamateur analogique vérifié.",
     "memoryCount": 142,
-    "categories": [
-      "PMR446 RX",
-      "VHF marine RX",
-      "Radioamateur RX",
-      "Aviation RX"
-    ],
+    "categories": ["PMR446 RX", "VHF marine RX", "Radioamateur RX", "Aviation RX"],
     "available": true
   },
   {
@@ -23,12 +18,7 @@
     "accent": "cyan",
     "description": "Pack RX de 77 mémoires pour les Alpes du Nord et le bassin lémanique, avec variante 60 mémoires sans aviation.",
     "memoryCount": 77,
-    "categories": [
-      "France & Suisse",
-      "Radioamateur analogique",
-      "Aviation RX",
-      "APRS / ISS / satellites"
-    ],
+    "categories": ["France & Suisse", "Radioamateur analogique", "Aviation RX", "APRS / ISS / satellites"],
     "available": true
   },
   {
@@ -39,13 +29,7 @@
     "accent": "blue",
     "description": "Pack de 151 mémoires RX : socle Bretagne v0.1 complété par 16 mémoires aviation AIRAC 08/26, toujours en réception seule.",
     "memoryCount": 151,
-    "categories": [
-      "PMR446 RX",
-      "VHF marine RX",
-      "Radioamateur RX",
-      "Aviation RX",
-      "Ch64 / Ch79 RX"
-    ],
+    "categories": ["PMR446 RX", "VHF marine RX", "Radioamateur RX", "Aviation RX", "Ch64 / Ch79 RX"],
     "available": true
   },
   {
@@ -56,13 +40,7 @@
     "accent": "purple",
     "description": "Pack enrichi v0.2 de 144 mémoires RX : aviation, VHF marine, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 144,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX",
-      "VHF marine RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX", "VHF marine RX"],
     "available": true
   },
   {
@@ -73,12 +51,7 @@
     "accent": "cyan",
     "description": "Pack enrichi v0.2 de 58 mémoires RX : aviation, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 58,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX"],
     "available": true
   },
   {
@@ -89,28 +62,18 @@
     "accent": "purple",
     "description": "Pack enrichi v0.2 de 59 mémoires RX : aviation, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 59,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX"],
     "available": true
   },
   {
     "slug": "centre-val-de-loire",
     "name": "Centre-Val de Loire",
     "shortName": "Centre-Val de Loire",
-    "status": "v0.2 disponible",
+    "status": "v0.3 disponible",
     "accent": "cyan",
-    "description": "Pack enrichi v0.2 de 42 mémoires RX : aviation, APRS/ISS et relais FM 2 m paired RX.",
-    "memoryCount": 42,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX"
-    ],
+    "description": "Pack enrichi v0.3 de 51 mémoires RX : aviation AIRAC 08/26, APRS/ISS, relais FM 2 m/70 cm et transpondeurs crossband analogiques vérifiés.",
+    "memoryCount": 51,
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX"],
     "available": true
   },
   {
@@ -121,13 +84,7 @@
     "accent": "purple",
     "description": "Pack enrichi v0.2 de 130 mémoires RX : aviation, VHF marine, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 130,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX",
-      "VHF marine RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX", "VHF marine RX"],
     "available": true
   },
   {
@@ -138,12 +95,7 @@
     "accent": "cyan",
     "description": "Pack enrichi v0.3 de 54 mémoires RX : aviation AIRAC 08/26, APRS/ISS, relais FM 2 m/70 cm et transpondeurs crossband analogiques vérifiés.",
     "memoryCount": 54,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX"],
     "available": true
   },
   {
@@ -154,13 +106,7 @@
     "accent": "purple",
     "description": "Pack enrichi v0.2 de 151 mémoires RX : aviation, VHF marine, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 151,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX",
-      "VHF marine RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX", "VHF marine RX"],
     "available": true
   },
   {
@@ -171,12 +117,7 @@
     "accent": "cyan",
     "description": "Pack enrichi v0.2 de 62 mémoires RX : aviation, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 62,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX"],
     "available": true
   },
   {
@@ -187,13 +128,7 @@
     "accent": "purple",
     "description": "Pack enrichi v0.2 de 156 mémoires RX : aviation, VHF marine, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 156,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX",
-      "VHF marine RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX", "VHF marine RX"],
     "available": true
   },
   {
@@ -204,13 +139,7 @@
     "accent": "cyan",
     "description": "Pack enrichi v0.2 de 159 mémoires RX : aviation, VHF marine, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 159,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX",
-      "VHF marine RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX", "VHF marine RX"],
     "available": true
   },
   {
@@ -221,13 +150,7 @@
     "accent": "purple",
     "description": "Pack enrichi v0.2 de 137 mémoires RX : aviation, VHF marine, APRS/ISS et relais FM 2 m paired RX.",
     "memoryCount": 137,
-    "categories": [
-      "PMR446 RX",
-      "Radioamateur RX",
-      "APRS / ISS",
-      "Aviation RX",
-      "VHF marine RX"
-    ],
+    "categories": ["PMR446 RX", "Radioamateur RX", "APRS / ISS", "Aviation RX", "VHF marine RX"],
     "available": true
   }
 ]

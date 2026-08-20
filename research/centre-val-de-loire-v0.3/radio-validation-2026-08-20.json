@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-08-20",
+  "pack": "Centre-Val de Loire",
+  "target_version": "0.3",
+  "published_base_version": "0.2",
+  "published_base_memory_count": 42,
+  "kept_from_v0_2": [
+    {"call":"F5ZHF","site":"Orléans","frequencies_mhz":[145.625,145.025]},
+    {"call":"F5ZDE","site":"Aigurande-sur-Bouzanne","frequencies_mhz":[145.6375,145.0375]},
+    {"call":"F5ZVB","site":"Amilly","frequencies_mhz":[145.675,145.075]},
+    {"call":"F5ZLP","site":"Mazières-de-Touraine","frequencies_mhz":[145.7375,145.1375]}
+  ],
+  "promoted": [
+    {"call":"F5ZSQ","site":"Bonneval","kind":"70cm_fm_repeater","frequencies_mhz":[430.275,431.875],"memory_count":2,"evidence":"REF current + independent frequency table"},
+    {"call":"F5ZXW","site":"Celon","kind":"analog_crossband_transponder","frequencies_mhz":[145.2875,431.0875],"memory_count":2,"evidence":"REF current + RepeaterBook"},
+    {"call":"F6ZAW","site":"Vineuil","kind":"analog_crossband_transponder","frequencies_mhz":[145.575,433.5375],"memory_count":2,"evidence":"REF current + RepeaterBook + local club"},
+    {"call":"F5ZUZ","site":"Saint-Epain","kind":"70cm_fm_repeater","frequencies_mhz":[430.3375,439.7375],"memory_count":2,"evidence":"REF current + RepeaterBook + local/RI49 listing"},
+    {"call":"F5ZAP","site":"Égry","kind":"70cm_fm_repeater","frequencies_mhz":[430.375,439.775],"memory_count":2,"evidence":"REF current analog entry + F5KIA operator memo + RepeaterBook"},
+    {"call":"F1ZFY","site":"Orléans","kind":"70cm_fm_repeater","frequencies_mhz":[433.3,434.9],"memory_count":2,"evidence":"REF current analog entry"}
+  ],
+  "not_carried_forward_from_v0_2": [
+    {"call":"F5ZQY","reason":"current stop/off-air evidence; replaced operationally in local area by F6ZAW for this analog listening scope"},
+    {"call":"F5ZNX","reason":"current REF classifies C4FM while RepeaterBook still exposes FM/Fusion; analog mode conflict remains unresolved"}
+  ],
+  "deferred": [
+    {"call":"F1ZBW","reason":"current-source operational conflict"},
+    {"call":"F1ZVS","reason":"current output is visible but exact paired input was not sufficiently resolved in this review"},
+    {"call":"F1ZFQ","reason":"REF state is Test, not promoted as current stable infrastructure"},
+    {"call":"F5ZUQ","reason":"REF lists active but local outage evidence creates an unresolved operational conflict"}
+  ],
+  "sources": [
+    "https://www.r-e-f.org/",
+    "https://www.repeaterbook.com/row_repeaters/Display_SS.php?state_id=FR",
+    "https://f5kia.com/wp-content/uploads/2024/09/memento-des-relais-du-radio-club-2024.pdf"
+  ],
+  "result": {
+    "kept_station_count": 4,
+    "new_station_count": 6,
+    "analog_radio_memory_count": 20,
+    "removed_or_deferred_v0_2_memory_count": 4,
+    "new_radio_memory_count": 12
+  },
+  "rules": {
+    "rx_only": true,
+    "paired_rx": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "no_artificial_fill": true,
+    "source_conflict_blocks_promotion": true
+  }
+}

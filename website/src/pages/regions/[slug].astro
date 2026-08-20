@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
 import { buildStandardChannelGroups, type ChannelMemory } from "../../lib/channelDetails";
 import { buildBfcV03Pack } from "../../lib/bfcPack";
+import { buildCentreV03Pack } from "../../lib/centrePack";
 import { getPublicPack } from "../../lib/packRegistry";
 import {
   buildMetropolitanPack,
@@ -22,8 +23,14 @@ const { pack } = Astro.props as { pack: MetropolitanPackDefinition };
 const publicPack = getPublicPack(pack.id);
 const publicVariant = publicPack?.variants.find((variant) => variant.id === publicPack.defaultVariant) ?? publicPack?.variants[0];
 const isBfcV03 = pack.id === "bourgogne-franche-comte" && publicPack?.version === "v0.3";
+const isCentreV03 = pack.id === "centre-val-de-loire" && publicPack?.version === "v0.3";
+const isAdvancedV03 = isBfcV03 || isCentreV03;
 const version = publicPack?.version ?? pack.version;
-const placed = isBfcV03 ? buildBfcV03Pack() : buildMetropolitanPack(pack.id, pack.version);
+const placed = isBfcV03
+  ? buildBfcV03Pack()
+  : isCentreV03
+    ? buildCentreV03Pack()
+    : buildMetropolitanPack(pack.id, pack.version);
 const memoryCount = placed.length;
 if (publicVariant && publicVariant.memoryCount !== memoryCount) {
   throw new Error(`${pack.id}: registry=${publicVariant.memoryCount}, built=${memoryCount}`);
@@ -40,9 +47,14 @@ const channelGroups = buildStandardChannelGroups(memories);
 const filename = publicVariant?.filename ?? pack.filename;
 const downloadUrl = publicVariant?.downloadUrl ?? `/downloads/${pack.id}/${filename}`;
 const aviationCount = placed.filter(({ channel }) => channel.mode === "AM").length;
-const selectedInfrastructureCount = isBfcV03 ? pack.repeaters.length + 5 : pack.repeaters.length;
-const regionalChannelCount = isBfcV03 ? pack.repeaters.length * 2 + 10 : pack.repeaters.length * 2;
+const selectedInfrastructureCount = isBfcV03 ? pack.repeaters.length + 5 : isCentreV03 ? 10 : pack.repeaters.length;
+const regionalChannelCount = isBfcV03 ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : pack.repeaters.length * 2;
 const marineCount = pack.includeMarine ? 90 : 0;
+const radioScopeLabel = isAdvancedV03
+  ? "relais FM 2 m/70 cm et transpondeurs crossband analogiques"
+  : "relais FM 2 m";
+const radioRangeLabel = isBfcV03 ? "70+ / 80+" : isCentreV03 ? "70+ / 82+" : "70+";
+const aviationRangeLabel = isBfcV03 ? "40+ / 90+" : "40+";
 ---
 <BaseLayout
   title={`Pack ${pack.name} ${version} - RadioPack France`}
@@ -55,7 +67,7 @@ const marineCount = pack.includeMarine ? 90 : 0;
         <h1>{pack.name}</h1>
         <p class="lead">
           Une version régionale enrichie sur le modèle des packs matures : socle national RX, aviation SIA
-          revue dans le contexte AIRAC courant, sélection de {isBfcV03 ? "relais FM 2 m/70 cm et transpondeurs crossband analogiques" : "relais FM 2 m"} en paired RX{pack.includeMarine ? ", et module VHF marine complet" : ""}.
+          revue dans le contexte AIRAC courant, sélection de {radioScopeLabel} en paired RX{pack.includeMarine ? ", et module VHF marine complet" : ""}.
           Le contenu reste borné aux données publiques suffisamment vérifiables et utiles à l'écoute.
         </p>
         <div class="button-row">
@@ -74,15 +86,15 @@ const marineCount = pack.includeMarine ? 90 : 0;
             <span><b>0–15</b> PMR446 · 16</span>
             <span><b>20–21</b> Appels radioamateur · 2</span>
             <span><b>30–35</b> APRS / ISS · 6</span>
-            <span><b>{isBfcV03 ? "40+ / 90+" : "40+"}</b> Aviation AM · {aviationCount}</span>
-            <span><b>{isBfcV03 ? "70+ / 80+" : "70+"}</b> {isBfcV03 ? "Relais / transpondeurs analogiques paired RX" : "Relais FM 2 m paired RX"} · {regionalChannelCount}</span>
+            <span><b>{aviationRangeLabel}</b> Aviation AM · {aviationCount}</span>
+            <span><b>{radioRangeLabel}</b> {isAdvancedV03 ? "Relais / transpondeurs analogiques paired RX" : "Relais FM 2 m paired RX"} · {regionalChannelCount}</span>
             {pack.includeMarine && <span><b>100–189</b> VHF marine · {marineCount}</span>}
           </div>
           <p class="scope-note">
             Aviation : contexte SIA AIRAC 08/26 recoupé avec les pages eAIP publiques effectives ; aucune extraction XML champ par champ n'est revendiquée.
             {pack.includeMarine ? " Le littoral justifie l'intégration du module VHF marine national." : " Le module VHF marine reste séparé pour cette région intérieure."}
           </p>
-          <p class="scope-note">{isBfcV03 ? "Les pistes radioamateur ou aviation encore ambiguës sont différées plutôt que publiées sans preuve suffisante." : "UHF, numérique et services privés restent hors publication tant qu'une revue dédiée n'a pas validé chaque fréquence et son intérêt d'écoute."}</p>
+          <p class="scope-note">{isAdvancedV03 ? "Les pistes radioamateur ou aviation encore ambiguës sont différées plutôt que publiées sans preuve suffisante." : "UHF, numérique et services privés restent hors publication tant qu'une revue dédiée n'a pas validé chaque fréquence et son intérêt d'écoute."}</p>
         </div>
 
         <ChannelGroupDetails
@@ -102,9 +114,9 @@ const marineCount = pack.includeMarine ? 90 : 0;
           <li>{selectedInfrastructureCount} infrastructures analogiques sélectionnées</li>
           <li>paired RX : sortie + entrée vérifiée</li>
           {pack.includeMarine && <li>90 mémoires VHF marine</li>}
-          <li>{isBfcV03 ? "v0.2 historique conservée" : "v0.1 historique conservée"}</li>
+          <li>{isAdvancedV03 ? "v0.2 historique conservée" : "v0.1 historique conservée"}</li>
         </ul>
-        <p class="source-note">Revue sources : {metropolitanSourceNotes.checkedOn}</p>
+        <p class="source-note">Revue sources : {isCentreV03 ? "2026-08-20" : metropolitanSourceNotes.checkedOn}</p>
       </aside>
     </div>
   </section>

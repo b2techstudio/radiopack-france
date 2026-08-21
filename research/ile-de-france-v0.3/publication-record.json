@@ -11,7 +11,7 @@
   "previous_public_memory_count": 58,
   "planned_public_route": "/downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv",
   "candidate_csv_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
-  "hash_basis": "Deterministic internal candidate rebuilt by tools/build_idf_v03_candidate.py; the builder first reconstructs immutable v0.2 and requires frozen public SHA dbcdb placeholder not used; exact v0.2 SHA is recorded in base_public_csv_sha256.",
+  "hash_basis": "Deterministic internal candidate rebuilt by tools/build_idf_v03_candidate.py. The builder first reconstructs immutable public v0.2 and requires the exact frozen SHA-256 recorded in base_public_csv_sha256 before it can build the v0.3 candidate.",
   "base_public_csv_sha256": "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d",
   "builder": "tools/build_idf_v03_candidate.py",
   "candidate_csv": "research/ile-de-france-v0.3/generated/release-candidate/radiopack-france-ile-de-france-v0.3-candidate.csv",

@@ -26,13 +26,41 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
 
-## Sprint 101 — ouverture Île-de-France v0.3
+## Sprint 101 — Île-de-France v0.3, deuxième passe
 
-Le Sprint **101 / 0.21.90** ouvre officiellement Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont **18 aviation**. Il s'agit d'un checkpoint de recherche : aucun CSV public, aucun numéro de version public ni aucun SHA de publication n'est modifié.
+Le Sprint **101 / 0.21.90** poursuit Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont **18 aviation**. Le travail reste un checkpoint de recherche : aucun CSV public, aucun numéro de version public ni aucun SHA de publication n'est modifié.
 
-La première passe garde **F5ZNG, F5ZNN, F5ZMH et F1ZHK** comme base de travail ; **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont les nouveaux candidats les mieux étayés. **F5ZAD** et **F1ZUX** ne sont plus reconduits automatiquement. **F1ZSY, F5ZEQ, F5ZDR** et le crossband **F5ZNN** restent différés/bloqués par les gates documentés ; **F5ZBK** et **F1ZTC** demandent encore une seconde corroboration actuelle.
+### Radioamateur
 
-L'aviation reste sur **AIRAC 08/26 jusqu'au 2 septembre 2026 inclus**. La revue AD 2.18 et NOTAM/SUP AIP reste ouverte ; toute publication ou nouvelle validation à partir du **3 septembre 2026** devra être reprise sur **AIRAC 09/26**.
+Le calcul de travail provisoire est désormais de **57 RX** si les blocs nationaux et aviation restent inchangés. Ce nombre n'est pas un release candidate.
+
+- **F5ZNG, F5ZNN, F5ZMH et F1ZHK** restent dans la base de travail ;
+- **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** restent les nouveaux ajouts directs ;
+- **F6ZEE Pontault-Combault** reprend les RF 145.100 / 145.700 MHz de l'ancienne attribution F1ZSY, sans delta RF net ;
+- le crossband **F5ZNN 145.650 / 430.650 MHz** est validé avec déduplication : seule 430.650 MHz ajoute une mémoire ;
+- **F5ZEQ** n'est pas reconduit tant que son opérateur le signale hors service pour maintenance ;
+- **F5ZBK** et **F1ZDL** restent en attente d'une seconde corroboration opérationnelle actuelle ;
+- **F1ZTC** et **F5ZDR** restent différés.
+
+### Aviation
+
+AIRAC **08/26** est applicable jusqu'au **2 septembre 2026 inclus**. Le sous-ensemble de **18 mémoires aviation** reste inchangé dans le calcul provisoire, delta 0.
+
+- **LFPG / Paris Charles-de-Gaulle** : les quatre APP v0.2 118.155, 119.855, 121.155 et 124.355 MHz sont revalidées directement sur l'AD 2.18 SIA courant ;
+- des APP LFPG supplémentaires actuelles ont été observées mais ne sont pas promues sans décision de périmètre complète ;
+- **LFPO / Paris-Orly** et **LFPB / Paris-Le Bourget** : la capture directe AD 2.18 AIRAC 08/26 et la revue NOTAM/SUP restent ouvertes ;
+- toute publication ou nouvelle validation à partir du **3 septembre 2026** exigera AIRAC 09/26.
+
+### Gates encore ouverts
+
+- F5ZBK : seconde source actuelle ;
+- F1ZDL : seconde source actuelle ;
+- F1ZTC : réconciliation état/fréquences ;
+- F5ZDR : état analogique stable ;
+- LFPO : revalidation directe AIRAC 08/26 ;
+- LFPB : revalidation directe AIRAC 08/26 ;
+- revue NOTAM/SUP AIP LFPG/LFPO/LFPB ;
+- décision de périmètre pour toute fréquence aviation supplémentaire.
 
 Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
 
@@ -76,11 +104,7 @@ Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ;
 
 ### Île-de-France v0.3
 
-Travail actif officiel. La base publique reste **v0.2 / 58 RX / 18 aviation**, immuable.
-
-Le checkpoint du **21 août 2026** est dans `research/ile-de-france-v0.3/`. La revue actuelle ne constitue pas encore un candidat de publication : **F5ZAD** et **F1ZUX** ne sont plus reconduits automatiquement ; **F1ZSY** et **F5ZEQ** restent bloqués par des conflits de sources/état ; **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont les nouveaux candidats les mieux étayés ; **F5ZBK** et **F1ZTC** demandent encore une seconde corroboration actuelle. Le cas crossband **F5ZNN** doit être résolu avec la déduplication RF avant comptage final.
-
-L'aviation reste sur la photographie **AIRAC 08/26** jusqu'au 2 septembre 2026 inclus. La revue AD 2.18 et NOTAM/SUP AIP reste ouverte ; aucune modification RF aviation n'est promue dans ce checkpoint. Toute publication à partir du **3 septembre 2026** exigera AIRAC 09/26.
+Travail actif officiel. Base publique **v0.2 / 58 RX / 18 aviation**, immuable. Compteur de travail provisoire **57 RX**, dont **18 aviation provisoires**. `release_candidate_memory_count` reste `null`.
 
 Aucun CSV public ni registre de version n'est modifié tant que les gates radio et aviation ne sont pas fermés.
 

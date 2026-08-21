@@ -1,25 +1,23 @@
 # RadioPack France
 
-**Couverture publique au 19 août 2026 : les 13 régions administratives de France métropolitaine disposent désormais d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
+**Couverture publique au 21 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 98 / 0.21.87 — consolidation officielle des onze packs métropolitains v0.2, avec couverture 13/13, publication records, scopes figés et SHA-256 issus d'un build Astro frais.**
+**État courant : Sprint 100 / 0.21.89 — Bourgogne-Franche-Comté v0.3 et Centre-Val de Loire v0.3 sont publiées et immuables ; les neuf autres régions métropolitaines issues de l'enrichissement restent en v0.2 avant leur future passe v0.3.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
-## Couverture métropolitaine complète — 19 août 2026
+## Couverture métropolitaine complète
 
-La couverture administrative métropolitaine est **13/13**. Normandie et Bretagne conservent leurs versions publiques matures ; les onze autres régions disposent maintenant d'une **v0.2 enrichie**, tandis que leur v0.1 reste historique et immuable. Annecy–Alpes–Léman reste un pack territorial spécialisé en complément.
-
-Packs publics actuels :
+La couverture administrative métropolitaine est **13/13**. Les packs publics actuels sont :
 
 - **Normandie v0.4** — 142 mémoires RX ;
 - **Bretagne v0.2** — 151 mémoires RX ;
 - **Hauts-de-France v0.2** — 144 mémoires RX ;
 - **Île-de-France v0.2** — 58 mémoires RX ;
 - **Grand Est v0.2** — 59 mémoires RX ;
-- **Centre-Val de Loire v0.2** — 42 mémoires RX ;
+- **Centre-Val de Loire v0.3** — 51 mémoires RX, dont 7 aviation ;
 - **Pays de la Loire v0.2** — 130 mémoires RX ;
-- **Bourgogne-Franche-Comté v0.2** — 37 mémoires RX ;
+- **Bourgogne-Franche-Comté v0.3** — 54 mémoires RX, dont 14 aviation ;
 - **Nouvelle-Aquitaine v0.2** — 151 mémoires RX ;
 - **Auvergne-Rhône-Alpes v0.2** — 62 mémoires RX ;
 - **Occitanie v0.2** — 156 mémoires RX ;
@@ -27,15 +25,9 @@ Packs publics actuels :
 - **Corse v0.2** — 137 mémoires RX ;
 - **Annecy–Alpes–Léman v0.4** — 77 mémoires RX, variante 60 sans aviation.
 
-Les variantes par défaut représentent **1505 mémoires RX cumulées** dans le catalogue public. Ce total est un indicateur de catalogue : chaque fichier reste indépendant et respecte la limite de la radio.
+Les variantes par défaut représentent **1531 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
 
-### Périmètre des onze v0.2 enrichies
-
-Chaque pack v0.2 conserve le socle PMR446, appels radioamateur et APRS/ISS, puis ajoute une sélection aviation AM revue sur les pages publiques SIA eAIP AD 2.18 dans le contexte AIRAC 08/26 et une sélection régionale de relais FM 2 m en paired RX. Les six régions littorales concernées intègrent également le module national VHF marine de 90 mémoires.
-
-Les v0.1 restent générables à leurs URL historiques et ne sont jamais réécrites. UHF, numérique et réseaux privés/PPDR restent hors publication tant qu'une revue dédiée ne justifie pas leur présence. Le but est d'enrichir utilement les packs, pas de remplir artificiellement les 200 mémoires.
-
-La synthèse de l'enrichissement est `research/metropolitan-regions-v0.2-enrichment.md`. Chaque région dispose d'un dossier `research/<region>-v0.2/` avec un `README.md` et un `pack-plan.json` traçant blocs, sources, exclusions et compteurs.
+Le projet couvre actuellement les **13 régions métropolitaines**. Les cinq régions d'outre-mer ne sont pas encore incluses dans cette couverture.
 
 ## Contrat RX-only et paired RX
 
@@ -50,162 +42,93 @@ Règles permanentes :
 - les données privées, PPDR, chiffrées ou non publiquement vérifiables restent exclues ;
 - la présence d'une fréquence dans un fichier n'accorde jamais un droit d'émission.
 
-Les CSV générés par `website/src/lib/chirpPack.ts` appliquent systématiquement le contrat public RX-only. Les nouvelles routes régionales utilisent le même validateur de noms, emplacements, fréquences, doublons et limite mémoire.
+Les CSV générés par `website/src/lib/chirpPack.ts` appliquent ce contrat, ainsi que la validation des noms, emplacements, doublons RF et limite mémoire.
 
-## Sources des nouvelles régions
+## Méthode d'enrichissement v0.3
 
-La sélection FM 2 m des v0.2 a été revue le 19 août 2026 à partir de sources publiques complémentaires :
+Chaque future v0.3 régionale suit désormais le même processus :
 
-- plan de bande 144–146 MHz du REF ;
-- annuaire France RepeaterBook pour les fréquences et sites actuellement publiés ;
-- roster français F5AIB/REF comme seconde vérification des relais et indicatifs ;
-- Open Data ANFR comme contexte institutionnel sur les installations radio.
+1. partir de la dernière version publique immuable ;
+2. revalider les relais et transpondeurs analogiques 2 m / 70 cm / crossband à partir de sources publiques actuelles ;
+3. représenter les paires distinctes en paired RX ;
+4. revoir systématiquement l'aviation sur les sources SIA/eAIP du cycle AIRAC applicable, avec NOTAM/SUP AIP lorsque nécessaire ;
+5. différer les fréquences ambiguës plutôt que les deviner ;
+6. construire le CSV de façon déterministe, vérifier RX-only, déduplication et taille ;
+7. figer scope, checklist, gates, `publication-record.json` et SHA-256 du build Astro avant publication.
 
-L'aviation est en plus contrôlée sur les pages publiques SIA eAIP AD 2.18 dans le contexte AIRAC 08/26. Le dépôt ne transforme jamais une présence dans un annuaire en garantie absolue de disponibilité terrain ; toute évolution RF nécessite une nouvelle validation.
+Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé.
 
-## Site public
+## Sprint 100 — Centre-Val de Loire v0.3
 
-Le site Astro expose désormais le même registre sur toutes les vues principales :
+Le **Sprint 100 / 0.21.89** publie Centre-Val de Loire v0.3 à **51 RX**. La v0.2 de 42 RX reste historique et immuable.
 
-- `/regions` — 14 cartes publiques, dont les 13 régions administratives métropolitaines ;
-- `/regions/<slug>` — pages détaillées des onze v0.2 enrichies générées depuis la définition déterministe ;
-- `/generateur` — sélection de tous les packs publics ;
-- `/telechargements` — tous les CSV régionaux et les modules nationaux ;
-- `/versions` — état et nombre de mémoires de chaque version ;
-- `/sitemap.xml` — toutes les pages régionales publiées.
+La version comprend **20 mémoires radioamateur analogiques** sur dix infrastructures et **7 mémoires aviation AM**. La revue aviation corrige Châteauroux-Déols de 125.875 à **125.880 MHz** et ajoute Saint-Denis-de-l'Hôtel **122.405 MHz**. F5ZQY n'est pas reconduit dans la v0.3 ; F5ZNX et les dossiers insuffisamment prouvés restent différés.
 
-Les onze URL CSV v0.2 et leurs URL historiques v0.1 sont générées au build par `website/src/pages/downloads/[slug]/[file].csv.ts`. Les versions historiques Normandie, Bretagne et Annecy restent des artefacts publics immuables.
+SHA-256 public : `0882c84133576fae7f6b3cba64efc32e915355c254e533ed9850eb0edf2ebaae`.
 
-## Publication post-Sprint 97 — enrichissement métropolitain v0.2
+Références : `research/centre-val-de-loire-v0.3/publication-record.json` et `research/sprint-100-summary.md`.
 
-Les onze régions ajoutées lors de la couverture 13/13 ont été enrichies sans réécrire leurs v0.1. Les packs v0.2 combinent désormais aviation SIA, relais FM 2 m paired RX et, pour les régions littorales, VHF marine. Le contrôle SIA final a notamment corrigé les libellés/fichiers Hauts-de-France, Île-de-France et Grand Est avant publication ; la validation de déduplication reste active.
+## Sprint 99 — Bourgogne-Franche-Comté v0.3
 
-Cette publication reste postérieure au Sprint 97 et ne modifie pas l'état logique officiel **97 / 0.21.86**.
+Le **Sprint 99 / 0.21.88** publie Bourgogne-Franche-Comté v0.3 à **54 RX**. La v0.2 de 37 RX reste historique et immuable.
 
-## État actuel — Sprint 98 / 0.21.87
+La v0.3 ajoute dix mémoires radioamateur analogiques validées et porte l'aviation à **14 mémoires**. Les pistes encore insuffisamment corroborées restent différées.
 
-Le **Sprint 98 / 0.21.87** est l'état logique officiel synchronisé dans `PROJECT_STATUS.md`, `CHANGELOG.md` et `research/project-resume-state.json`. Il consolide la publication métropolitaine v0.2 sans modifier les fréquences ni le contenu des CSV publics.
+SHA-256 public : `b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5`.
 
-Repère historique conservé pour les garde-fous du dépôt : **État actuel — Sprint 39**.
-
-Versions historiques toujours conservées :
-
-- Normandie v0.3.1 — 139 mémoires RX, historique immuable ;
-- Annecy–Alpes–Léman v0.3 — 76 / 59, historique immuable ;
-- Bretagne v0.1 — 135 mémoires RX, historique immuable.
-
-Recherche active antérieure conservée : Normandie v0.5 reste à **142 RX** avec un plafond potentiel connu de **147 mémoires** hors F6ZES ; Bretagne v0.3 reste à **151 RX** en attente de la revalidation AIRAC 09/26 prévue à partir du 3 septembre 2026.
+Références : `research/bourgogne-franche-comte-v0.3/publication-record.json` et `research/sprint-99-summary.md`.
 
 ## Sprint 98 — consolidation des onze v0.2
 
-Les onze packs métropolitains v0.2 disposent désormais chacun d'un scope figé, d'une checklist 10/10, de gates de publication satisfaits et d'un `publication-record.json` contenant le SHA-256 du CSV issu d'un build Astro frais. Le manifeste commun est `research/sprint-98-metropolitan-publication-manifest.json` et le résumé est `research/sprint-98-summary.md`.
+Le Sprint 98 / 0.21.87 a consolidé les onze packs métropolitains v0.2 avec scopes figés, checklists 10/10, gates satisfaits, publication records et SHA-256 issus d'un build Astro frais. Le manifeste commun est `research/sprint-98-metropolitan-publication-manifest.json` et le résumé est `research/sprint-98-summary.md`.
 
-Le Sprint 98 ne change aucune mémoire RF : il rend la publication du 19 août reproductible et verrouille l'immuabilité des v0.2. Les v0.1 restent historiques et générables.
+Le Sprint 98 n'a modifié aucune mémoire RF : il a rendu la publication reproductible et verrouillé l'immuabilité des v0.2 et de leurs v0.1 historiques.
 
 ## Sprint 97 — consolidation de l’état post-Sprint 96
 
-Le Sprint 97 a consolidé les raffinements UX ajoutés après le Sprint 96 : détails de canaux régionaux construits depuis les CSV publics, raccourcis du générateur accessibles au clavier et synchronisation officielle du dépôt sur **97 / 0.21.86**.
+Le Sprint 97 / 0.21.86 a consolidé les raffinements UX ajoutés après le Sprint 96 : détails de canaux régionaux construits depuis les CSV publics, raccourcis du générateur accessibles au clavier et synchronisation du registre public.
 
 Références : `research/sprint-97-summary.md` et `research/sprint-97-post96-ui-state.json`.
 
-## Sprint 91 — Bretagne v0.3 AIRAC09 handoff
+## Travaux encore ouverts
 
-Bretagne v0.3 reste à **151 RX**, delta 0, avec revalidation AIRAC 09/26 prévue à partir du 3 septembre 2026 ; aucune anticipation de publication.
+**Bretagne v0.3** reste à 151 RX, delta 0, en attente de la revalidation AIRAC 09/26 à partir du **3 septembre 2026**. **Normandie v0.5** reste à 142 RX, delta 0 ; R3/F1ZBX et F5ZHA nécessitent toujours du terrain, F1ZOV reste sous surveillance d'état opérateur et F6ZES demeure sans fréquence/mode public suffisamment établi.
 
-## Sprint 90 — Normandie v0.5 source refresh
+Après BFC et Centre, les neuf régions métropolitaines encore en v0.2 seront traitées une par une, en commençant par **Île-de-France**.
 
-Normandie v0.5 reste à **142 RX**, delta 0. Les gates terrain/source R3, F5ZHA, F1ZOV et F6ZES restent inchangés.
+## Site public
 
-## Sprint 89 — Annecy v0.4 candidat
+Le site Astro expose un registre commun sur les vues principales :
 
-Le candidat Annecy–Alpes–Léman v0.4 était figé à **77 RX / 60 sans aviation** avant sa publication ultérieure immuable.
+- `/regions` — 14 cartes publiques, dont les 13 régions administratives métropolitaines ;
+- `/regions/<slug>` — détail de chaque pack ;
+- `/generateur` — sélection des packs publics ;
+- `/telechargements` — CSV régionaux et modules nationaux ;
+- `/versions` — versions et compteurs ;
+- `/sitemap.xml` — pages régionales publiées.
 
-## Repères historiques importants
-
-### Normandie v0.4 / v0.5 — Mortain-Bocage / Sud-Manche
-
-Le suivi historique couvre notamment F5ZHY, F6ZES, F6ZCE, F1ZBX, F5ZHA et F1ZOV. La source de synthèse est `research/normandie-v0.4/mortain-bocage-coverage.json`. Le principe `sourdeval_must_not_be_guessed: true` reste un garde-fou permanent. Les outils `build_normandie_v04_readiness_report.py` et `build_normandie_v04_promotion_scenarios.py` restent disponibles.
-
-Le dossier F5ZHA conserve son historique de validation dans `research/normandie-v0.4/f5zha-mortain-validation.json`. Une observation terrain est une preuve de revue, jamais une autorisation automatique de publication.
-
-### Bretagne
-
-La v0.2 publique reste immuable à 151 RX et la v0.1 historique reste conservée. Les principaux dossiers de preuve restent :
-
-- `research/bretagne-v0.1/public-maritime-radio.json` ;
-- `research/bretagne-v0.1/publication-record.json` ;
-- `research/bretagne-v0.1/release-scope.json` ;
-- `research/bretagne-v0.1/review-checklist.json` ;
-- `research/sprint-73-summary.md` ;
-- `tools/build_bretagne_internal_candidate.py` ;
-- `tools/build_bretagne_review_snapshot.py` ;
-- `tools/run_bretagne_prepublication_audit.py` ;
-- `tests/test_bretagne_internal_candidate.py` ;
-- `tests/test_bretagne_prepublication_review.py` ;
-- `tests/test_bretagne_public_release.py` ;
-- `tests/test_sprint73_bretagne_publication.py` ;
-- `website/src/pages/regions/bretagne.astro` ;
-- `website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv`.
-
-Ch64 et Ch79 restent historiquement traités comme paires RX génériques lorsque l'attribution locale n'est pas prouvée ; une attribution future ne doit pas dupliquer une RF déjà présente.
-
-### Annecy–Alpes–Léman
-
-La v0.4 publique reste immuable à 77 RX / 60 sans aviation. Les travaux paired RX et la publication des versions v0.3/v0.4 restent documentés sous `research/annecy-alpes-leman-v0.3/` et `research/annecy-alpes-leman-v0.4/`.
+Les versions historiques restent disponibles sous leurs URLs immuables lorsqu'elles font partie du contrat de publication.
 
 ## Workflow régional
 
-Le processus est décrit dans `REGIONAL-PACK-WORKFLOW.md` :
-
-1. collecter uniquement des sources publiques ;
-2. enregistrer preuves, conflits et exclusions ;
-3. ne promouvoir que les données qui franchissent les gates de revue ;
-4. construire le pack de façon déterministe ;
-5. valider RX-only, taille, noms et déduplication ;
-6. publier sous une nouvelle version immuable ;
-7. mettre à jour registre, site, tests et documentation.
+Le processus détaillé est décrit dans `REGIONAL-PACK-WORKFLOW.md` : collecter uniquement des sources publiques, enregistrer preuves/conflits/exclusions, ne promouvoir que les données franchissant les gates de revue, construire de façon déterministe, tester, puis publier une nouvelle version immuable.
 
 Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint.
 
 ## Tests principaux
 
 ```powershell
-python tests\test_paired_rx_policy.py
-python tests\test_mortain_bretagne_radio_research.py
-python tests\test_normandie_v04_readiness.py
-python tests\test_bretagne_v02_public_release.py
 python tests\test_site_files.py
 python tests\test_pack_registry.py
 python tests\test_web_generator.py
 python tests\test_sprint97_state_sync.py
+python tests\test_sprint98_state_sync.py
+python tests\test_sprint100_state_sync.py
 
 cd website
 npm ci
 npm run build
 cd ..
 ```
-
-Le build Astro génère aussi les onze nouveaux CSV métropolitains et les tests du catalogue construit vérifient les artefacts publics.
-
-## Synchronisation locale
-
-```powershell
-cd "C:\Users\cross\Documents\CODE\PROJETS\RadioPack-France"
-git pull --ff-only
-
-python tests\test_site_files.py
-python tests\test_pack_registry.py
-python tests\test_web_generator.py
-python tests\test_sprint97_state_sync.py
-
-cd website
-npm ci
-npm run build
-cd ..
-
-git status
-```
-
-Résultat attendu : `nothing to commit, working tree clean`.
 
 Les exports RadioPack sont destinés à l'écoute ; voir `NOTICE_LEGAL.md`.

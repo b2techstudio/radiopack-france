@@ -10,6 +10,7 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 
 - Normandie v0.4 : **142 mémoires RX**, publiée et immuable.
 - Annecy–Alpes–Léman v0.4 : **77 mémoires RX**, variante **60 sans aviation**, publiée et immuable.
+- Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Hauts-de-France v0.2 : **144 mémoires RX**, publiée et immuable.
 - Île-de-France v0.2 : **58 mémoires RX**, publiée et immuable.
@@ -49,6 +50,18 @@ Le Sprint **97 / 0.21.86** a consolidé les détails de canaux régionaux alimen
 
 Références : `research/sprint-97-summary.md` et `research/sprint-97-post96-ui-state.json`.
 
+## Sprint 91 — Bretagne v0.3 AIRAC09 handoff
+
+Le candidat reste à **151 RX, delta 0**. AIRAC 08/26 est courant jusqu'au 2 septembre 2026 inclus ; AIRAC 09/26 doit être revalidé à partir du 3 septembre avant toute publication v0.3.
+
+## Sprint 90 — Normandie v0.5 source refresh
+
+Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ; F1ZOV reste sous surveillance d'état opérateur et F6ZES reste sans fréquence/mode public suffisamment établi.
+
+## Sprint 89 — Annecy v0.4 candidat
+
+État historique avant publication : **77 RX / 60 sans aviation**, +1 RF 50.5375 MHz. Ce candidat est ensuite devenu la v0.4 publique immuable.
+
 ## Travaux ouverts
 
 ### Île-de-France v0.3
@@ -57,11 +70,11 @@ Prochaine région métropolitaine à enrichir. La base publique est **v0.2 / 58 
 
 ### Bretagne v0.3
 
-Candidat **151 RX, delta 0**. AIRAC 08/26 reste valable jusqu'au 2 septembre 2026 inclus ; la publication v0.3 reste bloquée jusqu'à la revalidation AIRAC 09/26 à partir du **3 septembre 2026**.
+Candidat **151 RX, delta 0**. Publication bloquée jusqu'à la revalidation AIRAC 09/26 à partir du **3 septembre 2026**.
 
 ### Normandie v0.5
 
-Candidat **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent encore du terrain ; F1ZOV reste sous surveillance d'état opérateur et F6ZES reste sans fréquence/mode public suffisamment établi.
+Candidat **142 RX, delta 0** avec les gates terrain/source historiques toujours ouverts.
 
 ## Contrat permanent
 

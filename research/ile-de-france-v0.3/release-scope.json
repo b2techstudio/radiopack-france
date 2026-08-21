@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "pack": "Île-de-France",
   "target_version": "0.3",
-  "status": "deterministic_release_candidate_built_prepublication_open",
+  "status": "prepublication_ready_not_published",
   "published_base": {
     "version": "0.2",
     "memory_count": 58,
@@ -30,8 +30,12 @@
     "latest_aviation_pass": "research/ile-de-france-v0.3/aviation-validation-pass4-2026-08-21.json",
     "candidate_manifest": "research/ile-de-france-v0.3/generated/release-candidate/candidate-manifest.json",
     "candidate_csv": "research/ile-de-france-v0.3/generated/release-candidate/radiopack-france-ile-de-france-v0.3-candidate.csv",
+    "review_checklist": "research/ile-de-france-v0.3/review-checklist.json",
+    "publication_gates": "research/ile-de-france-v0.3/publication-gates.json",
+    "publication_record": "research/ile-de-france-v0.3/publication-record.json",
     "candidate_memory_count": 57,
     "candidate_aviation_memory_count": 18,
+    "candidate_regional_radio_memory_count": 15,
     "candidate_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
   },
   "excluded": [
@@ -52,11 +56,15 @@
     "rx_only_validation_passed": true,
     "rf_deduplication_passed": true,
     "memory_limit_passed": true,
-    "publication_record_frozen": false
+    "review_checklist_complete": true,
+    "publication_gates_zero_blockers": true,
+    "publication_record_frozen": true
   },
   "freshness_gate": {
     "airac08_publication_allowed_through_inclusive": "2026-09-02",
     "airac09_revalidation_required_on_or_after": "2026-09-03"
   },
-  "publication_ready": false
+  "public_mutation_performed": false,
+  "publication_ready": true,
+  "published": false
 }

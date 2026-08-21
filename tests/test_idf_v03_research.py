@@ -25,7 +25,7 @@ class IleDeFranceV03ResearchTests(unittest.TestCase):
         self.assertTrue(radio["rules"]["no_artificial_fill"])
         self.assertTrue(radio["rules"]["source_conflict_blocks_promotion"])
 
-    def test_known_conflicts_are_not_silently_promoted(self):
+    def test_initial_checkpoint_conflicts_are_not_silently_promoted(self):
         radio = load_json("radio-validation-2026-08-21.json")
         promoted = {item["call"] for item in radio["promoted_for_working_candidate"]}
         deferred = {item["call"] for item in radio["deferred"]}
@@ -37,7 +37,67 @@ class IleDeFranceV03ResearchTests(unittest.TestCase):
         self.assertTrue(promoted.isdisjoint(deferred))
         self.assertTrue(promoted.isdisjoint(removed))
 
-    def test_promoted_working_candidate_has_no_duplicate_rf(self):
+    def test_second_pass_closes_attribution_and_dedup_decisions(self):
+        pass2 = load_json("radio-validation-pass2-2026-08-21.json")
+        decisions = pass2["decisions"]
+
+        keep = {item["call"] for item in decisions["closed_keep_gate"]}
+        replacements = {item["call"] for item in decisions["validated_existing_rf_replacement"]}
+        extensions = {item["call"] for item in decisions["validated_deduplicated_extension"]}
+        not_carried = {item["call"] for item in decisions["not_carried_forward_now"]}
+        deferred = {item["call"] for item in decisions["still_deferred"]}
+        pending = {item["call"] for item in decisions["pending_independent_current_corroboration"]}
+
+        self.assertIn("F1ZHK", keep)
+        self.assertEqual(replacements, {"F6ZEE"})
+        self.assertEqual(extensions, {"F5ZNN-crossband"})
+        self.assertEqual(not_carried, {"F1ZSY", "F5ZEQ"})
+        self.assertEqual(deferred, {"F1ZTC", "F5ZDR"})
+        self.assertEqual(pending, {"F5ZBK", "F1ZDL"})
+
+        replacement = decisions["validated_existing_rf_replacement"][0]
+        self.assertEqual(set(replacement["frequencies_mhz"]), {145.1, 145.7})
+        self.assertEqual(replacement["replaces_v0_2_attribution"], "F1ZSY")
+        self.assertEqual(replacement["net_new_rf_memory_count_vs_v0_2"], 0)
+
+        extension = decisions["validated_deduplicated_extension"][0]
+        self.assertEqual(extension["already_present_rf_mhz"], [145.65])
+        self.assertEqual(extension["unique_new_frequencies_mhz"], [430.65])
+        self.assertEqual(extension["memory_count"], 1)
+
+    def test_second_pass_provisional_memory_arithmetic_is_explicit(self):
+        pass2 = load_json("radio-validation-pass2-2026-08-21.json")
+        accounting = pass2["provisional_memory_accounting"]
+
+        expected = (
+            accounting["published_v0_2_total"]
+            - accounting["removed_v0_2_station_pair_memories"]
+            + accounting["replacement_existing_rf_memories"]
+            + accounting["direct_new_promoted_rf_memories_from_pass1"]
+            + accounting["deduplicated_extension_new_rf_memories"]
+        )
+        self.assertEqual(expected, 57)
+        self.assertEqual(
+            accounting["provisional_working_memory_count_if_aviation_and_national_blocks_unchanged"],
+            57,
+        )
+        self.assertIsNone(accounting["release_candidate_memory_count"])
+        self.assertFalse(pass2["result"]["radio_source_conflicts_closed"])
+        self.assertFalse(pass2["result"]["radio_memory_accounting_final"])
+        self.assertFalse(pass2["result"]["publication_ready"])
+
+    def test_second_pass_contract_remains_rx_only(self):
+        pass2 = load_json("radio-validation-pass2-2026-08-21.json")
+        self.assertTrue(pass2["rules"]["rx_only"])
+        self.assertTrue(pass2["rules"]["paired_rx"])
+        self.assertTrue(pass2["rules"]["same_rf_deduplicated"])
+        self.assertTrue(pass2["rules"]["no_artificial_fill"])
+        self.assertTrue(pass2["rules"]["source_conflict_blocks_promotion"])
+        self.assertTrue(pass2["rules"]["local_operator_status_overrides_general_directory_for_current_state"])
+        self.assertEqual(pass2["rules"]["chirp_duplex"], "off")
+        self.assertEqual(pass2["rules"]["chirp_offset"], "0.000000")
+
+    def test_promoted_initial_working_candidate_has_no_duplicate_rf(self):
         radio = load_json("radio-validation-2026-08-21.json")
         frequencies = [
             frequency
@@ -62,6 +122,8 @@ class IleDeFranceV03ResearchTests(unittest.TestCase):
         self.assertEqual(scope["published_base"]["version"], "0.2")
         self.assertEqual(scope["published_base"]["memory_count"], 58)
         self.assertTrue(scope["published_base"]["immutable"])
+        self.assertEqual(scope["research_evidence"]["provisional_working_memory_count"], 57)
+        self.assertFalse(scope["research_evidence"]["provisional_count_is_release_candidate"])
         self.assertFalse(scope["publication_ready"])
         self.assertTrue(all(value is False for value in scope["publication_gates"].values()))
 

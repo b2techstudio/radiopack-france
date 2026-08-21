@@ -1,0 +1,43 @@
+name: IDF v0.3 Research Guards
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "research/ile-de-france-v0.3/**"
+      - "tests/test_idf_v03_research.py"
+      - ".github/workflows/idf-v03-research.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/ile-de-france-v0.3/**"
+      - "tests/test_idf_v03_research.py"
+      - ".github/workflows/idf-v03-research.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  research-guard:
+    name: Validate IDF v0.3 checkpoint
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Test Île-de-France v0.3 research checkpoint
+        run: python tests/test_idf_v03_research.py
+
+      - name: Ensure public pack registry remains valid
+        run: python tests/test_pack_registry.py

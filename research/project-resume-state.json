@@ -23,6 +23,9 @@
   "active_work": {
     "pack":"Bretagne","target_version":"0.3","status":"airac09_future_handoff_prepared_waiting_effective_date","public_base_version":"0.2","public_base_memory_count":151,"candidate_memory_count":151,"candidate_memory_delta":0,"airac_current":"08/26","airac_current_until_inclusive":"2026-09-02","airac_next_required":"09/26","airac_next_effective_from":"2026-09-03","publication_allowed_before_airac09_revalidation":false,"handoff":"research/bretagne-v0.3/airac09-handoff.json"
   },
+  "annecy_v0_4_research": {
+    "status":"historical_candidate_state_before_publication","based_on_public_version":"0.3","public_version_remains":"0.3","candidate_memory_count":77,"candidate_without_aviation_memory_count":60,"candidate_memory_delta":1,"added_frequency_mhz":50.5375,"added_memory_name":"ZTH-6M","full_candidate_sha256":"2557076fcb198b830cd3b5ba64d7ff894c8e0d6e90eafc0fa40b691a3c6a5d98","without_aviation_candidate_sha256":"e31bfc6fce402af117b4f79caf6547b60a23c91ef36491e1351c74e96329aa6c","compatibility_review":"research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json","builder":"tools/build_annecy_v04_candidate.py","published":false
+  },
   "normandie_v0_5_latest_refresh": {
     "status":"current_sources_refreshed_zero_delta_field_blocked","candidate_memory_count":142,"candidate_memory_delta":0,"known_potential_ceiling_excluding_f6zes":147,"field_required":["R3_F1ZBX","F5ZHA"],"source_watch":["F1ZOV","F6ZES"],"evidence":"research/normandie-v0.5/sprint90-source-refresh.json"
   },
@@ -39,23 +42,7 @@
     "sprint":100,"state_version":"0.21.89","completed_on":"2026-08-20","status":"centre_val_de_loire_v03_published_immutable","memory_count":51,"previous_public_version":"0.2","previous_memory_count":42,"aviation_memory_count":7,"publication_record":"research/centre-val-de-loire-v0.3/publication-record.json","public_csv_sha256":"0882c84133576fae7f6b3cba64efc32e915355c254e533ed9850eb0edf2ebaae","summary":"research/sprint-100-summary.md"
   },
   "sources_of_truth": [
-    "research/project-resume-state.json",
-    "research/sprint-97-summary.md",
-    "research/sprint-97-post96-ui-state.json",
-    "website/src/components/ChannelGroupDetails.astro",
-    "website/src/lib/channelDetails.ts",
-    "website/src/scripts/generator-pack-shortcuts.js",
-    "website/src/pages/generateur.astro",
-    "tests/test_sprint97_state_sync.py",
-    "research/sprint-98-summary.md",
-    "research/sprint-98-metropolitan-publication-manifest.json",
-    "tools/check_metropolitan_v02_publication_records.py",
-    "tests/test_sprint98_state_sync.py",
-    "research/bourgogne-franche-comte-v0.3/publication-record.json",
-    "research/sprint-99-summary.md",
-    "research/centre-val-de-loire-v0.3/publication-record.json",
-    "research/sprint-100-summary.md",
-    "website/src/lib/packRegistry.ts"
+    "research/project-resume-state.json","research/sprint-89-summary.md","research/sprint-90-summary.md","research/sprint-91-summary.md","research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json","research/normandie-v0.5/sprint90-source-refresh.json","research/bretagne-v0.3/airac09-handoff.json","research/sprint-97-summary.md","research/sprint-97-post96-ui-state.json","website/src/components/ChannelGroupDetails.astro","website/src/lib/channelDetails.ts","website/src/scripts/generator-pack-shortcuts.js","website/src/pages/generateur.astro","tests/test_sprint97_state_sync.py","research/sprint-98-summary.md","research/sprint-98-metropolitan-publication-manifest.json","tools/check_metropolitan_v02_publication_records.py","tests/test_sprint98_state_sync.py","research/bourgogne-franche-comte-v0.3/publication-record.json","research/sprint-99-summary.md","research/centre-val-de-loire-v0.3/publication-record.json","research/sprint-100-summary.md","website/src/lib/packRegistry.ts"
   ],
   "recent_sprints": [
     {"sprint":100,"state_version":"0.21.89","summary":"Centre-Val de Loire v0.3 published immutable at 51 RX with 7 aviation memories and a frozen fresh-build SHA-256.","summary_file":"research/sprint-100-summary.md"},
@@ -64,15 +51,6 @@
     {"sprint":97,"state_version":"0.21.86","summary":"Post-Sprint 96 UX refinements consolidated into the official state; no RF or public CSV mutation.","summary_file":"research/sprint-97-summary.md"}
   ],
   "resume_rules": {
-    "published_versions_are_immutable":true,
-    "all_exported_memories_tx_disabled":true,
-    "verified_distinct_pair_uses_two_rx_memories":true,
-    "unresolved_frequency_must_not_be_guessed":true,
-    "private_ppdr_operational_data_excluded":true,
-    "no_artificial_fill":true,
-    "current_airac_cycle_boundary_must_be_respected_for_aviation_promotion":true,
-    "aviation_freshness_must_be_rechecked_if_publication_occurs_after_current_airac_window":true,
-    "publication_record_hash_must_match_public_csv":true,
-    "historical_public_csv_must_be_retained":true
+    "published_versions_are_immutable":true,"all_exported_memories_tx_disabled":true,"verified_distinct_pair_uses_two_rx_memories":true,"unresolved_frequency_must_not_be_guessed":true,"private_ppdr_operational_data_excluded":true,"no_artificial_fill":true,"current_airac_cycle_boundary_must_be_respected_for_aviation_promotion":true,"aviation_freshness_must_be_rechecked_if_publication_occurs_after_current_airac_window":true,"publication_record_hash_must_match_public_csv":true,"historical_public_csv_must_be_retained":true
   }
 }

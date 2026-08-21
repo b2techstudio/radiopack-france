@@ -21,7 +21,7 @@ assert state["state_version"] == "0.21.90"
 assert "**État courant : Sprint 101 / 0.21.90" in readme
 assert "Sprint courant : **101**" in project
 assert "État logique : **0.21.90**" in project
-assert "candidat déterministe **57 RX**" in project
+assert "candidat déterministe **57 RX / 18 aviation / 15 radio régionales**" in project
 assert changelog.startswith("# Changelog\n\n## 0.21.90 - 2026-08-21")
 
 idf_public = state["public_packs"]["ile_de_france"]

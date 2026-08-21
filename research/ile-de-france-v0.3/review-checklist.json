@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "status": "completed_prepublication_not_published",
+  "pack": "Île-de-France",
+  "version": "0.3",
+  "reviewed_on": "2026-08-21",
+  "item_count": 12,
+  "reviewed_count": 12,
+  "items": [
+    {"id":"v02_immutable_and_sha_reconstructed","reviewed":true},
+    {"id":"radio_scope_closed","reviewed":true},
+    {"id":"radio_source_conflicts_excluded_or_resolved","reviewed":true},
+    {"id":"paired_rx_and_crossband_dedup_review","reviewed":true},
+    {"id":"aviation_airac08_scope_revalidated","reviewed":true},
+    {"id":"lfpo_sup_notam_scope_review","reviewed":true},
+    {"id":"lfpb_current_notam_frequency_review","reviewed":true},
+    {"id":"candidate_57_18_15_counts_verified","reviewed":true},
+    {"id":"candidate_sha_deterministic","reviewed":true},
+    {"id":"rx_only_and_unique_rf_validation","reviewed":true},
+    {"id":"memory_limit_200_validation","reviewed":true},
+    {"id":"airac09_freshness_boundary_recorded","reviewed":true}
+  ],
+  "public_mutation_performed": false
+}

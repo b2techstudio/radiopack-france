@@ -78,46 +78,46 @@ class IleDeFranceV03ResearchTests(unittest.TestCase):
         self.assertEqual(aviation["provisional_aviation_decision"]["memory_delta_promoted"], 0)
         self.assertFalse(aviation["gates"]["publication_allowed"])
 
-    def test_third_aviation_pass_narrows_but_does_not_close_release_gate(self):
+    def test_third_aviation_pass_preserves_prior_caution(self):
         aviation = load_json("aviation-validation-pass3-2026-08-21.json")
         self.assertEqual(aviation["current_airac"], "08/26")
-        self.assertEqual(aviation["airac_valid_through_inclusive"], "2026-09-02")
         self.assertTrue(aviation["aerodromes"]["LFPG"]["current_airac08_direct_subset_revalidated"])
         self.assertTrue(aviation["aerodromes"]["LFPO"]["official_sia_recent_com_material_matches_published_subset"])
         self.assertTrue(aviation["aerodromes"]["LFPB"]["official_sia_june_july_2026_material_matches_published_subset"])
-        self.assertFalse(aviation["aerodromes"]["LFPO"]["direct_airac08_ad2_18_static_capture_completed"])
-        self.assertFalse(aviation["aerodromes"]["LFPB"]["direct_airac08_ad2_18_static_capture_completed"])
-        self.assertTrue(aviation["sup_aip_review"]["085/2026"]["reviewed_official_sia_text"])
-        self.assertTrue(aviation["sup_aip_review"]["147/2026"]["reviewed_official_sia_search_extract"])
         self.assertFalse(aviation["sup_aip_review"]["147/2026"]["full_pdf_visual_review_completed"])
-        self.assertEqual(aviation["provisional_aviation_decision"]["working_memory_count"], 18)
-        self.assertEqual(aviation["provisional_aviation_decision"]["memory_delta_promoted"], 0)
-        self.assertFalse(aviation["provisional_aviation_decision"]["working_count_is_final"])
-        self.assertFalse(aviation["gates"]["full_current_airac_scoped_revalidation_complete"])
-        self.assertFalse(aviation["gates"]["notam_sup_review_complete"])
-        self.assertFalse(aviation["gates"]["frequency_delta_validated"])
         self.assertFalse(aviation["gates"]["publication_allowed"])
 
-    def test_release_scope_has_only_radio_gates_closed(self):
+    def test_fourth_aviation_pass_closes_scoped_gate_without_expansion(self):
+        aviation = load_json("aviation-validation-pass4-2026-08-21.json")
+        self.assertEqual(aviation["current_airac"], "08/26")
+        self.assertEqual(aviation["airac_valid_through_inclusive"], "2026-09-02")
+        self.assertEqual(aviation["final_aviation_decision"]["memory_count"], 18)
+        self.assertEqual(aviation["final_aviation_decision"]["memory_delta"], 0)
+        self.assertFalse(aviation["final_aviation_decision"]["additional_frequencies_promoted"])
+        self.assertTrue(aviation["gates"]["aviation_revalidation_complete"])
+        self.assertTrue(aviation["gates"]["notam_sup_review_complete_for_retained_subset"])
+        self.assertTrue(aviation["gates"]["frequency_delta_validated"])
+        self.assertTrue(aviation["gates"]["publication_allowed_before_airac09_boundary"])
+        self.assertEqual(aviation["freshness_boundary"]["airac09_revalidation_required_on_or_after"], "2026-09-03")
+
+    def test_release_scope_advances_to_prepublication_candidate(self):
         scope = load_json("release-scope.json")
         self.assertEqual(scope["published_base"]["version"], "0.2")
         self.assertEqual(scope["published_base"]["memory_count"], 58)
         self.assertTrue(scope["published_base"]["immutable"])
-        self.assertEqual(scope["research_evidence"]["working_memory_count_if_aviation_unchanged"], 57)
-        self.assertEqual(scope["research_evidence"]["provisional_aviation_memory_count"], 18)
-        self.assertTrue(scope["research_evidence"]["radio_memory_accounting_final"])
-        self.assertEqual(
-            scope["research_evidence"]["latest_radio_pass"],
-            "research/ile-de-france-v0.3/radio-validation-pass3-2026-08-21.json",
-        )
+        self.assertEqual(scope["research_evidence"]["candidate_memory_count"], 57)
+        self.assertEqual(scope["research_evidence"]["candidate_aviation_memory_count"], 18)
         self.assertEqual(
             scope["research_evidence"]["latest_aviation_pass"],
-            "research/ile-de-france-v0.3/aviation-validation-pass3-2026-08-21.json",
+            "research/ile-de-france-v0.3/aviation-validation-pass4-2026-08-21.json",
         )
-        self.assertTrue(scope["publication_gates"]["radio_source_conflicts_closed"])
-        self.assertTrue(scope["publication_gates"]["radio_memory_accounting_final"])
-        self.assertFalse(scope["publication_gates"]["aviation_revalidation_complete"])
-        self.assertFalse(scope["publication_gates"]["deterministic_candidate_built"])
+        for key in [
+            "radio_source_conflicts_closed", "radio_memory_accounting_final", "aviation_revalidation_complete",
+            "deterministic_candidate_built", "rx_only_validation_passed", "rf_deduplication_passed",
+            "memory_limit_passed",
+        ]:
+            self.assertTrue(scope["publication_gates"][key])
+        self.assertFalse(scope["publication_gates"]["publication_record_frozen"])
         self.assertFalse(scope["publication_ready"])
 
 

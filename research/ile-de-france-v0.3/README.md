@@ -1,10 +1,10 @@
-# Île-de-France v0.3 — checkpoint de recherche
+# Île-de-France v0.3 — release candidate interne
 
-Checkpoint ouvert le **21 août 2026** à partir de la **v0.2 publique immuable de 58 mémoires RX**.
+Travail ouvert le **21 août 2026** à partir de la **v0.2 publique immuable de 58 mémoires RX**.
 
-Ce dossier ne constitue **pas encore** un candidat de publication. Aucun CSV public n'est modifié. Après trois passes, le **scope radio est finalisé pour cette reprise** ; l'aviation reste le seul gate de release.
+Le dossier contient désormais un **release candidate interne déterministe de 57 mémoires RX**. Il n'est **pas encore publié** : la v0.2 publique reste inchangée, le publication record v0.3 n'est pas gelé et `publication_ready` reste à `false`.
 
-## Radioamateur — troisième passe
+## Radioamateur — scope final
 
 Historique conservé dans :
 
@@ -12,7 +12,7 @@ Historique conservé dans :
 - `radio-validation-pass2-2026-08-21.json` ;
 - `radio-validation-pass3-2026-08-21.json`.
 
-### Retenus dans le scope courant
+### Retenus dans le candidat
 
 - **F5ZNG Provins** — 145.625 / 145.025 MHz ;
 - **F5ZNN Saint-Rémy-la-Vanne** — 145.650 / 145.050 MHz ;
@@ -28,36 +28,61 @@ Historique conservé dans :
 - **F5ZAD**, **F1ZUX** : non reconduits depuis les passes précédentes ;
 - **F1ZSY** : ancienne attribution remplacée par F6ZEE sur le même jeu RF ;
 - **F5ZEQ** : non reconduit tant que l'opérateur le signale hors service pour maintenance ;
-- **F1ZTC**, **F5ZDR**, **F5ZBK**, **F1ZDL** : exclus de cette v0.3 faute de preuve opérationnelle actuelle suffisante. Ils restent dans le backlog et pourront être réévalués plus tard ; cette décision ne prétend pas qu'ils sont définitivement hors service.
+- **F1ZTC**, **F5ZDR**, **F5ZBK**, **F1ZDL** : exclus de cette v0.3 faute de preuve opérationnelle actuelle suffisante. Ils restent dans le backlog ; cette décision ne les déclare pas définitivement hors service.
 
-### Comptage radio final du scope
+Le bloc radio régional final contient **15 RF uniques**.
 
-Si les **18 mémoires aviation** restent inchangées :
+## Aviation — scope final AIRAC 08/26
 
-`58 - 8 + 2 + 4 + 1 = 57`
+Le candidat conserve les **18 mémoires aviation** déjà présentes dans la v0.2, sans expansion et avec un delta de **0**.
 
-Le **57** est désormais le compteur de travail radio final pour ce scope, mais **pas encore un release candidate** car l'aviation n'est pas fermée.
+- **LFPG / Paris-CDG** : sous-ensemble retenu revalidé directement sur le SIA AIRAC 08/26 ;
+- **LFPO / Paris-Orly** : catalogue COM SIA courant, matériel AD 2.18 officiel, SUP AIP **085/2026** et **147/2026** et revue NOTAM de la fenêtre courante utilisés pour valider le sous-ensemble retenu ;
+- **LFPB / Paris-Le Bourget** : le NOTAM courant A2706/26 confirme les valeurs 8.33 kHz ATIS/GND/TWR/DEL retenues et le matériel SIA 2026 confirme **LE BOURGET INFO 123.835 MHz** ;
+- aucune fréquence aviation supplémentaire n'est ajoutée dans cette v0.3.
 
-## Aviation — troisième passe AIRAC 08/26
+Le détail final est dans `aviation-validation-pass4-2026-08-21.json`.
 
-AIRAC **08/26** est courant du **6 août au 2 septembre 2026 inclus**. Le bloc aviation reste provisoirement à **18 mémoires, delta 0**.
+Cette validation est fraîche jusqu'au **2 septembre 2026 inclus**. Toute publication ou nouvelle validation effectuée à partir du **3 septembre 2026** doit être reprise sur **AIRAC 09/26**.
 
-- **LFPG / Paris-CDG** : les quatre APP v0.2 118.155, 119.855, 121.155 et 124.355 MHz sont revalidées directement sur le SIA du cycle courant ;
-- **LFPO / Paris-Orly** : le matériel COM SIA officiel récent contient les huit fréquences v0.2. Les SUP AIP **085/2026** et **147/2026** sont actifs et concernent les procédures temporaires ainsi que les travaux de la piste 06/24 ;
-- **LFPB / Paris-Le Bourget** : le matériel SIA officiel de juin/juillet 2026 confirme les cinq fréquences v0.2 ;
-- la preuve directe AIRAC 08/26 LFPO/LFPB et la revue NOTAM/SUP complète restent nécessaires avant de figer un delta RF aviation à zéro.
+## Candidat déterministe
 
-Le détail est dans `aviation-validation-pass3-2026-08-21.json`.
+Fichiers :
 
-Toute publication ou nouvelle validation effectuée à partir du **3 septembre 2026** devra être reprise sur **AIRAC 09/26**.
+- builder : `tools/build_idf_v03_candidate.py` ;
+- CSV : `generated/release-candidate/radiopack-france-ile-de-france-v0.3-candidate.csv` ;
+- manifeste : `generated/release-candidate/candidate-manifest.json`.
 
-## Gates de publication restant ouverts
+Le builder reconstruit d'abord la v0.2 à partir des sources du dépôt et exige son SHA-256 public figé :
 
-- revalidation autoritative de cycle courant LFPO ;
-- revalidation autoritative de cycle courant LFPB ;
-- revue NOTAM LFPG/LFPO/LFPB ;
-- revue SUP AIP suffisante, notamment l'activation des phases du SUP 147/2026 ;
-- construction et validation du candidat déterministe après fermeture du gate aviation.
+`dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d`
+
+Il construit ensuite la v0.3 en conservant les blocs nationaux et aviation et en remplaçant uniquement le bloc régional.
+
+Résultat :
+
+- **57 RX** au total ;
+- **18 aviation** ;
+- **15 radio régionales** ;
+- SHA-256 candidat : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
+
+## Gates
+
+Fermés :
+
+- conflits de sources radio ;
+- comptage radio ;
+- revalidation aviation pour le sous-ensemble retenu ;
+- construction déterministe ;
+- RX-only ;
+- déduplication RF ;
+- limite de 200 mémoires.
+
+Encore ouvert :
+
+- **gel du publication record v0.3** et revue finale de prépublication.
+
+Tant que ce dernier gate n'est pas fermé, le candidat reste interne et aucun téléchargement public v0.3 n'est exposé.
 
 ## Règles permanentes
 
@@ -66,8 +91,8 @@ Toute publication ou nouvelle validation effectuée à partir du **3 septembre 2
 - paired RX pour les paires distinctes vérifiées ;
 - déduplication RF ;
 - aucun remplissage artificiel ;
-- aucun état, mode ou fréquence ambigu ne doit être deviné ;
+- aucune fréquence ambiguë devinée ;
 - une station insuffisamment corroborée peut être sortie du scope sans être déclarée définitivement inactive ;
 - données privées, PPDR, chiffrées ou non publiquement vérifiables exclues ;
 - v0.2 publique conservée immuable ;
-- publication v0.3 interdite tant que le gate aviation n'est pas fermé.
+- revalidation AIRAC obligatoire si la fenêtre de fraîcheur est franchie avant publication.

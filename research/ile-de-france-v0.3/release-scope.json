@@ -2,23 +2,21 @@
   "schema_version": "1.0",
   "pack": "Île-de-France",
   "target_version": "0.3",
-  "status": "radio_scope_final_aviation_gate_open",
+  "status": "deterministic_release_candidate_built_prepublication_open",
   "published_base": {
     "version": "0.2",
     "memory_count": 58,
-    "immutable": true
+    "immutable": true,
+    "sha256": "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d"
   },
   "scope": {
-    "national_base": "carry forward from immutable public v0.2 unless a separate national correction is explicitly validated",
-    "radioamateur": [
-      "2 m analog repeaters",
-      "70 cm analog repeaters",
-      "analog crossband transponders"
-    ],
+    "national_base": "exact reconstruction of immutable public v0.2 common blocks",
+    "radioamateur": ["2 m analog repeaters", "70 cm analog repeaters", "analog crossband transponders"],
     "aviation": {
-      "published_base_memory_count": 18,
-      "airac_review_required": true,
-      "notam_sup_review_required": true
+      "memory_count": 18,
+      "airac_cycle": "08/26",
+      "valid_through_inclusive": "2026-09-02",
+      "no_expansion": true
     },
     "marine": false
   },
@@ -28,11 +26,13 @@
     "latest_radio_pass": "research/ile-de-france-v0.3/radio-validation-pass3-2026-08-21.json",
     "aviation_checkpoint": "research/ile-de-france-v0.3/aviation-airac08-2026-08-21.json",
     "aviation_pass2": "research/ile-de-france-v0.3/aviation-validation-pass2-2026-08-21.json",
-    "latest_aviation_pass": "research/ile-de-france-v0.3/aviation-validation-pass3-2026-08-21.json",
-    "working_memory_count_if_aviation_unchanged": 57,
-    "provisional_aviation_memory_count": 18,
-    "radio_memory_accounting_final": true,
-    "working_count_is_release_candidate": false
+    "aviation_pass3": "research/ile-de-france-v0.3/aviation-validation-pass3-2026-08-21.json",
+    "latest_aviation_pass": "research/ile-de-france-v0.3/aviation-validation-pass4-2026-08-21.json",
+    "candidate_manifest": "research/ile-de-france-v0.3/generated/release-candidate/candidate-manifest.json",
+    "candidate_csv": "research/ile-de-france-v0.3/generated/release-candidate/radiopack-france-ile-de-france-v0.3-candidate.csv",
+    "candidate_memory_count": 57,
+    "candidate_aviation_memory_count": 18,
+    "candidate_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
   },
   "excluded": [
     "digital-only repeaters and hotspots without a useful analog RX role",
@@ -41,17 +41,22 @@
     "encrypted or non-public data",
     "unverified frequencies",
     "artificial fill",
-    "radio stations lacking sufficient current corroboration for this release scope"
+    "radio stations lacking sufficient current corroboration for this release scope",
+    "additional aviation frequencies outside the retained verified 18-memory subset"
   ],
   "publication_gates": {
     "radio_source_conflicts_closed": true,
     "radio_memory_accounting_final": true,
-    "aviation_revalidation_complete": false,
-    "deterministic_candidate_built": false,
-    "rx_only_validation_passed": false,
-    "rf_deduplication_passed": false,
-    "memory_limit_passed": false,
+    "aviation_revalidation_complete": true,
+    "deterministic_candidate_built": true,
+    "rx_only_validation_passed": true,
+    "rf_deduplication_passed": true,
+    "memory_limit_passed": true,
     "publication_record_frozen": false
+  },
+  "freshness_gate": {
+    "airac08_publication_allowed_through_inclusive": "2026-09-02",
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
   },
   "publication_ready": false
 }

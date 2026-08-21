@@ -6,14 +6,18 @@ on:
       - main
     paths:
       - "research/ile-de-france-v0.3/**"
+      - "tools/build_idf_v03_candidate.py"
       - "tests/test_idf_v03_research.py"
+      - "tests/test_idf_v03_candidate.py"
       - ".github/workflows/idf-v03-research.yml"
   pull_request:
     branches:
       - main
     paths:
       - "research/ile-de-france-v0.3/**"
+      - "tools/build_idf_v03_candidate.py"
       - "tests/test_idf_v03_research.py"
+      - "tests/test_idf_v03_candidate.py"
       - ".github/workflows/idf-v03-research.yml"
   workflow_dispatch:
 
@@ -22,7 +26,7 @@ permissions:
 
 jobs:
   research-guard:
-    name: Validate IDF v0.3 checkpoint
+    name: Validate IDF v0.3 candidate
     runs-on: ubuntu-24.04
 
     steps:
@@ -38,6 +42,9 @@ jobs:
 
       - name: Test Île-de-France v0.3 research checkpoint
         run: python tests/test_idf_v03_research.py
+
+      - name: Verify deterministic candidate and frozen SHA
+        run: python tests/test_idf_v03_candidate.py
 
       - name: Ensure public pack registry remains valid
         run: python tests/test_pack_registry.py

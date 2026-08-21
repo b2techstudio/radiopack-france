@@ -26,40 +26,55 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
 
-## Sprint 101 — Île-de-France v0.3, troisième passe
+## Sprint 101 — Île-de-France v0.3, release candidate interne
 
-Le Sprint **101 / 0.21.90** poursuit Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont **18 aviation**. Aucun CSV public, aucun numéro de version public ni aucun SHA de publication n'est modifié.
+Le Sprint **101 / 0.21.90** a construit un candidat déterministe **57 RX** à partir de la **v0.2 publique immuable de 58 RX**. Aucun CSV public v0.3, aucun registre public ni aucun SHA de publication n'est encore modifié.
 
-### Radioamateur — scope final
+### Composition du candidat
 
-Le calcul radio est désormais figé à **57 RX si le bloc aviation reste à 18**.
+- **24 mémoires nationales** reprises depuis les datasets source ;
+- **18 mémoires aviation** conservées sans expansion ;
+- **15 mémoires radio régionales** ;
+- total : **57 RX** ;
+- SHA-256 candidat : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
 
-- **F5ZNG, F5ZNN, F5ZMH et F1ZHK** restent dans le scope ;
-- **F6ZEE Pontault-Combault** reprend les RF 145.100 / 145.700 MHz de l'ancienne attribution F1ZSY, sans delta RF net ;
-- **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont ajoutés ;
-- le crossband **F5ZNN 145.650 / 430.650 MHz** ajoute uniquement 430.650 MHz après déduplication ;
-- **F5ZEQ** reste non reconduit tant que son opérateur le signale hors service pour maintenance ;
-- **F1ZTC, F5ZDR, F5ZBK et F1ZDL** sont sortis du scope de cette v0.3 faute de preuve opérationnelle actuelle suffisante. Ils restent dans le backlog et ne sont pas déclarés définitivement hors service.
+Le builder `tools/build_idf_v03_candidate.py` reconstruit d'abord la v0.2 et exige le SHA public figé `dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d` avant de construire la v0.3. Le CSV candidat et son manifeste sont ensuite contrôlés byte-à-byte par CI.
 
-Pour le scope courant : **conflits radio fermés = oui** et **comptage radio final = oui**.
+### Radioamateur — finalisé pour ce scope
 
-### Aviation — seul verrou de publication restant
+- **F5ZNG, F5ZNN, F5ZMH et F1ZHK** sont conservés ;
+- **F6ZEE Pontault-Combault** reprend 145.100 / 145.700 MHz sous l'attribution courante ;
+- **F5ZMR Provins** ajoute 431.525 / 439.125 MHz ;
+- **F5ZSY Issy-les-Moulineaux** ajoute 145.325 / 430.325 MHz ;
+- le crossband **F5ZNN** ajoute uniquement **430.650 MHz** après déduplication ;
+- **F5ZEQ** reste non reconduit tant que son opérateur le signale en maintenance ;
+- **F1ZTC, F5ZDR, F5ZBK et F1ZDL** restent hors de ce candidat faute de preuve opérationnelle actuelle suffisante, sans affirmation de fermeture définitive.
 
-AIRAC **08/26** est applicable jusqu'au **2 septembre 2026 inclus**. Le sous-ensemble de **18 mémoires aviation** reste inchangé dans le calcul de travail, delta 0.
+Pour ce scope : **conflits radio fermés = oui** et **comptage radio final = oui**.
 
-- **LFPG / Paris Charles-de-Gaulle** : sous-ensemble v0.2 revalidé directement sur le SIA AIRAC 08/26 ;
-- **LFPO / Paris-Orly** : le matériel COM SIA officiel récent contient toutes les fréquences v0.2. Les SUP AIP 085/2026 et 147/2026 sont actifs ;
-- **LFPB / Paris-Le Bourget** : le matériel SIA officiel de juin/juillet 2026 confirme les cinq fréquences v0.2 ;
-- la preuve directe AIRAC 08/26 LFPO/LFPB et la revue NOTAM/SUP complète, notamment l'activation des phases du SUP 147/2026, restent ouvertes ;
-- toute publication ou nouvelle validation à partir du **3 septembre 2026** exigera AIRAC 09/26.
+### Aviation — finalisée pour AIRAC 08/26 et le sous-ensemble retenu
 
-### Gates encore ouverts
+Le candidat conserve exactement les **18 mémoires aviation** de la v0.2, delta 0, sans prétendre couvrir toutes les fréquences aviation disponibles.
 
-- LFPO : preuve actuelle AIRAC 08/26 AD 2.18 ou équivalent autoritatif de cycle courant ;
-- LFPB : preuve actuelle AIRAC 08/26 AD 2.18 ou équivalent autoritatif de cycle courant ;
-- revue NOTAM LFPG/LFPO/LFPB ;
-- revue SUP AIP suffisante pour figer le delta RF aviation ;
-- construction du candidat déterministe seulement après fermeture du gate aviation.
+- **LFPG / Paris Charles-de-Gaulle** : sous-ensemble retenu revalidé directement sur le SIA AIRAC 08/26 ;
+- **LFPO / Paris-Orly** : catalogue COM SIA courant, matériel AD 2.18 officiel, SUP AIP 085/2026 et 147/2026 et revue NOTAM de la fenêtre courante utilisés pour fermer le scope retenu ;
+- **LFPB / Paris-Le Bourget** : le NOTAM courant A2706/26 confirme les valeurs ATIS/GND/TWR/DEL retenues et le matériel SIA 2026 confirme INFO 123.835 MHz ;
+- aucune fréquence aviation supplémentaire n'est promue dans cette v0.3.
+
+Le gate aviation est fermé pour une publication effectuée au plus tard le **2 septembre 2026 inclus**. Toute publication ou nouvelle validation à partir du **3 septembre 2026** exige une revalidation AIRAC 09/26.
+
+### État prépublication
+
+- `release_candidate_memory_count = 57` ;
+- radio finalisée : **oui** ;
+- aviation revalidée pour le scope AIRAC 08/26 : **oui** ;
+- candidat déterministe construit : **oui** ;
+- RX-only validé : **oui** ;
+- déduplication RF validée : **oui** ;
+- limite 200 mémoires validée : **oui** ;
+- publication record gelé : **non** ;
+- `publication_ready = false` ;
+- public v0.2 toujours **58 RX immuable**.
 
 Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
 
@@ -103,9 +118,9 @@ Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ;
 
 ### Île-de-France v0.3
 
-Travail actif officiel. Base publique **v0.2 / 58 RX / 18 aviation**, immuable. Compteur de travail **57 RX si aviation inchangée**, dont **18 aviation provisoires**. Radio finalisée pour ce scope ; aviation encore ouverte. `release_candidate_memory_count` reste `null`.
+Candidat déterministe **57 RX / 18 aviation / 15 radio régionales** construit et validé. La prépublication reste ouverte : gel du publication record, revue finale et vérification que le futur CSV public est strictement identique au candidat figé.
 
-Aucun CSV public ni registre de version n'est modifié tant que le gate aviation n'est pas fermé.
+Aucune mutation publique v0.3 n'est encore effectuée.
 
 ### Bretagne v0.3
 

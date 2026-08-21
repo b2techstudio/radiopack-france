@@ -49,15 +49,20 @@ Si les blocs nationaux et les **18 mémoires aviation** de la v0.2 restent incha
 
 **57 n'est pas le compteur d'un release candidate.** F5ZBK, F1ZDL, F1ZTC, F5ZDR et l'aviation restent derrière des gates ouverts.
 
-## Aviation — AIRAC 08/26
+## Aviation — deuxième passe AIRAC 08/26
 
-Le bloc public v0.2 contient **18 mémoires aviation AM**. La photographie AIRAC 08/26 reste courante jusqu'au **2 septembre 2026 inclus**.
+Le bloc public v0.2 contient **18 mémoires aviation AM**. AIRAC 08/26 reste le cycle courant du **6 août au 2 septembre 2026 inclus**.
 
-La première passe du 21 août a identifié des SUP AIP actifs autour d'Orly, mais aucun changement de fréquence n'est promu sur cette seule base. La v0.3 conserve donc un **gate aviation ouvert** : revue complète des rubriques AD 2.18 utiles, puis contrôle NOTAM/SUP AIP applicable avant toute décision RF.
+La deuxième passe est enregistrée dans `aviation-validation-pass2-2026-08-21.json` et avance la revue sans fermer prématurément le gate aviation :
+
+- **LFPG / Paris Charles-de-Gaulle** : la page SIA eAIP AD 2.18 directement courante depuis le 6 août 2026 a été contrôlée. Les quatre fréquences APP déjà présentes en v0.2 — **118.155, 119.855, 121.155 et 124.355 MHz** — sont toujours publiées et sont donc revalidées pour le calcul de travail ;
+- le même AD 2.18 LFPG publie aussi d'autres fréquences APP actuelles, notamment **125.830, 126.430, 126.580, 131.205, 133.380 et 136.280 MHz**. Elles sont uniquement consignées comme observations : aucune n'est ajoutée tant que le périmètre utile et la revue complète aviation ne sont pas fermés ;
+- **LFPO / Paris-Orly** : les huit mémoires v0.2 restent inchangées dans le calcul provisoire, mais la capture directe AD 2.18 AIRAC 08/26 et la revue NOTAM/SUP applicables restent ouvertes. Les SUP AIP 147/2026 et 085/2026 précédemment identifiés restent à examiner dans cette fermeture ;
+- **LFPB / Paris-Le Bourget** : les cinq mémoires v0.2 restent elles aussi inchangées dans le calcul provisoire ; la capture directe AD 2.18 AIRAC 08/26 et la revue NOTAM/SUP restent à fermer.
+
+La décision aviation provisoire reste donc **18 mémoires, delta 0**. Elle n'est pas finale et ne transforme pas le total de travail **57** en release candidate.
 
 Toute publication ou nouvelle validation effectuée à partir du **3 septembre 2026** devra être reprise sur **AIRAC 09/26**.
-
-Le détail est dans `aviation-airac08-2026-08-21.json`.
 
 ## Règles permanentes
 
@@ -68,6 +73,7 @@ Le détail est dans `aviation-airac08-2026-08-21.json`.
 - aucun remplissage artificiel ;
 - aucun état, mode ou fréquence ambigu ne doit être deviné ;
 - l'état courant publié par l'opérateur local prévaut sur un annuaire général pour une décision de publication ;
+- toute fréquence aviation supplémentaire exige validation de source et décision explicite de périmètre ;
 - données privées, PPDR, chiffrées ou non publiquement vérifiables exclues ;
 - v0.2 publique conservée immuable ;
 - publication v0.3 interdite tant que les gates radio et aviation ne sont pas fermés.

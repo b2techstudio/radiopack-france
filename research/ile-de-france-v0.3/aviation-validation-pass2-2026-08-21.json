@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-08-21",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "status": "partial_current_airac_revalidation_not_release_candidate",
+  "based_on": "research/ile-de-france-v0.3/aviation-airac08-2026-08-21.json",
+  "current_airac": "08/26",
+  "airac_effective_from": "2026-08-06",
+  "airac_valid_through_inclusive": "2026-09-02",
+  "published_v0_2_aviation_memory_count": 18,
+  "aerodromes": {
+    "LFPG": {
+      "name": "Paris Charles de Gaulle",
+      "current_direct_sia_ad2_18_checked": true,
+      "current_direct_sia_page_effective_from": "2026-08-06",
+      "published_v0_2_subset_mhz": [118.155, 119.855, 121.155, 124.355],
+      "published_v0_2_subset_revalidated": true,
+      "additional_current_app_frequencies_observed_mhz": [125.83, 126.43, 126.58, 131.205, 133.38, 136.28],
+      "additional_candidates_promoted": false,
+      "decision": "keep published subset for working arithmetic; do not expand until the full scoped aviation usefulness and NOTAM/SUP review is closed",
+      "source": "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_06_AUG_2026/FRANCE/AIRAC-2026-08-06/html/eAIP/FR-AD-2.LFPG-fr-FR.html"
+    },
+    "LFPO": {
+      "name": "Paris Orly",
+      "published_v0_2_subset_mhz": [118.855, 124.45, 127.75, 121.555, 121.705, 118.7, 126.505, 131.355],
+      "current_direct_sia_ad2_18_checked": false,
+      "secondary_current_or_recent_sources_are_consistent_with_core_subset": true,
+      "decision": "no RF change promoted; direct current AIRAC 08/26 AD 2.18 capture and applicable NOTAM/SUP review remain required",
+      "observed_active_sup_aip": ["147/2026", "085/2026"]
+    },
+    "LFPB": {
+      "name": "Paris Le Bourget",
+      "published_v0_2_subset_mhz": [123.835, 121.955, 121.905, 118.93, 120.005],
+      "current_direct_sia_ad2_18_checked": false,
+      "recent_official_aip_material_located": true,
+      "decision": "no RF change promoted; current AIRAC 08/26 direct AD 2.18 capture and applicable NOTAM/SUP review remain required"
+    }
+  },
+  "provisional_aviation_decision": {
+    "published_subset_memory_count": 18,
+    "memory_delta_promoted": 0,
+    "working_memory_count": 18,
+    "working_count_is_final": false,
+    "reason": "LFPG base subset is revalidated, but LFPO/LFPB and NOTAM/SUP gates remain open; additional current LFPG frequencies are observations only."
+  },
+  "open_gates_after_pass2": [
+    "LFPO direct current AIRAC 08/26 AD 2.18 revalidation",
+    "LFPB direct current AIRAC 08/26 AD 2.18 revalidation",
+    "applicable NOTAM review for LFPG/LFPO/LFPB",
+    "applicable SUP AIP review for LFPG/LFPO/LFPB",
+    "scoped usefulness decision for any additional current aviation frequencies"
+  ],
+  "next_airac": {
+    "cycle": "09/26",
+    "effective_from": "2026-09-03",
+    "required_before_publication_on_or_after": "2026-09-03"
+  },
+  "gates": {
+    "lfpg_published_subset_revalidated": true,
+    "lfpo_published_subset_revalidated": false,
+    "lfpb_published_subset_revalidated": false,
+    "full_scoped_ad2_18_recheck_complete": false,
+    "notam_sup_review_complete": false,
+    "frequency_delta_validated": false,
+    "publication_allowed": false
+  },
+  "rules": {
+    "rx_only": true,
+    "no_frequency_guessing": true,
+    "additional_frequency_requires_scope_and_source_validation": true,
+    "airac_transition_requires_revalidation": true,
+    "published_v0_2_immutable": true
+  }
+}

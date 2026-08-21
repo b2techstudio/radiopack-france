@@ -2,7 +2,7 @@
 
 **Couverture publique au 21 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 100 / 0.21.89 — Bourgogne-Franche-Comté v0.3 et Centre-Val de Loire v0.3 sont publiées et immuables ; les neuf autres régions métropolitaines issues de l'enrichissement restent en v0.2 avant leur future passe v0.3.**
+**État courant : Sprint 101 / 0.21.90 — Île-de-France v0.3 est le travail actif de recherche à partir de la v0.2 publique immuable de 58 RX ; aucune nouvelle version publique n'est encore candidate.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -60,6 +60,16 @@ Chaque future v0.3 régionale suit désormais le même processus :
 
 Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé.
 
+## Sprint 101 — Île-de-France v0.3 en recherche
+
+Le **Sprint 101 / 0.21.90** ouvre officiellement Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont 18 aviation. Ce checkpoint ne publie aucun nouveau CSV et ne modifie aucun SHA public.
+
+La première passe garde F5ZNG, F5ZNN, F5ZMH et F1ZHK comme base de travail ; F5ZMR Provins et F5ZSY Issy-les-Moulineaux sont les nouveaux candidats les mieux étayés. F5ZAD et F1ZUX ne sont plus reconduits automatiquement, tandis que F1ZSY, F5ZEQ, F5ZDR et le crossband F5ZNN restent bloqués/différés par les gates documentés. F5ZBK et F1ZTC demandent encore une seconde corroboration actuelle.
+
+L'aviation reste sur **AIRAC 08/26 jusqu'au 2 septembre 2026 inclus** ; la revue AD 2.18 et NOTAM/SUP AIP reste ouverte. Toute publication ou nouvelle validation à partir du **3 septembre 2026** devra être reprise sur **AIRAC 09/26**.
+
+Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
+
 ## Sprint 100 — Centre-Val de Loire v0.3
 
 Le **Sprint 100 / 0.21.89** publie Centre-Val de Loire v0.3 à **51 RX**. La v0.2 de 42 RX reste historique et immuable.
@@ -106,7 +116,7 @@ Le candidat historique Annecy–Alpes–Léman v0.4 était figé à **77 RX / 60
 
 ## Travaux encore ouverts
 
-Bretagne v0.3 reste à **151 RX** en attente de la transition AIRAC. Normandie v0.5 reste à **142 RX** avec ses gates terrain/source. Après BFC et Centre, les neuf régions métropolitaines encore en v0.2 seront traitées une par une, en commençant par **Île-de-France**.
+**Île-de-France v0.3** est désormais le travail actif officiel de recherche. Bretagne v0.3 reste à **151 RX** en attente de la transition AIRAC et Normandie v0.5 reste à **142 RX** avec ses gates terrain/source. Après BFC et Centre, les autres régions métropolitaines encore en v0.2 seront traitées progressivement.
 
 ## Site public
 
@@ -136,6 +146,8 @@ python tests\test_web_generator.py
 python tests\test_sprint97_state_sync.py
 python tests\test_sprint98_state_sync.py
 python tests\test_sprint100_state_sync.py
+python tests\test_sprint101_state_sync.py
+python tests\test_idf_v03_research.py
 
 cd website
 npm ci

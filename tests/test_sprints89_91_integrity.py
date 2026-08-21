@@ -25,8 +25,9 @@ for relative in required:
     assert path.stat().st_size > 20, f"Incomplete sprints89-91 file: {relative}"
 
 state = json.loads((ROOT / "research/project-resume-state.json").read_text(encoding="utf-8"))
-# Historical integrity guard: later releases may advance the current public pack,
-# but the Sprint 89 research decision and the Normandie/Bretagne gates must persist.
+# Historical integrity guard: later releases may advance the current public pack
+# and active work, but the Sprint 89 research decision plus the Normandie and
+# Bretagne gates must remain represented without being rewritten as current work.
 assert state["current_sprint"] >= 91
 version_parts = tuple(int(part) for part in state["state_version"].split("."))
 assert version_parts >= (0, 21, 80)
@@ -52,10 +53,21 @@ else:
 
 assert state["normandie_v0_5_latest_refresh"]["candidate_memory_count"] == 142
 assert state["normandie_v0_5_latest_refresh"]["candidate_memory_delta"] == 0
-assert state["active_work"]["pack"] == "Bretagne"
-assert state["active_work"]["candidate_memory_count"] == 151
-assert state["active_work"]["airac_next_effective_from"] == "2026-09-03"
-assert state["active_work"]["publication_allowed_before_airac09_revalidation"] is False
+
+bretagne = state.get("bretagne_v0_3_airac_handoff", state.get("active_work", {}))
+assert bretagne["pack"] == "Bretagne"
+assert bretagne["target_version"] == "0.3"
+assert bretagne["candidate_memory_count"] == 151
+assert bretagne["candidate_memory_delta"] == 0
+assert bretagne["airac_next_effective_from"] == "2026-09-03"
+assert bretagne["publication_allowed_before_airac09_revalidation"] is False
+
+# Starting with Sprint 101, active_work can move on while the Sprint 91 handoff
+# remains a historical/future gate in its dedicated machine-readable block.
+if state["current_sprint"] >= 101:
+    assert state["active_work"]["pack"] == "Île-de-France"
+    assert state["active_work"]["target_version"] == "0.3"
+    assert state["active_work"]["publication_ready"] is False
 
 project = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
 assert f'Sprint courant : **{state["current_sprint"]}**' in project

@@ -25,6 +25,8 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 - **Corse v0.2** — 137 mémoires RX ;
 - **Annecy–Alpes–Léman v0.4** — 77 mémoires RX, variante 60 sans aviation.
 
+Repère historique de publication : **Annecy–Alpes–Léman v0.4 : 77 RX / 60 sans aviation** ; la v0.3 76/59 reste immuable.
+
 Les variantes par défaut représentent **1531 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
 
 Le projet couvre actuellement les **13 régions métropolitaines**. Les cinq régions d'outre-mer ne sont pas encore incluses dans cette couverture.
@@ -90,11 +92,21 @@ Le Sprint 97 / 0.21.86 a consolidé les raffinements UX ajoutés après le Sprin
 
 Références : `research/sprint-97-summary.md` et `research/sprint-97-post96-ui-state.json`.
 
+## Sprint 91 — Bretagne v0.3 AIRAC09 handoff
+
+Bretagne v0.3 reste à **151 RX**, delta 0. AIRAC 08/26 reste courant jusqu'au 2 septembre 2026 inclus ; la publication attend la revalidation AIRAC 09/26 à partir du 3 septembre 2026.
+
+## Sprint 90 — Normandie v0.5 source refresh
+
+Normandie v0.5 reste à **142 RX**, delta 0. R3/F1ZBX et F5ZHA restent des gates terrain ; F1ZOV reste sous surveillance opérateur et F6ZES reste sans fréquence/mode public suffisamment établi.
+
+## Sprint 89 — Annecy v0.4 candidat
+
+Le candidat historique Annecy–Alpes–Léman v0.4 était figé à **77 RX / 60 sans aviation** avant sa publication ultérieure immuable.
+
 ## Travaux encore ouverts
 
-**Bretagne v0.3** reste à 151 RX, delta 0, en attente de la revalidation AIRAC 09/26 à partir du **3 septembre 2026**. **Normandie v0.5** reste à 142 RX, delta 0 ; R3/F1ZBX et F5ZHA nécessitent toujours du terrain, F1ZOV reste sous surveillance d'état opérateur et F6ZES demeure sans fréquence/mode public suffisamment établi.
-
-Après BFC et Centre, les neuf régions métropolitaines encore en v0.2 seront traitées une par une, en commençant par **Île-de-France**.
+Bretagne v0.3 reste à **151 RX** en attente de la transition AIRAC. Normandie v0.5 reste à **142 RX** avec ses gates terrain/source. Après BFC et Centre, les neuf régions métropolitaines encore en v0.2 seront traitées une par une, en commençant par **Île-de-France**.
 
 ## Site public
 

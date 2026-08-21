@@ -22,6 +22,13 @@
     },
     "marine": false
   },
+  "research_evidence": {
+    "initial_radio_checkpoint": "research/ile-de-france-v0.3/radio-validation-2026-08-21.json",
+    "latest_radio_pass": "research/ile-de-france-v0.3/radio-validation-pass2-2026-08-21.json",
+    "aviation_checkpoint": "research/ile-de-france-v0.3/aviation-airac08-2026-08-21.json",
+    "provisional_working_memory_count": 57,
+    "provisional_count_is_release_candidate": false
+  },
   "excluded": [
     "digital-only repeaters and hotspots without a useful analog RX role",
     "private networks",

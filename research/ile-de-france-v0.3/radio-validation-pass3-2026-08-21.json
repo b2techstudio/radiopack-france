@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-08-21",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "status": "radio_scope_final_aviation_still_open_not_release_candidate",
+  "based_on": "research/ile-de-france-v0.3/radio-validation-pass2-2026-08-21.json",
+  "published_base_version": "0.2",
+  "published_base_memory_count": 58,
+  "published_base_aviation_memory_count": 18,
+  "scope_decisions": {
+    "kept_or_promoted_from_previous_passes": [
+      "F5ZNG",
+      "F5ZNN",
+      "F5ZMH",
+      "F1ZHK",
+      "F6ZEE",
+      "F5ZMR",
+      "F5ZSY",
+      "F5ZNN-crossband"
+    ],
+    "not_carried_in_v0_3_candidate_scope": [
+      {
+        "call": "F1ZTC",
+        "site": "Paris",
+        "decision": "exclude_from_this_candidate",
+        "reason": "RepeaterBook marks the relay off-air at 145.775/145.175 MHz with a 2026-02-17 review and reports it inactive for years. Other public directory material does not provide sufficiently current operational evidence to override that state. Exclusion is scoped to this candidate and may be revisited later.",
+        "sources": [
+          "https://www.repeaterbook.com/row_repeaters/details.php?ID=7983&state_id=FR",
+          "https://www.arp75.org/",
+          "https://www.r-e-f.org/"
+        ]
+      },
+      {
+        "call": "F5ZDR",
+        "site": "Linas",
+        "decision": "exclude_from_this_candidate",
+        "reason": "No sufficiently current evidence establishes a stable analog operating role. Local information describes the UHF chain as degraded while directory material exposes differing multimode/digital roles. Keep in future backlog rather than guessing an analog memory set."
+      },
+      {
+        "call": "F5ZBK",
+        "site": "Triel-sur-Seine",
+        "frequencies_mhz": [430.175, 431.775],
+        "decision": "exclude_from_this_candidate_pending_future_revalidation",
+        "reason": "The current REF row is active and internally consistent, but no sufficiently current independent operational corroboration was found. A REF-derived mirror is not considered independent evidence."
+      },
+      {
+        "call": "F1ZDL",
+        "site": "Saint-Mard",
+        "frequencies_mhz": [430.075, 439.475],
+        "decision": "exclude_from_this_candidate_pending_future_revalidation",
+        "reason": "The current REF row is active and internally consistent, but no sufficiently current independent operational corroboration was found. Older or REF-derived indexes do not close the gate."
+      }
+    ]
+  },
+  "final_radio_memory_accounting_assuming_aviation_unchanged": {
+    "published_v0_2_total": 58,
+    "published_v0_2_aviation_memories": 18,
+    "published_v0_2_non_regional_blocks_if_unchanged": 42,
+    "published_v0_2_regional_rf_memories": 16,
+    "removed_v0_2_station_pair_memories": 8,
+    "replacement_existing_rf_memories": 2,
+    "direct_new_promoted_rf_memories_from_pass1": 4,
+    "deduplicated_extension_new_rf_memories": 1,
+    "working_total_with_aviation_18": 57,
+    "formula": "58 - 8 + 2 + 4 + 1 = 57",
+    "radio_memory_accounting_final": true,
+    "release_candidate_memory_count": null
+  },
+  "future_backlog_not_release_blockers": [
+    "F1ZTC recheck if an operator/current operational source reports restoration",
+    "F5ZDR recheck when a stable current analog role is publicly established",
+    "F5ZBK recheck when an independent current operational source is available",
+    "F1ZDL recheck when an independent current operational source is available",
+    "F5ZEQ recheck when the operator reports return to service"
+  ],
+  "result": {
+    "radio_source_conflicts_closed_for_current_release_scope": true,
+    "radio_memory_accounting_final": true,
+    "working_memory_count_if_aviation_unchanged": 57,
+    "aviation_revalidation_complete": false,
+    "publication_ready": false
+  },
+  "rules": {
+    "rx_only": true,
+    "paired_rx": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "insufficiently_corroborated_station_may_be_excluded_without_claiming_permanent_shutdown": true,
+    "private_ppdr_operational_data_excluded": true,
+    "published_v0_2_immutable": true
+  }
+}

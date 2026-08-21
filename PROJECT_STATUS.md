@@ -26,41 +26,40 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
 
-## Sprint 101 — Île-de-France v0.3, deuxième passe
+## Sprint 101 — Île-de-France v0.3, troisième passe
 
-Le Sprint **101 / 0.21.90** poursuit Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont **18 aviation**. Le travail reste un checkpoint de recherche : aucun CSV public, aucun numéro de version public ni aucun SHA de publication n'est modifié.
+Le Sprint **101 / 0.21.90** poursuit Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont **18 aviation**. Aucun CSV public, aucun numéro de version public ni aucun SHA de publication n'est modifié.
 
-### Radioamateur
+### Radioamateur — scope final
 
-Le calcul de travail provisoire est désormais de **57 RX** si les blocs nationaux et aviation restent inchangés. Ce nombre n'est pas un release candidate.
+Le calcul radio est désormais figé à **57 RX si le bloc aviation reste à 18**.
 
-- **F5ZNG, F5ZNN, F5ZMH et F1ZHK** restent dans la base de travail ;
-- **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** restent les nouveaux ajouts directs ;
+- **F5ZNG, F5ZNN, F5ZMH et F1ZHK** restent dans le scope ;
 - **F6ZEE Pontault-Combault** reprend les RF 145.100 / 145.700 MHz de l'ancienne attribution F1ZSY, sans delta RF net ;
-- le crossband **F5ZNN 145.650 / 430.650 MHz** est validé avec déduplication : seule 430.650 MHz ajoute une mémoire ;
-- **F5ZEQ** n'est pas reconduit tant que son opérateur le signale hors service pour maintenance ;
-- **F5ZBK** et **F1ZDL** restent en attente d'une seconde corroboration opérationnelle actuelle ;
-- **F1ZTC** et **F5ZDR** restent différés.
+- **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont ajoutés ;
+- le crossband **F5ZNN 145.650 / 430.650 MHz** ajoute uniquement 430.650 MHz après déduplication ;
+- **F5ZEQ** reste non reconduit tant que son opérateur le signale hors service pour maintenance ;
+- **F1ZTC, F5ZDR, F5ZBK et F1ZDL** sont sortis du scope de cette v0.3 faute de preuve opérationnelle actuelle suffisante. Ils restent dans le backlog et ne sont pas déclarés définitivement hors service.
 
-### Aviation
+Pour le scope courant : **conflits radio fermés = oui** et **comptage radio final = oui**.
 
-AIRAC **08/26** est applicable jusqu'au **2 septembre 2026 inclus**. Le sous-ensemble de **18 mémoires aviation** reste inchangé dans le calcul provisoire, delta 0.
+### Aviation — seul verrou de publication restant
 
-- **LFPG / Paris Charles-de-Gaulle** : les quatre APP v0.2 118.155, 119.855, 121.155 et 124.355 MHz sont revalidées directement sur l'AD 2.18 SIA courant ;
-- des APP LFPG supplémentaires actuelles ont été observées mais ne sont pas promues sans décision de périmètre complète ;
-- **LFPO / Paris-Orly** et **LFPB / Paris-Le Bourget** : la capture directe AD 2.18 AIRAC 08/26 et la revue NOTAM/SUP restent ouvertes ;
+AIRAC **08/26** est applicable jusqu'au **2 septembre 2026 inclus**. Le sous-ensemble de **18 mémoires aviation** reste inchangé dans le calcul de travail, delta 0.
+
+- **LFPG / Paris Charles-de-Gaulle** : sous-ensemble v0.2 revalidé directement sur le SIA AIRAC 08/26 ;
+- **LFPO / Paris-Orly** : le matériel COM SIA officiel récent contient toutes les fréquences v0.2. Les SUP AIP 085/2026 et 147/2026 sont actifs ;
+- **LFPB / Paris-Le Bourget** : le matériel SIA officiel de juin/juillet 2026 confirme les cinq fréquences v0.2 ;
+- la preuve directe AIRAC 08/26 LFPO/LFPB et la revue NOTAM/SUP complète, notamment l'activation des phases du SUP 147/2026, restent ouvertes ;
 - toute publication ou nouvelle validation à partir du **3 septembre 2026** exigera AIRAC 09/26.
 
 ### Gates encore ouverts
 
-- F5ZBK : seconde source actuelle ;
-- F1ZDL : seconde source actuelle ;
-- F1ZTC : réconciliation état/fréquences ;
-- F5ZDR : état analogique stable ;
-- LFPO : revalidation directe AIRAC 08/26 ;
-- LFPB : revalidation directe AIRAC 08/26 ;
-- revue NOTAM/SUP AIP LFPG/LFPO/LFPB ;
-- décision de périmètre pour toute fréquence aviation supplémentaire.
+- LFPO : preuve actuelle AIRAC 08/26 AD 2.18 ou équivalent autoritatif de cycle courant ;
+- LFPB : preuve actuelle AIRAC 08/26 AD 2.18 ou équivalent autoritatif de cycle courant ;
+- revue NOTAM LFPG/LFPO/LFPB ;
+- revue SUP AIP suffisante pour figer le delta RF aviation ;
+- construction du candidat déterministe seulement après fermeture du gate aviation.
 
 Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
 
@@ -104,9 +103,9 @@ Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ;
 
 ### Île-de-France v0.3
 
-Travail actif officiel. Base publique **v0.2 / 58 RX / 18 aviation**, immuable. Compteur de travail provisoire **57 RX**, dont **18 aviation provisoires**. `release_candidate_memory_count` reste `null`.
+Travail actif officiel. Base publique **v0.2 / 58 RX / 18 aviation**, immuable. Compteur de travail **57 RX si aviation inchangée**, dont **18 aviation provisoires**. Radio finalisée pour ce scope ; aviation encore ouverte. `release_candidate_memory_count` reste `null`.
 
-Aucun CSV public ni registre de version n'est modifié tant que les gates radio et aviation ne sont pas fermés.
+Aucun CSV public ni registre de version n'est modifié tant que le gate aviation n'est pas fermé.
 
 ### Bretagne v0.3
 

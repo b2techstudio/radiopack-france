@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-08-21",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "status": "second_pass_research_not_release_candidate",
+  "based_on": "research/ile-de-france-v0.3/radio-validation-2026-08-21.json",
+  "published_base_version": "0.2",
+  "published_base_memory_count": 58,
+  "published_base_aviation_memory_count": 18,
+  "decisions": {
+    "closed_keep_gate": [
+      {
+        "call": "F1ZHK",
+        "site": "Nangis",
+        "frequencies_mhz": [145.7625, 145.1625],
+        "decision": "keep",
+        "reason": "Current REF analog row and current RepeaterBook listing converge on the same RF pair; the previous REF-capture gate is closed.",
+        "sources": [
+          "https://www.r-e-f.org/",
+          "https://www.repeaterbook.com/row_repeaters/Display_SS.php?state_id=FR"
+        ]
+      }
+    ],
+    "validated_existing_rf_replacement": [
+      {
+        "call": "F6ZEE",
+        "site": "Pontault-Combault",
+        "kind": "2m_fm_repeater",
+        "frequencies_mhz": [145.1, 145.7],
+        "memory_count": 2,
+        "net_new_rf_memory_count_vs_v0_2": 0,
+        "replaces_v0_2_attribution": "F1ZSY",
+        "decision": "use_current_attribution_for_same_rf_set",
+        "reason": "REF lists F6ZEE active at Pontault-Combault on the 145.100/145.700 MHz RF set and RepeaterBook shows F6ZEE on-air, added 2026-01-21. RepeaterBook marks the old F1ZSY Paris attribution off-air. RX-only paired memory accounting therefore keeps the same two RF frequencies under the current attribution without adding memories.",
+        "sources": [
+          "https://www.r-e-f.org/",
+          "https://www.repeaterbook.com/row_repeaters/Display_date.php?date=365&state_id=FR",
+          "https://www.repeaterbook.com/row_repeaters/Display_SS.php?state_id=FR"
+        ]
+      }
+    ],
+    "validated_deduplicated_extension": [
+      {
+        "call": "F5ZNN-crossband",
+        "site": "Saint-Rémy-la-Vanne",
+        "kind": "analog_crossband_transponder",
+        "frequencies_mhz": [145.65, 430.65],
+        "already_present_rf_mhz": [145.65],
+        "unique_new_frequencies_mhz": [430.65],
+        "memory_count": 1,
+        "decision": "promote_unique_rf_only",
+        "reason": "REF and the current RI49 operational list converge on the 145.650/430.650 MHz transponder. 145.650 MHz is already represented by the kept F5ZNN 2 m pair, so RF deduplication adds only 430.650 MHz.",
+        "sources": [
+          "https://www.r-e-f.org/",
+          "https://49.f4ipa.fr/trafiquer.php"
+        ]
+      }
+    ],
+    "not_carried_forward_now": [
+      {
+        "call": "F1ZSY",
+        "site": "Paris",
+        "frequencies_mhz": [145.7, 145.1],
+        "decision": "retire_old_attribution_keep_rf_via_F6ZEE",
+        "reason": "RepeaterBook marks F1ZSY off-air while current REF and RepeaterBook support F6ZEE on the same RF set. No RF memory is lost because the pair is retained under F6ZEE."
+      },
+      {
+        "call": "F5ZEQ",
+        "site": "Le Mesnil-le-Roi",
+        "frequencies_mhz": [145.75, 145.15],
+        "decision": "temporarily_not_carried",
+        "reason": "The operator/radioclub page explicitly states that F5ZEQ is currently off-service for maintenance. Local operator current state overrides a general directory active flag for release decisions. Re-review when the operator reports restoration.",
+        "sources": [
+          "https://f5kck.org/f5zeq/",
+          "https://www.r-e-f.org/"
+        ]
+      }
+    ],
+    "still_deferred": [
+      {
+        "call": "F1ZTC",
+        "site": "Paris",
+        "decision": "defer",
+        "reason": "Current-source conflict remains both on status and RF: RepeaterBook marks the relay off-air at 145.775/145.175 MHz with a 2026-02-17 review, while other public lists still expose a Paris relay and older/current directory data do not converge cleanly enough for promotion.",
+        "sources": [
+          "https://www.repeaterbook.com/row_repeaters/details.php?ID=7983&state_id=FR",
+          "https://www.arp75.org/",
+          "https://www.r-e-f.org/"
+        ]
+      },
+      {
+        "call": "F5ZDR",
+        "site": "Linas",
+        "decision": "defer",
+        "reason": "Local club information still describes the UHF chain as degraded, while directory data expose a different multimode/digital RF role. A stable current analog operating state is not sufficiently established."
+      }
+    ],
+    "pending_independent_current_corroboration": [
+      {
+        "call": "F5ZBK",
+        "site": "Triel-sur-Seine",
+        "frequencies_mhz": [430.175, 431.775],
+        "decision": "pending",
+        "reason": "Current REF row is active and internally consistent, but a sufficiently current independent operational corroboration is still wanted before promotion."
+      },
+      {
+        "call": "F1ZDL",
+        "site": "Saint-Mard",
+        "frequencies_mhz": [430.075, 439.475],
+        "decision": "pending",
+        "reason": "Current REF exposes an active analog FM relay at Saint-Mard. A second current operational source is still required before promotion; older third-party indexes are not enough to close the gate."
+      }
+    ]
+  },
+  "provisional_memory_accounting": {
+    "purpose": "working research arithmetic only; not a release-candidate count",
+    "published_v0_2_total": 58,
+    "published_v0_2_non_regional_blocks_if_unchanged": 42,
+    "published_v0_2_regional_rf_memories": 16,
+    "removed_v0_2_station_pair_memories": 8,
+    "removed_v0_2_station_pairs": ["F5ZAD", "F1ZUX", "F1ZSY", "F5ZEQ"],
+    "replacement_existing_rf_memories": 2,
+    "replacement_station": "F6ZEE",
+    "direct_new_promoted_rf_memories_from_pass1": 4,
+    "direct_new_promoted_entries_from_pass1": ["F5ZMR", "F5ZSY"],
+    "deduplicated_extension_new_rf_memories": 1,
+    "deduplicated_extension_frequency_mhz": 430.65,
+    "provisional_working_memory_count_if_aviation_and_national_blocks_unchanged": 57,
+    "formula": "58 - 8 + 2 + 4 + 1 = 57",
+    "release_candidate_memory_count": null
+  },
+  "open_gates_after_pass2": [
+    "F5ZBK independent current operational corroboration",
+    "F1ZDL independent current operational corroboration",
+    "F1ZTC status/frequency reconciliation",
+    "F5ZDR stable current analog operating-state reconciliation",
+    "full scoped aviation AD 2.18 + NOTAM/SUP AIP revalidation"
+  ],
+  "result": {
+    "radio_decisions_advanced": true,
+    "provisional_working_memory_count": 57,
+    "radio_source_conflicts_closed": false,
+    "radio_memory_accounting_final": false,
+    "publication_ready": false
+  },
+  "rules": {
+    "rx_only": true,
+    "paired_rx": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "source_conflict_blocks_promotion": true,
+    "local_operator_status_overrides_general_directory_for_current_state": true,
+    "private_ppdr_operational_data_excluded": true,
+    "published_v0_2_immutable": true
+  }
+}

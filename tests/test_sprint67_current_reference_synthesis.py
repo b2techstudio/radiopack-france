@@ -9,7 +9,6 @@ RESUME = ROOT / "research/project-resume-state.json"
 COR = ROOT / "research/bretagne-v0.1/corsen-channel79-evidence.json"
 ETEL = ROOT / "research/bretagne-v0.1/etel-channel64-evidence.json"
 
-assert EVIDENCE.is_file()
 e = json.loads(EVIDENCE.read_text(encoding="utf-8"))
 assert e["sprint"] == 67
 assert e["state_version"] == "0.21.56"
@@ -28,7 +27,6 @@ assert f5["current_display_state_overrides_dated_verification_provenance"] is Fa
 assert f5["authoritative_source_reconciliation_complete"] is False
 assert f5["mortain_field_gate_cleared"] is False
 assert f5["candidate_memory_delta"] == 0
-
 assert n["f6zes"]["frequency_mode_operational_state_resolved"] is False
 assert n["f6zes"]["must_not_guess_frequency"] is True
 r3 = n["r3"]
@@ -82,7 +80,6 @@ assert b["new_site_assignment_count"] == 0
 assert b["new_rf_memory_delta"] == 0
 assert b["public_promotion_allowed"] is False
 
-# Existing detailed dossiers must remain conservative.
 cor = json.loads(COR.read_text(encoding="utf-8"))
 assert cor["assessment"]["primary_current_channel79_transmitter_site_confirmed"] is False
 assert cor["assessment"]["site_assignment_can_be_promoted"] is False
@@ -99,16 +96,12 @@ assert e["decisions"]["public_pack_mutated"] is False
 assert e["decisions"]["public_export_allowed"] is False
 
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert resume["current_sprint"] >= 67
-assert resume["state_version"] >= "0.21.56"
-assert normandie_work["internal_candidate_memory_count"] == 142
-assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
-assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert normandie_work["latest_current_reference_synthesis"]["file"] == "research/sprint-67-current-reference-synthesis.json"
-assert resume["bretagne_research_update"]["ministry_leisure_guide_2026_pdf_extracted"] is True
-assert resume["bretagne_research_update"]["ministry_leisure_guide_2026_names_transmitter_sites"] is False
-assert resume["bretagne_research_update"]["corsen_secondary_current_stiff_channel79_clue_exists"] is True
+current = resume["normandie_v0_5_latest_refresh"]
+assert current["candidate_memory_count"] == 142
+assert current["candidate_memory_delta"] == 0
+assert current["known_potential_ceiling_excluding_f6zes"] == 147
+assert set(current["field_required"]) == {"R3_F1ZBX", "F5ZHA"}
 assert resume["resume_rules"]["current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter"] is True
 assert resume["resume_rules"]["secondary_source_convergence_does_not_become_primary_validation"] is True
 assert resume["resume_rules"]["current_display_badge_does_not_override_dated_verification_provenance"] is True
@@ -119,4 +112,4 @@ assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 
-print("Sprint 67 current reference synthesis: 2026 ministry guide confirms channel level only, secondary Ch79 convergence stays non-primary, RepeaterBook display badge cannot override stale provenance, candidate/public packs unchanged OK")
+print("Sprint 67 current reference synthesis: historical primary/secondary boundaries remain immutable; compact current state preserves Normandie gates, public packs unchanged OK")

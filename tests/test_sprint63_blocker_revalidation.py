@@ -69,14 +69,16 @@ normandie_public = ROOT / "website/public/downloads/normandie/radiopack-france-n
 assert normandie_public.is_file()
 assert len(normandie_public.read_text(encoding="utf-8").splitlines()) == 140
 
-# Sprint 63 evidence remains immutable historical evidence. The project resume state is
-# allowed to advance to later sprints as long as the guarded conclusions stay intact.
+# Historical evidence is authoritative; the compact current resume only carries the
+# current gate summary needed to ensure later releases did not silently promote it.
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert resume["current_sprint"] >= evidence["sprint"]
-assert normandie_work["internal_candidate_memory_count"] == 142
-assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert normandie_work["public_release_ready"] is False
-assert resume["resume_rules"]["stale_secondary_conflict_does_not_replace_required_authoritative_reconciliation"] is True
+current = resume["normandie_v0_5_latest_refresh"]
+assert current["candidate_memory_count"] == 142
+assert current["candidate_memory_delta"] == 0
+assert current["known_potential_ceiling_excluding_f6zes"] == 147
+assert set(current["field_required"]) == {"R3_F1ZBX", "F5ZHA"}
+assert set(current["source_watch"]) == {"F1ZOV", "F6ZES"}
+assert resume["resume_rules"]["unresolved_frequency_must_not_be_guessed"] is True
 
-print("Sprint 63 blocker revalidation: historical evidence remains guarded after later sprints; no gate cleared, stale F5ZHA secondary conflict correctly bounded, F1ZOV/F6ZES still blocked, unread Guide Marine produces no inference, public packs unchanged, OK")
+print("Sprint 63 blocker revalidation: historical evidence remains guarded after later sprints; no gate cleared, F5ZHA/F1ZOV/F6ZES conclusions preserved, public packs unchanged, OK")

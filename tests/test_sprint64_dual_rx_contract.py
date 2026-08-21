@@ -10,7 +10,6 @@ policy = json.loads((ROOT / "research/paired-rx-policy.json").read_text(encoding
 next_plan = json.loads((ROOT / "research/paired-rx-next-version-plan.json").read_text(encoding="utf-8"))
 r3_pack = json.loads((ROOT / "research/normandie-v0.4/r3-validation-pack.json").read_text(encoding="utf-8"))
 resume = json.loads((ROOT / "research/project-resume-state.json").read_text(encoding="utf-8"))
-normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 
 assert contract["status"] == "dual_rx_contract_snapshot_not_public"
 assert contract["public_export_allowed"] is False
@@ -23,7 +22,6 @@ assert contract["rules"]["chirp_offset"] == "0.000000"
 
 items = {item["id"]: item for item in contract["contracts"]}
 assert set(items) == {"F1ZBX_R3", "CROSS_ETEL_CHANNEL_64", "CROSS_CORSEN_CHANNEL_79"}
-
 r3 = items["F1ZBX_R3"]
 assert r3["rx_frequencies_mhz"] == [145.075, 145.675]
 assert r3["required_distinct_rx_memory_count_if_promoted"] == 2
@@ -81,7 +79,6 @@ assert bretagne_links["MARINE-64"]["coast_to_ship_rx_mhz"] == 160.825
 assert bretagne_links["MARINE-79"]["ship_to_coast_rx_mhz"] == 156.975
 assert bretagne_links["MARINE-79"]["coast_to_ship_rx_mhz"] == 161.575
 
-# Public state must remain unchanged while these gates are still closed.
 public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
 assert len(rows) == 139
@@ -89,10 +86,13 @@ registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8"
 assert 'version: "v0.4"' in registry
 assert 'id: "bretagne"' in registry
 assert resume["public_packs"]["normandie"]["memory_count"] == 142
-assert normandie_work["internal_candidate_memory_count"] == 142
-assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
+current = resume["normandie_v0_5_latest_refresh"]
+assert current["candidate_memory_count"] == 142
+assert current["candidate_memory_delta"] == 0
+assert set(current["field_required"]) == {"R3_F1ZBX", "F5ZHA"}
+assert resume["resume_rules"]["verified_distinct_pair_uses_two_rx_memories"] is True
 
 print(
-    "Tests Sprint 64 dual RX contract: R3 keeps exactly two pair memories independently of its two field sessions, "
-    "Etel Ch64 and Corsen Ch79 each keep both maritime RX directions, all gates remain closed and public packs unchanged OK"
+    "Tests Sprint 64 dual RX contract: R3 keeps exactly two pair memories independently of field sessions, "
+    "Etel Ch64/Corsen Ch79 keep both RX directions, historical gates remain closed in source evidence OK"
 )

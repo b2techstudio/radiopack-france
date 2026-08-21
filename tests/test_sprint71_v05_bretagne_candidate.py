@@ -29,7 +29,6 @@ assert zha["promotion"] is False
 zov = e["normandie_v0_5"]["f1zov"]
 assert zov["local_operator_status"] == "En Maintenance"
 assert zov["promotion"] is False
-
 zes = e["normandie_v0_5"]["f6zes"]
 assert zes["current_ref_frequency_present"] is False
 assert zes["current_ref_mode_present"] is False
@@ -38,12 +37,7 @@ assert zes["promotion"] is False
 
 b = e["bretagne_v0_1"]
 assert b["internal_candidate_memory_count"] == 135
-assert b["national_blocks"] == {
-    "pmr446": 16,
-    "marine_vhf": 90,
-    "amateur_listening": 6,
-    "amateur_calls": 2,
-}
+assert b["national_blocks"] == {"pmr446": 16, "marine_vhf": 90, "amateur_listening": 6, "amateur_calls": 2}
 assert b["regional_unique_memories_after_national_deduplication"] == 21
 assert b["regional_source_unique_count"] == 29
 assert b["marine_policy"]["channel64_pair_mhz"] == [156.225, 160.825]
@@ -54,26 +48,19 @@ assert b["marine_policy"]["channel64_local_site_claimed"] is False
 assert b["marine_policy"]["channel79_local_site_claimed"] is False
 assert b["aviation"]["memory_count"] == 0
 assert b["aviation"]["status"] == "pending_current_sia_extraction"
-
 assert e["rules"]["internal_candidate_is_not_publication"] is True
 assert e["rules"]["tx_disabled"] is True
 
 state = json.loads(STATE.read_text(encoding="utf-8"))
 assert state["current_sprint"] >= 71
 assert state["state_version"] >= "0.21.60"
-assert state["public_packs"]["bretagne"]["version"] in {"0.1", "0.2"}
-assert state["public_packs"]["bretagne"]["memory_count"] in {135, 151}
-if state["current_sprint"] >= 80:
-    assert state["public_packs"]["bretagne"]["version"] == "0.2"
-    assert state["public_packs"]["bretagne"]["memory_count"] == 151
-historical_v01 = state.get("completed_bretagne_v0_1_release")
-if historical_v01 is None:
-    historical_v01 = state["active_work"]
-    assert historical_v01["target_version"] == "0.1"
-    assert historical_v01["public_export_allowed"] is False
-else:
-    assert historical_v01["version"] == "0.1"
-    assert historical_v01["immutable"] is True
-assert historical_v01.get("internal_candidate_memory_count", historical_v01.get("memory_count")) == 135
+assert state["public_packs"]["bretagne"]["version"] == "0.2"
+assert state["public_packs"]["bretagne"]["memory_count"] == 151
+assert state["public_packs"]["bretagne"]["immutable"] is True
+assert state["public_packs"]["bretagne"]["previous_immutable_version"] == "0.1"
+assert state["public_packs"]["bretagne"]["previous_memory_count"] == 135
+record = json.loads((ROOT / "research/bretagne-v0.1/publication-record.json").read_text(encoding="utf-8"))
+assert record["version"] == "0.1" and record["memory_count"] == 135
+assert record["published_version_is_immutable"] is True
 
-print("Sprint 71: Normandie v0.5 revalidated with 0 promotion; Bretagne v0.1 historical 135-memory candidate remains auditable after later Bretagne publications OK")
+print("Sprint 71: Normandie v0.5 revalidated with 0 promotion; Bretagne v0.1 historical 135-memory candidate remains auditable from its immutable evidence after v0.2 publication OK")

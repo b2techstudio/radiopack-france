@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-08-21",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "status": "revalidation_open_no_rf_change_promoted",
+  "current_airac": "08/26",
+  "airac_effective_from": "2026-08-06",
+  "airac_valid_through_inclusive": "2026-09-02",
+  "published_v0_2_aviation_memory_count": 18,
+  "aerodromes": ["LFPG", "LFPO", "LFPB"],
+  "carry_forward_policy": "Do not mutate published aviation frequencies until the scoped AD 2.18 and applicable NOTAM/SUP AIP review is complete.",
+  "observed_current_sup_aip": [
+    {
+      "id": "147/2026",
+      "site": "LFPO",
+      "valid_from": "2026-08-06",
+      "valid_to": "2027-06-10",
+      "topic": "restriction / works affecting runway 06/24",
+      "frequency_change_proven": false
+    },
+    {
+      "id": "085/2026",
+      "site": "LFPO",
+      "valid_from": "2026-06-11",
+      "valid_to": "2026-12-23",
+      "topic": "temporary procedures associated with runway 06/24 closure",
+      "frequency_change_proven": false
+    }
+  ],
+  "next_airac": {
+    "cycle": "09/26",
+    "effective_from": "2026-09-03",
+    "required_before_publication_on_or_after": "2026-09-03"
+  },
+  "gates": {
+    "full_scoped_ad2_18_recheck_complete": false,
+    "notam_sup_review_complete": false,
+    "frequency_delta_validated": false,
+    "publication_allowed": false
+  },
+  "sources": [
+    "https://www.sia.aviation-civile.gouv.fr/"
+  ],
+  "rules": {
+    "rx_only": true,
+    "no_frequency_guessing": true,
+    "airac_transition_requires_revalidation": true,
+    "published_v0_2_immutable": true
+  }
+}

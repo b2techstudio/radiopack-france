@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "status": "research_open",
+  "published_base": {
+    "version": "0.2",
+    "memory_count": 58,
+    "immutable": true
+  },
+  "scope": {
+    "national_base": "carry forward from immutable public v0.2 unless a separate national correction is explicitly validated",
+    "radioamateur": [
+      "2 m analog repeaters",
+      "70 cm analog repeaters",
+      "analog crossband transponders"
+    ],
+    "aviation": {
+      "published_base_memory_count": 18,
+      "airac_review_required": true,
+      "notam_sup_review_required": true
+    },
+    "marine": false
+  },
+  "excluded": [
+    "digital-only repeaters and hotspots without a useful analog RX role",
+    "private networks",
+    "PPDR operational data",
+    "encrypted or non-public data",
+    "unverified frequencies",
+    "artificial fill"
+  ],
+  "publication_gates": {
+    "radio_source_conflicts_closed": false,
+    "radio_memory_accounting_final": false,
+    "aviation_revalidation_complete": false,
+    "deterministic_candidate_built": false,
+    "rx_only_validation_passed": false,
+    "rf_deduplication_passed": false,
+    "memory_limit_passed": false,
+    "publication_record_frozen": false
+  },
+  "publication_ready": false
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-08-21",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "status": "research_checkpoint_not_release_candidate",
+  "published_base_version": "0.2",
+  "published_base_memory_count": 58,
+  "kept_from_v0_2_candidate": [
+    {
+      "call": "F5ZNG",
+      "site": "Provins",
+      "frequencies_mhz": [145.625, 145.025],
+      "evidence": "REF current + RepeaterBook + ARSM77"
+    },
+    {
+      "call": "F5ZNN",
+      "site": "Saint-Rémy-la-Vanne",
+      "frequencies_mhz": [145.65, 145.05],
+      "evidence": "REF current + ARSM77"
+    },
+    {
+      "call": "F5ZMH",
+      "site": "Linas",
+      "frequencies_mhz": [145.7375, 145.1375],
+      "evidence": "RepeaterBook current + F5KEE local"
+    },
+    {
+      "call": "F1ZHK",
+      "site": "Nangis",
+      "frequencies_mhz": [145.7625, 145.1625],
+      "evidence": "RepeaterBook current + ARSM77",
+      "gate": "capture current REF row before final promotion"
+    }
+  ],
+  "promoted_for_working_candidate": [
+    {
+      "call": "F5ZMR",
+      "site": "Provins",
+      "kind": "70cm_fm_repeater",
+      "frequencies_mhz": [431.525, 439.125],
+      "memory_count": 2,
+      "evidence": "REF current + RepeaterBook update 2026-06-14"
+    },
+    {
+      "call": "F5ZSY",
+      "site": "Issy-les-Moulineaux",
+      "kind": "analog_crossband_transponder",
+      "frequencies_mhz": [145.325, 430.325],
+      "memory_count": 2,
+      "evidence": "REF current + RepeaterBook reviewed 2026-02-17"
+    }
+  ],
+  "candidate_pending_second_current_source": [
+    {
+      "call": "F5ZBK",
+      "site": "Triel-sur-Seine",
+      "kind": "70cm_fm_repeater",
+      "frequencies_mhz": [430.175, 431.775],
+      "reason": "REF current active; independent current operational corroboration still wanted"
+    },
+    {
+      "call": "F1ZTC",
+      "site": "Paris 16",
+      "kind": "2m_fm_repeater",
+      "frequencies_mhz": [145.7875, 145.1875],
+      "reason": "REF current active; independent current operational corroboration still wanted"
+    }
+  ],
+  "not_carried_forward_from_v0_2": [
+    {
+      "call": "F5ZAD",
+      "site": "Clamart",
+      "reason": "REF current marks Arrêt and RepeaterBook marks off-air"
+    },
+    {
+      "call": "F1ZUX",
+      "site": "Achères",
+      "reason": "current RepeaterBook marks off-air/down since 2023 and current call/site evidence no longer supports an active IDF relay"
+    }
+  ],
+  "deferred": [
+    {
+      "call": "F1ZSY",
+      "site": "Paris 16",
+      "reason": "current-source conflict: REF/ARP list active while RepeaterBook says inactive for years"
+    },
+    {
+      "call": "F5ZEQ",
+      "site": "Le Mesnil-le-Roi / Sartrouville",
+      "reason": "local operator page says maintenance/out-of-service while REF and RepeaterBook list active"
+    },
+    {
+      "call": "F5ZDR",
+      "site": "Linas",
+      "reason": "local club evidence still describes the UHF chain as degraded; current stable-operation gate not cleared"
+    },
+    {
+      "call": "F5ZNN-crossband",
+      "site": "Saint-Rémy-la-Vanne",
+      "frequencies_mhz": [145.65, 430.65],
+      "reason": "REF exposes a current crossband row but RF deduplication and role overlap with the 2 m pair must be resolved before memory accounting"
+    }
+  ],
+  "sources": [
+    "https://www.r-e-f.org/",
+    "https://www.repeaterbook.com/row_repeaters/Display_SS.php?state_id=FR",
+    "https://arsm77.fr/relais-et-balises/",
+    "https://www.f5kee.fr/",
+    "https://f5kck.org/f5zeq/",
+    "https://www.arp75.org/"
+  ],
+  "result": {
+    "published_base_analog_pair_count": 8,
+    "working_keep_count": 4,
+    "working_new_promoted_station_count": 2,
+    "not_carried_count": 2,
+    "deferred_or_pending_count": 6,
+    "release_candidate_memory_count": null,
+    "publication_ready": false
+  },
+  "rules": {
+    "rx_only": true,
+    "paired_rx": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "source_conflict_blocks_promotion": true,
+    "private_ppdr_operational_data_excluded": true,
+    "published_v0_2_immutable": true
+  }
+}

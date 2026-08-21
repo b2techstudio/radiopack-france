@@ -63,13 +63,13 @@ assert public["bretagne"]["version"] == "0.2"
 assert public["bretagne"]["memory_count"] == 151
 assert public["bretagne"]["immutable"] is True
 
-active = state["active_work"]
-assert active["pack"] == "Bretagne"
-assert active["target_version"] == "0.3"
-assert active["candidate_memory_count"] == 151
-assert active["candidate_memory_delta"] == 0
-assert active["airac_next_effective_from"] == "2026-09-03"
-assert active["publication_allowed_before_airac09_revalidation"] is False
+bretagne = state.get("bretagne_v0_3_airac_handoff", state.get("active_work", {}))
+assert bretagne["pack"] == "Bretagne"
+assert bretagne["target_version"] == "0.3"
+assert bretagne["candidate_memory_count"] == 151
+assert bretagne["candidate_memory_delta"] == 0
+assert bretagne["airac_next_effective_from"] == "2026-09-03"
+assert bretagne["publication_allowed_before_airac09_revalidation"] is False
 
 normandie = state["normandie_v0_5_latest_refresh"]
 assert normandie["candidate_memory_count"] == 142

@@ -66,7 +66,13 @@ Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ;
 
 ### Île-de-France v0.3
 
-Prochaine région métropolitaine à enrichir. La base publique est **v0.2 / 58 RX / 18 aviation**. La revue v0.3 doit traiter systématiquement les relais/transpondeurs analogiques 2 m, 70 cm et crossband suffisamment vérifiés ainsi que l'aviation SIA/AIRAC applicable. Aucun remplissage artificiel.
+Prochaine région métropolitaine à enrichir. La base publique reste **v0.2 / 58 RX / 18 aviation**, immuable.
+
+Un premier checkpoint de recherche a été ouvert le **21 août 2026** dans `research/ile-de-france-v0.3/`. La revue actuelle ne constitue pas encore un candidat de publication : **F5ZAD** et **F1ZUX** ne sont plus reconduits automatiquement ; **F1ZSY** et **F5ZEQ** restent bloqués par des conflits de sources/état ; **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont les nouveaux candidats les mieux étayés ; **F5ZBK** et **F1ZTC** demandent encore une seconde corroboration actuelle. Le cas crossband **F5ZNN** doit être résolu avec la déduplication RF avant comptage final.
+
+L'aviation reste sur la photographie **AIRAC 08/26** jusqu'au 2 septembre 2026 inclus. La revue AD 2.18 et NOTAM/SUP AIP reste ouverte ; aucune modification RF aviation n'est promue dans ce checkpoint. Toute publication à partir du **3 septembre 2026** exigera AIRAC 09/26.
+
+Aucun CSV public ni registre de version n'est modifié tant que les gates radio et aviation ne sont pas fermés.
 
 ### Bretagne v0.3
 

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "pack": "Île-de-France",
   "target_version": "0.3",
-  "status": "research_open",
+  "status": "radio_scope_final_aviation_gate_open",
   "published_base": {
     "version": "0.2",
     "memory_count": 58,
@@ -24,12 +24,15 @@
   },
   "research_evidence": {
     "initial_radio_checkpoint": "research/ile-de-france-v0.3/radio-validation-2026-08-21.json",
-    "latest_radio_pass": "research/ile-de-france-v0.3/radio-validation-pass2-2026-08-21.json",
+    "radio_pass2": "research/ile-de-france-v0.3/radio-validation-pass2-2026-08-21.json",
+    "latest_radio_pass": "research/ile-de-france-v0.3/radio-validation-pass3-2026-08-21.json",
     "aviation_checkpoint": "research/ile-de-france-v0.3/aviation-airac08-2026-08-21.json",
-    "latest_aviation_pass": "research/ile-de-france-v0.3/aviation-validation-pass2-2026-08-21.json",
-    "provisional_working_memory_count": 57,
+    "aviation_pass2": "research/ile-de-france-v0.3/aviation-validation-pass2-2026-08-21.json",
+    "latest_aviation_pass": "research/ile-de-france-v0.3/aviation-validation-pass3-2026-08-21.json",
+    "working_memory_count_if_aviation_unchanged": 57,
     "provisional_aviation_memory_count": 18,
-    "provisional_count_is_release_candidate": false
+    "radio_memory_accounting_final": true,
+    "working_count_is_release_candidate": false
   },
   "excluded": [
     "digital-only repeaters and hotspots without a useful analog RX role",
@@ -37,11 +40,12 @@
     "PPDR operational data",
     "encrypted or non-public data",
     "unverified frequencies",
-    "artificial fill"
+    "artificial fill",
+    "radio stations lacking sufficient current corroboration for this release scope"
   ],
   "publication_gates": {
-    "radio_source_conflicts_closed": false,
-    "radio_memory_accounting_final": false,
+    "radio_source_conflicts_closed": true,
+    "radio_memory_accounting_final": true,
     "aviation_revalidation_complete": false,
     "deterministic_candidate_built": false,
     "rx_only_validation_passed": false,

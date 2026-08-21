@@ -15,7 +15,10 @@ required_files = [
     "research/project-resume-state.json", "research/paired-rx-policy.json",
     "research/bourgogne-franche-comte-v0.3/publication-record.json",
     "research/centre-val-de-loire-v0.3/publication-record.json",
-    "research/sprint-99-summary.md", "research/sprint-100-summary.md",
+    "research/ile-de-france-v0.3/radio-validation-2026-08-21.json",
+    "research/ile-de-france-v0.3/aviation-airac08-2026-08-21.json",
+    "research/ile-de-france-v0.3/release-scope.json",
+    "research/sprint-99-summary.md", "research/sprint-100-summary.md", "research/sprint-101-summary.md",
 ]
 for relative in required_files:
     path = ROOT / relative
@@ -105,12 +108,13 @@ for expected in ["buildMetropolitanPack", "buildBfcV03Pack", "buildCentreV03Pack
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "**État courant : Sprint 100 / 0.21.89", "## Sprint 100 —", "## Sprint 99 —", "## Sprint 98 —", "## Sprint 97 —",
+    "**État courant : Sprint 101 / 0.21.90", "## Sprint 101 —", "## Sprint 100 —", "## Sprint 99 —", "## Sprint 98 —", "## Sprint 97 —",
     "Normandie v0.4** — 142 mémoires RX", "Annecy–Alpes–Léman v0.4** — 77 mémoires RX",
-    "Bretagne v0.2** — 151 mémoires RX", "Centre-Val de Loire v0.3** — 51 mémoires RX",
-    "Bourgogne-Franche-Comté v0.3** — 54 mémoires RX", "research/paired-rx-policy.json",
+    "Bretagne v0.2** — 151 mémoires RX", "Île-de-France v0.2** — 58 mémoires RX",
+    "Centre-Val de Loire v0.3** — 51 mémoires RX", "Bourgogne-Franche-Comté v0.3** — 54 mémoires RX",
+    "research/paired-rx-policy.json", "research/ile-de-france-v0.3/",
     "Duplex=off", "Offset=0.000000", "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README courant/historique incomplet: {expected}"
 
-print("Tests RadioPack repository/site: state Sprint 100, BFC v0.3=54, Centre v0.3=51, historical v0.2 preserved, RX-only guards OK")
+print("Tests RadioPack repository/site: state Sprint 101, IDF v0.2 public=58 immutable, BFC/Centre v0.3 preserved, RX-only guards OK")

@@ -117,12 +117,47 @@ class IleDeFranceV03ResearchTests(unittest.TestCase):
         self.assertFalse(aviation["gates"]["notam_sup_review_complete"])
         self.assertFalse(aviation["gates"]["frequency_delta_validated"])
 
+    def test_second_aviation_pass_revalidates_lfpg_without_premature_expansion(self):
+        aviation = load_json("aviation-validation-pass2-2026-08-21.json")
+        self.assertEqual(aviation["current_airac"], "08/26")
+        self.assertEqual(aviation["airac_effective_from"], "2026-08-06")
+        self.assertEqual(aviation["airac_valid_through_inclusive"], "2026-09-02")
+
+        lfpg = aviation["aerodromes"]["LFPG"]
+        self.assertTrue(lfpg["current_direct_sia_ad2_18_checked"])
+        self.assertTrue(lfpg["published_v0_2_subset_revalidated"])
+        self.assertEqual(
+            lfpg["published_v0_2_subset_mhz"],
+            [118.155, 119.855, 121.155, 124.355],
+        )
+        self.assertEqual(
+            lfpg["additional_current_app_frequencies_observed_mhz"],
+            [125.83, 126.43, 126.58, 131.205, 133.38, 136.28],
+        )
+        self.assertFalse(lfpg["additional_candidates_promoted"])
+
+        self.assertFalse(aviation["aerodromes"]["LFPO"]["current_direct_sia_ad2_18_checked"])
+        self.assertFalse(aviation["aerodromes"]["LFPB"]["current_direct_sia_ad2_18_checked"])
+        self.assertEqual(aviation["provisional_aviation_decision"]["working_memory_count"], 18)
+        self.assertEqual(aviation["provisional_aviation_decision"]["memory_delta_promoted"], 0)
+        self.assertFalse(aviation["provisional_aviation_decision"]["working_count_is_final"])
+        self.assertTrue(aviation["gates"]["lfpg_published_subset_revalidated"])
+        self.assertFalse(aviation["gates"]["full_scoped_ad2_18_recheck_complete"])
+        self.assertFalse(aviation["gates"]["notam_sup_review_complete"])
+        self.assertFalse(aviation["gates"]["frequency_delta_validated"])
+        self.assertFalse(aviation["gates"]["publication_allowed"])
+
     def test_release_scope_is_explicitly_not_ready(self):
         scope = load_json("release-scope.json")
         self.assertEqual(scope["published_base"]["version"], "0.2")
         self.assertEqual(scope["published_base"]["memory_count"], 58)
         self.assertTrue(scope["published_base"]["immutable"])
         self.assertEqual(scope["research_evidence"]["provisional_working_memory_count"], 57)
+        self.assertEqual(scope["research_evidence"]["provisional_aviation_memory_count"], 18)
+        self.assertEqual(
+            scope["research_evidence"]["latest_aviation_pass"],
+            "research/ile-de-france-v0.3/aviation-validation-pass2-2026-08-21.json",
+        )
         self.assertFalse(scope["research_evidence"]["provisional_count_is_release_candidate"])
         self.assertFalse(scope["publication_ready"])
         self.assertTrue(all(value is False for value in scope["publication_gates"].values()))

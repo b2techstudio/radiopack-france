@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-08-21",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "status": "aviation_scope_narrowed_not_release_candidate",
+  "based_on": "research/ile-de-france-v0.3/aviation-validation-pass2-2026-08-21.json",
+  "current_airac": "08/26",
+  "airac_effective_from": "2026-08-06",
+  "airac_valid_through_inclusive": "2026-09-02",
+  "published_v0_2_aviation_memory_count": 18,
+  "aerodromes": {
+    "LFPG": {
+      "name": "Paris Charles de Gaulle",
+      "published_v0_2_subset_mhz": [118.155, 119.855, 121.155, 124.355],
+      "current_airac08_direct_subset_revalidated": true,
+      "decision": "keep_current_v0_2_subset_no_expansion"
+    },
+    "LFPO": {
+      "name": "Paris Orly",
+      "published_v0_2_subset_mhz": [118.855, 124.45, 127.75, 121.555, 121.705, 118.7, 126.505, 131.355],
+      "official_sia_recent_com_material_matches_published_subset": true,
+      "direct_airac08_ad2_18_static_capture_completed": false,
+      "active_sup_aip": ["085/2026", "147/2026"],
+      "decision": "keep_v0_2_subset_for_working_arithmetic_only",
+      "note": "Official SIA COM material indexed through the preceding cycle contains every published v0.2 LFPO frequency. Current AIRAC 08/26 SUP AIP 085/2026 and 147/2026 concern temporary procedures and runway/taxiway works. The full current-cycle AD 2.18 and NOTAM activation state are still required before release."
+    },
+    "LFPB": {
+      "name": "Paris Le Bourget",
+      "published_v0_2_subset_mhz": [123.835, 121.955, 121.905, 118.93, 120.005],
+      "official_sia_june_july_2026_material_matches_published_subset": true,
+      "direct_airac08_ad2_18_static_capture_completed": false,
+      "decision": "keep_v0_2_subset_for_working_arithmetic_only"
+    }
+  },
+  "sup_aip_review": {
+    "085/2026": {
+      "site": "LFPO",
+      "valid_from": "2026-06-11",
+      "valid_to": "2026-12-23",
+      "reviewed_official_sia_text": true,
+      "topic": "temporary instrument procedures associated with runway 06/24 closure",
+      "published_v0_2_frequency_change_proven": false
+    },
+    "147/2026": {
+      "site": "LFPO",
+      "valid_from": "2026-08-06",
+      "valid_to": "2027-06-10",
+      "reviewed_official_sia_search_extract": true,
+      "full_pdf_visual_review_completed": false,
+      "topic": "runway 06/24 and associated taxiway works; phases activated by NOTAM",
+      "published_v0_2_frequency_change_proven": false,
+      "caution": "The available static tool could not visually inspect the oversized official PDF, so absence of a frequency change is not treated as conclusively proven by this SUP review alone."
+    }
+  },
+  "provisional_aviation_decision": {
+    "working_memory_count": 18,
+    "memory_delta_promoted": 0,
+    "working_count_is_final": false,
+    "additional_frequencies_promoted": false
+  },
+  "remaining_release_blockers": [
+    "LFPO direct current AIRAC 08/26 AD 2.18 revalidation or equivalent authoritative current-cycle evidence",
+    "LFPB direct current AIRAC 08/26 AD 2.18 revalidation or equivalent authoritative current-cycle evidence",
+    "authoritative current NOTAM review for LFPG/LFPO/LFPB, including SUP 147/2026 phase activation",
+    "final SUP AIP impact review sufficient to rule out RF changes in the publication scope"
+  ],
+  "next_airac": {
+    "cycle": "09/26",
+    "effective_from": "2026-09-03",
+    "required_before_publication_on_or_after": "2026-09-03"
+  },
+  "gates": {
+    "lfpg_published_subset_revalidated": true,
+    "lfpo_recent_official_subset_consistent": true,
+    "lfpb_recent_official_subset_consistent": true,
+    "full_current_airac_scoped_revalidation_complete": false,
+    "notam_sup_review_complete": false,
+    "frequency_delta_validated": false,
+    "publication_allowed": false
+  },
+  "rules": {
+    "rx_only": true,
+    "no_frequency_guessing": true,
+    "recent_official_consistency_does_not_replace_required_current_cycle_gate": true,
+    "airac_transition_requires_revalidation": true,
+    "published_v0_2_immutable": true
+  }
+}

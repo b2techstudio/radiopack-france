@@ -1,4 +1,4 @@
-name: Sprint 100 State Sync
+name: Sprint 101 State Sync
 
 on:
   push:
@@ -13,12 +13,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: sprint100-state-sync-${{ github.ref }}
+  group: sprint101-state-sync-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   state-sync:
-    name: Historical state 100 / 0.21.89
+    name: Official state 101 / 0.21.90
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -29,5 +29,7 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.13"
-      - name: Test Sprint 100 historical publication state
-        run: python tests/test_sprint100_state_sync.py
+      - name: Test Sprint 101 official state synchronization
+        run: python tests/test_sprint101_state_sync.py
+      - name: Test Île-de-France v0.3 research checkpoint
+        run: python tests/test_idf_v03_research.py

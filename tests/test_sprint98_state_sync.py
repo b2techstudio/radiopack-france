@@ -7,9 +7,11 @@ state = json.loads((ROOT / "research/project-resume-state.json").read_text(encod
 manifest = json.loads((ROOT / "research/sprint-98-metropolitan-publication-manifest.json").read_text(encoding="utf-8"))
 ci = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
 
-# Sprint 98 is now historical: later v0.3 releases must not invalidate its frozen v0.2 evidence.
+# Sprint 98 is historical: later official states and v0.3 research/publications
+# must not invalidate its frozen v0.2 evidence.
 assert state["current_sprint"] >= 100
-assert state["state_version"] == "0.21.89"
+version_parts = tuple(int(part) for part in state["state_version"].split("."))
+assert version_parts >= (0, 21, 89)
 assert manifest["region_count"] == 11
 assert manifest["memory_count"] == 1135
 assert manifest["all_rx_only"] is True
@@ -65,4 +67,4 @@ assert (ROOT / "research/sprint-98-summary.md").is_file()
 assert "- name: Test Sprint 98 state synchronization" in ci
 assert "python tools/check_metropolitan_v02_publication_records.py --dist website/dist" in ci
 
-print("Sprint 98 historical integrity: eleven immutable v0.2 records retained after BFC/Centre v0.3 publications OK")
+print("Sprint 98 historical integrity: eleven immutable v0.2 records retained across later official states OK")

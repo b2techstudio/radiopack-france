@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **21 août 2026**
-Sprint courant : **100**
-État logique : **0.21.89**
+Sprint courant : **101**
+État logique : **0.21.90**
 
-L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-100-summary.md`.
+L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-101-summary.md`.
 
 ## État public
 
@@ -25,6 +25,16 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Corse v0.2 : **137 mémoires RX**, publiée et immuable.
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
+
+## Sprint 101 — ouverture Île-de-France v0.3
+
+Le Sprint **101 / 0.21.90** ouvre officiellement Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont **18 aviation**. Il s'agit d'un checkpoint de recherche : aucun CSV public, aucun numéro de version public ni aucun SHA de publication n'est modifié.
+
+La première passe garde **F5ZNG, F5ZNN, F5ZMH et F1ZHK** comme base de travail ; **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont les nouveaux candidats les mieux étayés. **F5ZAD** et **F1ZUX** ne sont plus reconduits automatiquement. **F1ZSY, F5ZEQ, F5ZDR** et le crossband **F5ZNN** restent différés/bloqués par les gates documentés ; **F5ZBK** et **F1ZTC** demandent encore une seconde corroboration actuelle.
+
+L'aviation reste sur **AIRAC 08/26 jusqu'au 2 septembre 2026 inclus**. La revue AD 2.18 et NOTAM/SUP AIP reste ouverte ; toute publication ou nouvelle validation à partir du **3 septembre 2026** devra être reprise sur **AIRAC 09/26**.
+
+Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
 
 ## Sprint 100 — Centre-Val de Loire v0.3
 
@@ -66,9 +76,9 @@ Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ;
 
 ### Île-de-France v0.3
 
-Prochaine région métropolitaine à enrichir. La base publique reste **v0.2 / 58 RX / 18 aviation**, immuable.
+Travail actif officiel. La base publique reste **v0.2 / 58 RX / 18 aviation**, immuable.
 
-Un premier checkpoint de recherche a été ouvert le **21 août 2026** dans `research/ile-de-france-v0.3/`. La revue actuelle ne constitue pas encore un candidat de publication : **F5ZAD** et **F1ZUX** ne sont plus reconduits automatiquement ; **F1ZSY** et **F5ZEQ** restent bloqués par des conflits de sources/état ; **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont les nouveaux candidats les mieux étayés ; **F5ZBK** et **F1ZTC** demandent encore une seconde corroboration actuelle. Le cas crossband **F5ZNN** doit être résolu avec la déduplication RF avant comptage final.
+Le checkpoint du **21 août 2026** est dans `research/ile-de-france-v0.3/`. La revue actuelle ne constitue pas encore un candidat de publication : **F5ZAD** et **F1ZUX** ne sont plus reconduits automatiquement ; **F1ZSY** et **F5ZEQ** restent bloqués par des conflits de sources/état ; **F5ZMR Provins** et le crossband **F5ZSY Issy-les-Moulineaux** sont les nouveaux candidats les mieux étayés ; **F5ZBK** et **F1ZTC** demandent encore une seconde corroboration actuelle. Le cas crossband **F5ZNN** doit être résolu avec la déduplication RF avant comptage final.
 
 L'aviation reste sur la photographie **AIRAC 08/26** jusqu'au 2 septembre 2026 inclus. La revue AD 2.18 et NOTAM/SUP AIP reste ouverte ; aucune modification RF aviation n'est promue dans ce checkpoint. Toute publication à partir du **3 septembre 2026** exigera AIRAC 09/26.
 

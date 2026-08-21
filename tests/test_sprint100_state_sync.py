@@ -10,13 +10,12 @@ changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
 bfc = json.loads((ROOT / "research/bourgogne-franche-comte-v0.3/publication-record.json").read_text(encoding="utf-8"))
 centre = json.loads((ROOT / "research/centre-val-de-loire-v0.3/publication-record.json").read_text(encoding="utf-8"))
 
-assert state["updated"] == "2026-08-21"
-assert state["current_sprint"] == 100
-assert state["state_version"] == "0.21.89"
-assert "**État courant : Sprint 100 / 0.21.89" in readme
-assert "Sprint courant : **100**" in project
-assert "État logique : **0.21.89**" in project
-assert changelog.startswith("# Changelog\n\n## 0.21.89 - 2026-08-20")
+# Sprint 100 is now a historical publication guard. Advancing the current
+# project state must not mutate the immutable BFC/Centre publication facts.
+assert state["current_sprint"] >= 100
+assert "## Sprint 100 — Centre-Val de Loire v0.3" in readme
+assert "## Sprint 100 — Centre-Val de Loire v0.3" in project
+assert "## 0.21.89 - 2026-08-20" in changelog
 
 pbfc = state["public_packs"]["bourgogne_franche_comte"]
 assert pbfc["version"] == "0.3" and pbfc["memory_count"] == 54 and pbfc["immutable"] is True
@@ -39,17 +38,16 @@ assert s100["public_csv_sha256"] == centre["public_csv_sha256"]
 
 assert (ROOT / "research/sprint-99-summary.md").is_file()
 assert (ROOT / "research/sprint-100-summary.md").is_file()
-assert state["recent_sprints"][0]["sprint"] == 100
-assert state["recent_sprints"][1]["sprint"] == 99
+assert any(item["sprint"] == 100 and item["state_version"] == "0.21.89" for item in state["recent_sprints"])
 
-active = state["active_work"]
-assert active["pack"] == "Bretagne" and active["target_version"] == "0.3"
-assert active["candidate_memory_count"] == 151 and active["candidate_memory_delta"] == 0
-assert active["airac_next_effective_from"] == "2026-09-03"
-assert active["publication_allowed_before_airac09_revalidation"] is False
+bretagne = state.get("bretagne_v0_3_airac_handoff", state.get("active_work", {}))
+assert bretagne["pack"] == "Bretagne" and bretagne["target_version"] == "0.3"
+assert bretagne["candidate_memory_count"] == 151 and bretagne["candidate_memory_delta"] == 0
+assert bretagne["airac_next_effective_from"] == "2026-09-03"
+assert bretagne["publication_allowed_before_airac09_revalidation"] is False
 
 normandie = state["normandie_v0_5_latest_refresh"]
 assert normandie["candidate_memory_count"] == 142 and normandie["candidate_memory_delta"] == 0
 assert normandie["known_potential_ceiling_excluding_f6zes"] == 147
 
-print("Sprint 100 state sync: BFC v0.3=54 and Centre v0.3=51 officially synchronized at 100 / 0.21.89 OK")
+print("Sprint 100 historical guard: BFC v0.3=54 and Centre v0.3=51 remain immutable OK")

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "status": "deterministic_internal_release_candidate_not_published",
+  "generated_on": "2026-08-21",
+  "pack": "Île-de-France",
+  "target_version": "0.3",
+  "published_base_version": "0.2",
+  "published_base_memory_count": 58,
+  "published_base_sha256": "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d",
+  "candidate_memory_count": 57,
+  "candidate_aviation_memory_count": 18,
+  "candidate_regional_radio_memory_count": 15,
+  "candidate_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
+  "candidate_csv": "research/ile-de-france-v0.3/generated/release-candidate/radiopack-france-ile-de-france-v0.3-candidate.csv",
+  "builder": "tools/build_idf_v03_candidate.py",
+  "airac_cycle": "08/26",
+  "airac_valid_through_inclusive": "2026-09-02",
+  "airac09_revalidation_required_on_or_after": "2026-09-03",
+  "validation": {
+    "public_base_sha_matches_frozen_record": true,
+    "rx_only": true,
+    "rf_deduplicated": true,
+    "unique_locations": true,
+    "unique_names": true,
+    "memory_limit_passed": true
+  },
+  "public_export_allowed": false
+}

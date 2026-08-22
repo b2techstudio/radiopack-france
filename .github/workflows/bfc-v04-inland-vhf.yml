@@ -8,8 +8,15 @@ on:
       - "data/regional/bourgogne-franche-comte-inland-vhf-rx.json"
       - "research/bourgogne-franche-comte-v0.4/**"
       - "research/bourgogne-franche-comte-v0.3/publication-record.json"
+      - "research/project-resume-state.json"
+      - "research/sprint-106-summary.md"
+      - "research/sprint-107-summary.md"
+      - "README.md"
+      - "PROJECT_STATUS.md"
       - "tools/build_bfc_v04_candidate.py"
       - "tests/test_bfc_v04_candidate.py"
+      - "tests/test_sprint107_state_sync.py"
+      - "website/src/data/regions.json"
       - "website/src/lib/bfcPack.ts"
       - "website/src/lib/chirpPack.ts"
       - "website/src/lib/packRegistry.ts"
@@ -23,8 +30,15 @@ on:
       - "data/regional/bourgogne-franche-comte-inland-vhf-rx.json"
       - "research/bourgogne-franche-comte-v0.4/**"
       - "research/bourgogne-franche-comte-v0.3/publication-record.json"
+      - "research/project-resume-state.json"
+      - "research/sprint-106-summary.md"
+      - "research/sprint-107-summary.md"
+      - "README.md"
+      - "PROJECT_STATUS.md"
       - "tools/build_bfc_v04_candidate.py"
       - "tests/test_bfc_v04_candidate.py"
+      - "tests/test_sprint107_state_sync.py"
+      - "website/src/data/regions.json"
       - "website/src/lib/bfcPack.ts"
       - "website/src/lib/chirpPack.ts"
       - "website/src/lib/packRegistry.ts"
@@ -76,3 +90,6 @@ jobs:
 
       - name: Test BFC v0.4 public byte identity and publication invariants
         run: python tests/test_bfc_v04_candidate.py --dist website/dist
+
+      - name: Test Sprint 107 state synchronization
+        run: python tests/test_sprint107_state_sync.py

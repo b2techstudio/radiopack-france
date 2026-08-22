@@ -8,6 +8,7 @@ on:
       - "research/grand-est-v0.3/**"
       - "research/grand-est-v0.2/**"
       - "tests/test_grand_est_v03_initialization.py"
+      - "tests/test_grand_est_v03_pass2.py"
       - "website/src/lib/packRegistry.ts"
       - ".github/workflows/grand-est-v03-research.yml"
   pull_request:
@@ -17,6 +18,7 @@ on:
       - "research/grand-est-v0.3/**"
       - "research/grand-est-v0.2/**"
       - "tests/test_grand_est_v03_initialization.py"
+      - "tests/test_grand_est_v03_pass2.py"
       - "website/src/lib/packRegistry.ts"
       - ".github/workflows/grand-est-v03-research.yml"
   workflow_dispatch:
@@ -29,8 +31,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  initialization:
-    name: Grand Est v0.3 initialization guards
+  research:
+    name: Grand Est v0.3 research guards
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -43,3 +45,5 @@ jobs:
           python-version: "3.13"
       - name: Test Grand Est v0.3 initialization
         run: python tests/test_grand_est_v03_initialization.py
+      - name: Test Grand Est v0.3 radio pass 2
+        run: python tests/test_grand_est_v03_pass2.py

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "status": "published_zero_blockers",
+  "pack": "Normandie",
+  "version": "0.5",
+  "publication_sprint": 113,
+  "checked_on": "2026-08-22",
+  "blocker_count": 0,
+  "public_release_allowed": true,
+  "gates": {
+    "immutable_v0_4_base_verified": true,
+    "candidate_frozen": true,
+    "candidate_memory_count_146": true,
+    "candidate_sha_frozen": true,
+    "public_csv_exists": true,
+    "public_csv_memory_count_146": true,
+    "public_csv_rx_only": true,
+    "public_csv_unique_locations_names_and_rf": true,
+    "candidate_public_byte_identity_verified": true,
+    "theoretical_coverage_label_present_on_four_new_memories": true,
+    "theoretical_coverage_disclosed_as_unmeasured": true,
+    "field_reception_not_required_by_current_policy": true,
+    "f1zov_maintenance_not_promoted": true,
+    "f6zes_unresolved_not_promoted": true,
+    "stale_f5zha_secondary_frequency_not_promoted": true,
+    "historical_v0_4_retained": true,
+    "registry_points_to_v0_5": true,
+    "region_metadata_points_to_v0_5": true,
+    "region_page_discloses_theoretical_coverage": true
+  },
+  "hashes": {
+    "public_v0_4_sha256": "3da26f18cefbf7ec1dfb6a991101d07f6a8ce9fb921015a7202870fc9b9db66d",
+    "frozen_candidate_sha256": "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59",
+    "public_v0_5_sha256": "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59"
+  },
+  "rules": {
+    "theory_can_close_coverage_gate": true,
+    "theory_is_not_measurement": true,
+    "field_sessions_optional_quality_feedback": true,
+    "automatic_publication_allowed": false,
+    "publication_requires_explicit_release_review": true
+  }
+}

@@ -1,0 +1,68 @@
+name: Patch Normandie v0.5 catalog hardcodings
+
+on:
+  push:
+    branches:
+      - release/normandie-v05-theoretical
+    paths:
+      - ".github/workflows/_patch_normandie_v05_catalog.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+          ref: release/normandie-v05-theoretical
+
+      - name: Patch generator and registry test
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          generator = Path('website/src/pages/generateur.astro')
+          text = generator.read_text(encoding='utf-8')
+          replacements = {
+              '<h3>142 mémoires</h3>': '<h3>146 mémoires</h3>',
+              'Le CSV public Normandie v0.4 contient 142 mémoires RX et est proposé tel quel.': 'Le CSV public Normandie v0.5 contient 146 mémoires RX, dont 4 à couverture théorique documentée.',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'generator token not found: {old}')
+              text = text.replace(old, new)
+          generator.write_text(text, encoding='utf-8')
+
+          test = Path('tests/test_pack_registry.py')
+          text = test.read_text(encoding='utf-8')
+          replacements = {
+              'NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"': 'NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv"',
+              "'memoryCount: 77', 'memoryCount: 60', 'id: \"normandie\"', 'regionSlug: \"normandie\"', 'version: \"v0.4\"',\n    'memoryCount: 142', '/downloads/normandie/radiopack-france-normandie-v0.4.csv',": "'memoryCount: 77', 'memoryCount: 60', 'id: \"normandie\"', 'regionSlug: \"normandie\"', 'version: \"v0.5\"',\n    'memoryCount: 146', '/downloads/normandie/radiopack-france-normandie-v0.5.csv',",
+              '"142 mémoires",': '"146 mémoires",',
+              '(NORMANDIE, 142),': '(NORMANDIE, 146),',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'test_pack_registry token not found: {old}')
+              text = text.replace(old, new)
+          text = text.replace(
+              'assert registry.count(\'downloadUrl: "\') == 4',
+              'assert registry.count(\'downloadUrl: "\') == 4\nassert "couverture théorique documentée" in registry'
+          )
+          test.write_text(text, encoding='utf-8')
+          PY
+          rm .github/workflows/_patch_normandie_v05_catalog.yml
+
+      - name: Commit patch and remove helper
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add website/src/pages/generateur.astro tests/test_pack_registry.py .github/workflows/_patch_normandie_v05_catalog.yml
+          git commit -m "Align Normandie v0.5 catalog and registry guard"
+          git push origin HEAD:release/normandie-v05-theoretical

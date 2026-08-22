@@ -6,11 +6,24 @@ record = json.loads((ROOT / "research/bretagne-v0.1/publication-record.json").re
 scope = json.loads((ROOT / "research/bretagne-v0.1/release-scope.json").read_text(encoding="utf-8"))
 plan = json.loads((ROOT / "research/bretagne-v0.1/pack-plan.json").read_text(encoding="utf-8"))
 gates = json.loads((ROOT / "research/bretagne-v0.1/publication-gates.json").read_text(encoding="utf-8"))
-assert state["current_sprint"] >= 73 and state["state_version"] >= "0.21.62"
+assert state["current_sprint"] >= 73
+assert tuple(int(part) for part in state["state_version"].split(".")) >= (0, 21, 62)
 assert state["public_packs"]["bretagne"]["version"] in {"0.1", "0.2"}
 assert state["public_packs"]["bretagne"]["memory_count"] in {135, 151}
 assert state["public_packs"]["bretagne"]["immutable"] is True
-assert state["public_packs"]["normandie"]["version"] == "0.4" and state["public_packs"]["normandie"]["memory_count"] == 142
+
+# Sprint 73 only freezes the Bretagne v0.1 publication. Normandie may advance
+# independently after its own later reviewed releases.
+normandie_public = state["public_packs"]["normandie"]
+assert normandie_public["immutable"] is True
+if normandie_public["version"] == "0.4":
+    assert normandie_public["memory_count"] == 142
+else:
+    assert normandie_public["version"] == "0.5"
+    assert normandie_public["memory_count"] == 146
+    assert normandie_public["previous_immutable_version"] == "0.4"
+    assert normandie_public["previous_memory_count"] == 142
+
 annecy_public = state["public_packs"]["annecy_alpes_leman"]
 assert annecy_public["version"] in {"0.2", "0.3", "0.4"}
 assert annecy_public["memory_count"] in {65, 76, 77}
@@ -25,6 +38,7 @@ elif annecy_public["version"] == "0.4":
     assert annecy_public["previous_immutable_version"] == "0.3"
     assert annecy_public["previous_memory_count"] == 76
     assert annecy_public["previous_without_aviation_memory_count"] == 59
+
 assert record["status"] == "published_immutable" and record["memory_count"] == 135
 assert record["version"] == "0.1" and record["published_version_is_immutable"] is True
 assert scope["status"] == "scope_frozen_135_prepublication_not_public" and scope["sprint"] == 72
@@ -38,4 +52,4 @@ assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1
 if state["current_sprint"] >= 80:
     assert state["public_packs"]["bretagne"]["version"] == "0.2"
     assert state["public_packs"]["bretagne"]["memory_count"] == 151
-print("Sprint 73: Bretagne v0.1 historical publication remains immutable and auditable after later Bretagne and Annecy releases OK")
+print("Sprint 73: Bretagne v0.1 historical publication remains immutable and auditable after later Bretagne, Annecy and Normandie releases OK")

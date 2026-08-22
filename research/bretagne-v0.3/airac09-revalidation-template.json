@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "status": "not_executed_future_cycle",
+  "pack": "Bretagne",
+  "target_version": "0.3",
+  "cycle": "AIRAC 09/26",
+  "effective_from": "2026-09-03",
+  "effective_until_inclusive": "2026-09-30",
+  "current_cycle_primary_source_verified": false,
+  "current_cycle_primary_source_verified_on": null,
+  "current_cycle_primary_source_url": "https://www.sia.aviation-civile.gouv.fr/catalog/product/view/id/3641/category/57/",
+  "xml_export_bytes_extracted": false,
+  "direct_xml_field_match_claimed": false,
+  "human_review": {
+    "completed": false,
+    "reviewed_on": null,
+    "reviewer_note": null
+  },
+  "baseline": {
+    "public_version": "0.2",
+    "public_memory_count": 151,
+    "public_sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4",
+    "aviation_cycle": "AIRAC 08/26",
+    "aviation_memory_count": 16
+  },
+  "memories": [
+    {"location":130,"name":"AIR-EMERG","baseline_frequency_mhz":121.5,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":131,"name":"RNS-COT-A","baseline_frequency_mhz":120.35,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":132,"name":"RNS-NORD","baseline_frequency_mhz":126.95,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":133,"name":"RNS-SUD","baseline_frequency_mhz":134.0,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":134,"name":"RNS-COT-B","baseline_frequency_mhz":134.2,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":135,"name":"RNS-GND","baseline_frequency_mhz":121.73,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":136,"name":"RNS-TWR","baseline_frequency_mhz":120.505,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":137,"name":"RNS-ATIS","baseline_frequency_mhz":136.405,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":138,"name":"BES-IRO1","baseline_frequency_mhz":119.575,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":139,"name":"BES-IRO2","baseline_frequency_mhz":135.83,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":140,"name":"BES-APP","baseline_frequency_mhz":125.86,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":141,"name":"BES-TWR","baseline_frequency_mhz":120.105,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":142,"name":"BES-ATIS","baseline_frequency_mhz":129.355,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":143,"name":"DIN-TWR","baseline_frequency_mhz":120.155,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":144,"name":"DIN-ATIS","baseline_frequency_mhz":124.58,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null},
+    {"location":145,"name":"QUIM-TWR","baseline_frequency_mhz":118.625,"decision":null,"current_frequency_mhz":null,"source_cycle":null,"source_effective_from":null,"source_url":null,"evidence_note":null}
+  ],
+  "rules": {
+    "fill_only_from_current_primary_or_current_effective_public_sources": true,
+    "future_cycle_must_not_be_marked_current_before_effective_from": true,
+    "unchanged_requires_current_frequency_equal_baseline": true,
+    "changed_requires_explicit_current_frequency": true,
+    "removed_requires_current_frequency_null": true,
+    "every_resolved_memory_requires_source_url": true,
+    "every_resolved_memory_requires_source_cycle_airac09": true,
+    "every_resolved_memory_requires_source_effective_from": true,
+    "human_review_required_before_candidate_rebuild": true,
+    "candidate_rebuild_is_not_publication": true,
+    "automatic_candidate_mutation_allowed": false,
+    "automatic_publication_allowed": false
+  }
+}

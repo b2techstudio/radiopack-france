@@ -1,0 +1,79 @@
+name: Sprint 111 Bretagne AIRAC 09/26 Readiness
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "research/bretagne-v0.3/airac09-readiness.json"
+      - "research/bretagne-v0.3/airac09-revalidation-template.json"
+      - "research/bretagne-v0.3/airac09-handoff.json"
+      - "research/bretagne-v0.3/airac-transition-policy.json"
+      - "research/bretagne-v0.3/pack-plan.json"
+      - "research/bretagne-v0.3/README.md"
+      - "research/bretagne-v0.2/aviation-airac-08.json"
+      - "research/bretagne-v0.2/publication-record.json"
+      - "tools/check_bretagne_v03_airac09_revalidation.py"
+      - "tests/test_sprint75_bretagne_aviation.py"
+      - "tests/test_sprint82_bretagne_v03_public_revalidation.py"
+      - "tests/test_sprint111_bretagne_airac09_readiness.py"
+      - ".github/workflows/sprint111-bretagne-airac09-readiness.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/bretagne-v0.3/airac09-readiness.json"
+      - "research/bretagne-v0.3/airac09-revalidation-template.json"
+      - "research/bretagne-v0.3/airac09-handoff.json"
+      - "research/bretagne-v0.3/airac-transition-policy.json"
+      - "research/bretagne-v0.3/pack-plan.json"
+      - "research/bretagne-v0.3/README.md"
+      - "research/bretagne-v0.2/aviation-airac-08.json"
+      - "research/bretagne-v0.2/publication-record.json"
+      - "tools/check_bretagne_v03_airac09_revalidation.py"
+      - "tests/test_sprint75_bretagne_aviation.py"
+      - "tests/test_sprint82_bretagne_v03_public_revalidation.py"
+      - "tests/test_sprint111_bretagne_airac09_readiness.py"
+      - ".github/workflows/sprint111-bretagne-airac09-readiness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sprint111-bretagne-airac09-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  readiness:
+    name: Bretagne v0.3 AIRAC 09/26 readiness invariants
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Verify historical Sprint 75 aviation baseline
+        run: python tests/test_sprint75_bretagne_aviation.py
+
+      - name: Verify historical Sprint 82 public revalidation
+        run: python tests/test_sprint82_bretagne_v03_public_revalidation.py
+
+      - name: Verify Sprint 111 AIRAC 09/26 readiness
+        run: python tests/test_sprint111_bretagne_airac09_readiness.py
+
+      - name: Verify pre-effective-date CLI remains blocked
+        run: |
+          python tools/check_bretagne_v03_airac09_revalidation.py --as-of 2026-08-22 > /tmp/bretagne-airac09-pre-effective.json
+          python -c 'import json; d=json.load(open("/tmp/bretagne-airac09-pre-effective.json")); assert d["cycle_phase"]=="future_not_current" and d["candidate_rebuild_allowed"] is False and d["public_release_allowed"] is False'
+
+      - name: Verify effective-date incomplete template remains blocked
+        run: |
+          python tools/check_bretagne_v03_airac09_revalidation.py --as-of 2026-09-03 > /tmp/bretagne-airac09-incomplete.json
+          python -c 'import json; d=json.load(open("/tmp/bretagne-airac09-incomplete.json")); assert d["cycle_phase"]=="current" and d["unresolved_memory_count"]==16 and d["candidate_rebuild_allowed"] is False and d["public_release_allowed"] is False'

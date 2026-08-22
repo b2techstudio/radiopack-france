@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **22 août 2026**
-Sprint courant : **107**
-État logique : **0.21.95**
+Sprint courant : **109**
+État logique : **0.21.97**
 
-L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-107-summary.md`.
+L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-109-summary.md`.
 
 ## État public
 
@@ -18,12 +18,28 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Pays de la Loire v0.2 : **130 mémoires RX**, publiée et immuable.
 - Bourgogne-Franche-Comté v0.4 : **61 mémoires RX**, dont **14 aviation** et **7 VHF navigation intérieure**, publiée et immuable ; v0.3 **54 RX** et v0.2 **37 RX** historiques immuables.
 - Nouvelle-Aquitaine v0.2 : **151 mémoires RX**, publiée et immuable.
-- Auvergne-Rhône-Alpes v0.2 : **62 mémoires RX**, publiée et immuable.
+- Auvergne-Rhône-Alpes v0.3 : **71 mémoires RX**, dont **18 aviation** et **9 VHF navigation intérieure**, publiée et immuable ; v0.2 **62 RX** historique immuable.
 - Occitanie v0.2 : **156 mémoires RX**, publiée et immuable.
 - Provence-Alpes-Côte d’Azur v0.2 : **159 mémoires RX**, publiée et immuable.
 - Corse v0.2 : **137 mémoires RX**, publiée et immuable.
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
+
+## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée
+
+Auvergne-Rhône-Alpes v0.3 est publiée et figée à **71 RX**. Elle conserve les **62 lignes** de v0.2 et ajoute **9 mémoires VHF navigation intérieure** aux emplacements **120–128** : voies **10, 12, 18, 19, 20 et 22**, avec paired RX pour 19, 20 et 22.
+
+La voie 18 est retenue côté bateau uniquement à **156.900 MHz** : **161.500 MHz n'est pas ajoutée**. Le canal maritime 16 / 156.800 MHz reste exclu.
+
+SHA public et candidat : `b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e`.
+
+La route Astro publique v0.3 a été vérifiée byte-identique au candidat Sprint 108 figé. Publication gates : **0 blocker**. La v0.2 de 62 RX reste historique et immuable.
+
+Les **18 mémoires aviation** sont héritées sans modification de v0.2. AIRAC 08/26 reste applicable jusqu'au **2 septembre 2026 inclus** ; toute nouvelle révision aviation à partir du **3 septembre 2026** exige AIRAC 09/26.
+
+## Sprint 108 — candidat ARA v0.3 figé
+
+Le Sprint 108 a fermé le minimum vérifié Auvergne-Rhône-Alpes à **+9 RF fluviales**, construit le candidat déterministe 71 RX et figé le SHA avant toute mutation publique.
 
 ## Sprint 107 — Bourgogne-Franche-Comté v0.4 publiée
 
@@ -33,17 +49,12 @@ SHA public et candidat : `02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec1990700
 
 La route Astro publique v0.4 a été vérifiée byte-identique au candidat figé. Publication gates : **0 blocker**. La v0.3 de 54 RX reste historique et immuable.
 
-Le canal 18 n'est pas ajouté à BFC : l'affectation documentée concerne la traversée de Lyon et reste dans le scope Auvergne-Rhône-Alpes. Les **14 mémoires aviation** sont héritées sans modification de v0.3.
+## Sprints 106–103 — VHF navigation intérieure
 
-## Sprint 106 — candidat BFC v0.4 figé
-
-Le Sprint 106 a fermé le minimum vérifié BFC à **+7 RF fluviales**, construit le candidat déterministe 61 RX et figé le SHA avant toute mutation publique.
-
-## Sprints 105–103 — VHF navigation intérieure
-
+- Sprint 106 : candidat BFC v0.4 figé à 61 RX avant publication.
 - Sprint 105 : Île-de-France v0.4 publiée à **64 RX**, +7 VHF navigation intérieure.
 - Sprint 104 : Grand Est v0.4 publiée à **97 RX**, +13 VHF navigation intérieure.
-- Sprint 103 : audit national VHF navigation intérieure ; après Grand Est, IDF et BFC, la prochaine priorité non côtière est **Auvergne-Rhône-Alpes v0.3**, avec au moins **+9 RF** vérifiées à préparer.
+- Sprint 103 : audit national VHF navigation intérieure ; les quatre deltas non côtiers vérifiés Grand Est, IDF, BFC et ARA sont maintenant publiés.
 
 ## Historique récent
 
@@ -56,17 +67,13 @@ Le Sprint 106 a fermé le minimum vérifié BFC à **+7 RF fluviales**, construi
 
 ## Travaux ouverts
 
-### Auvergne-Rhône-Alpes v0.3
+### Normandie v0.5
 
-**Prochaine priorité.** Base publique actuelle : **v0.2 / 62 RX**. L'audit Sprint 103 a identifié un delta fluvial d'au moins **+9 RF** sur Rhône/Saône à transformer en scope vérifié et candidat déterministe.
+**Priorité actionnable actuelle.** Candidat **142 RX, delta 0**. Les promotions restent bloquées par les gates terrain/source : validation terrain requise pour **R3/F1ZBX** et **F5ZHA**, veille source sur **F1ZOV** et **F6ZES**. Le plafond potentiel connu reste 147 RX hors F6ZES si tous les gates identifiés se ferment.
 
 ### Bretagne v0.3
 
-Candidat **151 RX, delta 0**. Publication bloquée jusqu'à la revalidation AIRAC 09/26 à partir du **3 septembre 2026**.
-
-### Normandie v0.5
-
-Candidat **142 RX, delta 0** avec les gates terrain/source historiques toujours ouverts.
+Candidat **151 RX, delta 0**. Publication bloquée jusqu'à la revalidation AIRAC 09/26 à partir du **3 septembre 2026** ; avant cette date, AIRAC 08/26 reste la référence applicable.
 
 ## Contrat permanent
 

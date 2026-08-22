@@ -2,7 +2,7 @@
 
 **Couverture publique au 22 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 110 / 0.21.98 — Normandie v0.5 reste un candidat interne à 142 RX / delta 0 après revalidation des sources ; R3/F1ZBX et F5ZHA restent soumis aux gates terrain.**
+**État courant : Sprint 111 / 0.21.99 — Bretagne v0.3 est préparée pour AIRAC 09/26 avec une matrice de 16 mémoires et un validateur temporel ; Normandie v0.5 reste la priorité terrain à 142 RX / delta 0.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -43,6 +43,14 @@ Règles permanentes :
 - une fréquence présente dans un fichier n'accorde jamais un droit d'émission.
 
 Les CSV générés par `website/src/lib/chirpPack.ts` appliquent ce contrat, ainsi que la validation des noms, emplacements, doublons RF et limite mémoire.
+
+## Sprint 111 — Bretagne v0.3 : readiness AIRAC 09/26
+
+Le produit SIA AIRAC 09/26 est déjà disponible au 22 août 2026, mais il n'entre en vigueur que le **3 septembre 2026**. Sa disponibilité anticipée est enregistrée comme source future uniquement et ne peut fermer aucun gate avant cette date.
+
+La préparation couvre exactement les **16 mémoires aviation** Bretagne héritées d'AIRAC 08/26, positions **130–145**. `research/bretagne-v0.3/airac09-revalidation-template.json` exige une décision explicite `unchanged`, `changed` ou `removed` pour chaque mémoire. `tools/check_bretagne_v03_airac09_revalidation.py` refuse la reconstruction avant le 3 septembre, après l'expiration du cycle, si une mémoire reste non résolue, ou sans vérification primaire et revue humaine.
+
+Même après un verdict positif, seule la **reconstruction d'un candidat interne** est autorisée : aucune mutation automatique et aucune publication automatique. Bretagne publique reste **v0.2 / 151 RX** immuable et le candidat v0.3 reste **151 RX / delta 0**. Référence : `research/sprint-111-summary.md`.
 
 ## Sprint 110 — Normandie v0.5 : sources revalidées, handoff terrain
 
@@ -125,7 +133,7 @@ Le Sprint 97 / 0.21.86 a consolidé les détails de canaux régionaux, les racco
 ## Travaux encore ouverts
 
 - **Normandie v0.5** : priorité actionnable actuelle ; candidat 142 RX, delta 0, avec validation terrain requise pour R3/F1ZBX et F5ZHA et veille source sur F1ZOV/F6ZES.
-- **Bretagne v0.3** : 151 RX, delta 0, publication bloquée jusqu'à la revalidation AIRAC 09/26 à partir du **3 septembre 2026**.
+- **Bretagne v0.3** : 151 RX, delta 0 ; Sprint 111 a préparé la matrice de 16 mémoires et le validateur AIRAC 09/26. Le produit futur est déjà disponible mais ne devient source courante qu'à partir du **3 septembre 2026**.
 
 ## Site public
 

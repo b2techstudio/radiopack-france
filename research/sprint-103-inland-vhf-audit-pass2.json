@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "status": "rf_delta_pass2_closed_non_exhaustive",
+  "reviewed_on": "2026-08-22",
+  "principle": "Count only RF that are absent from the current public pack and whose inland use is supported by a current or authoritative official source. Shared maritime/inland RF are not duplicated.",
+  "frequency_reference": {
+    "source": "ANFR CRR fluvial / international VHF channel plan",
+    "channels_mhz": {
+      "10": [156.500],
+      "12": [156.600],
+      "13": [156.650],
+      "14": [156.700],
+      "18": [156.900, 161.500],
+      "19": [156.950, 161.550],
+      "20": [157.000, 161.600],
+      "22": [157.100, 161.700],
+      "69": [156.475],
+      "72": [156.625],
+      "77": [156.875],
+      "82": [157.125, 161.725]
+    },
+    "paired_rx_note": "For a verified boat-to-shore/lock duplex assignment, retain both RF sides. For a boat-to-boat use, retain only the boat-side RF unless a second side is independently required."
+  },
+  "results": [
+    {
+      "pack": "Grand Est",
+      "current_version": "0.3",
+      "target_version": "0.4",
+      "new_rf_count": 13,
+      "new_rf_mhz": [156.300,156.400,156.500,156.650,156.625,156.875,156.550,156.950,161.550,157.000,161.600,157.100,161.700],
+      "status": "candidate_scope_closed",
+      "evidence": "ANFR inland boat-to-boat plan plus CCNR 2026 Rhine/Moselle assignments for channels 11/19/20/22."
+    },
+    {
+      "pack": "Île-de-France",
+      "current_version": "0.3",
+      "target_version": "0.4",
+      "minimum_new_rf_count": 1,
+      "minimum_new_rf_mhz": [156.500],
+      "status": "minimum_scope_proven_local_lock_channels_pending",
+      "evidence": "Current Seine-Yonne rules require permanent channel-10 watch in Paris and Val-de-Marne; Vives-Eaux PCC confirms lock VHF call channels but the article does not publish their channel numbers.",
+      "rule": "Do not guess the lock channels; keep them pending until an official numbered assignment is obtained."
+    },
+    {
+      "pack": "Bourgogne-Franche-Comté",
+      "current_version": "0.3",
+      "target_version": "0.4",
+      "minimum_new_rf_count": 7,
+      "minimum_new_rf_mhz": [156.500,156.600,157.000,161.600,157.100,161.700,156.475],
+      "status": "minimum_scope_proven_non_exhaustive",
+      "evidence": "VNF 2026 Saône guide: channel 10 boat-to-boat, channel 12 safety multidiffusion, locks Seurre/Ormes channel 22 and Ecuelles channel 20. VNF 2026 Centre-Bourgogne guide also uses channel 69 on the Yonne sector from Saint-Aubin to Cannes-Ecluse.",
+      "excluded_from_bfc_delta": "Channel 18 is the Lyon crossing assignment and belongs to Auvergne-Rhône-Alpes, not the BFC territorial part of the Saône."
+    },
+    {
+      "pack": "Auvergne-Rhône-Alpes",
+      "current_version": "0.2",
+      "target_version": "0.3",
+      "minimum_new_rf_count": 9,
+      "minimum_new_rf_mhz": [156.500,156.600,156.900,156.950,161.550,157.000,161.600,157.100,161.700],
+      "status": "minimum_scope_proven_non_exhaustive",
+      "evidence": "VNF Rhône/Saône documents: channel 10 boat-to-boat, channel 18 in the Lyon/Pierre-Bénite sector, channel 12 at Port Édouard Herriot/safety, and lock channels 19/20/22. Channel 18 is counted only on its boat-side RF for the boat-to-boat sector."
+    },
+    {
+      "pack": "Centre-Val de Loire",
+      "current_version": "0.3",
+      "target_version": null,
+      "minimum_new_rf_count": 0,
+      "status": "navigation_confirmed_no_current_numbered_vhf_assignment_proven_in_pass2",
+      "evidence": "Current VNF material confirms active navigation and automated/telecommanded locks on Briare/Loing/latéral à la Loire, but this pass did not establish a numbered VHF assignment inside Centre-Val de Loire. Phone/remote-control operation must not be converted into guessed RF."
+    },
+    {
+      "pack": "Normandie",
+      "current_version": "0.4",
+      "new_rf_count": 0,
+      "status": "inland_use_confirmed_rf_already_covered",
+      "evidence": "Basse-Seine rules use channel 10; the public coastal pack already contains the full national VHF RX dataset."
+    },
+    {
+      "pack": "Bretagne",
+      "current_version": "0.2",
+      "new_rf_count": 0,
+      "status": "inland_fluvio_maritime_use_confirmed_rf_already_covered",
+      "evidence": "Current Bretagne navigation information uses channel 13 at the Rance barrage; the 2024 navigation guide also gives channel 14 for Le Châtelier. Both RF are already in the full marine block."
+    },
+    {
+      "pack": "Hauts-de-France",
+      "current_version": "0.2",
+      "new_rf_count": 0,
+      "status": "current_2026_lock_plan_confirmed_rf_already_covered",
+      "evidence": "VNF plan effective 2026-07-28 uses five channels 18, 19, 20, 22 and 82 for large-gauge locks. The public coastal pack already contains the full national VHF RX dataset, including both sides of these duplex channels."
+    },
+    {
+      "pack": "Pays de la Loire",
+      "current_version": "0.2",
+      "new_rf_count": 0,
+      "status": "inland_use_confirmed_rf_already_covered",
+      "evidence": "Loire navigation requires/encourages channel-10 watch depending on vessel category; channel 10 is already present in the coastal pack's full VHF block."
+    },
+    {
+      "pack": "Nouvelle-Aquitaine",
+      "current_version": "0.2",
+      "new_rf_count": 0,
+      "status": "inland_use_confirmed_rf_already_covered",
+      "evidence": "VNF Garonne/Bordeaux guidance requires VHF channel 12 when entering the Grand Port Maritime de Bordeaux; channel 12 is already present in the coastal pack's full VHF block."
+    },
+    {
+      "pack": "Occitanie",
+      "current_version": "0.2",
+      "new_rf_count": 0,
+      "status": "inland_use_confirmed_rf_already_covered",
+      "evidence": "VNF Canal du Rhône à Sète guidance uses channel 10; relevant VHF RF are already present in the coastal pack's full VHF block."
+    },
+    {
+      "pack": "Provence-Alpes-Côte d’Azur",
+      "current_version": "0.2",
+      "new_rf_count": 0,
+      "status": "inland_use_confirmed_rf_already_covered",
+      "evidence": "Lower Rhône/Barcarin/Port-Saint-Louis uses channels 10/12/18/19/20/22 and maritime 16 in the maritime zone; all are already present in the coastal pack's full VHF block."
+    },
+    {
+      "pack": "Corse",
+      "current_version": "0.2",
+      "new_rf_count": 0,
+      "status": "no_separate_inland_scope_identified_marine_block_retained",
+      "evidence": "No separate significant inland-navigation network requiring an additional fluvial VHF block was identified in this audit."
+    },
+    {
+      "pack": "Annecy–Alpes–Léman",
+      "current_version": "0.4",
+      "new_rf_count": null,
+      "status": "lake_specific_audit_separate",
+      "evidence": "Lacustrine radio requirements are outside the metropolitan fluvial rollout and remain a separate territorial review."
+    }
+  ],
+  "actionable_non_coastal_queue": [
+    {"pack":"Grand Est","target_version":"0.4","verified_minimum_new_rf":13},
+    {"pack":"Île-de-France","target_version":"0.4","verified_minimum_new_rf":1},
+    {"pack":"Bourgogne-Franche-Comté","target_version":"0.4","verified_minimum_new_rf":7},
+    {"pack":"Auvergne-Rhône-Alpes","target_version":"0.3","verified_minimum_new_rf":9}
+  ],
+  "public_mutation_performed": false
+}

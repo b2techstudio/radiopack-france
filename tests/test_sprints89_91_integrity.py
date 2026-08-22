@@ -46,11 +46,18 @@ if annecy_checkpoint is not None:
     assert annecy_checkpoint["added_memory_name"] == "ZTH-6M"
 else:
     compatibility = json.loads((ROOT / "research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json").read_text(encoding="utf-8"))
+    assert compatibility["status"] == "ready_for_candidate"
     assert compatibility["target_version"] == "0.4"
     assert compatibility["based_on_public_version"] == "0.3"
-    assert compatibility["candidate_memory_count"] == 77
-    assert compatibility["candidate_without_aviation_memory_count"] == 60
-    assert compatibility["candidate_memory_delta"] == 1
+    assert compatibility["base_full_memory_count"] == 76
+    assert compatibility["base_without_aviation_memory_count"] == 59
+    assert compatibility["proposed_full_memory_count"] == 77
+    assert compatibility["proposed_without_aviation_memory_count"] == 60
+    assert compatibility["new_unique_rf_memory_count"] == 1
+    assert compatibility["candidate_frequency_mhz"] == 50.5375
+    assert compatibility["candidate_name"] == "ZTH-6M"
+    assert compatibility["decision"]["promotion_to_v0_4_candidate_allowed"] is True
+    assert compatibility["decision"]["field_validation_required"] is False
 
 # Sprint 89 was pre-publication. The current public pointer may legitimately be
 # the later immutable v0.4 release, while the historical candidate evidence

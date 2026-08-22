@@ -1,0 +1,109 @@
+name: IDF v0.4 Inland VHF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "data/regional/ile-de-france-inland-vhf-rx.json"
+      - "research/ile-de-france-v0.4/**"
+      - "research/ile-de-france-v0.3/**"
+      - "research/sprint-105-summary.md"
+      - "research/sprint-104-summary.md"
+      - "research/project-resume-state.json"
+      - "tools/build_idf_v04_candidate.py"
+      - "tools/build_idf_v03_candidate.py"
+      - "tests/test_idf_v04_publication.py"
+      - "tests/test_idf_v03_publication.py"
+      - "tests/test_sprint105_state_sync.py"
+      - "tests/test_sprint104_state_sync.py"
+      - "tests/test_site_files.py"
+      - "tests/test_pack_registry.py"
+      - "website/public/downloads/ile-de-france/**"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/data/regions.json"
+      - "website/src/pages/regions/[slug].astro"
+      - "README.md"
+      - "PROJECT_STATUS.md"
+      - "CHANGELOG.md"
+      - ".github/workflows/idf-v04-inland-vhf.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "data/regional/ile-de-france-inland-vhf-rx.json"
+      - "research/ile-de-france-v0.4/**"
+      - "research/ile-de-france-v0.3/**"
+      - "research/sprint-105-summary.md"
+      - "research/sprint-104-summary.md"
+      - "research/project-resume-state.json"
+      - "tools/build_idf_v04_candidate.py"
+      - "tools/build_idf_v03_candidate.py"
+      - "tests/test_idf_v04_publication.py"
+      - "tests/test_idf_v03_publication.py"
+      - "tests/test_sprint105_state_sync.py"
+      - "tests/test_sprint104_state_sync.py"
+      - "tests/test_site_files.py"
+      - "tests/test_pack_registry.py"
+      - "website/public/downloads/ile-de-france/**"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/data/regions.json"
+      - "website/src/pages/regions/[slug].astro"
+      - "README.md"
+      - "PROJECT_STATUS.md"
+      - "CHANGELOG.md"
+      - ".github/workflows/idf-v04-inland-vhf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: idf-v04-inland-vhf-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guards:
+    name: IDF v0.4 inland VHF and publication guards
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Rebuild IDF v0.4 publication basis in workspace
+        run: python tools/build_idf_v04_candidate.py --write
+      - name: Verify frozen IDF v0.4 candidate, manifest and public bytes
+        run: python tools/build_idf_v04_candidate.py --check
+      - name: Test IDF v0.4 publication
+        run: python tests/test_idf_v04_publication.py
+      - name: Verify immutable historical IDF v0.3 publication
+        run: python tests/test_idf_v03_publication.py
+      - name: Verify Sprint 105 state synchronization
+        run: python tests/test_sprint105_state_sync.py
+      - name: Verify historical Sprint 104 state
+        run: python tests/test_sprint104_state_sync.py
+      - name: Test repository/site synchronization
+        run: python tests/test_site_files.py
+      - name: Test public pack registry
+        run: python tests/test_pack_registry.py
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Install website dependencies
+        run: cd website && npm ci
+      - name: Build Astro website
+        run: cd website && npm run build
+      - name: Recheck Astro-built IDF v0.4 CSV
+        run: python tests/test_idf_v04_publication.py --dist website/dist
+      - name: Recheck Astro-built historical IDF v0.3 CSV
+        run: python tests/test_idf_v03_publication.py --dist website/dist
+      - name: Show publication manifest
+        run: cat research/ile-de-france-v0.4/generated/release-candidate/candidate-manifest.json

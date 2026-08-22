@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "status": "publication_pr_verification",
+  "pack": "Île-de-France",
+  "version": "0.3",
+  "published_on": "2026-08-22",
+  "memory_count": 57,
+  "aviation_memory_count": 18,
+  "regional_radio_memory_count": 15,
+  "candidate_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
+  "expected_public_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
+  "checks_required": [
+    "candidate deterministic rebuild",
+    "source public CSV byte identity",
+    "Astro-built public CSV byte identity",
+    "RX-only contract",
+    "RF uniqueness",
+    "registry count/version sync",
+    "historical v0.2 preservation",
+    "full repository CI"
+  ]
+}

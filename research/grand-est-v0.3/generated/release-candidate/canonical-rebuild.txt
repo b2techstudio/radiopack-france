@@ -1,5 +1,0 @@
-Canonical repair required by deterministic builder:
-- add trailing empty-column comma on locations 56, 57, 77, 106, 108;
-- remove duplicated NN,023 fields on location 104;
-- no frequency, name, mode, location or comment changes.
-Expected canonical SHA-256: 45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720

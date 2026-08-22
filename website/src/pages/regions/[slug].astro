@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
 import { buildStandardChannelGroups, loadPublicPackMemories, type ChannelMemory } from "../../lib/channelDetails";
-import { buildBfcV03Pack } from "../../lib/bfcPack";
+import { buildBfcV03Pack, buildBfcV04Pack } from "../../lib/bfcPack";
 import { buildCentreV03Pack } from "../../lib/centrePack";
 import { getPublicPack } from "../../lib/packRegistry";
 import {
@@ -23,19 +23,22 @@ const { pack } = Astro.props as { pack: MetropolitanPackDefinition };
 const publicPack = getPublicPack(pack.id);
 const publicVariant = publicPack?.variants.find((variant) => variant.id === publicPack.defaultVariant) ?? publicPack?.variants[0];
 const isBfcV03 = pack.id === "bourgogne-franche-comte" && publicPack?.version === "v0.3";
+const isBfcV04 = pack.id === "bourgogne-franche-comte" && publicPack?.version === "v0.4";
 const isCentreV03 = pack.id === "centre-val-de-loire" && publicPack?.version === "v0.3";
 const isIdfV04 = pack.id === "ile-de-france" && publicPack?.version === "v0.4";
 const isGrandEstV04 = pack.id === "grand-est" && publicPack?.version === "v0.4";
-const isInlandVhf = isIdfV04 || isGrandEstV04;
-const isAdvancedAnalog = isBfcV03 || isCentreV03 || isIdfV04 || isGrandEstV04;
+const isInlandVhf = isBfcV04 || isIdfV04 || isGrandEstV04;
+const isAdvancedAnalog = isBfcV03 || isBfcV04 || isCentreV03 || isIdfV04 || isGrandEstV04;
 const version = publicPack?.version ?? pack.version;
-const placed = isBfcV03
-  ? buildBfcV03Pack()
-  : isCentreV03
-    ? buildCentreV03Pack()
-    : isIdfV04 || isGrandEstV04
-      ? []
-      : buildMetropolitanPack(pack.id, pack.version);
+const placed = isBfcV04
+  ? buildBfcV04Pack()
+  : isBfcV03
+    ? buildBfcV03Pack()
+    : isCentreV03
+      ? buildCentreV03Pack()
+      : isIdfV04 || isGrandEstV04
+        ? []
+        : buildMetropolitanPack(pack.id, pack.version);
 const memories: ChannelMemory[] = isIdfV04
   ? loadPublicPackMemories("downloads/ile-de-france/radiopack-france-ile-de-france-v0.4.csv")
   : isGrandEstV04
@@ -56,16 +59,17 @@ const channelGroups = buildStandardChannelGroups(memories);
 const filename = publicVariant?.filename ?? pack.filename;
 const downloadUrl = publicVariant?.downloadUrl ?? `/downloads/${pack.id}/${filename}`;
 const aviationCount = memories.filter((memory) => memory.mode === "AM").length;
-const selectedInfrastructureCount = isBfcV03 ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV04 ? 7 : isGrandEstV04 ? 22 : pack.repeaters.length;
-const regionalChannelCount = isBfcV03 ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV04 ? 15 : isGrandEstV04 ? 41 : pack.repeaters.length * 2;
-const inlandVhfCount = isIdfV04 ? 7 : isGrandEstV04 ? 13 : 0;
-const inlandRangeLabel = isIdfV04 ? "120–126" : "120–132";
+const isBfcAdvanced = isBfcV03 || isBfcV04;
+const selectedInfrastructureCount = isBfcAdvanced ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV04 ? 7 : isGrandEstV04 ? 22 : pack.repeaters.length;
+const regionalChannelCount = isBfcAdvanced ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV04 ? 15 : isGrandEstV04 ? 41 : pack.repeaters.length * 2;
+const inlandVhfCount = isBfcV04 ? 7 : isIdfV04 ? 7 : isGrandEstV04 ? 13 : 0;
+const inlandRangeLabel = isBfcV04 || isIdfV04 ? "120–126" : "120–132";
 const marineCount = pack.includeMarine ? 90 : 0;
 const radioScopeLabel = isAdvancedAnalog
   ? "relais FM 2 m/70 cm et transpondeurs crossband analogiques"
   : "relais FM 2 m";
-const radioRangeLabel = isBfcV03 ? "70+ / 80+" : isCentreV03 ? "70+ / 82+" : "70+";
-const aviationRangeLabel = isBfcV03 ? "40+ / 90+" : "40+";
+const radioRangeLabel = isBfcAdvanced ? "70+ / 80+" : isCentreV03 ? "70+ / 82+" : "70+";
+const aviationRangeLabel = isBfcAdvanced ? "40+ / 90+" : "40+";
 const sourceReviewDate = isInlandVhf ? "2026-08-22" : isCentreV03 ? "2026-08-20" : metropolitanSourceNotes.checkedOn;
 ---
 <BaseLayout

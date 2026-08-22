@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 required_files = [
     "README.md", "PROJECT_STATUS.md", "CHANGELOG.md", ".github/workflows/ci.yml",
+    ".github/workflows/sprint113-state-sync.yml",
     "REGIONAL-PACK-WORKFLOW.md", "website/src/lib/chirpPack.ts",
     "website/src/lib/metropolitanPack.ts", "website/src/lib/bfcPack.ts",
     "website/src/lib/centrePack.ts", "website/src/lib/araPack.ts", "website/src/lib/packRegistry.ts",
@@ -14,7 +15,13 @@ required_files = [
     "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.4.csv.ts",
     "website/src/pages/downloads/centre-val-de-loire/radiopack-france-centre-val-de-loire-v0.3.csv.ts",
     "website/src/pages/downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv.ts",
+    "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv",
     "research/project-resume-state.json", "research/paired-rx-policy.json",
+    "research/normandie-v0.5/theoretical-coverage-policy.json",
+    "research/normandie-v0.5/candidate-freeze.json",
+    "research/normandie-v0.5/release-scope.json",
+    "research/normandie-v0.5/publication-gates.json",
+    "research/normandie-v0.5/publication-record.json",
     "research/bourgogne-franche-comte-v0.3/publication-record.json",
     "research/bourgogne-franche-comte-v0.4/publication-record.json",
     "research/bourgogne-franche-comte-v0.4/release-scope.json",
@@ -31,10 +38,12 @@ required_files = [
     "research/sprint-103-summary.md", "research/sprint-104-summary.md", "research/sprint-105-summary.md",
     "research/sprint-106-summary.md", "research/sprint-107-summary.md", "research/sprint-108-summary.md",
     "research/sprint-109-summary.md", "research/sprint-110-summary.md", "research/sprint-111-summary.md",
+    "research/sprint-112-summary.md", "research/sprint-113-summary.md",
     "research/bretagne-v0.3/airac09-readiness.json",
     "research/bretagne-v0.3/airac09-revalidation-template.json",
     "tools/check_bretagne_v03_airac09_revalidation.py",
     "tests/test_sprint111_bretagne_airac09_readiness.py",
+    "tests/test_sprint113_state_sync.py",
 ]
 for relative in required_files:
     path = ROOT / relative
@@ -55,6 +64,7 @@ assert "annecy-haute-savoie" in region_by_slug
 assert all(item["available"] is True for item in regions)
 
 current_public = {
+    "normandie": (146, "v0.5"),
     "hauts-de-france": (144, "v0.2"),
     "ile-de-france": (64, "v0.4"),
     "grand-est": (97, "v0.4"),
@@ -73,6 +83,7 @@ for slug, (count, version) in current_public.items():
     assert region["status"] == f"{version} disponible"
     assert "Aviation RX" in region["categories"]
 
+assert "théorique" in region_by_slug["normandie"]["description"].lower()
 for slug in ["bourgogne-franche-comte", "ile-de-france", "grand-est", "auvergne-rhone-alpes"]:
     assert "VHF navigation intérieure RX" in region_by_slug[slug]["categories"]
 
@@ -107,6 +118,19 @@ for folder, expected_count, previous_count in [
     assert record["published_version_is_immutable"] is True
     assert len(record["public_csv_sha256"]) == 64
 
+normandie_v05 = json.loads((ROOT / "research/normandie-v0.5/publication-record.json").read_text(encoding="utf-8"))
+assert normandie_v05["status"] == "published_immutable"
+assert normandie_v05["publication_sprint"] == 113
+assert normandie_v05["version"] == "0.5"
+assert normandie_v05["memory_count"] == 146
+assert normandie_v05["previous_public_version"] == "0.4"
+assert normandie_v05["previous_public_memory_count"] == 142
+assert normandie_v05["public_csv_sha256"] == "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59"
+assert normandie_v05["candidate_public_byte_identity_verified"] is True
+assert normandie_v05["theoretical_coverage"]["memory_count"] == 4
+assert normandie_v05["theoretical_coverage"]["field_reception_required_for_publication"] is False
+assert normandie_v05["published_version_is_immutable"] is True
+
 bfc_v04 = json.loads((ROOT / "research/bourgogne-franche-comte-v0.4/publication-record.json").read_text(encoding="utf-8"))
 assert bfc_v04["status"] == "published_immutable"
 assert bfc_v04["version"] == "0.4"
@@ -133,6 +157,8 @@ assert ara_v03["published_version_is_immutable"] is True
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
+    'id: "normandie"', 'version: "v0.5"', 'memoryCount: 146',
+    '/downloads/normandie/radiopack-france-normandie-v0.5.csv', 'couverture théorique',
     '{ id: "ile-de-france", name: "Île-de-France", memoryCount: 64, marine: false, aviation: 18, version: "v0.4" }',
     '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }',
     '{ id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 51, marine: false, aviation: 7, version: "v0.3" }',
@@ -172,9 +198,11 @@ for expected in [
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "Sprint 111 / 0.21.99",
+    "Sprint 113 / 0.22.01",
+    "## Sprint 113 — Normandie v0.5 publiée sur couverture théorique",
+    "## Sprint 112 — Normandie v0.5 : candidat théorique figé",
     "## Sprint 111 — Bretagne v0.3 : readiness AIRAC 09/26",
-    "## Sprint 110 — Normandie v0.5 : sources revalidées, handoff terrain",
+    "## Sprint 110 — historique Normandie v0.5 : ancien handoff terrain",
     "## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée",
     "## Sprint 108 — candidat ARA v0.3 figé",
     "## Sprint 107 — Bourgogne-Franche-Comté v0.4 publiée",
@@ -185,7 +213,7 @@ for expected in [
     "## Sprint 101 — Île-de-France v0.3 publiée",
     "## Sprint 100 — Centre-Val de Loire v0.3",
     "## Sprint 99 — Bourgogne-Franche-Comté v0.3",
-    "**Normandie v0.4** — 142 mémoires RX",
+    "**Normandie v0.5** — 146 mémoires RX",
     "**Annecy–Alpes–Léman v0.4** — 77 mémoires RX",
     "**Bretagne v0.2** — 151 mémoires RX",
     "**Île-de-France v0.4** — 64 mémoires RX",
@@ -193,7 +221,8 @@ for expected in [
     "**Centre-Val de Loire v0.3** — 51 mémoires RX",
     "**Bourgogne-Franche-Comté v0.4** — 61 mémoires RX",
     "**Auvergne-Rhône-Alpes v0.3** — 71 mémoires RX",
-    "**1591 mémoires RX cumulées**",
+    "**1595 mémoires RX cumulées**",
+    "contrôle qualité facultatif",
     "research/paired-rx-policy.json",
     "Duplex=off", "Offset=0.000000",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
@@ -201,7 +230,18 @@ for expected in [
     assert expected in readme, f"README courant/historique incomplet: {expected}"
 
 status = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
-for expected in ["Sprint courant : **111**", "État logique : **0.21.99**", "Bourgogne-Franche-Comté v0.4", "Auvergne-Rhône-Alpes v0.3", "Normandie v0.5", "Bretagne v0.3 AIRAC 09/26"]:
+for expected in [
+    "Sprint courant : **113**", "État logique : **0.22.01**",
+    "## Sprint 113 — Normandie v0.5 publiée", "Bourgogne-Franche-Comté v0.4",
+    "Auvergne-Rhône-Alpes v0.3", "Normandie v0.5", "Bretagne v0.3 AIRAC 09/26",
+    "contrôle qualité facultatif",
+]:
     assert expected in status
 
-print("Tests RadioPack repository/site: canonical Sprint 111 / Bretagne AIRAC readiness synchronized, Normandie field priority and public releases preserved, RX-only guards OK")
+state = json.loads((ROOT / "research/project-resume-state.json").read_text(encoding="utf-8"))
+assert state["current_sprint"] == 113 and state["state_version"] == "0.22.01"
+assert state["public_packs"]["normandie"]["version"] == "0.5"
+assert state["public_packs"]["normandie"]["memory_count"] == 146
+assert state["resume_rules"]["field_listening_is_optional_quality_feedback_for_coverage"] is True
+
+print("Tests RadioPack repository/site: canonical Sprint 113 synchronized, Normandie v0.5 theoretical publication and historical guards preserved, RX-only OK")

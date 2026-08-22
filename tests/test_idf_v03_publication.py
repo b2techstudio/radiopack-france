@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import csv
 import hashlib
 import json
@@ -13,6 +14,11 @@ METROPOLITAN = ROOT / "website/src/lib/metropolitanPack.ts"
 REGION_PAGE = ROOT / "website/src/pages/regions/[slug].astro"
 EXPECTED_SHA = "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
 BASE_SHA = "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d"
+PUBLIC_RELATIVE = Path("downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv")
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--dist", type=Path, help="Optional Astro dist directory to validate after a production build")
+args = parser.parse_args()
 
 assert CANDIDATE.is_file(), "Frozen IDF v0.3 candidate missing"
 assert PUBLIC.is_file(), "Public IDF v0.3 CSV missing"
@@ -72,5 +78,11 @@ assert gates["blocker_count"] == 0
 assert all(check["pass"] for check in gates["checks"])
 assert checklist["reviewed_count"] == checklist["item_count"] == 12
 assert checklist["published"] is True
+
+if args.dist:
+    built = args.dist / PUBLIC_RELATIVE
+    assert built.is_file(), f"Built IDF v0.3 CSV missing: {built}"
+    assert built.read_bytes() == CANDIDATE.read_bytes(), "Astro-built IDF v0.3 CSV differs from frozen candidate"
+    assert hashlib.sha256(built.read_bytes()).hexdigest() == EXPECTED_SHA
 
 print(f"IDF v0.3 publication: 57 RX, 18 aviation, 15 regional, exact candidate/public SHA {EXPECTED_SHA} OK")

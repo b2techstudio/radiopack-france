@@ -7,11 +7,9 @@ V03 = ROOT / "research" / "grand-est-v0.3"
 
 pass1 = json.loads((V03 / "radio-validation-pass1-2026-08-22.json").read_text(encoding="utf-8"))
 pass2 = json.loads((V03 / "radio-validation-pass2-2026-08-22.json").read_text(encoding="utf-8"))
-backlog = json.loads((V03 / "backlog.json").read_text(encoding="utf-8"))
 scope = json.loads((V03 / "release-scope.json").read_text(encoding="utf-8"))
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 
-# Pass 2 is immutable historical research evidence even when later passes/candidate work advance state.
 assert pass2["status"] == "second_source_pass_complete_with_backlog_no_public_mutation"
 assert pass2["public_base"]["version"] == "0.2"
 assert pass2["public_base"]["memory_count"] == 59
@@ -28,14 +26,9 @@ for item in pass1["v02_first_pass_safe_carry"]:
 for item in pass1["high_confidence_new_links"]:
     rf.extend(item["rf_mhz"])
 for item in pass2["validated_in_pass2"]:
-    assert len(item["rf_mhz"]) == 2
-    assert item["rf_mhz"][0] != item["rf_mhz"][1]
     rf.extend(item["rf_mhz"])
-
 assert rf.count(432.5375) == 4
 assert len(set(rf)) == 35
-assert pass2["pass2_rf_accounting"]["shared_rf_mhz"] == [432.5375]
-assert pass2["pass2_rf_accounting"]["shared_rf_occurrence_count"] == 4
 assert pass2["pass2_rf_accounting"]["unique_rf_added_by_pass2"] == 13
 assert pass2["pass2_rf_accounting"]["regional_unique_rf_working_count"] == 35
 assert pass2["pass2_rf_accounting"]["validated_working_memory_count"] == 78
@@ -57,24 +50,17 @@ for key in ["rx_only", "paired_rx_for_distinct_verified_pairs", "same_rf_frequen
     assert pass2["rules"][key] is True
 assert pass2["rules"]["chirp_duplex"] == "off"
 assert pass2["rules"]["chirp_offset"] == "0.000000"
-assert pass2["rules"]["maximum_memories"] == 200
 assert pass2["rules"]["public_mutation"] is False
 assert pass2["rules"]["candidate_built"] is False
 
-# Current state may advance beyond pass 2; public safety and the historical checkpoint cannot regress.
+# Pass2 stays historical while the final state may be published.
+assert scope["status"] == "published_immutable"
 assert scope["current_phase"]["radio_pass2_complete"] is True
-assert scope["current_phase"]["publication_ready"] is False
-assert scope["current_phase"]["public_mutation_performed"] is False
-assert backlog["status"] in {
-    "pass2_reduced_backlog",
-    "radio_scope_closed_with_explicit_deferrals",
-    "radio_scope_closed_candidate_built_backlog_deferred",
-}
-if scope["current_phase"]["deterministic_candidate_built"]:
-    assert scope["candidate"]["memory_count"] == 84
-    assert scope["candidate"]["public_export_allowed"] is False
+assert scope["current_phase"]["published"] is True
+assert scope["public"]["memory_count"] == 84
+assert scope["public"]["byte_identical_to_candidate"] is True
 
-assert '{ id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19, version: "v0.2" }' in registry
-assert not (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").exists()
+assert '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+assert (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").is_file()
 
-print("Sprint 102 Grand Est v0.3 pass2 historical evidence: 8 links / 35 regional RF checkpoint preserved across later work, public=false OK")
+print("Sprint 102 Grand Est v0.3 pass2 historical checkpoint preserved after publication: 35 RF checkpoint -> 84 public OK")

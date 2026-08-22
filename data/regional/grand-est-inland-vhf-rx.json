@@ -1,0 +1,127 @@
+{
+  "dataset": "Grand Est — VHF navigation intérieure (réception seule)",
+  "version": "0.4.0-research",
+  "updated": "2026-08-22",
+  "scope": "Grand Est",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Ce jeu est distinct du bloc VHF marine : il décrit des usages de navigation intérieure.",
+    "La voie 10 est la première voie bateau-bateau en navigation intérieure française.",
+    "La voie 6 est autorisée en France mais ne doit pas être utilisée sur le Rhin entre les PK 150 et 350 ; elle est conservée ici en RX uniquement pour les autres voies intérieures du Grand Est.",
+    "Les voies duplex sont représentées par deux mémoires RX, côté bateau et côté station terrestre.",
+    "Les affectations locales Rhin/Moselle sont fondées sur le guide CCNR 2026 ; aucune fréquence locale non documentée n'est devinée."
+  ],
+  "sources": [
+    {
+      "authority": "ANFR",
+      "title": "Manuel CRR fluvial - version 6, mai 2025",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "accessed": "2026-08-22"
+    },
+    {
+      "authority": "CCNR / Commission de la Moselle",
+      "title": "Guide de radiocommunication pour la navigation intérieure - partie régionale Rhin et Moselle, édition 2026",
+      "url": "https://www.ccr-zkr.org/files/documents/reglementRP/rp41fr_pr_032026.pdf",
+      "accessed": "2026-08-22"
+    },
+    {
+      "authority": "UIT",
+      "title": "Appendice 18 - plan international VHF maritime utilisé comme référence de paire duplex pour la voie 19",
+      "url": "https://www.itu.int/wftp3/pub/epub_shared/BR/2015-WRC-Final-Acts/E/WRC-Final-Acts_opf_files/WebSearch/page0217.html",
+      "accessed": "2026-08-22"
+    }
+  ],
+  "channels": [
+    {
+      "name": "FLV06",
+      "frequency_mhz": 156.3,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 06 · bateau-bateau · usage interdit sur Rhin PK150-350 · RX seule"
+    },
+    {
+      "name": "FLV08",
+      "frequency_mhz": 156.4,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 08 · travail bateau-bateau · ANFR · RX seule"
+    },
+    {
+      "name": "FLV10",
+      "frequency_mhz": 156.5,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 10 · première voie bateau-bateau · ANFR · RX seule"
+    },
+    {
+      "name": "FLV13",
+      "frequency_mhz": 156.65,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 13 · travail bateau-bateau · ANFR · RX seule"
+    },
+    {
+      "name": "FLV72",
+      "frequency_mhz": 156.625,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 72 · travail bateau-bateau · ANFR · RX seule"
+    },
+    {
+      "name": "FLV77",
+      "frequency_mhz": 156.875,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 77 · travail bateau-bateau · ANFR · RX seule"
+    },
+    {
+      "name": "STR-11",
+      "frequency_mhz": 156.55,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Strasbourg port · écluses Nord/Sud · voie 11 · CCNR 2026 · RX seule"
+    },
+    {
+      "name": "FL19-B",
+      "frequency_mhz": 156.95,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 19 · côté bateau · Gambsheim CARING / Koenigsmacker · CCNR 2026 · RX seule"
+    },
+    {
+      "name": "FL19-T",
+      "frequency_mhz": 161.55,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 19 · côté station terrestre · Gambsheim CARING / Koenigsmacker · RX seule"
+    },
+    {
+      "name": "FL20-B",
+      "frequency_mhz": 157.0,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté bateau · écluses Rhin/Moselle françaises · CCNR 2026 · RX seule"
+    },
+    {
+      "name": "FL20-T",
+      "frequency_mhz": 161.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté station terrestre · écluses Rhin/Moselle françaises · RX seule"
+    },
+    {
+      "name": "FL22-B",
+      "frequency_mhz": 157.1,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté bateau · écluses Rhin françaises · CCNR 2026 · RX seule"
+    },
+    {
+      "name": "FL22-T",
+      "frequency_mhz": 161.7,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté station terrestre · écluses Rhin françaises · RX seule"
+    }
+  ]
+}

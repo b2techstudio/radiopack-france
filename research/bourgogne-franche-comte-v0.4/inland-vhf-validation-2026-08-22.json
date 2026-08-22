@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "status": "minimum_verified_internal_candidate_scope_closed",
+  "reviewed_on": "2026-08-22",
+  "pack": "Bourgogne-Franche-Comté",
+  "target_version": "0.4",
+  "public_base_version": "0.3",
+  "public_base_memory_count": 54,
+  "public_base_sha256": "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5",
+  "reason": "Le pack public v0.3 ne contient pas de bloc VHF de navigation intérieure alors que des affectations actuelles sont documentées sur la Saône, le canal du Rhône au Rhin branche Sud et le réseau Centre-Bourgogne.",
+  "sources": {
+    "anfr_manual": {
+      "title": "Manuel CRR fluvial - version 6, mai 2025",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "role": "Référence nationale pour le plan des voies VHF fluviales et les fréquences associées."
+    },
+    "vnf_rhone_saone_2026": {
+      "title": "Avis à la batellerie n°1 - 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2026/02/VNF_batellerie_2026_vdef.pdf",
+      "findings": [
+        "Saône hors traversée de Lyon : canal 10 bateau-bateau.",
+        "Écluse de Seurre : canal 22.",
+        "Écluse d'Écuelles : canal 20.",
+        "Écluse d'Ormes : canal 22.",
+        "Canal du Rhône au Rhin, branche Sud : canal 10 bateau-bateau."
+      ]
+    },
+    "vnf_centre_bourgogne_2026": {
+      "title": "Avis à la batellerie n°01 - 2026, V01 mars 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2023/06/2026_Avis-Bat-01_V01-2.pdf",
+      "findings": [
+        "Annonce canal 12 d'Auxerre à Joigny jusqu'à l'écluse du Pêchoir incluse.",
+        "Annonce canal 69 de Saint-Aubin à Cannes-Écluse."
+      ]
+    }
+  },
+  "scope": {
+    "verified_channels": [10, 12, 20, 22, 69],
+    "memory_count": 7,
+    "new_rf_count": 7,
+    "rf_plan_mhz": [156.5, 156.6, 157.0, 161.6, 157.1, 161.7, 156.475],
+    "candidate_memory_count": 61,
+    "location_start": 120,
+    "location_end": 126,
+    "paired_rx_channels": [20, 22],
+    "channel_18_added": false,
+    "reason_channel_18_not_added": "La traversée de Lyon relève du scope Auvergne-Rhône-Alpes et avait déjà été explicitement exclue du delta BFC lors du Sprint 103.",
+    "marine_channel_16_added": false,
+    "release_scope_non_exhaustive": true
+  },
+  "aviation": {
+    "inherited_from_public_v0_3": true,
+    "memory_count": 14,
+    "cycle": "AIRAC 08/26",
+    "valid_through_inclusive": "2026-09-02",
+    "new_revalidation_claimed": false,
+    "revalidation_required_on_or_after": "2026-09-03"
+  },
+  "gates": {
+    "current_official_inland_navigation_sources_present": true,
+    "rx_only_contract": true,
+    "rf_deduplication_required": true,
+    "no_unverified_channel_assignment_added": true,
+    "public_v0_3_must_remain_immutable": true,
+    "deterministic_internal_candidate_builder_required": true,
+    "public_export_allowed": false,
+    "public_release_allowed": false
+  },
+  "next_step": "Construire en CI un candidat interne déterministe de 61 RX à partir du CSV public v0.3 généré par Astro, vérifier son SHA de base et ses invariants, puis seulement ensuite décider du gel de la base de publication v0.4."
+}

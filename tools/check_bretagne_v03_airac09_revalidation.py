@@ -227,7 +227,7 @@ def evaluate(root: Path, evidence_path: Path, as_of: date) -> dict[str, Any]:
         "human_review_valid": human_review_valid,
         "validation_errors": errors,
         "candidate_rebuild_allowed": candidate_rebuild_allowed,
-        "candidate_rebuild_is_publication": false if False else False,
+        "candidate_rebuild_is_publication": False,
         "automatic_candidate_mutation_allowed": False,
         "automatic_publication_allowed": False,
         "public_release_allowed": False,

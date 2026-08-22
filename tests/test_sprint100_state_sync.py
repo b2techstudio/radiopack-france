@@ -8,20 +8,31 @@ readme = (ROOT / "README.md").read_text(encoding="utf-8")
 project = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
 changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
 bfc = json.loads((ROOT / "research/bourgogne-franche-comte-v0.3/publication-record.json").read_text(encoding="utf-8"))
+bfc04 = json.loads((ROOT / "research/bourgogne-franche-comte-v0.4/publication-record.json").read_text(encoding="utf-8"))
 centre = json.loads((ROOT / "research/centre-val-de-loire-v0.3/publication-record.json").read_text(encoding="utf-8"))
 
-# Sprint 100 is now a historical publication guard. Advancing the current
-# project state must not mutate the immutable BFC/Centre publication facts.
+# Sprint 100 is historical. Later BFC releases may become current without
+# changing the immutable Sprint 99/100 publication facts.
 assert state["current_sprint"] >= 100
 assert "## Sprint 100 — Centre-Val de Loire v0.3" in readme
-assert "## Sprint 100 — Centre-Val de Loire v0.3" in project
+assert "Centre-Val de Loire v0.3" in project
 assert "## 0.21.89 - 2026-08-20" in changelog
 
 pbfc = state["public_packs"]["bourgogne_franche_comte"]
-assert pbfc["version"] == "0.3" and pbfc["memory_count"] == 54 and pbfc["immutable"] is True
-assert pbfc["previous_immutable_version"] == "0.2" and pbfc["previous_memory_count"] == 37
-assert pbfc["public_csv_sha256"] == bfc["public_csv_sha256"]
-assert pbfc["publication_record"] == "research/bourgogne-franche-comte-v0.3/publication-record.json"
+assert pbfc["immutable"] is True
+bfc_version = tuple(int(part) for part in pbfc["version"].split("."))
+assert bfc_version >= (0, 3)
+if pbfc["version"] == "0.3":
+    assert pbfc["memory_count"] == 54
+    assert pbfc["previous_immutable_version"] == "0.2" and pbfc["previous_memory_count"] == 37
+    assert pbfc["public_csv_sha256"] == bfc["public_csv_sha256"]
+    assert pbfc["publication_record"] == "research/bourgogne-franche-comte-v0.3/publication-record.json"
+else:
+    assert pbfc["version"] == "0.4" and pbfc["memory_count"] == 61
+    assert pbfc["previous_immutable_version"] == "0.3" and pbfc["previous_memory_count"] == 54
+    assert pbfc["public_csv_sha256"] == bfc04["public_csv_sha256"]
+    assert pbfc["publication_record"] == "research/bourgogne-franche-comte-v0.4/publication-record.json"
+    assert bfc04["previous_public_sha256"] == bfc["public_csv_sha256"]
 
 pcentre = state["public_packs"]["centre_val_de_loire"]
 assert pcentre["version"] == "0.3" and pcentre["memory_count"] == 51 and pcentre["immutable"] is True
@@ -50,4 +61,4 @@ normandie = state["normandie_v0_5_latest_refresh"]
 assert normandie["candidate_memory_count"] == 142 and normandie["candidate_memory_delta"] == 0
 assert normandie["known_potential_ceiling_excluding_f6zes"] == 147
 
-print("Sprint 100 historical guard: BFC v0.3=54 and Centre v0.3=51 remain immutable OK")
+print("Sprint 100 historical guard: BFC v0.3=54 and Centre v0.3=51 remain immutable after later BFC releases OK")

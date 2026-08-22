@@ -1,13 +1,14 @@
 {
   "schema_version": "1.0",
-  "status": "candidate_frozen_publication_pending",
+  "status": "published_zero_blockers",
   "pack": "Bourgogne-Franche-Comté",
   "version": "0.4",
   "reviewed_on": "2026-08-22",
   "candidate_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
+  "public_csv_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
   "candidate_memory_count": 61,
-  "blocking_publication_steps": 2,
-  "public_release_allowed": false,
+  "blocker_count": 0,
+  "public_release_allowed": true,
   "gates": {
     "immutable_v0_3_base_verified": true,
     "base_public_sha_verified": true,
@@ -22,14 +23,12 @@
     "airac08_current_window_verified": true,
     "candidate_reproducibility_verified": true,
     "candidate_sha_frozen": true,
-    "public_route_created": false,
-    "registry_update_verified": false,
+    "public_route_created": true,
+    "candidate_public_byte_identity_verified": true,
+    "registry_update_verified": true,
+    "region_page_update_verified": true,
     "historical_v0_3_retained": true
   },
-  "pending_publication_steps": [
-    "Créer la route/bytes publics v0.4 et prouver leur identité SHA-256 avec le candidat figé.",
-    "Promouvoir le registre/site vers v0.4 tout en conservant v0.3 historique et vérifier la synchronisation globale."
-  ],
   "warnings": [
     "Le scope VHF fluvial est volontairement non exhaustif : les affectations locales non documentées restent différées.",
     "Le canal 18 n'appartient pas au delta BFC retenu : son affectation documentée concerne la traversée de Lyon.",

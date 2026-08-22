@@ -50,16 +50,23 @@ assert record["full_memory_count"] == 76
 assert record["without_aviation_memory_count"] == 59
 assert record["new_unique_rf_memory_count"] == 11
 
-# If later research exists, it must build on—not rewrite—the Sprint 86/v0.3 result.
+# The v0.4 research checkpoint is historical too: it records how the single
+# 50 MHz addition was prepared on top of immutable v0.3. It must not pretend
+# v0.3 is still current after the separate v0.4 publication.
 if "annecy_v0_4_research" in state:
     v04 = state["annecy_v0_4_research"]
+    assert v04["status"] == "historical_candidate_state_before_publication"
     assert v04["based_on_public_version"] == "0.3"
-    assert v04["public_version_remains"] == "0.3"
     assert v04["candidate_memory_count"] == 77
     assert v04["candidate_without_aviation_memory_count"] == 60
     assert v04["candidate_memory_delta"] == 1
     assert v04["added_frequency_mhz"] == 50.5375
-    assert v04["published"] is False
+    assert v04["added_memory_name"] == "ZTH-6M"
+    assert v04["compatibility_review"] == "research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json"
+    assert v04["builder"] == "tools/build_annecy_v04_candidate.py"
+    assert public_annecy["version"] == "0.4"
+    assert public_annecy["memory_count"] == 77
+    assert public_annecy["without_aviation_memory_count"] == 60
     assert V04_REVIEW.is_file()
 
 expansion = json.loads(EXPANSION.read_text(encoding="utf-8"))
@@ -183,4 +190,4 @@ assert "buildAnnecyCsv(true)" in old_full_route.read_text(encoding="utf-8")
 assert "buildAnnecyCsv(false)" in old_no_air_route.read_text(encoding="utf-8")
 assert "radiopack-france-annecy-alpes-leman-v0.4.csv" in registry
 
-print("Sprint 86 Annecy v0.3 paired RX: historical 65 -> 76 (+11) remains immutable; later v0.4 research is separated and forward-compatible OK")
+print("Sprint 86 Annecy v0.3 paired RX: historical 65 -> 76 (+11) remains immutable; v0.4 is recognized as the separate current publication OK")

@@ -1,23 +1,22 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **22 août 2026**
-Sprint courant : **105**
-État logique : **0.21.93**
+Sprint courant : **107**
+État logique : **0.21.95**
 
-L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-105-summary.md`.
+L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-107-summary.md`.
 
 ## État public
 
 - Normandie v0.4 : **142 mémoires RX**, publiée et immuable.
 - Annecy–Alpes–Léman v0.4 : **77 mémoires RX**, variante **60 sans aviation**, publiée et immuable.
-- Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Hauts-de-France v0.2 : **144 mémoires RX**, publiée et immuable.
 - Île-de-France v0.4 : **64 mémoires RX**, dont **18 aviation**, **15 radio régionales** et **7 VHF navigation intérieure**, publiée et immuable ; v0.3 **57 RX** et v0.2 **58 RX** historiques immuables.
 - Grand Est v0.4 : **97 mémoires RX**, dont **19 aviation** et **13 VHF navigation intérieure**, publiée et immuable ; v0.3 **84 RX** et v0.2 **59 RX** historiques immuables.
 - Centre-Val de Loire v0.3 : **51 mémoires RX**, dont **7 aviation**, publiée et immuable.
 - Pays de la Loire v0.2 : **130 mémoires RX**, publiée et immuable.
-- Bourgogne-Franche-Comté v0.3 : **54 mémoires RX**, dont **14 aviation**, publiée et immuable.
+- Bourgogne-Franche-Comté v0.4 : **61 mémoires RX**, dont **14 aviation** et **7 VHF navigation intérieure**, publiée et immuable ; v0.3 **54 RX** et v0.2 **37 RX** historiques immuables.
 - Nouvelle-Aquitaine v0.2 : **151 mémoires RX**, publiée et immuable.
 - Auvergne-Rhône-Alpes v0.2 : **62 mémoires RX**, publiée et immuable.
 - Occitanie v0.2 : **156 mémoires RX**, publiée et immuable.
@@ -26,93 +25,40 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
 
-## Sprint 105 — Île-de-France v0.4 publiée
+## Sprint 107 — Bourgogne-Franche-Comté v0.4 publiée
 
-Île-de-France v0.4 est publiée et figée à **64 RX** : **18 aviation**, **15 radio régionales** et **7 VHF navigation intérieure**. SHA public : `14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2`.
+Bourgogne-Franche-Comté v0.4 est publiée et figée à **61 RX**. Elle conserve les **54 lignes** de v0.3 et ajoute **7 mémoires VHF navigation intérieure** sur les emplacements **120–126** : voies **10, 12, 20, 22 et 69**, avec paired RX pour 20 et 22.
 
-Le bloc fluvial retient les canaux **10, 18, 20 et 22** sur les emplacements **120–126**. Les canaux 18/20/22 sont représentés en paired RX sur leurs deux fréquences distinctes. Les affectations actuelles du PCC Vives-Eaux 2026 sont documentées par VNF. Le canal 69 n'est pas promu et aucun canal 16 maritime n'est ajouté.
+SHA public et candidat : `02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72`.
 
-L'aviation reste à **18 mémoires, delta 0**, héritée de v0.3. AIRAC 08/26 est applicable jusqu'au **2 septembre 2026 inclus** ; toute nouvelle révision aviation à partir du **3 septembre 2026** exige AIRAC 09/26.
+La route Astro publique v0.4 a été vérifiée byte-identique au candidat figé. Publication gates : **0 blocker**. La v0.3 de 54 RX reste historique et immuable.
 
-Checklist : **12/12** ; publication gates : **0 blocker** ; candidat et CSV public byte-identiques. Les v0.3/57 et v0.2/58 restent historiques et immuables.
+Le canal 18 n'est pas ajouté à BFC : l'affectation documentée concerne la traversée de Lyon et reste dans le scope Auvergne-Rhône-Alpes. Les **14 mémoires aviation** sont héritées sans modification de v0.3.
 
-## Sprint 104 — Grand Est v0.4 publiée
+## Sprint 106 — candidat BFC v0.4 figé
 
-Grand Est v0.4 est publiée et figée à **97 RX** : **19 aviation**, **41 radio régionales** et **13 VHF navigation intérieure**. SHA public : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d`. Les v0.3/84 et v0.2/59 restent historiques et immuables.
+Le Sprint 106 a fermé le minimum vérifié BFC à **+7 RF fluviales**, construit le candidat déterministe 61 RX et figé le SHA avant toute mutation publique.
 
-## Sprint 103 — audit VHF navigation intérieure
+## Sprints 105–103 — VHF navigation intérieure
 
-Audit national terminé sans mutation publique : les packs côtiers couvrent déjà les RF partagées via le bloc maritime ; les deltas non côtiers vérifiés sont Grand Est +13, IDF au moins +1, BFC au moins +7 et ARA au moins +9.
+- Sprint 105 : Île-de-France v0.4 publiée à **64 RX**, +7 VHF navigation intérieure.
+- Sprint 104 : Grand Est v0.4 publiée à **97 RX**, +13 VHF navigation intérieure.
+- Sprint 103 : audit national VHF navigation intérieure ; après Grand Est, IDF et BFC, la prochaine priorité non côtière est **Auvergne-Rhône-Alpes v0.3**, avec au moins **+9 RF** vérifiées à préparer.
 
-## Sprint 102 — Grand Est v0.3 publiée
+## Historique récent
 
-Grand Est v0.3 a été publiée à **84 RX / 19 aviation / 41 radio régionales** avec SHA `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`; elle est désormais historique.
-
-## Sprint 101 — Île-de-France v0.3 publiée
-
-Île-de-France v0.3 est publiée et figée à **57 RX / 18 aviation / 15 radio régionales**. La v0.2 de **58 RX** reste historique et immuable.
-
-SHA-256 public : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
-
-Le CSV public réutilise exactement les octets du candidat déterministe. Le builder reconstruit la v0.2, vérifie son SHA historique `dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d`, puis vérifie le candidat v0.3.
-
-### Radioamateur
-
-Scope final : **15 RF régionales uniques**. F5ZNG, F5ZNN, F5ZMH, F1ZHK, F6ZEE, F5ZMR, F5ZSY et l'extension crossband F5ZNN sont retenus. F5ZEQ reste non reconduit pendant sa maintenance ; F1ZTC, F5ZDR, F5ZBK et F1ZDL restent hors scope faute de preuve actuelle suffisante, sans être déclarés définitivement inactifs.
-
-### Aviation
-
-Le pack conserve **18 mémoires, delta 0**, sans expansion. LFPG, LFPO et LFPB ont été revalidés pour ce sous-ensemble sur la fenêtre AIRAC 08/26 avec les éléments SIA/NOTAM/SUP documentés. Cette photographie est valable jusqu'au **2 septembre 2026 inclus** ; toute nouvelle révision aviation à partir du **3 septembre 2026** exige AIRAC 09/26.
-
-### Publication
-
-- checklist : **12/12** ;
-- publication gates : **0 blocker** ;
-- publication record : **`published_immutable`** ;
-- `publication_ready = true` ;
-- `published = true` ;
-- CSV public v0.3 : **créé et byte-identique au candidat** ;
-- registre public : **v0.3 / 57 RX**.
-
-Références : `research/ile-de-france-v0.3/publication-record.json` et `research/sprint-101-summary.md`.
-
-## Sprint 100 — Centre-Val de Loire v0.3
-
-Le Sprint **100 / 0.21.89** officialise Centre-Val de Loire v0.3 à **51 RX**. La v0.2 de 42 RX reste historique et immuable. La v0.3 comprend 20 mémoires radioamateur analogiques et 7 aviation ; Châteauroux-Déols est corrigé à **125.880 MHz** et Saint-Denis-de-l'Hôtel **122.405 MHz** est ajouté. SHA public : `0882c84133576fae7f6b3cba64efc32e915355c254e533ed9850eb0edf2ebaae`.
-
-Références : `research/centre-val-de-loire-v0.3/publication-record.json` et `research/sprint-100-summary.md`.
-
-## Sprint 99 — Bourgogne-Franche-Comté v0.3
-
-Le Sprint **99 / 0.21.88** officialise Bourgogne-Franche-Comté v0.3 à **54 RX**, dont 14 aviation. La v0.2 de 37 RX reste historique et immuable. SHA public : `b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5`.
-
-Références : `research/bourgogne-franche-comte-v0.3/publication-record.json` et `research/sprint-99-summary.md`.
-
-## Sprint 98 — consolidation officielle de l'enrichissement métropolitain v0.2
-
-Le Sprint **98 / 0.21.87** a consolidé les onze v0.2 avec scopes figés, checklists 10/10, gates satisfaits, publication records et SHA-256 issus d'un build Astro frais. Les v0.1 associées restent historiques et immuables.
-
-Références : `research/sprint-98-summary.md` et `research/sprint-98-metropolitan-publication-manifest.json`.
-
-## Sprint 97 — consolidation de l'état post-Sprint 96
-
-Le Sprint **97 / 0.21.86** a consolidé les détails de canaux régionaux alimentés depuis les CSV publics, les raccourcis du générateur accessibles au clavier et la synchronisation du registre public, sans mutation RF ni CSV.
-
-Références : `research/sprint-97-summary.md` et `research/sprint-97-post96-ui-state.json`.
-
-## Sprint 91 — Bretagne v0.3 AIRAC09 handoff
-
-Le candidat reste à **151 RX, delta 0**. AIRAC 08/26 est courant jusqu'au 2 septembre 2026 inclus ; AIRAC 09/26 doit être revalidé à partir du 3 septembre avant toute publication v0.3.
-
-## Sprint 90 — Normandie v0.5 source refresh
-
-Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ; F1ZOV reste sous surveillance d'état opérateur et F6ZES reste sans fréquence/mode public suffisamment établi.
-
-## Sprint 89 — Annecy v0.4 candidat
-
-État historique avant publication : **77 RX / 60 sans aviation**, +1 RF 50.5375 MHz. Ce candidat est ensuite devenu la v0.4 publique immuable.
+- Sprint 102 : Grand Est v0.3 publiée à 84 RX.
+- Sprint 101 : Île-de-France v0.3 publiée à 57 RX.
+- Sprint 100 : Centre-Val de Loire v0.3 publiée à 51 RX.
+- Sprint 99 : Bourgogne-Franche-Comté v0.3 publiée à 54 RX.
+- Sprint 98 : consolidation officielle des onze publications métropolitaines v0.2.
+- Sprint 97 : consolidation de l'état UI/catalogue post-Sprint 96.
 
 ## Travaux ouverts
+
+### Auvergne-Rhône-Alpes v0.3
+
+**Prochaine priorité.** Base publique actuelle : **v0.2 / 62 RX**. L'audit Sprint 103 a identifié un delta fluvial d'au moins **+9 RF** sur Rhône/Saône à transformer en scope vérifié et candidat déterministe.
 
 ### Bretagne v0.3
 

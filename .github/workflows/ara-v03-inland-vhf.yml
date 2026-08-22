@@ -10,6 +10,12 @@ on:
       - "research/auvergne-rhone-alpes-v0.2/publication-record.json"
       - "tools/build_ara_v03_candidate.py"
       - "tests/test_ara_v03_candidate.py"
+      - "tests/test_ara_v03_publication.py"
+      - "website/src/lib/araPack.ts"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/data/regions.json"
+      - "website/src/pages/regions/[slug].astro"
+      - "website/src/pages/downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv.ts"
       - ".github/workflows/ara-v03-inland-vhf.yml"
   pull_request:
     branches:
@@ -20,6 +26,12 @@ on:
       - "research/auvergne-rhone-alpes-v0.2/publication-record.json"
       - "tools/build_ara_v03_candidate.py"
       - "tests/test_ara_v03_candidate.py"
+      - "tests/test_ara_v03_publication.py"
+      - "website/src/lib/araPack.ts"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/data/regions.json"
+      - "website/src/pages/regions/[slug].astro"
+      - "website/src/pages/downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv.ts"
       - ".github/workflows/ara-v03-inland-vhf.yml"
   workflow_dispatch:
 
@@ -31,8 +43,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  internal-candidate:
-    name: ARA v0.3 internal candidate invariants
+  publication:
+    name: ARA v0.3 publication invariants
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -50,7 +62,7 @@ jobs:
       - name: Install website dependencies
         run: cd website && npm ci
 
-      - name: Build Astro website and immutable ARA v0.2 route
+      - name: Build Astro website and ARA v0.2/v0.3 routes
         run: cd website && npm run build
 
       - name: Set up Python
@@ -58,11 +70,14 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Build ARA v0.3 internal candidate
+      - name: Build frozen ARA v0.3 candidate basis
         run: python tools/build_ara_v03_candidate.py --write
 
-      - name: Rebuild and compare ARA v0.3 internal candidate
+      - name: Rebuild and compare frozen ARA v0.3 candidate
         run: python tools/build_ara_v03_candidate.py --check
 
-      - name: Test ARA v0.3 inland-VHF invariants
+      - name: Test frozen ARA v0.3 inland-VHF candidate
         run: python tests/test_ara_v03_candidate.py --dist website/dist
+
+      - name: Test ARA v0.3 public byte identity and publication invariants
+        run: python tests/test_ara_v03_publication.py --dist website/dist

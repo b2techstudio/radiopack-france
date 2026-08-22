@@ -7,12 +7,13 @@ required_files = [
     "README.md", "PROJECT_STATUS.md", "CHANGELOG.md", ".github/workflows/ci.yml",
     "REGIONAL-PACK-WORKFLOW.md", "website/src/lib/chirpPack.ts",
     "website/src/lib/metropolitanPack.ts", "website/src/lib/bfcPack.ts",
-    "website/src/lib/centrePack.ts", "website/src/lib/packRegistry.ts",
+    "website/src/lib/centrePack.ts", "website/src/lib/araPack.ts", "website/src/lib/packRegistry.ts",
     "website/src/data/regions.json", "website/src/pages/regions/[slug].astro",
     "website/src/pages/downloads/[slug]/[file].csv.ts",
     "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv.ts",
     "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.4.csv.ts",
     "website/src/pages/downloads/centre-val-de-loire/radiopack-france-centre-val-de-loire-v0.3.csv.ts",
+    "website/src/pages/downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv.ts",
     "research/project-resume-state.json", "research/paired-rx-policy.json",
     "research/bourgogne-franche-comte-v0.3/publication-record.json",
     "research/bourgogne-franche-comte-v0.4/publication-record.json",
@@ -22,9 +23,14 @@ required_files = [
     "research/ile-de-france-v0.3/publication-record.json",
     "research/ile-de-france-v0.4/publication-record.json",
     "research/grand-est-v0.4/publication-record.json",
+    "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
+    "research/auvergne-rhone-alpes-v0.3/release-scope.json",
+    "research/auvergne-rhone-alpes-v0.3/publication-gates.json",
+    "research/auvergne-rhone-alpes-v0.3/publication-record.json",
     "research/sprint-99-summary.md", "research/sprint-100-summary.md", "research/sprint-101-summary.md",
     "research/sprint-103-summary.md", "research/sprint-104-summary.md", "research/sprint-105-summary.md",
-    "research/sprint-106-summary.md", "research/sprint-107-summary.md",
+    "research/sprint-106-summary.md", "research/sprint-107-summary.md", "research/sprint-108-summary.md",
+    "research/sprint-109-summary.md",
 ]
 for relative in required_files:
     path = ROOT / relative
@@ -52,7 +58,7 @@ current_public = {
     "pays-de-la-loire": (130, "v0.2"),
     "bourgogne-franche-comte": (61, "v0.4"),
     "nouvelle-aquitaine": (151, "v0.2"),
-    "auvergne-rhone-alpes": (62, "v0.2"),
+    "auvergne-rhone-alpes": (71, "v0.3"),
     "occitanie": (156, "v0.2"),
     "provence-alpes-cote-d-azur": (159, "v0.2"),
     "corse": (137, "v0.2"),
@@ -63,7 +69,7 @@ for slug, (count, version) in current_public.items():
     assert region["status"] == f"{version} disponible"
     assert "Aviation RX" in region["categories"]
 
-for slug in ["bourgogne-franche-comte", "ile-de-france", "grand-est"]:
+for slug in ["bourgogne-franche-comte", "ile-de-france", "grand-est", "auvergne-rhone-alpes"]:
     assert "VHF navigation intérieure RX" in region_by_slug[slug]["categories"]
 
 historical_v02 = {
@@ -112,14 +118,25 @@ assert idf_v03["status"] == "published_immutable" and idf_v03["memory_count"] ==
 assert idf_v04["status"] == "published_immutable" and idf_v04["memory_count"] == 64
 assert idf_v04["previous_public_version"] == "0.3" and idf_v04["previous_public_memory_count"] == 57
 
+ara_v03 = json.loads((ROOT / "research/auvergne-rhone-alpes-v0.3/publication-record.json").read_text(encoding="utf-8"))
+assert ara_v03["status"] == "published_immutable"
+assert ara_v03["version"] == "0.3"
+assert ara_v03["memory_count"] == 71
+assert ara_v03["previous_public_version"] == "0.2"
+assert ara_v03["previous_public_memory_count"] == 62
+assert ara_v03["public_csv_sha256"] == "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e"
+assert ara_v03["published_version_is_immutable"] is True
+
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
     '{ id: "ile-de-france", name: "Île-de-France", memoryCount: 64, marine: false, aviation: 18, version: "v0.4" }',
     '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }',
     '{ id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 51, marine: false, aviation: 7, version: "v0.3" }',
     '{ id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 61, marine: false, aviation: 14, version: "v0.4" }',
+    '{ id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 71, marine: false, aviation: 18, version: "v0.3" }',
     '7 mémoires VHF navigation intérieure',
     '13 mémoires VHF navigation intérieure',
+    '9 mémoires VHF navigation intérieure',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
 ]:
     assert expected in registry, f"Registre public incomplet: {expected}"
@@ -133,6 +150,9 @@ for expected in ["buildBfcV03Pack", "bfcV03MemoryCount = 54", "buildBfcV04Pack",
     assert expected in bfc_builder
 centre_builder = (ROOT / "website/src/lib/centrePack.ts").read_text(encoding="utf-8")
 assert "buildCentreV03Pack" in centre_builder and "centreV03MemoryCount = 51" in centre_builder
+ara_builder = (ROOT / "website/src/lib/araPack.ts").read_text(encoding="utf-8")
+for expected in ["buildAraV03Pack", "araV03MemoryCount = 71", "INLAND_VHF_V03", "auvergne-rhone-alpes-inland-vhf-rx.json"]:
+    assert expected in ara_builder
 
 chirp = (ROOT / "website/src/lib/chirpPack.ts").read_text(encoding="utf-8")
 for expected in ["validatePlacedChannels", "Pack trop grand", "Fréquence dupliquée", '"off"', '"0.000000"']:
@@ -140,8 +160,8 @@ for expected in ["validatePlacedChannels", "Pack trop grand", "Fréquence dupliq
 
 region_route = (ROOT / "website/src/pages/regions/[slug].astro").read_text(encoding="utf-8")
 for expected in [
-    "buildMetropolitanPack", "buildBfcV03Pack", "buildBfcV04Pack", "buildCentreV03Pack", "getPublicPack", "ChannelGroupDetails",
-    "Duplex=off", "AIRAC 08/26", "isBfcV04", "isIdfV04", "isGrandEstV04", "120–126", "120–132",
+    "buildMetropolitanPack", "buildBfcV03Pack", "buildBfcV04Pack", "buildCentreV03Pack", "buildAraV03Pack", "getPublicPack", "ChannelGroupDetails",
+    "Duplex=off", "AIRAC 08/26", "isBfcV04", "isIdfV04", "isGrandEstV04", "isAraV03", "120–126", "120–128", "120–132",
     "radiopack-france-ile-de-france-v0.4.csv", "radiopack-france-grand-est-v0.4.csv",
 ]:
     assert expected in region_route
@@ -175,4 +195,4 @@ status = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
 for expected in ["Sprint courant : **107**", "État logique : **0.21.95**", "Bourgogne-Franche-Comté v0.4", "Auvergne-Rhône-Alpes v0.3"]:
     assert expected in status
 
-print("Tests RadioPack repository/site: state Sprint 107, BFC/IDF/Grand Est v0.4 current, historical releases preserved, RX-only guards OK")
+print("Tests RadioPack repository/site: ARA v0.3 / 71 RX promoted on site; canonical state still Sprint 107 pending dedicated sync, historical releases preserved, RX-only guards OK")

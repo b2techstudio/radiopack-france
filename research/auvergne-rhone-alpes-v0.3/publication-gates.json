@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "status": "published_zero_blockers",
+  "pack": "Auvergne-Rhône-Alpes",
+  "version": "0.3",
+  "reviewed_on": "2026-08-22",
+  "candidate_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+  "public_csv_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+  "candidate_memory_count": 71,
+  "blocker_count": 0,
+  "public_release_allowed": true,
+  "gates": {
+    "immutable_v0_2_base_verified": true,
+    "base_public_sha_verified": true,
+    "base_rows_preserved": true,
+    "inland_scope_verified": true,
+    "local_assignments_verified": true,
+    "paired_rx_contract_verified": true,
+    "channel_18_boat_side_only_verified": true,
+    "marine_channel_16_excluded": true,
+    "rf_deduplication_verified": true,
+    "rx_only_verified": true,
+    "memory_limit_verified": true,
+    "aviation_zero_delta_verified": true,
+    "airac08_current_window_verified": true,
+    "candidate_reproducibility_verified": true,
+    "candidate_sha_frozen": true,
+    "public_route_created": true,
+    "candidate_public_byte_identity_verified": true,
+    "registry_update_verified": true,
+    "region_page_update_verified": true,
+    "historical_v0_2_retained": true
+  },
+  "warnings": [
+    "Le scope VHF fluvial est volontairement non exhaustif : les affectations locales non documentées restent différées.",
+    "Le canal 18 est retenu uniquement côté bateau pour le secteur Pierre-Bénite ; 161.500 MHz n'est pas ajouté.",
+    "Le canal maritime 16 n'est pas ajouté au pack intérieur Auvergne-Rhône-Alpes.",
+    "Les 18 mémoires aviation sont héritées sans modification de v0.2 ; aucune nouvelle revalidation champ par champ n'est revendiquée.",
+    "Toute nouvelle révision aviation à partir du 3 septembre 2026 exige AIRAC 09/26."
+  ]
+}

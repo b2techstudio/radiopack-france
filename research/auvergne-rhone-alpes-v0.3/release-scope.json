@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "pack": "Auvergne-Rhône-Alpes",
+  "version": "0.3",
+  "prepared_on": "2026-08-22",
+  "frozen_on": "2026-08-22",
+  "published_on": "2026-08-22",
+  "based_on_public_version": "0.2",
+  "base_memory_count": 62,
+  "base_public_sha256": "60b4f96467419db40e9f3f33076057f4e093853c81d9e3315b8fe7f0459daa53",
+  "memory_count": 71,
+  "memory_delta": 9,
+  "aviation_memory_count": 18,
+  "aviation_memory_delta": 0,
+  "inland_vhf_memory_count": 9,
+  "inland_vhf_memory_delta": 9,
+  "candidate_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+  "public_csv_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+  "public_route": "/downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv",
+  "inland_scope": {
+    "channels": [10, 12, 18, 19, 20, 22],
+    "paired_rx_channels": [19, 20, 22],
+    "location_range": "120-128",
+    "channel_18_boat_side_only": true,
+    "channel_18_shore_side_added": false,
+    "marine_channel_16_added": false,
+    "non_exhaustive": true
+  },
+  "aviation": {
+    "cycle": "AIRAC 08/26",
+    "valid_through_inclusive": "2026-09-02",
+    "inherited_unchanged_from_v0_2": true,
+    "new_field_by_field_revalidation_claimed": false,
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "rf_deduplicated": true,
+    "base_rows_preserved": true,
+    "no_artificial_fill": true,
+    "published_versions_immutable": true,
+    "private_ppdr_excluded": true
+  },
+  "publication": {
+    "public_export_allowed": true,
+    "public_release_allowed": true,
+    "public_registry_updated": true,
+    "public_route_created": true,
+    "candidate_public_byte_identity_verified": true,
+    "historical_v0_2_retained": true
+  }
+}

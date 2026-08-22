@@ -30,7 +30,7 @@ required_files = [
     "research/sprint-99-summary.md", "research/sprint-100-summary.md", "research/sprint-101-summary.md",
     "research/sprint-103-summary.md", "research/sprint-104-summary.md", "research/sprint-105-summary.md",
     "research/sprint-106-summary.md", "research/sprint-107-summary.md", "research/sprint-108-summary.md",
-    "research/sprint-109-summary.md",
+    "research/sprint-109-summary.md", "research/sprint-110-summary.md",
 ]
 for relative in required_files:
     path = ROOT / relative
@@ -168,7 +168,8 @@ for expected in [
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "Sprint 109 / 0.21.97",
+    "Sprint 110 / 0.21.98",
+    "## Sprint 110 — Normandie v0.5 : sources revalidées, handoff terrain",
     "## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée",
     "## Sprint 108 — candidat ARA v0.3 figé",
     "## Sprint 107 — Bourgogne-Franche-Comté v0.4 publiée",
@@ -195,7 +196,7 @@ for expected in [
     assert expected in readme, f"README courant/historique incomplet: {expected}"
 
 status = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
-for expected in ["Sprint courant : **109**", "État logique : **0.21.97**", "Bourgogne-Franche-Comté v0.4", "Auvergne-Rhône-Alpes v0.3", "Normandie v0.5"]:
+for expected in ["Sprint courant : **110**", "État logique : **0.21.98**", "Bourgogne-Franche-Comté v0.4", "Auvergne-Rhône-Alpes v0.3", "Normandie v0.5"]:
     assert expected in status
 
-print("Tests RadioPack repository/site: canonical Sprint 109 / ARA v0.3 71 RX synchronized, historical releases preserved, RX-only guards OK")
+print("Tests RadioPack repository/site: canonical Sprint 110 / Normandie v0.5 zero-delta field handoff synchronized, public releases preserved, RX-only guards OK")

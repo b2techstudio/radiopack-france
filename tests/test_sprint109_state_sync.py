@@ -19,8 +19,8 @@ for path in [STATE, ARA_V02_RECORD, ARA_V03_RECORD, ARA_FREEZE, README, STATUS, 
     assert path.is_file(), path
 
 state = json.loads(STATE.read_text(encoding="utf-8"))
-assert state["current_sprint"] == 109
-assert state["state_version"] == "0.21.97"
+assert state["current_sprint"] >= 109
+assert state["state_version"].startswith("0.21.")
 assert state["updated"] == "2026-08-22"
 
 ara = state["public_packs"]["auvergne_rhone_alpes"]
@@ -32,44 +32,7 @@ assert ara["previous_memory_count"] == 62
 assert ara["publication_record"] == "research/auvergne-rhone-alpes-v0.3/publication-record.json"
 assert ara["public_csv_sha256"] == ARA_V03_SHA
 
-active = state["active_work"]
-assert active["pack"] == "Auvergne-Rhône-Alpes"
-assert active["target_version"] == "0.3"
-assert active["status"] == "published_immutable"
-assert active["public_base_version"] == "0.2"
-assert active["public_base_memory_count"] == 62
-assert active["public_base_sha256"] == ARA_V02_SHA
-assert active["candidate_memory_count"] == 71
-assert active["candidate_aviation_memory_count"] == 18
-assert active["candidate_inland_vhf_memory_count"] == 9
-assert active["candidate_memory_delta"] == 9
-assert active["candidate_sha256"] == ARA_V03_SHA
-assert active["public_csv_sha256"] == ARA_V03_SHA
-assert active["channel_18_boat_side_only"] is True
-assert active["channel_18_shore_side_promoted"] is False
-assert active["marine_channel_16_promoted"] is False
-assert active["aviation_memory_delta"] == 0
-assert active["aviation_inherited_unchanged_from_v0_2"] is True
-assert active["candidate_public_byte_identity_verified"] is True
-assert active["publication_gates_zero_blockers"] is True
-assert active["published"] is True
-assert active["published_version_is_immutable"] is True
-assert active["public_mutation_performed"] is True
-assert active["airac08_publication_allowed_through_inclusive"] == "2026-09-02"
-assert active["airac09_revalidation_required_on_or_after"] == "2026-09-03"
-
-priority = state["next_priority"]
-assert priority["pack"] == "Normandie"
-assert priority["target_version"] == "0.5"
-assert priority["status"] == "field_validation_required_before_any_promotion"
-assert priority["public_base_version"] == "0.4"
-assert priority["public_base_memory_count"] == 142
-assert priority["candidate_memory_count"] == 142
-assert priority["candidate_memory_delta"] == 0
-assert priority["known_potential_ceiling_excluding_f6zes"] == 147
-assert priority["field_required"] == ["R3_F1ZBX", "F5ZHA"]
-assert priority["source_watch"] == ["F1ZOV", "F6ZES"]
-assert priority["evidence"] == "research/normandie-v0.5/sprint90-source-refresh.json"
+# Current active work may advance after Sprint 109; the ARA publication snapshot below is historical.
 
 s108 = state["latest_sprint108_ara_v03_candidate"]
 assert s108["sprint"] == 108
@@ -95,10 +58,9 @@ assert s109["public_csv_sha256"] == ARA_V03_SHA
 assert s109["published"] is True
 assert s109["published_version_is_immutable"] is True
 
-assert state["recent_sprints"][0]["sprint"] == 109
-assert state["recent_sprints"][0]["state_version"] == "0.21.97"
-assert state["recent_sprints"][1]["sprint"] == 108
-assert state["recent_sprints"][1]["state_version"] == "0.21.96"
+recent_by_sprint = {item["sprint"]: item for item in state["recent_sprints"]}
+assert recent_by_sprint[109]["state_version"] == "0.21.97"
+assert recent_by_sprint[108]["state_version"] == "0.21.96"
 for source in [
     "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
     "research/auvergne-rhone-alpes-v0.3/publication-record.json",
@@ -148,7 +110,6 @@ assert ara_region["memoryCount"] == 71
 
 readme = README.read_text(encoding="utf-8")
 for token in [
-    "Sprint 109 / 0.21.97",
     "Auvergne-Rhône-Alpes v0.3",
     "71 mémoires RX",
     "1591 mémoires RX cumulées",
@@ -160,12 +121,11 @@ for token in [
 
 status = STATUS.read_text(encoding="utf-8")
 for token in [
-    "Sprint courant : **109**",
-    "État logique : **0.21.97**",
+    "## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée",
     "Auvergne-Rhône-Alpes v0.3 : **71 mémoires RX**",
     "**Priorité actionnable actuelle.**",
     "Normandie v0.5",
 ]:
     assert token in status, token
 
-print("Sprint 109 state sync: ARA v0.3=71 immutable, v0.2=62 historical, byte identity SHA frozen, next priority Normandie v0.5 OK")
+print("Sprint 109 historical guard: ARA v0.3=71 immutable, v0.2=62 historical, byte identity SHA frozen after later state advances OK")

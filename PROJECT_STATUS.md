@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **22 août 2026**
-Sprint courant : **109**
-État logique : **0.21.97**
+Sprint courant : **110**
+État logique : **0.21.98**
 
-L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-109-summary.md`.
+L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-110-summary.md`.
 
 ## État public
 
@@ -24,6 +24,17 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Corse v0.2 : **137 mémoires RX**, publiée et immuable.
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
+
+## Sprint 110 — Normandie v0.5 revalidée, zéro delta
+
+Normandie v0.5 reste **interne et non publiée à 142 RX / delta 0**. Le rafraîchissement source du 22 août 2026 ne justifie aucune promotion.
+
+- R3/F1ZBX : paramètres publics confirmés, mais **2 sessions terrain Mortain-Bocage** restent requises ;
+- F5ZHA : paire actuelle **145.4675 / 432.575 MHz**, mais **2 sessions terrain** restent requises ;
+- F1ZOV : statut opérateur local toujours **en maintenance** ;
+- F6ZES : site Sourdeval connu, mais fréquence et mode publics toujours non résolus.
+
+Le kit Sprint 84 et l'évaluateur Sprint 85 restent les outils de référence. Aucune mutation automatique du candidat ni publication automatique n'est autorisée. La prochaine action est la collecte de vraies sessions terrain.
 
 ## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée
 

@@ -3,31 +3,32 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
 import { buildStandardChannelGroups, loadPublicPackMemories } from "../../lib/channelDetails";
 
-const memories = loadPublicPackMemories("downloads/normandie/radiopack-france-normandie-v0.4.csv");
+const memories = loadPublicPackMemories("downloads/normandie/radiopack-france-normandie-v0.5.csv");
 const channelGroups = buildStandardChannelGroups(memories);
 ---
-<BaseLayout title="Pack Normandie v0.4 - RadioPack France" description="CSV CHIRP Normandie v0.4 de 142 mémoires pour Quansheng UV-K5, en réception seule.">
+<BaseLayout title="Pack Normandie v0.5 - RadioPack France" description="CSV CHIRP Normandie v0.5 de 146 mémoires pour Quansheng UV-K5, en réception seule, avec 4 mémoires à couverture théorique documentée.">
   <section class="section"><div class="container page-grid">
     <div class="copy">
-      <span class="eyebrow">Pack régional - v0.4</span>
+      <span class="eyebrow">Pack régional - v0.5</span>
       <h1>Normandie</h1>
-      <p class="lead">La version 0.4 contient 142 mémoires RX validées. Elle conserve intégralement la base v0.3.1 et ajoute trois mémoires radioamateur vérifiées sans intégrer les dossiers encore incertains.</p>
+      <p class="lead">La version 0.5 contient 146 mémoires RX. Elle conserve intégralement la v0.4 et ajoute quatre mémoires R3/F1ZBX et F5ZHA sur une <strong>couverture théorique documentée</strong>, sans les présenter comme réception mesurée ou garantie.</p>
       <div class="button-row">
-        <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.4.csv" download>Télécharger le CSV v0.4</a>
+        <a class="button button-primary" href="/downloads/normandie/radiopack-france-normandie-v0.5.csv" download>Télécharger le CSV v0.5</a>
         <a class="button button-secondary" href="/documentation">Procédure CHIRP</a>
       </div>
-      <div class="card legal"><strong>Réception seule sur les 142 mémoires</strong><p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. Le pack n'accorde aucun droit d'émission.</p></div>
-      <div class="memory-map card"><h2>Évolution v0.4</h2><div class="ranges"><span><b>Base</b> 139 mémoires v0.3.1 conservées</span><span><b>175</b> 50-ZHY-IN · 145.0875</span><span><b>176</b> 53-ZCE-IN · 145.1000</span><span><b>177</b> 50-ZBL-U · 431.2500</span></div></div>
+      <div class="card legal"><strong>Réception seule sur les 146 mémoires</strong><p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. Le pack n'accorde aucun droit d'émission.</p></div>
+      <div class="card legal"><strong>Couverture théorique ≠ réception garantie</strong><p>Les quatre nouvelles mémoires sont retenues selon une estimation de plausibilité radio basée sur les paramètres publics, la distance et une géométrie simplifiée. Le relief réel, les bâtiments, la végétation, le matériel et le fading peuvent modifier fortement la réception. Les écoutes terrain restent un retour qualité facultatif.</p></div>
+      <div class="memory-map card"><h2>Évolution v0.5</h2><div class="ranges"><span><b>Base</b> 142 mémoires v0.4 conservées</span><span><b>178</b> 35-R3-IN · 145.075</span><span><b>179</b> 35-R3-OUT · 145.675</span><span><b>180</b> 53-ZHA-V · 145.4675</span><span><b>181</b> 53-ZHA-U · 432.575</span></div></div>
 
       <ChannelGroupDetails
         groups={channelGroups}
         title="Tous les canaux du pack Normandie"
-        intro="Clique sur un groupe pour afficher chaque mémoire réellement présente dans le CSV public v0.4 avec sa fréquence, son mode et son libellé."
+        intro="Clique sur un groupe pour afficher chaque mémoire réellement présente dans le CSV public v0.5 avec sa fréquence, son mode et son libellé. Les positions 178–181 portent explicitement la mention de couverture théorique."
       />
     </div>
-    <aside class="card status-card"><span class="badge badge-green">Disponible - v0.4</span><h3>142 mémoires sur 200</h3><div class="meter"><span></span></div><ul><li>RX-only</li><li>3 ajouts validés depuis v0.3.1</li><li>R3, F5ZHA, F1ZOV et F6ZES reportés à v0.5</li><li>Aucune fréquence incertaine ajoutée</li></ul></aside>
+    <aside class="card status-card"><span class="badge badge-green">Disponible - v0.5</span><h3>146 mémoires sur 200</h3><div class="meter"><span></span></div><ul><li>RX-only</li><li>+4 mémoires depuis v0.4</li><li>R3/F1ZBX : 2 RX à couverture théorique</li><li>F5ZHA : 2 RX à couverture théorique</li><li>F1ZOV toujours exclu : maintenance opérateur</li><li>F6ZES toujours exclu : fréquence/mode non résolus</li><li>v0.4 conservée historiquement</li></ul></aside>
   </div></section>
 </BaseLayout>
 <style>
-.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px;position:sticky;top:110px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:18px}.meter span{display:block;width:71%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9185ff,#4ea8ff,#f4c95d)}.legal,.memory-map{padding:22px}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#b9b1ff}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(11,23,40,.28);color:var(--muted);font-size:.82rem}.ranges b{color:#9185ff;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}.status-card{position:static}}
+.page-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}.copy{display:grid;gap:22px}.copy h1{font-size:clamp(3.8rem,8vw,6.4rem)}.status-card{padding:28px;position:sticky;top:110px}.status-card h3{margin:18px 0 10px}.status-card ul{margin:0;padding-left:1.2rem;color:var(--muted)}.meter{height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:18px}.meter span{display:block;width:73%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#9185ff,#4ea8ff,#f4c95d)}.legal,.memory-map{padding:22px}.legal p{margin-top:6px;color:var(--muted)}code{font-weight:800;color:#b9b1ff}.ranges{display:flex;flex-wrap:wrap;gap:10px}.ranges span{padding:.55rem .7rem;border-radius:10px;border:1px solid var(--line);background:rgba(11,23,40,.28);color:var(--muted);font-size:.82rem}.ranges b{color:#9185ff;margin-right:4px}@media(max-width:800px){.page-grid{grid-template-columns:1fr}.status-card{position:static}}
 </style>

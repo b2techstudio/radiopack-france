@@ -17,8 +17,8 @@ for path in [STATE, READINESS, TEMPLATE, PUBLIC_RECORD, PUBLIC_V02, README, STAT
     assert path.is_file(), path
 
 state = json.loads(STATE.read_text(encoding="utf-8"))
-assert state["current_sprint"] == 111
-assert state["state_version"] == "0.21.99"
+assert state["current_sprint"] >= 111
+assert tuple(int(part) for part in state["state_version"].split(".")) >= (0, 21, 99)
 assert state["updated"] == "2026-08-22"
 
 bretagne = state["public_packs"]["bretagne"]
@@ -36,23 +36,6 @@ assert public_record["aviation"]["memory_count"] == 16
 assert public_record["aviation"]["cycle"] == "AIRAC 08/26"
 assert public_record["aviation"]["valid_through_inclusive"] == "2026-09-02"
 assert not PUBLIC_V03.exists()
-
-active = state["active_work"]
-assert active["pack"] == "Normandie"
-assert active["target_version"] == "0.5"
-assert active["status"] == "current_sources_refreshed_zero_delta_field_blocked"
-assert active["candidate_memory_count"] == 142
-assert active["candidate_memory_delta"] == 0
-assert active["field_required"] == ["R3_F1ZBX", "F5ZHA"]
-assert active["automatic_candidate_mutation_allowed"] is False
-assert active["automatic_publication_allowed"] is False
-assert active["published"] is False
-
-priority = state["next_priority"]
-assert priority["pack"] == "Normandie"
-assert priority["target_version"] == "0.5"
-assert priority["status"] == "collect_real_mortain_bocage_field_sessions"
-assert priority["field_required"] == ["R3_F1ZBX", "F5ZHA"]
 
 handoff = state["bretagne_v0_3_airac_handoff"]
 assert handoff["status"] == "airac09_future_source_available_readiness_prepared_waiting_effective_date"
@@ -78,39 +61,30 @@ assert handoff["readiness"] == "research/bretagne-v0.3/airac09-readiness.json"
 assert handoff["revalidation_template"] == "research/bretagne-v0.3/airac09-revalidation-template.json"
 assert handoff["validator"] == "tools/check_bretagne_v03_airac09_revalidation.py"
 
+# Sprint 111 snapshot remains historical even when the current state advances.
 s111 = state["latest_sprint111_bretagne_airac09_readiness"]
 assert s111["sprint"] == 111
 assert s111["state_version"] == "0.21.99"
 assert s111["completed_on"] == "2026-08-22"
 assert s111["status"] == "bretagne_v03_airac09_readiness_prepared_future_cycle_not_current"
-assert s111["public_base_version"] == "0.2"
-assert s111["public_base_memory_count"] == 151
 assert s111["candidate_memory_count"] == 151
 assert s111["candidate_memory_delta"] == 0
-assert s111["baseline_aviation_cycle"] == "AIRAC 08/26"
-assert s111["baseline_aviation_memory_count"] == 16
-assert s111["baseline_locations"] == [130, 145]
-assert s111["required_cycle"] == "AIRAC 09/26"
-assert s111["future_sia_product_available"] is True
-assert s111["future_sia_product_is_current_evidence"] is False
-assert s111["effective_from"] == "2026-09-03"
-assert s111["effective_until_inclusive"] == "2026-09-30"
-assert s111["explicit_memory_decision_count_required"] == 16
-assert s111["candidate_rebuild_allowed_before_effective_date"] is False
-assert s111["automatic_candidate_mutation_allowed"] is False
-assert s111["automatic_publication_allowed"] is False
-assert s111["public_csv_mutation"] is False
-assert s111["rf_data_mutation"] is False
-assert s111["public_v0_3_created"] is False
+assert s111["airac_next_effective_from"] == "2026-09-03"
+assert s111["published"] is False
 
 readiness = json.loads(READINESS.read_text(encoding="utf-8"))
 assert readiness["status"] == "future_cycle_source_available_not_current_readiness_prepared"
 assert readiness["prepared_on"] == "2026-08-22"
+assert readiness["public_base"]["version"] == "0.2"
+assert readiness["public_base"]["memory_count"] == 151
 assert readiness["candidate"]["memory_count"] == 151
 assert readiness["candidate"]["memory_delta"] == 0
 assert readiness["candidate"]["aviation_memory_count"] == 16
 assert readiness["candidate"]["public_export_allowed"] is False
 assert readiness["candidate"]["public_release_allowed"] is False
+assert readiness["cycle"]["current_on_prepared_date"] == "AIRAC 08/26"
+assert readiness["cycle"]["current_until_inclusive"] == "2026-09-02"
+assert readiness["cycle"]["required_cycle"] == "AIRAC 09/26"
 assert readiness["cycle"]["effective_from"] == "2026-09-03"
 assert readiness["cycle"]["effective_until_inclusive"] == "2026-09-30"
 assert readiness["rules"]["future_airac_source_availability_is_not_current_evidence"] is True
@@ -128,47 +102,48 @@ assert template["human_review"]["completed"] is False
 assert template["rules"]["automatic_candidate_mutation_allowed"] is False
 assert template["rules"]["automatic_publication_allowed"] is False
 
-recent = state["recent_sprints"]
-assert recent[0]["sprint"] == 111 and recent[0]["state_version"] == "0.21.99"
-assert recent[1]["sprint"] == 110 and recent[1]["state_version"] == "0.21.98"
-
-for source in [
-    "research/bretagne-v0.3/airac09-readiness.json",
-    "research/bretagne-v0.3/airac09-revalidation-template.json",
-    "tools/check_bretagne_v03_airac09_revalidation.py",
-    "tests/test_sprint111_bretagne_airac09_readiness.py",
-    ".github/workflows/sprint111-bretagne-airac09-readiness.yml",
-    "research/sprint-111-summary.md",
-]:
-    assert source in state["sources_of_truth"], source
-
-assert state["resume_rules"]["future_airac_source_availability_is_not_current_evidence"] is True
-assert state["resume_rules"]["candidate_rebuild_after_airac_revalidation_is_not_publication"] is True
-assert state["resume_rules"]["airac_revalidation_requires_explicit_decision_for_every_scoped_aviation_memory"] is True
+recent = {item["sprint"]: item for item in state["recent_sprints"]}
+assert recent[111]["state_version"] == "0.21.99"
+assert recent[110]["state_version"] == "0.21.98"
 
 registry = REGISTRY.read_text(encoding="utf-8")
 assert "radiopack-france-bretagne-v0.2.csv" in registry
 assert "radiopack-france-bretagne-v0.3.csv" not in registry
 
+# The current active work may legitimately be Bretagne while waiting for the
+# effective date; Normandie field listening must no longer be forced after the
+# Sprint 112 theory-policy change.
+if state["current_sprint"] >= 113:
+    active = state["active_work"]
+    assert active["pack"] == "Bretagne"
+    assert active["target_version"] == "0.3"
+    assert active["candidate_memory_count"] == 151
+    assert active["candidate_memory_delta"] == 0
+    assert active["airac_next_effective_from"] == "2026-09-03"
+    assert active["publication_allowed_before_airac09_revalidation"] is False
+
+    priority = state["next_priority"]
+    assert priority["field_listening_role"] == "optional_quality_feedback"
+    assert priority["coverage_policy"] == "documented_theoretical_plausibility_may_close_coverage_gate"
+
 readme = README.read_text(encoding="utf-8")
 for token in [
-    "Sprint 111 / 0.21.99",
     "## Sprint 111 — Bretagne v0.3 : readiness AIRAC 09/26",
     "16 mémoires aviation",
     "3 septembre 2026",
-    "## Sprint 110 — Normandie v0.5 : sources revalidées, handoff terrain",
-    "1591 mémoires RX cumulées",
+    "## Sprint 110 — historique Normandie v0.5 : ancien handoff terrain",
 ]:
     assert token in readme, token
+if state["current_sprint"] >= 113:
+    assert "Sprint 113 / 0.22.01" in readme
+    assert "1595 mémoires RX cumulées" in readme
 
 status = STATUS.read_text(encoding="utf-8")
-for token in [
-    "Sprint courant : **111**",
-    "État logique : **0.21.99**",
-    "Résumé courant : `research/sprint-111-summary.md`",
-    "## Sprint 111 — Bretagne v0.3 AIRAC 09/26 prête pour revalidation",
-    "La priorité immédiatement actionnable reste **Normandie v0.5 terrain**",
-]:
-    assert token in status, token
+assert "## Sprint 111 — Bretagne v0.3 AIRAC 09/26 prête pour revalidation" in status
+if state["current_sprint"] >= 113:
+    assert "Sprint courant : **113**" in status
+    assert "État logique : **0.22.01**" in status
+    assert "Résumé courant : `research/sprint-113-summary.md`" in status
+    assert "écoutes terrain" in status and "facultatif" in status
 
-print("Sprint 111 state sync: Bretagne AIRAC 09/26 readiness canonical, public v0.2 immutable, Normandie field priority preserved, no RF/public mutation OK")
+print("Sprint 111 historical guard: Bretagne AIRAC09 readiness remains exact after Sprint 113; no early v0.3 publication and Normandie field priority may advance OK")

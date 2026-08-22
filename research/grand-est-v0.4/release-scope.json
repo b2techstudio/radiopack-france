@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "status": "internal_candidate_builder_ready",
+  "updated": "2026-08-22",
+  "pack": "Grand Est",
+  "target_version": "0.4",
+  "public_base_version": "0.3",
+  "public_base_memory_count": 84,
+  "public_base_sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+  "scope": {
+    "existing_public_memories_retained": 84,
+    "new_inland_vhf_memories": 13,
+    "candidate_memory_count": 97,
+    "new_inland_vhf_rf_count": 13,
+    "aviation_memory_count_unchanged": 19,
+    "regional_radio_memory_count_unchanged": 41,
+    "marine_block_added": false
+  },
+  "files": {
+    "inland_dataset": "data/regional/grand-est-inland-vhf-rx.json",
+    "inland_validation": "research/grand-est-v0.4/inland-vhf-validation-2026-08-22.json",
+    "builder": "tools/build_grand_est_v04_candidate.py",
+    "candidate_guard": "tests/test_grand_est_v04_candidate.py"
+  },
+  "gates": {
+    "official_inland_sources_reviewed": true,
+    "grand_est_has_no_maritime_coast": true,
+    "inland_vhf_scope_closed": true,
+    "builder_ready": true,
+    "candidate_generated_and_frozen": false,
+    "candidate_sha_frozen": false,
+    "review_checklist_complete": false,
+    "publication_gates_zero_blockers": false,
+    "public_export_allowed": false,
+    "public_mutation_performed": false
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "rf_deduplication": true,
+    "no_artificial_fill": true,
+    "no_unverified_local_channel_assignment": true,
+    "published_v0_3_remains_immutable": true
+  }
+}

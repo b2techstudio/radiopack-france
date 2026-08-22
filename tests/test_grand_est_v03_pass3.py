@@ -12,6 +12,8 @@ backlog = json.loads((V03 / "backlog.json").read_text(encoding="utf-8"))
 scope = json.loads((V03 / "release-scope.json").read_text(encoding="utf-8"))
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 
+# Pass 3 is the immutable radio-scope closure evidence. Later candidate work may advance state,
+# but must not rewrite these historical facts.
 assert pass3["status"] == "radio_scope_closed_non_exhaustive_no_public_mutation"
 assert pass3["public_base"]["version"] == "0.2"
 assert pass3["public_base"]["memory_count"] == 59
@@ -51,17 +53,22 @@ assert backlog["validated_radio_scope"]["regional_unique_rf_count"] == 41
 assert {item.get("call") for item in backlog["excluded_from_analog_scope"] if item.get("call")} >= {"F1ZBU", "F5ZTC", "F5ZWR"}
 assert any("F1ZCV" == item.get("call") for item in backlog["deferred_from_v03_radio_scope"])
 
-assert scope["status"] == "radio_scope_closed_candidate_not_built"
+# Current scope can progress past pass 3, but the public pack must remain untouched.
 assert scope["current_phase"]["radio_pass3_complete"] is True
 assert scope["current_phase"]["radio_scope_closed"] is True
 assert scope["radio_scope"]["final_regional_memory_count"] == 41
-assert scope["working_total_before_candidate_rebuild"]["total"] == 84
-assert scope["working_total_before_candidate_rebuild"]["is_candidate"] is False
-assert scope["next_gate"]["name"] == "deterministic_candidate_build"
 assert scope["current_phase"]["aviation_revalidation_started"] is False
-assert scope["current_phase"]["deterministic_candidate_built"] is False
 assert scope["current_phase"]["publication_ready"] is False
 assert scope["current_phase"]["public_mutation_performed"] is False
+if scope["current_phase"]["deterministic_candidate_built"]:
+    assert scope["candidate"]["memory_count"] == 84
+    assert scope["candidate"]["regional_radio_memory_count"] == 41
+    assert scope["candidate"]["public_export_allowed"] is False
+    assert scope["next_gate"]["name"] == "aviation_current_cycle_revalidation"
+else:
+    assert scope["status"] == "radio_scope_closed_candidate_not_built"
+    assert scope["working_total_before_candidate_rebuild"]["total"] == 84
+    assert scope["next_gate"]["name"] == "deterministic_candidate_build"
 
 for key in ["rx_only", "paired_rx_for_distinct_verified_pairs", "same_rf_frequency_deduplicated", "no_artificial_fill"]:
     assert pass3["rules"][key] is True
@@ -73,4 +80,4 @@ assert pass3["rules"]["public_mutation"] is False
 assert '{ id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19, version: "v0.2" }' in registry
 assert not (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").exists()
 
-print("Sprint 102 Grand Est v0.3 pass3: non-exhaustive radio scope frozen at 41 unique regional RF / 84 working total, candidate=false, public=false OK")
+print("Sprint 102 Grand Est v0.3 pass3 historical radio scope: 41 unique regional RF / 84 total basis preserved across candidate work, public=false OK")

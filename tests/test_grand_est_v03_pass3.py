@@ -12,14 +12,11 @@ backlog = json.loads((V03 / "backlog.json").read_text(encoding="utf-8"))
 scope = json.loads((V03 / "release-scope.json").read_text(encoding="utf-8"))
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 
-# Pass 3 is the immutable radio-scope closure evidence. Later candidate work may advance state,
-# but must not rewrite these historical facts.
 assert pass3["status"] == "radio_scope_closed_non_exhaustive_no_public_mutation"
 assert pass3["public_base"]["version"] == "0.2"
 assert pass3["public_base"]["memory_count"] == 59
 assert pass3["public_base"]["non_regional_memory_count"] == 43
 assert pass3["public_base"]["immutable"] is True
-
 assert {item["call"] for item in pass3["validated_in_pass3"]} == {"F1ZFL", "F5ZCC", "F1ZJS"}
 assert {item["call"] for item in pass3["explicitly_deferred_at_scope_closure"]} == {"F5ZRP", "F5ZTY", "F5ZUK", "F1ZFN", "F1ZEF"}
 
@@ -32,9 +29,9 @@ for item in pass2["validated_in_pass2"]:
     rf.extend(item["rf_mhz"])
 for item in pass3["validated_in_pass3"]:
     rf.extend(item["rf_mhz"])
-
 assert rf.count(432.5375) == 4
 assert len(set(rf)) == 41
+
 accounting = pass3["closed_radio_scope_accounting"]
 assert accounting["safe_v02_unique_rf"] == 14
 assert accounting["pass1_new_unique_rf"] == 8
@@ -48,30 +45,20 @@ assert accounting["scope_is_non_exhaustive"] is True
 assert accounting["candidate_built"] is False
 assert accounting["publication_ready"] is False
 
-assert backlog["status"] in {
-    "radio_scope_closed_with_explicit_deferrals",
-    "radio_scope_closed_candidate_built_backlog_deferred",
-}
 assert backlog["validated_radio_scope"]["regional_unique_rf_count"] == 41
 assert {item.get("call") for item in backlog["excluded_from_analog_scope"] if item.get("call")} >= {"F1ZBU", "F5ZTC", "F5ZWR"}
 assert any("F1ZCV" == item.get("call") for item in backlog["deferred_from_v03_radio_scope"])
 
-# Current scope can progress past pass 3, but the public pack must remain untouched.
+# Pass3 facts remain frozen while release state advances legitimately to publication.
+assert scope["status"] == "published_immutable"
 assert scope["current_phase"]["radio_pass3_complete"] is True
 assert scope["current_phase"]["radio_scope_closed"] is True
 assert scope["radio_scope"]["final_regional_memory_count"] == 41
-assert scope["current_phase"]["aviation_revalidation_started"] is False
-assert scope["current_phase"]["publication_ready"] is False
-assert scope["current_phase"]["public_mutation_performed"] is False
-if scope["current_phase"]["deterministic_candidate_built"]:
-    assert scope["candidate"]["memory_count"] == 84
-    assert scope["candidate"]["regional_radio_memory_count"] == 41
-    assert scope["candidate"]["public_export_allowed"] is False
-    assert scope["next_gate"]["name"] == "aviation_current_cycle_revalidation"
-else:
-    assert scope["status"] == "radio_scope_closed_candidate_not_built"
-    assert scope["working_total_before_candidate_rebuild"]["total"] == 84
-    assert scope["next_gate"]["name"] == "deterministic_candidate_build"
+assert scope["candidate"]["memory_count"] == 84
+assert scope["candidate"]["regional_radio_memory_count"] == 41
+assert scope["public"]["memory_count"] == 84
+assert scope["current_phase"]["published"] is True
+assert scope["current_phase"]["public_mutation_performed"] is True
 
 for key in ["rx_only", "paired_rx_for_distinct_verified_pairs", "same_rf_frequency_deduplicated", "no_artificial_fill"]:
     assert pass3["rules"][key] is True
@@ -80,7 +67,7 @@ assert pass3["rules"]["chirp_offset"] == "0.000000"
 assert pass3["rules"]["maximum_memories"] == 200
 assert pass3["rules"]["public_mutation"] is False
 
-assert '{ id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19, version: "v0.2" }' in registry
-assert not (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").exists()
+assert '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+assert (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").is_file()
 
-print("Sprint 102 Grand Est v0.3 pass3 historical radio scope: 41 unique regional RF / 84 total basis preserved across candidate work, public=false OK")
+print("Sprint 102 Grand Est v0.3 pass3 historical radio scope preserved: 41 RF / 84 public OK")

@@ -14,6 +14,7 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 - **Bretagne v0.2** — 151 mémoires RX ;
 - **Hauts-de-France v0.2** — 144 mémoires RX ;
 - **Île-de-France v0.3** — 57 mémoires RX, dont 18 aviation ;
+- **Île-de-France v0.2** — 58 mémoires RX, historique immuable ;
 - **Grand Est v0.2** — 59 mémoires RX ;
 - **Centre-Val de Loire v0.3** — 51 mémoires RX, dont 7 aviation ;
 - **Pays de la Loire v0.2** — 130 mémoires RX ;

@@ -69,8 +69,9 @@ normandie_public = ROOT / "website/public/downloads/normandie/radiopack-france-n
 assert normandie_public.is_file()
 assert len(normandie_public.read_text(encoding="utf-8").splitlines()) == 140
 
-# Historical evidence is authoritative; the compact current resume only carries the
-# current gate summary needed to ensure later releases did not silently promote it.
+# Historical evidence is authoritative. The current resume preserves the old
+# Sprint 110 gate snapshot while the rule name has been generalized to cover
+# both unresolved frequency and unresolved mode.
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
 assert resume["current_sprint"] >= evidence["sprint"]
 current = resume["normandie_v0_5_latest_refresh"]
@@ -79,6 +80,10 @@ assert current["candidate_memory_delta"] == 0
 assert current["known_potential_ceiling_excluding_f6zes"] == 147
 assert set(current["field_required"]) == {"R3_F1ZBX", "F5ZHA"}
 assert set(current["source_watch"]) == {"F1ZOV", "F6ZES"}
-assert resume["resume_rules"]["unresolved_frequency_must_not_be_guessed"] is True
+rules = resume["resume_rules"]
+assert rules.get("unresolved_frequency_or_mode_must_not_be_guessed", rules.get("unresolved_frequency_must_not_be_guessed")) is True
+if resume["current_sprint"] >= 113:
+    assert rules["theoretical_coverage_may_close_coverage_gate_when_source_and_operational_status_are_documented"] is True
+    assert rules["field_listening_is_optional_quality_feedback_for_coverage"] is True
 
-print("Sprint 63 blocker revalidation: historical evidence remains guarded after later sprints; no gate cleared, F5ZHA/F1ZOV/F6ZES conclusions preserved, public packs unchanged, OK")
+print("Sprint 63 blocker revalidation: historical evidence remains guarded after later sprints; no source/status inference, current theory policy may separately govern coverage, OK")

@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.0",
+  "status": "national_inland_vhf_audit_pass1",
+  "reviewed_on": "2026-08-22",
+  "scope": "All public RadioPack France packs, with inland-navigation VHF treated separately from maritime VHF and lake-specific radio.",
+  "policy": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "rf_deduplication_required": true,
+    "do_not_duplicate_inland_rf_when_same_frequency_is_already_present_in_marine_block": true,
+    "channel_10_is_primary_boat_to_boat_call_channel_in_french_inland_navigation": true,
+    "local_lock_port_and_information_channels_require_current_official_assignment_before_promotion": true,
+    "maritime_channel_16_must_not_be_assumed_to_be_the_inland_watch_channel": true
+  },
+  "national_sources": [
+    {
+      "authority": "ANFR",
+      "title": "Manuel CRR fluvial - version 6, mai 2025",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "findings": [
+        "Voie 10 is the first boat-to-boat channel.",
+        "Boat-to-boat work channels include 6, 8, 13, 72 and 77.",
+        "Channel 6 is prohibited for use on the Rhine between PK 150 and 350.",
+        "Inland navigation uses dedicated information-nautical and port-authority channels depending on location."
+      ]
+    },
+    {
+      "authority": "VNF",
+      "title": "Le réseau navigable",
+      "url": "https://www.vnf.fr/vnf/accueil/qui-sommes-nous-vnf/2-reseaux/",
+      "finding": "France has a large connected inland-waterway network; VNF manages 6,700 km of it."
+    }
+  ],
+  "packs": [
+    {
+      "pack": "Normandie",
+      "current_version": "0.4",
+      "inland_navigation": true,
+      "evidence": "Seine/Basse-Seine navigation uses VHF, including channel 10 for boat-to-boat announcements; lower Seine also interfaces with Rouen/Seine maritime traffic.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "rf_likely_already_covered_by_marine_block_semantic_scope_audit_required",
+      "next_action": "Verify the published Normandie marine block contains all Seine inland RF used by current RPP/VNF/HAROPA assignments; do not duplicate identical RF."
+    },
+    {
+      "pack": "Bretagne",
+      "current_version": "0.2",
+      "inland_navigation": true,
+      "evidence": "Navigable canals and rivers exist, but this pass has not yet established a current official region-wide VHF assignment requiring extra RF beyond the existing marine block.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "navigation_present_current_vhf_assignment_research_required",
+      "next_action": "Check current canal/Vilaine/Rance/Nantes-Brest operating documents; if a used inland channel is already in the marine block, record coverage without duplicating it."
+    },
+    {
+      "pack": "Hauts-de-France",
+      "current_version": "0.2",
+      "inland_navigation": true,
+      "evidence": "VNF Nord-Pas-de-Calais changed large-gauge lock VHF allocation from 2 to 5 channels effective 2026-07-28.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "official_inland_vhf_confirmed_current_assignment_audit_required",
+      "next_action": "Capture the five current lock/PCC channels from the VNF 2026 map and verify all RF are already present in the marine block."
+    },
+    {
+      "pack": "Île-de-France",
+      "current_version": "0.3",
+      "inland_navigation": true,
+      "evidence": "VHF watch on channel 10 is mandatory in Paris/Val-de-Marne under the current Seine-Yonne rules; VNF PCC locks also expose VHF call channels.",
+      "marine_block_expected": false,
+      "rf_delta_expected": "positive",
+      "status": "inland_vhf_missing_from_current_pack",
+      "next_action": "Prepare Île-de-France v0.4 inland-VHF scope from current Seine/Marne/Oise lock and navigation assignments."
+    },
+    {
+      "pack": "Grand Est",
+      "current_version": "0.3",
+      "inland_navigation": true,
+      "evidence": "CCNR 2026 documents active VHF assignments on the French Rhine and Moselle; ANFR documents the national inland boat-to-boat channels.",
+      "marine_block_expected": false,
+      "rf_delta_expected": 13,
+      "status": "grand_est_v0_4_scope_ready",
+      "next_action": "Build Grand Est v0.4 with 13 deduplicated inland-VHF RX memories."
+    },
+    {
+      "pack": "Centre-Val de Loire",
+      "current_version": "0.3",
+      "inland_navigation": true,
+      "evidence": "VNF operates navigable canals including Briare/Loing and the canal latéral à la Loire, but current specific VHF assignments have not yet been proven in this pass.",
+      "marine_block_expected": false,
+      "rf_delta_expected": "unknown_pending_assignment_review",
+      "status": "navigation_confirmed_vhf_scope_not_yet_closed",
+      "next_action": "Review current RPP/VNF operating documents before adding any RF."
+    },
+    {
+      "pack": "Pays de la Loire",
+      "current_version": "0.2",
+      "inland_navigation": true,
+      "evidence": "VNF states professional vessels on the Loire must maintain constant VHF watch on channel 10; other users are advised to do the same.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "official_inland_vhf_confirmed_rf_already_expected_in_marine_block",
+      "next_action": "Verify channel 10 and any local Loire/estuary working channels are already represented; add provenance, not duplicate RF."
+    },
+    {
+      "pack": "Bourgogne-Franche-Comté",
+      "current_version": "0.3",
+      "inland_navigation": true,
+      "evidence": "VNF Saône guide assigns boat-to-boat channel 10, Lyon transition channel 18, safety multidiffusion channel 12 and lock channels 20/22.",
+      "marine_block_expected": false,
+      "rf_delta_expected": "positive",
+      "status": "inland_vhf_missing_from_current_pack",
+      "next_action": "Prepare Bourgogne-Franche-Comté v0.4 with the current Saône inland VHF set, deduplicated by RF."
+    },
+    {
+      "pack": "Nouvelle-Aquitaine",
+      "current_version": "0.2",
+      "inland_navigation": true,
+      "evidence": "VNF documents navigable Garonne access to Bordeaux and requires contact with the port on VHF channel 12 for entry into the Grand Port Maritime de Bordeaux.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "official_inland_vhf_confirmed_rf_already_expected_in_marine_block",
+      "next_action": "Audit Garonne/Canal des Deux Mers working channels and record existing RF coverage without duplication."
+    },
+    {
+      "pack": "Auvergne-Rhône-Alpes",
+      "current_version": "0.2",
+      "inland_navigation": true,
+      "evidence": "VNF Rhône/Saône operating documents use VHF channel 10 for boat-to-boat and channels 19/20/22 for locks; Saône also uses channel 12 and 18 in defined sectors.",
+      "marine_block_expected": false,
+      "rf_delta_expected": "positive",
+      "status": "inland_vhf_missing_from_current_pack",
+      "next_action": "Prepare Auvergne-Rhône-Alpes v0.3 inland-VHF scope for Rhône/Saône."
+    },
+    {
+      "pack": "Occitanie",
+      "current_version": "0.2",
+      "inland_navigation": true,
+      "evidence": "VNF Rhône-Saône bulletins document VHF use on the Canal du Rhône à Sète, including channels 10 and 18.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "official_inland_vhf_confirmed_rf_already_expected_in_marine_block",
+      "next_action": "Audit Canal du Rhône à Sète and Canal du Midi assignments; avoid duplicate RF already in marine block."
+    },
+    {
+      "pack": "Provence-Alpes-Côte d’Azur",
+      "current_version": "0.2",
+      "inland_navigation": true,
+      "evidence": "Lower Rhône/Barcarin/Port-Saint-Louis navigation uses inland VHF, including channel 10 and lock channels 19/20/22 depending on sector.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "official_inland_vhf_confirmed_rf_already_expected_in_marine_block",
+      "next_action": "Verify lower-Rhône inland assignments are all RF-covered by the marine block and document dual maritime/inland use."
+    },
+    {
+      "pack": "Corse",
+      "current_version": "0.2",
+      "inland_navigation": false,
+      "evidence": "No significant VNF inland-navigation network requiring a separate fluvial VHF block was identified; the pack is already coastal/maritime.",
+      "marine_block_expected": true,
+      "rf_delta_expected": 0,
+      "status": "no_separate_inland_vhf_scope_identified",
+      "next_action": "No fluvial addition; keep maritime scope only unless a specific inland-waterway source is identified."
+    },
+    {
+      "pack": "Annecy-Alpes-Leman",
+      "current_version": "0.4",
+      "inland_navigation": "lake_specific_not_fluvial",
+      "evidence": "This territorial pack is dominated by lacustrine rather than fluvial navigation.",
+      "marine_block_expected": false,
+      "rf_delta_expected": "not_assessed_in_this_fluvial_audit",
+      "status": "separate_lake_radio_audit",
+      "next_action": "Keep lake-specific radio review separate from the national fluvial-VHF rollout."
+    }
+  ],
+  "priority_order": [
+    "Grand Est v0.4",
+    "Île-de-France v0.4",
+    "Bourgogne-Franche-Comté v0.4",
+    "Auvergne-Rhône-Alpes v0.3",
+    "Hauts-de-France current 2026 lock-channel audit",
+    "Centre-Val de Loire current-assignment research",
+    "Remaining coastal-pack provenance audits"
+  ]
+}

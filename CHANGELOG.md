@@ -1,5 +1,70 @@
 # Changelog
 
+## 0.22.01 - 2026-08-22
+
+**Sprint 113** — Normandie v0.5 publiée et figée à **146 mémoires RX**.
+
+- base v0.4 / 142 RX conservée historique et immuable ;
+- +4 mémoires à couverture théorique documentée : R3/F1ZBX 145.075 / 145.675 MHz et F5ZHA 145.4675 / 432.575 MHz ;
+- les quatre mémoires sont explicitement décrites comme théoriques, jamais comme réception mesurée ou garantie ;
+- écoutes terrain conservées comme retour qualité facultatif et non gate de publication ;
+- F1ZOV reste différé pour maintenance opérateur ; F6ZES reste différé faute de fréquence/mode résolus ;
+- candidat et CSV public byte-identiques ;
+- SHA-256 : `1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59` ;
+- publication gates : **0 blocker** ;
+- état projet synchronisé sur Sprint 113 / 0.22.01.
+
+## 0.22.00 - 2026-08-22
+
+**Sprint 112** — Normandie v0.5 passe à une politique de couverture théorique documentée et son candidat est figé à **146 RX / +4**.
+
+- suppression du caractère bloquant des écoutes terrain pour la couverture ;
+- la théorie ne remplace ni une fréquence/mode manquant ni un statut opérationnel courant ;
+- modèle de plausibilité : distance, géométrie simplifiée 4/3 Terre et FSPL ;
+- SHA candidat figé avant publication : `1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59`.
+
+## 0.21.99 - 2026-08-22
+
+**Sprint 111** — Bretagne v0.3 préparée pour la revalidation AIRAC 09/26.
+
+- matrice de 16 mémoires aviation préparée ;
+- AIRAC 09/26 observé disponible mais non courant avant le **3 septembre 2026** ;
+- aucun rebuild ni publication avant l'entrée en vigueur et la revue primaire/humaine ;
+- candidat reste 151 RX / delta 0.
+
+## 0.21.98 - 2026-08-22
+
+**Sprint 110** — revalidation historique Normandie v0.5 à **142 RX / delta 0** avec handoff terrain.
+
+- R3/F1ZBX et F5ZHA restaient alors soumis à des sessions terrain ;
+- F1ZOV maintenance, F6ZES fréquence/mode non résolus ;
+- ce cadre a été explicitement remplacé au Sprint 112 par la politique théorique, sans réécrire l'évidence Sprint 110.
+
+## 0.21.97 - 2026-08-22
+
+**Sprint 109** — Auvergne-Rhône-Alpes v0.3 publiée et figée à **71 RX**.
+
+- base v0.2 / 62 RX immuable ;
+- +9 mémoires VHF navigation intérieure ;
+- paired RX canaux 19/20/22 ; canal 18 côté bateau uniquement ;
+- SHA candidat/public : `b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e`.
+
+## 0.21.96 - 2026-08-22
+
+**Sprint 108** — candidat Auvergne-Rhône-Alpes v0.3 figé à **71 RX / +9**, non public avant promotion.
+
+## 0.21.95 - 2026-08-22
+
+**Sprint 107** — Bourgogne-Franche-Comté v0.4 publiée et figée à **61 RX**.
+
+- base v0.3 / 54 RX immuable ;
+- +7 mémoires VHF navigation intérieure ;
+- SHA candidat/public : `02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72`.
+
+## 0.21.94 - 2026-08-22
+
+**Sprint 106** — candidat Bourgogne-Franche-Comté v0.4 figé à **61 RX / +7**, non public avant promotion.
+
 ## 0.21.93 - 2026-08-22
 
 **Sprint 105** — Île-de-France v0.4 publiée et figée à **64 mémoires RX**.

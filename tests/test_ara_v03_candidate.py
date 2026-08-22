@@ -21,6 +21,8 @@ from tools.build_ara_v03_candidate import (
     build,
 )
 
+CANDIDATE_FREEZE = ROOT / "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json"
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--dist", type=Path, default=REPO_ROOT / "website" / "dist")
 args = parser.parse_args()
@@ -29,6 +31,7 @@ base_csv = args.dist / "downloads" / "auvergne-rhone-alpes" / "radiopack-france-
 candidate, manifest = build(ROOT, base_csv)
 rows = list(csv.DictReader(io.StringIO(candidate.decode("utf-8"), newline="")))
 base_rows = list(csv.DictReader(io.StringIO(base_csv.read_text(encoding="utf-8"), newline="")))
+candidate_sha = hashlib.sha256(candidate).hexdigest()
 
 assert manifest["status"] == "internal_candidate_reproducible"
 assert manifest["pack"] == "Auvergne-Rhône-Alpes"
@@ -39,13 +42,38 @@ assert manifest["published_base_sha256"] == EXPECTED_BASE_SHA
 assert manifest["candidate_memory_count"] == EXPECTED_CANDIDATE_COUNT == 71
 assert manifest["candidate_inland_vhf_memory_count"] == EXPECTED_INLAND_COUNT == 9
 assert manifest["candidate_memory_delta"] == 9
-assert manifest["candidate_sha256"] == hashlib.sha256(candidate).hexdigest()
+assert manifest["candidate_sha256"] == candidate_sha
 assert manifest["public_export_allowed"] is False
 assert manifest["published"] is False
 assert manifest["immutable"] is False
 assert manifest["validation"]["public_base_sha_matches_frozen_record"] is True
 assert manifest["validation"]["base_rows_preserved"] is True
 assert manifest["validation"]["channel_18_boat_side_only"] is True
+
+assert CANDIDATE_FREEZE.is_file()
+freeze = json.loads(CANDIDATE_FREEZE.read_text(encoding="utf-8"))
+assert freeze["status"] == "internal_candidate_frozen_not_public"
+assert freeze["sprint"] == 108
+assert freeze["pack"] == "Auvergne-Rhône-Alpes"
+assert freeze["target_version"] == "0.3"
+assert freeze["public_base_version"] == "0.2"
+assert freeze["public_base_memory_count"] == EXPECTED_BASE_COUNT
+assert freeze["public_base_sha256"] == EXPECTED_BASE_SHA
+assert freeze["candidate_memory_count"] == EXPECTED_CANDIDATE_COUNT
+assert freeze["candidate_inland_vhf_memory_count"] == EXPECTED_INLAND_COUNT
+assert freeze["candidate_memory_delta"] == EXPECTED_INLAND_COUNT
+assert freeze["candidate_sha256"] == "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e"
+assert freeze["candidate_sha256"] == candidate_sha
+assert freeze["freeze_basis"]["deterministic_rebuild_passed"] is True
+assert freeze["freeze_basis"]["public_v0_2_sha_verified"] is True
+assert freeze["freeze_basis"]["base_62_rows_preserved"] is True
+assert freeze["freeze_basis"]["rx_only"] is True
+assert freeze["freeze_basis"]["rf_deduplicated"] is True
+assert freeze["freeze_basis"]["channel_18_boat_side_only"] is True
+assert freeze["freeze_basis"]["marine_channel_16_excluded"] is True
+assert freeze["public_export_allowed"] is False
+assert freeze["public_release_allowed"] is False
+assert freeze["published"] is False
 
 assert len(rows) == 71
 assert all(row["Duplex"] == "off" for row in rows)
@@ -83,6 +111,6 @@ assert validation["gates"]["public_export_allowed"] is False
 assert validation["gates"]["public_release_allowed"] is False
 
 print(
-    "ARA v0.3 internal candidate: "
-    f"71 RX / +9 inland VHF / sha256={manifest['candidate_sha256']} / public=false"
+    "ARA v0.3 frozen internal candidate: "
+    f"71 RX / +9 inland VHF / sha256={candidate_sha} / public=false"
 )

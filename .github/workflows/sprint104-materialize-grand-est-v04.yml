@@ -1,4 +1,4 @@
-name: Sprint 104 Materialize Grand Est v0.4
+name: Sprint 104 Finalize Grand Est v0.4 State
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  materialize:
+  finalize:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout publication branch
@@ -22,18 +22,168 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.13"
-      - name: Build canonical candidate
-        run: python tools/build_grand_est_v04_candidate.py --write --check
-      - name: Materialize exact public bytes
+      - name: Finalize state and documentation
         run: |
-          mkdir -p website/public/downloads/grand-est
-          cp research/grand-est-v0.4/generated/release-candidate/radiopack-france-grand-est-v0.4-candidate.csv \
-             website/public/downloads/grand-est/radiopack-france-grand-est-v0.4.csv
-      - name: Commit canonical candidate and public CSV
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          sha = "ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d"
+          base_sha = "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720"
+
+          state_path = Path("research/project-resume-state.json")
+          state = json.loads(state_path.read_text(encoding="utf-8"))
+          state["updated"] = "2026-08-22"
+          state["current_sprint"] = 104
+          state["state_version"] = "0.21.92"
+          state["public_packs"]["grand_est"] = {
+              "version": "0.4",
+              "memory_count": 97,
+              "immutable": True,
+              "previous_immutable_version": "0.3",
+              "previous_memory_count": 84,
+              "publication_record": "research/grand-est-v0.4/publication-record.json",
+              "public_csv_sha256": sha,
+          }
+          state["active_work"] = {
+              "pack": "Grand Est",
+              "target_version": "0.4",
+              "status": "published_immutable",
+              "public_base_version": "0.3",
+              "public_base_memory_count": 84,
+              "public_base_sha256": base_sha,
+              "candidate_memory_count": 97,
+              "candidate_aviation_memory_count": 19,
+              "candidate_regional_radio_memory_count": 41,
+              "candidate_inland_vhf_memory_count": 13,
+              "candidate_memory_delta": 13,
+              "candidate_sha256": sha,
+              "public_csv_sha256": sha,
+              "inland_scope_closed": True,
+              "inland_rf_deduplicated": True,
+              "aviation_memory_delta": 0,
+              "aviation_inherited_unchanged_from_v0_3": True,
+              "aviation_new_field_by_field_revalidation_claimed": False,
+              "deterministic_candidate_built": True,
+              "review_checklist_complete": True,
+              "publication_gates_zero_blockers": True,
+              "publication_record_frozen": True,
+              "publication_ready": True,
+              "published": True,
+              "published_version_is_immutable": True,
+              "public_mutation_performed": True,
+              "inland_validation": "research/grand-est-v0.4/inland-vhf-validation-2026-08-22.json",
+              "aviation_validation": "research/grand-est-v0.4/aviation-airac08-publication-2026-08-22.json",
+              "candidate_manifest": "research/grand-est-v0.4/generated/release-candidate/candidate-manifest.json",
+              "candidate_csv": "research/grand-est-v0.4/generated/release-candidate/radiopack-france-grand-est-v0.4-candidate.csv",
+              "public_csv": "website/public/downloads/grand-est/radiopack-france-grand-est-v0.4.csv",
+              "builder": "tools/build_grand_est_v04_candidate.py",
+              "review_checklist": "research/grand-est-v0.4/review-checklist.json",
+              "publication_gates": "research/grand-est-v0.4/publication-gates.json",
+              "publication_record": "research/grand-est-v0.4/publication-record.json",
+              "release_scope": "research/grand-est-v0.4/release-scope.json",
+              "published_on": "2026-08-22",
+              "airac08_publication_allowed_through_inclusive": "2026-09-02",
+              "airac09_revalidation_required_on_or_after": "2026-09-03",
+          }
+          state["latest_sprint103_inland_vhf_audit"] = {
+              "sprint": 103,
+              "completed_on": "2026-08-22",
+              "status": "national_inland_vhf_audit_completed_no_public_mutation",
+              "grand_est_candidate_memory_count": 97,
+              "grand_est_verified_inland_vhf_delta": 13,
+              "audit_pass2": "research/sprint-103-inland-vhf-audit-pass2.json",
+              "summary": "research/sprint-103-summary.md",
+              "public_csv_mutation": False,
+          }
+          state["latest_sprint104_grand_est_v04_publication"] = {
+              "sprint": 104,
+              "state_version": "0.21.92",
+              "completed_on": "2026-08-22",
+              "status": "grand_est_v04_published_immutable",
+              "memory_count": 97,
+              "previous_public_version": "0.3",
+              "previous_memory_count": 84,
+              "aviation_memory_count": 19,
+              "aviation_memory_delta": 0,
+              "regional_radio_memory_count": 41,
+              "inland_vhf_memory_count": 13,
+              "public_csv_sha256": sha,
+              "publication_record": "research/grand-est-v0.4/publication-record.json",
+              "summary": "research/sprint-104-summary.md",
+          }
+          additions = [
+              "research/sprint-103-inland-vhf-audit.json",
+              "research/sprint-103-inland-vhf-audit-pass2.json",
+              "research/sprint-103-summary.md",
+              "data/regional/grand-est-inland-vhf-rx.json",
+              "research/grand-est-v0.4/inland-vhf-validation-2026-08-22.json",
+              "research/grand-est-v0.4/release-scope.json",
+              "research/grand-est-v0.4/aviation-airac08-publication-2026-08-22.json",
+              "research/grand-est-v0.4/review-checklist.json",
+              "research/grand-est-v0.4/publication-gates.json",
+              "research/grand-est-v0.4/publication-record.json",
+              "research/grand-est-v0.4/generated/release-candidate/candidate-manifest.json",
+              "research/grand-est-v0.4/generated/release-candidate/radiopack-france-grand-est-v0.4-candidate.csv",
+              "website/public/downloads/grand-est/radiopack-france-grand-est-v0.4.csv",
+              "tools/build_grand_est_v04_candidate.py",
+              "tests/test_grand_est_v04_candidate.py",
+              "tests/test_grand_est_v04_publication.py",
+              "tests/test_sprint103_inland_vhf_audit.py",
+              "tests/test_sprint104_state_sync.py",
+              "research/sprint-104-summary.md",
+          ]
+          for item in additions:
+              if item not in state["sources_of_truth"]:
+                  state["sources_of_truth"].append(item)
+          state["recent_sprints"] = [
+              {"sprint":104,"state_version":"0.21.92","summary":"Grand Est v0.4 published immutable at 97 RX by adding 13 verified inland-navigation VHF memories to immutable v0.3; aviation 19 and regional radio 41 remain unchanged; candidate/public SHA-256 ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d.","summary_file":"research/sprint-104-summary.md"},
+              {"sprint":103,"state_version":"0.21.91","summary":"National inland-navigation VHF audit completed without public mutation; coastal packs already RF-cover shared channels, while Grand Est, IDF, BFC and ARA require verified inland deltas.","summary_file":"research/sprint-103-summary.md"},
+          ] + [entry for entry in state["recent_sprints"] if entry.get("sprint") not in {103,104}][:6]
+          state["resume_rules"]["inland_navigation_vhf_is_distinct_from_marine_vhf"] = True
+          state["resume_rules"]["shared_inland_marine_rf_must_not_be_duplicated"] = True
+          state["resume_rules"]["undocumented_local_navigation_channel_must_not_be_guessed"] = True
+          state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          summary = """# Sprint 104 — Grand Est v0.4 publiée\n\nLe Sprint 104 / 0.21.92 publie **Grand Est v0.4** à **97 mémoires RX**. La v0.3 de 84 RX et la v0.2 de 59 RX restent historiques et immuables.\n\n## Delta\n\n- +13 mémoires VHF de navigation intérieure ;\n- 19 aviation inchangées, delta 0 ;\n- 41 radio régionales inchangées, delta 0 ;\n- aucune VHF maritime canal 16 ajoutée ;\n- aucune RF dupliquée.\n\nLe bloc fluvial couvre les voies bateau-bateau 6, 8, 10, 13, 72 et 77, la voie 11 du port de Strasbourg, et les voies 19, 20 et 22 en paired RX quand les deux côtés bateau/station sont vérifiés. La restriction de la voie 6 sur le Rhin PK 150–350 est conservée dans le commentaire.\n\nSHA-256 candidat/public : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d`.\n\nAIRAC 08/26 reste applicable jusqu'au 2 septembre 2026 inclus ; toute nouvelle révision aviation à partir du 3 septembre exige AIRAC 09/26.\n"""
+          Path("research/sprint-104-summary.md").write_text(summary, encoding="utf-8")
+
+          readme_path = Path("README.md")
+          readme = readme_path.read_text(encoding="utf-8")
+          readme = re.sub(r"\*\*État courant :.*?\*\*\n", "**État courant : Sprint 104 / 0.21.92 — Grand Est v0.4 est publiée et immuable à 97 RX, dont 19 aviation, 41 radio régionales et 13 VHF de navigation intérieure.**\n", readme, count=1)
+          readme = re.sub(r"- \*\*Grand Est v0\.2\*\* — 59 mémoires RX ;", "- **Grand Est v0.4** — 97 mémoires RX, dont 19 aviation et 13 VHF navigation intérieure ;\n- **Grand Est v0.3** — 84 mémoires RX, historique immuable ;\n- **Grand Est v0.2** — 59 mémoires RX, historique immuable ;", readme, count=1)
+          readme = re.sub(r"Les variantes par défaut représentent \*\*\d+ mémoires RX cumulées\*\*", "Les variantes par défaut représentent **1568 mémoires RX cumulées**", readme, count=1)
+          marker = "## Sprint 101 — Île-de-France v0.3 publiée"
+          insertion = """## Sprint 104 — Grand Est v0.4 publiée\n\nGrand Est v0.4 est publiée à **97 RX** : 84 mémoires héritées byte-identiques de v0.3 et **13 mémoires VHF de navigation intérieure** validées. Aviation : **19, delta 0** ; radio régionale : **41, delta 0**. SHA public : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d`.\n\n## Sprint 103 — audit VHF navigation intérieure\n\nL'audit national distingue désormais VHF maritime et VHF de navigation intérieure. Les packs côtiers ne dupliquent pas les RF déjà présentes ; la file non côtière vérifiée est Grand Est, Île-de-France, Bourgogne-Franche-Comté et Auvergne-Rhône-Alpes.\n\n## Sprint 102 — Grand Est v0.3 publiée\n\nGrand Est v0.3 a été publiée à **84 RX / 19 aviation / 41 radio régionales**, SHA `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`. Elle devient historique et immuable avec la publication v0.4.\n\n"""
+          if "## Sprint 104 — Grand Est v0.4 publiée" not in readme:
+              readme = readme.replace(marker, insertion + marker)
+          readme = readme.replace("Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé.", "Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé. La VHF de navigation intérieure est auditée séparément ; une RF déjà présente via le bloc maritime n'est jamais dupliquée.")
+          readme_path.write_text(readme, encoding="utf-8")
+
+          status_path = Path("PROJECT_STATUS.md")
+          status = status_path.read_text(encoding="utf-8")
+          status = re.sub(r"Sprint courant : \*\*\d+\*\*", "Sprint courant : **104**", status, count=1)
+          status = re.sub(r"État logique : \*\*[^*]+\*\*", "État logique : **0.21.92**", status, count=1)
+          status = re.sub(r"Résumé courant : `[^`]+`", "Résumé courant : `research/sprint-104-summary.md`", status, count=1)
+          status = status.replace("- Grand Est v0.2 : **59 mémoires RX**, publiée et immuable.", "- Grand Est v0.4 : **97 mémoires RX**, dont **19 aviation** et **13 VHF navigation intérieure**, publiée et immuable ; v0.3 **84 RX** et v0.2 **59 RX** historiques immuables.")
+          marker = "## Sprint 101 — Île-de-France v0.3 publiée"
+          insertion = """## Sprint 104 — Grand Est v0.4 publiée\n\nGrand Est v0.4 est publiée et figée à **97 RX** : **19 aviation**, **41 radio régionales** et **13 VHF navigation intérieure**. SHA public : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d`. Les v0.3/84 et v0.2/59 restent historiques et immuables.\n\n## Sprint 103 — audit VHF navigation intérieure\n\nAudit national terminé sans mutation publique : les packs côtiers couvrent déjà les RF partagées via le bloc maritime ; les deltas non côtiers vérifiés sont Grand Est +13, IDF au moins +1, BFC au moins +7 et ARA au moins +9.\n\n## Sprint 102 — Grand Est v0.3 publiée\n\nGrand Est v0.3 a été publiée à **84 RX / 19 aviation / 41 radio régionales** avec SHA `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`; elle est désormais historique.\n\n"""
+          if "## Sprint 104 — Grand Est v0.4 publiée" not in status:
+              status = status.replace(marker, insertion + marker)
+          status_path.write_text(status, encoding="utf-8")
+
+          changelog_path = Path("CHANGELOG.md")
+          changelog = changelog_path.read_text(encoding="utf-8")
+          entry = """## 0.21.92 - 2026-08-22\n\n**Sprint 104** — Grand Est v0.4 publiée et figée à **97 mémoires RX** après le Sprint 103 d'audit VHF navigation intérieure.\n\n- +13 mémoires VHF fluviales validées ;\n- 19 aviation inchangées, delta 0 ;\n- 41 radio régionales inchangées, delta 0 ;\n- candidat/public byte-identiques ;\n- SHA-256 : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d` ;\n- v0.3/84 et v0.2/59 conservées immuables ;\n- audit national : aucune duplication des RF fluviales déjà présentes dans les blocs VHF maritimes côtiers.\n\n## 0.21.91 - 2026-08-22\n\n**Sprint 102** — Grand Est v0.3 publiée et figée à **84 mémoires RX**, dont 19 aviation et 41 radio régionales. SHA-256 : `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`.\n\n"""
+          if "## 0.21.92 - 2026-08-22" not in changelog:
+              changelog = changelog.replace("# Changelog\n\n", "# Changelog\n\n" + entry, 1)
+          changelog_path.write_text(changelog, encoding="utf-8")
+          PY
+      - name: Commit finalized state
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/grand-est-v0.4/generated/release-candidate/radiopack-france-grand-est-v0.4-candidate.csv
-          git add website/public/downloads/grand-est/radiopack-france-grand-est-v0.4.csv
-          git diff --cached --quiet || git commit -m "Sprint 104: materialize Grand Est v0.4 candidate/public"
+          git add research/project-resume-state.json research/sprint-104-summary.md README.md PROJECT_STATUS.md CHANGELOG.md
+          git diff --cached --quiet || git commit -m "Sprint 104: finalize Grand Est v0.4 project state"
           git push origin HEAD:${GITHUB_REF_NAME}

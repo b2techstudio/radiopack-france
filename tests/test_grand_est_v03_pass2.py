@@ -53,14 +53,17 @@ assert pass2["rules"]["chirp_offset"] == "0.000000"
 assert pass2["rules"]["public_mutation"] is False
 assert pass2["rules"]["candidate_built"] is False
 
-# Pass2 stays historical while the final state may be published.
+# Pass2 stays historical while the final state may advance beyond v0.3.
 assert scope["status"] == "published_immutable"
 assert scope["current_phase"]["radio_pass2_complete"] is True
 assert scope["current_phase"]["published"] is True
 assert scope["public"]["memory_count"] == 84
 assert scope["public"]["byte_identical_to_candidate"] is True
 
-assert '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+assert (
+    '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+    or '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }' in registry
+)
 assert (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").is_file()
 
-print("Sprint 102 Grand Est v0.3 pass2 historical checkpoint preserved after publication: 35 RF checkpoint -> 84 public OK")
+print("Sprint 102 Grand Est v0.3 pass2 historical checkpoint preserved: 35 RF checkpoint -> v0.3/84 evidence intact")

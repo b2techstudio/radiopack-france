@@ -1,18 +1,20 @@
 # Changelog
 
-## 0.21.90 - 2026-08-21
+## 0.21.90 - 2026-08-22
 
-**Sprint 101** — ouverture officielle du checkpoint de recherche Île-de-France v0.3.
+**Sprint 101** — Île-de-France v0.3 publiée et figée à **57 mémoires RX**.
 
-- base publique **Île-de-France v0.2 / 58 RX / 18 aviation** conservée immuable ;
-- F5ZMR Provins et F5ZSY Issy-les-Moulineaux promus comme nouveaux candidats de travail fortement étayés ;
-- F5ZAD et F1ZUX non reconduits automatiquement dans le travail v0.3 ;
-- F1ZSY, F5ZEQ, F5ZDR et le crossband F5ZNN maintenus derrière des gates de validation ;
-- F5ZBK et F1ZTC restent en attente d'une seconde corroboration actuelle ;
-- aviation AIRAC 08/26 maintenue sans mutation RF, revue AD 2.18 + NOTAM/SUP encore ouverte ;
-- AIRAC 09/26 obligatoire pour toute publication ou nouvelle validation à partir du 3 septembre 2026 ;
-- nouveau garde CI `IDF v0.3 Research Guards` ;
-- aucune mutation de CSV public, de SHA public ou de version publiée.
+- base historique **Île-de-France v0.2 / 58 RX / 18 aviation** conservée immuable ;
+- v0.3 : **57 RX**, dont **18 aviation** et **15 radio régionales** ;
+- scope radio finalisé avec F5ZNG, F5ZNN, F5ZMH, F1ZHK, F6ZEE, F5ZMR, F5ZSY et extension crossband F5ZNN dédupliquée ;
+- F5ZEQ non reconduit pendant sa maintenance ; F1ZTC, F5ZDR, F5ZBK et F1ZDL différés faute de corroboration actuelle suffisante ;
+- aviation AIRAC 08/26 conservée à 18 mémoires, delta 0, avec revue LFPG/LFPO/LFPB et NOTAM/SUP du sous-ensemble retenu ;
+- AIRAC 09/26 obligatoire pour toute nouvelle révision aviation à partir du 3 septembre 2026 ;
+- checklist **12/12**, publication gates **0 blocker** ;
+- CSV public strictement byte-identique au candidat déterministe ;
+- SHA-256 public : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125` ;
+- publication record : `published_immutable` ;
+- RX-only, paired RX, déduplication et aucun remplissage artificiel.
 
 ## 0.21.89 - 2026-08-20
 

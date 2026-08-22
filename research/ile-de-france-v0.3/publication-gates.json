@@ -1,11 +1,12 @@
 {
   "schema_version": "1.0",
-  "status": "prepublication_zero_blockers_not_published",
+  "status": "published_zero_blockers",
   "pack": "Île-de-France",
   "version": "0.3",
-  "checked_on": "2026-08-21",
+  "checked_on": "2026-08-22",
   "blocker_count": 0,
   "candidate_csv_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
+  "public_csv_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
   "checks": [
     {"id":"scope_closed","pass":true},
     {"id":"review_checklist_complete","pass":true},
@@ -20,6 +21,8 @@
     {"id":"aviation_airac08_revalidated_for_retained_subset","pass":true},
     {"id":"notam_sup_scope_review_complete","pass":true},
     {"id":"deterministic_candidate_rebuild_matches_frozen_csv","pass":true},
+    {"id":"public_csv_byte_identical_to_candidate","pass":true},
+    {"id":"website_registry_sync","pass":true},
     {"id":"airac09_boundary_recorded","pass":true}
   ],
   "warnings": [
@@ -27,7 +30,8 @@
     "F5ZEQ remains outside this release scope while its operator reports maintenance/off-service state.",
     "The aviation scope deliberately retains 18 verified memories and is not an exhaustive catalog of all useful Paris-area aviation frequencies.",
     "SUP AIP 147/2026 oversized PDF was not visually inspected by the static tool; current SIA catalog/search material plus current distributed NOTAM activation evidence were used for the retained-subset decision.",
-    "Any publication or aviation revision on or after 2026-09-03 requires AIRAC 09/26 revalidation before public export."
+    "Any aviation revision on or after 2026-09-03 requires AIRAC 09/26 revalidation before public export."
   ],
-  "public_mutation_performed": false
+  "public_mutation_performed": true,
+  "published": true
 }

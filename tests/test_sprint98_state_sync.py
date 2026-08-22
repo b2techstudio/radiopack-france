@@ -7,8 +7,9 @@ state = json.loads((ROOT / "research/project-resume-state.json").read_text(encod
 manifest = json.loads((ROOT / "research/sprint-98-metropolitan-publication-manifest.json").read_text(encoding="utf-8"))
 ci = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
 
-# Sprint 98 is historical: later official states and v0.3 research/publications
-# must not invalidate its frozen v0.2 evidence.
+# Sprint 98 is historical: later official states and v0.3+ publications must
+# not invalidate its frozen v0.2 evidence or force those v0.2 versions to stay
+# current forever.
 assert state["current_sprint"] >= 100
 version_parts = tuple(int(part) for part in state["state_version"].split("."))
 assert version_parts >= (0, 21, 89)
@@ -46,16 +47,18 @@ for slug, (state_key, count) in historical.items():
     assert record["public_csv_sha256"] == entry["sha256"]
     assert record["published_version_is_immutable"] is True
 
+    # The current public pack may legitimately have advanced past v0.2. The
+    # Sprint 98 invariant is that the frozen v0.2 record remains immutable and
+    # that no current state regresses below it. When v0.2 is the immediate
+    # predecessor, its historical count must still be carried exactly.
     current = state["public_packs"][state_key]
-    if slug == "bourgogne-franche-comte":
-        assert current["version"] == "0.3" and current["memory_count"] == 54
-        assert current["previous_immutable_version"] == "0.2" and current["previous_memory_count"] == 37
-    elif slug == "centre-val-de-loire":
-        assert current["version"] == "0.3" and current["memory_count"] == 51
-        assert current["previous_immutable_version"] == "0.2" and current["previous_memory_count"] == 42
-    else:
-        assert current["version"] == "0.2" and current["memory_count"] == count
-        assert current["immutable"] is True
+    current_version = tuple(int(part) for part in current["version"].split("."))
+    assert current_version >= (0, 2)
+    assert current["immutable"] is True
+    if current["version"] == "0.2":
+        assert current["memory_count"] == count
+    elif current.get("previous_immutable_version") == "0.2":
+        assert current["previous_memory_count"] == count
 
 s98 = state["latest_sprint98_metropolitan_consolidation"]
 assert s98["sprint"] == 98
@@ -67,4 +70,4 @@ assert (ROOT / "research/sprint-98-summary.md").is_file()
 assert "- name: Test Sprint 98 state synchronization" in ci
 assert "python tools/check_metropolitan_v02_publication_records.py --dist website/dist" in ci
 
-print("Sprint 98 historical integrity: eleven immutable v0.2 records retained across later official states OK")
+print("Sprint 98 historical integrity: eleven immutable v0.2 records retained across later official releases OK")

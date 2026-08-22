@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESEARCH = ROOT / "research" / "ile-de-france-v0.3"
 CANDIDATE = RESEARCH / "generated/release-candidate/radiopack-france-ile-de-france-v0.3-candidate.csv"
 MANIFEST = RESEARCH / "generated/release-candidate/candidate-manifest.json"
+PUBLIC = ROOT / "website/public/downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv"
 
 
 class IleDeFranceV03CandidateTests(unittest.TestCase):
@@ -28,11 +29,13 @@ class IleDeFranceV03CandidateTests(unittest.TestCase):
             manifest["published_base_sha256"],
             "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d",
         )
-        self.assertEqual(
-            manifest["candidate_sha256"],
-            hashlib.sha256(CANDIDATE.read_bytes()).hexdigest(),
-        )
-        self.assertFalse(manifest["public_export_allowed"])
+        candidate_sha = hashlib.sha256(CANDIDATE.read_bytes()).hexdigest()
+        self.assertEqual(manifest["candidate_sha256"], candidate_sha)
+        self.assertEqual(manifest["public_csv_sha256"], candidate_sha)
+        self.assertTrue(manifest["public_export_allowed"])
+        self.assertTrue(manifest["published"])
+        self.assertTrue(manifest["published_version_is_immutable"])
+        self.assertEqual(PUBLIC.read_bytes(), CANDIDATE.read_bytes())
 
     def test_candidate_contract_and_scope(self):
         with CANDIDATE.open(encoding="utf-8", newline="") as handle:
@@ -64,44 +67,48 @@ class IleDeFranceV03CandidateTests(unittest.TestCase):
         self.assertEqual(aviation["freshness_boundary"]["publication_allowed_through_inclusive"], "2026-09-02")
         self.assertEqual(aviation["freshness_boundary"]["airac09_revalidation_required_on_or_after"], "2026-09-03")
 
-    def test_prepublication_bundle_is_frozen_but_not_public(self):
+    def test_publication_bundle_is_immutable_and_public(self):
         scope = json.loads((RESEARCH / "release-scope.json").read_text(encoding="utf-8"))
         checklist = json.loads((RESEARCH / "review-checklist.json").read_text(encoding="utf-8"))
         gates_file = json.loads((RESEARCH / "publication-gates.json").read_text(encoding="utf-8"))
         record = json.loads((RESEARCH / "publication-record.json").read_text(encoding="utf-8"))
 
-        self.assertEqual(scope["status"], "prepublication_ready_not_published")
+        self.assertEqual(scope["status"], "published_immutable")
         self.assertTrue(scope["publication_ready"])
-        self.assertFalse(scope["published"])
-        self.assertFalse(scope["public_mutation_performed"])
+        self.assertTrue(scope["published"])
+        self.assertTrue(scope["public_mutation_performed"])
+        self.assertTrue(scope["published_version_is_immutable"])
         for key in [
             "radio_source_conflicts_closed", "radio_memory_accounting_final", "aviation_revalidation_complete",
             "deterministic_candidate_built", "rx_only_validation_passed", "rf_deduplication_passed",
             "memory_limit_passed", "review_checklist_complete", "publication_gates_zero_blockers",
-            "publication_record_frozen",
+            "publication_record_frozen", "public_csv_matches_candidate", "public_registry_updated",
         ]:
             self.assertTrue(scope["publication_gates"][key])
 
-        self.assertEqual(checklist["status"], "completed_prepublication_not_published")
+        self.assertEqual(checklist["status"], "completed_published_immutable")
         self.assertEqual(checklist["item_count"], 12)
         self.assertEqual(checklist["reviewed_count"], 12)
         self.assertTrue(all(item["reviewed"] for item in checklist["items"]))
-        self.assertFalse(checklist["public_mutation_performed"])
+        self.assertTrue(checklist["public_mutation_performed"])
+        self.assertTrue(checklist["published"])
 
-        self.assertEqual(gates_file["status"], "prepublication_zero_blockers_not_published")
+        self.assertEqual(gates_file["status"], "published_zero_blockers")
         self.assertEqual(gates_file["blocker_count"], 0)
         self.assertTrue(all(item["pass"] for item in gates_file["checks"]))
-        self.assertFalse(gates_file["public_mutation_performed"])
+        self.assertTrue(gates_file["public_mutation_performed"])
+        self.assertTrue(gates_file["published"])
 
-        self.assertEqual(record["status"], "prepublication_frozen_not_published")
+        self.assertEqual(record["status"], "published_immutable")
         self.assertEqual(record["memory_count"], 57)
         self.assertEqual(record["candidate_csv_sha256"], hashlib.sha256(CANDIDATE.read_bytes()).hexdigest())
+        self.assertEqual(record["public_csv_sha256"], hashlib.sha256(PUBLIC.read_bytes()).hexdigest())
         self.assertEqual(record["base_public_csv_sha256"], manifest_sha := json.loads(MANIFEST.read_text(encoding="utf-8"))["published_base_sha256"])
         self.assertEqual(manifest_sha, "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d")
-        self.assertFalse(record["public_csv_created"])
-        self.assertFalse(record["public_registry_updated"])
-        self.assertFalse(record["published"])
-        self.assertFalse(record["published_version_is_immutable"])
+        self.assertTrue(record["public_csv_created"])
+        self.assertTrue(record["public_registry_updated"])
+        self.assertTrue(record["published"])
+        self.assertTrue(record["published_version_is_immutable"])
 
 
 if __name__ == "__main__":

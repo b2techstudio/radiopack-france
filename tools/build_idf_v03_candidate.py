@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Build the deterministic Île-de-France v0.3 internal release candidate.
+"""Build the deterministic Île-de-France v0.3 publication basis.
 
 The builder first reconstructs the immutable public v0.2 from repository source data
 and refuses to continue unless its SHA-256 still matches the frozen publication record.
 It then keeps the exact national + 18-memory aviation blocks and replaces only the
-regional radio block with the Sprint 101 pass-3 scope.
+regional radio block with the Sprint 101 pass-3 scope. The resulting bytes are the
+immutable basis of the published v0.3 CSV.
 """
 from __future__ import annotations
 
@@ -193,8 +194,9 @@ def build(root: Path) -> tuple[bytes, dict[str, Any]]:
 
     manifest = {
         "schema_version": "1.0",
-        "status": "deterministic_internal_release_candidate_not_published",
+        "status": "published_basis_immutable",
         "generated_on": "2026-08-21",
+        "published_on": "2026-08-22",
         "pack": "Île-de-France",
         "target_version": "0.3",
         "published_base_version": "0.2",
@@ -204,7 +206,9 @@ def build(root: Path) -> tuple[bytes, dict[str, Any]]:
         "candidate_aviation_memory_count": 18,
         "candidate_regional_radio_memory_count": 15,
         "candidate_sha256": candidate_sha,
+        "public_csv_sha256": candidate_sha,
         "candidate_csv": str(OUTPUT),
+        "public_csv": "website/public/downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv",
         "builder": "tools/build_idf_v03_candidate.py",
         "airac_cycle": "08/26",
         "airac_valid_through_inclusive": "2026-09-02",
@@ -216,8 +220,11 @@ def build(root: Path) -> tuple[bytes, dict[str, Any]]:
             "unique_locations": True,
             "unique_names": True,
             "memory_limit_passed": True,
+            "public_csv_byte_identical_to_candidate": True,
         },
-        "public_export_allowed": False,
+        "public_export_allowed": True,
+        "published": True,
+        "published_version_is_immutable": True,
     }
     return candidate_bytes, manifest
 
@@ -243,7 +250,7 @@ def main() -> None:
         output.write_bytes(candidate_bytes)
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    print(f"IDF V0.3 CANDIDATE: 57 RX, aviation=18, sha256={manifest['candidate_sha256']}, public=false")
+    print(f"IDF V0.3 PUBLISHED BASIS: 57 RX, aviation=18, sha256={manifest['candidate_sha256']}, public=true")
 
 
 if __name__ == "__main__":

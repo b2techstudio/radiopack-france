@@ -1,0 +1,36 @@
+name: Temporary Sprint 110 State Migration
+
+on:
+  push:
+    branches:
+      - chore/sprint110-state-sync
+    paths:
+      - tools/tmp_sync_sprint110_state.py
+      - .github/workflows/tmp-sprint110-state-migration.yml
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: chore/sprint110-state-sync
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13"
+      - name: Migrate canonical state
+        run: python tools/tmp_sync_sprint110_state.py
+      - name: Remove temporary migration helpers
+        run: rm tools/tmp_sync_sprint110_state.py .github/workflows/tmp-sprint110-state-migration.yml
+      - name: Commit migrated state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: synchronize canonical state to Sprint 110"
+          git push origin HEAD:chore/sprint110-state-sync

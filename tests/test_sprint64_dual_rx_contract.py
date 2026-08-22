@@ -79,20 +79,39 @@ assert bretagne_links["MARINE-64"]["coast_to_ship_rx_mhz"] == 160.825
 assert bretagne_links["MARINE-79"]["ship_to_coast_rx_mhz"] == 156.975
 assert bretagne_links["MARINE-79"]["coast_to_ship_rx_mhz"] == 161.575
 
+# Keep the original v0.3.1 public baseline and the Sprint 64 paired-RX evidence
+# immutable. The current public Normandie pointer may advance independently.
 public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
 assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' in registry
+assert 'id: "normandie"' in registry
 assert 'id: "bretagne"' in registry
-assert resume["public_packs"]["normandie"]["memory_count"] == 142
+
+current_public = resume["public_packs"]["normandie"]
+assert current_public["immutable"] is True
+if current_public["version"] == "0.4":
+    assert current_public["memory_count"] == 142
+else:
+    assert current_public["version"] == "0.5"
+    assert current_public["memory_count"] == 146
+    assert current_public["previous_immutable_version"] == "0.4"
+    assert current_public["previous_memory_count"] == 142
+
+# This is the historical Sprint 110 pre-theory snapshot, not the current
+# promotion policy after Sprint 112/113.
 current = resume["normandie_v0_5_latest_refresh"]
 assert current["candidate_memory_count"] == 142
 assert current["candidate_memory_delta"] == 0
 assert set(current["field_required"]) == {"R3_F1ZBX", "F5ZHA"}
-assert resume["resume_rules"]["verified_distinct_pair_uses_two_rx_memories"] is True
+
+rules = resume["resume_rules"]
+assert rules.get("verified_distinct_split_pair_uses_two_rx_memories", rules.get("verified_distinct_pair_uses_two_rx_memories")) is True
+if resume["current_sprint"] >= 113:
+    assert rules["field_listening_is_optional_quality_feedback_for_coverage"] is True
+    assert resume["normandie_v0_5_publication"]["theoretical_coverage_memory_count"] == 4
 
 print(
-    "Tests Sprint 64 dual RX contract: R3 keeps exactly two pair memories independently of field sessions, "
-    "Etel Ch64/Corsen Ch79 keep both RX directions, historical gates remain closed in source evidence OK"
+    "Tests Sprint 64 dual RX contract: R3 keeps exactly two pair memories independently of field sessions; "
+    "historical field gates remain auditable while current Normandie may advance under the separate theory policy OK"
 )

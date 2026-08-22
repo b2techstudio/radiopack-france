@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ChannelGroupDetails from "../../components/ChannelGroupDetails.astro";
 import { buildStandardChannelGroups, loadPublicPackMemories, type ChannelMemory } from "../../lib/channelDetails";
+import { buildAraV03Pack } from "../../lib/araPack";
 import { buildBfcV03Pack, buildBfcV04Pack } from "../../lib/bfcPack";
 import { buildCentreV03Pack } from "../../lib/centrePack";
 import { getPublicPack } from "../../lib/packRegistry";
@@ -37,23 +38,23 @@ const placed = isBfcV04
     ? buildBfcV03Pack()
     : isCentreV03
       ? buildCentreV03Pack()
-      : isIdfV04 || isGrandEstV04 || isAraV03
-        ? []
-        : buildMetropolitanPack(pack.id, pack.version);
+      : isAraV03
+        ? buildAraV03Pack()
+        : isIdfV04 || isGrandEstV04
+          ? []
+          : buildMetropolitanPack(pack.id, pack.version);
 const memories: ChannelMemory[] = isIdfV04
   ? loadPublicPackMemories("downloads/ile-de-france/radiopack-france-ile-de-france-v0.4.csv")
   : isGrandEstV04
     ? loadPublicPackMemories("downloads/grand-est/radiopack-france-grand-est-v0.4.csv")
-    : isAraV03
-      ? loadPublicPackMemories("downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv")
-      : placed.map(({ location, channel }) => ({
-          location,
-          name: channel.name,
-          frequency: channel.frequency_mhz.toFixed(6),
-          mode: channel.mode,
-          step: channel.step_khz.toFixed(2),
-          comment: channel.comment,
-        }));
+    : placed.map(({ location, channel }) => ({
+        location,
+        name: channel.name,
+        frequency: channel.frequency_mhz.toFixed(6),
+        mode: channel.mode,
+        step: channel.step_khz.toFixed(2),
+        comment: channel.comment,
+      }));
 const memoryCount = memories.length;
 if (publicVariant && publicVariant.memoryCount !== memoryCount) {
   throw new Error(`${pack.id}: registry=${publicVariant.memoryCount}, built=${memoryCount}`);

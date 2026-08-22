@@ -27,6 +27,8 @@ Ces quatre mémoires sont publiées sur une **couverture théorique documentée*
 
 La politique Sprint 112 utilise une plausibilité basée sur les paramètres publics, distance, géométrie simplifiée et FSPL. Les écoutes terrain deviennent un retour qualité facultatif et ne sont plus un gate de publication.
 
+Les outils Sprint 84/85 ne sont pas supprimés : ils deviennent des **outils historiques facultatifs de contrôle qualité**. Leurs résultats ne peuvent ni retirer automatiquement une mémoire publiée, ni modifier automatiquement un candidat ou une publication.
+
 ## Toujours exclus
 
 - F1ZOV : l'opérateur local le marque toujours en maintenance ;

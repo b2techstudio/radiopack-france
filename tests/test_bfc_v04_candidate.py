@@ -35,7 +35,7 @@ candidate, manifest = build(ROOT, base_csv)
 rows = list(csv.DictReader(io.StringIO(candidate.decode("utf-8"), newline="")))
 base_rows = list(csv.DictReader(io.StringIO(base_csv.read_text(encoding="utf-8"), newline="")))
 
-assert manifest["status"] == "internal_candidate_reproducible"
+assert manifest["status"] == "release_candidate_frozen_internal"
 assert manifest["pack"] == "Bourgogne-Franche-Comté"
 assert manifest["target_version"] == "0.4"
 assert manifest["published_base_version"] == "0.3"
@@ -44,12 +44,15 @@ assert manifest["published_base_sha256"] == EXPECTED_BASE_SHA
 assert manifest["candidate_memory_count"] == EXPECTED_CANDIDATE_COUNT == 61
 assert manifest["candidate_inland_vhf_memory_count"] == EXPECTED_INLAND_COUNT == 7
 assert manifest["candidate_memory_delta"] == 7
+assert manifest["candidate_frozen"] is True
 assert manifest["public_export_allowed"] is False
 assert manifest["published"] is False
 assert manifest["immutable"] is False
 assert manifest["candidate_sha256"] == hashlib.sha256(candidate).hexdigest()
+assert manifest["candidate_sha256"] == manifest["expected_candidate_sha256"]
 assert manifest["validation"]["public_base_sha_matches_frozen_record"] is True
 assert manifest["validation"]["base_rows_preserved"] is True
+assert manifest["validation"]["candidate_sha_frozen"] is True
 
 assert len(rows) == 61
 assert all(row["Duplex"] == "off" for row in rows)
@@ -84,6 +87,6 @@ assert validation["gates"]["public_export_allowed"] is False
 assert validation["gates"]["public_release_allowed"] is False
 
 print(
-    "BFC v0.4 internal candidate: "
+    "BFC v0.4 frozen internal candidate: "
     f"61 RX / +7 inland VHF / sha256={manifest['candidate_sha256']} / public=false"
 )

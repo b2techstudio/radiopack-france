@@ -1,0 +1,49 @@
+name: Materialize frozen Normandie v0.5 CSV
+
+on:
+  push:
+    branches:
+      - release/normandie-v05-theoretical
+    paths:
+      - ".github/workflows/_materialize_normandie_v05.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+          ref: release/normandie-v05-theoretical
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Build frozen candidate and materialize public CSV
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/normandie-v05-public
+          python tools/build_normandie_v05_internal_candidate.py --output-dir /tmp/normandie-v05-public
+          src=/tmp/normandie-v05-public/normandie-v0.5-internal.csv
+          dst=website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv
+          test "$(sha256sum "$src" | awk '{print $1}')" = "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59"
+          cp "$src" "$dst"
+          test "$(sha256sum "$dst" | awk '{print $1}')" = "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59"
+          rm .github/workflows/_materialize_normandie_v05.yml
+
+      - name: Commit materialized CSV and remove helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv .github/workflows/_materialize_normandie_v05.yml
+          git commit -m "Materialize frozen Normandie v0.5 public CSV"
+          git push origin HEAD:release/normandie-v05-theoretical

@@ -2,7 +2,7 @@
 
 **Couverture publique au 22 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 101 / 0.21.90 — Île-de-France v0.3 est publiée et immuable à 57 RX, dont 18 aviation et 15 mémoires radio régionales. La v0.2 de 58 RX reste historique et immuable.**
+**État courant : Sprint 104 / 0.21.92 — Grand Est v0.4 est publiée et immuable à 97 RX, dont 19 aviation, 41 radio régionales et 13 VHF de navigation intérieure.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -15,7 +15,9 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 - **Hauts-de-France v0.2** — 144 mémoires RX ;
 - **Île-de-France v0.3** — 57 mémoires RX, dont 18 aviation ;
 - **Île-de-France v0.2** — 58 mémoires RX, historique immuable ;
-- **Grand Est v0.2** — 59 mémoires RX ;
+- **Grand Est v0.4** — 97 mémoires RX, dont 19 aviation et 13 VHF navigation intérieure ;
+- **Grand Est v0.3** — 84 mémoires RX, historique immuable ;
+- **Grand Est v0.2** — 59 mémoires RX, historique immuable ;
 - **Centre-Val de Loire v0.3** — 51 mémoires RX, dont 7 aviation ;
 - **Pays de la Loire v0.2** — 130 mémoires RX ;
 - **Bourgogne-Franche-Comté v0.3** — 54 mémoires RX, dont 14 aviation ;
@@ -28,7 +30,7 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 
 Repère historique de publication : **Annecy–Alpes–Léman v0.4 : 77 RX / 60 sans aviation** ; la v0.3 76/59 reste immuable.
 
-Les variantes par défaut représentent **1530 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
+Les variantes par défaut représentent **1568 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
 
 Le projet couvre actuellement les **13 régions métropolitaines**. Les cinq régions d'outre-mer ne sont pas encore incluses dans cette couverture.
 
@@ -59,7 +61,19 @@ Chaque future v0.3 régionale suit désormais le même processus :
 6. construire le CSV de façon déterministe, vérifier RX-only, déduplication et taille ;
 7. figer scope, checklist, gates, `publication-record.json` et SHA-256 avant publication.
 
-Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé.
+Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé. La VHF de navigation intérieure est auditée séparément ; une RF déjà présente via le bloc maritime n'est jamais dupliquée.
+
+## Sprint 104 — Grand Est v0.4 publiée
+
+Grand Est v0.4 est publiée à **97 RX** : 84 mémoires héritées byte-identiques de v0.3 et **13 mémoires VHF de navigation intérieure** validées. Aviation : **19, delta 0** ; radio régionale : **41, delta 0**. SHA public : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d`.
+
+## Sprint 103 — audit VHF navigation intérieure
+
+L'audit national distingue désormais VHF maritime et VHF de navigation intérieure. Les packs côtiers ne dupliquent pas les RF déjà présentes ; la file non côtière vérifiée est Grand Est, Île-de-France, Bourgogne-Franche-Comté et Auvergne-Rhône-Alpes.
+
+## Sprint 102 — Grand Est v0.3 publiée
+
+Grand Est v0.3 a été publiée à **84 RX / 19 aviation / 41 radio régionales**, SHA `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`. Elle devient historique et immuable avec la publication v0.4.
 
 ## Sprint 101 — Île-de-France v0.3 publiée
 

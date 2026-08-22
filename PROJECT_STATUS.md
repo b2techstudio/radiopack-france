@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **22 août 2026**
-Sprint courant : **101**
-État logique : **0.21.90**
+Sprint courant : **104**
+État logique : **0.21.92**
 
-L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-101-summary.md`.
+L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-104-summary.md`.
 
 ## État public
 
@@ -14,7 +14,7 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Hauts-de-France v0.2 : **144 mémoires RX**, publiée et immuable.
 - Île-de-France v0.3 : **57 mémoires RX**, dont **18 aviation**, publiée et immuable ; v0.2 **58 RX** historique immuable.
-- Grand Est v0.2 : **59 mémoires RX**, publiée et immuable.
+- Grand Est v0.4 : **97 mémoires RX**, dont **19 aviation** et **13 VHF navigation intérieure**, publiée et immuable ; v0.3 **84 RX** et v0.2 **59 RX** historiques immuables.
 - Centre-Val de Loire v0.3 : **51 mémoires RX**, dont **7 aviation**, publiée et immuable.
 - Pays de la Loire v0.2 : **130 mémoires RX**, publiée et immuable.
 - Bourgogne-Franche-Comté v0.3 : **54 mémoires RX**, dont **14 aviation**, publiée et immuable.
@@ -25,6 +25,18 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Corse v0.2 : **137 mémoires RX**, publiée et immuable.
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
+
+## Sprint 104 — Grand Est v0.4 publiée
+
+Grand Est v0.4 est publiée et figée à **97 RX** : **19 aviation**, **41 radio régionales** et **13 VHF navigation intérieure**. SHA public : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d`. Les v0.3/84 et v0.2/59 restent historiques et immuables.
+
+## Sprint 103 — audit VHF navigation intérieure
+
+Audit national terminé sans mutation publique : les packs côtiers couvrent déjà les RF partagées via le bloc maritime ; les deltas non côtiers vérifiés sont Grand Est +13, IDF au moins +1, BFC au moins +7 et ARA au moins +9.
+
+## Sprint 102 — Grand Est v0.3 publiée
+
+Grand Est v0.3 a été publiée à **84 RX / 19 aviation / 41 radio régionales** avec SHA `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`; elle est désormais historique.
 
 ## Sprint 101 — Île-de-France v0.3 publiée
 

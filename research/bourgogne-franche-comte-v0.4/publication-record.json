@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-22",
+  "publication_sprint": 107,
+  "pack": "Bourgogne-Franche-Comté",
+  "version": "0.4",
+  "memory_count": 61,
+  "previous_public_version": "0.3",
+  "previous_public_memory_count": 54,
+  "previous_public_sha256": "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5",
+  "public_route": "/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.4.csv",
+  "public_csv_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
+  "candidate_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
+  "hash_basis": "GitHub Actions PR #45 production Astro build; tests/test_bfc_v04_candidate.py proved byte identity between the generated public v0.4 route and the frozen Sprint 106 candidate.",
+  "generator": "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.4.csv.ts",
+  "pack_builder": "website/src/lib/bfcPack.ts#buildBfcV04Pack",
+  "candidate_builder": "tools/build_bfc_v04_candidate.py",
+  "inland_dataset": "data/regional/bourgogne-franche-comte-inland-vhf-rx.json",
+  "inland_validation": "research/bourgogne-franche-comte-v0.4/inland-vhf-validation-2026-08-22.json",
+  "release_scope": "research/bourgogne-franche-comte-v0.4/release-scope.json",
+  "publication_gates": "research/bourgogne-franche-comte-v0.4/publication-gates.json",
+  "inland_vhf": {
+    "memory_count": 7,
+    "channels": [10, 12, 20, 22, 69],
+    "paired_rx_channels": [20, 22],
+    "location_range": "120-126",
+    "channel_18_added": false,
+    "marine_channel_16_added": false,
+    "scope_non_exhaustive": true
+  },
+  "aviation": {
+    "memory_count": 14,
+    "memory_delta": 0,
+    "cycle": "AIRAC 08/26",
+    "valid_through_inclusive": "2026-09-02",
+    "inherited_unchanged_from_v0_3": true,
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
+  },
+  "published_version_is_immutable": true,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "base_rows_preserved": true,
+    "no_artificial_fill": true,
+    "private_ppdr_operational_data_excluded": true,
+    "release_is_non_exhaustive": true
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "status": "radio_scope_closed_non_exhaustive_no_public_mutation",
+  "pack": "Grand Est",
+  "target_version": "0.3",
+  "reviewed_on": "2026-08-22",
+  "public_base": {
+    "version": "0.2",
+    "memory_count": 59,
+    "non_regional_memory_count": 43,
+    "public_csv_sha256": "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1",
+    "immutable": true
+  },
+  "validated_in_pass3": [
+    {
+      "call": "F1ZFL",
+      "area": "Moselle / Erching",
+      "rf_mhz": [430.125, 431.725],
+      "mode": "FM",
+      "decision": "validated_for_closed_radio_scope",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://wp.amra57.org/relais-phonie/"
+      ],
+      "freshness_note": "current REF state corroborated by the live departmental association relay page; the association page has old publication metadata but no conflicting current state was found"
+    },
+    {
+      "call": "F5ZCC",
+      "area": "Moselle / Theding / Bassin Houiller",
+      "rf_mhz": [430.15, 431.75],
+      "mode": "FM",
+      "decision": "validated_for_closed_radio_scope",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://wp.amra57.org/f6kft-2/",
+        "https://wp.amra57.org/relais-phonie/"
+      ],
+      "freshness_note": "current REF state corroborated by live F6KFT/AMRA57 departmental pages; association page publication metadata is old but frequencies and identity agree"
+    },
+    {
+      "call": "F1ZJS",
+      "area": "Moselle / Tromborn / Pays de Nied",
+      "rf_mhz": [439.125, 431.525],
+      "mode": "FM",
+      "decision": "validated_for_closed_radio_scope",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://wp.amra57.org/relais-phonie/"
+      ],
+      "freshness_note": "current REF state corroborated by the live departmental association relay page; no contradictory current operator evidence found"
+    }
+  ],
+  "explicitly_deferred_at_scope_closure": [
+    {
+      "call": "F5ZRP",
+      "rf_mhz": [430.325, 431.925],
+      "reason": "current national directory supports active analog FM but no sufficiently fresh local/operator corroboration was found in this sprint"
+    },
+    {
+      "call": "F5ZTY",
+      "rf_mhz": [431.95, 430.35],
+      "reason": "current national directory and current secondary directory agree, but no sufficiently fresh local/operator corroboration was found"
+    },
+    {
+      "call": "F5ZUK",
+      "rf_mhz": [432.8375, 431.2375],
+      "reason": "local REF67 listing and secondary off-air/stale status are not sufficiently reconciled for current active-service promotion"
+    },
+    {
+      "call": "F1ZFN",
+      "rf_mhz": null,
+      "reason": "exact current public RF/mode/status unresolved"
+    },
+    {
+      "call": "F1ZEF",
+      "rf_mhz": null,
+      "reason": "exact current public RF/mode/status unresolved"
+    }
+  ],
+  "closed_radio_scope_accounting": {
+    "safe_v02_unique_rf": 14,
+    "pass1_new_unique_rf": 8,
+    "pass2_unique_rf_added": 13,
+    "pass3_unique_rf_added": 6,
+    "regional_unique_rf_final_for_this_scope": 41,
+    "inherited_non_regional_memories_before_candidate_rebuild": 43,
+    "research_scope_total_if_non_regional_base_is_preserved": 84,
+    "final_radio_scope_frozen": true,
+    "scope_is_non_exhaustive": true,
+    "candidate_built": false,
+    "publication_ready": false
+  },
+  "retained_policy_decisions": {
+    "F1ZAX": "deferred due current C4FM classification without current local analog proof",
+    "F5ZBD": "excluded while off service / upgrade",
+    "F1ZBU": "excluded because current service is digital DMR/C4FM/D-STAR",
+    "F1ZCV": "zero-RF-delta attribution only; its pair duplicates F5ZAU",
+    "F5ZTC": "excluded because status is Test",
+    "F5ZWR": "excluded because status is Projet"
+  },
+  "aviation": {
+    "action_in_radio_scope_closure": "none",
+    "base_memory_count": 19,
+    "base_cycle": "AIRAC 08/26",
+    "base_valid_through_inclusive": "2026-09-02",
+    "candidate_or_publication_aviation_gate": "must be checked against the applicable AIRAC before publication; AIRAC 09/26 required for any revision on or after 2026-09-03"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "maximum_memories": 200,
+    "no_artificial_fill": true,
+    "unverified_or_conflicting_items_explicitly_deferred": true,
+    "public_mutation": false
+  }
+}

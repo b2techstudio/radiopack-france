@@ -5,6 +5,8 @@ on:
     branches:
       - main
     paths:
+      - "research/normandie-v0.5/README.md"
+      - "research/normandie-v0.5/backlog.json"
       - "research/normandie-v0.5/sprint110-source-field-refresh.json"
       - "research/normandie-v0.5/sprint90-source-refresh.json"
       - "research/normandie-v0.5/current-blocker-revalidation.json"
@@ -20,6 +22,8 @@ on:
     branches:
       - main
     paths:
+      - "research/normandie-v0.5/README.md"
+      - "research/normandie-v0.5/backlog.json"
       - "research/normandie-v0.5/sprint110-source-field-refresh.json"
       - "research/normandie-v0.5/sprint90-source-refresh.json"
       - "research/normandie-v0.5/current-blocker-revalidation.json"
@@ -64,5 +68,5 @@ jobs:
       - name: Verify historical Sprint 90 source refresh
         run: python tests/test_sprint90_normandie_v05_source_refresh.py
 
-      - name: Verify Sprint 110 source and field handoff
+      - name: Verify Sprint 110 source, metadata and field handoff
         run: python tests/test_sprint110_normandie_v05_refresh.py

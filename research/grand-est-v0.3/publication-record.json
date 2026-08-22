@@ -1,7 +1,8 @@
 {
   "schema_version": "1.0",
-  "status": "publication_prepared_public_mutation_next",
+  "status": "published_immutable",
   "prepared_on": "2026-08-22",
+  "published_on": "2026-08-22",
   "publication_sprint": 102,
   "state_version": "0.21.91",
   "pack": "Grand Est",
@@ -13,7 +14,7 @@
   "candidate_csv_sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
   "public_csv_sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
   "base_public_csv_sha256": "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1",
-  "hash_basis": "The public Grand Est v0.3 CSV is required to reuse the exact Git blob of the frozen deterministic candidate; CI verifies byte identity and SHA-256.",
+  "hash_basis": "The public Grand Est v0.3 CSV reuses the exact Git blob of the frozen deterministic candidate; publication CI verifies byte identity and SHA-256.",
   "builder": "tools/build_grand_est_v03_candidate.py",
   "candidate_csv": "research/grand-est-v0.3/generated/release-candidate/radiopack-france-grand-est-v0.3-candidate.csv",
   "public_csv": "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv",
@@ -39,10 +40,10 @@
     "airac09_revalidation_required_on_or_after": "2026-09-03"
   },
   "marine_memory_count": 0,
-  "public_csv_created": false,
-  "public_registry_updated": false,
-  "published": false,
-  "published_version_is_immutable": false,
+  "public_csv_created": true,
+  "public_registry_updated": true,
+  "published": true,
+  "published_version_is_immutable": true,
   "rules": {
     "rx_only": true,
     "chirp_duplex": "off",

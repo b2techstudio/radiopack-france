@@ -49,9 +49,16 @@ assert delta["is_official_state_replacement"] is False
 assert delta["state_sync"]["completed"] is True
 
 public = state["public_packs"]
-assert public["normandie"]["version"] == "0.4"
-assert public["normandie"]["memory_count"] == 142
-assert public["normandie"]["immutable"] is True
+normandie = public["normandie"]
+assert normandie["immutable"] is True
+if normandie["version"] == "0.4":
+    assert normandie["memory_count"] == 142
+else:
+    assert normandie["version"] == "0.5"
+    assert normandie["memory_count"] == 146
+    assert normandie["previous_immutable_version"] == "0.4"
+    assert normandie["previous_memory_count"] == 142
+    assert normandie["public_csv_sha256"] == "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59"
 assert public["annecy_alpes_leman"]["version"] == "0.4"
 assert public["annecy_alpes_leman"]["memory_count"] == 77
 assert public["annecy_alpes_leman"]["without_aviation_memory_count"] == 60
@@ -68,10 +75,12 @@ assert bretagne["candidate_memory_delta"] == 0
 assert bretagne["airac_next_effective_from"] == "2026-09-03"
 assert bretagne["publication_allowed_before_airac09_revalidation"] is False
 
-normandie = state["normandie_v0_5_latest_refresh"]
-assert normandie["candidate_memory_count"] == 142
-assert normandie["candidate_memory_delta"] == 0
-assert normandie["known_potential_ceiling_excluding_f6zes"] == 147
+# Preserve the historical Sprint 110 pre-theory snapshot without forcing it to
+# remain the current Normandie policy forever.
+normandie_refresh = state["normandie_v0_5_latest_refresh"]
+assert normandie_refresh["candidate_memory_count"] == 142
+assert normandie_refresh["candidate_memory_delta"] == 0
+assert normandie_refresh["known_potential_ceiling_excluding_f6zes"] == 147
 
 sprint97 = state["latest_sprint97_state_consolidation"]
 assert sprint97["sprint"] == 97
@@ -99,4 +108,4 @@ assert any(x.get("sprint") == 97 and x.get("state_version") == "0.21.86" for x i
 assert "- name: Test Sprint 97 state synchronization" in ci
 assert "run: python tests/test_sprint97_state_sync.py" in ci
 
-print("Sprint 97 historical state remains auditable after later official states OK")
+print("Sprint 97 historical state remains auditable after Normandie v0.5 and later official states OK")

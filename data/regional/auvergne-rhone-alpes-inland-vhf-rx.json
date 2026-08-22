@@ -1,0 +1,109 @@
+{
+  "dataset": "Auvergne-Rhône-Alpes — VHF navigation intérieure (réception seule)",
+  "version": "0.3.0-research",
+  "updated": "2026-08-22",
+  "scope": "Auvergne-Rhône-Alpes",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Ce jeu est distinct de la VHF maritime et ne contient que des RF de navigation intérieure documentées par le plan ANFR et l'avis VNF Rhône Saône 2026.",
+    "La voie 10 est retenue côté bateau pour le Rhône hors secteur PK 0 à PK 4.",
+    "La voie 18 est retenue uniquement côté bateau pour le secteur Rhône PK 0 à PK 4 à Pierre-Bénite, conformément au scope Sprint 103.",
+    "La voie 12 est documentée à l'entrée du Port Édouard Herriot.",
+    "Les voies duplex 19, 20 et 22 sont représentées par deux mémoires RX, côté bateau et côté station terrestre.",
+    "Le canal 16 maritime n'est pas ajouté au pack intérieur ARA.",
+    "Aucune affectation locale non documentée n'est devinée."
+  ],
+  "sources": [
+    {
+      "authority": "ANFR",
+      "title": "Manuel CRR fluvial - version 6, mai 2025",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "accessed": "2026-08-22",
+      "role": "Plan national des voies et fréquences VHF de navigation intérieure."
+    },
+    {
+      "authority": "VNF Direction territoriale Rhône Saône",
+      "title": "Avis à la batellerie n°1 - 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2026/02/VNF_batellerie_2026_vdef.pdf",
+      "accessed": "2026-08-22",
+      "findings": [
+        "Rhône sauf PK 0 au PK 4 : canal 10 bateau-bateau.",
+        "Rhône PK 0 au PK 4, Pierre-Bénite : canal 18 bateau-bateau.",
+        "Entrée Port Édouard Herriot : canal 12.",
+        "Écluse Pierre-Bénite : canal 19.",
+        "Écluse Vaugris : canal 22.",
+        "Écluse Sablons : canal 20.",
+        "Écluse Gervans : canal 19.",
+        "Écluse Bourg-lès-Valence : canal 22.",
+        "Écluse Beauchastel : canal 20.",
+        "Écluse Le Logis Neuf : canal 19.",
+        "Écluse Châteauneuf-du-Rhône : canal 22."
+      ]
+    }
+  ],
+  "channels": [
+    {
+      "name": "FLV10",
+      "frequency_mhz": 156.5,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 10 · Rhône hors PK0-4 · bateau-bateau · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FLV12",
+      "frequency_mhz": 156.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 12 · entrée Port Édouard Herriot · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FLV18",
+      "frequency_mhz": 156.9,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 18 · Rhône PK0-4 Pierre-Bénite · côté bateau uniquement · RX seule"
+    },
+    {
+      "name": "FL19-B",
+      "frequency_mhz": 156.95,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 19 · côté bateau · écluses Rhône ARA · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FL19-T",
+      "frequency_mhz": 161.55,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 19 · côté station terrestre · écluses Rhône ARA · RX seule"
+    },
+    {
+      "name": "FL20-B",
+      "frequency_mhz": 157.0,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté bateau · écluses Rhône ARA · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FL20-T",
+      "frequency_mhz": 161.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté station terrestre · écluses Rhône ARA · RX seule"
+    },
+    {
+      "name": "FL22-B",
+      "frequency_mhz": 157.1,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté bateau · écluses Rhône ARA · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FL22-T",
+      "frequency_mhz": 161.7,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté station terrestre · écluses Rhône ARA · RX seule"
+    }
+  ]
+}

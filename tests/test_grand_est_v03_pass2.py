@@ -11,7 +11,7 @@ backlog = json.loads((V03 / "backlog.json").read_text(encoding="utf-8"))
 scope = json.loads((V03 / "release-scope.json").read_text(encoding="utf-8"))
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 
-# Pass 2 is immutable historical research evidence even when pass 3 later closes scope.
+# Pass 2 is immutable historical research evidence even when later passes/candidate work advance state.
 assert pass2["status"] == "second_source_pass_complete_with_backlog_no_public_mutation"
 assert pass2["public_base"]["version"] == "0.2"
 assert pass2["public_base"]["memory_count"] == 59
@@ -61,14 +61,20 @@ assert pass2["rules"]["maximum_memories"] == 200
 assert pass2["rules"]["public_mutation"] is False
 assert pass2["rules"]["candidate_built"] is False
 
-# Current research may be later than pass 2, but cannot regress public safety.
+# Current state may advance beyond pass 2; public safety and the historical checkpoint cannot regress.
 assert scope["current_phase"]["radio_pass2_complete"] is True
-assert scope["current_phase"]["deterministic_candidate_built"] is False
 assert scope["current_phase"]["publication_ready"] is False
 assert scope["current_phase"]["public_mutation_performed"] is False
-assert backlog["status"] in {"pass2_reduced_backlog", "radio_scope_closed_with_explicit_deferrals"}
+assert backlog["status"] in {
+    "pass2_reduced_backlog",
+    "radio_scope_closed_with_explicit_deferrals",
+    "radio_scope_closed_candidate_built_backlog_deferred",
+}
+if scope["current_phase"]["deterministic_candidate_built"]:
+    assert scope["candidate"]["memory_count"] == 84
+    assert scope["candidate"]["public_export_allowed"] is False
 
 assert '{ id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19, version: "v0.2" }' in registry
 assert not (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").exists()
 
-print("Sprint 102 Grand Est v0.3 pass2 historical evidence: 8 links / 35 regional RF checkpoint preserved across later scope closure, public=false OK")
+print("Sprint 102 Grand Est v0.3 pass2 historical evidence: 8 links / 35 regional RF checkpoint preserved across later work, public=false OK")

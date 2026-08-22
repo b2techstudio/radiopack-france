@@ -6,18 +6,26 @@ on:
       - main
     paths:
       - "research/ile-de-france-v0.3/**"
+      - "website/public/downloads/ile-de-france/**"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/pages/regions/[slug].astro"
       - "tools/build_idf_v03_candidate.py"
       - "tests/test_idf_v03_research.py"
       - "tests/test_idf_v03_candidate.py"
+      - "tests/test_idf_v03_publication.py"
       - ".github/workflows/idf-v03-research.yml"
   pull_request:
     branches:
       - main
     paths:
       - "research/ile-de-france-v0.3/**"
+      - "website/public/downloads/ile-de-france/**"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/pages/regions/[slug].astro"
       - "tools/build_idf_v03_candidate.py"
       - "tests/test_idf_v03_research.py"
       - "tests/test_idf_v03_candidate.py"
+      - "tests/test_idf_v03_publication.py"
       - ".github/workflows/idf-v03-research.yml"
   workflow_dispatch:
 
@@ -26,7 +34,7 @@ permissions:
 
 jobs:
   research-guard:
-    name: Validate IDF v0.3 candidate
+    name: Validate IDF v0.3 candidate and publication
     runs-on: ubuntu-24.04
 
     steps:
@@ -45,6 +53,9 @@ jobs:
 
       - name: Verify deterministic candidate and frozen SHA
         run: python tests/test_idf_v03_candidate.py
+
+      - name: Verify immutable public IDF v0.3 CSV
+        run: python tests/test_idf_v03_publication.py
 
       - name: Ensure public pack registry remains valid
         run: python tests/test_pack_registry.py

@@ -10,9 +10,11 @@ gates = json.loads((BASE / "publication-gates.json").read_text(encoding="utf-8")
 candidate = json.loads((BASE / "internal-candidate-v0.3.json").read_text(encoding="utf-8"))
 record03 = json.loads((BASE / "publication-record.json").read_text(encoding="utf-8"))
 record02 = json.loads((ROOT / "research/bourgogne-franche-comte-v0.2/publication-record.json").read_text(encoding="utf-8"))
+record04 = json.loads((ROOT / "research/bourgogne-franche-comte-v0.4/publication-record.json").read_text(encoding="utf-8"))
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
-route = ROOT / "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv.ts"
+route03 = ROOT / "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.3.csv.ts"
+route04 = ROOT / "website/src/pages/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.4.csv.ts"
 builder = ROOT / "website/src/lib/bfcPack.ts"
 region_page = ROOT / "website/src/pages/regions/[slug].astro"
 
@@ -70,22 +72,28 @@ assert len({row["name"] for row in new_rows}) == 17
 assert len({round(float(row["frequency_mhz"]), 6) for row in new_rows}) == 17
 assert any(row["name"] == "CHAL-INFO" and float(row["frequency_mhz"]) == 118.605 for row in new_rows)
 
-assert route.is_file()
-assert builder.is_file()
-route_text = route.read_text(encoding="utf-8")
+assert route03.is_file() and route04.is_file() and builder.is_file()
+route03_text = route03.read_text(encoding="utf-8")
 builder_text = builder.read_text(encoding="utf-8")
 region_page_text = region_page.read_text(encoding="utf-8")
-assert 'buildBfcV03Pack' in route_text
-assert 'buildBfcV03Pack' in region_page_text
+assert "buildBfcV03Pack" in route03_text
+assert "buildBfcV03Pack" in region_page_text and "buildBfcV04Pack" in region_page_text
 assert 'buildMetropolitanPack("bourgogne-franche-comte", "v0.2")' in builder_text
 assert 'name: "CHAL-INFO"' in builder_text
 assert 'frequency_mhz: 118.605' in builder_text
 assert 'bfcV03MemoryCount = 54' in builder_text
+assert 'bfcV04MemoryCount = 61' in builder_text
 
-assert '{ id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 54, marine: false, aviation: 14, version: "v0.3" }' in registry
+# v0.3 remains an immutable historical publication even though v0.4 is now current.
+assert record04["status"] == "published_immutable"
+assert record04["previous_public_version"] == "0.3"
+assert record04["previous_public_memory_count"] == 54
+assert record04["previous_public_sha256"] == expected_sha
+assert '{ id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 61, marine: false, aviation: 14, version: "v0.4" }' in registry
 region = next(item for item in regions if item["slug"] == "bourgogne-franche-comte")
-assert region["status"] == "v0.3 disponible"
-assert region["memoryCount"] == 54
+assert region["status"] == "v0.4 disponible"
+assert region["memoryCount"] == 61
 assert region["available"] is True
+assert "VHF navigation intérieure RX" in region["categories"]
 
-print("BFC v0.3 publication guard: 54 RX immutable release, hash frozen, shared builder/route/region metadata synchronized, OK")
+print("BFC v0.3 historical guard: 54 RX immutable release and hash preserved after v0.4 promotion, OK")

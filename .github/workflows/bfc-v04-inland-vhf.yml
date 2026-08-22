@@ -12,6 +12,8 @@ on:
       - "tests/test_bfc_v04_candidate.py"
       - "website/src/lib/bfcPack.ts"
       - "website/src/lib/chirpPack.ts"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/pages/regions/[slug].astro"
       - "website/src/pages/downloads/bourgogne-franche-comte/**"
       - ".github/workflows/bfc-v04-inland-vhf.yml"
   pull_request:
@@ -25,6 +27,8 @@ on:
       - "tests/test_bfc_v04_candidate.py"
       - "website/src/lib/bfcPack.ts"
       - "website/src/lib/chirpPack.ts"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/pages/regions/[slug].astro"
       - "website/src/pages/downloads/bourgogne-franche-comte/**"
       - ".github/workflows/bfc-v04-inland-vhf.yml"
   workflow_dispatch:
@@ -37,8 +41,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  internal-candidate:
-    name: BFC v0.4 internal candidate invariants
+  publication-basis:
+    name: BFC v0.4 publication invariants
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -56,7 +60,7 @@ jobs:
       - name: Install website dependencies
         run: cd website && npm ci
 
-      - name: Build Astro website and immutable BFC v0.3 route
+      - name: Build Astro website and BFC v0.3/v0.4 public routes
         run: cd website && npm run build
 
       - name: Set up Python
@@ -64,11 +68,11 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Build BFC v0.4 internal candidate
+      - name: Build BFC v0.4 publication basis
         run: python tools/build_bfc_v04_candidate.py --write
 
-      - name: Rebuild and compare BFC v0.4 internal candidate
+      - name: Rebuild and compare BFC v0.4 publication basis
         run: python tools/build_bfc_v04_candidate.py --check
 
-      - name: Test BFC v0.4 inland-VHF invariants
+      - name: Test BFC v0.4 public byte identity and publication invariants
         run: python tests/test_bfc_v04_candidate.py --dist website/dist

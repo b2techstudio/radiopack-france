@@ -14,8 +14,12 @@ from tools.build_bfc_v04_candidate import (
     EXPECTED_BASE_COUNT,
     EXPECTED_BASE_SHA,
     EXPECTED_CANDIDATE_COUNT,
+    EXPECTED_CANDIDATE_SHA,
     EXPECTED_INLAND_COUNT,
     INLAND_LOCATION_START,
+    PUBLICATION_GATES,
+    PUBLICATION_RECORD,
+    RELEASE_SCOPE,
     ROOT,
     VALIDATION,
     build,
@@ -31,11 +35,12 @@ parser.add_argument(
 args = parser.parse_args()
 
 base_csv = args.dist / "downloads" / "bourgogne-franche-comte" / "radiopack-france-bourgogne-franche-comte-v0.3.csv"
+public_v04_csv = args.dist / "downloads" / "bourgogne-franche-comte" / "radiopack-france-bourgogne-franche-comte-v0.4.csv"
 candidate, manifest = build(ROOT, base_csv)
 rows = list(csv.DictReader(io.StringIO(candidate.decode("utf-8"), newline="")))
 base_rows = list(csv.DictReader(io.StringIO(base_csv.read_text(encoding="utf-8"), newline="")))
 
-assert manifest["status"] == "release_candidate_frozen_internal"
+assert manifest["status"] == "published_basis_immutable"
 assert manifest["pack"] == "Bourgogne-Franche-Comté"
 assert manifest["target_version"] == "0.4"
 assert manifest["published_base_version"] == "0.3"
@@ -45,14 +50,15 @@ assert manifest["candidate_memory_count"] == EXPECTED_CANDIDATE_COUNT == 61
 assert manifest["candidate_inland_vhf_memory_count"] == EXPECTED_INLAND_COUNT == 7
 assert manifest["candidate_memory_delta"] == 7
 assert manifest["candidate_frozen"] is True
-assert manifest["public_export_allowed"] is False
-assert manifest["published"] is False
-assert manifest["immutable"] is False
+assert manifest["public_export_allowed"] is True
+assert manifest["published"] is True
+assert manifest["immutable"] is True
 assert manifest["candidate_sha256"] == hashlib.sha256(candidate).hexdigest()
-assert manifest["candidate_sha256"] == manifest["expected_candidate_sha256"]
+assert manifest["candidate_sha256"] == manifest["public_csv_sha256"] == manifest["expected_candidate_sha256"] == EXPECTED_CANDIDATE_SHA
 assert manifest["validation"]["public_base_sha_matches_frozen_record"] is True
 assert manifest["validation"]["base_rows_preserved"] is True
 assert manifest["validation"]["candidate_sha_frozen"] is True
+assert manifest["validation"]["candidate_public_byte_identity_verified"] is True
 
 assert len(rows) == 61
 assert all(row["Duplex"] == "off" for row in rows)
@@ -79,6 +85,14 @@ assert {row["Frequency"] for row in inland} == {
 assert "156.900000" not in {row["Frequency"] for row in inland}
 assert "161.500000" not in {row["Frequency"] for row in inland}
 
+assert public_v04_csv.is_file()
+public_v04 = public_v04_csv.read_bytes()
+assert public_v04 == candidate
+assert hashlib.sha256(public_v04).hexdigest() == EXPECTED_CANDIDATE_SHA
+public_rows = list(csv.DictReader(io.StringIO(public_v04.decode("utf-8"), newline="")))
+assert len(public_rows) == 61
+assert public_rows == rows
+
 validation = json.loads((ROOT / VALIDATION).read_text(encoding="utf-8"))
 assert validation["scope"]["memory_count"] == 7
 assert validation["scope"]["candidate_memory_count"] == 61
@@ -86,7 +100,36 @@ assert validation["scope"]["channel_18_added"] is False
 assert validation["gates"]["public_export_allowed"] is False
 assert validation["gates"]["public_release_allowed"] is False
 
+release_scope = json.loads((ROOT / RELEASE_SCOPE).read_text(encoding="utf-8"))
+assert release_scope["status"] == "published_immutable"
+assert release_scope["memory_count"] == 61
+assert release_scope["candidate_sha256"] == EXPECTED_CANDIDATE_SHA
+assert release_scope["public_csv_sha256"] == EXPECTED_CANDIDATE_SHA
+assert release_scope["publication"]["public_release_allowed"] is True
+assert release_scope["publication"]["candidate_public_byte_identity_verified"] is True
+
+publication_gates = json.loads((ROOT / PUBLICATION_GATES).read_text(encoding="utf-8"))
+assert publication_gates["status"] == "published_zero_blockers"
+assert publication_gates["blocker_count"] == 0
+assert publication_gates["public_release_allowed"] is True
+assert publication_gates["candidate_sha256"] == EXPECTED_CANDIDATE_SHA
+assert publication_gates["public_csv_sha256"] == EXPECTED_CANDIDATE_SHA
+assert publication_gates["gates"]["public_route_created"] is True
+assert publication_gates["gates"]["candidate_public_byte_identity_verified"] is True
+assert publication_gates["gates"]["registry_update_verified"] is True
+
+publication = json.loads((ROOT / PUBLICATION_RECORD).read_text(encoding="utf-8"))
+assert publication["status"] == "published_immutable"
+assert publication["version"] == "0.4"
+assert publication["memory_count"] == 61
+assert publication["previous_public_version"] == "0.3"
+assert publication["previous_public_memory_count"] == 54
+assert publication["previous_public_sha256"] == EXPECTED_BASE_SHA
+assert publication["public_csv_sha256"] == EXPECTED_CANDIDATE_SHA
+assert publication["candidate_sha256"] == EXPECTED_CANDIDATE_SHA
+assert publication["published_version_is_immutable"] is True
+
 print(
-    "BFC v0.4 frozen internal candidate: "
-    f"61 RX / +7 inland VHF / sha256={manifest['candidate_sha256']} / public=false"
+    "BFC v0.4 published immutable: "
+    f"61 RX / +7 inland VHF / sha256={EXPECTED_CANDIDATE_SHA} / byte_identity=true / public=true"
 )

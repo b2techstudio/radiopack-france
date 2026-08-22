@@ -1,9 +1,13 @@
 import { buildMetropolitanPack } from "./metropolitanPack";
-import type { Channel, PlacedChannel } from "./chirpPack";
+import { assemblePack, validatePlacedChannels, type Channel, type PlacedChannel } from "./chirpPack";
 
 export const bfcV03Version = "v0.3";
 export const bfcV03MemoryCount = 54;
 export const bfcV03Filename = "radiopack-france-bourgogne-franche-comte-v0.3.csv";
+
+export const bfcV04Version = "v0.4";
+export const bfcV04MemoryCount = 61;
+export const bfcV04Filename = "radiopack-france-bourgogne-franche-comte-v0.4.csv";
 
 export const bfcV03ExtraChannels: Channel[] = [
   {
@@ -135,8 +139,26 @@ export const buildBfcV03Pack = (): PlacedChannel[] => {
     channel,
   }));
   const placed = [...base, ...additions].sort((a, b) => a.location - b.location);
+  validatePlacedChannels(placed);
   if (placed.length !== bfcV03MemoryCount) {
     throw new Error(`BFC ${bfcV03Version}: ${placed.length} memories, expected ${bfcV03MemoryCount}`);
+  }
+  return placed;
+};
+
+export const buildBfcV04Pack = (): PlacedChannel[] => {
+  const base = buildBfcV03Pack();
+  const inland = assemblePack([
+    {
+      path: "data/regional/bourgogne-franche-comte-inland-vhf-rx.json",
+      start: 120,
+      block: "INLAND_VHF_V04",
+    },
+  ]);
+  const placed = [...base, ...inland].sort((a, b) => a.location - b.location);
+  validatePlacedChannels(placed);
+  if (placed.length !== bfcV04MemoryCount) {
+    throw new Error(`BFC ${bfcV04Version}: ${placed.length} memories, expected ${bfcV04MemoryCount}`);
   }
   return placed;
 };

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Build the frozen internal Bourgogne-Franche-Comté v0.4 inland-VHF candidate.
+"""Build the immutable Bourgogne-Franche-Comté v0.4 publication basis.
 
-The public BFC v0.3 route remains immutable and public. This builder consumes the
-CSV produced by a fresh Astro production build, verifies its frozen publication
-SHA-256, then appends only the seven verified inland-navigation VHF memories.
-The resulting internal candidate is bound to a frozen SHA-256 but is not public.
+The public BFC v0.3 route remains immutable. This builder consumes the CSV
+produced by a fresh Astro production build, verifies its frozen publication
+SHA-256, appends only the seven verified inland-navigation VHF memories, and
+requires the result to match the frozen v0.4 public SHA-256.
 """
 from __future__ import annotations
 
@@ -18,9 +18,14 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORD = Path("research/bourgogne-franche-comte-v0.3/publication-record.json")
+PUBLICATION_RECORD = Path("research/bourgogne-franche-comte-v0.4/publication-record.json")
 DEFAULT_BASE_CSV = Path(
     "website/dist/downloads/bourgogne-franche-comte/"
     "radiopack-france-bourgogne-franche-comte-v0.3.csv"
+)
+PUBLIC_V04_CSV = Path(
+    "website/dist/downloads/bourgogne-franche-comte/"
+    "radiopack-france-bourgogne-franche-comte-v0.4.csv"
 )
 INLAND_DATA = Path("data/regional/bourgogne-franche-comte-inland-vhf-rx.json")
 VALIDATION = Path("research/bourgogne-franche-comte-v0.4/inland-vhf-validation-2026-08-22.json")
@@ -134,27 +139,41 @@ def validate(rows: list[list[str]]) -> None:
         raise ValueError("RX-only contract violated")
 
 
-def validate_freeze_records(root: Path) -> None:
+def validate_publication_records(root: Path) -> None:
     release_scope = load_json(root / RELEASE_SCOPE)
     gates = load_json(root / PUBLICATION_GATES)
+    publication = load_json(root / PUBLICATION_RECORD)
 
-    if release_scope.get("status") != "release_candidate_frozen_internal":
-        raise ValueError("BFC v0.4 release scope is not frozen")
+    if release_scope.get("status") != "published_immutable":
+        raise ValueError("BFC v0.4 release scope is not published immutable")
     if release_scope.get("candidate_sha256") != EXPECTED_CANDIDATE_SHA:
         raise ValueError("BFC v0.4 release-scope candidate SHA mismatch")
-    if int(release_scope.get("candidate_memory_count", -1)) != EXPECTED_CANDIDATE_COUNT:
+    if release_scope.get("public_csv_sha256") != EXPECTED_CANDIDATE_SHA:
+        raise ValueError("BFC v0.4 release-scope public SHA mismatch")
+    if int(release_scope.get("memory_count", -1)) != EXPECTED_CANDIDATE_COUNT:
         raise ValueError("BFC v0.4 release-scope memory count mismatch")
-    if release_scope.get("publication", {}).get("public_release_allowed") is not False:
-        raise ValueError("Frozen BFC v0.4 scope unexpectedly marked public")
+    if release_scope.get("publication", {}).get("public_release_allowed") is not True:
+        raise ValueError("Published BFC v0.4 scope does not allow public release")
 
-    if gates.get("status") != "candidate_frozen_publication_pending":
-        raise ValueError("BFC v0.4 publication gates are not in frozen-pending state")
+    if gates.get("status") != "published_zero_blockers":
+        raise ValueError("BFC v0.4 publication gates are not closed")
     if gates.get("candidate_sha256") != EXPECTED_CANDIDATE_SHA:
         raise ValueError("BFC v0.4 publication-gates candidate SHA mismatch")
-    if gates.get("gates", {}).get("candidate_sha_frozen") is not True:
-        raise ValueError("BFC v0.4 candidate SHA gate is not frozen")
-    if gates.get("public_release_allowed") is not False:
-        raise ValueError("BFC v0.4 publication gates unexpectedly allow release")
+    if gates.get("public_csv_sha256") != EXPECTED_CANDIDATE_SHA:
+        raise ValueError("BFC v0.4 publication-gates public SHA mismatch")
+    if gates.get("gates", {}).get("candidate_public_byte_identity_verified") is not True:
+        raise ValueError("BFC v0.4 candidate/public byte identity gate is not closed")
+    if gates.get("public_release_allowed") is not True:
+        raise ValueError("BFC v0.4 publication gates do not allow release")
+
+    if publication.get("status") != "published_immutable" or publication.get("version") != "0.4":
+        raise ValueError("Unexpected BFC v0.4 publication record")
+    if int(publication.get("memory_count", -1)) != EXPECTED_CANDIDATE_COUNT:
+        raise ValueError("Unexpected BFC v0.4 publication-record memory count")
+    if publication.get("public_csv_sha256") != EXPECTED_CANDIDATE_SHA:
+        raise ValueError("Unexpected BFC v0.4 publication-record SHA")
+    if publication.get("candidate_sha256") != EXPECTED_CANDIDATE_SHA:
+        raise ValueError("Unexpected BFC v0.4 candidate/public SHA relationship")
 
 
 def build(root: Path, base_csv: Path = DEFAULT_BASE_CSV) -> tuple[bytes, dict[str, Any]]:
@@ -168,11 +187,9 @@ def build(root: Path, base_csv: Path = DEFAULT_BASE_CSV) -> tuple[bytes, dict[st
 
     validation = load_json(root / VALIDATION)
     if validation.get("status") != "minimum_verified_internal_candidate_scope_closed":
-        raise ValueError("BFC v0.4 inland validation is not ready for internal candidate build")
-    if validation.get("gates", {}).get("public_export_allowed") is not False:
-        raise ValueError("Internal candidate unexpectedly marked public")
+        raise ValueError("BFC v0.4 inland validation is not the frozen research basis")
 
-    validate_freeze_records(root)
+    validate_publication_records(root)
 
     base_path = resolve_under(root, base_csv)
     if not base_path.is_file():
@@ -190,13 +207,14 @@ def build(root: Path, base_csv: Path = DEFAULT_BASE_CSV) -> tuple[bytes, dict[st
     candidate = csv_bytes(rows)
     candidate_sha = hashlib.sha256(candidate).hexdigest()
     if candidate_sha != EXPECTED_CANDIDATE_SHA:
-        raise ValueError(f"BFC v0.4 frozen candidate SHA mismatch: {candidate_sha}")
+        raise ValueError(f"BFC v0.4 publication SHA mismatch: {candidate_sha}")
 
     manifest = {
         "schema_version": "1.0",
-        "status": "release_candidate_frozen_internal",
+        "status": "published_basis_immutable",
         "generated_on": "2026-08-22",
         "frozen_on": "2026-08-22",
+        "published_on": "2026-08-22",
         "pack": "Bourgogne-Franche-Comté",
         "target_version": "0.4",
         "published_base_version": "0.3",
@@ -207,12 +225,15 @@ def build(root: Path, base_csv: Path = DEFAULT_BASE_CSV) -> tuple[bytes, dict[st
         "candidate_inland_vhf_memory_count": EXPECTED_INLAND_COUNT,
         "candidate_memory_delta": EXPECTED_INLAND_COUNT,
         "candidate_sha256": candidate_sha,
+        "public_csv_sha256": candidate_sha,
         "expected_candidate_sha256": EXPECTED_CANDIDATE_SHA,
         "candidate_csv": str(OUTPUT),
+        "public_csv": str(PUBLIC_V04_CSV),
         "builder": "tools/build_bfc_v04_candidate.py",
         "inland_validation": str(VALIDATION),
         "release_scope": str(RELEASE_SCOPE),
         "publication_gates": str(PUBLICATION_GATES),
+        "publication_record": str(PUBLICATION_RECORD),
         "inland_dataset": str(INLAND_DATA),
         "validation": {
             "public_base_sha_matches_frozen_record": True,
@@ -224,11 +245,12 @@ def build(root: Path, base_csv: Path = DEFAULT_BASE_CSV) -> tuple[bytes, dict[st
             "memory_limit_passed": True,
             "inland_scope_minimum_verified": True,
             "candidate_sha_frozen": True,
+            "candidate_public_byte_identity_verified": True,
         },
         "candidate_frozen": True,
-        "public_export_allowed": False,
-        "published": False,
-        "immutable": False,
+        "public_export_allowed": True,
+        "published": True,
+        "immutable": True,
     }
     return candidate, manifest
 
@@ -237,8 +259,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--base-csv", type=Path, default=DEFAULT_BASE_CSV)
-    parser.add_argument("--write", action="store_true", help="write frozen internal candidate and manifest")
-    parser.add_argument("--check", action="store_true", help="compare against candidate written in this workspace")
+    parser.add_argument("--write", action="store_true", help="write immutable publication-basis candidate and manifest")
+    parser.add_argument("--check", action="store_true", help="compare against publication basis written in this workspace")
     args = parser.parse_args()
 
     root = args.root.resolve()
@@ -256,14 +278,14 @@ def main() -> None:
 
     if args.check:
         if not output.is_file() or output.read_bytes() != candidate:
-            raise ValueError("Workspace BFC v0.4 candidate differs from deterministic rebuild")
+            raise ValueError("Workspace BFC v0.4 publication basis differs from deterministic rebuild")
         if not manifest_path.is_file() or load_json(manifest_path) != manifest:
-            raise ValueError("Workspace BFC v0.4 manifest differs from deterministic rebuild")
+            raise ValueError("Workspace BFC v0.4 publication manifest differs from deterministic rebuild")
 
     print(
-        "BFC V0.4 FROZEN INTERNAL CANDIDATE: "
+        "BFC V0.4 PUBLISHED BASIS: "
         f"{EXPECTED_CANDIDATE_COUNT} RX, inland={EXPECTED_INLAND_COUNT}, "
-        f"sha256={manifest['candidate_sha256']}, public=false"
+        f"sha256={manifest['candidate_sha256']}, public=true"
     )
 
 

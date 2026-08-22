@@ -1,20 +1,23 @@
 {
   "schema_version": "1.0",
-  "status": "release_candidate_frozen_internal",
+  "status": "published_immutable",
   "pack": "Bourgogne-Franche-Comté",
   "version": "0.4",
   "prepared_on": "2026-08-22",
   "frozen_on": "2026-08-22",
+  "published_on": "2026-08-22",
   "based_on_public_version": "0.3",
   "base_memory_count": 54,
   "base_public_sha256": "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5",
-  "candidate_memory_count": 61,
+  "memory_count": 61,
   "memory_delta": 7,
   "aviation_memory_count": 14,
   "aviation_memory_delta": 0,
   "inland_vhf_memory_count": 7,
   "inland_vhf_memory_delta": 7,
   "candidate_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
+  "public_csv_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
+  "public_route": "/downloads/bourgogne-franche-comte/radiopack-france-bourgogne-franche-comte-v0.4.csv",
   "inland_scope": {
     "channels": [10, 12, 20, 22, 69],
     "paired_rx_channels": [20, 22],
@@ -38,14 +41,15 @@
     "rf_deduplicated": true,
     "base_rows_preserved": true,
     "no_artificial_fill": true,
-    "published_v0_3_immutable": true,
+    "published_versions_immutable": true,
     "private_ppdr_excluded": true
   },
   "publication": {
-    "public_export_allowed": false,
-    "public_release_allowed": false,
-    "public_registry_updated": false,
-    "public_route_created": false,
-    "reason": "Le candidat et son SHA sont figés, mais la promotion publique est volontairement une étape séparée."
+    "public_export_allowed": true,
+    "public_release_allowed": true,
+    "public_registry_updated": true,
+    "public_route_created": true,
+    "candidate_public_byte_identity_verified": true,
+    "historical_v0_3_retained": true
   }
 }

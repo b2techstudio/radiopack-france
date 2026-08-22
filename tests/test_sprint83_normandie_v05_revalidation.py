@@ -111,8 +111,12 @@ else:
     assert BACKLOG["rules"]["theory_is_not_measured_reception"] is True
 
 registry = REGISTRY.read_text(encoding="utf-8")
-assert '/downloads/normandie/radiopack-france-normandie-v0.4.csv' in registry
-if not PUBLIC_V05.exists():
+if PUBLIC_V05.exists():
+    assert '/downloads/normandie/radiopack-france-normandie-v0.5.csv' in registry
+    assert 'version: "v0.5"' in registry
+    assert 'memoryCount: 146' in registry
+else:
+    assert '/downloads/normandie/radiopack-france-normandie-v0.4.csv' in registry
     assert '/downloads/normandie/radiopack-france-normandie-v0.5.csv' not in registry
 
-print("Sprint 83 historical Normandie revalidation remains auditable; later theoretical promotion to 146 is allowed without rewriting Sprint 83 evidence OK")
+print("Sprint 83 historical Normandie revalidation remains auditable; later theoretical promotion/publication to 146 is allowed without rewriting Sprint 83 evidence OK")

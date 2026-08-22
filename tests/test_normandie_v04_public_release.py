@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / 'website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv'
+PUBLIC_V05 = ROOT / 'website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv'
 BASE = ROOT / 'website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv'
 RECORD = ROOT / 'research/normandie-v0.4/publication-record.json'
 REGISTRY = ROOT / 'website/src/lib/packRegistry.ts'
@@ -22,13 +23,20 @@ assert all(len(r['Name']) <= 10 for r in rows)
 assert len({r['Location'] for r in rows})==142
 assert len({r['Name'] for r in rows})==142
 freqs={round(float(r['Frequency']),6) for r in rows}
-for blocked in [145.075,145.675,145.4675,432.575,431.975]: assert blocked not in freqs
+for blocked_at_v04_release in [145.075,145.675,145.4675,432.575,431.975]:
+    assert blocked_at_v04_release not in freqs
 record=json.loads(RECORD.read_text(encoding='utf-8'))
 assert record['status']=='published_immutable' and record['version']=='0.4' and record['memory_count']==142
 assert record['public_csv_sha256']==hashlib.sha256(PUBLIC.read_bytes()).hexdigest()
 assert record['base_csv_sha256']==hashlib.sha256(BASE.read_bytes()).hexdigest()
 assert record['base_memory_count']==139 and record['published_version_is_immutable'] is True
 registry=REGISTRY.read_text(encoding='utf-8')
-assert 'version: "v0.4"' in registry and 'memoryCount: 142' in registry
-assert '/downloads/normandie/radiopack-france-normandie-v0.4.csv' in registry
-print('Normandie v0.4 public release: immutable 142-memory RX-only CSV exactly matches reviewed candidate OK')
+assert PUBLIC.is_file()
+if PUBLIC_V05.exists():
+    assert 'version: "v0.5"' in registry
+    assert 'memoryCount: 146' in registry
+    assert '/downloads/normandie/radiopack-france-normandie-v0.5.csv' in registry
+else:
+    assert 'version: "v0.4"' in registry and 'memoryCount: 142' in registry
+    assert '/downloads/normandie/radiopack-france-normandie-v0.4.csv' in registry
+print('Normandie v0.4 historical public release: immutable 142-memory RX-only CSV remains exactly reproducible after later versions OK')

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-22",
+  "publication_sprint": 113,
+  "state_version": "0.22.01",
+  "pack": "Normandie",
+  "version": "0.5",
+  "memory_count": 146,
+  "new_memory_count_vs_v0_4": 4,
+  "public_csv": "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv",
+  "public_csv_sha256": "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59",
+  "candidate_sha256": "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59",
+  "candidate_public_byte_identity_verified": true,
+  "candidate_freeze": "research/normandie-v0.5/candidate-freeze.json",
+  "release_scope": "research/normandie-v0.5/release-scope.json",
+  "publication_gates": "research/normandie-v0.5/publication-gates.json",
+  "previous_public_version": "0.4",
+  "previous_public_memory_count": 142,
+  "previous_public_csv": "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv",
+  "previous_public_csv_sha256": "3da26f18cefbf7ec1dfb6a991101d07f6a8ce9fb921015a7202870fc9b9db66d",
+  "theoretical_coverage": {
+    "memory_count": 4,
+    "locations": [178, 179, 180, 181],
+    "stations": ["F1ZBX / R3 Broceliande", "F5ZHA Laval"],
+    "frequencies_mhz": [145.075, 145.675, 145.4675, 432.575],
+    "field_reception_verified": false,
+    "field_reception_required_for_publication": false,
+    "public_disclosure_required": true,
+    "public_label": "couverture théorique",
+    "theory_is_not_measured_or_guaranteed_reception": true,
+    "policy": "research/normandie-v0.5/theoretical-coverage-policy.json",
+    "decision_record": "research/normandie-v0.5/sprint112-theoretical-coverage.json"
+  },
+  "deferred_after_v0_5": [
+    "F1ZOV_OPERATIONAL_STATUS",
+    "F6ZES_RESOLVED"
+  ],
+  "published_version_is_immutable": true,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "no_artificial_fill": true,
+    "unresolved_frequency_not_inferred": true,
+    "maintenance_status_not_overridden_by_theory": true,
+    "historical_v0_4_retained": true,
+    "field_sessions_are_optional_quality_feedback": true
+  }
+}

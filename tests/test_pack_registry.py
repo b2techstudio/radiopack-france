@@ -18,7 +18,7 @@ ANNECY_FULL = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-fran
 ANNECY_NO_AIR = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv"
 ANNECY_V03_FULL = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3.csv"
 ANNECY_V03_NO_AIR = ROOT / "website/public/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.3-sans-aviation.csv"
-NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
+NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv"
 BRETAGNE = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv"
 for path in [
     REGISTRY,
@@ -42,8 +42,8 @@ registry = REGISTRY.read_text(encoding="utf-8")
 for expected in [
     'id: "annecy-alpes-leman"', 'regionSlug: "annecy-haute-savoie"', 'name: "Annecy–Alpes–Léman"',
     'version: "v0.4"', 'defaultVariant: "full"', 'includedVariant: "full"', 'excludedVariant: "no-aviation"',
-    'memoryCount: 77', 'memoryCount: 60', 'id: "normandie"', 'regionSlug: "normandie"', 'version: "v0.4"',
-    'memoryCount: 142', '/downloads/normandie/radiopack-france-normandie-v0.4.csv',
+    'memoryCount: 77', 'memoryCount: 60', 'id: "normandie"', 'regionSlug: "normandie"', 'version: "v0.5"',
+    'memoryCount: 146', '/downloads/normandie/radiopack-france-normandie-v0.5.csv',
     'id: "bretagne"', 'regionSlug: "bretagne"', 'memoryCount: 151',
     '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv',
     '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv',
@@ -52,12 +52,13 @@ for expected in [
 ]:
     assert expected in registry
 assert registry.count('downloadUrl: "') == 4
+assert "couverture théorique documentée" in registry
 
 page = GENERATOR.read_text(encoding="utf-8")
 for expected in [
     "77 mémoires",
     "60 sans aviation",
-    "142 mémoires",
+    "146 mémoires",
     "151 mémoires",
     'data-pack-shortcut="annecy-alpes-leman"',
     'data-pack-shortcut="normandie"',
@@ -107,7 +108,7 @@ for path, expected_count in [
     (ANNECY_NO_AIR, 60),
     (ANNECY_V03_FULL, 76),
     (ANNECY_V03_NO_AIR, 59),
-    (NORMANDIE, 142),
+    (NORMANDIE, 146),
     (BRETAGNE, 151),
 ]:
     with path.open(encoding="utf-8", newline="") as handle:

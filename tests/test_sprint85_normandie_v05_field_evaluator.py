@@ -194,9 +194,16 @@ with tempfile.TemporaryDirectory(prefix="radiopack-s85-bad-schema-") as td:
     assert result.returncode != 0
     assert "missing required columns" in result.stderr
 
-assert not (ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv").exists()
+public_v05 = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv"
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert "radiopack-france-normandie-v0.4.csv" in registry
-assert "radiopack-france-normandie-v0.5.csv" not in registry
+# Sprint 85 remains historical optional field-evaluation tooling. Later theory-based
+# publication does not rewrite its evaluator policy or synthetic session results.
+if public_v05.exists():
+    assert "radiopack-france-normandie-v0.5.csv" in registry
+    assert 'version: "v0.5"' in registry
+    assert 'memoryCount: 146' in registry
+else:
+    assert "radiopack-france-normandie-v0.4.csv" in registry
+    assert "radiopack-france-normandie-v0.5.csv" not in registry
 
-print("Sprint 85 Normandie v0.5: field-session evaluator classifies R3/F5ZHA gates reproducibly, ignores diagnostics for promotion, never auto-mutates or publishes OK")
+print("Sprint 85 historical Normandie field evaluator remains reproducible as optional quality tooling and never auto-mutates or publishes OK")

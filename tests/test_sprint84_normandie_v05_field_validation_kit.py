@@ -87,8 +87,15 @@ with tempfile.TemporaryDirectory(prefix="radiopack-normandie-v05-field-") as td:
     assert manifest["candidate_memory_delta"] == 0
     assert manifest["public_export_allowed"] is False
 
-assert PUBLIC_V04.is_file() and not PUBLIC_V05.exists()
-assert "/downloads/normandie/radiopack-france-normandie-v0.4.csv" in REGISTRY
-assert "/downloads/normandie/radiopack-france-normandie-v0.5.csv" not in REGISTRY
+# Sprint 84 remains a historical diagnostic kit even after the project later adopts
+# theoretical coverage and publishes v0.5. Its own 142-memory context is not rewritten.
+assert PUBLIC_V04.is_file()
+assert "/downloads/normandie/radiopack-france-normandie-v0.4.csv" in REGISTRY or PUBLIC_V05.exists()
+if PUBLIC_V05.exists():
+    assert "/downloads/normandie/radiopack-france-normandie-v0.5.csv" in REGISTRY
+    assert 'version: "v0.5"' in REGISTRY
+    assert 'memoryCount: 146' in REGISTRY
+else:
+    assert "/downloads/normandie/radiopack-france-normandie-v0.5.csv" not in REGISTRY
 
-print("Sprint 84 Normandie v0.5 field kit: 6 RX diagnostic memories + empty session log template, candidate remains 142, no public mutation OK")
+print("Sprint 84 historical Normandie field kit remains reproducible as optional diagnostic tooling after later theoretical coverage/publication OK")

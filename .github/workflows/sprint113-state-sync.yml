@@ -1,0 +1,59 @@
+name: Sprint 113 State Sync
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/project-resume-state.json"
+      - "research/normandie-v0.5/**"
+      - "research/sprint-112-summary.md"
+      - "research/sprint-113-summary.md"
+      - "README.md"
+      - "PROJECT_STATUS.md"
+      - "CHANGELOG.md"
+      - "generator/options.json"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/data/regions.json"
+      - "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv"
+      - "tests/test_sprint113_state_sync.py"
+      - ".github/workflows/sprint113-state-sync.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "research/project-resume-state.json"
+      - "research/normandie-v0.5/**"
+      - "README.md"
+      - "PROJECT_STATUS.md"
+      - "CHANGELOG.md"
+      - "tests/test_sprint113_state_sync.py"
+      - ".github/workflows/sprint113-state-sync.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  state-sync:
+    name: Sprint 113 canonical state invariants
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Verify Sprint 113 state synchronization
+        run: python tests/test_sprint113_state_sync.py
+
+      - name: Verify Sprint 110 remains historical
+        run: python tests/test_sprint110_state_sync.py
+
+      - name: Verify Sprint 97 remains historical
+        run: python tests/test_sprint97_state_sync.py

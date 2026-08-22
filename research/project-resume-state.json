@@ -2,8 +2,8 @@
   "schema_version": "1.4",
   "status": "project_resume_state",
   "updated": "2026-08-22",
-  "current_sprint": 110,
-  "state_version": "0.21.98",
+  "current_sprint": 111,
+  "state_version": "0.21.99",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -188,7 +188,7 @@
   "bretagne_v0_3_airac_handoff": {
     "pack": "Bretagne",
     "target_version": "0.3",
-    "status": "airac09_future_handoff_prepared_waiting_effective_date",
+    "status": "airac09_future_source_available_readiness_prepared_waiting_effective_date",
     "public_base_version": "0.2",
     "public_base_memory_count": 151,
     "candidate_memory_count": 151,
@@ -198,7 +198,20 @@
     "airac_next_required": "09/26",
     "airac_next_effective_from": "2026-09-03",
     "publication_allowed_before_airac09_revalidation": false,
-    "handoff": "research/bretagne-v0.3/airac09-handoff.json"
+    "handoff": "research/bretagne-v0.3/airac09-handoff.json",
+    "future_cycle_source_available": true,
+    "future_cycle_source_observed_on": "2026-08-22",
+    "future_cycle_source_is_current_evidence": false,
+    "airac_next_effective_until_inclusive": "2026-09-30",
+    "baseline_aviation_memory_count": 16,
+    "required_explicit_memory_decision_count": 16,
+    "candidate_rebuild_allowed_before_effective_date": false,
+    "automatic_candidate_mutation_allowed": false,
+    "automatic_publication_allowed": false,
+    "readiness": "research/bretagne-v0.3/airac09-readiness.json",
+    "revalidation_template": "research/bretagne-v0.3/airac09-revalidation-template.json",
+    "validator": "tools/check_bretagne_v03_airac09_revalidation.py",
+    "summary": "research/sprint-111-summary.md"
   },
   "annecy_v0_4_research": {
     "status": "historical_candidate_state_before_publication",
@@ -562,9 +575,21 @@
     "research/normandie-v0.5/field-evaluation-policy.json",
     "tools/evaluate_normandie_v05_field_sessions.py",
     "tests/test_sprint110_normandie_v05_refresh.py",
-    "research/sprint-110-summary.md"
+    "research/sprint-110-summary.md",
+    "research/bretagne-v0.3/airac09-readiness.json",
+    "research/bretagne-v0.3/airac09-revalidation-template.json",
+    "tools/check_bretagne_v03_airac09_revalidation.py",
+    "tests/test_sprint111_bretagne_airac09_readiness.py",
+    ".github/workflows/sprint111-bretagne-airac09-readiness.yml",
+    "research/sprint-111-summary.md"
   ],
   "recent_sprints": [
+    {
+      "sprint": 111,
+      "state_version": "0.21.99",
+      "summary": "Bretagne v0.3 AIRAC 09/26 readiness prepared with a 16-memory aviation revalidation matrix and a deterministic date-aware validator; future SIA AIRAC 09/26 availability is recorded but cannot be treated as current evidence before 2026-09-03; no RF or public CSV mutation.",
+      "summary_file": "research/sprint-111-summary.md"
+    },
     {
       "sprint": 110,
       "state_version": "0.21.98",
@@ -689,7 +714,10 @@
     "inland_navigation_vhf_is_distinct_from_marine_vhf": true,
     "shared_inland_marine_rf_must_not_be_duplicated": true,
     "undocumented_local_navigation_channel_must_not_be_guessed": true,
-    "temporary_navigation_channel_requires_current_evidence_before_promotion": true
+    "temporary_navigation_channel_requires_current_evidence_before_promotion": true,
+    "future_airac_source_availability_is_not_current_evidence": true,
+    "candidate_rebuild_after_airac_revalidation_is_not_publication": true,
+    "airac_revalidation_requires_explicit_decision_for_every_scoped_aviation_memory": true
   },
   "latest_sprint108_ara_v03_candidate": {
     "sprint": 108,
@@ -794,5 +822,38 @@
     "field_evaluation_policy": "research/normandie-v0.5/field-evaluation-policy.json",
     "field_evaluator": "tools/evaluate_normandie_v05_field_sessions.py",
     "summary": "research/sprint-110-summary.md"
+  },
+  "latest_sprint111_bretagne_airac09_readiness": {
+    "sprint": 111,
+    "state_version": "0.21.99",
+    "completed_on": "2026-08-22",
+    "status": "bretagne_v03_airac09_readiness_prepared_future_cycle_not_current",
+    "public_base_version": "0.2",
+    "public_base_memory_count": 151,
+    "candidate_memory_count": 151,
+    "candidate_memory_delta": 0,
+    "baseline_aviation_cycle": "AIRAC 08/26",
+    "baseline_aviation_memory_count": 16,
+    "baseline_locations": [
+      130,
+      145
+    ],
+    "required_cycle": "AIRAC 09/26",
+    "future_sia_product_available": true,
+    "future_sia_product_observed_on": "2026-08-22",
+    "future_sia_product_is_current_evidence": false,
+    "effective_from": "2026-09-03",
+    "effective_until_inclusive": "2026-09-30",
+    "explicit_memory_decision_count_required": 16,
+    "candidate_rebuild_allowed_before_effective_date": false,
+    "automatic_candidate_mutation_allowed": false,
+    "automatic_publication_allowed": false,
+    "public_csv_mutation": false,
+    "rf_data_mutation": false,
+    "public_v0_3_created": false,
+    "readiness": "research/bretagne-v0.3/airac09-readiness.json",
+    "revalidation_template": "research/bretagne-v0.3/airac09-revalidation-template.json",
+    "validator": "tools/check_bretagne_v03_airac09_revalidation.py",
+    "summary": "research/sprint-111-summary.md"
   }
 }

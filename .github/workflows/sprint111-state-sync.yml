@@ -1,0 +1,62 @@
+name: Sprint 111 State Sync
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/project-resume-state.json"
+      - "research/bretagne-v0.3/airac09-readiness.json"
+      - "research/bretagne-v0.3/airac09-revalidation-template.json"
+      - "research/sprint-111-summary.md"
+      - "README.md"
+      - "PROJECT_STATUS.md"
+      - "tests/test_site_files.py"
+      - "tests/test_sprint110_state_sync.py"
+      - "tests/test_sprint111_state_sync.py"
+      - "tests/test_sprint111_bretagne_airac09_readiness.py"
+      - ".github/workflows/sprint111-state-sync.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "research/project-resume-state.json"
+      - "research/bretagne-v0.3/airac09-readiness.json"
+      - "research/bretagne-v0.3/airac09-revalidation-template.json"
+      - "research/sprint-111-summary.md"
+      - "README.md"
+      - "PROJECT_STATUS.md"
+      - "tests/test_site_files.py"
+      - "tests/test_sprint110_state_sync.py"
+      - "tests/test_sprint111_state_sync.py"
+      - "tests/test_sprint111_bretagne_airac09_readiness.py"
+      - ".github/workflows/sprint111-state-sync.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  sprint111-state:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Verify Sprint 111 canonical state
+        run: python tests/test_sprint111_state_sync.py
+
+      - name: Verify Sprint 111 AIRAC readiness
+        run: python tests/test_sprint111_bretagne_airac09_readiness.py
+
+      - name: Verify Sprint 110 historical state
+        run: python tests/test_sprint110_state_sync.py
+
+      - name: Verify repository/site synchronization
+        run: python tests/test_site_files.py

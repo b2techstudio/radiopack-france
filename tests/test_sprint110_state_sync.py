@@ -16,9 +16,10 @@ for path in [STATE, REFRESH, KIT, POLICY, EVALUATOR, README, STATUS, ARA_RECORD]
     assert path.is_file(), path
 
 state = json.loads(STATE.read_text(encoding="utf-8"))
-assert state["current_sprint"] == 110
-assert state["state_version"] == "0.21.98"
+assert state["current_sprint"] >= 110
 assert state["updated"] == "2026-08-22"
+if state["current_sprint"] == 110:
+    assert state["state_version"] == "0.21.98"
 
 normandie_public = state["public_packs"]["normandie"]
 assert normandie_public["version"] == "0.4"
@@ -125,7 +126,6 @@ for source in [
 
 readme = README.read_text(encoding="utf-8")
 for token in [
-    "Sprint 110 / 0.21.98",
     "## Sprint 110 — Normandie v0.5 : sources revalidées, handoff terrain",
     "142 RX / delta 0",
     "R3/F1ZBX",
@@ -133,15 +133,15 @@ for token in [
     "1591 mémoires RX cumulées",
 ]:
     assert token in readme, token
+assert f"État courant : Sprint {state['current_sprint']} / {state['state_version']}" in readme
 
 status = STATUS.read_text(encoding="utf-8")
 for token in [
-    "Sprint courant : **110**",
-    "État logique : **0.21.98**",
-    "Résumé courant : `research/sprint-110-summary.md`",
     "## Sprint 110 — Normandie v0.5 revalidée, zéro delta",
     "collecte de vraies sessions terrain",
 ]:
     assert token in status, token
+assert f"Sprint courant : **{state['current_sprint']}**" in status
+assert f"État logique : **{state['state_version']}**" in status
 
-print("Sprint 110 state sync: Normandie v0.5=142 RX delta 0, field gates preserved, no public mutation, ARA v0.3 immutable OK")
+print("Sprint 110 historical state guard: Normandie v0.5=142 RX delta 0 preserved, field priority remains valid, later sprints allowed")

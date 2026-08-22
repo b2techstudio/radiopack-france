@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **22 août 2026**
-Sprint courant : **110**
-État logique : **0.21.98**
+Sprint courant : **111**
+État logique : **0.21.99**
 
-L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-110-summary.md`.
+L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-111-summary.md`.
 
 ## État public
 
@@ -24,6 +24,14 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Corse v0.2 : **137 mémoires RX**, publiée et immuable.
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
+
+## Sprint 111 — Bretagne v0.3 AIRAC 09/26 prête pour revalidation
+
+Le produit SIA AIRAC 09/26 est disponible en avance mais n'est **pas courant avant le 3 septembre 2026**. Sprint 111 prépare une matrice de **16 mémoires aviation** (positions 130–145) et un validateur qui exige une décision explicite pour chaque mémoire, une source primaire courante et une revue humaine.
+
+Bretagne v0.2 reste publique et immuable à **151 RX** ; le candidat v0.3 reste **151 RX / delta 0**. Aucun CSV v0.3 n'est créé. Un verdict AIRAC positif autorisera seulement une reconstruction interne, jamais une publication automatique.
+
+La priorité immédiatement actionnable reste **Normandie v0.5 terrain**.
 
 ## Sprint 110 — Normandie v0.5 revalidée, zéro delta
 
@@ -84,7 +92,7 @@ La route Astro publique v0.4 a été vérifiée byte-identique au candidat figé
 
 ### Bretagne v0.3
 
-Candidat **151 RX, delta 0**. Publication bloquée jusqu'à la revalidation AIRAC 09/26 à partir du **3 septembre 2026** ; avant cette date, AIRAC 08/26 reste la référence applicable.
+Candidat **151 RX, delta 0**. Sprint 111 a préparé la matrice de 16 mémoires et le validateur. AIRAC 09/26 est disponible comme source future mais ne devient courant qu'à partir du **3 septembre 2026** ; avant cette date, AIRAC 08/26 reste la référence applicable.
 
 ## Contrat permanent
 

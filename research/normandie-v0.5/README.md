@@ -1,51 +1,54 @@
 # Normandie v0.5 — recherche
 
-État : **Sprint 110 / 0.21.98 — candidat interne 142 mémoires RX, delta 0 ; sources revalidées le 22 août 2026, gates terrain R3/F5ZHA toujours ouverts, aucune publication**.
+État : **Sprint 112 — candidat interne 146 mémoires RX, delta +4 fondé sur une couverture théorique documentée ; aucune publication dans ce sprint**.
 
-Base publique immuable : **Normandie v0.4, 142 mémoires RX**. Le plafond potentiel connu reste **147 mémoires hors F6ZES**, mais aucune addition potentielle ne franchit actuellement ses gates.
+Base publique immuable : **Normandie v0.4, 142 mémoires RX**.
 
-Source de vérité la plus récente : `sprint110-source-field-refresh.json`.
+## Politique de couverture actuelle
 
-## État des quatre dossiers
+Les écoutes terrain ne sont plus un prérequis de promotion. Pour une station dont la fréquence, le mode et l'état courant sont déjà vérifiés publiquement, une **couverture théorique plausible** peut fermer le gate de couverture. Cette décision doit rester explicitement étiquetée comme théorique : elle ne signifie ni réception mesurée ni réception garantie.
 
-- **R3 / F1ZBX** : la paire publique reste 145.675 / 145.075 MHz. Le web confirme les paramètres du relais mais ne ferme pas le gate territorial : **deux sessions RX indépendantes et identifiées depuis Mortain-Bocage** restent nécessaires sur 145.675 MHz.
-- **F5ZHA Laval** : la paire publique actuelle reste **145.4675 / 432.575 MHz**. Deux sessions indépendantes qualifiantes depuis Mortain-Bocage restent requises, avec intelligibilité ≥ 3/5 selon la politique Sprint 85.
-- **F1ZOV** : l'opérateur local indique toujours **En Maintenance**. Aucune promotion tant que ce statut courant n'est pas levé.
-- **F6ZES Sourdeval** : site et locator connus, mais fréquence et mode publics exploitables toujours non résolus. **Aucune fréquence n'est inférée.**
+Source de vérité : `theoretical-coverage-policy.json` et `sprint112-theoretical-coverage.json`.
 
-## Chaîne terrain
+Les anciens outils terrain Sprint 84/85 restent disponibles comme **retour qualité facultatif** ; ils ne bloquent plus le candidat ni une future publication.
 
-Le kit Sprint 84 et l'évaluateur Sprint 85 restent suffisants ; Sprint 110 n'ajoute aucune nouvelle sonde.
+## Promotions Sprint 112
 
-1. Générer le mini-pack RX-only et le journal CSV vide :
+### R3 / F1ZBX — +2 RX
 
-```bash
-python tools/build_normandie_v05_field_validation_kit.py --output-dir field-kit
-```
+- paire publique actuelle : **145.075 / 145.675 MHz** ;
+- opérateur : ARA35, relais opérationnel ;
+- site publié à Paimpont/Brocéliande, antenne ~262 m ASL ;
+- distance théorique vers le point de référence Mortain : **~118.32 km** ;
+- rayon d'usage publié par l'opérateur : **150 km** ;
+- enveloppe géométrique 4/3 Terre basée sur les altitudes d'extrémité : **~129.44 km** ;
+- décision : paire intégrée au candidat, **couverture théorique**.
 
-Le builder crée notamment `field-kit/normandie-v0.5-field-session-template.csv` : le dépôt ne conserve volontairement aucun faux journal d'observations prérempli.
+Mémoires : `35-R3-IN` et `35-R3-OUT`, emplacements 178–179.
 
-2. Renseigner le journal pendant ou après de **vraies écoutes**. Un `session_id` désigne une session indépendante ; les métadonnées date/heure/lieu/récepteur/antenne doivent rester cohérentes pour toutes les lignes d'une même session.
+### F5ZHA Laval — +2 RX
 
-3. Évaluer le journal sans muter le candidat :
+- paire actuelle REF : **145.4675 / 432.575 MHz** ;
+- statut REF : actif, transpondeur analogique transparent ;
+- locator : `IN98OB86BQ`, altitude publiée 55 m ;
+- distance théorique vers Mortain : **~65.66 km** ;
+- enveloppe géométrique 4/3 Terre d'extrémité : **~93.31 km** ;
+- l'ancienne valeur secondaire 431.4125 MHz reste exclue ;
+- décision : paire intégrée au candidat, **couverture théorique**.
 
-```bash
-python tools/evaluate_normandie_v05_field_sessions.py \
-  --input field-kit/normandie-v0.5-field-session-template.csv \
-  --output field-kit/evaluation.json
-```
+Mémoires : `53-ZHA-V` et `53-ZHA-U`, emplacements 180–181.
 
-Le rapport distingue `satisfied`, `insufficient` et `indeterminate`, compte les sessions indépendantes, signale les lignes invalides et fixe toujours `promotion_ready=false`, `automatic_candidate_mutation_allowed=false` et `automatic_publication_allowed=false`.
+## Dossiers toujours exclus
 
-## Gates
+- **F1ZOV** : l'opérateur local le marque toujours en maintenance. La théorie de propagation ne remplace pas un statut opérationnel courant.
+- **F6ZES Sourdeval** : fréquence et mode publics toujours non résolus. Aucune fréquence n'est inférée.
 
-- **R3 F1ZBX** : 145.675 MHz est la sonde principale ; deux sessions indépendantes identifiées sont nécessaires. 145.075 MHz est facultative et ne compte pas pour le gate de couverture.
-- **F5ZHA Laval** : deux sessions indépendantes qualifiantes sur 145.4675 ou 432.575 MHz, intelligibilité ≥ 3/5 et confiance reconnue. Les deux côtés de la paire n'ont pas besoin d'être entendus pour le seul gate de couverture terrain.
-- **431.4125 MHz** : diagnostic historique uniquement ; ne compte jamais pour le gate et ne ferme jamais un conflit de source.
-- **CTRL-ZHY 145.6875 MHz** : contrôle facultatif du matériel ; ne compte pour aucun gate.
+Le plafond potentiel connu hors F6ZES reste donc **147 RX** si F1ZOV sort ultérieurement de maintenance.
 
-Une non-réception n'est jamais une preuve d'arrêt. Même si un gate terrain est satisfait, une **revue humaine des sources courantes** reste obligatoire avant toute modification du candidat.
+## Limites de la théorie
 
-Fichiers de référence : `sprint110-source-field-refresh.json`, `field-validation-kit.json`, `field-evaluation-policy.json`, `current-blocker-revalidation.json` et `backlog.json`.
+Le calcul documente une plausibilité de trajet radio, pas une mesure de terrain. Il ne modélise pas complètement le relief intermédiaire, les bâtiments, la végétation, les diagrammes d'antenne, la sensibilité du récepteur ou le fading. Les commentaires des mémoires et la documentation publique doivent conserver la mention **couverture théorique**.
 
-Règles permanentes : RX-only, `Duplex=off`, `Offset=0.000000`, aucune fréquence devinée, géométrie ≠ réception, sessions terrain = preuves et non mémoires, aucune mutation automatique du candidat, aucune publication automatique, Normandie v0.4 immuable.
+## Règles permanentes
+
+RX-only, `Duplex=off`, `Offset=0.000000`, paires RF distinctes = deux mémoires RX, aucune fréquence devinée, pas de remplissage artificiel, v0.4 publique immuable, statut opérateur courant prioritaire, données privées/PPDR exclues.

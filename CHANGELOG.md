@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.21.93 - 2026-08-22
+
+**Sprint 105** — Île-de-France v0.4 publiée et figée à **64 mémoires RX**.
+
+- base v0.3/57 vérifiée et conservée immuable ;
+- +7 mémoires VHF de navigation intérieure : canal 10 et paired RX 18/20/22 ;
+- 18 aviation inchangées, delta 0 ;
+- 15 radio régionales inchangées, delta 0 ;
+- canal 69 non promu ; aucun canal 16 maritime ajouté ;
+- checklist **12/12**, publication gates **0 blocker** ;
+- candidat/public byte-identiques ;
+- SHA-256 : `14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2` ;
+- v0.3/57 et v0.2/58 conservées historiques et immuables ;
+- état projet synchronisé sur Sprint 105 / 0.21.93.
+
 ## 0.21.92 - 2026-08-22
 
 **Sprint 104** — Grand Est v0.4 publiée et figée à **97 mémoires RX** après le Sprint 103 d'audit VHF navigation intérieure.

@@ -2,7 +2,7 @@
 
 **Couverture publique au 22 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 104 / 0.21.92 — Grand Est v0.4 est publiée et immuable à 97 RX, dont 19 aviation, 41 radio régionales et 13 VHF de navigation intérieure.**
+**État courant : Sprint 105 / 0.21.93 — Île-de-France v0.4 est publiée et immuable à 64 RX, dont 18 aviation, 15 radio régionales et 7 VHF de navigation intérieure.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -13,7 +13,8 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 - **Normandie v0.4** — 142 mémoires RX ;
 - **Bretagne v0.2** — 151 mémoires RX ;
 - **Hauts-de-France v0.2** — 144 mémoires RX ;
-- **Île-de-France v0.3** — 57 mémoires RX, dont 18 aviation ;
+- **Île-de-France v0.4** — 64 mémoires RX, dont 18 aviation et 7 VHF navigation intérieure ;
+- **Île-de-France v0.3** — 57 mémoires RX, historique immuable ;
 - **Île-de-France v0.2** — 58 mémoires RX, historique immuable ;
 - **Grand Est v0.4** — 97 mémoires RX, dont 19 aviation et 13 VHF navigation intérieure ;
 - **Grand Est v0.3** — 84 mémoires RX, historique immuable ;
@@ -30,7 +31,7 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 
 Repère historique de publication : **Annecy–Alpes–Léman v0.4 : 77 RX / 60 sans aviation** ; la v0.3 76/59 reste immuable.
 
-Les variantes par défaut représentent **1568 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
+Les variantes par défaut représentent **1575 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
 
 Le projet couvre actuellement les **13 régions métropolitaines**. Les cinq régions d'outre-mer ne sont pas encore incluses dans cette couverture.
 
@@ -62,6 +63,14 @@ Chaque future v0.3 régionale suit désormais le même processus :
 7. figer scope, checklist, gates, `publication-record.json` et SHA-256 avant publication.
 
 Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé. La VHF de navigation intérieure est auditée séparément ; une RF déjà présente via le bloc maritime n'est jamais dupliquée.
+
+## Sprint 105 — Île-de-France v0.4 publiée
+
+Île-de-France v0.4 est publiée à **64 RX** à partir de la v0.3 immuable de 57 RX. Le delta est exclusivement constitué de **7 mémoires VHF de navigation intérieure** : canal 10 en simplex et canaux 18, 20 et 22 en paired RX. Aviation : **18, delta 0** ; radio régionale : **15, delta 0**.
+
+Les affectations locales 2026 publiées par VNF pour le PCC de Vives-Eaux sont Varennes 22, Champagne 18, La Cave 22, Vives-Eaux 20 et Le Coudray 22. Le canal 69 n'est pas promu faute de base 2026 suffisante pour une mémoire permanente ; aucun canal 16 maritime n'est ajouté.
+
+SHA public : `14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2`. Les v0.3/57 et v0.2/58 restent historiques et immuables. AIRAC 08/26 reste applicable jusqu'au 2 septembre 2026 inclus ; toute nouvelle révision aviation à partir du 3 septembre exige AIRAC 09/26.
 
 ## Sprint 104 — Grand Est v0.4 publiée
 
@@ -135,7 +144,7 @@ Le candidat historique Annecy–Alpes–Léman v0.4 était figé à **77 RX / 60
 
 ## Travaux encore ouverts
 
-**Bretagne v0.3** reste à **151 RX** en attente de la transition AIRAC 09/26 et **Normandie v0.5** reste à **142 RX** avec ses gates terrain/source. Après les publications BFC, Centre et Île-de-France v0.3, les autres régions métropolitaines encore en v0.2 seront traitées progressivement.
+**Bretagne v0.3** reste à **151 RX** en attente de la transition AIRAC 09/26 et **Normandie v0.5** reste à **142 RX** avec ses gates terrain/source. Après les publications BFC, Centre, Île-de-France v0.4 et Grand Est v0.4, les autres régions métropolitaines encore en v0.2 seront traitées progressivement.
 
 ## Site public
 
@@ -169,6 +178,8 @@ python tests\test_sprint101_state_sync.py
 python tests\test_idf_v03_research.py
 python tests\test_idf_v03_candidate.py
 python tests\test_idf_v03_publication.py
+python tests\test_idf_v04_publication.py
+python tests\test_sprint105_state_sync.py
 
 cd website
 npm ci

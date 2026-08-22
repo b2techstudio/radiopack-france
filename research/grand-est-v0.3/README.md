@@ -1,56 +1,61 @@
 # Grand Est v0.3 — Sprint 102
 
-Statut : **candidat interne construit — aucune mutation publique**.
+Statut : **publié — immuable**.
 
-Base publique immuable : **Grand Est v0.2 / 59 mémoires RX**.
-SHA-256 public v0.2 : `a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1`.
+Publication : **84 mémoires RX**, dont **19 aviation** et **41 radio régionales**.
+SHA-256 candidat/public : `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`.
 
-## État du candidat
+Base historique conservée : **Grand Est v0.2 / 59 RX**, SHA-256 `a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1`.
 
-Le périmètre radio analogique non exhaustif a été fermé après trois passes de recherche :
+## Radio régionale
 
-- **41 fréquences RF régionales uniques** ;
-- déduplication explicite de `432.5375 MHz`, partagée par plusieurs crossbands ;
-- F1ZAX différé car le REF courant le classe C4FM sans preuve locale actuelle de voix FM analogique ;
-- F5ZBD exclu tant qu'il est signalé hors service / en mise à niveau ;
-- F1ZBU exclu du périmètre analogique car son service courant est numérique ;
-- les autres dossiers insuffisamment corroborés restent explicitement différés.
+Le périmètre analogique non exhaustif a été fermé après trois passes de recherche à **41 fréquences RF uniques**. `432.5375 MHz`, utilisée par plusieurs infrastructures crossband, est dédupliquée en une seule mémoire.
 
-Un candidat déterministe interne est maintenant figé à **84 mémoires RX** :
+Les dossiers ambigus ou insuffisamment corroborés n'ont pas été forcés : F1ZAX, F5ZBD, F5ZRP, F5ZTY, F5ZUK, F1ZFN et F1ZEF restent différés/exclus selon leur état ; F1ZBU reste hors scope analogique car son service courant est numérique.
 
-- 43 mémoires non régionales héritées de la base v0.2 ;
-- 19 mémoires aviation AIRAC 08/26 incluses dans ces 43 ;
-- 41 mémoires radio régionales ;
-- SHA-256 candidat : `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`.
+## Aviation
 
-Le builder reconstruit d'abord la v0.2 et refuse de poursuivre si son SHA historique ne correspond pas. Le candidat reste `public_export_allowed=false` : aucune v0.3 publique n'existe encore.
+La v0.3 reprend exactement les **19 mémoires aviation** déjà publiées en v0.2 sous le même cycle AIRAC 08/26.
 
-## Prochaine gate
+Décision de publication :
 
-L'aviation doit être revalidée sur le cycle courant avant toute décision de publication. Le cycle AIRAC 08/26 reste applicable jusqu'au **2 septembre 2026 inclus**. Toute révision effectuée le **3 septembre 2026 ou après** doit repartir sur AIRAC 09/26.
+- 19 avant / 19 après ;
+- 0 ajout ;
+- 0 retrait ;
+- 0 changement de fréquence ;
+- sous-ensemble hérité inchangé ;
+- aucune nouvelle validation champ-par-champ revendiquée.
 
-Après l'aviation viennent la checklist de revue et les publication gates. Aucune mutation du registre ou du CSV public n'est autorisée avant leur fermeture.
+AIRAC 08/26 reste applicable jusqu'au **2 septembre 2026 inclus**. Toute nouvelle révision aviation le **3 septembre 2026 ou après** exige AIRAC 09/26.
 
-## Règles
+## Construction et intégrité
+
+Le builder `tools/build_grand_est_v03_candidate.py` reconstruit d'abord la v0.2 et exige son SHA historique exact. Le CSV public v0.3 est byte-identique au candidat canonique.
+
+Règles garanties :
 
 - réception uniquement ;
 - `Duplex=off` ;
 - `Offset=0.000000` ;
-- paired RX pour chaque paire distincte vérifiée ;
-- déduplication par fréquence RF ;
+- paired RX pour les paires distinctes vérifiées ;
+- déduplication RF ;
 - maximum 200 mémoires ;
-- pas d'inférence de fréquence ou de mode manquant ;
+- pas d'inférence de fréquence/mode/état manquant ;
 - pas de données opérationnelles privées / PPDR ;
-- versions publiques déjà publiées immuables.
+- versions publiées immuables.
 
-## Fichiers du Sprint 102
+## Artefacts
 
-- `radio-validation-pass1-2026-08-22.json` : audit radio initial ;
-- `radio-validation-pass2-2026-08-22.json` : seconde-source et déduplication ;
-- `radio-validation-pass3-2026-08-22.json` : fermeture du scope radio ;
-- `backlog.json` : différés et exclusions ;
-- `release-scope.json` : état courant et gates ;
-- `generated/release-candidate/` : candidat CSV + manifeste figés ;
-- `tools/build_grand_est_v03_candidate.py` : reconstruction déterministe ;
-- `tests/test_grand_est_v03_*.py` : garde-fous ;
-- `.github/workflows/grand-est-v03-research.yml` : CI dédiée.
+- `radio-validation-pass1-2026-08-22.json` ;
+- `radio-validation-pass2-2026-08-22.json` ;
+- `radio-validation-pass3-2026-08-22.json` ;
+- `aviation-airac08-publication-2026-08-22.json` ;
+- `backlog.json` ;
+- `release-scope.json` ;
+- `review-checklist.json` ;
+- `publication-gates.json` ;
+- `publication-record.json` ;
+- `generated/release-candidate/` ;
+- `tools/build_grand_est_v03_candidate.py` ;
+- `tests/test_grand_est_v03_*.py` ;
+- `.github/workflows/grand-est-v03-research.yml`.

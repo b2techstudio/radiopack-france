@@ -59,3 +59,19 @@ jobs:
 
       - name: Ensure public pack registry remains valid
         run: python tests/test_pack_registry.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@0b464482a4f3721a2acdeb5799ee3f80d8bec1ae # v7.0.0
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install website dependencies
+        run: cd website && npm ci
+
+      - name: Build Astro website
+        run: cd website && npm run build
+
+      - name: Verify Astro-built IDF v0.3 CSV and frozen SHA
+        run: python tests/test_idf_v03_publication.py --dist website/dist

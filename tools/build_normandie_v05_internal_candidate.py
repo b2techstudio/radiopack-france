@@ -147,6 +147,7 @@ def build_candidate(root: Path) -> dict[str, Any]:
     locations = [int(row["Location"]) for row in rows_after]
     names = [row["Name"] for row in rows_after]
     frequencies = [round(float(row["Frequency"]), 6) for row in rows_after]
+    new_frequencies = [round(float(row["Frequency"]), 6) for row in additions]
     if len(rows_after) != 146:
         raise ValueError("Expected 146 theoretical candidate memories")
     if len(locations) != len(set(locations)):
@@ -159,8 +160,8 @@ def build_candidate(root: Path) -> dict[str, Any]:
         raise ValueError("CHIRP name exceeds 10 characters")
     if not all(row["Duplex"] == "off" and row["Offset"] == "0.000000" for row in rows_after):
         raise ValueError("Normandie v0.5 candidate violates RX-only contract")
-    if 431.4125 in frequencies or 431.975 in frequencies or 430.375 in frequencies:
-        raise ValueError("Deferred or stale frequency leaked into candidate")
+    if any(freq in new_frequencies for freq in [431.4125, 431.975, 430.375]):
+        raise ValueError("Deferred or stale frequency was added by Sprint 112")
 
     return {
         "schema_version": "1.1",

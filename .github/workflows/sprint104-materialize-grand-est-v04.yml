@@ -1,0 +1,39 @@
+name: Sprint 104 Materialize Grand Est v0.4
+
+on:
+  push:
+    branches:
+      - feature/sprint-104-grand-est-v04-publication
+    paths:
+      - ".github/workflows/sprint104-materialize-grand-est-v04.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout publication branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Build canonical candidate
+        run: python tools/build_grand_est_v04_candidate.py --write --check
+      - name: Materialize exact public bytes
+        run: |
+          mkdir -p website/public/downloads/grand-est
+          cp research/grand-est-v0.4/generated/release-candidate/radiopack-france-grand-est-v0.4-candidate.csv \
+             website/public/downloads/grand-est/radiopack-france-grand-est-v0.4.csv
+      - name: Commit canonical candidate and public CSV
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/grand-est-v0.4/generated/release-candidate/radiopack-france-grand-est-v0.4-candidate.csv
+          git add website/public/downloads/grand-est/radiopack-france-grand-est-v0.4.csv
+          git diff --cached --quiet || git commit -m "Sprint 104: materialize Grand Est v0.4 candidate/public"
+          git push origin HEAD:${GITHUB_REF_NAME}

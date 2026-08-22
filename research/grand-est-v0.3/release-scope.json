@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "status": "research_initialization",
+  "pack": "Grand Est",
+  "target_version": "0.3",
+  "initialized_on": "2026-08-22",
+  "public_base": {
+    "version": "0.2",
+    "memory_count": 59,
+    "public_csv_sha256": "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1",
+    "immutable": true
+  },
+  "current_phase": {
+    "radio_pass1_complete": true,
+    "radio_pass2_required": true,
+    "aviation_revalidation_started": false,
+    "deterministic_candidate_built": false,
+    "review_checklist_created": false,
+    "publication_gates_created": false,
+    "publication_ready": false,
+    "published": false,
+    "public_mutation_performed": false
+  },
+  "radio_scope": {
+    "v02_regional_rx_memories": 16,
+    "v02_repeaters": 8,
+    "first_pass_safe_carry_repeaters": 7,
+    "first_pass_mode_conflicts": 1,
+    "high_confidence_new_links": 4,
+    "additional_second_pass_candidates_open": true,
+    "final_regional_memory_count": null
+  },
+  "aviation_scope": {
+    "base_memory_count": 19,
+    "base_cycle": "AIRAC 08/26",
+    "base_valid_through_inclusive": "2026-09-02",
+    "current_pass_delta": 0,
+    "not_revalidated_in_sprint102_initialization": true,
+    "airac09_required_for_any_revision_on_or_after": "2026-09-03"
+  },
+  "completion_requirements_before_candidate": [
+    "resolve or explicitly defer F1ZAX mode conflict",
+    "resolve or explicitly defer F5ZBD current service-state conflict",
+    "run second-source validation for all proposed new analog/crossband links",
+    "deduplicate all RF frequencies, especially shared 432.5375 MHz crossband use",
+    "decide exact analog scope and exclude digital-only infrastructure",
+    "preserve public v0.2 bytes and metadata unchanged"
+  ],
+  "publication_requirements": [
+    "build deterministic v0.3 candidate from immutable v0.2 basis",
+    "validate RX-only semantics and <=200 memories",
+    "complete source review and review checklist",
+    "reach zero publication blockers",
+    "revalidate aviation against the applicable AIRAC before any aviation-affecting publication",
+    "publish only as a new immutable version"
+  ],
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "maximum_memories": 200,
+    "no_artificial_fill": true,
+    "unverified_frequency_or_mode_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true
+  }
+}

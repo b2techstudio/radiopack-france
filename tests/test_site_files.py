@@ -168,7 +168,9 @@ for expected in [
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "Sprint 107 / 0.21.95",
+    "Sprint 109 / 0.21.97",
+    "## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée",
+    "## Sprint 108 — candidat ARA v0.3 figé",
     "## Sprint 107 — Bourgogne-Franche-Comté v0.4 publiée",
     "## Sprint 106 — candidat BFC v0.4 figé",
     "## Sprint 105 — Île-de-France v0.4 publiée",
@@ -184,7 +186,8 @@ for expected in [
     "**Grand Est v0.4** — 97 mémoires RX",
     "**Centre-Val de Loire v0.3** — 51 mémoires RX",
     "**Bourgogne-Franche-Comté v0.4** — 61 mémoires RX",
-    "**1582 mémoires RX cumulées**",
+    "**Auvergne-Rhône-Alpes v0.3** — 71 mémoires RX",
+    "**1591 mémoires RX cumulées**",
     "research/paired-rx-policy.json",
     "Duplex=off", "Offset=0.000000",
     "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
@@ -192,7 +195,7 @@ for expected in [
     assert expected in readme, f"README courant/historique incomplet: {expected}"
 
 status = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
-for expected in ["Sprint courant : **107**", "État logique : **0.21.95**", "Bourgogne-Franche-Comté v0.4", "Auvergne-Rhône-Alpes v0.3"]:
+for expected in ["Sprint courant : **109**", "État logique : **0.21.97**", "Bourgogne-Franche-Comté v0.4", "Auvergne-Rhône-Alpes v0.3", "Normandie v0.5"]:
     assert expected in status
 
-print("Tests RadioPack repository/site: ARA v0.3 / 71 RX promoted on site; canonical state still Sprint 107 pending dedicated sync, historical releases preserved, RX-only guards OK")
+print("Tests RadioPack repository/site: canonical Sprint 109 / ARA v0.3 71 RX synchronized, historical releases preserved, RX-only guards OK")

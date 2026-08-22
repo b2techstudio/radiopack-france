@@ -2,7 +2,7 @@
 
 **Couverture publique au 22 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 107 / 0.21.95 — Bourgogne-Franche-Comté v0.4 est publiée et immuable à 61 RX, dont 14 aviation et 7 VHF de navigation intérieure.**
+**État courant : Sprint 109 / 0.21.97 — Auvergne-Rhône-Alpes v0.3 est publiée et immuable à 71 RX, dont 18 aviation et 9 VHF de navigation intérieure.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -19,15 +19,15 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 - **Pays de la Loire v0.2** — 130 mémoires RX ;
 - **Bourgogne-Franche-Comté v0.4** — 61 mémoires RX, dont 14 aviation et 7 VHF navigation intérieure ;
 - **Nouvelle-Aquitaine v0.2** — 151 mémoires RX ;
-- **Auvergne-Rhône-Alpes v0.2** — 62 mémoires RX ;
+- **Auvergne-Rhône-Alpes v0.3** — 71 mémoires RX, dont 18 aviation et 9 VHF navigation intérieure ;
 - **Occitanie v0.2** — 156 mémoires RX ;
 - **Provence-Alpes-Côte d’Azur v0.2** — 159 mémoires RX ;
 - **Corse v0.2** — 137 mémoires RX ;
 - **Annecy–Alpes–Léman v0.4** — 77 mémoires RX, variante 60 sans aviation.
 
-Les variantes par défaut représentent **1582 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
+Les variantes par défaut représentent **1591 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
 
-Les versions précédentes publiées restent historiques et immuables, notamment Île-de-France v0.3/v0.2, Grand Est v0.3/v0.2 et Bourgogne-Franche-Comté v0.3/v0.2.
+Les versions précédentes publiées restent historiques et immuables, notamment Île-de-France v0.3/v0.2, Grand Est v0.3/v0.2, Bourgogne-Franche-Comté v0.3/v0.2 et Auvergne-Rhône-Alpes v0.2.
 
 ## Contrat RX-only et paired RX
 
@@ -43,6 +43,22 @@ Règles permanentes :
 - une fréquence présente dans un fichier n'accorde jamais un droit d'émission.
 
 Les CSV générés par `website/src/lib/chirpPack.ts` appliquent ce contrat, ainsi que la validation des noms, emplacements, doublons RF et limite mémoire.
+
+## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée
+
+Auvergne-Rhône-Alpes v0.3 est publiée à **71 RX** à partir de la v0.2 immuable de 62 RX. Le delta contient **9 mémoires VHF de navigation intérieure** aux emplacements 120–128 : voies 10 et 12 en simplex, voie 18 côté bateau uniquement, et voies 19, 20 et 22 en paired RX.
+
+Le côté station terrestre du canal 18 à **161.500 MHz** n'est pas ajouté et le canal maritime 16 reste exclu. Les **18 mémoires aviation** sont héritées sans modification de v0.2.
+
+SHA public et candidat : `b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e`. La CI de publication a prouvé l'identité byte-à-byte entre le candidat Sprint 108 figé et la route Astro publique v0.3. La v0.2 de 62 RX reste historique et immuable.
+
+AIRAC 08/26 reste applicable jusqu'au **2 septembre 2026 inclus** ; toute nouvelle révision aviation à partir du **3 septembre 2026** exige AIRAC 09/26.
+
+Références : `research/auvergne-rhone-alpes-v0.3/publication-record.json` et `research/sprint-109-summary.md`.
+
+## Sprint 108 — candidat ARA v0.3 figé
+
+Le Sprint 108 a fermé le minimum vérifié ARA à **+9 RF fluviales**, construit un candidat déterministe de **71 RX**, puis figé son SHA avant toute mutation publique. La promotion du Sprint 109 a réutilisé exactement ces octets.
 
 ## Sprint 107 — Bourgogne-Franche-Comté v0.4 publiée
 
@@ -72,7 +88,7 @@ Grand Est v0.4 est publiée à **97 RX** : 84 mémoires héritées byte-identiqu
 
 ## Sprint 103 — audit VHF navigation intérieure
 
-L'audit national distingue VHF maritime et VHF de navigation intérieure. Les packs côtiers ne dupliquent pas les RF déjà présentes ; la file non côtière vérifiée était Grand Est, Île-de-France, Bourgogne-Franche-Comté puis **Auvergne-Rhône-Alpes**, désormais prochaine priorité.
+L'audit national distingue VHF maritime et VHF de navigation intérieure. Les quatre deltas non côtiers vérifiés Grand Est, Île-de-France, Bourgogne-Franche-Comté et Auvergne-Rhône-Alpes sont désormais publiés dans leurs versions immuables respectives.
 
 ## Sprint 102 — Grand Est v0.3 publiée
 
@@ -100,9 +116,8 @@ Le Sprint 97 / 0.21.86 a consolidé les détails de canaux régionaux, les racco
 
 ## Travaux encore ouverts
 
-- **Auvergne-Rhône-Alpes v0.3** : prochaine priorité ; audit Sprint 103 avec au moins **+9 RF VHF navigation intérieure** à préparer sur Rhône/Saône.
+- **Normandie v0.5** : priorité actionnable actuelle ; candidat 142 RX, delta 0, avec validation terrain requise pour R3/F1ZBX et F5ZHA et veille source sur F1ZOV/F6ZES.
 - **Bretagne v0.3** : 151 RX, delta 0, publication bloquée jusqu'à la revalidation AIRAC 09/26 à partir du **3 septembre 2026**.
-- **Normandie v0.5** : 142 RX, delta 0, toujours dépendante des gates terrain/source historiques.
 
 ## Site public
 
@@ -128,9 +143,9 @@ Le `README.md` doit être mis à jour à chaque changement important et à la fi
 ```powershell
 python tests\test_site_files.py
 python tests\test_pack_registry.py
-python tests\test_bfc_v03_prepublication.py
-python tests\test_bfc_v04_candidate.py --dist website\dist
-python tests\test_sprint105_state_sync.py
+python tests\test_ara_v03_candidate.py --dist website\dist
+python tests\test_ara_v03_publication.py --dist website\dist
+python tests\test_sprint109_state_sync.py
 
 cd website
 npm ci

@@ -8,10 +8,13 @@ EXPECTED_SHA = "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72
 V03_SHA = "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5"
 
 state = json.loads(STATE.read_text(encoding="utf-8"))
-assert state["updated"] == "2026-08-22"
-assert state["current_sprint"] == 107
-assert state["state_version"] == "0.21.95"
+assert state["updated"] >= "2026-08-22"
+assert state["current_sprint"] >= 107
+version = tuple(int(part) for part in state["state_version"].split("."))
+assert version >= (0, 21, 95)
 
+# Sprint 107 is now a historical publication checkpoint. Later sprints may move
+# active_work and next_priority, but BFC v0.4 itself must remain immutable.
 bfc = state["public_packs"]["bourgogne_franche_comte"]
 assert bfc["version"] == "0.4"
 assert bfc["memory_count"] == 61
@@ -20,30 +23,6 @@ assert bfc["previous_immutable_version"] == "0.3"
 assert bfc["previous_memory_count"] == 54
 assert bfc["publication_record"] == "research/bourgogne-franche-comte-v0.4/publication-record.json"
 assert bfc["public_csv_sha256"] == EXPECTED_SHA
-
-active = state["active_work"]
-assert active["pack"] == "Bourgogne-Franche-Comté"
-assert active["target_version"] == "0.4"
-assert active["status"] == "published_immutable"
-assert active["public_base_version"] == "0.3"
-assert active["public_base_memory_count"] == 54
-assert active["public_base_sha256"] == V03_SHA
-assert active["candidate_memory_count"] == 61
-assert active["candidate_inland_vhf_memory_count"] == 7
-assert active["candidate_memory_delta"] == 7
-assert active["candidate_sha256"] == EXPECTED_SHA
-assert active["public_csv_sha256"] == EXPECTED_SHA
-assert active["candidate_public_byte_identity_verified"] is True
-assert active["publication_gates_zero_blockers"] is True
-assert active["published"] is True
-assert active["published_version_is_immutable"] is True
-
-next_priority = state["next_priority"]
-assert next_priority["pack"] == "Auvergne-Rhône-Alpes"
-assert next_priority["target_version"] == "0.3"
-assert next_priority["public_base_version"] == "0.2"
-assert next_priority["public_base_memory_count"] == 62
-assert next_priority["minimum_verified_inland_vhf_rf_delta"] == 9
 
 s106 = state["latest_sprint106_bfc_v04_candidate"]
 assert s106["sprint"] == 106
@@ -101,17 +80,25 @@ assert region["memoryCount"] == 61
 assert "VHF navigation intérieure RX" in region["categories"]
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
-assert "Sprint 107 / 0.21.95" in readme
 assert "## Sprint 107 — Bourgogne-Franche-Comté v0.4 publiée" in readme
-assert "**1582 mémoires RX cumulées**" in readme
+assert "**Bourgogne-Franche-Comté v0.4** — 61 mémoires RX" in readme
 project = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
-assert "Sprint courant : **107**" in project
-assert "État logique : **0.21.95**" in project
+assert "Bourgogne-Franche-Comté v0.4" in project
 summary = (ROOT / "research/sprint-107-summary.md").read_text(encoding="utf-8")
 assert "61 mémoires RX" in summary
 assert EXPECTED_SHA in summary
 
-assert state["recent_sprints"][0]["sprint"] == 107
-assert state["recent_sprints"][1]["sprint"] == 106
+recent_by_sprint = {item["sprint"]: item for item in state["recent_sprints"]}
+assert 107 in recent_by_sprint and 106 in recent_by_sprint
+assert recent_by_sprint[107]["state_version"] == "0.21.95"
+assert recent_by_sprint[106]["state_version"] == "0.21.94"
 
-print("Sprint 107 state sync: BFC v0.4 61 RX published immutable, byte-identical frozen SHA, ARA v0.3 next priority OK")
+# If later ARA publication state exists, it must advance from—not rewrite—the
+# Sprint 107 BFC checkpoint.
+if state["current_sprint"] >= 109:
+    ara = state["public_packs"]["auvergne_rhone_alpes"]
+    assert ara["version"] == "0.3"
+    assert ara["previous_immutable_version"] == "0.2"
+    assert state["latest_sprint109_ara_v03_publication"]["published"] is True
+
+print("Sprint 107 historical guard: BFC v0.4 61 RX remains immutable and byte-identical after later publications OK")

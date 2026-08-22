@@ -6,12 +6,15 @@ Date : **22 août 2026**
 
 Le projet abandonne le caractère bloquant des écoutes terrain pour les décisions de couverture Normandie v0.5. Une station dont les paramètres et le statut courant sont publiquement vérifiés peut désormais être intégrée sur une **couverture théorique documentée**, à condition que la documentation n'assimile jamais cette théorie à une réception mesurée ou garantie.
 
-## Candidat
+## Candidat figé
 
 - base publique immuable : Normandie v0.4 / **142 RX** ;
 - candidat interne v0.5 : **146 RX** ;
 - delta : **+4 RX** ;
+- SHA-256 figé : `1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59` ;
 - publication dans Sprint 112 : **non**.
+
+Le gel est enregistré dans `research/normandie-v0.5/candidate-freeze.json`. Le test Sprint 112 reconstruit le CSV et exige exactement ce SHA.
 
 Promotions :
 
@@ -60,6 +63,7 @@ Le modèle est une estimation de plausibilité. Il ne modélise pas complètemen
 
 - `research/normandie-v0.5/theoretical-coverage-policy.json`
 - `research/normandie-v0.5/sprint112-theoretical-coverage.json`
+- `research/normandie-v0.5/candidate-freeze.json`
 - `research/normandie-v0.5/backlog.json`
 - `research/normandie-v0.5/pack-plan.json`
 - `tools/build_normandie_v05_internal_candidate.py`

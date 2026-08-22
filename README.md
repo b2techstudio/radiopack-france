@@ -180,6 +180,8 @@ python tests\test_idf_v03_candidate.py
 python tests\test_idf_v03_publication.py
 python tests\test_idf_v04_publication.py
 python tests\test_sprint105_state_sync.py
+python tests\test_idf_v04_publication.py
+python tests\test_sprint105_state_sync.py
 
 cd website
 npm ci

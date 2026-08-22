@@ -127,7 +127,7 @@ for token in [
     "sources revalidées le 22 août 2026",
     "sprint110-source-field-refresh.json",
     "normandie-v0.5-field-session-template.csv",
-    "de vraies écoutes",
+    "vraies écoutes",
     "promotion_ready=false",
     "Aucune fréquence n'est inférée",
 ]:

@@ -103,7 +103,7 @@ const metropolitanMetadata = [
   { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 130, marine: true, aviation: 10, version: "v0.2" },
   { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 61, marine: false, aviation: 14, version: "v0.4" },
   { id: "nouvelle-aquitaine", name: "Nouvelle-Aquitaine", memoryCount: 151, marine: true, aviation: 13, version: "v0.2" },
-  { id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 62, marine: false, aviation: 18, version: "v0.2" },
+  { id: "auvergne-rhone-alpes", name: "Auvergne-Rhône-Alpes", memoryCount: 71, marine: false, aviation: 18, version: "v0.3" },
   { id: "occitanie", name: "Occitanie", memoryCount: 156, marine: true, aviation: 20, version: "v0.2" },
   { id: "provence-alpes-cote-d-azur", name: "Provence-Alpes-Côte d’Azur", memoryCount: 159, marine: true, aviation: 25, version: "v0.2" },
   { id: "corse", name: "Corse", memoryCount: 137, marine: true, aviation: 19, version: "v0.2" },
@@ -124,6 +124,7 @@ const metropolitanPublicPacks: PublicPack[] = metropolitanMetadata.map((item) =>
     ...(item.id === "bourgogne-franche-comte" && item.version === "v0.4" ? ["7 mémoires VHF navigation intérieure"] : []),
     ...(item.id === "ile-de-france" && item.version === "v0.4" ? ["7 mémoires VHF navigation intérieure"] : []),
     ...(item.id === "grand-est" && item.version === "v0.4" ? ["13 mémoires VHF navigation intérieure"] : []),
+    ...(item.id === "auvergne-rhone-alpes" && item.version === "v0.3" ? ["9 mémoires VHF navigation intérieure"] : []),
     ...(item.marine ? ["module VHF marine"] : []),
   ].join(", ");
   return {

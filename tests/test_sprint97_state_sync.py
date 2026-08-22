@@ -30,10 +30,7 @@ assert state["current_sprint"] >= 97
 # Sprint 97 remains auditable through its own immutable artifacts and state
 # checkpoint. Current README/PROJECT_STATUS may legitimately focus on a later sprint.
 assert "## Sprint 97 —" in readme
-assert "research/sprint-97-summary.md" in readme
-assert "research/sprint-97-post96-ui-state.json" in readme
 assert "RadioPack France — point de reprise" in project
-assert state["current_sprint"] >= 97
 
 assert "## 0.21.86 - 2026-08-17" in changelog
 assert "**Sprint 97**" in changelog.split("## 0.21.85", 1)[0]

@@ -62,7 +62,7 @@ jobs:
       - name: Test Grand Est v0.3 radio scope closure history
         run: python tests/test_grand_est_v03_pass3.py
       - name: Compare frozen and deterministic candidate bytes
-        run: python -c "import hashlib; from tools.build_grand_est_v03_candidate import build, ROOT, OUTPUT; b,_=build(ROOT); f=(ROOT/OUTPUT).read_bytes(); print('generated_sha256='+hashlib.sha256(b).hexdigest()); print('frozen_sha256='+hashlib.sha256(f).hexdigest()); print('generated_size='+str(len(b))); print('frozen_size='+str(len(f))); print('generated_crlf='+str(b.count(bytes([13,10])))); print('frozen_crlf='+str(f.count(bytes([13,10]))))"
+        run: python -c "import hashlib; from tools.build_grand_est_v03_candidate import build, ROOT, OUTPUT; b,_=build(ROOT); f=(ROOT/OUTPUT).read_bytes(); i=next((i for i,(x,y) in enumerate(zip(b,f)) if x!=y),min(len(b),len(f))); print('generated_sha256='+hashlib.sha256(b).hexdigest()); print('frozen_sha256='+hashlib.sha256(f).hexdigest()); print('generated_size='+str(len(b))); print('frozen_size='+str(len(f))); print('first_diff='+str(i)); print('generated_slice='+repr(b[max(0,i-40):i+80])); print('frozen_slice='+repr(f[max(0,i-40):i+82])); print('generated_tail='+repr(b[-80:])); print('frozen_tail='+repr(f[-82:]))"
       - name: Verify deterministic Grand Est v0.3 candidate
         run: python tools/build_grand_est_v03_candidate.py --check
       - name: Test Grand Est v0.3 candidate/public identity

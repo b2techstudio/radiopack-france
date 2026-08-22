@@ -3,6 +3,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,8 +38,19 @@ assert max(int(row["Location"]) for row in rows) <= 199
 assert sum(row["Mode"] == "AM" for row in rows) == 18
 assert sum(int(row["Location"]) >= 70 for row in rows) == 15
 
+# Keep the historical v0.3 publication strict without forcing it to remain the
+# current registry version forever. Later versions may legitimately advance.
 registry = REGISTRY.read_text(encoding="utf-8")
-assert '{ id: "ile-de-france", name: "Île-de-France", memoryCount: 57, marine: false, aviation: 18, version: "v0.3" }' in registry
+match = re.search(
+    r'\{ id: "ile-de-france", name: "Île-de-France", memoryCount: (\d+), marine: false, aviation: 18, version: "v(\d+)\.(\d+)" \}',
+    registry,
+)
+assert match, "Current IDF registry entry missing"
+current_count = int(match.group(1))
+current_version = (int(match.group(2)), int(match.group(3)))
+assert current_version >= (0, 3)
+if current_version == (0, 3):
+    assert current_count == 57
 assert 'item.id === "ile-de-france"' in registry
 assert 'radiopack-france-${item.id}-${item.version}.csv' in registry
 
@@ -49,9 +61,13 @@ assert 'version: "v0.2"' in metropolitan
 assert 'memoryCount: 58' in metropolitan
 assert 'filename: "radiopack-france-ile-de-france-v0.2.csv"' in metropolitan
 
+# The region page must load the current public CSV; the immutable v0.3 CSV stays
+# available independently as a historical artifact.
 page = REGION_PAGE.read_text(encoding="utf-8")
-assert 'const isIdfV03 = pack.id === "ile-de-france" && publicPack?.version === "v0.3";' in page
-assert 'loadPublicPackMemories("downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv")' in page
+assert 'loadPublicPackMemories' in page
+current_path = f'downloads/ile-de-france/radiopack-france-ile-de-france-v{current_version[0]}.{current_version[1]}.csv'
+assert current_path in page
+assert PUBLIC.is_file()
 
 record = json.loads((RESEARCH / "publication-record.json").read_text(encoding="utf-8"))
 manifest = json.loads((RESEARCH / "generated/release-candidate/candidate-manifest.json").read_text(encoding="utf-8"))
@@ -81,8 +97,8 @@ assert checklist["published"] is True
 
 if args.dist:
     built = args.dist / PUBLIC_RELATIVE
-    assert built.is_file(), f"Built IDF v0.3 CSV missing: {built}"
-    assert built.read_bytes() == CANDIDATE.read_bytes(), "Astro-built IDF v0.3 CSV differs from frozen candidate"
+    assert built.is_file(), f"Built historical IDF v0.3 CSV missing: {built}"
+    assert built.read_bytes() == CANDIDATE.read_bytes(), "Astro-built historical IDF v0.3 CSV differs from frozen candidate"
     assert hashlib.sha256(built.read_bytes()).hexdigest() == EXPECTED_SHA
 
-print(f"IDF v0.3 publication: 57 RX, 18 aviation, 15 regional, exact candidate/public SHA {EXPECTED_SHA} OK")
+print(f"IDF v0.3 historical publication preserved: 57 RX / 18 aviation / 15 regional, exact SHA {EXPECTED_SHA} OK; current version may advance")

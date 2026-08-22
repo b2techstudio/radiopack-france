@@ -1,7 +1,8 @@
 {
   "schema_version": "1.0",
-  "status": "prepublication_frozen_not_published",
+  "status": "published_immutable",
   "frozen_on": "2026-08-21",
+  "published_on": "2026-08-22",
   "publication_sprint": 101,
   "state_version": "0.21.90",
   "pack": "Île-de-France",
@@ -9,12 +10,14 @@
   "memory_count": 57,
   "previous_public_version": "0.2",
   "previous_public_memory_count": 58,
-  "planned_public_route": "/downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv",
+  "public_route": "/downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv",
+  "public_csv_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
   "candidate_csv_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
-  "hash_basis": "Deterministic internal candidate rebuilt by tools/build_idf_v03_candidate.py. The builder first reconstructs immutable public v0.2 and requires the exact frozen SHA-256 recorded in base_public_csv_sha256 before it can build the v0.3 candidate.",
+  "hash_basis": "The public v0.3 static CSV reuses the exact Git blob of the frozen deterministic candidate; publication CI additionally verifies byte identity and SHA-256.",
   "base_public_csv_sha256": "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d",
   "builder": "tools/build_idf_v03_candidate.py",
   "candidate_csv": "research/ile-de-france-v0.3/generated/release-candidate/radiopack-france-ile-de-france-v0.3-candidate.csv",
+  "public_csv": "website/public/downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv",
   "candidate_manifest": "research/ile-de-france-v0.3/generated/release-candidate/candidate-manifest.json",
   "release_scope": "research/ile-de-france-v0.3/release-scope.json",
   "review_checklist": "research/ile-de-france-v0.3/review-checklist.json",
@@ -35,10 +38,10 @@
     "airac09_revalidation_required_on_or_after": "2026-09-03"
   },
   "marine_memory_count": 0,
-  "public_csv_created": false,
-  "public_registry_updated": false,
-  "published": false,
-  "published_version_is_immutable": false,
+  "public_csv_created": true,
+  "public_registry_updated": true,
+  "published": true,
+  "published_version_is_immutable": true,
   "rules": {
     "rx_only": true,
     "chirp_duplex": "off",
@@ -47,6 +50,7 @@
     "no_artificial_fill": true,
     "private_ppdr_operational_data_excluded": true,
     "release_is_non_exhaustive": true,
-    "candidate_sha_must_equal_future_public_csv_sha": true
+    "candidate_sha_must_equal_public_csv_sha": true,
+    "historical_v0_2_remains_immutable": true
   }
 }

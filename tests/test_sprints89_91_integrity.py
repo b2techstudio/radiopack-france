@@ -32,17 +32,28 @@ assert state["current_sprint"] >= 91
 version_parts = tuple(int(part) for part in state["state_version"].split("."))
 assert version_parts >= (0, 21, 80)
 
-annecy_checkpoint = state["annecy_v0_4_research"]
-assert annecy_checkpoint["status"] == "historical_candidate_state_before_publication"
-assert annecy_checkpoint["based_on_public_version"] == "0.3"
-assert annecy_checkpoint["candidate_memory_count"] == 77
-assert annecy_checkpoint["candidate_without_aviation_memory_count"] == 60
-assert annecy_checkpoint["candidate_memory_delta"] == 1
-assert annecy_checkpoint["added_frequency_mhz"] == 50.5375
-assert annecy_checkpoint["added_memory_name"] == "ZTH-6M"
+# Older resume schemas carried a dedicated Annecy v0.4 candidate block. Compact
+# later states may omit that duplicate because the immutable Sprint 89 summary,
+# compatibility review and publication record retain the same evidence.
+annecy_checkpoint = state.get("annecy_v0_4_research")
+if annecy_checkpoint is not None:
+    assert annecy_checkpoint["status"] == "historical_candidate_state_before_publication"
+    assert annecy_checkpoint["based_on_public_version"] == "0.3"
+    assert annecy_checkpoint["candidate_memory_count"] == 77
+    assert annecy_checkpoint["candidate_without_aviation_memory_count"] == 60
+    assert annecy_checkpoint["candidate_memory_delta"] == 1
+    assert annecy_checkpoint["added_frequency_mhz"] == 50.5375
+    assert annecy_checkpoint["added_memory_name"] == "ZTH-6M"
+else:
+    compatibility = json.loads((ROOT / "research/annecy-alpes-leman-v0.4/compatibility-and-source-review.json").read_text(encoding="utf-8"))
+    assert compatibility["target_version"] == "0.4"
+    assert compatibility["based_on_public_version"] == "0.3"
+    assert compatibility["candidate_memory_count"] == 77
+    assert compatibility["candidate_without_aviation_memory_count"] == 60
+    assert compatibility["candidate_memory_delta"] == 1
 
 # Sprint 89 was pre-publication. The current public pointer may legitimately be
-# the later immutable v0.4 release, while the historical candidate checkpoint
+# the later immutable v0.4 release, while the historical candidate evidence
 # remains unchanged.
 v04_record = ROOT / "research/annecy-alpes-leman-v0.4/publication-record.json"
 current = state["public_packs"]["annecy_alpes_leman"]
@@ -57,6 +68,7 @@ publication = json.loads(v04_record.read_text(encoding="utf-8"))
 assert publication["status"] == "published_immutable"
 assert publication["based_on_public_version"] == "0.3"
 
+# Sprint 90 remains a historical pre-theory snapshot.
 assert state["normandie_v0_5_latest_refresh"]["candidate_memory_count"] == 142
 assert state["normandie_v0_5_latest_refresh"]["candidate_memory_delta"] == 0
 
@@ -97,9 +109,8 @@ if state["current_sprint"] >= 101:
     assert idf_v03_record["memory_count"] == 57
     assert idf_v03_record["public_csv_sha256"] == "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
 
-# Current docs can focus on Sprint 107; the historical Sprint 89/90/91 details
-# remain frozen in their dedicated summary files instead of being duplicated in
-# every later point-of-resume document.
+# Current docs can focus on Sprint 113; historical Sprint 89/90/91 details remain
+# frozen in their dedicated summaries rather than duplicated in every resume.
 project = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
 assert "Annecy–Alpes–Léman v0.4" in project
 assert "77 mémoires RX" in project
@@ -110,6 +121,8 @@ readme = (ROOT / "README.md").read_text(encoding="utf-8")
 assert "**Annecy–Alpes–Léman v0.4** — 77 mémoires RX" in readme
 assert "**Normandie v0.5**" in readme
 assert "**Bretagne v0.3**" in readme
+if state["current_sprint"] >= 113:
+    assert "Sprint 113 / 0.22.01" in readme
 
 s89 = (ROOT / "research/sprint-89-summary.md").read_text(encoding="utf-8")
 s90 = (ROOT / "research/sprint-90-summary.md").read_text(encoding="utf-8")
@@ -118,4 +131,4 @@ assert "Sprint 89" in s89 and "77" in s89 and "60" in s89
 assert "Sprint 90" in s90 and "142" in s90
 assert "Sprint 91" in s91 and "3 septembre 2026" in s91
 
-print("Sprints 89-91 integrity: historical checkpoints remain exact while Annecy v0.4 is recognized as current immutable publication OK")
+print("Sprints 89-91 integrity: historical checkpoints remain exact with compact Sprint 113 state and current immutable publications OK")

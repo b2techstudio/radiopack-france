@@ -2,7 +2,7 @@
 
 **Couverture publique au 22 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 111 / 0.21.99 — Bretagne v0.3 est préparée pour AIRAC 09/26 avec une matrice de 16 mémoires et un validateur temporel ; Normandie v0.5 reste la priorité terrain à 142 RX / delta 0.**
+**État courant : Sprint 113 / 0.22.01 — Normandie v0.5 est publiée et immuable à 146 RX avec 4 mémoires à couverture théorique documentée ; Bretagne v0.3 reste préparée pour AIRAC 09/26, qui ne devient courant qu'au 3 septembre 2026.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -10,7 +10,7 @@ RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à parti
 
 La couverture administrative métropolitaine est **13/13**. Les packs publics actuels sont :
 
-- **Normandie v0.4** — 142 mémoires RX ;
+- **Normandie v0.5** — 146 mémoires RX, dont 4 mémoires à couverture théorique documentée ;
 - **Bretagne v0.2** — 151 mémoires RX ;
 - **Hauts-de-France v0.2** — 144 mémoires RX ;
 - **Île-de-France v0.4** — 64 mémoires RX, dont 18 aviation et 7 VHF navigation intérieure ;
@@ -25,11 +25,11 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 - **Corse v0.2** — 137 mémoires RX ;
 - **Annecy–Alpes–Léman v0.4** — 77 mémoires RX, variante 60 sans aviation.
 
-Les variantes par défaut représentent **1591 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
+Les variantes par défaut représentent **1595 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
 
-Les versions précédentes publiées restent historiques et immuables, notamment Île-de-France v0.3/v0.2, Grand Est v0.3/v0.2, Bourgogne-Franche-Comté v0.3/v0.2 et Auvergne-Rhône-Alpes v0.2.
+Les versions précédentes publiées restent historiques et immuables, notamment Normandie v0.4, Île-de-France v0.3/v0.2, Grand Est v0.3/v0.2, Bourgogne-Franche-Comté v0.3/v0.2 et Auvergne-Rhône-Alpes v0.2.
 
-## Contrat RX-only et paired RX
+## Contrat RX-only, paired RX et couverture théorique
 
 Règles permanentes :
 
@@ -39,10 +39,37 @@ Règles permanentes :
 - versions publiées immuables ;
 - `research/paired-rx-policy.json` : une paire split/duplex vérifiée de deux fréquences distinctes utilise deux mémoires RX ;
 - une fréquence, un mode ou une attribution locale non résolus ne sont jamais devinés ;
+- une couverture théorique documentée peut satisfaire un gate de couverture lorsque la fréquence, le mode et le statut opérationnel sont suffisamment documentés ;
+- la théorie ne doit jamais être présentée comme une réception mesurée ou garantie ;
+- les écoutes terrain sont un retour qualité facultatif et ne bloquent plus à elles seules une promotion de couverture ;
+- la théorie ne contourne jamais un statut opérateur en maintenance ni l'absence d'une fréquence ou d'un mode publiquement résolus ;
 - les données privées, PPDR, chiffrées ou non publiquement vérifiables restent exclues ;
 - une fréquence présente dans un fichier n'accorde jamais un droit d'émission.
 
 Les CSV générés par `website/src/lib/chirpPack.ts` appliquent ce contrat, ainsi que la validation des noms, emplacements, doublons RF et limite mémoire.
+
+## Sprint 113 — Normandie v0.5 publiée sur couverture théorique
+
+Normandie v0.5 est publiée et figée à **146 mémoires RX** à partir de la v0.4 immuable de 142 RX. Le delta de **+4 RX** est constitué de :
+
+- `35-R3-IN` — 145.075 MHz ;
+- `35-R3-OUT` — 145.675 MHz ;
+- `53-ZHA-V` — 145.4675 MHz ;
+- `53-ZHA-U` — 432.575 MHz.
+
+Les quatre mémoires sont étiquetées comme **couverture théorique documentée**. Elles ne sont pas présentées comme réception mesurée ou garantie. Les écoutes terrain restent utiles comme contrôle qualité facultatif, sans être un gate de publication.
+
+SHA candidat et CSV public : `1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59`. La CI de publication impose l'identité byte-for-byte. Normandie v0.4 / 142 RX reste historique et immuable.
+
+F1ZOV reste différé parce que l'opérateur le marque en maintenance. F6ZES reste différé faute de fréquence et de mode publics résolus. L'ancienne valeur secondaire F5ZHA 431.4125 MHz n'est pas promue.
+
+Références : `research/normandie-v0.5/publication-record.json`, `research/normandie-v0.5/publication-gates.json` et `research/sprint-113-summary.md`.
+
+## Sprint 112 — Normandie v0.5 : candidat théorique figé
+
+Le Sprint 112 a remplacé le gate de réception terrain par une politique de **plausibilité théorique documentée**. Le candidat déterministe est passé de 142 à **146 RX**, puis a été figé au SHA `1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59` avant toute publication.
+
+Le modèle utilise le point de référence Mortain, la distance géodésique, une enveloppe géométrique 4/3 Terre et la FSPL comme références de plausibilité. Il ne modélise pas complètement relief intermédiaire, clutter, bâtiments, végétation, diagrammes d'antenne, sensibilité du récepteur ou fading. Référence : `research/sprint-112-summary.md`.
 
 ## Sprint 111 — Bretagne v0.3 : readiness AIRAC 09/26
 
@@ -52,13 +79,13 @@ La préparation couvre exactement les **16 mémoires aviation** Bretagne hérit�
 
 Même après un verdict positif, seule la **reconstruction d'un candidat interne** est autorisée : aucune mutation automatique et aucune publication automatique. Bretagne publique reste **v0.2 / 151 RX** immuable et le candidat v0.3 reste **151 RX / delta 0**. Référence : `research/sprint-111-summary.md`.
 
-## Sprint 110 — Normandie v0.5 : sources revalidées, handoff terrain
+## Sprint 110 — historique Normandie v0.5 : ancien handoff terrain
 
-La revalidation du 22 août 2026 maintient le candidat Normandie v0.5 à **142 RX / delta 0**, sans mutation RF ni publique. Le plafond potentiel connu reste **147 RX hors F6ZES**, mais aucune addition ne franchit actuellement ses gates.
+Au Sprint 110, la revalidation du 22 août 2026 maintenait le candidat Normandie v0.5 à **142 RX / delta 0** et exigeait encore des sessions terrain pour R3/F1ZBX et F5ZHA. Cette photographie reste conservée comme preuve historique.
 
-**R3/F1ZBX** reste conditionné à deux sessions RX indépendantes et identifiées depuis Mortain-Bocage sur 145.675 MHz. **F5ZHA** reste conditionné à deux sessions RX indépendantes sur la paire actuelle 145.4675 / 432.575 MHz avec les critères du Sprint 85. **F1ZOV** reste en maintenance selon l'opérateur local et **F6ZES** reste sans fréquence/mode publics exploitables.
+La politique a ensuite été explicitement remplacée au Sprint 112 par la couverture théorique documentée. Le kit Sprint 84 et l'évaluateur Sprint 85 restent disponibles comme outils historiques facultatifs de contrôle qualité ; ils ne constituent plus un gate de promotion ou de publication.
 
-Le kit Sprint 84 et l'évaluateur Sprint 85 sont suffisants : aucune nouvelle sonde n'est nécessaire et aucun verdict terrain ne peut muter automatiquement le candidat ou publier une version. Référence : `research/sprint-110-summary.md`.
+F1ZOV restait en maintenance selon l'opérateur local et F6ZES sans fréquence/mode publics exploitables ; ces deux conclusions restent valides après la publication v0.5. Référence historique : `research/sprint-110-summary.md`.
 
 ## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée
 
@@ -132,8 +159,9 @@ Le Sprint 97 / 0.21.86 a consolidé les détails de canaux régionaux, les racco
 
 ## Travaux encore ouverts
 
-- **Normandie v0.5** : priorité actionnable actuelle ; candidat 142 RX, delta 0, avec validation terrain requise pour R3/F1ZBX et F5ZHA et veille source sur F1ZOV/F6ZES.
+- **Normandie** : v0.5 est publiée à 146 RX. La veille source continue sur F1ZOV et F6ZES ; les écoutes terrain éventuelles sont du contrôle qualité facultatif, pas un gate.
 - **Bretagne v0.3** : 151 RX, delta 0 ; Sprint 111 a préparé la matrice de 16 mémoires et le validateur AIRAC 09/26. Le produit futur est déjà disponible mais ne devient source courante qu'à partir du **3 septembre 2026**.
+- En attendant cette date, les prochains travaux de couverture peuvent utiliser la **théorie documentée** selon la politique Sprint 112, sans inventer une fréquence, un mode ou un statut opérationnel.
 
 ## Site public
 
@@ -159,9 +187,10 @@ Le `README.md` doit être mis à jour à chaque changement important et à la fi
 ```powershell
 python tests\test_site_files.py
 python tests\test_pack_registry.py
+python tests\test_normandie_v05_public_release.py
+python tests\test_sprint113_state_sync.py
 python tests\test_ara_v03_candidate.py --dist website\dist
 python tests\test_ara_v03_publication.py --dist website\dist
-python tests\test_sprint110_state_sync.py
 
 cd website
 npm ci

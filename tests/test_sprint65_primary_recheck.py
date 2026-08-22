@@ -86,8 +86,12 @@ assert bretagne["new_site_assignment_count"] == 0
 assert bretagne["new_rf_memory_delta"] == 0
 assert bretagne["public_promotion_allowed"] is False
 
+# Sprint 65 owns these source-interpretation rules. They stay frozen in the
+# historical evidence rather than being required as permanent top-level resume keys.
 for key, value in evidence["rules"].items():
     assert value is True, f"Sprint 65 rule must remain enabled: {key}"
+assert evidence["rules"]["current_regional_channel_statement_does_not_identify_transmitter_site"] is True
+assert evidence["rules"]["current_cross_network_statement_does_not_map_channel_to_station"] is True
 
 assert evidence["decisions"]["normandie_gate_cleared_count"] == 0
 assert evidence["decisions"]["normandie_candidate_mutated"] is False
@@ -103,17 +107,23 @@ assert normandie_work["internal_candidate_memory_count"] == 142
 assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
 assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
 assert normandie_work["public_release_ready"] is False
-assert resume["resume_rules"]["current_regional_channel_statement_does_not_identify_transmitter_site"] is True
-assert resume["resume_rules"]["current_cross_network_statement_does_not_map_channel_to_station"] is True
+
+# Current policy is broader and can change coverage handling without rewriting
+# Sprint 65's source/site-assignment conclusions.
+if resume["current_sprint"] >= 113:
+    rules = resume["resume_rules"]
+    assert rules["unresolved_frequency_or_mode_must_not_be_guessed"] is True
+    assert rules["theory_is_not_measured_or_guaranteed_reception"] is True
+    assert rules["maintenance_status_must_not_be_overridden_by_theory"] is True
 
 public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
 assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert 'version: "v0.4"' in registry
+assert 'id: "normandie"' in registry
 assert 'id: "bretagne"' in registry
 
 print(
-    "Sprint 65 primary recheck: current Ministry/DIRM statements refresh channel/network context without inventing sites; "
-    "F5ZHA remains source+field gated, F6ZES unresolved, Ch64/Ch79 keep two RX memories if eventually publishable, public packs unchanged OK"
+    "Sprint 65 primary recheck: historical Ministry/DIRM source boundaries remain exact; "
+    "later theoretical coverage policy does not invent transmitter-site mappings or unresolved frequency/mode data OK"
 )

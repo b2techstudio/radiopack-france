@@ -20,7 +20,7 @@ for path in [STATE, ARA_V02_RECORD, ARA_V03_RECORD, ARA_FREEZE, README, STATUS, 
 
 state = json.loads(STATE.read_text(encoding="utf-8"))
 assert state["current_sprint"] >= 109
-assert state["state_version"].startswith("0.21.")
+assert tuple(int(part) for part in state["state_version"].split(".")) >= (0, 21, 97)
 assert state["updated"] == "2026-08-22"
 
 ara = state["public_packs"]["auvergne_rhone_alpes"]
@@ -31,8 +31,6 @@ assert ara["previous_immutable_version"] == "0.2"
 assert ara["previous_memory_count"] == 62
 assert ara["publication_record"] == "research/auvergne-rhone-alpes-v0.3/publication-record.json"
 assert ara["public_csv_sha256"] == ARA_V03_SHA
-
-# Current active work may advance after Sprint 109; the ARA publication snapshot below is historical.
 
 s108 = state["latest_sprint108_ara_v03_candidate"]
 assert s108["sprint"] == 108
@@ -112,7 +110,7 @@ readme = README.read_text(encoding="utf-8")
 for token in [
     "Auvergne-Rhône-Alpes v0.3",
     "71 mémoires RX",
-    "1591 mémoires RX cumulées",
+    "1595 mémoires RX cumulées",
     "## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée",
     "## Sprint 108 — candidat ARA v0.3 figé",
     "Normandie v0.5",
@@ -123,9 +121,9 @@ status = STATUS.read_text(encoding="utf-8")
 for token in [
     "## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée",
     "Auvergne-Rhône-Alpes v0.3 : **71 mémoires RX**",
-    "**Priorité actionnable actuelle.**",
     "Normandie v0.5",
+    "Sprint courant : **113**",
 ]:
     assert token in status, token
 
-print("Sprint 109 historical guard: ARA v0.3=71 immutable, v0.2=62 historical, byte identity SHA frozen after later state advances OK")
+print("Sprint 109 historical guard: ARA v0.3=71 immutable and exact SHA preserved after Sprint 113 Normandie publication OK")

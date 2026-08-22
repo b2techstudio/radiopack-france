@@ -64,9 +64,8 @@ assert bretagne["publication_allowed_before_airac09_revalidation"] is False
 
 # Starting with Sprint 101, active_work can move on while the Sprint 91 handoff
 # remains a historical/future gate in its dedicated machine-readable block.
-# A later pack may legitimately reach prepublication readiness. If so, this
-# historical guard must ensure that readiness has NOT silently mutated the
-# currently published pack rather than forcing publication_ready to stay false.
+# Prepublication and publication are both valid later phases, but the public IDF
+# state must match the phase exactly and v0.2 must remain recorded as history.
 if state["current_sprint"] >= 101:
     active = state["active_work"]
     assert active["pack"] == "Île-de-France"
@@ -76,10 +75,20 @@ if state["current_sprint"] >= 101:
         assert active["publication_record_frozen"] is True
         assert active["candidate_sha256"] == "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
         idf_public = state["public_packs"]["ile_de_france"]
-        assert idf_public["version"] == "0.2"
-        assert idf_public["memory_count"] == 58
-        assert idf_public["immutable"] is True
-        assert idf_public["public_csv_sha256"] == "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d"
+        if active.get("published"):
+            assert active["published_version_is_immutable"] is True
+            assert active["public_mutation_performed"] is True
+            assert idf_public["version"] == "0.3"
+            assert idf_public["memory_count"] == 57
+            assert idf_public["immutable"] is True
+            assert idf_public["previous_immutable_version"] == "0.2"
+            assert idf_public["previous_memory_count"] == 58
+            assert idf_public["public_csv_sha256"] == "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
+        else:
+            assert idf_public["version"] == "0.2"
+            assert idf_public["memory_count"] == 58
+            assert idf_public["immutable"] is True
+            assert idf_public["public_csv_sha256"] == "dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d"
 
 project = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
 assert f'Sprint courant : **{state["current_sprint"]}**' in project

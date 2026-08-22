@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "status": "completed_published_immutable",
+  "pack": "Grand Est",
+  "version": "0.4",
+  "reviewed_on": "2026-08-22",
+  "item_count": 12,
+  "reviewed_count": 12,
+  "blocker_count": 0,
+  "items": [
+    {"id":"immutable_base","reviewed":true,"note":"Grand Est v0.3 / 84 remains immutable and its public SHA is verified before v0.4 construction."},
+    {"id":"inland_scope","reviewed":true,"note":"Thirteen inland-navigation VHF RF memories are frozen from ANFR/CCNR-backed Sprint 103 evidence."},
+    {"id":"inland_local_assignments","reviewed":true,"note":"Strasbourg channel 11 and Rhine/Moselle channels 19/20/22 are supported by the 2026 regional guide; undocumented local channels are not guessed."},
+    {"id":"paired_rx","reviewed":true,"note":"Verified duplex channels 19/20/22 retain both boat and terrestrial RF sides; boat-to-boat channels remain single-RF memories."},
+    {"id":"channel6_boundary","reviewed":true,"note":"Channel 6 is retained RX-only with the explicit Rhine PK150-350 prohibition in its comment."},
+    {"id":"rf_deduplication","reviewed":true,"note":"Candidate contains 97 unique RF values and does not duplicate a maritime block."},
+    {"id":"memory_count","reviewed":true,"note":"97 RX = immutable v0.3 84 + 13 inland VHF; no radio or aviation count changes."},
+    {"id":"rx_only_contract","reviewed":true,"note":"Every memory uses Duplex=off and Offset=0.000000."},
+    {"id":"aviation_subset","reviewed":true,"note":"Nineteen aviation memories are inherited unchanged from v0.3; aviation delta is zero."},
+    {"id":"airac_current_cycle","reviewed":true,"note":"SIA confirms AIRAC 08/26 remains effective through 2026-09-02 inclusive; AIRAC09 applies from 2026-09-03."},
+    {"id":"candidate_public_identity","reviewed":true,"note":"Candidate and public CSV use the exact same Git blob; SHA-256 ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d."},
+    {"id":"no_artificial_fill","reviewed":true,"note":"Only verified inland-navigation RF are added; no memory exists solely to increase pack size."}
+  ]
+}

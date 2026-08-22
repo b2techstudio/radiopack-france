@@ -1,0 +1,97 @@
+{
+  "dataset": "Bourgogne-Franche-Comté — VHF navigation intérieure (réception seule)",
+  "version": "0.4.0-research",
+  "updated": "2026-08-22",
+  "scope": "Bourgogne-Franche-Comté",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Ce jeu est distinct du bloc VHF marine et ne contient que des RF de navigation intérieure documentées par des sources officielles courantes.",
+    "La voie 10 couvre le bateau-bateau sur la Saône hors traversée de Lyon et sur le canal du Rhône au Rhin, branche Sud.",
+    "Les voies duplex 20 et 22 sont représentées par deux mémoires RX, côté bateau et côté station terrestre.",
+    "La voie 12 est documentée sur le réseau Centre-Bourgogne et la voie 69 sur le secteur Saint-Aubin à Cannes-Écluse.",
+    "La voie 18 de la traversée de Lyon est exclue de ce jeu territorial : elle relève du scope Auvergne-Rhône-Alpes.",
+    "Aucune affectation locale non documentée n'est devinée."
+  ],
+  "sources": [
+    {
+      "authority": "ANFR",
+      "title": "Manuel CRR fluvial - version 6, mai 2025",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "accessed": "2026-08-22"
+    },
+    {
+      "authority": "VNF Rhône Saône",
+      "title": "Avis à la batellerie n°1 - 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2026/02/VNF_batellerie_2026_vdef.pdf",
+      "accessed": "2026-08-22",
+      "findings": [
+        "Saône hors traversée de Lyon : canal 10 bateau-bateau.",
+        "Écluse de Seurre : canal 22.",
+        "Écluse d'Écuelles : canal 20.",
+        "Écluse d'Ormes : canal 22.",
+        "Canal du Rhône au Rhin, branche Sud : canal 10 bateau-bateau."
+      ]
+    },
+    {
+      "authority": "VNF Centre-Bourgogne",
+      "title": "Avis à la batellerie n°01 - 2026, V01 mars 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2023/06/2026_Avis-Bat-01_V01-2.pdf",
+      "accessed": "2026-08-22",
+      "findings": [
+        "Annonce VHF canal 12 d'Auxerre à Joigny jusqu'à l'écluse du Pêchoir incluse.",
+        "Annonce VHF canal 69 de Saint-Aubin à Cannes-Écluse."
+      ]
+    }
+  ],
+  "channels": [
+    {
+      "name": "FLV10",
+      "frequency_mhz": 156.5,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 10 · Saône BFC / CRR branche Sud · bateau-bateau · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FLV12",
+      "frequency_mhz": 156.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 12 · Centre-Bourgogne Auxerre-Joigny · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FL20-B",
+      "frequency_mhz": 157.0,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté bateau · écluse d'Écuelles · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FL20-T",
+      "frequency_mhz": 161.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté station terrestre · écluse d'Écuelles · RX seule"
+    },
+    {
+      "name": "FL22-B",
+      "frequency_mhz": 157.1,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté bateau · écluses Seurre / Ormes · VNF 2026 · RX seule"
+    },
+    {
+      "name": "FL22-T",
+      "frequency_mhz": 161.7,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté station terrestre · écluses Seurre / Ormes · RX seule"
+    },
+    {
+      "name": "FLV69",
+      "frequency_mhz": 156.475,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 69 · Centre-Bourgogne Saint-Aubin-Cannes-Écluse · VNF 2026 · RX seule"
+    }
+  ]
+}

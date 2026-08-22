@@ -87,8 +87,13 @@ et = json.loads(ETEL.read_text(encoding="utf-8"))
 assert et["assessment"]["channel64_site_confirmed"] is False
 assert et["assessment"]["site_assignment_can_be_promoted"] is False
 
+# Sprint 67 owns these primary/secondary source interpretation rules. Preserve
+# them in its immutable evidence instead of requiring permanent resume aliases.
 for key, value in e["rules"].items():
     assert value is True, key
+assert e["rules"]["current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter"] is True
+assert e["rules"]["secondary_source_convergence_does_not_become_primary_validation"] is True
+assert e["rules"]["current_display_badge_does_not_override_dated_verification_provenance"] is True
 assert e["decisions"]["normandie_gate_cleared_count"] == 0
 assert e["decisions"]["normandie_candidate_mutated"] is False
 assert e["decisions"]["bretagne_site_assignment_promoted"] is False
@@ -102,9 +107,15 @@ assert current["candidate_memory_count"] == 142
 assert current["candidate_memory_delta"] == 0
 assert current["known_potential_ceiling_excluding_f6zes"] == 147
 assert set(current["field_required"]) == {"R3_F1ZBX", "F5ZHA"}
-assert resume["resume_rules"]["current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter"] is True
-assert resume["resume_rules"]["secondary_source_convergence_does_not_become_primary_validation"] is True
-assert resume["resume_rules"]["current_display_badge_does_not_override_dated_verification_provenance"] is True
+
+if resume["current_sprint"] >= 113:
+    rules = resume["resume_rules"]
+    assert rules["unresolved_frequency_or_mode_must_not_be_guessed"] is True
+    assert rules["theory_is_not_measured_or_guaranteed_reception"] is True
+    assert rules["maintenance_status_must_not_be_overridden_by_theory"] is True
+    publication = resume["normandie_v0_5_publication"]
+    assert publication["memory_count"] == 146
+    assert publication["field_reception_required_for_publication"] is False
 
 public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
@@ -112,4 +123,4 @@ assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 
-print("Sprint 67 current reference synthesis: historical primary/secondary boundaries remain immutable; compact current state preserves Normandie gates, public packs unchanged OK")
+print("Sprint 67 current reference synthesis: historical primary/secondary boundaries remain immutable while Sprint 113 theory policy stays separate and source-safe OK")

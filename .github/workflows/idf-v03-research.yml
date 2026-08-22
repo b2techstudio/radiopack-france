@@ -61,7 +61,7 @@ jobs:
         run: python tests/test_pack_registry.py
 
       - name: Set up Node.js
-        uses: actions/setup-node@0b464482a4f3721a2acdeb5799ee3f80d8bec1ae # v7.0.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22.12.0"
           cache: npm

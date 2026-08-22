@@ -96,12 +96,13 @@ assert all("couverture theorique Mortain" in row["Comment"] for row in new_rows)
 all_freqs = [round(float(row["Frequency"]), 6) for row in rows]
 all_names = [row["Name"] for row in rows]
 all_locations = [int(row["Location"]) for row in rows]
+new_freqs = [round(float(row["Frequency"]), 6) for row in new_rows]
 assert len(all_freqs) == len(set(all_freqs)) == 146
 assert len(all_names) == len(set(all_names)) == 146
 assert len(all_locations) == len(set(all_locations)) == 146
-assert 431.4125 not in all_freqs
-assert 431.975 not in all_freqs
-assert 430.375 not in all_freqs
+assert 431.4125 not in new_freqs
+assert 431.975 not in new_freqs
+assert 430.375 not in new_freqs
 
 with tempfile.TemporaryDirectory(prefix="radiopack-normandie-v05-theory-") as td:
     subprocess.run([

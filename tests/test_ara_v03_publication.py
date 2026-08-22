@@ -162,8 +162,9 @@ assert ara["memoryCount"] == 71
 assert "VHF navigation intérieure RX" in ara["categories"]
 
 page = REGION_PAGE.read_text(encoding="utf-8")
+assert 'import { buildAraV03Pack } from "../../lib/araPack";' in page
 assert 'const isAraV03 = pack.id === "auvergne-rhone-alpes" && publicPack?.version === "v0.3";' in page
-assert 'radiopack-france-auvergne-rhone-alpes-v0.3.csv' in page
+assert '? buildAraV03Pack()' in page
 assert 'isAraV03 ? 9 : 0' in page
 assert 'isAraV03 ? "120–128"' in page
 

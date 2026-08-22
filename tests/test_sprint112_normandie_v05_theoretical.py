@@ -141,6 +141,8 @@ with tempfile.TemporaryDirectory(prefix="radiopack-normandie-v05-theory-") as td
     assert info["candidate_csv_sha256"] == EXPECTED_SHA
 
 assert PUBLIC_V04.is_file()
-assert not PUBLIC_V05.exists()
+if PUBLIC_V05.exists():
+    assert hashlib.sha256(PUBLIC_V05.read_bytes()).hexdigest() == EXPECTED_SHA
+    assert PUBLIC_V05.read_bytes() == module.candidate_csv_bytes(candidate)
 
-print("Sprint 112 Normandie v0.5: frozen theoretical candidate=146 RX, SHA stable, R3+F5ZHA promoted, F1ZOV/F6ZES deferred, no public v0.5 OK")
+print("Sprint 112 historical Normandie v0.5 guard: frozen theoretical candidate=146 RX and SHA remain stable before or after explicit publication OK")

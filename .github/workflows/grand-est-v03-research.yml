@@ -7,9 +7,11 @@ on:
     paths:
       - "research/grand-est-v0.3/**"
       - "research/grand-est-v0.2/**"
+      - "tools/build_grand_est_v03_candidate.py"
       - "tests/test_grand_est_v03_initialization.py"
       - "tests/test_grand_est_v03_pass2.py"
       - "tests/test_grand_est_v03_pass3.py"
+      - "tests/test_grand_est_v03_candidate.py"
       - "website/src/lib/packRegistry.ts"
       - ".github/workflows/grand-est-v03-research.yml"
   pull_request:
@@ -18,9 +20,11 @@ on:
     paths:
       - "research/grand-est-v0.3/**"
       - "research/grand-est-v0.2/**"
+      - "tools/build_grand_est_v03_candidate.py"
       - "tests/test_grand_est_v03_initialization.py"
       - "tests/test_grand_est_v03_pass2.py"
       - "tests/test_grand_est_v03_pass3.py"
+      - "tests/test_grand_est_v03_candidate.py"
       - "website/src/lib/packRegistry.ts"
       - ".github/workflows/grand-est-v03-research.yml"
   workflow_dispatch:
@@ -51,3 +55,7 @@ jobs:
         run: python tests/test_grand_est_v03_pass2.py
       - name: Test Grand Est v0.3 radio scope closure
         run: python tests/test_grand_est_v03_pass3.py
+      - name: Verify deterministic Grand Est v0.3 candidate
+        run: python tools/build_grand_est_v03_candidate.py --check
+      - name: Test Grand Est v0.3 candidate
+        run: python tests/test_grand_est_v03_candidate.py

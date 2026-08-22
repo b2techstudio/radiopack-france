@@ -1,8 +1,8 @@
 # RadioPack France
 
-**Couverture publique au 21 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
+**Couverture publique au 22 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 101 / 0.21.90 — Île-de-France v0.3 est le travail actif de recherche à partir de la v0.2 publique immuable de 58 RX ; aucune nouvelle version publique n'est encore candidate.**
+**État courant : Sprint 101 / 0.21.90 — Île-de-France v0.3 est publiée et immuable à 57 RX, dont 18 aviation et 15 mémoires radio régionales. La v0.2 de 58 RX reste historique et immuable.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -13,7 +13,7 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 - **Normandie v0.4** — 142 mémoires RX ;
 - **Bretagne v0.2** — 151 mémoires RX ;
 - **Hauts-de-France v0.2** — 144 mémoires RX ;
-- **Île-de-France v0.2** — 58 mémoires RX ;
+- **Île-de-France v0.3** — 57 mémoires RX, dont 18 aviation ;
 - **Grand Est v0.2** — 59 mémoires RX ;
 - **Centre-Val de Loire v0.3** — 51 mémoires RX, dont 7 aviation ;
 - **Pays de la Loire v0.2** — 130 mémoires RX ;
@@ -27,7 +27,7 @@ La couverture administrative métropolitaine est **13/13**. Les packs publics ac
 
 Repère historique de publication : **Annecy–Alpes–Léman v0.4 : 77 RX / 60 sans aviation** ; la v0.3 76/59 reste immuable.
 
-Les variantes par défaut représentent **1531 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
+Les variantes par défaut représentent **1530 mémoires RX cumulées** dans le catalogue public. Chaque fichier reste indépendant et respecte la limite de la radio.
 
 Le projet couvre actuellement les **13 régions métropolitaines**. Les cinq régions d'outre-mer ne sont pas encore incluses dans cette couverture.
 
@@ -56,19 +56,23 @@ Chaque future v0.3 régionale suit désormais le même processus :
 4. revoir systématiquement l'aviation sur les sources SIA/eAIP du cycle AIRAC applicable, avec NOTAM/SUP AIP lorsque nécessaire ;
 5. différer les fréquences ambiguës plutôt que les deviner ;
 6. construire le CSV de façon déterministe, vérifier RX-only, déduplication et taille ;
-7. figer scope, checklist, gates, `publication-record.json` et SHA-256 du build Astro avant publication.
+7. figer scope, checklist, gates, `publication-record.json` et SHA-256 avant publication.
 
 Les régions littorales conservent aussi leur périmètre VHF marine lorsque celui-ci est déjà validé.
 
-## Sprint 101 — Île-de-France v0.3 en recherche
+## Sprint 101 — Île-de-France v0.3 publiée
 
-Le **Sprint 101 / 0.21.90** ouvre officiellement Île-de-France v0.3 à partir de la **v0.2 publique immuable de 58 RX**, dont 18 aviation. Ce checkpoint ne publie aucun nouveau CSV et ne modifie aucun SHA public.
+Le **Sprint 101 / 0.21.90** publie Île-de-France v0.3 à **57 RX** à partir de la **v0.2 historique immuable de 58 RX**.
 
-La première passe garde F5ZNG, F5ZNN, F5ZMH et F1ZHK comme base de travail ; F5ZMR Provins et F5ZSY Issy-les-Moulineaux sont les nouveaux candidats les mieux étayés. F5ZAD et F1ZUX ne sont plus reconduits automatiquement, tandis que F1ZSY, F5ZEQ, F5ZDR et le crossband F5ZNN restent bloqués/différés par les gates documentés. F5ZBK et F1ZTC demandent encore une seconde corroboration actuelle.
+Composition : **24 mémoires nationales**, **18 aviation** et **15 radio régionales**. Le CSV public est strictement identique au candidat déterministe figé.
 
-L'aviation reste sur **AIRAC 08/26 jusqu'au 2 septembre 2026 inclus** ; la revue AD 2.18 et NOTAM/SUP AIP reste ouverte. Toute publication ou nouvelle validation à partir du **3 septembre 2026** devra être reprise sur **AIRAC 09/26**.
+SHA-256 public : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
 
-Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
+Le scope radio retient F5ZNG, F5ZNN, F5ZMH, F1ZHK, F6ZEE, F5ZMR, F5ZSY et l'extension crossband F5ZNN après déduplication. F5ZEQ reste non reconduit pendant sa maintenance ; F1ZTC, F5ZDR, F5ZBK et F1ZDL restent hors scope faute de corroboration actuelle suffisante, sans affirmation de fermeture définitive.
+
+L'aviation conserve **18 mémoires, delta 0**, revalidées pour le sous-ensemble retenu dans la fenêtre **AIRAC 08/26**, valable jusqu'au **2 septembre 2026 inclus**. Toute nouvelle révision aviation à partir du **3 septembre 2026** doit être revalidée sur **AIRAC 09/26**.
+
+Références : `research/ile-de-france-v0.3/publication-record.json` et `research/sprint-101-summary.md`.
 
 ## Sprint 100 — Centre-Val de Loire v0.3
 
@@ -116,7 +120,7 @@ Le candidat historique Annecy–Alpes–Léman v0.4 était figé à **77 RX / 60
 
 ## Travaux encore ouverts
 
-**Île-de-France v0.3** est désormais le travail actif officiel de recherche. Bretagne v0.3 reste à **151 RX** en attente de la transition AIRAC et Normandie v0.5 reste à **142 RX** avec ses gates terrain/source. Après BFC et Centre, les autres régions métropolitaines encore en v0.2 seront traitées progressivement.
+**Bretagne v0.3** reste à **151 RX** en attente de la transition AIRAC 09/26 et **Normandie v0.5** reste à **142 RX** avec ses gates terrain/source. Après les publications BFC, Centre et Île-de-France v0.3, les autres régions métropolitaines encore en v0.2 seront traitées progressivement.
 
 ## Site public
 
@@ -148,6 +152,8 @@ python tests\test_sprint98_state_sync.py
 python tests\test_sprint100_state_sync.py
 python tests\test_sprint101_state_sync.py
 python tests\test_idf_v03_research.py
+python tests\test_idf_v03_candidate.py
+python tests\test_idf_v03_publication.py
 
 cd website
 npm ci

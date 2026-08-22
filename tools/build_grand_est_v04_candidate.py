@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Build the deterministic Grand Est v0.4 inland-VHF internal candidate.
+"""Build the deterministic Grand Est v0.4 inland-VHF publication basis.
 
 Grand Est v0.3 is immutable. This builder reads that exact public CSV, verifies
 its SHA-256 against the frozen publication record, then adds only the validated
-13-memory inland-navigation VHF block. No public file is modified by this tool.
+13-memory inland-navigation VHF block. The resulting bytes are the immutable
+Grand Est v0.4 public publication basis.
 """
 from __future__ import annotations
 
@@ -21,11 +22,13 @@ BASE_PUBLIC = Path("website/public/downloads/grand-est/radiopack-france-grand-es
 INLAND_DATA = Path("data/regional/grand-est-inland-vhf-rx.json")
 OUTPUT = Path("research/grand-est-v0.4/generated/release-candidate/radiopack-france-grand-est-v0.4-candidate.csv")
 MANIFEST = Path("research/grand-est-v0.4/generated/release-candidate/candidate-manifest.json")
+PUBLIC = Path("website/public/downloads/grand-est/radiopack-france-grand-est-v0.4.csv")
 
 EXPECTED_BASE_SHA = "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720"
 EXPECTED_BASE_COUNT = 84
 EXPECTED_INLAND_COUNT = 13
 EXPECTED_CANDIDATE_COUNT = 97
+EXPECTED_PUBLIC_SHA = "ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d"
 INLAND_LOCATION_START = 120
 
 COLUMNS = [
@@ -129,10 +132,14 @@ def build(root: Path) -> tuple[bytes, dict[str, Any]]:
 
     candidate = csv_bytes(rows)
     candidate_sha = hashlib.sha256(candidate).hexdigest()
+    if candidate_sha != EXPECTED_PUBLIC_SHA:
+        raise ValueError(f"Grand Est v0.4 publication SHA mismatch: {candidate_sha}")
+
     manifest = {
         "schema_version": "1.0",
-        "status": "internal_candidate_inland_vhf_scope_frozen",
+        "status": "published_basis_immutable",
         "generated_on": "2026-08-22",
+        "published_on": "2026-08-22",
         "pack": "Grand Est",
         "target_version": "0.4",
         "published_base_version": "0.3",
@@ -142,7 +149,9 @@ def build(root: Path) -> tuple[bytes, dict[str, Any]]:
         "candidate_inland_vhf_memory_count": EXPECTED_INLAND_COUNT,
         "candidate_memory_delta": EXPECTED_INLAND_COUNT,
         "candidate_sha256": candidate_sha,
+        "public_csv_sha256": candidate_sha,
         "candidate_csv": str(OUTPUT),
+        "public_csv": str(PUBLIC),
         "builder": "tools/build_grand_est_v04_candidate.py",
         "inland_validation": "research/grand-est-v0.4/inland-vhf-validation-2026-08-22.json",
         "inland_dataset": str(INLAND_DATA),
@@ -153,10 +162,12 @@ def build(root: Path) -> tuple[bytes, dict[str, Any]]:
             "unique_locations": True,
             "unique_names": True,
             "memory_limit_passed": True,
-            "inland_scope_frozen": True
+            "inland_scope_frozen": True,
+            "candidate_public_sha_equal": True
         },
-        "public_export_allowed": False,
-        "published": False
+        "public_export_allowed": True,
+        "published": True,
+        "immutable": True
     }
     return candidate, manifest
 
@@ -164,13 +175,14 @@ def build(root: Path) -> tuple[bytes, dict[str, Any]]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=ROOT)
-    parser.add_argument("--write", action="store_true", help="write internal candidate and manifest")
-    parser.add_argument("--check", action="store_true", help="compare against already frozen candidate and manifest")
+    parser.add_argument("--write", action="store_true", help="write publication-basis candidate and manifest")
+    parser.add_argument("--check", action="store_true", help="compare against frozen candidate, manifest and public CSV")
     args = parser.parse_args()
     root = args.root.resolve()
     candidate, manifest = build(root)
     output = root / OUTPUT
     manifest_path = root / MANIFEST
+    public_path = root / PUBLIC
 
     if args.write:
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -181,11 +193,13 @@ def main() -> None:
             raise ValueError("Frozen Grand Est v0.4 candidate CSV differs from deterministic rebuild")
         if not manifest_path.is_file() or load_json(manifest_path) != manifest:
             raise ValueError("Frozen Grand Est v0.4 candidate manifest differs from deterministic rebuild")
+        if not public_path.is_file() or public_path.read_bytes() != candidate:
+            raise ValueError("Public Grand Est v0.4 CSV differs from deterministic publication basis")
 
     print(
-        "GRAND EST V0.4 INTERNAL CANDIDATE: "
+        "GRAND EST V0.4 PUBLISHED BASIS: "
         f"{EXPECTED_CANDIDATE_COUNT} RX, inland={EXPECTED_INLAND_COUNT}, "
-        f"sha256={manifest['candidate_sha256']}, public=false"
+        f"sha256={manifest['candidate_sha256']}, public=true"
     )
 
 

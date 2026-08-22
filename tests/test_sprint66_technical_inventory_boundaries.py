@@ -98,32 +98,38 @@ assert etel["assessment"]["current_technical_maintenance_scope_17_stations_verif
 assert etel["assessment"]["technical_maintenance_scope_names_channels"] is False
 assert etel["rules"]["current_maintenance_scope_does_not_name_station_channels"] is True
 
+# The exact Sprint 66 technical-boundary rules stay in the immutable evidence.
 for key, value in e["rules"].items():
     assert value is True, key
+assert e["rules"]["current_maintenance_scope_does_not_name_station_channels"] is True
+assert e["rules"]["association_existence_does_not_validate_repeater_frequency"] is True
+assert e["rules"]["undated_secondary_schedule_is_not_current_primary_validation"] is True
+assert e["rules"]["current_infrastructure_procurement_does_not_assign_channel"] is True
 assert e["decisions"]["normandie_gate_cleared_count"] == 0
 assert e["decisions"]["normandie_candidate_mutated"] is False
 assert e["decisions"]["bretagne_site_assignment_promoted"] is False
 assert e["decisions"]["public_pack_mutated"] is False
 assert e["decisions"]["public_export_allowed"] is False
 
-# Sprint 66 is historical. The exact technical-inventory snapshot above is the
-# immutable evidence; the compact current resume only needs to preserve the
-# resulting current boundaries, not every old intermediate sub-object.
+# Sprint 66 is historical. The compact current resume preserves the resulting
+# durable boundaries without duplicating every old technical sub-object.
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
 assert resume["current_sprint"] >= e["sprint"]
 normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert normandie_work["internal_candidate_memory_count"] == 142
 assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
 assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert resume["bretagne_research_update"]["primary_current_channel79_transmitter_site_confirmed"] is False
-assert resume["bretagne_research_update"]["new_rf_memory_delta"] == 0
-for key in [
-    "current_maintenance_scope_does_not_name_station_channels",
-    "association_existence_does_not_validate_repeater_frequency",
-    "undated_secondary_schedule_is_not_current_primary_validation",
-    "current_infrastructure_procurement_does_not_assign_channel",
-]:
-    assert resume["resume_rules"][key] is True
+
+bretagne_handoff = resume["bretagne_v0_3_airac_handoff"]
+assert bretagne_handoff["candidate_memory_count"] == 151
+assert bretagne_handoff["candidate_memory_delta"] == 0
+assert bretagne_handoff["publication_allowed_before_airac09_revalidation"] is False
+
+if resume["current_sprint"] >= 113:
+    rules = resume["resume_rules"]
+    assert rules["unresolved_frequency_or_mode_must_not_be_guessed"] is True
+    assert rules["theory_is_not_measured_or_guaranteed_reception"] is True
+    assert rules["maintenance_status_must_not_be_overridden_by_theory"] is True
 
 public_normandie = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.3.1.csv"
 rows = list(csv.DictReader(io.StringIO(public_normandie.read_text(encoding="utf-8"))))
@@ -131,4 +137,4 @@ assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 
-print("Sprint 66 technical inventory boundaries: historical evidence remains exact while compact current state preserves resulting Normandie/Bretagne gates OK")
+print("Sprint 66 technical inventory boundaries: historical evidence remains exact while compact Sprint 113 state preserves durable no-guess/no-maintenance-override boundaries OK")

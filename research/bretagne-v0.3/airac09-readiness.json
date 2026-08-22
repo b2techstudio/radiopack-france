@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "status": "future_cycle_source_available_not_current_readiness_prepared",
+  "pack": "Bretagne",
+  "target_version": "0.3",
+  "prepared_on": "2026-08-22",
+  "public_base": {
+    "version": "0.2",
+    "memory_count": 151,
+    "sha256": "73aa3d530ae9f6c572eb01794b0861ecba61df0faf7884ee766085d3de7601a4",
+    "immutable": true
+  },
+  "candidate": {
+    "memory_count": 151,
+    "memory_delta": 0,
+    "aviation_memory_count": 16,
+    "public_export_allowed": false,
+    "public_release_allowed": false
+  },
+  "cycle": {
+    "current_on_prepared_date": "AIRAC 08/26",
+    "current_until_inclusive": "2026-09-02",
+    "required_cycle": "AIRAC 09/26",
+    "effective_from": "2026-09-03",
+    "effective_until_inclusive": "2026-09-30",
+    "must_not_be_treated_as_current_before": "2026-09-03"
+  },
+  "future_cycle_sources": [
+    {
+      "authority": "SIA France",
+      "title": "Données aéronautiques XML AIRAC 09/26",
+      "url": "https://www.sia.aviation-civile.gouv.fr/catalog/product/view/id/3641/category/57/",
+      "listing_url": "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia.html",
+      "observed_available_on": "2026-08-22",
+      "effective_from": "2026-09-03",
+      "effective_until_inclusive": "2026-09-30",
+      "available_before_effective_date": true,
+      "current_evidence_on_observed_date": false,
+      "xml_export_bytes_extracted_in_repository_workflow": false
+    },
+    {
+      "authority": "EUROCONTROL Network Manager",
+      "title": "RAD AIRAC 2609",
+      "url": "https://www.nm.eurocontrol.int/RAD/",
+      "observed_available_on": "2026-08-22",
+      "effective_from": "2026-09-03",
+      "effective_until_inclusive": "2026-09-30",
+      "supports_cycle_dates_only": true
+    }
+  ],
+  "baseline_aviation": {
+    "source": "research/bretagne-v0.2/aviation-airac-08.json",
+    "cycle": "AIRAC 08/26",
+    "locations": [130, 145],
+    "memory_count": 16,
+    "names": [
+      "AIR-EMERG",
+      "RNS-COT-A",
+      "RNS-NORD",
+      "RNS-SUD",
+      "RNS-COT-B",
+      "RNS-GND",
+      "RNS-TWR",
+      "RNS-ATIS",
+      "BES-IRO1",
+      "BES-IRO2",
+      "BES-APP",
+      "BES-TWR",
+      "BES-ATIS",
+      "DIN-TWR",
+      "DIN-ATIS",
+      "QUIM-TWR"
+    ],
+    "frequencies_mhz": [
+      121.5,
+      120.35,
+      126.95,
+      134.0,
+      134.2,
+      121.73,
+      120.505,
+      136.405,
+      119.575,
+      135.83,
+      125.86,
+      120.105,
+      129.355,
+      120.155,
+      124.58,
+      118.625
+    ]
+  },
+  "revalidation_contract": {
+    "template": "research/bretagne-v0.3/airac09-revalidation-template.json",
+    "validator": "tools/check_bretagne_v03_airac09_revalidation.py",
+    "all_16_baseline_memories_must_receive_explicit_decision": true,
+    "allowed_memory_decisions": ["unchanged", "changed", "removed"],
+    "unresolved_memory_blocks_candidate_rebuild": true,
+    "current_cycle_primary_source_verification_required": true,
+    "human_review_required": true,
+    "candidate_rebuild_may_not_be_authorized_before_effective_date": true,
+    "candidate_rebuild_is_not_publication": true,
+    "automatic_candidate_mutation_allowed": false,
+    "automatic_publication_allowed": false
+  },
+  "rules": {
+    "future_airac_source_availability_is_not_current_evidence": true,
+    "future_airac_must_not_be_promoted_before_effective_date": true,
+    "direct_xml_field_match_must_not_be_claimed_without_xml_extraction": true,
+    "rx_only": true,
+    "published_v0_2_immutable": true,
+    "public_v0_3_created": false,
+    "no_frequency_inference": true
+  }
+}

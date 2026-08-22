@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "status": "completed_prepublication",
+  "pack": "Grand Est",
+  "version": "0.3",
+  "reviewed_on": "2026-08-22",
+  "item_count": 12,
+  "reviewed_count": 12,
+  "blocker_count": 0,
+  "items": [
+    {"id":"immutable_base","reviewed":true,"note":"Grand Est v0.2 / 59 remains immutable; candidate reconstruction verifies SHA a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1."},
+    {"id":"radio_scope","reviewed":true,"note":"Three radio passes close a non-exhaustive analog scope at 41 unique regional RF memories."},
+    {"id":"radio_deferrals","reviewed":true,"note":"F1ZAX, F5ZBD, F5ZRP, F5ZTY, F5ZUK, F1ZFN and F1ZEF remain deferred/excluded rather than guessed."},
+    {"id":"digital_exclusion","reviewed":true,"note":"F1ZBU and other digital-only or unresolved mixed-digital infrastructure are excluded from the analog scope."},
+    {"id":"rf_deduplication","reviewed":true,"note":"432.5375 MHz shared by four crossband infrastructures is represented once; candidate has unique RF values."},
+    {"id":"memory_count","reviewed":true,"note":"Candidate contains exactly 84 RX memories: 41 regional radio plus 43 inherited national/aviation memories."},
+    {"id":"rx_only_contract","reviewed":true,"note":"All candidate memories use Duplex=off and Offset=0.000000."},
+    {"id":"aviation_subset","reviewed":true,"note":"Nineteen aviation memories are retained unchanged from v0.2; aviation delta is zero."},
+    {"id":"airac_current_cycle","reviewed":true,"note":"SIA still identifies AIRAC 08/26 as current through 2026-09-02 inclusive; no new field-by-field revalidation is claimed."},
+    {"id":"candidate_sha","reviewed":true,"note":"Frozen deterministic candidate SHA-256 is 45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720."},
+    {"id":"no_artificial_fill","reviewed":true,"note":"No memory is added merely to increase pack size."},
+    {"id":"publication_plan","reviewed":true,"note":"Public v0.3 will reuse the exact frozen candidate blob and v0.2 will remain historically buildable and immutable."}
+  ]
+}

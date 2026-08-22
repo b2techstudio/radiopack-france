@@ -1,29 +1,35 @@
 # Grand Est v0.3 — Sprint 102
 
-Statut : **recherche uniquement — aucune mutation publique**.
+Statut : **candidat interne construit — aucune mutation publique**.
 
 Base publique immuable : **Grand Est v0.2 / 59 mémoires RX**.
 SHA-256 public v0.2 : `a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1`.
 
-## Objectif
+## État du candidat
 
-Construire une future v0.3 à partir de la v0.2 publiée, sans remplissage artificiel et sans reconduire automatiquement des relais dont le mode ou l'état courant a changé.
+Le périmètre radio analogique non exhaustif a été fermé après trois passes de recherche :
 
-Le Sprint 102 commence par un audit radio actuel. L'aviation reste figée sur la base AIRAC 08/26 de la v0.2 tant qu'une révision aviation n'est pas explicitement lancée ; toute révision sur ou après le 3 septembre 2026 devra être faite sur AIRAC 09/26.
+- **41 fréquences RF régionales uniques** ;
+- déduplication explicite de `432.5375 MHz`, partagée par plusieurs crossbands ;
+- F1ZAX différé car le REF courant le classe C4FM sans preuve locale actuelle de voix FM analogique ;
+- F5ZBD exclu tant qu'il est signalé hors service / en mise à niveau ;
+- F1ZBU exclu du périmètre analogique car son service courant est numérique ;
+- les autres dossiers insuffisamment corroborés restent explicitement différés.
 
-## Premier constat radio
+Un candidat déterministe interne est maintenant figé à **84 mémoires RX** :
 
-La v0.2 contient huit relais 2 m paired-RX. Sept restent compatibles avec un inventaire analogique courant au premier passage. `F1ZAX` demande une résolution de mode avant toute reconduction : l'inventaire REF courant le classe en C4FM, alors que des annuaires secondaires peuvent encore l'afficher FM/Fusion.
+- 43 mémoires non régionales héritées de la base v0.2 ;
+- 19 mémoires aviation AIRAC 08/26 incluses dans ces 43 ;
+- 41 mémoires radio régionales ;
+- SHA-256 candidat : `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`.
 
-Le premier balayage fait aussi apparaître plusieurs infrastructures analogiques actuelles absentes de la v0.2, notamment :
+Le builder reconstruit d'abord la v0.2 et refuse de poursuivre si son SHA historique ne correspond pas. Le candidat reste `public_export_allowed=false` : aucune v0.3 publique n'existe encore.
 
-- `F5ZUD` — Vandoeuvre/Nancy — 145.7125 / 145.1125 MHz ;
-- `F1ZUV` — Strasbourg — crossband 144.750 / 439.750 MHz ;
-- `F5ZAW` — Bellefosse / Champ du Feu — crossband 145.2125 / 433.425 MHz ;
-- `F5ZYS` — Dogneville — 439.775 / 430.375 MHz ;
-- ainsi qu'un backlog plus large en Ardennes, Aube, Meuse, Moselle, Bas-Rhin, Haut-Rhin et Vosges.
+## Prochaine gate
 
-Aucun de ces éléments ne modifie encore le CSV public. Les ajouts ne seront promus qu'après validation suffisante de la fréquence, du mode, de l'état courant et de la pertinence pour un pack d'écoute analogique.
+L'aviation doit être revalidée sur le cycle courant avant toute décision de publication. Le cycle AIRAC 08/26 reste applicable jusqu'au **2 septembre 2026 inclus**. Toute révision effectuée le **3 septembre 2026 ou après** doit repartir sur AIRAC 09/26.
+
+Après l'aviation viennent la checklist de revue et les publication gates. Aucune mutation du registre ou du CSV public n'est autorisée avant leur fermeture.
 
 ## Règles
 
@@ -40,7 +46,11 @@ Aucun de ces éléments ne modifie encore le CSV public. Les ajouts ne seront pr
 ## Fichiers du Sprint 102
 
 - `radio-validation-pass1-2026-08-22.json` : audit radio initial ;
-- `backlog.json` : éléments à confirmer / résoudre ;
-- `release-scope.json` : limites de la phase de recherche ;
-- `tests/test_grand_est_v03_initialization.py` : garde-fous de démarrage ;
+- `radio-validation-pass2-2026-08-22.json` : seconde-source et déduplication ;
+- `radio-validation-pass3-2026-08-22.json` : fermeture du scope radio ;
+- `backlog.json` : différés et exclusions ;
+- `release-scope.json` : état courant et gates ;
+- `generated/release-candidate/` : candidat CSV + manifeste figés ;
+- `tools/build_grand_est_v03_candidate.py` : reconstruction déterministe ;
+- `tests/test_grand_est_v03_*.py` : garde-fous ;
 - `.github/workflows/grand-est-v03-research.yml` : CI dédiée.

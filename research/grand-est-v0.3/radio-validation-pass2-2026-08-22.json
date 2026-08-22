@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "status": "second_source_pass_complete_with_backlog_no_public_mutation",
+  "pack": "Grand Est",
+  "target_version": "0.3",
+  "reviewed_on": "2026-08-22",
+  "public_base": {
+    "version": "0.2",
+    "memory_count": 59,
+    "non_regional_memory_count": 43,
+    "public_csv_sha256": "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1",
+    "immutable": true
+  },
+  "carry_from_pass1": {
+    "safe_v02_repeaters": ["F5ZAU", "F1ZDG", "F5ZDL", "F1ZAE", "F5ZEC", "F5ZCQ", "F1ZPJ"],
+    "safe_v02_unique_rf_count": 14,
+    "new_links_already_two_source": ["F5ZUD", "F1ZUV", "F5ZAW", "F5ZYS"],
+    "new_links_already_two_source_unique_rf_count": 8
+  },
+  "validated_in_pass2": [
+    {
+      "call": "F1ZEK",
+      "area": "Ardennes / Montherme",
+      "rf_mhz": [432.5375, 145.25],
+      "mode": "FM crossband",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://adrasec08.fr/radiocommunications/les-relais-radioamateurs-du-secteur/"
+      ]
+    },
+    {
+      "call": "F1ZXX",
+      "area": "Ardennes / Warcq",
+      "rf_mhz": [432.775, 145.4125],
+      "mode": "FM crossband",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://adrasec08.fr/radiocommunications/les-relais-radioamateurs-du-secteur/"
+      ]
+    },
+    {
+      "call": "F5ZFT",
+      "area": "Ardennes / Saint-Menges",
+      "rf_mhz": [432.5375, 145.475],
+      "mode": "FM crossband",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://adrasec08.fr/radiocommunications/les-relais-radioamateurs-du-secteur/"
+      ]
+    },
+    {
+      "call": "F1ZGN",
+      "area": "Meuse / Sommedieue",
+      "rf_mhz": [145.425, 432.5375],
+      "mode": "FM crossband",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://adrasec08.fr/radiocommunications/les-relais-radioamateurs-du-secteur/"
+      ]
+    },
+    {
+      "call": "F1ZGP",
+      "area": "Meuse / Bar-le-Duc",
+      "rf_mhz": [145.2875, 432.5375],
+      "mode": "FM crossband",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://adrasec08.fr/radiocommunications/les-relais-radioamateurs-du-secteur/"
+      ]
+    },
+    {
+      "call": "F5ZDJ",
+      "area": "Meuse / Verdun",
+      "rf_mhz": [430.275, 431.875],
+      "mode": "FM",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://adrasec08.fr/radiocommunications/les-relais-radioamateurs-du-secteur/"
+      ]
+    },
+    {
+      "call": "F1ZDA",
+      "area": "Haut-Rhin / Petit Ballon",
+      "rf_mhz": [430.075, 431.675],
+      "mode": "FM",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://www.ref68.com/le-relais-du-petit-ballon/",
+        "https://www.ref68.com/passerelle-reception-aprs-au-relais-du-petit-ballon/"
+      ]
+    },
+    {
+      "call": "F1ZBV",
+      "area": "Vosges / La Sotiere / Le Valtin sector",
+      "rf_mhz": [145.6625, 145.0625],
+      "mode": "FM",
+      "decision": "validated_for_research_working_set",
+      "sources": [
+        "https://ra88.org/radio-club-f8khp/relais/",
+        "https://www.r-e-f.org/index.php?option=com_content&view="
+      ]
+    }
+  ],
+  "pass2_rf_accounting": {
+    "validated_in_pass2_link_count": 8,
+    "raw_pair_sides": 16,
+    "shared_rf_mhz": [432.5375],
+    "shared_rf_occurrence_count": 4,
+    "unique_rf_added_by_pass2": 13,
+    "regional_unique_rf_working_count": 35,
+    "non_regional_inherited_count_before_future_aviation_review": 43,
+    "validated_working_memory_count": 78,
+    "validated_working_memory_count_is_release_candidate": false,
+    "final_count_frozen": false
+  },
+  "resolved_as_excluded_or_deferred": [
+    {
+      "call": "F1ZAX",
+      "decision": "defer",
+      "reason": "current REF classifies the installation as digital C4FM; no current local proof of analog FM voice found"
+    },
+    {
+      "call": "F5ZBD",
+      "decision": "exclude_while_off_service",
+      "reason": "current local REF51 reports temporary shutdown for upgrade and ADRASEC08 reports OFF / no longer in service"
+    },
+    {
+      "call": "F1ZBU",
+      "decision": "exclude_from_analog_scope",
+      "reason": "current REF classifies 433.025/431.425 as digital DMR/C4FM/D-STAR; current APRS/D-STAR telemetry is consistent with digital service"
+    },
+    {
+      "call": "F1ZCV",
+      "decision": "defer_attribution_zero_rf_delta",
+      "reason": "current national inventory supports the analog pair, but the pair 145.6125/145.0125 is already present through F5ZAU; no current local source was found in this pass"
+    }
+  ],
+  "still_open_for_fresh_local_corroboration": [
+    "F5ZRP",
+    "F5ZTY",
+    "F1ZFL",
+    "F5ZCC",
+    "F1ZJS",
+    "F5ZUK",
+    "F1ZFN",
+    "F1ZEF"
+  ],
+  "not_stable_active": ["F5ZTC", "F5ZWR"],
+  "aviation": {
+    "action_in_pass2": "none",
+    "base_memory_count": 19,
+    "base_cycle": "AIRAC 08/26",
+    "airac09_required_for_any_revision_on_or_after": "2026-09-03"
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "maximum_memories": 200,
+    "no_artificial_fill": true,
+    "public_mutation": false,
+    "candidate_built": false
+  }
+}

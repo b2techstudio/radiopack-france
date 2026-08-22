@@ -14,6 +14,8 @@ PUBLIC_V04 = ROOT / "research/normandie-v0.4/publication-record.json"
 for path in [REFRESH, KIT, POLICY, BACKLOG, LOCAL_README, STATE, PUBLIC_V04]:
     assert path.is_file(), path
 
+# Sprint 110 evidence remains immutable historical evidence even if later policy changes
+# legitimately move the current v0.5 candidate beyond the former field-gated state.
 refresh = json.loads(REFRESH.read_text(encoding="utf-8"))
 assert refresh["status"] == "current_sources_revalidated_zero_delta_field_handoff_confirmed"
 assert refresh["pack"] == "Normandie"
@@ -99,40 +101,53 @@ assert handoff["f5zha_required_independent_sessions"] == 2
 assert handoff["automatic_promotion_allowed"] is False
 assert handoff["automatic_publication_allowed"] is False
 
-# The local research backlog and README must reflect the latest Sprint 110 revalidation,
-# not the older Sprint 85/90 handoff metadata.
+# Current backlog may have advanced after Sprint 110. Preserve the historical refresh,
+# while requiring any later state to keep the same source constraints and immutable v0.4 base.
 backlog = json.loads(BACKLOG.read_text(encoding="utf-8"))
-assert backlog["schema_version"] == "1.3"
 assert backlog["last_revalidated_on"] == "2026-08-22"
-assert backlog["current_candidate_memory_count"] == 142
-assert backlog["current_candidate_memory_delta"] == 0
 assert backlog["known_potential_ceiling_excluding_f6zes"] == 147
 assert backlog["latest_source_refresh"] == "research/normandie-v0.5/sprint110-source-field-refresh.json"
-assert backlog["field_evaluation_policy"] == "research/normandie-v0.5/field-evaluation-policy.json"
-assert backlog["field_evaluator"] == "tools/evaluate_normandie_v05_field_sessions.py"
 assert backlog["public_export_allowed"] is False
 backlog_by_id = {item["id"]: item for item in backlog["items"]}
 assert set(backlog_by_id) == {"R3_MORTAIN_RX", "F5ZHA_SOURCE_AND_COVERAGE", "F1ZOV_OPERATIONAL_STATUS", "F6ZES_RESOLVED"}
 assert all(item["last_checked_on"] == "2026-08-22" for item in backlog["items"])
-assert backlog_by_id["R3_MORTAIN_RX"]["web_research_can_close_field_gate"] is False
-assert backlog_by_id["F5ZHA_SOURCE_AND_COVERAGE"]["web_research_can_close_field_gate"] is False
 assert backlog_by_id["F1ZOV_OPERATIONAL_STATUS"]["local_operator_status"] == "maintenance"
 assert backlog_by_id["F6ZES_RESOLVED"]["usable_frequency_published"] is False
 assert backlog["rules"]["automatic_candidate_mutation_allowed"] is False
 assert backlog["rules"]["automatic_publication_allowed"] is False
 
+if backlog["schema_version"] == "1.3":
+    assert backlog["current_candidate_memory_count"] == 142
+    assert backlog["current_candidate_memory_delta"] == 0
+    assert backlog_by_id["R3_MORTAIN_RX"]["web_research_can_close_field_gate"] is False
+    assert backlog_by_id["F5ZHA_SOURCE_AND_COVERAGE"]["web_research_can_close_field_gate"] is False
+else:
+    assert backlog["schema_version"] == "1.4"
+    assert backlog["current_candidate_memory_count"] == 146
+    assert backlog["current_candidate_memory_delta"] == 4
+    assert backlog["theoretical_coverage_policy"] == "research/normandie-v0.5/theoretical-coverage-policy.json"
+    assert backlog["field_validation_role"] == "optional_post_publication_quality_feedback"
+    assert backlog_by_id["R3_MORTAIN_RX"]["promoted"] is True
+    assert backlog_by_id["F5ZHA_SOURCE_AND_COVERAGE"]["promoted"] is True
+    assert backlog["rules"]["theory_is_not_measured_reception"] is True
+
 local_readme = LOCAL_README.read_text(encoding="utf-8")
-for token in [
-    "Sprint 110 / 0.21.98",
-    "sources revalidées le 22 août 2026",
-    "sprint110-source-field-refresh.json",
-    "normandie-v0.5-field-session-template.csv",
-    "vraies écoutes",
-    "promotion_ready=false",
-    "Aucune fréquence n'est inférée",
-]:
-    assert token in local_readme, token
-assert "Sprint 85 / 0.21.74" not in local_readme
+assert "Aucune fréquence n'est inférée" in local_readme or "aucune fréquence" in local_readme.lower()
+assert "F1ZOV" in local_readme and "F6ZES" in local_readme
+if "Sprint 112" in local_readme:
+    assert "146 mémoires RX" in local_readme
+    assert "couverture théorique" in local_readme
+    assert "retour qualité facultatif" in local_readme
+else:
+    for token in [
+        "Sprint 110 / 0.21.98",
+        "sources revalidées le 22 août 2026",
+        "sprint110-source-field-refresh.json",
+        "normandie-v0.5-field-session-template.csv",
+        "vraies écoutes",
+        "promotion_ready=false",
+    ]:
+        assert token in local_readme, token
 
 public = json.loads(PUBLIC_V04.read_text(encoding="utf-8"))
 assert public["status"] == "published_immutable"
@@ -157,4 +172,4 @@ for rule in [
     assert refresh["rules"][rule] is True, rule
 assert refresh["rules"]["public_mutation_performed"] is False
 
-print("Sprint 110 Normandie v0.5: sources current, backlog/README synchronized, candidate 142 delta 0, field gates preserved, no public mutation OK")
+print("Sprint 110 historical Normandie v0.5 refresh remains auditable; later theoretical coverage policy may advance current candidate without rewriting Sprint 110 evidence OK")

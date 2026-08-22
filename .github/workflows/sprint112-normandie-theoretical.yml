@@ -1,0 +1,49 @@
+name: Sprint 112 Normandie v0.5 Theoretical Coverage
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/normandie-v0.5/**"
+      - "tools/build_normandie_v05_internal_candidate.py"
+      - "tests/test_sprint112_normandie_v05_theoretical.py"
+      - ".github/workflows/sprint112-normandie-theoretical.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "research/normandie-v0.5/**"
+      - "tools/build_normandie_v05_internal_candidate.py"
+      - "tests/test_sprint112_normandie_v05_theoretical.py"
+      - ".github/workflows/sprint112-normandie-theoretical.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  theoretical-candidate:
+    name: Normandie v0.5 theoretical candidate invariants
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Build theoretical internal candidate
+        run: python tools/build_normandie_v05_internal_candidate.py --output-dir /tmp/normandie-v05-theory
+
+      - name: Verify Sprint 112 theoretical policy and candidate
+        run: python tests/test_sprint112_normandie_v05_theoretical.py
+
+      - name: Verify historical Sprint 110 refresh
+        run: python tests/test_sprint110_normandie_v05_refresh.py
+
+      - name: Verify historical Sprint 85 evaluator
+        run: python tests/test_sprint85_normandie_v05_field_evaluator.py

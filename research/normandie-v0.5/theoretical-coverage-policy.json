@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "status": "current_theoretical_coverage_policy_not_public",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "adopted_on": "2026-08-22",
+  "purpose": "Remplacer les gates de réception terrain par une décision de couverture théorique documentée pour les mémoires dont la fréquence, le mode et l'état courant sont déjà publiquement vérifiés.",
+  "decision_model": {
+    "field_reception_required_for_candidate_promotion": false,
+    "field_reception_required_for_publication": false,
+    "theoretical_coverage_may_close_coverage_gate": true,
+    "field_observation_role": "optional_post_publication_quality_feedback",
+    "minimum_requirements": [
+      "current authoritative or operator source verifies the station as active or operational",
+      "candidate RF and mode are publicly resolved",
+      "target-area path is theoretically plausible from published geometry, operator range or an equivalent documented propagation model",
+      "theoretical status is disclosed and must not be described as measured reception"
+    ],
+    "not_sufficient": [
+      "frequency inferred from an unresolved listing",
+      "station currently marked maintenance, stopped or unavailable by its operator",
+      "stale secondary frequency overriding a current authoritative source",
+      "private or unpublished operational information"
+    ]
+  },
+  "reference_point": {
+    "name": "Mortain",
+    "role": "representative reference point for Mortain-Bocage coverage theory",
+    "latitude_deg": 48.64861,
+    "longitude_deg": -0.93972,
+    "representative_elevation_m_asl": 232,
+    "source": "https://fr.wikipedia.org/wiki/Mortain",
+    "limitations": "A single representative point does not model every location, building, antenna or terrain obstruction inside Mortain-Bocage."
+  },
+  "propagation_methods": {
+    "great_circle_distance": "haversine on WGS84-like spherical Earth approximation",
+    "endpoint_elevation_envelope": {
+      "formula": "d_km = 4.12 * (sqrt(h1_m_asl) + sqrt(h2_m_asl))",
+      "effective_earth_radius": "4/3 Earth approximation",
+      "purpose": "coarse theoretical plausibility envelope only",
+      "limitations": "Does not model terrain profile, clutter, diffraction, antenna pattern, receiver sensitivity or fading."
+    },
+    "free_space_path_loss": {
+      "formula": "FSPL_dB = 32.44 + 20*log10(distance_km) + 20*log10(frequency_MHz)",
+      "purpose": "transparent theoretical attenuation reference only",
+      "limitations": "Not a received-signal prediction without transmitter EIRP, antenna system and obstruction losses."
+    }
+  },
+  "publication_language": {
+    "required_label": "couverture théorique",
+    "forbidden_claims": [
+      "réception vérifiée à Mortain-Bocage",
+      "couverture mesurée",
+      "réception garantie"
+    ]
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "same_rf_deduplicated": true,
+    "no_artificial_fill": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "local_operator_status_has_priority_for_current_operational_state": true,
+    "published_v0_4_immutable": true,
+    "theory_is_not_measurement": true,
+    "field_sessions_optional_for_quality_feedback": true,
+    "automatic_publication_allowed": false
+  }
+}

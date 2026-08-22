@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "status": "theoretical_coverage_promotes_four_internal_memories_not_public",
+  "pack": "Normandie",
+  "target_version": "0.5",
+  "sprint": 112,
+  "evaluated_on": "2026-08-22",
+  "public_base_version": "0.4",
+  "public_base_memory_count": 142,
+  "candidate_memory_count_before": 142,
+  "candidate_memory_count_after": 146,
+  "candidate_memory_delta": 4,
+  "coverage_policy": "research/normandie-v0.5/theoretical-coverage-policy.json",
+  "reference_point": {
+    "name": "Mortain",
+    "latitude_deg": 48.64861,
+    "longitude_deg": -0.93972,
+    "representative_elevation_m_asl": 232
+  },
+  "promotions": [
+    {
+      "id": "R3_MORTAIN_THEORY",
+      "station": "F1ZBX / R3 Broceliande",
+      "source_status": "operational",
+      "pair_mhz": [145.075, 145.675],
+      "mode": "NFM",
+      "source_site": {
+        "latitude_deg": 48.01,
+        "longitude_deg": -2.22,
+        "antenna_elevation_m_asl": 262,
+        "published_usage_radius_km": 150
+      },
+      "theory": {
+        "great_circle_distance_km": 118.32,
+        "endpoint_elevation_4_3_earth_envelope_km": 129.44,
+        "operator_usage_radius_margin_km": 31.68,
+        "fspl_output_145_675_db": 117.17,
+        "distance_within_operator_usage_radius": true,
+        "distance_within_endpoint_elevation_envelope": true,
+        "coverage_classification": "theoretically_plausible"
+      },
+      "memory_delta": 2,
+      "candidate_locations": [178, 179],
+      "candidate_names": ["35-R3-IN", "35-R3-OUT"],
+      "field_reception_verified": false,
+      "field_reception_required": false,
+      "promotion_basis": "current operator parameters plus theoretical Mortain path plausibility",
+      "source": "https://ara35.fr/frequences/relais-phonie/r3/"
+    },
+    {
+      "id": "F5ZHA_MORTAIN_THEORY",
+      "station": "F5ZHA Laval",
+      "source_status": "active",
+      "pair_mhz": [145.4675, 432.575],
+      "mode": "NFM",
+      "source_site": {
+        "locator": "IN98OB86BQ",
+        "locator_center_latitude_deg": 48.069531,
+        "locator_center_longitude_deg": -0.766146,
+        "published_altitude_m_asl": 55,
+        "locator_center_is_approximation": true
+      },
+      "theory": {
+        "great_circle_distance_km": 65.66,
+        "endpoint_elevation_4_3_earth_envelope_km": 93.31,
+        "distance_within_endpoint_elevation_envelope": true,
+        "fspl_vhf_145_4675_db": 112.04,
+        "fspl_uhf_432_575_db": 121.51,
+        "coverage_classification": "theoretically_plausible"
+      },
+      "memory_delta": 2,
+      "candidate_locations": [180, 181],
+      "candidate_names": ["53-ZHA-V", "53-ZHA-U"],
+      "field_reception_verified": false,
+      "field_reception_required": false,
+      "promotion_basis": "current REF active pair plus theoretical Mortain path plausibility",
+      "source": "https://www.r-e-f.org/index.php?dept=DPT04&limitstart=3",
+      "stale_secondary_frequency_mhz_excluded": 431.4125
+    }
+  ],
+  "still_deferred": [
+    {
+      "id": "F1ZOV_OPERATIONAL_STATUS",
+      "reason": "local operator still marks the relay in maintenance",
+      "potential_memory_delta": 1,
+      "theory_does_not_override_current_operator_status": true
+    },
+    {
+      "id": "F6ZES_RESOLVED",
+      "reason": "frequency and mode remain publicly unresolved",
+      "potential_memory_delta": null,
+      "theory_does_not_allow_frequency_inference": true
+    }
+  ],
+  "candidate_contract": {
+    "memory_count": 146,
+    "new_memory_count": 4,
+    "locations": [178, 179, 180, 181],
+    "all_new_memories_rx_only": true,
+    "all_new_memories_theoretical_coverage_label_required": true,
+    "public_export_allowed": false,
+    "public_release_allowed": false
+  },
+  "rules": {
+    "theoretical_coverage_closes_previous_field_only_gate": true,
+    "theory_is_not_measured_reception": true,
+    "field_sessions_remain_optional_feedback": true,
+    "same_rf_deduplicated": true,
+    "verified_distinct_pair_uses_two_rx_memories": true,
+    "unresolved_frequency_must_not_be_guessed": true,
+    "maintenance_status_not_overridden_by_theory": true,
+    "published_v0_4_immutable": true,
+    "automatic_publication_allowed": false
+  }
+}

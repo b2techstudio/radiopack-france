@@ -84,8 +84,10 @@ assert refresh["candidate_memory_count_before"] == 142
 assert refresh["candidate_memory_count_after"] == 142
 assert refresh["candidate_memory_delta"] == 0
 assert refresh["promotion_count"] == 0
-assert refresh["public_mutation"] is False
-assert refresh["rf_data_mutation"] is False
+assert refresh["public_v0_4_immutable"] is True
+assert refresh["public_v0_5_created"] is False
+assert refresh["rules"]["public_mutation_performed"] is False
+assert refresh["rules"]["no_frequency_inference"] is True
 
 kit = json.loads(KIT.read_text(encoding="utf-8"))
 assert kit["gates"]["R3_MORTAIN_RX"]["minimum_independent_sessions"] == 2
@@ -142,4 +144,4 @@ for token in [
 ]:
     assert token in status, token
 
-print("Sprint 110 state sync: Normandie v0.5=142 RX delta 0, field gates preserved, no public/RF mutation, ARA v0.3 immutable OK")
+print("Sprint 110 state sync: Normandie v0.5=142 RX delta 0, field gates preserved, no public mutation, ARA v0.3 immutable OK")

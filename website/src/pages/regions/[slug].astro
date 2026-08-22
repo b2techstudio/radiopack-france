@@ -23,6 +23,7 @@ export function getStaticPaths() {
 const { pack } = Astro.props as { pack: MetropolitanPackDefinition };
 const publicPack = getPublicPack(pack.id);
 const publicVariant = publicPack?.variants.find((variant) => variant.id === publicPack.defaultVariant) ?? publicPack?.variants[0];
+const isNormandieV05 = pack.id === "normandie" && publicPack?.version === "v0.5";
 const isBfcV03 = pack.id === "bourgogne-franche-comte" && publicPack?.version === "v0.3";
 const isBfcV04 = pack.id === "bourgogne-franche-comte" && publicPack?.version === "v0.4";
 const isCentreV03 = pack.id === "centre-val-de-loire" && publicPack?.version === "v0.3";
@@ -32,29 +33,33 @@ const isAraV03 = pack.id === "auvergne-rhone-alpes" && publicPack?.version === "
 const isInlandVhf = isBfcV04 || isIdfV04 || isGrandEstV04 || isAraV03;
 const isAdvancedAnalog = isBfcV03 || isBfcV04 || isCentreV03 || isIdfV04 || isGrandEstV04;
 const version = publicPack?.version ?? pack.version;
-const placed = isBfcV04
-  ? buildBfcV04Pack()
-  : isBfcV03
-    ? buildBfcV03Pack()
-    : isCentreV03
-      ? buildCentreV03Pack()
-      : isAraV03
-        ? buildAraV03Pack()
-        : isIdfV04 || isGrandEstV04
-          ? []
-          : buildMetropolitanPack(pack.id, pack.version);
-const memories: ChannelMemory[] = isIdfV04
-  ? loadPublicPackMemories("downloads/ile-de-france/radiopack-france-ile-de-france-v0.4.csv")
-  : isGrandEstV04
-    ? loadPublicPackMemories("downloads/grand-est/radiopack-france-grand-est-v0.4.csv")
-    : placed.map(({ location, channel }) => ({
-        location,
-        name: channel.name,
-        frequency: channel.frequency_mhz.toFixed(6),
-        mode: channel.mode,
-        step: channel.step_khz.toFixed(2),
-        comment: channel.comment,
-      }));
+const placed = isNormandieV05
+  ? []
+  : isBfcV04
+    ? buildBfcV04Pack()
+    : isBfcV03
+      ? buildBfcV03Pack()
+      : isCentreV03
+        ? buildCentreV03Pack()
+        : isAraV03
+          ? buildAraV03Pack()
+          : isIdfV04 || isGrandEstV04
+            ? []
+            : buildMetropolitanPack(pack.id, pack.version);
+const memories: ChannelMemory[] = isNormandieV05
+  ? loadPublicPackMemories("downloads/normandie/radiopack-france-normandie-v0.5.csv")
+  : isIdfV04
+    ? loadPublicPackMemories("downloads/ile-de-france/radiopack-france-ile-de-france-v0.4.csv")
+    : isGrandEstV04
+      ? loadPublicPackMemories("downloads/grand-est/radiopack-france-grand-est-v0.4.csv")
+      : placed.map(({ location, channel }) => ({
+          location,
+          name: channel.name,
+          frequency: channel.frequency_mhz.toFixed(6),
+          mode: channel.mode,
+          step: channel.step_khz.toFixed(2),
+          comment: channel.comment,
+        }));
 const memoryCount = memories.length;
 if (publicVariant && publicVariant.memoryCount !== memoryCount) {
   throw new Error(`${pack.id}: registry=${publicVariant.memoryCount}, built=${memoryCount}`);
@@ -64,22 +69,26 @@ const filename = publicVariant?.filename ?? pack.filename;
 const downloadUrl = publicVariant?.downloadUrl ?? `/downloads/${pack.id}/${filename}`;
 const aviationCount = memories.filter((memory) => memory.mode === "AM").length;
 const isBfcAdvanced = isBfcV03 || isBfcV04;
-const selectedInfrastructureCount = isBfcAdvanced ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV04 ? 7 : isGrandEstV04 ? 22 : pack.repeaters.length;
-const regionalChannelCount = isBfcAdvanced ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV04 ? 15 : isGrandEstV04 ? 41 : pack.repeaters.length * 2;
+const selectedInfrastructureCount = isNormandieV05 ? pack.repeaters.length + 2 : isBfcAdvanced ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV04 ? 7 : isGrandEstV04 ? 22 : pack.repeaters.length;
+const regionalChannelCount = isNormandieV05 ? pack.repeaters.length * 2 + 4 : isBfcAdvanced ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV04 ? 15 : isGrandEstV04 ? 41 : pack.repeaters.length * 2;
 const inlandVhfCount = isBfcV04 ? 7 : isIdfV04 ? 7 : isGrandEstV04 ? 13 : isAraV03 ? 9 : 0;
 const inlandRangeLabel = isAraV03 ? "120–128" : isBfcV04 || isIdfV04 ? "120–126" : "120–132";
 const marineCount = pack.includeMarine ? 90 : 0;
-const radioScopeLabel = isAdvancedAnalog
-  ? "relais FM 2 m/70 cm et transpondeurs crossband analogiques"
-  : "relais FM 2 m";
+const radioScopeLabel = isNormandieV05
+  ? "relais FM et transpondeurs crossband, dont 4 mémoires à couverture théorique documentée"
+  : isAdvancedAnalog
+    ? "relais FM 2 m/70 cm et transpondeurs crossband analogiques"
+    : "relais FM 2 m";
 const radioRangeLabel = isBfcAdvanced ? "70+ / 80+" : isCentreV03 ? "70+ / 82+" : "70+";
 const aviationRangeLabel = isBfcAdvanced ? "40+ / 90+" : "40+";
-const sourceReviewDate = isInlandVhf ? "2026-08-22" : isCentreV03 ? "2026-08-20" : metropolitanSourceNotes.checkedOn;
-const historicalVersionLabel = publicPack?.version === "v0.4"
-  ? "v0.3 et v0.2 historiques conservées"
-  : publicPack?.version === "v0.3" || isAdvancedAnalog
-    ? "v0.2 historique conservée"
-    : "v0.1 historique conservée";
+const sourceReviewDate = isNormandieV05 || isInlandVhf ? "2026-08-22" : isCentreV03 ? "2026-08-20" : metropolitanSourceNotes.checkedOn;
+const historicalVersionLabel = publicPack?.version === "v0.5"
+  ? "v0.4 et versions antérieures historiques conservées"
+  : publicPack?.version === "v0.4"
+    ? "v0.3 et v0.2 historiques conservées"
+    : publicPack?.version === "v0.3" || isAdvancedAnalog
+      ? "v0.2 historique conservée"
+      : "v0.1 historique conservée";
 ---
 <BaseLayout
   title={`Pack ${pack.name} ${version} - RadioPack France`}
@@ -105,6 +114,13 @@ const historicalVersionLabel = publicPack?.version === "v0.4"
           <p>Toutes les lignes utilisent <code>Duplex=off</code> et <code>Offset=0.000000</code>. Les fréquences documentées n'accordent aucun droit d'émission.</p>
         </div>
 
+        {isNormandieV05 && (
+          <div class="card legal">
+            <strong>Couverture théorique — 4 mémoires</strong>
+            <p>Les mémoires R3/F1ZBX et F5ZHA aux positions 178–181 sont retenues sur une plausibilité de couverture théorique documentée vers Mortain. Elles ne constituent ni une réception mesurée, ni une couverture garantie. Les essais terrain restent un retour qualité facultatif.</p>
+          </div>
+        )}
+
         <div class="memory-map card">
           <h2>Périmètre {version}</h2>
           <div class="ranges">
@@ -112,7 +128,8 @@ const historicalVersionLabel = publicPack?.version === "v0.4"
             <span><b>20–21</b> Appels radioamateur · 2</span>
             <span><b>30–35</b> APRS / ISS · 6</span>
             <span><b>{aviationRangeLabel}</b> Aviation AM · {aviationCount}</span>
-            <span><b>{radioRangeLabel}</b> {isAdvancedAnalog ? "Relais / transpondeurs analogiques paired RX" : "Relais FM 2 m paired RX"} · {regionalChannelCount}</span>
+            <span><b>{radioRangeLabel}</b> {isAdvancedAnalog ? "Relais / transpondeurs analogiques paired RX" : "Relais FM / analogiques paired RX"} · {regionalChannelCount}</span>
+            {isNormandieV05 && <span><b>178–181</b> Couverture théorique R3 / F5ZHA · 4</span>}
             {isInlandVhf && <span><b>{inlandRangeLabel}</b> VHF navigation intérieure · {inlandVhfCount}</span>}
             {pack.includeMarine && <span><b>100–189</b> VHF marine · {marineCount}</span>}
           </div>
@@ -120,6 +137,7 @@ const historicalVersionLabel = publicPack?.version === "v0.4"
             Aviation : contexte SIA AIRAC 08/26 recoupé avec les pages eAIP publiques effectives ; aucune extraction XML champ par champ n'est revendiquée.
             {isInlandVhf ? " La VHF de navigation intérieure couvre uniquement les voies et affectations locales suffisamment documentées ; elle reste distincte de la VHF maritime." : pack.includeMarine ? " Le littoral justifie l'intégration du module VHF marine national." : " Le module VHF marine reste séparé pour cette région intérieure."}
           </p>
+          {isNormandieV05 && <p class="scope-note">Couverture théorique : distance, géométrie radio simplifiée et paramètres publics sont utilisés comme estimation de plausibilité. Le relief intermédiaire, le clutter, les bâtiments, le fading et le matériel réel peuvent modifier fortement la réception.</p>}
           <p class="scope-note">{isAdvancedAnalog ? "Les pistes radioamateur, aviation ou fluviales encore ambiguës sont différées plutôt que publiées sans preuve suffisante." : "UHF, numérique et services privés restent hors publication tant qu'une revue dédiée n'a pas validé chaque fréquence et son intérêt d'écoute."}</p>
         </div>
 
@@ -139,6 +157,7 @@ const historicalVersionLabel = publicPack?.version === "v0.4"
           <li>{aviationCount} mémoires aviation AM</li>
           <li>{selectedInfrastructureCount} infrastructures analogiques sélectionnées</li>
           <li>paired RX : sortie + entrée vérifiée</li>
+          {isNormandieV05 && <li>4 mémoires à couverture théorique documentée</li>}
           {isInlandVhf && <li>{inlandVhfCount} mémoires VHF navigation intérieure</li>}
           {pack.includeMarine && <li>90 mémoires VHF marine</li>}
           <li>{historicalVersionLabel}</li>

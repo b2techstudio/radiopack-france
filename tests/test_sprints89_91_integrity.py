@@ -116,6 +116,6 @@ s90 = (ROOT / "research/sprint-90-summary.md").read_text(encoding="utf-8")
 s91 = (ROOT / "research/sprint-91-summary.md").read_text(encoding="utf-8")
 assert "Sprint 89" in s89 and "77" in s89 and "60" in s89
 assert "Sprint 90" in s90 and "142" in s90
-assert "Sprint 91" in s91 and "2026-09-03" in s91
+assert "Sprint 91" in s91 and "3 septembre 2026" in s91
 
 print("Sprints 89-91 integrity: historical checkpoints remain exact while Annecy v0.4 is recognized as current immutable publication OK")

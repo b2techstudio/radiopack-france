@@ -1,46 +1,44 @@
 {
   "schema_version": "1.0",
-  "status": "internal_candidate_builder_ready",
-  "updated": "2026-08-22",
+  "status": "published_immutable",
   "pack": "Grand Est",
-  "target_version": "0.4",
-  "public_base_version": "0.3",
-  "public_base_memory_count": 84,
-  "public_base_sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
-  "scope": {
-    "existing_public_memories_retained": 84,
-    "new_inland_vhf_memories": 13,
-    "candidate_memory_count": 97,
-    "new_inland_vhf_rf_count": 13,
-    "aviation_memory_count_unchanged": 19,
-    "regional_radio_memory_count_unchanged": 41,
-    "marine_block_added": false
+  "version": "0.4",
+  "prepared_on": "2026-08-22",
+  "published_on": "2026-08-22",
+  "based_on_public_version": "0.3",
+  "base_memory_count": 84,
+  "base_public_sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+  "memory_count": 97,
+  "memory_delta": 13,
+  "aviation_memory_count": 19,
+  "aviation_memory_delta": 0,
+  "regional_radio_memory_count": 41,
+  "regional_radio_memory_delta": 0,
+  "inland_vhf_memory_count": 13,
+  "inland_vhf_memory_delta": 13,
+  "candidate_sha256": "ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d",
+  "public_csv_sha256": "ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d",
+  "inland_scope": {
+    "boat_to_boat_channels": [6, 8, 10, 13, 72, 77],
+    "strasbourg_port_channel": 11,
+    "paired_rx_channels": [19, 20, 22],
+    "location_range": "120-132",
+    "marine_channel_16_added": false
   },
-  "files": {
-    "inland_dataset": "data/regional/grand-est-inland-vhf-rx.json",
-    "inland_validation": "research/grand-est-v0.4/inland-vhf-validation-2026-08-22.json",
-    "builder": "tools/build_grand_est_v04_candidate.py",
-    "candidate_guard": "tests/test_grand_est_v04_candidate.py"
-  },
-  "gates": {
-    "official_inland_sources_reviewed": true,
-    "grand_est_has_no_maritime_coast": true,
-    "inland_vhf_scope_closed": true,
-    "builder_ready": true,
-    "candidate_generated_and_frozen": false,
-    "candidate_sha_frozen": false,
-    "review_checklist_complete": false,
-    "publication_gates_zero_blockers": false,
-    "public_export_allowed": false,
-    "public_mutation_performed": false
+  "aviation": {
+    "cycle": "AIRAC 08/26",
+    "valid_through_inclusive": "2026-09-02",
+    "inherited_unchanged_from_v0_3": true,
+    "new_field_by_field_revalidation_claimed": false,
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
   },
   "rules": {
     "rx_only": true,
     "chirp_duplex": "off",
     "chirp_offset": "0.000000",
-    "rf_deduplication": true,
+    "rf_deduplicated": true,
     "no_artificial_fill": true,
-    "no_unverified_local_channel_assignment": true,
-    "published_v0_3_remains_immutable": true
+    "published_versions_immutable": true,
+    "private_ppdr_excluded": true
   }
 }

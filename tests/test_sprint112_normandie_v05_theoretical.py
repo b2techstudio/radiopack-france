@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import hashlib
 import importlib.util
 import json
 import subprocess
@@ -13,9 +14,11 @@ POLICY = json.loads((RESEARCH / "theoretical-coverage-policy.json").read_text(en
 THEORY = json.loads((RESEARCH / "sprint112-theoretical-coverage.json").read_text(encoding="utf-8"))
 PLAN = json.loads((RESEARCH / "pack-plan.json").read_text(encoding="utf-8"))
 BACKLOG = json.loads((RESEARCH / "backlog.json").read_text(encoding="utf-8"))
+FREEZE = json.loads((RESEARCH / "candidate-freeze.json").read_text(encoding="utf-8"))
 BUILDER = ROOT / "tools/build_normandie_v05_internal_candidate.py"
 PUBLIC_V04 = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
 PUBLIC_V05 = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv"
+EXPECTED_SHA = "1d7ce66c7a5faafe98e4ee59791bcd29af1fd1f432ee1bfc1cad7cba3bc5cf59"
 
 assert POLICY["decision_model"]["theoretical_coverage_may_close_coverage_gate"] is True
 assert POLICY["decision_model"]["field_reception_required_for_candidate_promotion"] is False
@@ -67,6 +70,18 @@ assert items["F6ZES_RESOLVED"]["promoted"] is False
 assert items["F6ZES_RESOLVED"]["usable_frequency_published"] is False
 assert BACKLOG["rules"]["theory_is_not_measured_reception"] is True
 
+assert FREEZE["status"] == "internal_candidate_frozen_not_public"
+assert FREEZE["candidate_memory_count"] == 146
+assert FREEZE["candidate_memory_delta"] == 4
+assert FREEZE["theoretical_coverage_memory_count"] == 4
+assert FREEZE["candidate_sha256"] == EXPECTED_SHA
+assert FREEZE["added_locations"] == [178, 179, 180, 181]
+assert FREEZE["added_frequencies_mhz"] == [145.075, 145.675, 145.4675, 432.575]
+assert FREEZE["coverage_basis"] == "theoretical"
+assert FREEZE["field_reception_verified"] is False
+assert FREEZE["public_export_allowed"] is False
+assert FREEZE["published"] is False
+
 spec = importlib.util.spec_from_file_location("normandie_v05_theory", BUILDER)
 assert spec and spec.loader
 module = importlib.util.module_from_spec(spec)
@@ -78,6 +93,7 @@ assert candidate["theoretical_coverage_memory_count"] == 4
 assert candidate["field_reception_verified_memory_count"] == 0
 assert candidate["status"] == "internal_candidate_theoretical_coverage_not_for_publication"
 assert candidate["public_export_allowed"] is False
+assert hashlib.sha256(module.candidate_csv_bytes(candidate)).hexdigest() == EXPECTED_SHA
 
 rows = candidate["rows"]
 assert len(rows) == 146
@@ -119,11 +135,12 @@ with tempfile.TemporaryDirectory(prefix="radiopack-normandie-v05-theory-") as td
     with output.open(encoding="utf-8", newline="") as handle:
         rebuilt_rows = list(csv.DictReader(handle))
     assert len(rebuilt_rows) == 146
+    assert hashlib.sha256(output.read_bytes()).hexdigest() == EXPECTED_SHA
     info = json.loads(manifest.read_text(encoding="utf-8"))
     assert info["memory_count"] == 146
-    assert len(info["candidate_csv_sha256"]) == 64
+    assert info["candidate_csv_sha256"] == EXPECTED_SHA
 
 assert PUBLIC_V04.is_file()
 assert not PUBLIC_V05.exists()
 
-print("Sprint 112 Normandie v0.5: theoretical coverage promotes R3+F5ZHA to 146 RX internal candidate; theory labelled, F1ZOV/F6ZES remain deferred, no public v0.5 OK")
+print("Sprint 112 Normandie v0.5: frozen theoretical candidate=146 RX, SHA stable, R3+F5ZHA promoted, F1ZOV/F6ZES deferred, no public v0.5 OK")

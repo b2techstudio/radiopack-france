@@ -61,8 +61,6 @@ jobs:
         run: python tests/test_grand_est_v03_pass2.py
       - name: Test Grand Est v0.3 radio scope closure history
         run: python tests/test_grand_est_v03_pass3.py
-      - name: Compare frozen and deterministic candidate lines
-        run: python -c "import difflib,hashlib; from tools.build_grand_est_v03_candidate import build,ROOT,OUTPUT; b,_=build(ROOT); f=(ROOT/OUTPUT).read_bytes(); print('generated_sha256='+hashlib.sha256(b).hexdigest()); print('frozen_sha256='+hashlib.sha256(f).hexdigest()); print(''.join(difflib.unified_diff(f.decode('utf-8').splitlines(True),b.decode('utf-8').splitlines(True),fromfile='frozen',tofile='generated')))"
       - name: Verify deterministic Grand Est v0.3 candidate
         run: python tools/build_grand_est_v03_candidate.py --check
       - name: Test Grand Est v0.3 candidate/public identity

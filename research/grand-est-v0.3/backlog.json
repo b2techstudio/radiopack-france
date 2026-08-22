@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.2",
-  "status": "radio_scope_closed_with_explicit_deferrals",
+  "schema_version": "1.3",
+  "status": "radio_scope_closed_candidate_built_backlog_deferred",
   "pack": "Grand Est",
   "target_version": "0.3",
   "updated_on": "2026-08-22",
@@ -10,6 +10,13 @@
     "pass2_new": ["F1ZEK", "F1ZXX", "F5ZFT", "F1ZGN", "F1ZGP", "F5ZDJ", "F1ZDA", "F1ZBV"],
     "pass3_new": ["F1ZFL", "F5ZCC", "F1ZJS"],
     "regional_unique_rf_count": 41
+  },
+  "candidate": {
+    "memory_count": 84,
+    "regional_radio_memory_count": 41,
+    "aviation_memory_count": 19,
+    "sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+    "public_export_allowed": false
   },
   "deferred_from_v03_radio_scope": [
     {"call":"F1ZAX","reason":"current REF classifies 145.7625/145.1625 as digital C4FM; no current local proof of analog FM voice found"},
@@ -30,11 +37,11 @@
   "future_backlog": [
     "Revisit deferred radio items only if fresh public/operator evidence appears.",
     "Do not mutate the frozen v0.3 radio scope after publication; any later promotion belongs to a new version.",
-    "Aviation is a separate gate and has not been revised in the Sprint 102 radio passes."
+    "Aviation remains a separate publication gate; the current 84-memory candidate is internal only."
   ],
   "dedup_notes": [
     "432.5375 MHz is shared by F1ZEK, F5ZFT, F1ZGN and F1ZGP and contributes exactly one RF memory.",
     "F1ZCV duplicates the existing F5ZAU RF pair and contributes zero RF memories.",
-    "The radio scope is frozen at 41 unique regional RF memories, but no deterministic full candidate has been built yet."
+    "The deterministic internal candidate is frozen at 84 memories / 41 regional RF with SHA-256 45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720; it is not public."
   ]
 }

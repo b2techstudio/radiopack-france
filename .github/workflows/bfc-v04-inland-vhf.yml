@@ -1,0 +1,74 @@
+name: Bourgogne-Franche-Comte v0.4 Inland VHF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "data/regional/bourgogne-franche-comte-inland-vhf-rx.json"
+      - "research/bourgogne-franche-comte-v0.4/**"
+      - "research/bourgogne-franche-comte-v0.3/publication-record.json"
+      - "tools/build_bfc_v04_candidate.py"
+      - "tests/test_bfc_v04_candidate.py"
+      - "website/src/lib/bfcPack.ts"
+      - "website/src/lib/chirpPack.ts"
+      - "website/src/pages/downloads/bourgogne-franche-comte/**"
+      - ".github/workflows/bfc-v04-inland-vhf.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "data/regional/bourgogne-franche-comte-inland-vhf-rx.json"
+      - "research/bourgogne-franche-comte-v0.4/**"
+      - "research/bourgogne-franche-comte-v0.3/publication-record.json"
+      - "tools/build_bfc_v04_candidate.py"
+      - "tests/test_bfc_v04_candidate.py"
+      - "website/src/lib/bfcPack.ts"
+      - "website/src/lib/chirpPack.ts"
+      - "website/src/pages/downloads/bourgogne-franche-comte/**"
+      - ".github/workflows/bfc-v04-inland-vhf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfc-v04-inland-vhf-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  internal-candidate:
+    name: BFC v0.4 internal candidate invariants
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install website dependencies
+        run: cd website && npm ci
+
+      - name: Build Astro website and immutable BFC v0.3 route
+        run: cd website && npm run build
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Build BFC v0.4 internal candidate
+        run: python tools/build_bfc_v04_candidate.py --write
+
+      - name: Rebuild and compare BFC v0.4 internal candidate
+        run: python tools/build_bfc_v04_candidate.py --check
+
+      - name: Test BFC v0.4 inland-VHF invariants
+        run: python tests/test_bfc_v04_candidate.py --dist website/dist

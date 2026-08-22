@@ -1,3 +1,4 @@
+import csv
 import hashlib
 import json
 import subprocess
@@ -15,42 +16,7 @@ PUBLIC_V05 = ROOT / "website/public/downloads/normandie/radiopack-france-normand
 BUILDER = ROOT / "tools/build_normandie_v05_internal_candidate.py"
 REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 
-assert PLAN["status"] == "research_next_version_not_public"
-assert PLAN["target_version"] == "0.5" and PLAN["based_on_published_version"] == "0.4"
-assert PLAN["published_base_memory_count"] == 142 and PLAN["published_base_is_immutable"] is True
-assert PLAN["current_candidate_memory_count"] == 142 and PLAN["current_new_memory_count"] == 0
-assert PLAN["known_potential_ceiling_excluding_f6zes"] == 147
-assert PLAN["last_revalidated_on"] == "2026-08-15"
-assert PLAN["last_revalidation_promoted_item_count"] == 0
-assert PLAN["last_revalidation_memory_delta"] == 0
-assert PLAN["public_export_allowed"] is False and PLAN["public_registry_allowed"] is False
-
-assert PUBLIC_V04.is_file() and not PUBLIC_V05.exists()
-public_sha = hashlib.sha256(PUBLIC_V04.read_bytes()).hexdigest()
-assert RECORD["status"] == "published_immutable" and RECORD["version"] == "0.4"
-assert RECORD["memory_count"] == 142
-assert RECORD["public_csv_sha256"] == public_sha == PLAN["published_base_sha256"]
-
-with tempfile.TemporaryDirectory(prefix="radiopack-normandie-v05-") as td:
-    subprocess.run(
-        [sys.executable, str(BUILDER), "--root", str(ROOT), "--output-dir", td],
-        check=True,
-    )
-    csv_path = Path(td) / "normandie-v0.5-internal.csv"
-    json_path = Path(td) / "normandie-v0.5-internal.json"
-    assert csv_path.is_file() and json_path.is_file()
-    assert csv_path.read_bytes() == PUBLIC_V04.read_bytes()
-    candidate = json.loads(json_path.read_text(encoding="utf-8"))
-    assert candidate["target_version"] == "0.5"
-    assert candidate["memory_count"] == 142 and candidate["new_memory_count"] == 0
-    assert candidate["published_base_version"] == "0.4"
-    assert candidate["published_base_sha256"] == public_sha
-    assert candidate["known_potential_ceiling_excluding_f6zes"] == 147
-    assert candidate["public_export_allowed"] is False
-    assert candidate["rules"]["published_v0_4_immutable"] is True
-    assert candidate["rules"]["field_evidence_required_where_gate_demands_it"] is True
-    assert candidate["rules"]["unresolved_frequency_must_not_be_guessed"] is True
-
+# Sprint 83 evidence is immutable historical evidence: at that time zero items were promoted.
 assert REVALIDATION["status"] == "current_blocker_revalidation_zero_promotions_not_public"
 assert REVALIDATION["sprint"] == 83 and REVALIDATION["checked_on"] == "2026-08-15"
 assert REVALIDATION["candidate_memory_count_before"] == 142
@@ -90,15 +56,63 @@ assert zes["mode_published"] is False
 assert zes["operational_state_published"] is False
 assert zes["promoted"] is False
 
+# The current plan can advance after Sprint 83, but the v0.4 publication remains the immutable base.
+assert PLAN["target_version"] == "0.5" and PLAN["based_on_published_version"] == "0.4"
+assert PLAN["published_base_memory_count"] == 142 and PLAN["published_base_is_immutable"] is True
+assert PLAN["known_potential_ceiling_excluding_f6zes"] == 147
+assert PLAN["public_export_allowed"] is False and PLAN["public_registry_allowed"] is False
+assert PUBLIC_V04.is_file()
+public_sha = hashlib.sha256(PUBLIC_V04.read_bytes()).hexdigest()
+assert RECORD["status"] == "published_immutable" and RECORD["version"] == "0.4"
+assert RECORD["memory_count"] == 142
+assert RECORD["public_csv_sha256"] == public_sha == PLAN["published_base_sha256"]
+
+with tempfile.TemporaryDirectory(prefix="radiopack-normandie-v05-") as td:
+    subprocess.run(
+        [sys.executable, str(BUILDER), "--root", str(ROOT), "--output-dir", td],
+        check=True,
+    )
+    csv_path = Path(td) / "normandie-v0.5-internal.csv"
+    json_path = Path(td) / "normandie-v0.5-internal.json"
+    assert csv_path.is_file() and json_path.is_file()
+    candidate = json.loads(json_path.read_text(encoding="utf-8"))
+    assert candidate["target_version"] == "0.5"
+    assert candidate["published_base_version"] == "0.4"
+    assert candidate["published_base_sha256"] == public_sha
+    assert candidate["public_export_allowed"] is False
+    assert candidate["rules"]["published_v0_4_immutable"] is True
+    assert candidate["rules"]["unresolved_frequency_must_not_be_guessed"] is True
+    if PLAN["status"] == "research_next_version_not_public":
+        assert candidate["memory_count"] == 142 and candidate["new_memory_count"] == 0
+        assert csv_path.read_bytes() == PUBLIC_V04.read_bytes()
+    else:
+        assert PLAN["status"] == "research_next_version_theoretical_candidate_not_public"
+        assert candidate["memory_count"] == 146 and candidate["new_memory_count"] == 4
+        assert candidate["theoretical_coverage_memory_count"] == 4
+        assert candidate["rules"]["theoretical_coverage_may_close_coverage_gate"] is True
+        with csv_path.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        assert len(rows) == 146
+        assert [round(float(row["Frequency"]), 6) for row in rows[-4:]] == [145.075, 145.675, 145.4675, 432.575]
+
 items = {item["id"]: item for item in BACKLOG["items"]}
 assert set(items) == {"R3_MORTAIN_RX", "F5ZHA_SOURCE_AND_COVERAGE", "F1ZOV_OPERATIONAL_STATUS", "F6ZES_RESOLVED"}
-assert items["R3_MORTAIN_RX"]["potential_memory_delta"] == 2 and items["R3_MORTAIN_RX"]["promoted"] is False
-assert items["F5ZHA_SOURCE_AND_COVERAGE"]["potential_memory_delta"] == 2 and items["F5ZHA_SOURCE_AND_COVERAGE"]["promoted"] is False
+assert items["R3_MORTAIN_RX"]["potential_memory_delta"] == 2
+assert items["F5ZHA_SOURCE_AND_COVERAGE"]["potential_memory_delta"] == 2
 assert items["F1ZOV_OPERATIONAL_STATUS"]["potential_memory_delta"] == 1 and items["F1ZOV_OPERATIONAL_STATUS"]["promoted"] is False
 assert items["F6ZES_RESOLVED"]["potential_memory_delta"] is None and items["F6ZES_RESOLVED"]["must_not_guess"] is True
+if BACKLOG["current_candidate_memory_count"] == 142:
+    assert items["R3_MORTAIN_RX"]["promoted"] is False
+    assert items["F5ZHA_SOURCE_AND_COVERAGE"]["promoted"] is False
+else:
+    assert BACKLOG["current_candidate_memory_count"] == 146
+    assert items["R3_MORTAIN_RX"]["promoted"] is True
+    assert items["F5ZHA_SOURCE_AND_COVERAGE"]["promoted"] is True
+    assert BACKLOG["rules"]["theory_is_not_measured_reception"] is True
 
 registry = REGISTRY.read_text(encoding="utf-8")
 assert '/downloads/normandie/radiopack-france-normandie-v0.4.csv' in registry
-assert '/downloads/normandie/radiopack-france-normandie-v0.5.csv' not in registry
+if not PUBLIC_V05.exists():
+    assert '/downloads/normandie/radiopack-france-normandie-v0.5.csv' not in registry
 
-print("Sprint 83 Normandie v0.5 current blockers revalidated: candidate 142, delta 0, ceiling 147 excluding unresolved F6ZES, no public mutation OK")
+print("Sprint 83 historical Normandie revalidation remains auditable; later theoretical promotion to 146 is allowed without rewriting Sprint 83 evidence OK")

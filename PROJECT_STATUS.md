@@ -1,6 +1,6 @@
 # RadioPack France — point de reprise
 
-Dernière mise à jour : **21 août 2026**
+Dernière mise à jour : **22 août 2026**
 Sprint courant : **101**
 État logique : **0.21.90**
 
@@ -13,7 +13,7 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Hauts-de-France v0.2 : **144 mémoires RX**, publiée et immuable.
-- Île-de-France v0.2 : **58 mémoires RX**, publiée et immuable.
+- Île-de-France v0.3 : **57 mémoires RX**, dont **18 aviation**, publiée et immuable ; v0.2 **58 RX** historique immuable.
 - Grand Est v0.2 : **59 mémoires RX**, publiée et immuable.
 - Centre-Val de Loire v0.3 : **51 mémoires RX**, dont **7 aviation**, publiée et immuable.
 - Pays de la Loire v0.2 : **130 mémoires RX**, publiée et immuable.
@@ -26,13 +26,13 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
 
-## Sprint 101 — Île-de-France v0.3, prépublication prête
+## Sprint 101 — Île-de-France v0.3 publiée
 
-Le candidat déterministe **57 RX / 18 aviation / 15 radio régionales** est construit, vérifié et maintenant **prêt à publier**, mais il n'est pas encore public. La v0.2 de **58 RX** reste l'unique version publique et reste immuable.
+Île-de-France v0.3 est publiée et figée à **57 RX / 18 aviation / 15 radio régionales**. La v0.2 de **58 RX** reste historique et immuable.
 
-SHA-256 candidat : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
+SHA-256 public : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
 
-Le builder reconstruit la v0.2, vérifie son SHA public figé `dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d`, puis reconstruit le candidat v0.3 et exige une correspondance byte-à-byte avec le CSV interne gelé.
+Le CSV public réutilise exactement les octets du candidat déterministe. Le builder reconstruit la v0.2, vérifie son SHA historique `dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d`, puis vérifie le candidat v0.3.
 
 ### Radioamateur
 
@@ -40,21 +40,19 @@ Scope final : **15 RF régionales uniques**. F5ZNG, F5ZNN, F5ZMH, F1ZHK, F6ZEE, 
 
 ### Aviation
 
-Le candidat conserve **18 mémoires, delta 0**, sans expansion. LFPG, LFPO et LFPB ont été revalidés pour ce sous-ensemble sur la fenêtre AIRAC 08/26 avec les éléments SIA/NOTAM/SUP documentés. La validation est valable jusqu'au **2 septembre 2026 inclus** ; toute publication ou nouvelle validation à partir du **3 septembre 2026** exige AIRAC 09/26.
+Le pack conserve **18 mémoires, delta 0**, sans expansion. LFPG, LFPO et LFPB ont été revalidés pour ce sous-ensemble sur la fenêtre AIRAC 08/26 avec les éléments SIA/NOTAM/SUP documentés. Cette photographie est valable jusqu'au **2 septembre 2026 inclus** ; toute nouvelle révision aviation à partir du **3 septembre 2026** exige AIRAC 09/26.
 
-### Prépublication
+### Publication
 
 - checklist : **12/12** ;
 - publication gates : **0 blocker** ;
-- publication record : **figé** en statut `prepublication_frozen_not_published` ;
+- publication record : **`published_immutable`** ;
 - `publication_ready = true` ;
-- `published = false` ;
-- CSV public v0.3 : **non créé** ;
-- registre public : **non modifié**.
+- `published = true` ;
+- CSV public v0.3 : **créé et byte-identique au candidat** ;
+- registre public : **v0.3 / 57 RX**.
 
-La prochaine action est uniquement la mutation publique atomique : produire/exposer un CSV public strictement identique au candidat, basculer le registre/site vers v0.3, vérifier le SHA du build public, puis marquer le record `published_immutable`.
-
-Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
+Références : `research/ile-de-france-v0.3/publication-record.json` et `research/sprint-101-summary.md`.
 
 ## Sprint 100 — Centre-Val de Loire v0.3
 
@@ -93,10 +91,6 @@ Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ;
 État historique avant publication : **77 RX / 60 sans aviation**, +1 RF 50.5375 MHz. Ce candidat est ensuite devenu la v0.4 publique immuable.
 
 ## Travaux ouverts
-
-### Île-de-France v0.3
-
-Prépublication prête à **57 RX / 18 aviation / 15 radio régionales**, checklist 12/12, zéro blocker et publication record figé. **Aucune mutation publique v0.3 n'est encore effectuée.**
 
 ### Bretagne v0.3
 

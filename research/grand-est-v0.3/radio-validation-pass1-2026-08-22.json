@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "status": "research_pass1_no_public_mutation",
+  "pack": "Grand Est",
+  "target_version": "0.3",
+  "reviewed_on": "2026-08-22",
+  "public_base": {
+    "version": "0.2",
+    "memory_count": 59,
+    "regional_radio_memory_count": 16,
+    "aviation_memory_count": 19,
+    "public_csv_sha256": "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1",
+    "immutable": true
+  },
+  "source_policy": {
+    "current_ref_directory_last_update_seen": "2026-05-13",
+    "prefer_current_local_operator_or_department_source": true,
+    "secondary_directory_alone_does_not_close_mode_or_state_conflict": true,
+    "missing_or_ambiguous_rf_not_inferred": true
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "maximum_memories": 200,
+    "no_artificial_fill": true,
+    "private_ppdr_operational_data_excluded": true,
+    "public_mutation": false,
+    "candidate_built": false
+  },
+  "pass1_summary": {
+    "v02_repeater_count": 8,
+    "v02_first_pass_safe_carry_count": 7,
+    "v02_mode_conflict_count": 1,
+    "safe_carry_rx_memory_count": 14,
+    "high_confidence_new_link_count": 4,
+    "high_confidence_new_rx_memory_count": 8,
+    "inherited_non_radio_memory_count_before_future_revalidation": 43,
+    "research_floor_if_only_safe_carry_and_high_confidence_new_links_were_used": 65,
+    "research_floor_is_not_a_release_candidate": true
+  },
+  "v02_first_pass_safe_carry": [
+    {
+      "call": "F5ZAU",
+      "site_current": "Dabo",
+      "rf_mhz": [145.6125, 145.0125],
+      "mode": "FM",
+      "status": "active_analog_current",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://www.ref67.fr/images/livres/page_infos.pdf"
+      ]
+    },
+    {
+      "call": "F1ZDG",
+      "site_current": "Sondernach / Petit Ballon",
+      "rf_mhz": [145.625, 145.025],
+      "mode": "FM",
+      "status": "active_analog_current",
+      "sources": [
+        "https://www.ref68.com/le-relais-du-petit-ballon/",
+        "https://www.repeaterbook.com/row_repeaters/Display_SS.php?state_id=FR"
+      ]
+    },
+    {
+      "call": "F5ZDL",
+      "site_current": "Tilloy-et-Bellay",
+      "rf_mhz": [145.6375, 145.0375],
+      "mode": "FM",
+      "status": "active_analog_current",
+      "sources": [
+        "https://www.ref-51.fr/lesrelais.html",
+        "https://adrasec08.fr/radiocommunications/les-relais-radioamateurs-du-secteur/"
+      ]
+    },
+    {
+      "call": "F1ZAE",
+      "site_current": "Pierrevillers / Metz area",
+      "rf_mhz": [145.675, 145.075],
+      "mode": "FM",
+      "status": "active_analog_current",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://www.f6kat.fr/"
+      ]
+    },
+    {
+      "call": "F5ZEC",
+      "site_current": "Sexfontaines / Chaumont area",
+      "rf_mhz": [145.7, 145.1],
+      "mode": "FM",
+      "status": "active_analog_current",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://www.repeaterbook.com/row_repeaters/details.php?ID=3579&state_id=FR"
+      ]
+    },
+    {
+      "call": "F5ZCQ",
+      "site_current": "Rott / Wissembourg area",
+      "rf_mhz": [145.725, 145.125],
+      "mode": "FM",
+      "status": "active_analog_current",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://www.ref67.fr/images/livres/page_infos.pdf"
+      ]
+    },
+    {
+      "call": "F1ZPJ",
+      "site_current": "Saint-Avold",
+      "rf_mhz": [145.75, 145.15],
+      "mode": "FM",
+      "status": "active_analog_current",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://www.repeaterbook.com/row_repeaters/Display_SS.php?state_id=FR"
+      ]
+    }
+  ],
+  "v02_conflicts": [
+    {
+      "call": "F1ZAX",
+      "site_current": "Cosnes-et-Romain",
+      "rf_mhz": [145.7625, 145.1625],
+      "status": "mode_resolution_required",
+      "current_ref_classification": "digital C4FM",
+      "secondary_classification": "FM Fusion",
+      "decision": "do_not_auto_carry_into_analog_v0.3_until_current_analog_voice_support_is independently corroborated",
+      "sources": [
+        "https://www.r-e-f.org/index.php?option=com_content&view=",
+        "https://www.repeaterbook.com/row_repeaters/Display_SS.php?state_id=FR"
+      ]
+    }
+  ],
+  "high_confidence_new_links": [
+    {
+      "call": "F5ZUD",
+      "site_current": "Vandoeuvre-les-Nancy / Nancy",
+      "rf_mhz": [145.7125, 145.1125],
+      "mode": "FM",
+      "status": "active_analog_two_current_sources",
+      "sources": [
+        "https://f6kim.fr/relais-f5zud/",
+        "https://www.r-e-f.org/index.php?option=com_content&view="
+      ]
+    },
+    {
+      "call": "F1ZUV",
+      "site_current": "Strasbourg",
+      "rf_mhz": [144.75, 439.75],
+      "mode": "FM crossband",
+      "status": "active_analog_two_current_sources",
+      "sources": [
+        "https://www.ref67.fr/images/livres/page_infos.pdf",
+        "https://www.r-e-f.org/index.php?option=com_content&view="
+      ]
+    },
+    {
+      "call": "F5ZAW",
+      "site_current": "Bellefosse / Champ du Feu",
+      "rf_mhz": [145.2125, 433.425],
+      "mode": "FM crossband",
+      "status": "active_analog_two_current_sources",
+      "sources": [
+        "https://www.ref67.fr/images/livres/page_infos.pdf",
+        "https://www.r-e-f.org/index.php?option=com_content&view="
+      ]
+    },
+    {
+      "call": "F5ZYS",
+      "site_current": "Dogneville / Bianlout",
+      "rf_mhz": [439.775, 430.375],
+      "mode": "FM",
+      "status": "active_analog_two_current_sources",
+      "sources": [
+        "https://ra88.org/radio-club-f8khp/relais/",
+        "https://www.r-e-f.org/index.php?option=com_content&view="
+      ]
+    }
+  ],
+  "aviation": {
+    "action_in_this_pass": "none",
+    "base_cycle": "AIRAC 08/26",
+    "base_memory_count": 19,
+    "base_valid_through_inclusive": "2026-09-02",
+    "airac09_required_for_any_new_aviation_revision_on_or_after": "2026-09-03"
+  }
+}

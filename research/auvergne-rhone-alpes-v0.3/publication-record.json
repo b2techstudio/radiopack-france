@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "status": "published_immutable",
+  "published_on": "2026-08-22",
+  "publication_sprint": 109,
+  "pack": "Auvergne-Rhône-Alpes",
+  "version": "0.3",
+  "memory_count": 71,
+  "previous_public_version": "0.2",
+  "previous_public_memory_count": 62,
+  "previous_public_sha256": "60b4f96467419db40e9f3f33076057f4e093853c81d9e3315b8fe7f0459daa53",
+  "public_route": "/downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv",
+  "public_csv_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+  "candidate_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+  "hash_basis": "Sprint 109 production Astro build; tests/test_ara_v03_publication.py proves byte identity between the generated public v0.3 route and the frozen Sprint 108 candidate.",
+  "generator": "website/src/pages/downloads/auvergne-rhone-alpes/radiopack-france-auvergne-rhone-alpes-v0.3.csv.ts",
+  "pack_builder": "website/src/lib/araPack.ts#buildAraV03Pack",
+  "candidate_builder": "tools/build_ara_v03_candidate.py",
+  "candidate_freeze": "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
+  "inland_dataset": "data/regional/auvergne-rhone-alpes-inland-vhf-rx.json",
+  "inland_validation": "research/auvergne-rhone-alpes-v0.3/inland-vhf-validation-2026-08-22.json",
+  "release_scope": "research/auvergne-rhone-alpes-v0.3/release-scope.json",
+  "publication_gates": "research/auvergne-rhone-alpes-v0.3/publication-gates.json",
+  "inland_vhf": {
+    "memory_count": 9,
+    "channels": [10, 12, 18, 19, 20, 22],
+    "paired_rx_channels": [19, 20, 22],
+    "location_range": "120-128",
+    "channel_18_boat_side_only": true,
+    "channel_18_shore_side_added": false,
+    "marine_channel_16_added": false,
+    "scope_non_exhaustive": true
+  },
+  "aviation": {
+    "memory_count": 18,
+    "memory_delta": 0,
+    "cycle": "AIRAC 08/26",
+    "valid_through_inclusive": "2026-09-02",
+    "inherited_unchanged_from_v0_2": true,
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
+  },
+  "published_version_is_immutable": true,
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "same_rf_frequency_deduplicated": true,
+    "base_rows_preserved": true,
+    "no_artificial_fill": true,
+    "private_ppdr_operational_data_excluded": true,
+    "release_is_non_exhaustive": true
+  }
+}

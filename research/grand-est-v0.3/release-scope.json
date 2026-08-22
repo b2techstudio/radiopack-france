@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.2",
-  "status": "radio_scope_closed_candidate_not_built",
+  "schema_version": "1.3",
+  "status": "candidate_built_radio_scope_frozen_aviation_gate_pending",
   "pack": "Grand Est",
   "target_version": "0.3",
   "initialized_on": "2026-08-22",
@@ -17,7 +17,7 @@
     "radio_pass3_complete": true,
     "radio_scope_closed": true,
     "aviation_revalidation_started": false,
-    "deterministic_candidate_built": false,
+    "deterministic_candidate_built": true,
     "review_checklist_created": false,
     "publication_gates_created": false,
     "publication_ready": false,
@@ -37,12 +37,15 @@
     "scope_is_non_exhaustive": true,
     "scope_frozen_for_candidate_build": true
   },
-  "working_total_before_candidate_rebuild": {
-    "inherited_non_regional_memory_count": 43,
-    "regional_memory_count": 41,
-    "total": 84,
-    "is_candidate": false,
-    "reason": "the deterministic full v0.2 reconstruction and candidate builder have not yet been run"
+  "candidate": {
+    "memory_count": 84,
+    "aviation_memory_count": 19,
+    "regional_radio_memory_count": 41,
+    "sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+    "csv": "research/grand-est-v0.3/generated/release-candidate/radiopack-france-grand-est-v0.3-candidate.csv",
+    "manifest": "research/grand-est-v0.3/generated/release-candidate/candidate-manifest.json",
+    "builder": "tools/build_grand_est_v03_candidate.py",
+    "public_export_allowed": false
   },
   "resolved_policy_decisions": {
     "F1ZAX": "defer due current C4FM classification without current local analog proof",
@@ -60,25 +63,23 @@
     "base_cycle": "AIRAC 08/26",
     "base_valid_through_inclusive": "2026-09-02",
     "current_radio_pass_delta": 0,
-    "not_revalidated_in_sprint102_radio_passes": true,
+    "revalidation_complete_for_v03_candidate": false,
     "airac09_required_for_any_revision_on_or_after": "2026-09-03"
   },
   "next_gate": {
-    "name": "deterministic_candidate_build",
+    "name": "aviation_current_cycle_revalidation",
     "requirements": [
-      "reconstruct immutable Grand Est v0.2 deterministically and verify its expected SHA",
-      "replace the historical regional radio block with the frozen 41-RF radio scope",
-      "preserve RX-only semantics and RF deduplication",
-      "keep public v0.2 unchanged",
-      "do not mark publication ready until candidate, review and aviation gates are complete"
+      "revalidate the 19 inherited aviation memories against current AIRAC 08/26 evidence before any publication decision",
+      "record any delta explicitly; do not infer unavailable data",
+      "if work reaches 2026-09-03 or later, restart aviation validation on AIRAC 09/26",
+      "keep the candidate internal until aviation, review and publication gates are complete"
     ]
   },
   "publication_requirements": [
-    "build deterministic v0.3 candidate from immutable v0.2 basis",
     "validate RX-only semantics and <=200 memories",
+    "complete aviation current-cycle review",
     "complete source review and review checklist",
     "reach zero publication blockers",
-    "revalidate aviation against the applicable AIRAC before any aviation-affecting publication",
     "publish only as a new immutable version"
   ],
   "rules": {

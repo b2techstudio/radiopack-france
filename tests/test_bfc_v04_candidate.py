@@ -14,6 +14,7 @@ from tools.build_bfc_v04_candidate import (
     EXPECTED_BASE_COUNT,
     EXPECTED_BASE_SHA,
     EXPECTED_CANDIDATE_COUNT,
+    EXPECTED_CANDIDATE_SHA,
     EXPECTED_INLAND_COUNT,
     INLAND_LOCATION_START,
     ROOT,
@@ -31,6 +32,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 base_csv = args.dist / "downloads" / "bourgogne-franche-comte" / "radiopack-france-bourgogne-franche-comte-v0.3.csv"
+public_v04_csv = args.dist / "downloads" / "bourgogne-franche-comte" / "radiopack-france-bourgogne-franche-comte-v0.4.csv"
 candidate, manifest = build(ROOT, base_csv)
 rows = list(csv.DictReader(io.StringIO(candidate.decode("utf-8"), newline="")))
 base_rows = list(csv.DictReader(io.StringIO(base_csv.read_text(encoding="utf-8"), newline="")))
@@ -49,7 +51,7 @@ assert manifest["public_export_allowed"] is False
 assert manifest["published"] is False
 assert manifest["immutable"] is False
 assert manifest["candidate_sha256"] == hashlib.sha256(candidate).hexdigest()
-assert manifest["candidate_sha256"] == manifest["expected_candidate_sha256"]
+assert manifest["candidate_sha256"] == manifest["expected_candidate_sha256"] == EXPECTED_CANDIDATE_SHA
 assert manifest["validation"]["public_base_sha_matches_frozen_record"] is True
 assert manifest["validation"]["base_rows_preserved"] is True
 assert manifest["validation"]["candidate_sha_frozen"] is True
@@ -79,6 +81,14 @@ assert {row["Frequency"] for row in inland} == {
 assert "156.900000" not in {row["Frequency"] for row in inland}
 assert "161.500000" not in {row["Frequency"] for row in inland}
 
+assert public_v04_csv.is_file()
+public_v04 = public_v04_csv.read_bytes()
+assert public_v04 == candidate
+assert hashlib.sha256(public_v04).hexdigest() == EXPECTED_CANDIDATE_SHA
+public_rows = list(csv.DictReader(io.StringIO(public_v04.decode("utf-8"), newline="")))
+assert len(public_rows) == 61
+assert public_rows == rows
+
 validation = json.loads((ROOT / VALIDATION).read_text(encoding="utf-8"))
 assert validation["scope"]["memory_count"] == 7
 assert validation["scope"]["candidate_memory_count"] == 61
@@ -87,6 +97,6 @@ assert validation["gates"]["public_export_allowed"] is False
 assert validation["gates"]["public_release_allowed"] is False
 
 print(
-    "BFC v0.4 frozen internal candidate: "
-    f"61 RX / +7 inland VHF / sha256={manifest['candidate_sha256']} / public=false"
+    "BFC v0.4 public route candidate: "
+    f"61 RX / +7 inland VHF / sha256={EXPECTED_CANDIDATE_SHA} / byte_identity=true"
 )

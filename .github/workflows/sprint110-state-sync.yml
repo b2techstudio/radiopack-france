@@ -1,0 +1,39 @@
+name: Sprint 110 State Sync
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    paths:
+      - research/project-resume-state.json
+      - research/normandie-v0.5/sprint110-source-field-refresh.json
+      - research/sprint-110-summary.md
+      - README.md
+      - PROJECT_STATUS.md
+      - tests/test_site_files.py
+      - tests/test_sprint109_state_sync.py
+      - tests/test_sprint110_state_sync.py
+      - .github/workflows/sprint110-state-sync.yml
+
+permissions:
+  contents: read
+
+jobs:
+  sprint110-state:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13"
+      - name: Verify Sprint 110 canonical state
+        run: python tests/test_sprint110_state_sync.py
+      - name: Verify Sprint 109 historical state
+        run: python tests/test_sprint109_state_sync.py
+      - name: Verify repository/site synchronization
+        run: python tests/test_site_files.py

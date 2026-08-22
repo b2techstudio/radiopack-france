@@ -2,7 +2,7 @@
 
 **Couverture publique au 22 août 2026 : les 13 régions administratives de France métropolitaine disposent d'un pack RadioPack France. Le catalogue compte 14 packs publics avec Annecy–Alpes–Léman comme pack territorial spécialisé supplémentaire. Toutes les mémoires distribuées restent en réception seule.**
 
-**État courant : Sprint 109 / 0.21.97 — Auvergne-Rhône-Alpes v0.3 est publiée et immuable à 71 RX, dont 18 aviation et 9 VHF de navigation intérieure.**
+**État courant : Sprint 110 / 0.21.98 — Normandie v0.5 reste un candidat interne à 142 RX / delta 0 après revalidation des sources ; R3/F1ZBX et F5ZHA restent soumis aux gates terrain.**
 
 RadioPack France fournit des codeplugs CSV CHIRP régionaux documentés à partir de données publiques vérifiables pour les radios Quansheng UV-K5. Le projet privilégie une donnée recoupée et bornée plutôt qu'un remplissage artificiel des 200 mémoires.
 
@@ -43,6 +43,14 @@ Règles permanentes :
 - une fréquence présente dans un fichier n'accorde jamais un droit d'émission.
 
 Les CSV générés par `website/src/lib/chirpPack.ts` appliquent ce contrat, ainsi que la validation des noms, emplacements, doublons RF et limite mémoire.
+
+## Sprint 110 — Normandie v0.5 : sources revalidées, handoff terrain
+
+La revalidation du 22 août 2026 maintient le candidat Normandie v0.5 à **142 RX / delta 0**, sans mutation RF ni publique. Le plafond potentiel connu reste **147 RX hors F6ZES**, mais aucune addition ne franchit actuellement ses gates.
+
+**R3/F1ZBX** reste conditionné à deux sessions RX indépendantes et identifiées depuis Mortain-Bocage sur 145.675 MHz. **F5ZHA** reste conditionné à deux sessions RX indépendantes sur la paire actuelle 145.4675 / 432.575 MHz avec les critères du Sprint 85. **F1ZOV** reste en maintenance selon l'opérateur local et **F6ZES** reste sans fréquence/mode publics exploitables.
+
+Le kit Sprint 84 et l'évaluateur Sprint 85 sont suffisants : aucune nouvelle sonde n'est nécessaire et aucun verdict terrain ne peut muter automatiquement le candidat ou publier une version. Référence : `research/sprint-110-summary.md`.
 
 ## Sprint 109 — Auvergne-Rhône-Alpes v0.3 publiée
 
@@ -145,7 +153,7 @@ python tests\test_site_files.py
 python tests\test_pack_registry.py
 python tests\test_ara_v03_candidate.py --dist website\dist
 python tests\test_ara_v03_publication.py --dist website\dist
-python tests\test_sprint109_state_sync.py
+python tests\test_sprint110_state_sync.py
 
 cd website
 npm ci

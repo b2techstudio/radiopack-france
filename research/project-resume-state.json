@@ -2,8 +2,8 @@
   "schema_version": "1.4",
   "status": "project_resume_state",
   "updated": "2026-08-22",
-  "current_sprint": 109,
-  "state_version": "0.21.97",
+  "current_sprint": 110,
+  "state_version": "0.21.98",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -131,47 +131,9 @@
     }
   },
   "active_work": {
-    "pack": "Auvergne-Rhône-Alpes",
-    "target_version": "0.3",
-    "status": "published_immutable",
-    "public_base_version": "0.2",
-    "public_base_memory_count": 62,
-    "public_base_sha256": "60b4f96467419db40e9f3f33076057f4e093853c81d9e3315b8fe7f0459daa53",
-    "candidate_memory_count": 71,
-    "candidate_aviation_memory_count": 18,
-    "candidate_inland_vhf_memory_count": 9,
-    "candidate_memory_delta": 9,
-    "candidate_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
-    "public_csv_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
-    "inland_scope_closed": true,
-    "inland_rf_deduplicated": true,
-    "channel_18_boat_side_only": true,
-    "channel_18_shore_side_promoted": false,
-    "marine_channel_16_promoted": false,
-    "aviation_memory_delta": 0,
-    "aviation_inherited_unchanged_from_v0_2": true,
-    "deterministic_candidate_built": true,
-    "candidate_public_byte_identity_verified": true,
-    "publication_gates_zero_blockers": true,
-    "publication_record_frozen": true,
-    "publication_ready": true,
-    "published": true,
-    "published_version_is_immutable": true,
-    "public_mutation_performed": true,
-    "inland_validation": "research/auvergne-rhone-alpes-v0.3/inland-vhf-validation-2026-08-22.json",
-    "candidate_freeze": "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
-    "release_scope": "research/auvergne-rhone-alpes-v0.3/release-scope.json",
-    "publication_gates": "research/auvergne-rhone-alpes-v0.3/publication-gates.json",
-    "publication_record": "research/auvergne-rhone-alpes-v0.3/publication-record.json",
-    "builder": "tools/build_ara_v03_candidate.py",
-    "published_on": "2026-08-22",
-    "airac08_publication_allowed_through_inclusive": "2026-09-02",
-    "airac09_revalidation_required_on_or_after": "2026-09-03"
-  },
-  "next_priority": {
     "pack": "Normandie",
     "target_version": "0.5",
-    "status": "field_validation_required_before_any_promotion",
+    "status": "current_sources_refreshed_zero_delta_field_blocked",
     "public_base_version": "0.4",
     "public_base_memory_count": 142,
     "candidate_memory_count": 142,
@@ -185,8 +147,43 @@
       "F1ZOV",
       "F6ZES"
     ],
-    "evidence": "research/normandie-v0.5/sprint90-source-refresh.json",
-    "reason": "ARA closes the verified non-coastal inland-VHF queue from Sprint 103. Bretagne AIRAC 09/26 is not effective before 2026-09-03, so Normandie v0.5 field/source gates are the actionable current priority."
+    "r3_minimum_independent_sessions": 2,
+    "f5zha_minimum_independent_sessions": 2,
+    "field_validation_kit": "research/normandie-v0.5/field-validation-kit.json",
+    "field_evaluation_policy": "research/normandie-v0.5/field-evaluation-policy.json",
+    "field_evaluator": "tools/evaluate_normandie_v05_field_sessions.py",
+    "latest_source_refresh": "research/normandie-v0.5/sprint110-source-field-refresh.json",
+    "summary": "research/sprint-110-summary.md",
+    "field_gate_can_be_evaluated_automatically": true,
+    "automatic_candidate_mutation_allowed": false,
+    "automatic_publication_allowed": false,
+    "public_export_allowed": false,
+    "public_release_ready": false,
+    "published": false,
+    "public_mutation_performed": false,
+    "rf_data_mutation": false,
+    "published_v0_4_immutable": true
+  },
+  "next_priority": {
+    "pack": "Normandie",
+    "target_version": "0.5",
+    "status": "collect_real_mortain_bocage_field_sessions",
+    "public_base_version": "0.4",
+    "public_base_memory_count": 142,
+    "candidate_memory_count": 142,
+    "candidate_memory_delta": 0,
+    "field_required": [
+      "R3_F1ZBX",
+      "F5ZHA"
+    ],
+    "required_independent_sessions_per_target": 2,
+    "source_watch": [
+      "F1ZOV",
+      "F6ZES"
+    ],
+    "field_validation_kit": "research/normandie-v0.5/field-validation-kit.json",
+    "field_evaluator": "tools/evaluate_normandie_v05_field_sessions.py",
+    "latest_evidence": "research/normandie-v0.5/sprint110-source-field-refresh.json"
   },
   "bretagne_v0_3_airac_handoff": {
     "pack": "Bretagne",
@@ -559,9 +556,21 @@
     "tests/test_ara_v03_publication.py",
     "website/src/lib/araPack.ts",
     "research/sprint-108-summary.md",
-    "research/sprint-109-summary.md"
+    "research/sprint-109-summary.md",
+    "research/normandie-v0.5/sprint110-source-field-refresh.json",
+    "research/normandie-v0.5/field-validation-kit.json",
+    "research/normandie-v0.5/field-evaluation-policy.json",
+    "tools/evaluate_normandie_v05_field_sessions.py",
+    "tests/test_sprint110_normandie_v05_refresh.py",
+    "research/sprint-110-summary.md"
   ],
   "recent_sprints": [
+    {
+      "sprint": 110,
+      "state_version": "0.21.98",
+      "summary": "Normandie v0.5 sources revalidated with zero promotion and zero public/RF mutation; candidate remains 142 RX, R3/F1ZBX and F5ZHA remain field-gated, F1ZOV remains in operator maintenance, and F6ZES RF/mode remain unresolved.",
+      "summary_file": "research/sprint-110-summary.md"
+    },
     {
       "sprint": 109,
       "state_version": "0.21.97",
@@ -746,5 +755,44 @@
     "summary": "research/sprint-109-summary.md",
     "published": true,
     "published_version_is_immutable": true
+  },
+  "latest_sprint110_normandie_v05_refresh": {
+    "sprint": 110,
+    "state_version": "0.21.98",
+    "completed_on": "2026-08-22",
+    "status": "normandie_v05_sources_refreshed_zero_delta_field_handoff",
+    "public_base_version": "0.4",
+    "public_base_memory_count": 142,
+    "candidate_memory_count": 142,
+    "candidate_memory_delta": 0,
+    "known_potential_ceiling_excluding_f6zes": 147,
+    "field_required": [
+      "R3_F1ZBX",
+      "F5ZHA"
+    ],
+    "source_watch": [
+      "F1ZOV",
+      "F6ZES"
+    ],
+    "r3_public_pair_mhz": [
+      145.675,
+      145.075
+    ],
+    "f5zha_public_pair_mhz": [
+      145.4675,
+      432.575
+    ],
+    "f1zov_operator_status": "maintenance",
+    "f6zes_frequency_resolved": false,
+    "f6zes_mode_resolved": false,
+    "promotion_count": 0,
+    "public_csv_mutation": false,
+    "rf_data_mutation": false,
+    "public_v0_4_immutable": true,
+    "refresh": "research/normandie-v0.5/sprint110-source-field-refresh.json",
+    "field_validation_kit": "research/normandie-v0.5/field-validation-kit.json",
+    "field_evaluation_policy": "research/normandie-v0.5/field-evaluation-policy.json",
+    "field_evaluator": "tools/evaluate_normandie_v05_field_sessions.py",
+    "summary": "research/sprint-110-summary.md"
   }
 }

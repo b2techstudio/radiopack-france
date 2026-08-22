@@ -106,15 +106,17 @@ assert e["decisions"]["bretagne_site_assignment_promoted"] is False
 assert e["decisions"]["public_pack_mutated"] is False
 assert e["decisions"]["public_export_allowed"] is False
 
+# Sprint 66 is historical. The exact technical-inventory snapshot above is the
+# immutable evidence; the compact current resume only needs to preserve the
+# resulting current boundaries, not every old intermediate sub-object.
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
-normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert resume["current_sprint"] >= e["sprint"]
+normandie_work = resume.get("normandie_v0_5_work", resume["active_work"])
 assert normandie_work["internal_candidate_memory_count"] == 142
 assert normandie_work["maximum_internal_memory_count_if_all_current_known_gates_clear"] == 147
 assert normandie_work["current_guarded_promotion_plan_eligible_addition_count"] == 0
-assert normandie_work["latest_technical_inventory_recheck"]["file"] == "research/sprint-66-technical-inventory-boundaries.json"
-assert resume["bretagne_research_update"]["etel_2026_technical_maintenance_station_count"] == 17
-assert resume["bretagne_research_update"]["corsen_secondary_undated_full_chain_is_current_primary_validation"] is False
+assert resume["bretagne_research_update"]["primary_current_channel79_transmitter_site_confirmed"] is False
+assert resume["bretagne_research_update"]["new_rf_memory_delta"] == 0
 for key in [
     "current_maintenance_scope_does_not_name_station_channels",
     "association_existence_does_not_validate_repeater_frequency",
@@ -129,4 +131,4 @@ assert len(rows) == 139
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 assert 'id: "bretagne"' in registry
 
-print("Sprint 66 technical inventory boundaries: Etel 17-station maintenance scope remains unnamed by channel, Corsen full secondary Ch79 chain stays non-primary, Stiff infrastructure does not assign Ch79, Normandie gates and public packs unchanged OK")
+print("Sprint 66 technical inventory boundaries: historical evidence remains exact while compact current state preserves resulting Normandie/Bretagne gates OK")

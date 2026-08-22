@@ -2,8 +2,8 @@
   "schema_version": "1.4",
   "status": "project_resume_state",
   "updated": "2026-08-22",
-  "current_sprint": 107,
-  "state_version": "0.21.95",
+  "current_sprint": 109,
+  "state_version": "0.21.97",
   "public_packs": {
     "normandie": {
       "version": "0.4",
@@ -94,13 +94,13 @@
       "public_csv_sha256": "619f13f7c8b6cb2529f4f0320268a055c95edc3e7333acefa795010c6e50a8e2"
     },
     "auvergne_rhone_alpes": {
-      "version": "0.2",
-      "memory_count": 62,
+      "version": "0.3",
+      "memory_count": 71,
       "immutable": true,
-      "previous_immutable_version": "0.1",
-      "previous_memory_count": 38,
-      "publication_record": "research/auvergne-rhone-alpes-v0.2/publication-record.json",
-      "public_csv_sha256": "60b4f96467419db40e9f3f33076057f4e093853c81d9e3315b8fe7f0459daa53"
+      "previous_immutable_version": "0.2",
+      "previous_memory_count": 62,
+      "publication_record": "research/auvergne-rhone-alpes-v0.3/publication-record.json",
+      "public_csv_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e"
     },
     "occitanie": {
       "version": "0.2",
@@ -131,24 +131,25 @@
     }
   },
   "active_work": {
-    "pack": "Bourgogne-Franche-Comté",
-    "target_version": "0.4",
+    "pack": "Auvergne-Rhône-Alpes",
+    "target_version": "0.3",
     "status": "published_immutable",
-    "public_base_version": "0.3",
-    "public_base_memory_count": 54,
-    "public_base_sha256": "b5af25a6766b1181e735d376d3f70ab47ffb9ed67b9e38e35bee15e8a86ae7a5",
-    "candidate_memory_count": 61,
-    "candidate_aviation_memory_count": 14,
-    "candidate_inland_vhf_memory_count": 7,
-    "candidate_memory_delta": 7,
-    "candidate_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
-    "public_csv_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
+    "public_base_version": "0.2",
+    "public_base_memory_count": 62,
+    "public_base_sha256": "60b4f96467419db40e9f3f33076057f4e093853c81d9e3315b8fe7f0459daa53",
+    "candidate_memory_count": 71,
+    "candidate_aviation_memory_count": 18,
+    "candidate_inland_vhf_memory_count": 9,
+    "candidate_memory_delta": 9,
+    "candidate_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+    "public_csv_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
     "inland_scope_closed": true,
     "inland_rf_deduplicated": true,
-    "channel_18_promoted": false,
+    "channel_18_boat_side_only": true,
+    "channel_18_shore_side_promoted": false,
     "marine_channel_16_promoted": false,
     "aviation_memory_delta": 0,
-    "aviation_inherited_unchanged_from_v0_3": true,
+    "aviation_inherited_unchanged_from_v0_2": true,
     "deterministic_candidate_built": true,
     "candidate_public_byte_identity_verified": true,
     "publication_gates_zero_blockers": true,
@@ -157,23 +158,35 @@
     "published": true,
     "published_version_is_immutable": true,
     "public_mutation_performed": true,
-    "inland_validation": "research/bourgogne-franche-comte-v0.4/inland-vhf-validation-2026-08-22.json",
-    "release_scope": "research/bourgogne-franche-comte-v0.4/release-scope.json",
-    "publication_gates": "research/bourgogne-franche-comte-v0.4/publication-gates.json",
-    "publication_record": "research/bourgogne-franche-comte-v0.4/publication-record.json",
-    "builder": "tools/build_bfc_v04_candidate.py",
+    "inland_validation": "research/auvergne-rhone-alpes-v0.3/inland-vhf-validation-2026-08-22.json",
+    "candidate_freeze": "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
+    "release_scope": "research/auvergne-rhone-alpes-v0.3/release-scope.json",
+    "publication_gates": "research/auvergne-rhone-alpes-v0.3/publication-gates.json",
+    "publication_record": "research/auvergne-rhone-alpes-v0.3/publication-record.json",
+    "builder": "tools/build_ara_v03_candidate.py",
     "published_on": "2026-08-22",
     "airac08_publication_allowed_through_inclusive": "2026-09-02",
     "airac09_revalidation_required_on_or_after": "2026-09-03"
   },
   "next_priority": {
-    "pack": "Auvergne-Rhône-Alpes",
-    "target_version": "0.3",
-    "status": "next_inland_vhf_scope_to_prepare",
-    "public_base_version": "0.2",
-    "public_base_memory_count": 62,
-    "minimum_verified_inland_vhf_rf_delta": 9,
-    "audit": "research/sprint-103-inland-vhf-audit-pass2.json"
+    "pack": "Normandie",
+    "target_version": "0.5",
+    "status": "field_validation_required_before_any_promotion",
+    "public_base_version": "0.4",
+    "public_base_memory_count": 142,
+    "candidate_memory_count": 142,
+    "candidate_memory_delta": 0,
+    "known_potential_ceiling_excluding_f6zes": 147,
+    "field_required": [
+      "R3_F1ZBX",
+      "F5ZHA"
+    ],
+    "source_watch": [
+      "F1ZOV",
+      "F6ZES"
+    ],
+    "evidence": "research/normandie-v0.5/sprint90-source-refresh.json",
+    "reason": "ARA closes the verified non-coastal inland-VHF queue from Sprint 103. Bretagne AIRAC 09/26 is not effective before 2026-09-03, so Normandie v0.5 field/source gates are the actionable current priority."
   },
   "bretagne_v0_3_airac_handoff": {
     "pack": "Bretagne",
@@ -206,8 +219,14 @@
     "candidate_memory_count": 142,
     "candidate_memory_delta": 0,
     "known_potential_ceiling_excluding_f6zes": 147,
-    "field_required": ["R3_F1ZBX", "F5ZHA"],
-    "source_watch": ["F1ZOV", "F6ZES"],
+    "field_required": [
+      "R3_F1ZBX",
+      "F5ZHA"
+    ],
+    "source_watch": [
+      "F1ZOV",
+      "F6ZES"
+    ],
     "evidence": "research/normandie-v0.5/sprint90-source-refresh.json"
   },
   "normandie_v0_5_work": {
@@ -232,10 +251,16 @@
   },
   "bretagne_research_update": {
     "primary_current_channel79_transmitter_site_confirmed": false,
-    "current_primary_corsen_infrastructure_sites_verified": ["Cap Fréhel", "Stiff / Ouessant"],
+    "current_primary_corsen_infrastructure_sites_verified": [
+      "Cap Fréhel",
+      "Stiff / Ouessant"
+    ],
     "historical_primary_channel79_context_exists": true,
     "historical_primary_channel79_context_is_current_validation": false,
-    "paired_rx_frequencies_mhz": [156.975, 161.575],
+    "paired_rx_frequencies_mhz": [
+      156.975,
+      161.575
+    ],
     "corsen_channel79_required_rx_memory_count_if_published": 2,
     "new_rf_memory_delta": 0,
     "site_assignment_promoted": false,
@@ -408,7 +433,12 @@
     "regional_radio_memory_delta": 0,
     "inland_vhf_memory_count": 7,
     "inland_vhf_memory_delta": 7,
-    "inland_channels": [10, 18, 20, 22],
+    "inland_channels": [
+      10,
+      18,
+      20,
+      22
+    ],
     "channel_69_promoted": false,
     "public_csv_sha256": "14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2",
     "publication_record": "research/ile-de-france-v0.4/publication-record.json",
@@ -428,8 +458,17 @@
     "aviation_memory_count": 14,
     "aviation_memory_delta": 0,
     "inland_vhf_memory_count": 7,
-    "inland_channels": [10, 12, 20, 22, 69],
-    "paired_rx_channels": [20, 22],
+    "inland_channels": [
+      10,
+      12,
+      20,
+      22,
+      69
+    ],
+    "paired_rx_channels": [
+      20,
+      22
+    ],
     "channel_18_promoted": false,
     "candidate_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
     "summary": "research/sprint-106-summary.md",
@@ -447,8 +486,17 @@
     "aviation_memory_delta": 0,
     "inland_vhf_memory_count": 7,
     "inland_vhf_memory_delta": 7,
-    "inland_channels": [10, 12, 20, 22, 69],
-    "paired_rx_channels": [20, 22],
+    "inland_channels": [
+      10,
+      12,
+      20,
+      22,
+      69
+    ],
+    "paired_rx_channels": [
+      20,
+      22
+    ],
     "channel_18_promoted": false,
     "candidate_public_byte_identity_verified": true,
     "public_csv_sha256": "02dcba7e14a0cce331b63126ea4e552d41013ebd51aecec19907009f40236a72",
@@ -499,9 +547,33 @@
     "research/sprint-106-summary.md",
     "research/sprint-107-summary.md",
     "website/src/lib/packRegistry.ts",
-    "website/src/pages/regions/[slug].astro"
+    "website/src/pages/regions/[slug].astro",
+    "data/regional/auvergne-rhone-alpes-inland-vhf-rx.json",
+    "research/auvergne-rhone-alpes-v0.3/inland-vhf-validation-2026-08-22.json",
+    "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
+    "research/auvergne-rhone-alpes-v0.3/release-scope.json",
+    "research/auvergne-rhone-alpes-v0.3/publication-gates.json",
+    "research/auvergne-rhone-alpes-v0.3/publication-record.json",
+    "tools/build_ara_v03_candidate.py",
+    "tests/test_ara_v03_candidate.py",
+    "tests/test_ara_v03_publication.py",
+    "website/src/lib/araPack.ts",
+    "research/sprint-108-summary.md",
+    "research/sprint-109-summary.md"
   ],
   "recent_sprints": [
+    {
+      "sprint": 109,
+      "state_version": "0.21.97",
+      "summary": "Auvergne-Rhône-Alpes v0.3 published immutable at 71 RX by adding 9 verified inland-navigation VHF memories to immutable v0.2; public Astro CSV is byte-identical to the Sprint 108 frozen candidate at SHA-256 b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e.",
+      "summary_file": "research/sprint-109-summary.md"
+    },
+    {
+      "sprint": 108,
+      "state_version": "0.21.96",
+      "summary": "Auvergne-Rhône-Alpes v0.3 internal candidate frozen at 71 RX with +9 verified inland-navigation VHF memories and SHA-256 b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e; no public mutation in Sprint 108.",
+      "summary_file": "research/sprint-108-summary.md"
+    },
     {
       "sprint": 107,
       "state_version": "0.21.95",
@@ -609,5 +681,70 @@
     "shared_inland_marine_rf_must_not_be_duplicated": true,
     "undocumented_local_navigation_channel_must_not_be_guessed": true,
     "temporary_navigation_channel_requires_current_evidence_before_promotion": true
+  },
+  "latest_sprint108_ara_v03_candidate": {
+    "sprint": 108,
+    "state_version": "0.21.96",
+    "completed_on": "2026-08-22",
+    "status": "ara_v03_internal_candidate_frozen_not_public",
+    "public_base_version": "0.2",
+    "public_base_memory_count": 62,
+    "candidate_memory_count": 71,
+    "candidate_memory_delta": 9,
+    "aviation_memory_count": 18,
+    "aviation_memory_delta": 0,
+    "inland_vhf_memory_count": 9,
+    "inland_channels": [
+      10,
+      12,
+      18,
+      19,
+      20,
+      22
+    ],
+    "paired_rx_channels": [
+      19,
+      20,
+      22
+    ],
+    "channel_18_boat_side_only": true,
+    "marine_channel_16_promoted": false,
+    "candidate_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+    "candidate_freeze": "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
+    "summary": "research/sprint-108-summary.md",
+    "published": false
+  },
+  "latest_sprint109_ara_v03_publication": {
+    "sprint": 109,
+    "state_version": "0.21.97",
+    "completed_on": "2026-08-22",
+    "status": "ara_v03_published_immutable",
+    "memory_count": 71,
+    "previous_public_version": "0.2",
+    "previous_memory_count": 62,
+    "aviation_memory_count": 18,
+    "aviation_memory_delta": 0,
+    "inland_vhf_memory_count": 9,
+    "inland_vhf_memory_delta": 9,
+    "inland_channels": [
+      10,
+      12,
+      18,
+      19,
+      20,
+      22
+    ],
+    "paired_rx_channels": [
+      19,
+      20,
+      22
+    ],
+    "channel_18_boat_side_only": true,
+    "candidate_public_byte_identity_verified": true,
+    "public_csv_sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+    "publication_record": "research/auvergne-rhone-alpes-v0.3/publication-record.json",
+    "summary": "research/sprint-109-summary.md",
+    "published": true,
+    "published_version_is_immutable": true
   }
 }

@@ -1,43 +1,44 @@
-# Sprint 102 — Grand Est v0.3 radio scope + internal candidate
+# Sprint 102 — Grand Est v0.3 publication
 
 Date : 2026-08-22
 
-## Base figée
+## Résultat
 
-- Grand Est v0.2 : **59 RX** ;
-- aviation : **19** mémoires AIRAC 08/26 ;
-- radio régionale historique : 16 mémoires / 8 relais paired-RX ;
-- SHA-256 public v0.2 : `a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1` ;
-- version publique immuable.
+Grand Est **v0.3 est publié comme version immuable** avec :
 
-## Recherche radio
+- **84 mémoires RX** au total ;
+- **19 mémoires aviation** ;
+- **41 fréquences radio régionales** ;
+- SHA-256 candidat/public : `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`.
 
-Trois passes ont fermé un scope analogique non exhaustif sans mutation publique.
+La v0.2 / 59 RX reste historique et immuable, avec son SHA `a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1`.
 
-La v0.2 n'est pas reconduite aveuglément : F1ZAX est différé car l'inventaire REF courant le classe C4FM ; F5ZBD est exclu tant que les sources locales le signalent hors service / en mise à niveau ; F1ZBU est exclu du scope analogique car le service courant est numérique.
+## Radio
 
-Le scope retenu ajoute notamment F5ZUD, F1ZUV, F5ZAW, F5ZYS, les crossbands Ardennes/Meuse validés, F5ZDJ, F1ZDA, F1ZBV et les relais Moselle F1ZFL/F5ZCC/F1ZJS.
+Trois passes ont fermé un scope analogique volontairement non exhaustif à **41 RF uniques**. La fréquence `432.5375 MHz`, commune à plusieurs crossbands, n'est stockée qu'une seule fois.
 
-La fréquence `432.5375 MHz`, commune à F1ZEK, F5ZFT, F1ZGN et F1ZGP, est stockée une seule fois. F1ZCV partage exactement la paire RF de F5ZAU et ne crée donc aucun delta RF.
+Les cas insuffisamment corroborés ou hors périmètre analogique n'ont pas été forcés : F1ZAX, F5ZBD, F5ZRP, F5ZTY, F5ZUK, F1ZFN et F1ZEF restent différés/exclus selon leur dossier ; F1ZBU reste exclu car son service courant est numérique.
 
-Scope radio final pour cette version : **41 RF régionales uniques**.
+## Aviation
 
-## Candidat déterministe
+Les **19 mémoires aviation** de la v0.2 sont conservées **strictement inchangées** dans la v0.3 :
 
-Le builder `tools/build_grand_est_v03_candidate.py` reconstruit d'abord la v0.2 et exige son SHA historique exact avant de créer le candidat.
+- AIRAC 08/26 toujours courant le 2026-08-22 ;
+- delta aviation : **0 ajout / 0 retrait / 0 modification** ;
+- aucune nouvelle validation champ-par-champ n'est revendiquée ;
+- toute nouvelle révision aviation à partir du **3 septembre 2026** devra être revalidée sur AIRAC 09/26.
 
-Candidat interne figé :
+## Publication
 
-- **84 RX** au total ;
-- **19 aviation** ;
-- **41 radio régionales** ;
-- SHA-256 : `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720` ;
-- RX-only, RF/noms/locations uniques, limite 200 respectée ;
-- `public_export_allowed=false` ;
-- aucune v0.3 publique créée.
+Le CSV public utilise exactement les mêmes octets que le candidat déterministe canonique. Le builder reconstruit d'abord la v0.2 et refuse la génération si son SHA historique ne correspond pas.
 
-## Prochaine gate
+Garde-fous finaux :
 
-Revalidation aviation du cycle applicable. AIRAC 08/26 est valable jusqu'au **2 septembre 2026 inclus** ; à partir du **3 septembre 2026**, toute révision doit utiliser AIRAC 09/26.
-
-Ensuite : checklist de revue, publication gates, puis seulement une éventuelle publication immuable v0.3.
+- `Duplex=off` / `Offset=0.000000` sur toutes les mémoires ;
+- RF, noms et locations uniques ;
+- maximum 200 respecté ;
+- checklist **12/12** ;
+- publication gates **0 blocker** ;
+- candidat/public byte-identiques ;
+- registre et page régionale synchronisés ;
+- v0.2 historique conservée.

@@ -45,8 +45,7 @@ assert max(map(len, names)) <= 10
 assert sum(row["Frequency"] == "432.537500" for row in rows) == 1
 assert any(row["Name"] == "XBD-4325" and row["Frequency"] == "432.537500" for row in rows)
 
-# The manifest is the immutable prepublication freeze produced by the deterministic builder.
-# Publication evidence lives in release-scope/publication-record and must not rewrite that history.
+# Preserve the original internal candidate freeze exactly as historical evidence.
 manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
 assert manifest["status"] == "internal_candidate_radio_scope_frozen_aviation_gate_pending"
 assert manifest["published_base_version"] == "0.2"
@@ -71,6 +70,9 @@ assert record["candidate_csv_sha256"] == EXPECTED_SHA
 assert record["published"] is True
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+assert (
+    '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+    or '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }' in registry
+)
 
-print("Sprint 102 Grand Est v0.3 deterministic basis: 84 RX / 19 aviation / 41 regional, candidate=public bytes, SHA frozen OK")
+print("Sprint 102 Grand Est v0.3 deterministic basis: 84 RX / 19 aviation / 41 regional, candidate=public bytes and SHA remain frozen across later releases")

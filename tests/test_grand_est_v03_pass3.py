@@ -49,7 +49,7 @@ assert backlog["validated_radio_scope"]["regional_unique_rf_count"] == 41
 assert {item.get("call") for item in backlog["excluded_from_analog_scope"] if item.get("call")} >= {"F1ZBU", "F5ZTC", "F5ZWR"}
 assert any("F1ZCV" == item.get("call") for item in backlog["deferred_from_v03_radio_scope"])
 
-# Pass3 facts remain frozen while release state advances legitimately to publication.
+# Pass3 facts remain frozen while later releases may advance the current pack.
 assert scope["status"] == "published_immutable"
 assert scope["current_phase"]["radio_pass3_complete"] is True
 assert scope["current_phase"]["radio_scope_closed"] is True
@@ -67,7 +67,10 @@ assert pass3["rules"]["chirp_offset"] == "0.000000"
 assert pass3["rules"]["maximum_memories"] == 200
 assert pass3["rules"]["public_mutation"] is False
 
-assert '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+assert (
+    '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+    or '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }' in registry
+)
 assert (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").is_file()
 
-print("Sprint 102 Grand Est v0.3 pass3 historical radio scope preserved: 41 RF / 84 public OK")
+print("Sprint 102 Grand Est v0.3 pass3 historical radio scope preserved: 41 RF / v0.3 84 public evidence intact")

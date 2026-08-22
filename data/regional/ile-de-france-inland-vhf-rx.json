@@ -1,0 +1,93 @@
+{
+  "dataset": "Île-de-France — VHF navigation intérieure (réception seule)",
+  "version": "0.4.0-research",
+  "updated": "2026-08-22",
+  "scope": "Île-de-France",
+  "default_export_policy": "rx_only",
+  "notes": [
+    "Ce jeu est distinct d'un bloc VHF marine : il décrit uniquement des usages de navigation intérieure documentés pour l'Île-de-France.",
+    "Le RPP Seine-Yonne consolidé au 14 octobre 2025 impose ou prescrit l'usage du canal 10 dans plusieurs situations de navigation, notamment dans Paris et sur la Petite-Seine.",
+    "Le flyer VNF du PCC de Vives-Eaux de mai 2026 publie les canaux d'appel actuels des cinq écluses téléconduites : Varennes 22, Champagne 18, La Cave 22, Vives-Eaux 20 et Le Coudray 22.",
+    "Les voies duplex 18, 20 et 22 sont représentées par deux mémoires RX : côté bateau et côté station terrestre, conformément au plan de fréquences ANFR.",
+    "Le canal 69 temporairement rencontré dans des dispositions parisiennes antérieures n'est pas promu : aucune affectation permanente 2026 suffisamment actuelle n'est retenue dans ce scope.",
+    "Aucune fréquence locale non documentée n'est devinée et aucune mémoire n'est ajoutée pour remplir artificiellement le pack."
+  ],
+  "sources": [
+    {
+      "authority": "VNF",
+      "title": "RPP n° 2 Seine–Yonne — version consolidée au 14 octobre 2025",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2025/10/RPP-n%C2%B0-2-Seine-%E2%80%93-Yonne-version-consolidee-au-14-octobre-2025.pdf",
+      "accessed": "2026-08-22"
+    },
+    {
+      "authority": "VNF",
+      "title": "Mise en service du PCC de Vives-Eaux (77) — mai 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2026/05/Flyer-Usagers-PCC-Vives-Eaux-2026.pdf",
+      "accessed": "2026-08-22"
+    },
+    {
+      "authority": "ANFR",
+      "title": "Manuel CRR fluvial — version 6, mai 2025 — annexe 6",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "accessed": "2026-08-22"
+    }
+  ],
+  "local_assignments": [
+    {"site": "Varennes", "channel": 22},
+    {"site": "Champagne", "channel": 18},
+    {"site": "La Cave", "channel": 22},
+    {"site": "Vives-Eaux", "channel": 20},
+    {"site": "Le Coudray", "channel": 22}
+  ],
+  "channels": [
+    {
+      "name": "FLV10",
+      "frequency_mhz": 156.5,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 10 · veille bateau-bateau Seine/Paris · RPP Seine-Yonne 2025 consolidé · RX seule"
+    },
+    {
+      "name": "FL18-B",
+      "frequency_mhz": 156.9,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 18 · côté bateau · écluse de Champagne · PCC Vives-Eaux 2026 · RX seule"
+    },
+    {
+      "name": "FL18-T",
+      "frequency_mhz": 161.5,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 18 · côté station terrestre · écluse de Champagne · PCC Vives-Eaux 2026 · RX seule"
+    },
+    {
+      "name": "FL20-B",
+      "frequency_mhz": 157.0,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté bateau · écluse de Vives-Eaux · PCC Vives-Eaux 2026 · RX seule"
+    },
+    {
+      "name": "FL20-T",
+      "frequency_mhz": 161.6,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 20 · côté station terrestre · écluse de Vives-Eaux · PCC Vives-Eaux 2026 · RX seule"
+    },
+    {
+      "name": "FL22-B",
+      "frequency_mhz": 157.1,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté bateau · Varennes / La Cave / Le Coudray · PCC Vives-Eaux 2026 · RX seule"
+    },
+    {
+      "name": "FL22-T",
+      "frequency_mhz": 161.7,
+      "mode": "NFM",
+      "step_khz": 25,
+      "comment": "Fluvial voie 22 · côté station terrestre · Varennes / La Cave / Le Coudray · PCC Vives-Eaux 2026 · RX seule"
+    }
+  ]
+}

@@ -13,20 +13,24 @@ public_csv = ROOT / "website/public/downloads/ile-de-france/radiopack-france-ile
 
 EXPECTED_SHA = "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
 
-# Sprint 101 is historical: later official sprints may become current without
-# changing any immutable Île-de-France v0.3 publication fact.
+# Sprint 101 is historical: later official sprints and later IDF versions may
+# become current without changing any immutable Île-de-France v0.3 fact.
 assert state["current_sprint"] >= 101
 version_parts = tuple(int(part) for part in state["state_version"].split("."))
 assert version_parts >= (0, 21, 90)
 
 idf = state["public_packs"]["ile_de_france"]
-assert idf["version"] == "0.3"
-assert idf["memory_count"] == 57
+current_version = tuple(int(part) for part in idf["version"].split("."))
+assert current_version >= (0, 3)
 assert idf["immutable"] is True
-assert idf["previous_immutable_version"] == "0.2"
-assert idf["previous_memory_count"] == 58
-assert idf["publication_record"] == "research/ile-de-france-v0.3/publication-record.json"
-assert idf["public_csv_sha256"] == EXPECTED_SHA
+if current_version == (0, 3):
+    assert idf["memory_count"] == 57
+    assert idf["previous_immutable_version"] == "0.2"
+    assert idf["previous_memory_count"] == 58
+    assert idf["publication_record"] == "research/ile-de-france-v0.3/publication-record.json"
+    assert idf["public_csv_sha256"] == EXPECTED_SHA
+elif idf.get("previous_immutable_version") == "0.3":
+    assert idf["previous_memory_count"] == 57
 
 s101 = state["latest_sprint101_idf_v03_research"]
 assert s101["sprint"] == 101
@@ -70,4 +74,4 @@ assert gates["published"] is True
 recent101 = next(item for item in state["recent_sprints"] if item.get("sprint") == 101)
 assert "published immutable at 57 RX / 18 aviation" in recent101["summary"]
 
-print("Sprint 101 historical integrity: IDF v0.3 immutable 57/18/15 and exact public SHA retained across later sprints OK")
+print("Sprint 101 historical integrity: IDF v0.3 immutable 57/18/15 and exact public SHA retained across later IDF releases OK")

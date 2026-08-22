@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "status": "completed_published_immutable",
+  "reviewed_on": "2026-08-22",
+  "published_on": "2026-08-22",
+  "pack": "Île-de-France",
+  "version": "0.4",
+  "item_count": 12,
+  "reviewed_count": 12,
+  "blocker_count": 0,
+  "items": [
+    {"id": "base-v03", "status": "passed", "note": "Immutable v0.3 / 57 RX verified against frozen SHA."},
+    {"id": "vnf-rpp", "status": "passed", "note": "Current consolidated Seine-Yonne RPP supports channel 10 use."},
+    {"id": "vnf-vives-eaux", "status": "passed", "note": "May 2026 VNF flyer explicitly maps locks to channels 18/20/22."},
+    {"id": "anfr-frequency-plan", "status": "passed", "note": "ANFR Annex 6 supplies exact simplex/duplex frequencies."},
+    {"id": "paired-rx", "status": "passed", "note": "Distinct sides for channels 18/20/22 exported as paired RX only."},
+    {"id": "rf-dedup", "status": "passed", "note": "Seven inland RF are unique and absent from the 57-memory base."},
+    {"id": "temporary-channel-69", "status": "passed", "note": "Channel 69 not promoted without current permanent 2026 evidence."},
+    {"id": "marine-channel-16", "status": "passed", "note": "No unrelated marine channel 16 memory added."},
+    {"id": "aviation", "status": "passed", "note": "18 aviation memories inherited unchanged; AIRAC 08/26 boundary guarded."},
+    {"id": "rx-only", "status": "passed", "note": "All 64 memories keep Duplex=off and Offset=0.000000."},
+    {"id": "candidate-public-identity", "status": "passed", "note": "Candidate and public CSV use identical Git blob and SHA-256."},
+    {"id": "publication-metadata", "status": "passed", "note": "Scope, gates, record, registry/site and project state synchronized."}
+  ],
+  "complete": true
+}

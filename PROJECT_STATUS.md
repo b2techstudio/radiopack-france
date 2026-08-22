@@ -1,10 +1,10 @@
 # RadioPack France — point de reprise
 
 Dernière mise à jour : **22 août 2026**
-Sprint courant : **104**
-État logique : **0.21.92**
+Sprint courant : **105**
+État logique : **0.21.93**
 
-L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-104-summary.md`.
+L'état machine officiel est `research/project-resume-state.json`. Résumé courant : `research/sprint-105-summary.md`.
 
 ## État public
 
@@ -13,7 +13,7 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Annecy–Alpes–Léman v0.3 : **76 / 59**, historique immuable.
 - Bretagne v0.2 : **151 mémoires RX**, publiée et immuable.
 - Hauts-de-France v0.2 : **144 mémoires RX**, publiée et immuable.
-- Île-de-France v0.3 : **57 mémoires RX**, dont **18 aviation**, publiée et immuable ; v0.2 **58 RX** historique immuable.
+- Île-de-France v0.4 : **64 mémoires RX**, dont **18 aviation**, **15 radio régionales** et **7 VHF navigation intérieure**, publiée et immuable ; v0.3 **57 RX** et v0.2 **58 RX** historiques immuables.
 - Grand Est v0.4 : **97 mémoires RX**, dont **19 aviation** et **13 VHF navigation intérieure**, publiée et immuable ; v0.3 **84 RX** et v0.2 **59 RX** historiques immuables.
 - Centre-Val de Loire v0.3 : **51 mémoires RX**, dont **7 aviation**, publiée et immuable.
 - Pays de la Loire v0.2 : **130 mémoires RX**, publiée et immuable.
@@ -25,6 +25,16 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 - Corse v0.2 : **137 mémoires RX**, publiée et immuable.
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
+
+## Sprint 105 — Île-de-France v0.4 publiée
+
+Île-de-France v0.4 est publiée et figée à **64 RX** : **18 aviation**, **15 radio régionales** et **7 VHF navigation intérieure**. SHA public : `14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2`.
+
+Le bloc fluvial retient les canaux **10, 18, 20 et 22** sur les emplacements **120–126**. Les canaux 18/20/22 sont représentés en paired RX sur leurs deux fréquences distinctes. Les affectations actuelles du PCC Vives-Eaux 2026 sont documentées par VNF. Le canal 69 n'est pas promu et aucun canal 16 maritime n'est ajouté.
+
+L'aviation reste à **18 mémoires, delta 0**, héritée de v0.3. AIRAC 08/26 est applicable jusqu'au **2 septembre 2026 inclus** ; toute nouvelle révision aviation à partir du **3 septembre 2026** exige AIRAC 09/26.
+
+Checklist : **12/12** ; publication gates : **0 blocker** ; candidat et CSV public byte-identiques. Les v0.3/57 et v0.2/58 restent historiques et immuables.
 
 ## Sprint 104 — Grand Est v0.4 publiée
 

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "status": "inherited_unchanged_publication_basis",
+  "reviewed_on": "2026-08-22",
+  "pack": "Île-de-France",
+  "target_version": "0.4",
+  "source_public_version": "0.3",
+  "source_publication_record": "research/ile-de-france-v0.3/publication-record.json",
+  "cycle": "AIRAC 08/26",
+  "valid_from": "2026-08-06",
+  "valid_through_inclusive": "2026-09-02",
+  "airac09_revalidation_required_on_or_after": "2026-09-03",
+  "publication_decision": {
+    "memory_count_before": 18,
+    "memory_count_after": 18,
+    "frequency_delta": 0,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "inherited_byte_for_byte_inside_base_v0_3": true
+  },
+  "method": {
+    "new_field_by_field_revalidation_claimed": false,
+    "reason": "Sprint 105 does not alter aviation. The immutable v0.3 aviation block remains within AIRAC 08/26 applicability on 2026-08-22.",
+    "future_boundary_guarded": true
+  },
+  "rules": {
+    "no_aviation_delta_in_v0_4": true,
+    "airac09_required_for_new_aviation_revision_on_or_after_2026_09_03": true
+  },
+  "publication_gate_complete": true,
+  "blocker_count": 0
+}

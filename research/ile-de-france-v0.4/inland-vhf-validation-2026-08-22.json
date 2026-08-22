@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "status": "scope_closed_publication_basis",
+  "reviewed_on": "2026-08-22",
+  "pack": "Île-de-France",
+  "target_version": "0.4",
+  "public_base": {
+    "version": "0.3",
+    "memory_count": 57,
+    "sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
+    "immutable": true
+  },
+  "sources": [
+    {
+      "id": "VNF-RPP-SEINE-YONNE-2025-10-14",
+      "authority": "VNF",
+      "title": "RPP n° 2 Seine–Yonne — version consolidée au 14 octobre 2025",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2025/10/RPP-n%C2%B0-2-Seine-%E2%80%93-Yonne-version-consolidee-au-14-octobre-2025.pdf",
+      "accessed": "2026-08-22",
+      "evidence": "Article 14 et dispositions de navigation documentent la veille/annonce VHF sur le canal 10 dans les secteurs concernés, notamment Paris et Petite-Seine."
+    },
+    {
+      "id": "VNF-PCC-VIVES-EAUX-2026-05",
+      "authority": "VNF",
+      "title": "Mise en service du PCC de Vives-Eaux (77) — mai 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2026/05/Flyer-Usagers-PCC-Vives-Eaux-2026.pdf",
+      "accessed": "2026-08-22",
+      "evidence": "Table officielle : Varennes 22, Champagne 18, La Cave 22, Vives-Eaux 20, Le Coudray 22."
+    },
+    {
+      "id": "ANFR-CRR-FLUVIAL-V6-2025-05",
+      "authority": "ANFR",
+      "title": "Manuel CRR fluvial — version 6, mai 2025 — annexe 6",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "accessed": "2026-08-22",
+      "evidence": "Plan de fréquences : voie 10 = 156.500/156.500 MHz ; voie 18 = 156.900/161.500 ; voie 20 = 157.000/161.600 ; voie 22 = 157.100/161.700."
+    },
+    {
+      "id": "VNF-PARIS-ETE-2026",
+      "authority": "VNF",
+      "title": "Ouverture de sites de baignade à Paris : conditions de navigation à l’été 2026",
+      "url": "https://www.vnf.fr/vnf/articles/ouverture-de-sites-de-baignade-a-paris-conditions-de-navigation-a-lete-2026/",
+      "accessed": "2026-08-22",
+      "evidence": "La page 2026 rappelle la veille permanente bateau-bateau sur le canal 10. Aucune promotion permanente du canal 69 n'est retenue."
+    }
+  ],
+  "frequency_plan": [
+    {"channel": 10, "side": "simplex", "frequency_mhz": 156.5, "name": "FLV10", "location": 120},
+    {"channel": 18, "side": "boat", "frequency_mhz": 156.9, "name": "FL18-B", "location": 121},
+    {"channel": 18, "side": "land", "frequency_mhz": 161.5, "name": "FL18-T", "location": 122},
+    {"channel": 20, "side": "boat", "frequency_mhz": 157.0, "name": "FL20-B", "location": 123},
+    {"channel": 20, "side": "land", "frequency_mhz": 161.6, "name": "FL20-T", "location": 124},
+    {"channel": 22, "side": "boat", "frequency_mhz": 157.1, "name": "FL22-B", "location": 125},
+    {"channel": 22, "side": "land", "frequency_mhz": 161.7, "name": "FL22-T", "location": 126}
+  ],
+  "local_assignments": [
+    {"site": "Varennes", "channel": 22},
+    {"site": "Champagne", "channel": 18},
+    {"site": "La Cave", "channel": 22},
+    {"site": "Vives-Eaux", "channel": 20},
+    {"site": "Le Coudray", "channel": 22}
+  ],
+  "explicit_exclusions": [
+    {
+      "channel": 69,
+      "decision": "exclude_from_v0_4",
+      "reason": "Affectation temporaire rencontrée dans une campagne parisienne antérieure ; la documentation VNF 2026 consultée reconduit le canal 10 et ne fournit pas de base actuelle suffisante pour une mémoire permanente 69."
+    },
+    {
+      "channel": 16,
+      "decision": "exclude_from_v0_4",
+      "reason": "Aucun besoin documenté de bloc VHF maritime dans ce scope de navigation intérieure francilien."
+    }
+  ],
+  "accounting": {
+    "base_memory_count": 57,
+    "verified_inland_unique_rf_count": 7,
+    "rf_duplicates_against_base": 0,
+    "candidate_memory_delta": 7,
+    "candidate_memory_count": 64
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_verified_distinct_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "no_artificial_fill": true,
+    "no_undocumented_local_channel_guess": true,
+    "marine_vhf_distinct_from_inland_vhf": true,
+    "temporary_assignments_not_promoted_without_current_evidence": true
+  },
+  "scope_closed": true,
+  "blocker_count": 0
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "status": "published_zero_blockers",
+  "evaluated_on": "2026-08-22",
+  "published_on": "2026-08-22",
+  "pack": "Île-de-France",
+  "version": "0.4",
+  "blocker_count": 0,
+  "public_release_allowed": true,
+  "candidate_sha256": "14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2",
+  "public_csv_sha256": "14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2",
+  "gates": [
+    {"id": "immutable-base", "status": "passed", "required": true},
+    {"id": "official-inland-sources", "status": "passed", "required": true},
+    {"id": "exact-frequency-plan", "status": "passed", "required": true},
+    {"id": "rf-deduplication", "status": "passed", "required": true},
+    {"id": "paired-rx-policy", "status": "passed", "required": true},
+    {"id": "rx-only-contract", "status": "passed", "required": true},
+    {"id": "aviation-airac08-boundary", "status": "passed", "required": true},
+    {"id": "candidate-public-byte-identity", "status": "passed", "required": true},
+    {"id": "review-checklist", "status": "passed", "required": true},
+    {"id": "site-registry-state-sync", "status": "passed", "required": true}
+  ],
+  "warnings": [
+    "Aviation is inherited unchanged from v0.3; Sprint 105 does not claim a new field-by-field aviation revalidation.",
+    "Any aviation revision on or after 2026-09-03 requires AIRAC 09/26 revalidation.",
+    "Channel 69 is deliberately excluded because current 2026 material does not justify a permanent memory in this scope.",
+    "The release remains non-exhaustive: undocumented local navigation channels are not guessed."
+  ],
+  "published": true,
+  "immutable": true
+}

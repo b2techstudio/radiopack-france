@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "status": "publication_gate_complete",
+  "pack": "Grand Est",
+  "target_version": "0.4",
+  "reviewed_on": "2026-08-22",
+  "cycle": "AIRAC 08/26",
+  "valid_from": "2026-08-06",
+  "valid_through_inclusive": "2026-09-02",
+  "next_cycle": "AIRAC 09/26",
+  "next_cycle_effective_from": "2026-09-03",
+  "publication_decision": {
+    "memory_count_before": 19,
+    "memory_count_after": 19,
+    "frequency_delta": 0,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "inherited_unchanged_from_v0_3": true
+  },
+  "method": {
+    "sia_current_cycle_reconfirmed_on_public_catalog": true,
+    "new_field_by_field_revalidation_claimed": false,
+    "reason": "Grand Est v0.4 changes only inland-navigation VHF; the 19 aviation memories are byte-identical to immutable v0.3 and remain inside the same AIRAC 08/26 validity window."
+  },
+  "publication_gate_complete": true,
+  "airac09_revalidation_required_on_or_after": "2026-09-03"
+}

@@ -9,7 +9,7 @@ Date : **22 août 2026**
 
 - aviation : **18 mémoires**, delta **0** ;
 - radio régionale : **15 mémoires**, delta **0** ;
-- VHF navigation intérieure : **7 mémoires**, delta **+7** ;
+- **+7 mémoires VHF de navigation intérieure** ;
 - candidat et CSV public byte-identiques ;
 - SHA-256 candidat/public : `14e1d1d95b38ef44d01b9cccb989a3f1567153ac64875594cc24bd4b57a1cdc2`.
 

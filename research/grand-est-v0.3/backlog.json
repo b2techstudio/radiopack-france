@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "status": "open_research_backlog",
+  "schema_version": "1.1",
+  "status": "pass2_reduced_backlog",
   "pack": "Grand Est",
   "target_version": "0.3",
   "updated_on": "2026-08-22",
@@ -8,44 +8,54 @@
     {
       "id": "F1ZAX_MODE",
       "call": "F1ZAX",
-      "issue": "current REF inventory classifies the 145.7625/145.1625 MHz installation as C4FM while secondary listings still expose FM/Fusion wording",
-      "required_next_evidence": "current local/operator corroboration that analog FM voice is actually available before carrying it into the analog pack"
+      "issue": "current REF inventory classifies 145.7625/145.1625 MHz as C4FM while secondary listings still expose FM/Fusion wording",
+      "decision": "defer from analog scope until current local/operator evidence proves analog FM voice"
     },
     {
       "id": "F5ZBD_STATUS",
       "call": "F5ZBD",
-      "issue": "REF national inventory shows active while the current REF51 page says the UHF relay is temporarily stopped for upgrade",
+      "issue": "national inventory and local status conflict; current REF51 says temporary shutdown for upgrade and ADRASEC08 says OFF / no longer in service",
       "rf_mhz": [430.175, 431.775],
-      "required_next_evidence": "current REF51/operator confirmation of return to service"
+      "decision": "exclude while off service"
     }
   ],
-  "second_pass_candidates": [
-    {"call":"F1ZCV","area":"Aube / Montgueux","rf_mhz":[145.6125,145.0125],"mode":"FM","evidence":"current REF directory","next":"current local/department corroboration"},
-    {"call":"F1ZEK","area":"Ardennes / Montherme","rf_mhz":[432.5375,145.25],"mode":"FM crossband","evidence":"current REF directory","next":"current local/department corroboration"},
-    {"call":"F1ZXX","area":"Ardennes / Warcq","rf_mhz":[432.775,145.4125],"mode":"FM crossband","evidence":"current REF directory + ADRASEC08 area list","next":"verify exact paired-RX semantics and current local status"},
-    {"call":"F5ZFT","area":"Ardennes / Saint-Menges","rf_mhz":[432.5375,145.475],"mode":"FM crossband","evidence":"current REF directory + ADRASEC08 area list","next":"verify current local status and account for shared 432.5375 MHz RF"},
-    {"call":"F5ZRP","area":"Meurthe-et-Moselle / Vitrimont","rf_mhz":[430.325,431.925],"mode":"FM","evidence":"current REF directory","next":"current local/operator corroboration"},
-    {"call":"F5ZTY","area":"Meurthe-et-Moselle / Toul","rf_mhz":[431.95,430.35],"mode":"FM","evidence":"current REF directory","next":"current local/operator corroboration"},
-    {"call":"F1ZGN","area":"Meuse / Sommedieue","rf_mhz":[145.425,432.5375],"mode":"FM crossband","evidence":"current REF directory + ADRASEC08 area list","next":"current local/operator corroboration and shared-RF dedup review"},
-    {"call":"F1ZGP","area":"Meuse / Bar-le-Duc","rf_mhz":[145.2875,432.5375],"mode":"FM crossband","evidence":"current REF directory + ADRASEC08 area list","next":"current local/operator corroboration and shared-RF dedup review"},
-    {"call":"F1ZFL","area":"Moselle / Erching","rf_mhz":[430.125,431.725],"mode":"FM","evidence":"current REF directory","next":"current local/operator corroboration"},
-    {"call":"F5ZCC","area":"Moselle / Theding","rf_mhz":[430.15,431.75],"mode":"FM","evidence":"current REF directory + historical/local inventories","next":"fresh local/operator corroboration"},
-    {"call":"F1ZJS","area":"Moselle / Tromborn","rf_mhz":[439.125,431.525],"mode":"FM","evidence":"current REF directory","next":"current local/operator corroboration"},
-    {"call":"F1ZDA","area":"Haut-Rhin / Petit Ballon","rf_mhz":[430.075,431.675],"mode":"FM","evidence":"current REF68 local page","next":"independent current corroboration"},
-    {"call":"F1ZBV","area":"Vosges / La Sotiere","rf_mhz":[145.6625,145.0625],"mode":"FM","evidence":"current RA88 local page","next":"independent current corroboration"},
-    {"call":"F1ZBU","area":"Vosges / Uxegney","rf_mhz":[433.025,431.425],"mode":"FM","evidence":"current RA88 local page gives 433.025 MHz and -1.6 MHz offset","next":"independently confirm both RF sides before promotion"}
+  "validated_in_pass2": [
+    "F1ZEK",
+    "F1ZXX",
+    "F5ZFT",
+    "F1ZGN",
+    "F1ZGP",
+    "F5ZDJ",
+    "F1ZDA",
+    "F1ZBV"
   ],
-  "deferred_or_excluded_for_now": [
-    {"call":"F5ZTC","reason":"current REF status is Test, not a stable active service"},
-    {"call":"F5ZWR","reason":"current REF status is Projet"},
-    {"call":"F5ZDJ","reason":"needs fresh current local/operator confirmation before use"},
-    {"call":"F5ZUK","reason":"local listing exists but needs current national/operator reconciliation and exact pair confirmation"},
-    {"call":"F1ZFN","reason":"analog installation identity found; exact current RF/mode/status still to resolve"},
-    {"call":"F1ZEF","reason":"analog installation identity found; exact current RF/mode/status still to resolve"},
-    {"group":"digital_only_or_mixed_digital","reason":"do not blindly promote C4FM/DMR/D-STAR/SvxR-only infrastructure into the analog listening scope"}
+  "still_open_for_fresh_local_corroboration": [
+    {"call":"F5ZRP","area":"Meurthe-et-Moselle / Vitrimont","rf_mhz":[430.325,431.925],"mode":"FM","evidence":"current REF directory","next":"fresh local/operator corroboration"},
+    {"call":"F5ZTY","area":"Meurthe-et-Moselle / Toul","rf_mhz":[431.95,430.35],"mode":"FM","evidence":"current REF directory","next":"fresh local/operator corroboration"},
+    {"call":"F1ZFL","area":"Moselle / Erching","rf_mhz":[430.125,431.725],"mode":"FM","evidence":"current REF directory","next":"fresh local/operator corroboration"},
+    {"call":"F5ZCC","area":"Moselle / Theding","rf_mhz":[430.15,431.75],"mode":"FM","evidence":"current REF directory plus older local inventories","next":"fresh local/operator corroboration"},
+    {"call":"F1ZJS","area":"Moselle / Tromborn","rf_mhz":[439.125,431.525],"mode":"FM","evidence":"current REF directory","next":"fresh local/operator corroboration"},
+    {"call":"F5ZUK","area":"Bas-Rhin / Niederbronn-les-Bains","rf_mhz":[432.8375,431.2375],"mode":"FM","evidence":"REF67 local listing plus stale/off-air secondary data","next":"current service-state reconciliation"},
+    {"call":"F1ZFN","area":"Grand Est","rf_mhz":null,"mode":null,"evidence":"installation identity only","next":"resolve exact current public RF/mode/status"},
+    {"call":"F1ZEF","area":"Grand Est","rf_mhz":null,"mode":null,"evidence":"installation identity only","next":"resolve exact current public RF/mode/status"}
+  ],
+  "zero_rf_delta_attribution": [
+    {
+      "call": "F1ZCV",
+      "area": "Aube / Montgueux",
+      "rf_mhz": [145.6125, 145.0125],
+      "reason": "same RF pair already present via F5ZAU; attribution can be revisited without adding memories"
+    }
+  ],
+  "excluded_from_analog_scope": [
+    {"call":"F1ZBU","reason":"current REF lists 433.025/431.425 as digital DMR/C4FM/D-STAR; current D-STAR telemetry corroborates digital service"},
+    {"call":"F5ZTC","reason":"current REF status Test, not stable active service"},
+    {"call":"F5ZWR","reason":"current REF status Projet"},
+    {"group":"digital_only_or_unresolved_mixed_digital","reason":"do not blindly promote C4FM/DMR/D-STAR/SvxR-only infrastructure into the analog listening scope"}
   ],
   "dedup_notes": [
-    "432.5375 MHz appears in multiple Grand Est crossband infrastructures and must exist only once in the final RF memory set if those links are promoted.",
-    "No projected final memory count is frozen until second-pass evidence and RF deduplication are complete."
+    "432.5375 MHz is shared by F1ZEK, F5ZFT, F1ZGN and F1ZGP and contributes exactly one RF memory to the working set.",
+    "The validated pass2 working set is 78 memories only as a research accounting checkpoint; it is not a frozen release candidate.",
+    "No final candidate count is frozen until remaining local-source dossiers are explicitly resolved or deferred."
   ]
 }

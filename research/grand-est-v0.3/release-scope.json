@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.1",
-  "status": "radio_pass2_complete_backlog_open",
+  "schema_version": "1.2",
+  "status": "radio_scope_closed_candidate_not_built",
   "pack": "Grand Est",
   "target_version": "0.3",
   "initialized_on": "2026-08-22",
@@ -14,7 +14,8 @@
   "current_phase": {
     "radio_pass1_complete": true,
     "radio_pass2_complete": true,
-    "radio_pass3_or_explicit_scope_closure_required": true,
+    "radio_pass3_complete": true,
+    "radio_scope_closed": true,
     "aviation_revalidation_started": false,
     "deterministic_candidate_built": false,
     "review_checklist_created": false,
@@ -26,39 +27,52 @@
   "radio_scope": {
     "v02_regional_rx_memories": 16,
     "v02_repeaters": 8,
-    "first_pass_safe_carry_repeaters": 7,
-    "first_pass_mode_conflicts": 1,
-    "pass1_new_two_source_links": 4,
-    "pass2_newly_validated_links": 8,
-    "pass2_shared_rf_mhz": [432.5375],
-    "validated_regional_unique_rf_working_count": 35,
-    "validated_total_working_memory_count": 78,
-    "validated_total_working_memory_count_is_release_candidate": false,
-    "remaining_fresh_local_corroboration_dossiers": 8,
-    "final_regional_memory_count": null,
-    "final_total_memory_count": null
+    "safe_v02_repeaters_retained": 7,
+    "pass1_new_links": 4,
+    "pass2_new_links": 8,
+    "pass3_new_links": 3,
+    "validated_infrastructure_count": 22,
+    "shared_rf_mhz": [432.5375],
+    "final_regional_memory_count": 41,
+    "scope_is_non_exhaustive": true,
+    "scope_frozen_for_candidate_build": true
+  },
+  "working_total_before_candidate_rebuild": {
+    "inherited_non_regional_memory_count": 43,
+    "regional_memory_count": 41,
+    "total": 84,
+    "is_candidate": false,
+    "reason": "the deterministic full v0.2 reconstruction and candidate builder have not yet been run"
   },
   "resolved_policy_decisions": {
     "F1ZAX": "defer due current C4FM classification without current local analog proof",
-    "F5ZBD": "exclude while current local sources report off service / upgrade",
+    "F5ZBD": "exclude while off service / upgrade",
     "F1ZBU": "exclude from analog scope because current service is digital DMR/C4FM/D-STAR",
-    "F1ZCV": "zero-RF-delta attribution only because its pair duplicates F5ZAU"
+    "F1ZCV": "zero-RF-delta attribution only because its pair duplicates F5ZAU",
+    "F5ZRP": "defer for lack of fresh local/operator corroboration",
+    "F5ZTY": "defer for lack of fresh local/operator corroboration",
+    "F5ZUK": "defer due unresolved current service-state conflict",
+    "F1ZFN": "defer because exact current RF/mode/status unresolved",
+    "F1ZEF": "defer because exact current RF/mode/status unresolved"
   },
   "aviation_scope": {
     "base_memory_count": 19,
     "base_cycle": "AIRAC 08/26",
     "base_valid_through_inclusive": "2026-09-02",
-    "current_pass_delta": 0,
+    "current_radio_pass_delta": 0,
     "not_revalidated_in_sprint102_radio_passes": true,
     "airac09_required_for_any_revision_on_or_after": "2026-09-03"
   },
-  "completion_requirements_before_candidate": [
-    "resolve or explicitly defer every remaining fresh-local-source dossier",
-    "re-run RF deduplication after the final radio scope decision",
-    "confirm final analog-only scope and keep digital-only infrastructure excluded",
-    "freeze the exact regional unique-RF count only after scope closure",
-    "preserve public v0.2 bytes and metadata unchanged"
-  ],
+  "next_gate": {
+    "name": "deterministic_candidate_build",
+    "requirements": [
+      "reconstruct immutable Grand Est v0.2 deterministically and verify its expected SHA",
+      "replace the historical regional radio block with the frozen 41-RF radio scope",
+      "preserve RX-only semantics and RF deduplication",
+      "keep public v0.2 unchanged",
+      "do not mark publication ready until candidate, review and aviation gates are complete"
+    ]
+  },
   "publication_requirements": [
     "build deterministic v0.3 candidate from immutable v0.2 basis",
     "validate RX-only semantics and <=200 memories",

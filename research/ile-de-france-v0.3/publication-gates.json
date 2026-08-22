@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "status": "prepublication_zero_blockers_not_published",
+  "pack": "Île-de-France",
+  "version": "0.3",
+  "checked_on": "2026-08-21",
+  "blocker_count": 0,
+  "candidate_csv_sha256": "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125",
+  "checks": [
+    {"id":"scope_closed","pass":true},
+    {"id":"review_checklist_complete","pass":true},
+    {"id":"memory_count_57","pass":true},
+    {"id":"aviation_memory_count_18","pass":true},
+    {"id":"regional_radio_memory_count_15","pass":true},
+    {"id":"rx_only","pass":true},
+    {"id":"no_duplicate_rf","pass":true},
+    {"id":"no_artificial_fill","pass":true},
+    {"id":"historical_v0_2_immutable_and_sha_verified","pass":true},
+    {"id":"radio_source_conflicts_closed_for_scope","pass":true},
+    {"id":"aviation_airac08_revalidated_for_retained_subset","pass":true},
+    {"id":"notam_sup_scope_review_complete","pass":true},
+    {"id":"deterministic_candidate_rebuild_matches_frozen_csv","pass":true},
+    {"id":"airac09_boundary_recorded","pass":true}
+  ],
+  "warnings": [
+    "F1ZTC, F5ZDR, F5ZBK and F1ZDL are outside this release scope because current corroboration is insufficient; this does not assert permanent shutdown.",
+    "F5ZEQ remains outside this release scope while its operator reports maintenance/off-service state.",
+    "The aviation scope deliberately retains 18 verified memories and is not an exhaustive catalog of all useful Paris-area aviation frequencies.",
+    "SUP AIP 147/2026 oversized PDF was not visually inspected by the static tool; current SIA catalog/search material plus current distributed NOTAM activation evidence were used for the retained-subset decision.",
+    "Any publication or aviation revision on or after 2026-09-03 requires AIRAC 09/26 revalidation before public export."
+  ],
+  "public_mutation_performed": false
+}

@@ -100,13 +100,15 @@ class IleDeFranceV03ResearchTests(unittest.TestCase):
         self.assertTrue(aviation["gates"]["publication_allowed_before_airac09_boundary"])
         self.assertEqual(aviation["freshness_boundary"]["airac09_revalidation_required_on_or_after"], "2026-09-03")
 
-    def test_release_scope_advances_to_prepublication_candidate(self):
+    def test_release_scope_is_frozen_prepublication_not_public(self):
         scope = load_json("release-scope.json")
+        self.assertEqual(scope["status"], "prepublication_ready_not_published")
         self.assertEqual(scope["published_base"]["version"], "0.2")
         self.assertEqual(scope["published_base"]["memory_count"], 58)
         self.assertTrue(scope["published_base"]["immutable"])
         self.assertEqual(scope["research_evidence"]["candidate_memory_count"], 57)
         self.assertEqual(scope["research_evidence"]["candidate_aviation_memory_count"], 18)
+        self.assertEqual(scope["research_evidence"]["candidate_regional_radio_memory_count"], 15)
         self.assertEqual(
             scope["research_evidence"]["latest_aviation_pass"],
             "research/ile-de-france-v0.3/aviation-validation-pass4-2026-08-21.json",
@@ -114,11 +116,13 @@ class IleDeFranceV03ResearchTests(unittest.TestCase):
         for key in [
             "radio_source_conflicts_closed", "radio_memory_accounting_final", "aviation_revalidation_complete",
             "deterministic_candidate_built", "rx_only_validation_passed", "rf_deduplication_passed",
-            "memory_limit_passed",
+            "memory_limit_passed", "review_checklist_complete", "publication_gates_zero_blockers",
+            "publication_record_frozen",
         ]:
             self.assertTrue(scope["publication_gates"][key])
-        self.assertFalse(scope["publication_gates"]["publication_record_frozen"])
-        self.assertFalse(scope["publication_ready"])
+        self.assertTrue(scope["publication_ready"])
+        self.assertFalse(scope["published"])
+        self.assertFalse(scope["public_mutation_performed"])
 
 
 if __name__ == "__main__":

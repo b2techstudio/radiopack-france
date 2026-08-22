@@ -26,55 +26,33 @@ L'état machine officiel est `research/project-resume-state.json`. Résumé cour
 
 Couverture : **13/13 régions administratives métropolitaines**. Annecy–Alpes–Léman est un pack territorial supplémentaire. Les cinq régions d'outre-mer ne sont pas encore couvertes.
 
-## Sprint 101 — Île-de-France v0.3, release candidate interne
+## Sprint 101 — Île-de-France v0.3, prépublication prête
 
-Le Sprint **101 / 0.21.90** a construit un candidat déterministe **57 RX** à partir de la **v0.2 publique immuable de 58 RX**. Aucun CSV public v0.3, aucun registre public ni aucun SHA de publication n'est encore modifié.
+Le candidat déterministe **57 RX / 18 aviation / 15 radio régionales** est construit, vérifié et maintenant **prêt à publier**, mais il n'est pas encore public. La v0.2 de **58 RX** reste l'unique version publique et reste immuable.
 
-### Composition du candidat
+SHA-256 candidat : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
 
-- **24 mémoires nationales** reprises depuis les datasets source ;
-- **18 mémoires aviation** conservées sans expansion ;
-- **15 mémoires radio régionales** ;
-- total : **57 RX** ;
-- SHA-256 candidat : `e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125`.
+Le builder reconstruit la v0.2, vérifie son SHA public figé `dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d`, puis reconstruit le candidat v0.3 et exige une correspondance byte-à-byte avec le CSV interne gelé.
 
-Le builder `tools/build_idf_v03_candidate.py` reconstruit d'abord la v0.2 et exige le SHA public figé `dbcadbcef403d7272dc374a7010def7276b06048a8e863277fcdb3558a8f624d` avant de construire la v0.3. Le CSV candidat et son manifeste sont ensuite contrôlés byte-à-byte par CI.
+### Radioamateur
 
-### Radioamateur — finalisé pour ce scope
+Scope final : **15 RF régionales uniques**. F5ZNG, F5ZNN, F5ZMH, F1ZHK, F6ZEE, F5ZMR, F5ZSY et l'extension crossband F5ZNN sont retenus. F5ZEQ reste non reconduit pendant sa maintenance ; F1ZTC, F5ZDR, F5ZBK et F1ZDL restent hors scope faute de preuve actuelle suffisante, sans être déclarés définitivement inactifs.
 
-- **F5ZNG, F5ZNN, F5ZMH et F1ZHK** sont conservés ;
-- **F6ZEE Pontault-Combault** reprend 145.100 / 145.700 MHz sous l'attribution courante ;
-- **F5ZMR Provins** ajoute 431.525 / 439.125 MHz ;
-- **F5ZSY Issy-les-Moulineaux** ajoute 145.325 / 430.325 MHz ;
-- le crossband **F5ZNN** ajoute uniquement **430.650 MHz** après déduplication ;
-- **F5ZEQ** reste non reconduit tant que son opérateur le signale en maintenance ;
-- **F1ZTC, F5ZDR, F5ZBK et F1ZDL** restent hors de ce candidat faute de preuve opérationnelle actuelle suffisante, sans affirmation de fermeture définitive.
+### Aviation
 
-Pour ce scope : **conflits radio fermés = oui** et **comptage radio final = oui**.
+Le candidat conserve **18 mémoires, delta 0**, sans expansion. LFPG, LFPO et LFPB ont été revalidés pour ce sous-ensemble sur la fenêtre AIRAC 08/26 avec les éléments SIA/NOTAM/SUP documentés. La validation est valable jusqu'au **2 septembre 2026 inclus** ; toute publication ou nouvelle validation à partir du **3 septembre 2026** exige AIRAC 09/26.
 
-### Aviation — finalisée pour AIRAC 08/26 et le sous-ensemble retenu
+### Prépublication
 
-Le candidat conserve exactement les **18 mémoires aviation** de la v0.2, delta 0, sans prétendre couvrir toutes les fréquences aviation disponibles.
+- checklist : **12/12** ;
+- publication gates : **0 blocker** ;
+- publication record : **figé** en statut `prepublication_frozen_not_published` ;
+- `publication_ready = true` ;
+- `published = false` ;
+- CSV public v0.3 : **non créé** ;
+- registre public : **non modifié**.
 
-- **LFPG / Paris Charles-de-Gaulle** : sous-ensemble retenu revalidé directement sur le SIA AIRAC 08/26 ;
-- **LFPO / Paris-Orly** : catalogue COM SIA courant, matériel AD 2.18 officiel, SUP AIP 085/2026 et 147/2026 et revue NOTAM de la fenêtre courante utilisés pour fermer le scope retenu ;
-- **LFPB / Paris-Le Bourget** : le NOTAM courant A2706/26 confirme les valeurs ATIS/GND/TWR/DEL retenues et le matériel SIA 2026 confirme INFO 123.835 MHz ;
-- aucune fréquence aviation supplémentaire n'est promue dans cette v0.3.
-
-Le gate aviation est fermé pour une publication effectuée au plus tard le **2 septembre 2026 inclus**. Toute publication ou nouvelle validation à partir du **3 septembre 2026** exige une revalidation AIRAC 09/26.
-
-### État prépublication
-
-- `release_candidate_memory_count = 57` ;
-- radio finalisée : **oui** ;
-- aviation revalidée pour le scope AIRAC 08/26 : **oui** ;
-- candidat déterministe construit : **oui** ;
-- RX-only validé : **oui** ;
-- déduplication RF validée : **oui** ;
-- limite 200 mémoires validée : **oui** ;
-- publication record gelé : **non** ;
-- `publication_ready = false` ;
-- public v0.2 toujours **58 RX immuable**.
+La prochaine action est uniquement la mutation publique atomique : produire/exposer un CSV public strictement identique au candidat, basculer le registre/site vers v0.3, vérifier le SHA du build public, puis marquer le record `published_immutable`.
 
 Références : `research/ile-de-france-v0.3/` et `research/sprint-101-summary.md`.
 
@@ -118,9 +96,7 @@ Le candidat reste à **142 RX, delta 0**. R3/F1ZBX et F5ZHA exigent du terrain ;
 
 ### Île-de-France v0.3
 
-Candidat déterministe **57 RX / 18 aviation / 15 radio régionales** construit et validé. La prépublication reste ouverte : gel du publication record, revue finale et vérification que le futur CSV public est strictement identique au candidat figé.
-
-Aucune mutation publique v0.3 n'est encore effectuée.
+Prépublication prête à **57 RX / 18 aviation / 15 radio régionales**, checklist 12/12, zéro blocker et publication record figé. **Aucune mutation publique v0.3 n'est encore effectuée.**
 
 ### Bretagne v0.3
 

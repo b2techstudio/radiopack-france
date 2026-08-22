@@ -98,7 +98,7 @@ const legacyPublicPacks: PublicPack[] = [
 const metropolitanMetadata = [
   { id: "hauts-de-france", name: "Hauts-de-France", memoryCount: 144, marine: true, aviation: 14, version: "v0.2" },
   { id: "ile-de-france", name: "Île-de-France", memoryCount: 57, marine: false, aviation: 18, version: "v0.3" },
-  { id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19, version: "v0.2" },
+  { id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" },
   { id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 51, marine: false, aviation: 7, version: "v0.3" },
   { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 130, marine: true, aviation: 10, version: "v0.2" },
   { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 54, marine: false, aviation: 14, version: "v0.3" },
@@ -111,7 +111,7 @@ const metropolitanMetadata = [
 
 const metropolitanPublicPacks: PublicPack[] = metropolitanMetadata.map((item) => {
   const filename = `radiopack-france-${item.id}-${item.version}.csv`;
-  const expandedAnalogScope = item.id === "bourgogne-franche-comte" || item.id === "centre-val-de-loire" || item.id === "ile-de-france";
+  const expandedAnalogScope = item.id === "bourgogne-franche-comte" || item.id === "centre-val-de-loire" || item.id === "ile-de-france" || item.id === "grand-est";
   const radioScope = expandedAnalogScope
     ? "relais FM 2 m/70 cm et transpondeurs crossband paired RX"
     : "relais FM 2 m paired RX";

@@ -38,22 +38,36 @@ assert stations["F5ZHA_LAVAL"]["local_operator_search_failure_is_negative_eviden
 assert stations["F1ZOV_EQUEURDREVILLE"]["state"] == "operator_maintenance"
 assert stations["F6ZES_SOURDEVAL"]["must_not_guess_frequency"] is True
 
-# The official resume is intentionally compact after Sprint 100. Detailed historical
-# evidence remains in the immutable research files above rather than being duplicated
-# field-by-field into project-resume-state.json.
+# Historical v0.4 evidence remains authoritative for that release. The current
+# public pointer may legitimately advance to v0.5 without rewriting this data.
 resume = json.loads(RESUME.read_text(encoding="utf-8"))
 assert resume["current_sprint"] >= 100
-assert resume["public_packs"]["normandie"]["version"] == "0.4"
-assert resume["public_packs"]["normandie"]["memory_count"] == 142
+public_normandie = resume["public_packs"]["normandie"]
+assert public_normandie["immutable"] is True
+if public_normandie["version"] == "0.4":
+    assert public_normandie["memory_count"] == 142
+else:
+    assert public_normandie["version"] == "0.5"
+    assert public_normandie["memory_count"] == 146
+    assert public_normandie["previous_immutable_version"] == "0.4"
+    assert public_normandie["previous_memory_count"] == 142
+
+# Keep the historical pre-theory refresh as a checkpoint instead of treating it
+# as the current policy after Sprint 112/113.
 normandie = resume["normandie_v0_5_latest_refresh"]
 assert normandie["candidate_memory_count"] == 142
 assert normandie["candidate_memory_delta"] == 0
 assert normandie["known_potential_ceiling_excluding_f6zes"] == 147
 assert set(normandie["field_required"]) == {"R3_F1ZBX", "F5ZHA"}
 assert set(normandie["source_watch"]) == {"F1ZOV", "F6ZES"}
-assert resume["resume_rules"]["published_versions_are_immutable"] is True
-assert resume["resume_rules"]["verified_distinct_pair_uses_two_rx_memories"] is True
-assert resume["resume_rules"]["unresolved_frequency_must_not_be_guessed"] is True
+
+rules = resume["resume_rules"]
+assert rules["published_versions_are_immutable"] is True
+assert rules["verified_distinct_split_pair_uses_two_rx_memories"] is True
+assert rules["unresolved_frequency_or_mode_must_not_be_guessed"] is True
+if resume["current_sprint"] >= 113:
+    assert rules["theoretical_coverage_may_close_coverage_gate_when_source_and_operational_status_are_documented"] is True
+    assert rules["field_listening_is_optional_quality_feedback_for_coverage"] is True
 
 recorder = load_module("r3_recorder", RECORDER)
 reporter = load_module("gate_reporter", REPORTER)
@@ -124,6 +138,6 @@ with tempfile.TemporaryDirectory(prefix="radiopack-v04-field-tools-") as tmp:
     assert "Toutes les portes franchies : non" in md_path.read_text(encoding="utf-8")
 
 print(
-    "Tests Normandie v0.4 field tools: source evidence stays authoritative, compact resume keeps current gates, "
+    "Tests Normandie v0.4 field tools: historical source evidence remains authoritative, current resume may advance to v0.5, "
     "R3 recorder/report remain RX-only and non-public, OK"
 )

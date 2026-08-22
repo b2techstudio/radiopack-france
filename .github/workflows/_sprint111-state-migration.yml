@@ -1,0 +1,39 @@
+name: Temporary Sprint 111 State Migration
+
+on:
+  push:
+    branches:
+      - chore/sprint111-state-sync
+    paths:
+      - "tools/_migrate_sprint111_state.py"
+      - ".github/workflows/_sprint111-state-migration.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Apply structured state migration
+        run: python tools/_migrate_sprint111_state.py
+
+      - name: Commit migrated state and remove temporary helpers
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/project-resume-state.json README.md PROJECT_STATUS.md
+          git rm tools/_migrate_sprint111_state.py .github/workflows/_sprint111-state-migration.yml
+          git commit -m "Sprint 111: synchronize canonical project state"
+          git push origin HEAD:chore/sprint111-state-sync

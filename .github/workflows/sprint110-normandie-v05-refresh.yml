@@ -1,0 +1,68 @@
+name: Sprint 110 Normandie v0.5 Refresh
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "research/normandie-v0.5/sprint110-source-field-refresh.json"
+      - "research/normandie-v0.5/sprint90-source-refresh.json"
+      - "research/normandie-v0.5/current-blocker-revalidation.json"
+      - "research/normandie-v0.5/field-validation-kit.json"
+      - "research/normandie-v0.5/field-evaluation-policy.json"
+      - "research/normandie-v0.4/publication-record.json"
+      - "tests/test_sprint84_normandie_v05_field_validation_kit.py"
+      - "tests/test_sprint85_normandie_v05_field_evaluator.py"
+      - "tests/test_sprint90_normandie_v05_source_refresh.py"
+      - "tests/test_sprint110_normandie_v05_refresh.py"
+      - ".github/workflows/sprint110-normandie-v05-refresh.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/normandie-v0.5/sprint110-source-field-refresh.json"
+      - "research/normandie-v0.5/sprint90-source-refresh.json"
+      - "research/normandie-v0.5/current-blocker-revalidation.json"
+      - "research/normandie-v0.5/field-validation-kit.json"
+      - "research/normandie-v0.5/field-evaluation-policy.json"
+      - "research/normandie-v0.4/publication-record.json"
+      - "tests/test_sprint84_normandie_v05_field_validation_kit.py"
+      - "tests/test_sprint85_normandie_v05_field_evaluator.py"
+      - "tests/test_sprint90_normandie_v05_source_refresh.py"
+      - "tests/test_sprint110_normandie_v05_refresh.py"
+      - ".github/workflows/sprint110-normandie-v05-refresh.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sprint110-normandie-v05-refresh-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    name: Normandie v0.5 source and field-gate invariants
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Verify historical Sprint 84 field kit
+        run: python tests/test_sprint84_normandie_v05_field_validation_kit.py
+
+      - name: Verify historical Sprint 85 evaluator
+        run: python tests/test_sprint85_normandie_v05_field_evaluator.py
+
+      - name: Verify historical Sprint 90 source refresh
+        run: python tests/test_sprint90_normandie_v05_source_refresh.py
+
+      - name: Verify Sprint 110 source and field handoff
+        run: python tests/test_sprint110_normandie_v05_refresh.py

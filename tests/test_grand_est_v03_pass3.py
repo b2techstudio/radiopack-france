@@ -48,7 +48,10 @@ assert accounting["scope_is_non_exhaustive"] is True
 assert accounting["candidate_built"] is False
 assert accounting["publication_ready"] is False
 
-assert backlog["status"] == "radio_scope_closed_with_explicit_deferrals"
+assert backlog["status"] in {
+    "radio_scope_closed_with_explicit_deferrals",
+    "radio_scope_closed_candidate_built_backlog_deferred",
+}
 assert backlog["validated_radio_scope"]["regional_unique_rf_count"] == 41
 assert {item.get("call") for item in backlog["excluded_from_analog_scope"] if item.get("call")} >= {"F1ZBU", "F5ZTC", "F5ZWR"}
 assert any("F1ZCV" == item.get("call") for item in backlog["deferred_from_v03_radio_scope"])

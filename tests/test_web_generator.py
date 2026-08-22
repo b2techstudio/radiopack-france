@@ -12,7 +12,7 @@ PACK_REGISTRY = ROOT / "website/src/lib/packRegistry.ts"
 PACK_SHORTCUT_SCRIPT = ROOT / "website/src/scripts/generator-pack-shortcuts.js"
 STANDARD_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2.csv.ts"
 NO_AIR_ROUTE = ROOT / "website/src/pages/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.2-sans-aviation.csv.ts"
-NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.4.csv"
+NORMANDIE = ROOT / "website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv"
 BRETAGNE = ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.2.csv"
 
 for path in [
@@ -56,7 +56,7 @@ for expected in [
     "nombre de mémoires présentes dans le CSV publié",
     "77 mémoires",
     "60 sans aviation",
-    "142 mémoires",
+    "146 mémoires",
     "151 mémoires",
     'data-pack-shortcut="annecy-alpes-leman"',
     'data-pack-shortcut="normandie"',
@@ -112,11 +112,11 @@ for expected in [
     'id: "bretagne"',
     'memoryCount: 77',
     'memoryCount: 60',
-    'memoryCount: 142',
+    'memoryCount: 146',
     'memoryCount: 151',
     '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4.csv',
     '/downloads/annecy-alpes-leman/radiopack-france-annecy-alpes-leman-v0.4-sans-aviation.csv',
-    '/downloads/normandie/radiopack-france-normandie-v0.4.csv',
+    '/downloads/normandie/radiopack-france-normandie-v0.5.csv',
     '/downloads/bretagne/radiopack-france-bretagne-v0.2.csv',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
 ]:
@@ -191,6 +191,7 @@ assert ui_contract["download_strategy"] == "direct_validated_route"
 assert ui_contract["unsupported_options_hidden"] is True
 assert options["pack_selection"]["enabled"] is True
 assert {pack["id"] for pack in options["pack_selection"]["packs"]} == {"annecy-alpes-leman", "normandie", "bretagne"}
+assert next(pack for pack in options["pack_selection"]["packs"] if pack["id"] == "normandie")["default_memory_count"] == 146
 assert next(pack for pack in options["pack_selection"]["packs"] if pack["id"] == "bretagne")["default_memory_count"] == 151
 assert next(pack for pack in options["pack_selection"]["packs"] if pack["id"] == "bretagne")["aviation_included"] is True
 assert options["options"]["include_aviation"]["scope"] == ["annecy-alpes-leman"]

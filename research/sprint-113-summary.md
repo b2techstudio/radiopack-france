@@ -39,7 +39,8 @@ Les outils Sprint 84/85 ne sont pas supprimés : ils deviennent des **outils his
 
 - registre : Normandie v0.5 / 146 ;
 - métadonnées région : v0.5 / 146 ;
-- page région : mention explicite de la couverture théorique et de ses limites ;
+- page région dynamique et page Normandie dédiée : v0.5 / 146 avec mention explicite théorie/limites ;
+- raccourci du générateur : **146 mémoires** et description de la couverture théorique ;
 - CSV public : `website/public/downloads/normandie/radiopack-france-normandie-v0.5.csv`.
 
 ## Références

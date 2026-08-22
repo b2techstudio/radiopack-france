@@ -25,25 +25,28 @@ const publicVariant = publicPack?.variants.find((variant) => variant.id === publ
 const isBfcV03 = pack.id === "bourgogne-franche-comte" && publicPack?.version === "v0.3";
 const isCentreV03 = pack.id === "centre-val-de-loire" && publicPack?.version === "v0.3";
 const isIdfV03 = pack.id === "ile-de-france" && publicPack?.version === "v0.3";
-const isAdvancedV03 = isBfcV03 || isCentreV03 || isIdfV03;
+const isGrandEstV03 = pack.id === "grand-est" && publicPack?.version === "v0.3";
+const isAdvancedV03 = isBfcV03 || isCentreV03 || isIdfV03 || isGrandEstV03;
 const version = publicPack?.version ?? pack.version;
 const placed = isBfcV03
   ? buildBfcV03Pack()
   : isCentreV03
     ? buildCentreV03Pack()
-    : isIdfV03
+    : isIdfV03 || isGrandEstV03
       ? []
       : buildMetropolitanPack(pack.id, pack.version);
 const memories: ChannelMemory[] = isIdfV03
   ? loadPublicPackMemories("downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv")
-  : placed.map(({ location, channel }) => ({
-      location,
-      name: channel.name,
-      frequency: channel.frequency_mhz.toFixed(6),
-      mode: channel.mode,
-      step: channel.step_khz.toFixed(2),
-      comment: channel.comment,
-    }));
+  : isGrandEstV03
+    ? loadPublicPackMemories("downloads/grand-est/radiopack-france-grand-est-v0.3.csv")
+    : placed.map(({ location, channel }) => ({
+        location,
+        name: channel.name,
+        frequency: channel.frequency_mhz.toFixed(6),
+        mode: channel.mode,
+        step: channel.step_khz.toFixed(2),
+        comment: channel.comment,
+      }));
 const memoryCount = memories.length;
 if (publicVariant && publicVariant.memoryCount !== memoryCount) {
   throw new Error(`${pack.id}: registry=${publicVariant.memoryCount}, built=${memoryCount}`);
@@ -52,15 +55,15 @@ const channelGroups = buildStandardChannelGroups(memories);
 const filename = publicVariant?.filename ?? pack.filename;
 const downloadUrl = publicVariant?.downloadUrl ?? `/downloads/${pack.id}/${filename}`;
 const aviationCount = memories.filter((memory) => memory.mode === "AM").length;
-const selectedInfrastructureCount = isBfcV03 ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV03 ? 7 : pack.repeaters.length;
-const regionalChannelCount = isBfcV03 ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV03 ? 15 : pack.repeaters.length * 2;
+const selectedInfrastructureCount = isBfcV03 ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV03 ? 7 : isGrandEstV03 ? 22 : pack.repeaters.length;
+const regionalChannelCount = isBfcV03 ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV03 ? 15 : isGrandEstV03 ? 41 : pack.repeaters.length * 2;
 const marineCount = pack.includeMarine ? 90 : 0;
 const radioScopeLabel = isAdvancedV03
   ? "relais FM 2 m/70 cm et transpondeurs crossband analogiques"
   : "relais FM 2 m";
 const radioRangeLabel = isBfcV03 ? "70+ / 80+" : isCentreV03 ? "70+ / 82+" : "70+";
 const aviationRangeLabel = isBfcV03 ? "40+ / 90+" : "40+";
-const sourceReviewDate = isCentreV03 ? "2026-08-20" : isIdfV03 ? "2026-08-21" : metropolitanSourceNotes.checkedOn;
+const sourceReviewDate = isGrandEstV03 ? "2026-08-22" : isCentreV03 ? "2026-08-20" : isIdfV03 ? "2026-08-21" : metropolitanSourceNotes.checkedOn;
 ---
 <BaseLayout
   title={`Pack ${pack.name} ${version} - RadioPack France`}

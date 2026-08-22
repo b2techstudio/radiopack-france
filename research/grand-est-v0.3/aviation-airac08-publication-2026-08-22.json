@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "status": "current_cycle_inherited_subset_approved_zero_delta",
+  "pack": "Grand Est",
+  "target_version": "0.3",
+  "reviewed_on": "2026-08-22",
+  "cycle": "AIRAC 08/26",
+  "effective_from": "2026-08-06",
+  "valid_through_inclusive": "2026-09-02",
+  "sia_current_cycle_confirmed_on": "2026-08-22",
+  "sia_sources": [
+    "https://www.sia.aviation-civile.gouv.fr/zip-eaip-complet-airac-08-26.html",
+    "https://www.sia.aviation-civile.gouv.fr/produits-numeriques-en-libre-disposition/les-bases-de-donnees-sia.html"
+  ],
+  "publication_decision": {
+    "base_version": "0.2",
+    "base_reviewed_on": "2026-08-19",
+    "memory_count_before": 19,
+    "memory_count_after": 19,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "frequency_delta": 0,
+    "retain_exact_inherited_subset": true,
+    "new_aviation_claims_introduced": false
+  },
+  "method": {
+    "current_cycle_validity_reconfirmed": true,
+    "inherited_v0_2_subset_reused_unchanged": true,
+    "new_field_by_field_revalidation_claimed": false,
+    "reason": "The nineteen aviation memories were already reviewed and published in Grand Est v0.2 on 2026-08-19 under the same AIRAC 08/26 cycle. Sprint 102 introduces no aviation RF or metadata change; publication retains that exact subset while the SIA still identifies AIRAC 08/26 as current."
+  },
+  "memories": [
+    {"name":"AIR-EMERG","frequency_mhz":121.500,"icao":null},
+    {"name":"SXB-FIS1","frequency_mhz":119.580,"icao":"LFST"},
+    {"name":"SXB-FIS2","frequency_mhz":132.215,"icao":"LFST"},
+    {"name":"SXB-FIS3","frequency_mhz":136.135,"icao":"LFST"},
+    {"name":"SXB-APP","frequency_mhz":118.185,"icao":"LFST"},
+    {"name":"MLH-FIS1","frequency_mhz":129.250,"icao":"LFSB"},
+    {"name":"MLH-FIS2","frequency_mhz":130.900,"icao":"LFSB"},
+    {"name":"MLH-FIS3","frequency_mhz":134.680,"icao":"LFSB"},
+    {"name":"MLH-APP1","frequency_mhz":125.160,"icao":"LFSB"},
+    {"name":"MLH-APP2","frequency_mhz":127.285,"icao":"LFSB"},
+    {"name":"MLH-DEL","frequency_mhz":121.955,"icao":"LFSB"},
+    {"name":"MLH-GND","frequency_mhz":121.605,"icao":"LFSB"},
+    {"name":"MLH-TWR","frequency_mhz":118.300,"icao":"LFSB"},
+    {"name":"MLH-ATIS","frequency_mhz":127.880,"icao":"LFSB"},
+    {"name":"ETZ-APP","frequency_mhz":119.125,"icao":"LFJL"},
+    {"name":"ETZ-GND","frequency_mhz":121.705,"icao":"LFJL"},
+    {"name":"ETZ-TWR","frequency_mhz":122.075,"icao":"LFJL"},
+    {"name":"ETZ-ATIS","frequency_mhz":136.580,"icao":"LFJL"},
+    {"name":"ENC-INFO","frequency_mhz":119.605,"icao":"LFSN"}
+  ],
+  "airac09_revalidation_required_on_or_after": "2026-09-03",
+  "publication_gate_complete": true
+}

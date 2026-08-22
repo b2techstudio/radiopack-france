@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.4",
+  "status": "published_immutable",
+  "pack": "Grand Est",
+  "target_version": "0.3",
+  "initialized_on": "2026-08-22",
+  "updated_on": "2026-08-22",
+  "published_on": "2026-08-22",
+  "public_base": {
+    "version": "0.2",
+    "memory_count": 59,
+    "public_csv_sha256": "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1",
+    "immutable": true
+  },
+  "current_phase": {
+    "radio_pass1_complete": true,
+    "radio_pass2_complete": true,
+    "radio_pass3_complete": true,
+    "radio_scope_closed": true,
+    "aviation_publication_gate_complete": true,
+    "deterministic_candidate_built": true,
+    "review_checklist_complete": true,
+    "publication_gates_zero_blockers": true,
+    "publication_ready": true,
+    "published": true,
+    "public_mutation_performed": true,
+    "published_version_is_immutable": true
+  },
+  "radio_scope": {
+    "v02_regional_rx_memories": 16,
+    "v02_repeaters": 8,
+    "safe_v02_repeaters_retained": 7,
+    "pass1_new_links": 4,
+    "pass2_new_links": 8,
+    "pass3_new_links": 3,
+    "validated_infrastructure_count": 22,
+    "shared_rf_mhz": [432.5375],
+    "final_regional_memory_count": 41,
+    "scope_is_non_exhaustive": true,
+    "scope_frozen": true
+  },
+  "candidate": {
+    "memory_count": 84,
+    "aviation_memory_count": 19,
+    "regional_radio_memory_count": 41,
+    "sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+    "csv": "research/grand-est-v0.3/generated/release-candidate/radiopack-france-grand-est-v0.3-candidate.csv",
+    "manifest": "research/grand-est-v0.3/generated/release-candidate/candidate-manifest.json",
+    "builder": "tools/build_grand_est_v03_candidate.py",
+    "approved_as_publication_basis": true
+  },
+  "public": {
+    "memory_count": 84,
+    "aviation_memory_count": 19,
+    "regional_radio_memory_count": 41,
+    "csv": "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv",
+    "route": "/downloads/grand-est/radiopack-france-grand-est-v0.3.csv",
+    "sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+    "byte_identical_to_candidate": true
+  },
+  "resolved_policy_decisions": {
+    "F1ZAX": "defer due current C4FM classification without current local analog proof",
+    "F5ZBD": "exclude while off service / upgrade",
+    "F1ZBU": "exclude from analog scope because current service is digital DMR/C4FM/D-STAR",
+    "F1ZCV": "zero-RF-delta attribution only because its pair duplicates F5ZAU",
+    "F5ZRP": "defer for lack of fresh local/operator corroboration",
+    "F5ZTY": "defer for lack of fresh local/operator corroboration",
+    "F5ZUK": "defer due unresolved current service-state conflict",
+    "F1ZFN": "defer because exact current RF/mode/status unresolved",
+    "F1ZEF": "defer because exact current RF/mode/status unresolved"
+  },
+  "aviation_scope": {
+    "memory_count": 19,
+    "memory_delta": 0,
+    "cycle": "AIRAC 08/26",
+    "valid_from": "2026-08-06",
+    "valid_through_inclusive": "2026-09-02",
+    "current_cycle_confirmed_on": "2026-08-22",
+    "inherited_unchanged_from_v0_2": true,
+    "new_field_by_field_revalidation_claimed": false,
+    "publication_gate_complete": true,
+    "evidence": "research/grand-est-v0.3/aviation-airac08-publication-2026-08-22.json",
+    "airac09_revalidation_required_on_or_after": "2026-09-03"
+  },
+  "publication": {
+    "review_checklist": "research/grand-est-v0.3/review-checklist.json",
+    "publication_gates": "research/grand-est-v0.3/publication-gates.json",
+    "publication_record": "research/grand-est-v0.3/publication-record.json",
+    "blocker_count": 0,
+    "published": true,
+    "immutable": true
+  },
+  "rules": {
+    "rx_only": true,
+    "chirp_duplex": "off",
+    "chirp_offset": "0.000000",
+    "paired_rx_for_distinct_verified_pairs": true,
+    "same_rf_frequency_deduplicated": true,
+    "maximum_memories": 200,
+    "no_artificial_fill": true,
+    "unverified_frequency_or_mode_not_promoted": true,
+    "private_ppdr_operational_data_excluded": true,
+    "historical_v0_2_remains_immutable": true
+  }
+}

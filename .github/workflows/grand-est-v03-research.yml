@@ -1,0 +1,81 @@
+name: Grand Est v0.3 Research
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "research/grand-est-v0.3/**"
+      - "research/grand-est-v0.2/**"
+      - "tools/build_grand_est_v03_candidate.py"
+      - "tests/test_grand_est_v03_initialization.py"
+      - "tests/test_grand_est_v03_pass2.py"
+      - "tests/test_grand_est_v03_pass3.py"
+      - "tests/test_grand_est_v03_candidate.py"
+      - "tests/test_grand_est_v03_publication.py"
+      - "website/public/downloads/grand-est/**"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/pages/regions/[slug].astro"
+      - ".github/workflows/grand-est-v03-research.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "research/grand-est-v0.3/**"
+      - "research/grand-est-v0.2/**"
+      - "tools/build_grand_est_v03_candidate.py"
+      - "tests/test_grand_est_v03_initialization.py"
+      - "tests/test_grand_est_v03_pass2.py"
+      - "tests/test_grand_est_v03_pass3.py"
+      - "tests/test_grand_est_v03_candidate.py"
+      - "tests/test_grand_est_v03_publication.py"
+      - "website/public/downloads/grand-est/**"
+      - "website/src/lib/packRegistry.ts"
+      - "website/src/pages/regions/[slug].astro"
+      - ".github/workflows/grand-est-v03-research.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: grand-est-v03-research-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  research:
+    name: Grand Est v0.3 research and publication guards
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Test Grand Est v0.3 initialization history
+        run: python tests/test_grand_est_v03_initialization.py
+      - name: Test Grand Est v0.3 radio pass 2 history
+        run: python tests/test_grand_est_v03_pass2.py
+      - name: Test Grand Est v0.3 radio scope closure history
+        run: python tests/test_grand_est_v03_pass3.py
+      - name: Verify deterministic Grand Est v0.3 candidate
+        run: python tools/build_grand_est_v03_candidate.py --check
+      - name: Test Grand Est v0.3 candidate/public identity
+        run: python tests/test_grand_est_v03_candidate.py
+      - name: Test Grand Est v0.3 publication metadata
+        run: python tests/test_grand_est_v03_publication.py
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Install website dependencies
+        run: cd website && npm ci
+      - name: Build Astro website
+        run: cd website && npm run build
+      - name: Recheck Grand Est v0.3 after Astro build
+        run: python tests/test_grand_est_v03_publication.py

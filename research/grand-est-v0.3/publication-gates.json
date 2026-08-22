@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "status": "prepublication_zero_blockers",
+  "pack": "Grand Est",
+  "version": "0.3",
+  "checked_on": "2026-08-22",
+  "blocker_count": 0,
+  "candidate_memory_count": 84,
+  "candidate_aviation_memory_count": 19,
+  "candidate_regional_radio_memory_count": 41,
+  "candidate_sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+  "checks": [
+    {"id":"radio_scope_closed","pass":true},
+    {"id":"review_checklist_12_of_12","pass":true},
+    {"id":"memory_count_84","pass":true},
+    {"id":"rx_only","pass":true},
+    {"id":"no_duplicate_rf","pass":true},
+    {"id":"no_artificial_fill","pass":true},
+    {"id":"historical_v0_2_immutable","pass":true},
+    {"id":"candidate_base_sha_reconstruction","pass":true},
+    {"id":"aviation_airac08_current_cycle_confirmed","pass":true},
+    {"id":"aviation_delta_zero","pass":true},
+    {"id":"candidate_sha_frozen","pass":true}
+  ],
+  "warnings": [
+    "The Grand Est v0.3 radio scope is deliberately non-exhaustive; unresolved or insufficiently corroborated infrastructure remains deferred.",
+    "The nineteen aviation memories are inherited unchanged from published v0.2 in the same AIRAC 08/26 cycle; no new field-by-field aviation revalidation is claimed.",
+    "Any later aviation revision on or after 2026-09-03 requires AIRAC 09/26 revalidation.",
+    "RadioPack France is receive-only and is not an operational aviation information source."
+  ],
+  "public_release_allowed": true
+}

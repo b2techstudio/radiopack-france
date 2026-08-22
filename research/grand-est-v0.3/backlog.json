@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.3",
+  "status": "radio_scope_closed_candidate_built_backlog_deferred",
+  "pack": "Grand Est",
+  "target_version": "0.3",
+  "updated_on": "2026-08-22",
+  "validated_radio_scope": {
+    "pass1_safe_carry": ["F5ZAU", "F1ZDG", "F5ZDL", "F1ZAE", "F5ZEC", "F5ZCQ", "F1ZPJ"],
+    "pass1_new": ["F5ZUD", "F1ZUV", "F5ZAW", "F5ZYS"],
+    "pass2_new": ["F1ZEK", "F1ZXX", "F5ZFT", "F1ZGN", "F1ZGP", "F5ZDJ", "F1ZDA", "F1ZBV"],
+    "pass3_new": ["F1ZFL", "F5ZCC", "F1ZJS"],
+    "regional_unique_rf_count": 41
+  },
+  "candidate": {
+    "memory_count": 84,
+    "regional_radio_memory_count": 41,
+    "aviation_memory_count": 19,
+    "sha256": "45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720",
+    "public_export_allowed": false
+  },
+  "deferred_from_v03_radio_scope": [
+    {"call":"F1ZAX","reason":"current REF classifies 145.7625/145.1625 as digital C4FM; no current local proof of analog FM voice found"},
+    {"call":"F5ZBD","rf_mhz":[430.175,431.775],"reason":"current local sources report off service / temporary upgrade"},
+    {"call":"F1ZCV","rf_mhz":[145.6125,145.0125],"reason":"same RF pair already exists through F5ZAU, so attribution has zero RF delta; no current local corroboration found"},
+    {"call":"F5ZRP","rf_mhz":[430.325,431.925],"reason":"current national directory only; fresh local/operator corroboration not found"},
+    {"call":"F5ZTY","rf_mhz":[431.95,430.35],"reason":"national and secondary directories agree but fresh local/operator corroboration not found"},
+    {"call":"F5ZUK","rf_mhz":[432.8375,431.2375],"reason":"local listing conflicts with secondary off-air/stale evidence; current service state not reconciled"},
+    {"call":"F1ZFN","rf_mhz":null,"reason":"exact current public RF/mode/status unresolved"},
+    {"call":"F1ZEF","rf_mhz":null,"reason":"exact current public RF/mode/status unresolved"}
+  ],
+  "excluded_from_analog_scope": [
+    {"call":"F1ZBU","rf_mhz":[433.025,431.425],"reason":"current REF lists digital DMR/C4FM/D-STAR and current D-STAR telemetry corroborates digital service"},
+    {"call":"F5ZTC","reason":"current REF status Test"},
+    {"call":"F5ZWR","reason":"current REF status Projet"},
+    {"group":"digital_only_or_unresolved_mixed_digital","reason":"not promoted into the analog listening scope"}
+  ],
+  "future_backlog": [
+    "Revisit deferred radio items only if fresh public/operator evidence appears.",
+    "Do not mutate the frozen v0.3 radio scope after publication; any later promotion belongs to a new version.",
+    "Aviation remains a separate publication gate; the current 84-memory candidate is internal only."
+  ],
+  "dedup_notes": [
+    "432.5375 MHz is shared by F1ZEK, F5ZFT, F1ZGN and F1ZGP and contributes exactly one RF memory.",
+    "F1ZCV duplicates the existing F5ZAU RF pair and contributes zero RF memories.",
+    "The deterministic internal candidate is frozen at 84 memories / 41 regional RF with SHA-256 45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720; it is not public."
+  ]
+}

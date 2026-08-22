@@ -61,8 +61,8 @@ jobs:
         run: python tests/test_grand_est_v03_pass2.py
       - name: Test Grand Est v0.3 radio scope closure history
         run: python tests/test_grand_est_v03_pass3.py
-      - name: Print deterministic Grand Est candidate SHA
-        run: python -c "import hashlib; from tools.build_grand_est_v03_candidate import build, ROOT; b,_=build(ROOT); print('generated_sha256='+hashlib.sha256(b).hexdigest())"
+      - name: Compare frozen and deterministic candidate bytes
+        run: python -c "import hashlib; from tools.build_grand_est_v03_candidate import build, ROOT, OUTPUT; b,_=build(ROOT); f=(ROOT/OUTPUT).read_bytes(); print('generated_sha256='+hashlib.sha256(b).hexdigest()); print('frozen_sha256='+hashlib.sha256(f).hexdigest()); print('generated_size='+str(len(b))); print('frozen_size='+str(len(f))); print('generated_crlf='+str(b.count(bytes([13,10])))); print('frozen_crlf='+str(f.count(bytes([13,10]))))"
       - name: Verify deterministic Grand Est v0.3 candidate
         run: python tools/build_grand_est_v03_candidate.py --check
       - name: Test Grand Est v0.3 candidate/public identity

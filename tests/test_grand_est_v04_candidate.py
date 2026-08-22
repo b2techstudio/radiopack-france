@@ -15,7 +15,9 @@ from tools.build_grand_est_v04_candidate import (
     EXPECTED_BASE_SHA,
     EXPECTED_CANDIDATE_COUNT,
     EXPECTED_INLAND_COUNT,
+    EXPECTED_PUBLIC_SHA,
     INLAND_LOCATION_START,
+    PUBLIC,
     ROOT,
     build,
 )
@@ -23,6 +25,7 @@ from tools.build_grand_est_v04_candidate import (
 candidate, manifest = build(ROOT)
 rows = list(csv.DictReader(io.StringIO(candidate.decode("utf-8"), newline="")))
 
+assert manifest["status"] == "published_basis_immutable"
 assert manifest["pack"] == "Grand Est"
 assert manifest["target_version"] == "0.4"
 assert manifest["published_base_version"] == "0.3"
@@ -31,8 +34,11 @@ assert manifest["published_base_sha256"] == EXPECTED_BASE_SHA
 assert manifest["candidate_memory_count"] == EXPECTED_CANDIDATE_COUNT == 97
 assert manifest["candidate_inland_vhf_memory_count"] == EXPECTED_INLAND_COUNT == 13
 assert manifest["candidate_memory_delta"] == 13
-assert manifest["public_export_allowed"] is False
-assert manifest["published"] is False
+assert manifest["public_export_allowed"] is True
+assert manifest["published"] is True
+assert manifest["immutable"] is True
+assert manifest["candidate_sha256"] == EXPECTED_PUBLIC_SHA
+assert manifest["public_csv_sha256"] == EXPECTED_PUBLIC_SHA
 assert manifest["candidate_sha256"] == hashlib.sha256(candidate).hexdigest()
 
 assert len(rows) == 97
@@ -56,14 +62,17 @@ expected_rf = {
     "156.550000", "156.950000", "161.550000", "157.000000", "161.600000", "157.100000", "161.700000",
 }
 assert {row["Frequency"] for row in inland} == expected_rf
-assert "156.800000" not in {row["Frequency"] for row in inland}  # no maritime ch16 in Grand Est inland block
+assert "156.800000" not in {row["Frequency"] for row in inland}
 
 base_raw = (ROOT / BASE_PUBLIC).read_bytes()
 assert hashlib.sha256(base_raw).hexdigest() == EXPECTED_BASE_SHA
+public_raw = (ROOT / PUBLIC).read_bytes()
+assert public_raw == candidate
+assert hashlib.sha256(public_raw).hexdigest() == EXPECTED_PUBLIC_SHA
 
 validation = json.loads((ROOT / "research/grand-est-v0.4/inland-vhf-validation-2026-08-22.json").read_text(encoding="utf-8"))
 assert validation["scope"]["memory_count"] == 13
 assert validation["scope"]["candidate_memory_count_if_promoted"] == 97
 assert validation["scope"]["marine_channel_16_added"] is False
 
-print(f"Grand Est v0.4 candidate: 97 RX / +13 inland VHF / sha256={manifest['candidate_sha256']} / public=false")
+print(f"Grand Est v0.4 publication basis: 97 RX / +13 inland VHF / sha256={manifest['candidate_sha256']} / public=true")

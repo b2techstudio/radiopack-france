@@ -25,20 +25,20 @@ const publicVariant = publicPack?.variants.find((variant) => variant.id === publ
 const isBfcV03 = pack.id === "bourgogne-franche-comte" && publicPack?.version === "v0.3";
 const isCentreV03 = pack.id === "centre-val-de-loire" && publicPack?.version === "v0.3";
 const isIdfV03 = pack.id === "ile-de-france" && publicPack?.version === "v0.3";
-const isGrandEstV03 = pack.id === "grand-est" && publicPack?.version === "v0.3";
-const isAdvancedV03 = isBfcV03 || isCentreV03 || isIdfV03 || isGrandEstV03;
+const isGrandEstV04 = pack.id === "grand-est" && publicPack?.version === "v0.4";
+const isAdvancedAnalog = isBfcV03 || isCentreV03 || isIdfV03 || isGrandEstV04;
 const version = publicPack?.version ?? pack.version;
 const placed = isBfcV03
   ? buildBfcV03Pack()
   : isCentreV03
     ? buildCentreV03Pack()
-    : isIdfV03 || isGrandEstV03
+    : isIdfV03 || isGrandEstV04
       ? []
       : buildMetropolitanPack(pack.id, pack.version);
 const memories: ChannelMemory[] = isIdfV03
   ? loadPublicPackMemories("downloads/ile-de-france/radiopack-france-ile-de-france-v0.3.csv")
-  : isGrandEstV03
-    ? loadPublicPackMemories("downloads/grand-est/radiopack-france-grand-est-v0.3.csv")
+  : isGrandEstV04
+    ? loadPublicPackMemories("downloads/grand-est/radiopack-france-grand-est-v0.4.csv")
     : placed.map(({ location, channel }) => ({
         location,
         name: channel.name,
@@ -55,15 +55,16 @@ const channelGroups = buildStandardChannelGroups(memories);
 const filename = publicVariant?.filename ?? pack.filename;
 const downloadUrl = publicVariant?.downloadUrl ?? `/downloads/${pack.id}/${filename}`;
 const aviationCount = memories.filter((memory) => memory.mode === "AM").length;
-const selectedInfrastructureCount = isBfcV03 ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV03 ? 7 : isGrandEstV03 ? 22 : pack.repeaters.length;
-const regionalChannelCount = isBfcV03 ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV03 ? 15 : isGrandEstV03 ? 41 : pack.repeaters.length * 2;
+const selectedInfrastructureCount = isBfcV03 ? pack.repeaters.length + 5 : isCentreV03 ? 10 : isIdfV03 ? 7 : isGrandEstV04 ? 22 : pack.repeaters.length;
+const regionalChannelCount = isBfcV03 ? pack.repeaters.length * 2 + 10 : isCentreV03 ? 20 : isIdfV03 ? 15 : isGrandEstV04 ? 41 : pack.repeaters.length * 2;
+const inlandVhfCount = isGrandEstV04 ? 13 : 0;
 const marineCount = pack.includeMarine ? 90 : 0;
-const radioScopeLabel = isAdvancedV03
+const radioScopeLabel = isAdvancedAnalog
   ? "relais FM 2 m/70 cm et transpondeurs crossband analogiques"
   : "relais FM 2 m";
 const radioRangeLabel = isBfcV03 ? "70+ / 80+" : isCentreV03 ? "70+ / 82+" : "70+";
 const aviationRangeLabel = isBfcV03 ? "40+ / 90+" : "40+";
-const sourceReviewDate = isGrandEstV03 ? "2026-08-22" : isCentreV03 ? "2026-08-20" : isIdfV03 ? "2026-08-21" : metropolitanSourceNotes.checkedOn;
+const sourceReviewDate = isGrandEstV04 ? "2026-08-22" : isCentreV03 ? "2026-08-20" : isIdfV03 ? "2026-08-21" : metropolitanSourceNotes.checkedOn;
 ---
 <BaseLayout
   title={`Pack ${pack.name} ${version} - RadioPack France`}
@@ -76,7 +77,7 @@ const sourceReviewDate = isGrandEstV03 ? "2026-08-22" : isCentreV03 ? "2026-08-2
         <h1>{pack.name}</h1>
         <p class="lead">
           Une version régionale enrichie sur le modèle des packs matures : socle national RX, aviation SIA
-          revue dans le contexte AIRAC courant, sélection de {radioScopeLabel} en paired RX{pack.includeMarine ? ", et module VHF marine complet" : ""}.
+          revue dans le contexte AIRAC courant, sélection de {radioScopeLabel} en paired RX{isGrandEstV04 ? ", et bloc VHF de navigation intérieure vérifié" : pack.includeMarine ? ", et module VHF marine complet" : ""}.
           Le contenu reste borné aux données publiques suffisamment vérifiables et utiles à l'écoute.
         </p>
         <div class="button-row">
@@ -96,14 +97,15 @@ const sourceReviewDate = isGrandEstV03 ? "2026-08-22" : isCentreV03 ? "2026-08-2
             <span><b>20–21</b> Appels radioamateur · 2</span>
             <span><b>30–35</b> APRS / ISS · 6</span>
             <span><b>{aviationRangeLabel}</b> Aviation AM · {aviationCount}</span>
-            <span><b>{radioRangeLabel}</b> {isAdvancedV03 ? "Relais / transpondeurs analogiques paired RX" : "Relais FM 2 m paired RX"} · {regionalChannelCount}</span>
+            <span><b>{radioRangeLabel}</b> {isAdvancedAnalog ? "Relais / transpondeurs analogiques paired RX" : "Relais FM 2 m paired RX"} · {regionalChannelCount}</span>
+            {isGrandEstV04 && <span><b>120–132</b> VHF navigation intérieure · {inlandVhfCount}</span>}
             {pack.includeMarine && <span><b>100–189</b> VHF marine · {marineCount}</span>}
           </div>
           <p class="scope-note">
             Aviation : contexte SIA AIRAC 08/26 recoupé avec les pages eAIP publiques effectives ; aucune extraction XML champ par champ n'est revendiquée.
-            {pack.includeMarine ? " Le littoral justifie l'intégration du module VHF marine national." : " Le module VHF marine reste séparé pour cette région intérieure."}
+            {isGrandEstV04 ? " La VHF de navigation intérieure couvre les voies bateau-bateau et les affectations Rhin/Moselle vérifiées ; elle reste distincte de la VHF maritime." : pack.includeMarine ? " Le littoral justifie l'intégration du module VHF marine national." : " Le module VHF marine reste séparé pour cette région intérieure."}
           </p>
-          <p class="scope-note">{isAdvancedV03 ? "Les pistes radioamateur ou aviation encore ambiguës sont différées plutôt que publiées sans preuve suffisante." : "UHF, numérique et services privés restent hors publication tant qu'une revue dédiée n'a pas validé chaque fréquence et son intérêt d'écoute."}</p>
+          <p class="scope-note">{isAdvancedAnalog ? "Les pistes radioamateur, aviation ou fluviales encore ambiguës sont différées plutôt que publiées sans preuve suffisante." : "UHF, numérique et services privés restent hors publication tant qu'une revue dédiée n'a pas validé chaque fréquence et son intérêt d'écoute."}</p>
         </div>
 
         <ChannelGroupDetails
@@ -122,8 +124,9 @@ const sourceReviewDate = isGrandEstV03 ? "2026-08-22" : isCentreV03 ? "2026-08-2
           <li>{aviationCount} mémoires aviation AM</li>
           <li>{selectedInfrastructureCount} infrastructures analogiques sélectionnées</li>
           <li>paired RX : sortie + entrée vérifiée</li>
+          {isGrandEstV04 && <li>{inlandVhfCount} mémoires VHF navigation intérieure</li>}
           {pack.includeMarine && <li>90 mémoires VHF marine</li>}
-          <li>{isAdvancedV03 ? "v0.2 historique conservée" : "v0.1 historique conservée"}</li>
+          <li>{isGrandEstV04 ? "v0.3 et v0.2 historiques conservées" : isAdvancedAnalog ? "v0.2 historique conservée" : "v0.1 historique conservée"}</li>
         </ul>
         <p class="source-note">Revue sources : {sourceReviewDate}</p>
       </aside>

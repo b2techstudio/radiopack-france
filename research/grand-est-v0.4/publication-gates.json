@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "status": "published_zero_blockers",
+  "pack": "Grand Est",
+  "version": "0.4",
+  "reviewed_on": "2026-08-22",
+  "blocker_count": 0,
+  "public_release_allowed": true,
+  "gates": {
+    "immutable_v0_3_base_verified": true,
+    "inland_scope_verified": true,
+    "local_assignments_verified": true,
+    "paired_rx_contract_verified": true,
+    "rf_deduplication_verified": true,
+    "rx_only_verified": true,
+    "memory_limit_verified": true,
+    "aviation_zero_delta_verified": true,
+    "airac08_current_window_verified": true,
+    "candidate_public_byte_identity_verified": true,
+    "registry_update_verified": true,
+    "historical_versions_retained": true
+  },
+  "candidate_memory_count": 97,
+  "candidate_sha256": "ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d",
+  "public_csv_sha256": "ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d",
+  "warnings": [
+    "The inland VHF scope is intentionally non-exhaustive: undocumented local lock/channel assignments are deferred rather than guessed.",
+    "Channel 6 must not be used on the Rhine between PK 150 and 350; the pack is RX-only and preserves this restriction in the channel comment.",
+    "The 19 aviation memories are inherited unchanged from v0.3; no new field-by-field aviation revalidation is claimed.",
+    "Any new aviation revision on or after 2026-09-03 requires AIRAC 09/26 revalidation."
+  ]
+}

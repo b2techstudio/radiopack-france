@@ -98,7 +98,7 @@ const legacyPublicPacks: PublicPack[] = [
 const metropolitanMetadata = [
   { id: "hauts-de-france", name: "Hauts-de-France", memoryCount: 144, marine: true, aviation: 14, version: "v0.2" },
   { id: "ile-de-france", name: "Île-de-France", memoryCount: 57, marine: false, aviation: 18, version: "v0.3" },
-  { id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" },
+  { id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" },
   { id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 51, marine: false, aviation: 7, version: "v0.3" },
   { id: "pays-de-la-loire", name: "Pays de la Loire", memoryCount: 130, marine: true, aviation: 10, version: "v0.2" },
   { id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 54, marine: false, aviation: 14, version: "v0.3" },
@@ -121,6 +121,7 @@ const metropolitanPublicPacks: PublicPack[] = metropolitanMetadata.map((item) =>
     "APRS/ISS",
     `${item.aviation} mémoires aviation SIA`,
     radioScope,
+    ...(item.id === "grand-est" && item.version === "v0.4" ? ["13 mémoires VHF navigation intérieure"] : []),
     ...(item.marine ? ["module VHF marine"] : []),
   ].join(", ");
   return {

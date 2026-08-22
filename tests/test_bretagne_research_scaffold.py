@@ -168,9 +168,11 @@ assert emergency["rules"]["temporarily_stopped_repeaters_not_active_candidates"]
 assert emergency["rules"]["public_export_allowed"] is False
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8").lower()
-regions = (ROOT / "website/src/data/regions.json").read_text(encoding="utf-8").lower()
+regions = json.loads((ROOT / "website/src/data/regions.json").read_text(encoding="utf-8"))
 assert 'id: "bretagne"' in registry
-assert '"slug": "bretagne"' in regions
+bretagne_region = next(item for item in regions if item["slug"] == "bretagne")
+assert bretagne_region["available"] is True
+assert bretagne_region["status"] == "v0.2 disponible"
 assert (ROOT / "website/src/pages/regions/bretagne.astro").is_file()
 assert (ROOT / "website/public/downloads/bretagne/radiopack-france-bretagne-v0.1.csv").is_file()
 assert not (ROOT / "website/src/pages/downloads/bretagne").exists()

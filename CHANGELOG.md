@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.21.92 - 2026-08-22
+
+**Sprint 104** — Grand Est v0.4 publiée et figée à **97 mémoires RX** après le Sprint 103 d'audit VHF navigation intérieure.
+
+- +13 mémoires VHF fluviales validées ;
+- 19 aviation inchangées, delta 0 ;
+- 41 radio régionales inchangées, delta 0 ;
+- candidat/public byte-identiques ;
+- SHA-256 : `ba34604b11b75ae7f0e7aa17e3734053ff37bbe7910218af1ab66e59f3428a5d` ;
+- v0.3/84 et v0.2/59 conservées immuables ;
+- audit national : aucune duplication des RF fluviales déjà présentes dans les blocs VHF maritimes côtiers.
+
+## 0.21.91 - 2026-08-22
+
+**Sprint 102** — Grand Est v0.3 publiée et figée à **84 mémoires RX**, dont 19 aviation et 41 radio régionales. SHA-256 : `45aef8547a701e7541e620fa9a2d8394595576921e793b75238146ff6e42e720`.
+
 ## 0.21.90 - 2026-08-22
 
 **Sprint 101** — Île-de-France v0.3 publiée et figée à **57 mémoires RX**.

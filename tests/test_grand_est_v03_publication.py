@@ -27,12 +27,19 @@ assert len({row["Location"] for row in rows}) == 84
 assert max(int(row["Location"]) for row in rows) <= 199
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
-assert '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+assert (
+    '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+    or '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }' in registry
+)
 assert 'item.id === "grand-est"' in registry
 
 region_page = (ROOT / "website/src/pages/regions/[slug].astro").read_text(encoding="utf-8")
-assert 'isGrandEstV03' in region_page
-assert 'downloads/grand-est/radiopack-france-grand-est-v0.3.csv' in region_page
+# The current page may advance to v0.4, but v0.3 publication bytes remain immutable.
+assert ('isGrandEstV03' in region_page) or ('isGrandEstV04' in region_page)
+assert (
+    'downloads/grand-est/radiopack-france-grand-est-v0.3.csv' in region_page
+    or 'downloads/grand-est/radiopack-france-grand-est-v0.4.csv' in region_page
+)
 
 aviation = json.loads((V03 / "aviation-airac08-publication-2026-08-22.json").read_text(encoding="utf-8"))
 assert aviation["publication_gate_complete"] is True
@@ -48,6 +55,7 @@ assert checklist["blocker_count"] == 0
 assert gates["blocker_count"] == 0
 assert gates["public_release_allowed"] is True
 assert record["status"] == "published_immutable"
+assert record["version"] == "0.3"
 assert record["memory_count"] == 84
 assert record["public_csv_sha256"] == EXPECTED_SHA
 assert record["public_csv_created"] is True
@@ -55,4 +63,4 @@ assert record["public_registry_updated"] is True
 assert record["published"] is True
 assert record["published_version_is_immutable"] is True
 
-print("Grand Est v0.3 publication: 84 RX / 19 aviation / 41 regional, public byte identity and SHA OK")
+print("Grand Est v0.3 historical publication: 84 RX / 19 aviation / 41 regional, public byte identity and SHA preserved across later releases")

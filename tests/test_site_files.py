@@ -18,7 +18,9 @@ required_files = [
     "research/ile-de-france-v0.3/radio-validation-2026-08-21.json",
     "research/ile-de-france-v0.3/aviation-airac08-2026-08-21.json",
     "research/ile-de-france-v0.3/release-scope.json",
+    "research/grand-est-v0.4/publication-record.json",
     "research/sprint-99-summary.md", "research/sprint-100-summary.md", "research/sprint-101-summary.md",
+    "research/sprint-103-summary.md", "research/sprint-104-summary.md",
 ]
 for relative in required_files:
     path = ROOT / relative
@@ -39,8 +41,8 @@ assert "annecy-haute-savoie" in region_by_slug
 assert all(item["available"] is True for item in regions)
 
 current_public = {
-    "hauts-de-france": (144, "v0.2"), "ile-de-france": (58, "v0.2"),
-    "grand-est": (59, "v0.2"), "centre-val-de-loire": (51, "v0.3"),
+    "hauts-de-france": (144, "v0.2"), "ile-de-france": (57, "v0.3"),
+    "grand-est": (97, "v0.4"), "centre-val-de-loire": (51, "v0.3"),
     "pays-de-la-loire": (130, "v0.2"), "bourgogne-franche-comte": (54, "v0.3"),
     "nouvelle-aquitaine": (151, "v0.2"), "auvergne-rhone-alpes": (62, "v0.2"),
     "occitanie": (156, "v0.2"), "provence-alpes-cote-d-azur": (159, "v0.2"),
@@ -51,6 +53,7 @@ for slug, (count, version) in current_public.items():
     assert region["memoryCount"] == count, (slug, region["memoryCount"], count)
     assert region["status"] == f"{version} disponible"
     assert "Aviation RX" in region["categories"]
+assert "VHF navigation intérieure RX" in region_by_slug["grand-est"]["categories"]
 
 historical_v02 = {
     "hauts-de-france": 144, "ile-de-france": 58, "grand-est": 59,
@@ -83,6 +86,8 @@ for folder, expected_count, previous_count in [
 
 registry = (ROOT / "website/src/lib/packRegistry.ts").read_text(encoding="utf-8")
 for expected in [
+    '{ id: "ile-de-france", name: "Île-de-France", memoryCount: 57, marine: false, aviation: 18, version: "v0.3" }',
+    '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }',
     '{ id: "centre-val-de-loire", name: "Centre-Val de Loire", memoryCount: 51, marine: false, aviation: 7, version: "v0.3" }',
     '{ id: "bourgogne-franche-comte", name: "Bourgogne-Franche-Comté", memoryCount: 54, marine: false, aviation: 14, version: "v0.3" }',
     'export const defaultPublicPackId = "annecy-alpes-leman"',
@@ -103,18 +108,19 @@ for expected in ["validatePlacedChannels", "Pack trop grand", "Fréquence dupliq
     assert expected in chirp
 
 region_route = (ROOT / "website/src/pages/regions/[slug].astro").read_text(encoding="utf-8")
-for expected in ["buildMetropolitanPack", "buildBfcV03Pack", "buildCentreV03Pack", "getPublicPack", "ChannelGroupDetails", "Duplex=off", "AIRAC 08/26"]:
+for expected in ["buildMetropolitanPack", "buildBfcV03Pack", "buildCentreV03Pack", "getPublicPack", "ChannelGroupDetails", "Duplex=off", "AIRAC 08/26", "isGrandEstV04", "120–132"]:
     assert expected in region_route
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for expected in [
-    "**État courant : Sprint 101 / 0.21.90", "## Sprint 101 —", "## Sprint 100 —", "## Sprint 99 —", "## Sprint 98 —", "## Sprint 97 —",
+    "**État courant : Sprint 104 / 0.21.92", "## Sprint 104 —", "## Sprint 103 —", "## Sprint 102 —", "## Sprint 101 —", "## Sprint 100 —", "## Sprint 99 —", "## Sprint 98 —", "## Sprint 97 —",
     "Normandie v0.4** — 142 mémoires RX", "Annecy–Alpes–Léman v0.4** — 77 mémoires RX",
-    "Bretagne v0.2** — 151 mémoires RX", "Île-de-France v0.2** — 58 mémoires RX",
+    "Bretagne v0.2** — 151 mémoires RX", "Île-de-France v0.3** — 57 mémoires RX", "Île-de-France v0.2** — 58 mémoires RX",
+    "Grand Est v0.4** — 97 mémoires RX", "Grand Est v0.3** — 84 mémoires RX",
     "Centre-Val de Loire v0.3** — 51 mémoires RX", "Bourgogne-Franche-Comté v0.3** — 54 mémoires RX",
     "research/paired-rx-policy.json", "research/ile-de-france-v0.3/",
     "Duplex=off", "Offset=0.000000", "Le `README.md` doit être mis à jour à chaque changement important et à la fin de chaque sprint",
 ]:
     assert expected in readme, f"README courant/historique incomplet: {expected}"
 
-print("Tests RadioPack repository/site: state Sprint 101, IDF v0.2 public=58 immutable, BFC/Centre v0.3 preserved, RX-only guards OK")
+print("Tests RadioPack repository/site: state Sprint 104, IDF v0.3 and Grand Est v0.4 current, historical releases preserved, RX-only guards OK")

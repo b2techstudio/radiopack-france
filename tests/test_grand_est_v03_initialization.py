@@ -63,7 +63,12 @@ assert scope["radio_scope"]["final_regional_memory_count"] == 41
 assert scope["aviation_scope"]["memory_count"] == 19
 assert scope["aviation_scope"]["airac09_revalidation_required_on_or_after"] == "2026-09-03"
 
-assert '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
-assert (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").is_file()
+v03_public = ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv"
+assert v03_public.is_file()
+# The current registry may advance to v0.4, but it must never regress below v0.3.
+assert (
+    '{ id: "grand-est", name: "Grand Est", memoryCount: 84, marine: false, aviation: 19, version: "v0.3" }' in registry
+    or '{ id: "grand-est", name: "Grand Est", memoryCount: 97, marine: false, aviation: 19, version: "v0.4" }' in registry
+)
 
-print("Sprint 102 Grand Est v0.3 initialization history preserved after publication: v0.2=59 immutable, v0.3=84 public OK")
+print("Sprint 102 Grand Est v0.3 initialization history preserved: v0.2=59 immutable, v0.3=84 historical/public evidence intact")

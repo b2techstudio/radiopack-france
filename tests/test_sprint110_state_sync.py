@@ -127,7 +127,7 @@ for source in [
 readme = README.read_text(encoding="utf-8")
 assert "## Sprint 110 — historique Normandie v0.5 : ancien handoff terrain" in readme
 assert "142 RX / delta 0" in readme
-assert "supplanté" in readme
+assert "explicitement remplacée au Sprint 112" in readme
 if state["current_sprint"] >= 113:
     for token in [
         "État courant : Sprint 113 / 0.22.01",

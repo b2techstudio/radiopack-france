@@ -19,11 +19,11 @@ assert record["memory_count"] == 59
 assert record["public_csv_sha256"] == "a50416bd8a88af249bb691daa657ffd4b578daf1324bd0ca4dd632a2f1a0e5c1"
 assert record["published_version_is_immutable"] is True
 
-# Public registry must remain on v0.2 during research initialization.
+# Public registry stays on v0.2 throughout research.
 assert '{ id: "grand-est", name: "Grand Est", memoryCount: 59, marine: false, aviation: 19, version: "v0.2" }' in registry
 assert not (ROOT / "website/public/downloads/grand-est/radiopack-france-grand-est-v0.3.csv").exists()
 
-# Pass 1 is research-only and preserves the RX contract.
+# Pass 1 remains immutable research evidence even after later passes.
 assert pass1["status"] == "research_pass1_no_public_mutation"
 assert pass1["rules"]["rx_only"] is True
 assert pass1["rules"]["chirp_duplex"] == "off"
@@ -47,14 +47,9 @@ assert summary["research_floor_is_not_a_release_candidate"] is True
 
 safe_calls = {item["call"] for item in pass1["v02_first_pass_safe_carry"]}
 assert safe_calls == {"F5ZAU", "F1ZDG", "F5ZDL", "F1ZAE", "F5ZEC", "F5ZCQ", "F1ZPJ"}
-conflicts = {item["call"] for item in pass1["v02_conflicts"]}
-assert conflicts == {"F1ZAX"}
-assert pass1["v02_conflicts"][0]["status"] == "mode_resolution_required"
+assert {item["call"] for item in pass1["v02_conflicts"]} == {"F1ZAX"}
+assert {item["call"] for item in pass1["high_confidence_new_links"]} == {"F5ZUD", "F1ZUV", "F5ZAW", "F5ZYS"}
 
-new_calls = {item["call"] for item in pass1["high_confidence_new_links"]}
-assert new_calls == {"F5ZUD", "F1ZUV", "F5ZAW", "F5ZYS"}
-
-# The first safe working set itself has no duplicate RF; wider backlog dedup happens in pass 2.
 working_rf = []
 for item in pass1["v02_first_pass_safe_carry"] + pass1["high_confidence_new_links"]:
     assert len(item["rf_mhz"]) == 2
@@ -67,10 +62,8 @@ blockers = {item["id"] for item in backlog["blocking_conflicts"]}
 assert blockers == {"F1ZAX_MODE", "F5ZBD_STATUS"}
 assert any("432.5375" in note for note in backlog["dedup_notes"])
 
-# No candidate/publication can be claimed at initialization.
-assert scope["status"] == "research_initialization"
+# Later research may advance, but must still be non-public and non-candidate here.
 assert scope["current_phase"]["radio_pass1_complete"] is True
-assert scope["current_phase"]["radio_pass2_required"] is True
 assert scope["current_phase"]["aviation_revalidation_started"] is False
 assert scope["current_phase"]["deterministic_candidate_built"] is False
 assert scope["current_phase"]["publication_ready"] is False
@@ -79,4 +72,4 @@ assert scope["current_phase"]["public_mutation_performed"] is False
 assert scope["radio_scope"]["final_regional_memory_count"] is None
 assert scope["aviation_scope"]["airac09_required_for_any_revision_on_or_after"] == "2026-09-03"
 
-print("Sprint 102 Grand Est v0.3 initialization: immutable v0.2=59 preserved, pass1 radio research guarded, public=false OK")
+print("Sprint 102 Grand Est v0.3 initialization: immutable v0.2=59 and pass1 evidence preserved across later research, public=false OK")

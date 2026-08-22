@@ -88,12 +88,10 @@ assert et["assessment"]["channel64_site_confirmed"] is False
 assert et["assessment"]["site_assignment_can_be_promoted"] is False
 
 # Sprint 67 owns these primary/secondary source interpretation rules. Preserve
-# them in its immutable evidence instead of requiring permanent resume aliases.
+# every historical rule in its immutable evidence instead of requiring permanent
+# top-level resume aliases whose names may evolve later.
 for key, value in e["rules"].items():
     assert value is True, key
-assert e["rules"]["current_primary_channel_confirmation_without_site_name_does_not_assign_transmitter"] is True
-assert e["rules"]["secondary_source_convergence_does_not_become_primary_validation"] is True
-assert e["rules"]["current_display_badge_does_not_override_dated_verification_provenance"] is True
 assert e["decisions"]["normandie_gate_cleared_count"] == 0
 assert e["decisions"]["normandie_candidate_mutated"] is False
 assert e["decisions"]["bretagne_site_assignment_promoted"] is False

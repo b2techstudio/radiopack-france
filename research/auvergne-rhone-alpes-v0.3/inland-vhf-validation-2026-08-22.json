@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "status": "minimum_verified_internal_candidate_scope_closed",
+  "reviewed_on": "2026-08-22",
+  "pack": "Auvergne-Rhône-Alpes",
+  "target_version": "0.3",
+  "public_base_version": "0.2",
+  "public_base_memory_count": 62,
+  "public_base_sha256": "60b4f96467419db40e9f3f33076057f4e093853c81d9e3315b8fe7f0459daa53",
+  "reason": "Le pack public v0.2 ne contient pas de bloc VHF de navigation intérieure alors que l'avis VNF Rhône Saône 2026 documente des affectations courantes sur le Rhône et à l'entrée du Port Édouard Herriot.",
+  "audit_basis": "research/sprint-103-inland-vhf-audit-pass2.json",
+  "sources": {
+    "anfr_manual": {
+      "title": "Manuel CRR fluvial - version 6, mai 2025",
+      "url": "https://www.anfr.fr/fileadmin/2024/crr/Manuel_Fluvial_version_6_Mai_2025.pdf",
+      "role": "Référence de fréquences pour les voies VHF fluviales."
+    },
+    "vnf_rhone_saone_2026": {
+      "title": "Avis à la batellerie n°1 - 2026",
+      "url": "https://www.vnf.fr/vnf/app/uploads/2026/02/VNF_batellerie_2026_vdef.pdf",
+      "findings": [
+        "Rhône sauf PK 0 au PK 4 : canal 10.",
+        "Rhône PK 0 au PK 4, Pierre-Bénite : canal 18.",
+        "Entrée Port Édouard Herriot : canal 12.",
+        "Écluses du Rhône ARA : canaux 19, 20 et 22 selon l'ouvrage."
+      ]
+    }
+  },
+  "scope": {
+    "verified_channels": [10, 12, 18, 19, 20, 22],
+    "memory_count": 9,
+    "new_rf_count": 9,
+    "rf_plan_mhz": [156.5, 156.6, 156.9, 156.95, 161.55, 157.0, 161.6, 157.1, 161.7],
+    "candidate_memory_count": 71,
+    "location_start": 120,
+    "location_end": 128,
+    "paired_rx_channels": [19, 20, 22],
+    "channel_18_boat_side_only": true,
+    "channel_18_shore_side_added": false,
+    "marine_channel_16_added": false,
+    "release_scope_non_exhaustive": true
+  },
+  "candidate_freeze": {
+    "status": "frozen_internal_not_public",
+    "sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+    "memory_count": 71,
+    "memory_delta": 9,
+    "freeze_record": "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
+    "workflow_run_id": 32590524382,
+    "deterministic_rebuild_verified": true
+  },
+  "aviation": {
+    "inherited_from_public_v0_2": true,
+    "memory_count": 18,
+    "cycle": "AIRAC 08/26",
+    "valid_through_inclusive": "2026-09-02",
+    "new_revalidation_claimed": false,
+    "revalidation_required_on_or_after": "2026-09-03"
+  },
+  "gates": {
+    "current_official_inland_navigation_source_present": true,
+    "frequency_plan_reference_present": true,
+    "rx_only_contract": true,
+    "rf_deduplication_required": true,
+    "no_unverified_channel_assignment_added": true,
+    "public_v0_2_must_remain_immutable": true,
+    "deterministic_internal_candidate_builder_required": true,
+    "candidate_sha_frozen": true,
+    "candidate_must_match_frozen_sha": true,
+    "public_export_allowed": false,
+    "public_release_allowed": false
+  },
+  "next_step": "Rebuild the 71-RX internal candidate against the frozen SHA, merge Sprint 108 without public mutation, then prepare public v0.3 promotion in a separate sprint and PR."
+}

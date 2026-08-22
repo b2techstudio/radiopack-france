@@ -58,18 +58,34 @@ assert bretagne["candidate_memory_delta"] == 0
 assert bretagne["airac_next_effective_from"] == "2026-09-03"
 assert bretagne["publication_allowed_before_airac09_revalidation"] is False
 
-# Sprint 101 publication remains immutable even after active_work moves to Sprint 102+.
+# Sprint 101 publication remains immutable even when a later IDF version becomes
+# current. The state pointer may advance; the frozen Sprint 101 block and v0.3
+# publication record are the historical source of truth.
 if state["current_sprint"] >= 101:
     idf = state["public_packs"]["ile_de_france"]
-    assert idf["version"] == "0.3"
-    assert idf["memory_count"] == 57
+    current_idf_version = tuple(int(part) for part in idf["version"].split("."))
+    assert current_idf_version >= (0, 3)
     assert idf["immutable"] is True
-    assert idf["previous_immutable_version"] == "0.2"
-    assert idf["previous_memory_count"] == 58
-    assert idf["public_csv_sha256"] == "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
+    if current_idf_version == (0, 3):
+        assert idf["memory_count"] == 57
+        assert idf["previous_immutable_version"] == "0.2"
+        assert idf["previous_memory_count"] == 58
+        assert idf["public_csv_sha256"] == "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
+    elif idf.get("previous_immutable_version") == "0.3":
+        assert idf["previous_memory_count"] == 57
+
     s101 = state["latest_sprint101_idf_v03_research"]
+    assert s101["candidate_memory_count"] == 57
+    assert s101["candidate_aviation_memory_count"] == 18
+    assert s101["candidate_regional_radio_memory_count"] == 15
+    assert s101["public_csv_sha256"] == "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
     assert s101["published"] is True
     assert s101["published_version_is_immutable"] is True
+
+    idf_v03_record = json.loads((ROOT / "research/ile-de-france-v0.3/publication-record.json").read_text(encoding="utf-8"))
+    assert idf_v03_record["status"] == "published_immutable"
+    assert idf_v03_record["memory_count"] == 57
+    assert idf_v03_record["public_csv_sha256"] == "e04e6dbbf869661305068bac55cd8044abdcea7321d67e4c28111c9d057da125"
 
 project = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
 if v04_record.exists():
@@ -88,4 +104,4 @@ assert "## Sprint 91 —" in readme
 assert "## Sprint 90 —" in readme
 assert "## Sprint 89 —" in readme
 
-print("Sprints 89-91 integrity: historical decisions and future/field gates preserved across Sprint 102+ OK")
+print("Sprints 89-91 integrity: historical decisions and future/field gates preserved across later IDF releases OK")

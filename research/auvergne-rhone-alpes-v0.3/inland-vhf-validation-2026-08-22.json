@@ -40,6 +40,15 @@
     "marine_channel_16_added": false,
     "release_scope_non_exhaustive": true
   },
+  "candidate_freeze": {
+    "status": "frozen_internal_not_public",
+    "sha256": "b44a95486af5fd89fa72246ed7c8f0ab79e3084f6b0429df5215fba9918d691e",
+    "memory_count": 71,
+    "memory_delta": 9,
+    "freeze_record": "research/auvergne-rhone-alpes-v0.3/candidate-freeze.json",
+    "workflow_run_id": 32590524382,
+    "deterministic_rebuild_verified": true
+  },
   "aviation": {
     "inherited_from_public_v0_2": true,
     "memory_count": 18,
@@ -56,8 +65,10 @@
     "no_unverified_channel_assignment_added": true,
     "public_v0_2_must_remain_immutable": true,
     "deterministic_internal_candidate_builder_required": true,
+    "candidate_sha_frozen": true,
+    "candidate_must_match_frozen_sha": true,
     "public_export_allowed": false,
     "public_release_allowed": false
   },
-  "next_step": "Construire en CI un candidat interne déterministe de 71 RX à partir du CSV public v0.2 généré par Astro, vérifier le SHA de base, l'absence de doublons et les invariants RX-only, puis figer le SHA du candidat avant toute promotion publique."
+  "next_step": "Rebuild the 71-RX internal candidate against the frozen SHA, merge Sprint 108 without public mutation, then prepare public v0.3 promotion in a separate sprint and PR."
 }

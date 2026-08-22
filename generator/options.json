@@ -1,7 +1,7 @@
 {
   "schema_version": "3.0",
   "status": "multi_region_public_generator",
-  "updated": "2026-08-15",
+  "updated": "2026-08-22",
   "purpose": "Définir le comportement du générateur public RadioPack multi-régions et ses options spécifiques par pack.",
   "implementation": {
     "generic_pack_library": "website/src/lib/chirpPack.ts",
@@ -32,9 +32,11 @@
       {
         "id": "normandie",
         "name": "Normandie",
-        "version": "v0.4",
-        "default_memory_count": 142,
-        "options": []
+        "version": "v0.5",
+        "default_memory_count": 146,
+        "options": [],
+        "coverage_basis": "theoretical_documented",
+        "measured_reception_claimed": false
       },
       {
         "id": "bretagne",
@@ -110,6 +112,8 @@
     "Le registre public est la source de vérité du générateur pour les packs et variantes téléchargeables.",
     "Le générateur ne reconstruit aucun CSV côté navigateur et pointe uniquement vers des fichiers validés.",
     "Les options sont affichées uniquement pour les packs qui les prennent explicitement en charge.",
+    "Pour Normandie v0.5, la couverture théorique documentée peut satisfaire le gate de couverture sans être présentée comme une réception mesurée ou garantie.",
+    "Les écoutes terrain Normandie restent un retour qualité facultatif et non un prérequis de publication.",
     "Le contrôle NOTAM est facultatif et non bloquant pour un pack d'écoute RX.",
     "Un NOTAM ne supprime, n'ajoute ni ne remplace automatiquement une fréquence de référence dans le CSV.",
     "La bibliothèque générique chirpPack.ts centralise les règles CHIRP réutilisables pour les futurs packs régionaux.",

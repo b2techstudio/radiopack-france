@@ -1,9 +1,10 @@
 {
-  "schema_version": "1.0",
-  "status": "research_initialization",
+  "schema_version": "1.1",
+  "status": "radio_pass2_complete_backlog_open",
   "pack": "Grand Est",
   "target_version": "0.3",
   "initialized_on": "2026-08-22",
+  "updated_on": "2026-08-22",
   "public_base": {
     "version": "0.2",
     "memory_count": 59,
@@ -12,7 +13,8 @@
   },
   "current_phase": {
     "radio_pass1_complete": true,
-    "radio_pass2_required": true,
+    "radio_pass2_complete": true,
+    "radio_pass3_or_explicit_scope_closure_required": true,
     "aviation_revalidation_started": false,
     "deterministic_candidate_built": false,
     "review_checklist_created": false,
@@ -26,24 +28,35 @@
     "v02_repeaters": 8,
     "first_pass_safe_carry_repeaters": 7,
     "first_pass_mode_conflicts": 1,
-    "high_confidence_new_links": 4,
-    "additional_second_pass_candidates_open": true,
-    "final_regional_memory_count": null
+    "pass1_new_two_source_links": 4,
+    "pass2_newly_validated_links": 8,
+    "pass2_shared_rf_mhz": [432.5375],
+    "validated_regional_unique_rf_working_count": 35,
+    "validated_total_working_memory_count": 78,
+    "validated_total_working_memory_count_is_release_candidate": false,
+    "remaining_fresh_local_corroboration_dossiers": 8,
+    "final_regional_memory_count": null,
+    "final_total_memory_count": null
+  },
+  "resolved_policy_decisions": {
+    "F1ZAX": "defer due current C4FM classification without current local analog proof",
+    "F5ZBD": "exclude while current local sources report off service / upgrade",
+    "F1ZBU": "exclude from analog scope because current service is digital DMR/C4FM/D-STAR",
+    "F1ZCV": "zero-RF-delta attribution only because its pair duplicates F5ZAU"
   },
   "aviation_scope": {
     "base_memory_count": 19,
     "base_cycle": "AIRAC 08/26",
     "base_valid_through_inclusive": "2026-09-02",
     "current_pass_delta": 0,
-    "not_revalidated_in_sprint102_initialization": true,
+    "not_revalidated_in_sprint102_radio_passes": true,
     "airac09_required_for_any_revision_on_or_after": "2026-09-03"
   },
   "completion_requirements_before_candidate": [
-    "resolve or explicitly defer F1ZAX mode conflict",
-    "resolve or explicitly defer F5ZBD current service-state conflict",
-    "run second-source validation for all proposed new analog/crossband links",
-    "deduplicate all RF frequencies, especially shared 432.5375 MHz crossband use",
-    "decide exact analog scope and exclude digital-only infrastructure",
+    "resolve or explicitly defer every remaining fresh-local-source dossier",
+    "re-run RF deduplication after the final radio scope decision",
+    "confirm final analog-only scope and keep digital-only infrastructure excluded",
+    "freeze the exact regional unique-RF count only after scope closure",
     "preserve public v0.2 bytes and metadata unchanged"
   ],
   "publication_requirements": [
